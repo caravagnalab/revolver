@@ -9,3 +9,5 @@
 .Rproj.user/F9589ABC/rmd-outputs
 .Rproj.user/F9589ABC/pcs/workbench-pane.pper
 .Rproj.user/F9589ABC/saved_source_markers
+.Rproj.user
+.Rbuildignore
