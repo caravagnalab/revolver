@@ -14,21 +14,33 @@
 #' @param score A score for this model, that we seek to maximize.
 #' @param annotation A string to annotate this tree.
 #'
-#' @return An object of class "rev_phylo"
+#' @return An object of class \code{"rev_phylo"}
 #' @export
 #'
 #' @import crayon
 #'
 #' @examples
-#' data(CRC)
-#' # This has just one cluster -- we make up its adj_matrix for the tree
+#' # Take data from CRC, inspect sample and dataset
+#' data("CRC")
 #' dataset = CRC[CRC$patientID == 'adenoma_3', ]
-#' samples_ID = paste('R', 1:6, sep = '')
+#' samples = paste('R', 1:5, sep = '')
 #'
-#' m = matrix(1, ncol = 1, nrow = 1)
-#' colnames(m) = rownames(m) = '1'
-#' revolver_phylogeny(m, 'adenoma_1', dataset, samples_ID, 52)
+#' # Extract CCF values
+#' CCF = sapply(dataset$CCF, revolver:::CCF.parser)
+#' CCF = t(apply(CCF, 2, as.numeric))
+#' rownames(CCF) = rownames(dataset)
+#' colnames(CCF) = samples
 #'
+#' # Bind a dataset with explicit data
+#' dataset = cbind(dataset, CCF)
+#'
+#' # Create empty adj_mat
+#' m = matrix(0, ncol = 4, nrow = 4)
+#' colnames(m) = rownames(m) = 1:4
+
+#' # Phylogeny: will attach a GL (germline) to the root
+#' # of the tree. In this case all nodes are roots.
+#' revolver_phylogeny(m, 'adenoma_1', dataset, samples, 52)
 revolver_phylogeny = function(
   M,
   patient,
@@ -126,10 +138,10 @@ revolver_phylogeny = function(
 }
 
 
-#' @title Summary for a "rev_phylo" object.
-#' @details  Reports some summary for a "rev_phylo" object, this is a bit more than just using "print".
+#' @title Summary of a \code{"rev_phylo"} object.
+#' @details  Reports some summary for a \code{"rev_phylo"} object, this is a bit more than just using print.
 #'
-#' @param x An object of class "rev_phylo".
+#' @param x An object of class \code{"rev_phylo"}.
 #' @param ... Extra parameters
 #' @param print.stat Print or not statistics to screen.
 #'
@@ -177,10 +189,10 @@ summary.rev_phylo <- function(x, ..., print.stat = TRUE){
   cat(cyan('\nGoodness-of-fit: '), stat$gofit)
 }
 
-#' @title Print a "rev_phylo" object.
-#' @details Print a summary for a "rev_phylo" object, which includes MSDOS-like console layout for trees.
+#' @title Print a \code{"rev_phylo"} object.
+#' @details Print a summary for a \code{"rev_phylo"} object, which includes MSDOS-like console layout for trees.
 #'
-#' @param x An object of class "rev_phylo".
+#' @param x An object of class \code{"rev_phylo"}.
 #' @param ... Extra parameters
 #' @param digits Digits to use.
 #'
@@ -247,15 +259,15 @@ print.rev_phylo <- function(x, digits = max(3, getOption("digits") - 3), ...) {
 
 
 
-#' @title VCompute some statistics for a "rev_phylo" tree.
+#' @title Compute statistics for a \code{"rev_phylo"} tree.
 #'
 #' @details
-#' Compute some statistics for a "rev_phylo" tree. Thee include violations of the
+#' Compute some statistics for a \code{"rev_phylo"} tree. Thee include violations of the
 #' pigeonhole principle, Suppes' conditions etc. Stats are compute no matter what
 #' data is used to create the trees, but one should only consider those relevant
 #' to the actual type of data.
 #'
-#' @param x An object of class "rev_phylo".
+#' @param x An object of class \code{"rev_phylo"}.
 #'
 #' @return A list with all computed statistics.
 #' @export
@@ -390,15 +402,15 @@ stats.rev_phylo = function(x)
 
 #' Plot a phylogenetic or a mutation tree for a patient.
 #'
-#' @param x An object of class "rev_phylo".
-#' @param file Output file, or NA.
+#' @param x An object of class \code{"rev_phylo"}.
+#' @param file Output file, or \code{NA}.
 #' @param edge.width Edge width
 #' @param edge.label Edge label
 #' @param palette RColorBrewer palette to colour clusters.
 #' @param graph.cex Cex for the graph.
 #' @param table.cex Cex for the table.
 #' @param alpha Transparency.
-#' @param plot.stat TRUE if you want to show some statistics for the tree.
+#' @param plot.stat \code{TRUE} if you want to show some statistics for the tree.
 #' @param verbose Output.
 #' @param ... Extra parameters
 #'

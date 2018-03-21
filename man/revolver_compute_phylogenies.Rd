@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev_cohort.R
 \name{revolver_compute_phylogenies}
 \alias{revolver_compute_phylogenies}
-\title{Compute or add pre-computed phylogenies to a REVOLVER cohort.}
+\title{Compute/ add CCF-based phylogenies to a REVOLVER cohort.}
 \usage{
 revolver_compute_phylogenies(x, patient, use.MI = FALSE,
   precomputed.trees = NULL, precomputed.scores = NULL,
@@ -10,7 +10,7 @@ revolver_compute_phylogenies(x, patient, use.MI = FALSE,
   store.max = 100), verbose = FALSE)
 }
 \arguments{
-\item{x}{An object of class "rev_cohort"}
+\item{x}{An object of class \code{"rev_cohort"}}
 
 \item{patient}{A patient in the cohort, for which phylogenies are created}
 
@@ -20,11 +20,11 @@ revolver_compute_phylogenies(x, patient, use.MI = FALSE,
 adjacency matrix. No computation will be carried out in this case.}
 
 \item{options}{If one wants to generate new phylogenies for this patient, there named parameters should be
-passed through this list. "sspace.cutoff = 10000" is the state-space cutoff to generate trees in an
-exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen "sampling = 5000" tells how
-many trees are sampled. "overwrite = FALSE" is boolean flag that says if the patient's current phylogenies
-should be overwritten, in case they are already available. "store.max = 100" tells how many trees should
-be stored.}
+passed through this list. \code{sspace.cutoff = 10000} is the state-space cutoff to generate trees in an
+exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen \code{sampling} tells how
+many trees are sampled. \code{overwrite = FALSE} sets if the patient's current phylogenies
+should be overwritten, in case they are already available. \code{store.max = 100} tells how many trees should
+be stored, if there are more than \code{store.max} available (ranked).}
 
 \item{verbose}{output type.}
 
@@ -32,7 +32,7 @@ be stored.}
 scores. No computation will be carried out in this case.}
 }
 \value{
-a modififed object of class "rev_cohort" with available phylogeneis for "patient".
+a modififed object of class \code{"rev_cohort"} with available phylogeneis for \code{patient}.
 }
 \details{
 Create or compute phylogenies for REVOLVER fit from CCF data. This method should be used also if one

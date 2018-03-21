@@ -9,9 +9,9 @@
   plot.stat = FALSE, verbose = FALSE, ...)
 }
 \arguments{
-\item{x}{An object of class "rev_phylo".}
+\item{x}{An object of class \code{"rev_phylo"}.}
 
-\item{file}{Output file, or NA.}
+\item{file}{Output file, or \code{NA}.}
 
 \item{edge.width}{Edge width}
 
@@ -25,7 +25,7 @@
 
 \item{alpha}{Transparency.}
 
-\item{plot.stat}{TRUE if you want to show some statistics for the tree.}
+\item{plot.stat}{\code{TRUE} if you want to show some statistics for the tree.}
 
 \item{verbose}{Output.}
 

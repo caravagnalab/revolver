@@ -2,33 +2,33 @@
 % Please edit documentation in R/rev_fit.R
 \name{revolver_fit}
 \alias{revolver_fit}
-\title{Main fit function for REVOLVER algorithm}
+\title{REVOLVER fit function.}
 \usage{
 revolver_fit(x, initial.solution = 1, max.iterations = 10, restarts = 0,
   parallel = FALSE, cores.ratio = 0.8, transitive.orderings = FALSE,
   verbose = FALSE)
 }
 \arguments{
-\item{x}{A 'rev_cohort' object with available trees.}
+\item{x}{A \code{"rev_cohort"} object with available trees.}
 
-\item{initial.solution}{Either a scalar to fix it, or NA to sample it randomly.}
+\item{initial.solution}{Either a scalar to fix one initial condition (rank id), or \code{NA} to sample it randomly.}
 
 \item{max.iterations}{Maximum number of EM steps before forcing stop.}
 
 \item{restarts}{Number of initial conditions sampled to compute optimal fit}
 
-\item{parallel}{Use a parallel engine with TRUE, hides ouptut. Exploits doParallel.}
+\item{parallel}{Use a parallel engine with \code{TRUE}, hides ouptut. Exploits \code{doParallel}.}
 
-\item{cores.ratio}{Ratio of the number of cores to use, after the overall number of
-available cores has been detected by doParallel.}
+\item{cores.ratio}{Percentage of the number of cores to use, after the overall number of
+available cores has been detected by \code{doParallel}.}
 
 \item{transitive.orderings}{If transitive orderings should be computed before the second
-fitting step (transfering of orderings). The default is FALSE, which we suggest.}
+fitting step (transfering of orderings). The default is \code{FALSE}, which we suggest.}
 
 \item{verbose}{Verbose output}
 }
 \value{
-A 'rev_cohort_fit' object
+A \code{"rev_cohort_fit"} object
 }
 \details{
 The main fitting function for REVOLVER, implements the 2-steps EM-algorithm described

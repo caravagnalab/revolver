@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev_cohort.R
 \name{revolver_cohort}
 \alias{revolver_cohort}
-\title{Construct an S3 REVOLVER cohort object of class "rev_cohort".}
+\title{Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).}
 \usage{
 revolver_cohort(dataset, CCF.parser = revolver:::CCF.parser,
   options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
@@ -13,19 +13,20 @@ revolver_cohort(dataset, CCF.parser = revolver:::CCF.parser,
 
 \item{CCF.parser}{A function to parse the format for the encoding of CCF
 or binary values for each sequenced region. A possible function is available
-inside REVOLVER; since it is not exported use :::CCF.parser to retrieve it.}
+inside REVOLVER; since it is not exported but is available with
+\code{revolver:::CCF.parser} (the default of this parameter).}
 
 \item{options}{A list of 2 parameters that should be a boolean value for
-ONLY.DRIVER (use only driver SNVs), and MIN.CLUSTER.SIZE, the minimum cluster size.}
+\code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.}
 
 \item{annotation}{A string for annotation of this cohort. This will be prompted
 in every print for this object.}
 }
 \value{
-An object of class "rev_cohort"
+An object of class \code{"rev_cohort"}
 }
 \description{
-Construct an S3 REVOLVER cohort object of class "rev_cohort".
+Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 }
 \examples{
 data(CRC)

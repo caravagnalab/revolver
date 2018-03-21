@@ -7,16 +7,17 @@
 revolver_subsetDrivers(cohort, list)
 }
 \arguments{
-\item{cohort}{An object of class "rev_cohort"}
+\item{cohort}{An object of class \code{"rev_cohort"}}
 
 \item{list}{A vector of driver IDs to subset the data to.}
 }
 \value{
-A REVOLVER cohort with only drivers in the list "list".
+A REVOLVER cohort with only drivers in \code{list}.
 }
 \description{
 Subset the drivers in the cohort to match the input list.
 }
 \examples{
-TODO
+data(CRC.cohort)
+revolver_subsetDrivers(CRC.cohort, 'APC')
 }

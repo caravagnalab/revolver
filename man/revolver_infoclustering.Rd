@@ -8,25 +8,26 @@ revolver_infoclustering(x, methods = c("average", "single", "complete",
   "ward"), min.group.size = 2, do.plot = FALSE, file = "Rplot.pdf")
 }
 \arguments{
-\item{x}{A 'rev_cohort_fit' object for which the evolutionary distance has been computed.}
+\item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
 
 \item{methods}{Dendogram methods supported by agnes and cluster packages. Default
-are c( "average", "single", "complete", "ward").}
+are all of the following: \code{"average"}, \code{"single"}, \code{"complete"}, \code{"ward"}.}
 
-\item{min.group.size}{Minimum group size for dynamicTreeCut functions.}
+\item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
 
-\item{do.plot}{TRUE if you want plots to be saved to file "file"}
+\item{do.plot}{\code{TRUE} if you want plots to be saved to \code{file}}
 
 \item{file}{PDF output file.}
 }
 \value{
-None
+None, this function just produces a report to inspect offline.
 }
 \details{
+This requires to have computed the distance via function \code{\link{revolver_evo_distance}}.
 Compute possible clusterings for standard parameters. This helps
 to determine and select clusters in an output dendogram. This function uses
-dendogram cutting strategies available through packages such as cluster and
-dynamicTreeCut.
+dendogram cutting strategies available through packages such as \code{cluster} and
+\code{dynamicTreeCut}.
 }
 \examples{
 data(CRC.cohort)

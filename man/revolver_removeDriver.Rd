@@ -2,31 +2,31 @@
 % Please edit documentation in R/rev_cohort.R
 \name{revolver_removeDriver}
 \alias{revolver_removeDriver}
-\title{Remove a driver events associated to a certain ID, in a patient.}
+\title{Remove a driver event from a cohort.}
 \usage{
 revolver_removeDriver(x, patient, variantID, misc, cluster)
 }
 \arguments{
-\item{x}{An object of class "rev_cohort"}
+\item{x}{An object of class \code{"rev_cohort"}}
 
 \item{patient}{Patient ID.}
 
-\item{variantID}{ID of the event to mark as FALSE.}
+\item{variantID}{ID of the event to mark as \code{FALSE}.}
 
-\item{misc}{misc of the event to mark as FALSE.}
+\item{misc}{misc of the event to mark as \code{FALSE}}
 
-\item{cluster}{cluster of the event to mark as FALSE.}
+\item{cluster}{cluster of the event to mark as \code{FALSE}}
 }
 \value{
-see "return.value"
+a modified cohort object of class \code{"rev_cohort"}
 }
 \details{
 Basic editing function. Each event is identied through its ID,
-cluster assignment and "misc" flag. With this function, you can remove it.
+cluster assignment and its misc flag. With this function, you can remove it.
 The event is not physically removed from the dataset, but instead its flag
-is.Driver is set to FALSE. If there are phylogenies inside, they are updated
-as well. If you have fit those, however, you should re-run the fit after this
-modification.
+\code{is.Driver} is set to \code{FALSE}. If there are phylogenies inside, they are updated
+as well. If you have fit the models, however, you should re-run the fit after this
+modification because this modification does not propagate.
 }
 \examples{
 data(CRC.cohort)

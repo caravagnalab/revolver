@@ -2,37 +2,33 @@
 % Please edit documentation in R/rev_cohort.R
 \name{revolver_compute_CLtrees}
 \alias{revolver_compute_CLtrees}
-\title{Compute mutation trees (Chow-Liu trees with Suppes' conditions) from binary data.}
+\title{Compute/ add CCF-based mutation trees to a REVOLVER cohort.}
 \usage{
 revolver_compute_CLtrees(x, patient, precomputed.trees = NULL,
   precomputed.scores = NULL, options = list(sspace.cutoff = 10000,
   n.sampling = 5000, overwrite = FALSE, store.max = 100), verbose = FALSE)
 }
 \arguments{
-\item{x}{An object of class "rev_cohort"}
+\item{x}{An object of class \code{"rev_cohort"}}
 
-\item{patient}{A patient in the cohort, for which phylogenies are created}
+\item{patient}{A patient in the cohort, for which mutation trees are created}
 
-\item{precomputed.trees}{If a list a of precomputed trees is available, this list should contain their
-adjacency matrix. No computation will be carried out in this case.}
+\item{precomputed.trees}{See \code{\link{revolver_compute_phylogenies}}}
 
-\item{options}{If one wants to generate new phylogenies for this patient, there named parameters should be
-passed through this list. "sspace.cutoff = 10000" is the state-space cutoff to generate trees in an
-exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen "sampling = 5000" tells how
-many trees are sampled. "overwrite = FALSE" is boolean flag that says if the patient's current phylogenies
-should be overwritten, in case they are already available. "store.max = 100" tells how many trees should
-be stored.}
+\item{options}{See \code{\link{revolver_compute_phylogenies}}.}
 
 \item{verbose}{output type.}
 
-\item{precomputed.trees}{If a list a of precomputed trees is available, this list should contain their
-scores. No computation will be carried out in this case.}
+\item{precomputed.trees}{See \code{\link{revolver_compute_phylogenies}}}
 }
 \value{
-a modififed object of class "rev_cohort" with available phylogeneis for "patient".
+a modififed object of class \code{"rev_cohort"} with available
+mutation trees for \code{patient}.
 }
 \details{
-This is the analogous of "revolver_compute_phylogenies", but for binary data and hence it computes Chow-Liu trees.
+This is the analogous of \code{\link{revolver_compute_phylogenies}}, but for binary data and
+hence it computes Chow-Liu trees using also Suppes' conditions. Parameters have exactly
+the same meaning of the ones described in \code{\link{revolver_compute_phylogenies}}.
 }
 \examples{
 data(CRC.cohort)

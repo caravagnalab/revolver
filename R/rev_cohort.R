@@ -1,15 +1,16 @@
-#' Construct an S3 REVOLVER cohort object of class "rev_cohort".
+#' Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 #'
 #' @param dataset A dataframe in the specified format (see Online manual).
 #' @param CCF.parser A function to parse the format for the encoding of CCF
 #' or binary values for each sequenced region. A possible function is available
-#' inside REVOLVER; since it is not exported use :::CCF.parser to retrieve it.
+#' inside REVOLVER; since it is not exported but is available with
+#' \code{revolver:::CCF.parser} (the default of this parameter).
 #' @param options A list of 2 parameters that should be a boolean value for
-#' ONLY.DRIVER (use only driver SNVs), and MIN.CLUSTER.SIZE, the minimum cluster size.
+#' \code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.
 #' @param annotation A string for annotation of this cohort. This will be prompted
 #' in every print for this object.
 #'
-#' @return An object of class "rev_cohort"
+#' @return An object of class \code{"rev_cohort"}
 #' @export
 #' @import crayon
 #'
@@ -90,10 +91,9 @@ revolver_cohort = function(
   return(obj)
 }
 
-
-#' Print for class "rev_cohort"
+#' Print a \code{"rev_cohort"} object
 #'
-#' @param x obj of class "rev_cohort"
+#' @param x obj of class \code{"rev_cohort"}
 #' @param digits number of output digits
 #'
 #' @return nothing
@@ -184,14 +184,14 @@ rev_count_information_transfer_comb = function(x, p) {
 
 
 
-#' @title Compute or add pre-computed phylogenies to a REVOLVER cohort.
+#' @title Compute/ add CCF-based phylogenies to a REVOLVER cohort.
 #'
 #' @details
 #'
 #' Create or compute phylogenies for REVOLVER fit from CCF data. This method should be used also if one
 #' has already pre-computed trees to use for fitting.
 #'
-#' @param x An object of class "rev_cohort"
+#' @param x An object of class \code{"rev_cohort"}
 #' @param patient A patient in the cohort, for which phylogenies are created
 #' @param use.MI If MI should be used to weight each phylogenetic model (should be FALSE).
 #' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
@@ -199,14 +199,14 @@ rev_count_information_transfer_comb = function(x, p) {
 #' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
 #' scores. No computation will be carried out in this case.
 #' @param options If one wants to generate new phylogenies for this patient, there named parameters should be
-#' passed through this list. "sspace.cutoff = 10000" is the state-space cutoff to generate trees in an
-#' exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen "sampling = 5000" tells how
-#' many trees are sampled. "overwrite = FALSE" is boolean flag that says if the patient's current phylogenies
-#' should be overwritten, in case they are already available. "store.max = 100" tells how many trees should
-#' be stored.
+#' passed through this list. \code{sspace.cutoff = 10000} is the state-space cutoff to generate trees in an
+#' exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen \code{sampling} tells how
+#' many trees are sampled. \code{overwrite = FALSE} sets if the patient's current phylogenies
+#' should be overwritten, in case they are already available. \code{store.max = 100} tells how many trees should
+#' be stored, if there are more than \code{store.max} available (ranked).
 #' @param verbose output type.
 #'
-#' @return a modififed object of class "rev_cohort" with available phylogeneis for "patient".
+#' @return a modififed object of class \code{"rev_cohort"} with available phylogeneis for \code{patient}.
 #' @export
 #' @import crayon
 #'
@@ -605,26 +605,22 @@ revolver_compute_phylogenies = function(
 
 }
 
-#' @title Compute mutation trees (Chow-Liu trees with Suppes' conditions) from binary data.
+#' @title  Compute/ add CCF-based mutation trees to a REVOLVER cohort.
 #'
 #' @details
-#' This is the analogous of "revolver_compute_phylogenies", but for binary data and hence it computes Chow-Liu trees.
+#' This is the analogous of \code{\link{revolver_compute_phylogenies}}, but for binary data and
+#' hence it computes Chow-Liu trees using also Suppes' conditions. Parameters have exactly
+#' the same meaning of the ones described in \code{\link{revolver_compute_phylogenies}}.
 #'
-#' @param x An object of class "rev_cohort"
-#' @param patient A patient in the cohort, for which phylogenies are created
-#' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
-#' adjacency matrix. No computation will be carried out in this case.
-#' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
-#' scores. No computation will be carried out in this case.
-#' @param options If one wants to generate new phylogenies for this patient, there named parameters should be
-#' passed through this list. "sspace.cutoff = 10000" is the state-space cutoff to generate trees in an
-#' exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen "sampling = 5000" tells how
-#' many trees are sampled. "overwrite = FALSE" is boolean flag that says if the patient's current phylogenies
-#' should be overwritten, in case they are already available. "store.max = 100" tells how many trees should
-#' be stored.
+#' @param x An object of class \code{"rev_cohort"}
+#' @param patient A patient in the cohort, for which mutation trees are created
+#' @param precomputed.trees See \code{\link{revolver_compute_phylogenies}}
+#' @param precomputed.trees See \code{\link{revolver_compute_phylogenies}}
+#' @param options See \code{\link{revolver_compute_phylogenies}}.
 #' @param verbose output type.
 #'
-#' @return a modififed object of class "rev_cohort" with available phylogeneis for "patient".
+#' @return a modififed object of class \code{"rev_cohort"} with available
+#' mutation trees for \code{patient}.
 #' @export
 #' @import crayon
 #'
@@ -990,14 +986,14 @@ revolver_compute_CLtrees = function(
 }
 
 
-#' @title Plotting function for a REVOLVER cohort.
+#' @title Plot a REVOLVER cohort.
 #'
 #' @details
-#' Iterative plotting functions that scans some samples from a cohort. It will plot
+#' Iterative plotting functions that scans samples from a cohort. It will plot
 #' a patient's data (original and binarized), the score for the trees associated to
-#' the patient, and a number of such trees.
+#' the patient, and a number of possible trees per patient.
 #'
-#' @param x An object of class "rev_cohort"
+#' @param x An object of class \code{"rev_cohort"}
 #' @param patients The patients to plot, default is all the one available.
 #' @param max.phylogenies How many trees should be computed for each patient
 #' @param cex Scale cex for graphics
@@ -1173,11 +1169,11 @@ clonal.subclonal.table = function(x)
 #' @details Perform some basic diagnostic of a cohort object. It will inform of patients without drivers and other
 #' information that can be used to reshape the data before fitting a model.
 #'
-#' @param x An object of class "rev_cohort"
+#' @param x An object of class \code{"rev_cohort"}
 #' @param auto.fix Unused parameter; ideally we will implement some automatic fixing one day.
 #' @param return.value If the method should return or not a report with the errors. By default is just prints to screen
 #'
-#' @return see "return.value"
+#' @return depends on \code{return.value}
 #' @import crayon
 #' @export
 #'
@@ -1269,22 +1265,22 @@ revolver_check_cohort = function(x, auto.fix = FALSE, return.value = FALSE)
  if(return.value) return(err)
 }
 
-#' @title Remove a driver events associated to a certain ID, in a patient.
+#' @title Remove a driver event from a cohort.
 #'
 #' @details Basic editing function. Each event is identied through its ID,
-#' cluster assignment and "misc" flag. With this function, you can remove it.
+#' cluster assignment and its misc flag. With this function, you can remove it.
 #' The event is not physically removed from the dataset, but instead its flag
-#' is.Driver is set to FALSE. If there are phylogenies inside, they are updated
-#' as well. If you have fit those, however, you should re-run the fit after this
-#' modification.
+#' \code{is.Driver} is set to \code{FALSE}. If there are phylogenies inside, they are updated
+#' as well. If you have fit the models, however, you should re-run the fit after this
+#' modification because this modification does not propagate.
 #'
-#' @param x An object of class "rev_cohort"
+#' @param x An object of class \code{"rev_cohort"}
 #' @param patient Patient ID.
-#' @param variantID ID of the event to mark as FALSE.
-#' @param misc misc of the event to mark as FALSE.
-#' @param cluster cluster of the event to mark as FALSE.
+#' @param variantID ID of the event to mark as \code{FALSE}.
+#' @param misc misc of the event to mark as \code{FALSE}
+#' @param cluster cluster of the event to mark as \code{FALSE}
 #'
-#' @return see "return.value"
+#' @return a modified cohort object of class \code{"rev_cohort"}
 #' @import crayon
 #' @export
 #'
@@ -1327,16 +1323,17 @@ revolver_removeDriver = function(
 }
 
 
-
 #' Subset the drivers in the cohort to match the input list.
 #'
-#' @param cohort An object of class "rev_cohort"
+#' @param cohort An object of class \code{"rev_cohort"}
 #' @param list A vector of driver IDs to subset the data to.
 #'
-#' @return A REVOLVER cohort with only drivers in the list "list".
+#' @return A REVOLVER cohort with only drivers in \code{list}.
 #' @export
 #'
-#' @examples TODO
+#' @examples
+#' data(CRC.cohort)
+#' revolver_subsetDrivers(CRC.cohort, 'APC')
 revolver_subsetDrivers = function(cohort, list)
 {
   current.drivers = rownames(clonal.subclonal.table(cohort))
@@ -1375,10 +1372,10 @@ revolver_subsetDrivers = function(cohort, list)
 
 #' Subset the patients in the cohort to match the input list.
 #'
-#' @param cohort An object of class "rev_cohort"
+#' @param cohort An object of class \code{"rev_cohort"}
 #' @param list A vector of patient IDs to subset the data to.
 #'
-#' @return A REVOLVER cohort with only patients in the list "list".
+#' @return A REVOLVER cohort with only patients in the \code{list}.
 #' @export
 #'
 #' @examples

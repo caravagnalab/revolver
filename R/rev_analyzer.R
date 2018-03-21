@@ -3,7 +3,7 @@
 #' @title Wrapper for a full analysis with REVOLVER
 #' @details
 #' This is convenient wrapper to run all REVOLVER's analysis within one command.
-#' It takes as input a "rev_cohort" object and performs the following steps:
+#' It takes as input a \code{"rev_cohort"} object and performs the following steps:
 #' 1) it computes phylogenetic trees (either from binary or CCF data);
 #' 2) it performs model fit;
 #' 3) if performs clustering.
@@ -11,20 +11,20 @@
 #' passed to the repective functions, where you to run the analysis in single steps.
 #' This function saves relevant RData objects for its main steps.
 #'
-#' @param cohort A "rev_cohort" object.
-#' @param type Type of data: "CCF" or "binary". If NA it assumes that "cohort" contains
+#' @param cohort A \code{"rev_cohort"} object.
+#' @param type Type of data: \code{"CCF"} or \code{"binary"}. If \code{NA} it assumes that \code{"cohort"} contains
 #' already the tree models for your patients.
-#' @param cohort.name Default is 'REVOLVER-cohort', use this to identify output files that
+#' @param cohort.name Default is \code{"REVOLVER-cohort"}, use this to identify output files that
 #' will have this string as prefix.
-#' @param folder.output Output folder, default is current one ".".
-#' @param do.plots Set it to TRUE if you want also plots as output.
-#' @param options.trees List of parameters for building input trees. See "revolver_compute_phylogenies"
-#' or "revolver_compute_CLtrees"
-#' @param options.fit List of parameters for fitting models. See "revolver_fit".
-#' @param options.clustering.withGL List of parameters for clustering with the germline node GL. See "revolver_cluster".
-#' @param options.clustering.withoutGL List of parameters for clustering without the germline node GL. See "revolver_cluster".
+#' @param folder.output Output folder, default is current one.
+#' @param do.plots Set it to \code{TRUE} if you want also plots as output.
+#' @param options.trees List of parameters for building input trees. See \code{\link{revolver_compute_phylogenies}}.
+#' or \code{\link{revolver_compute_CLtrees}}.
+#' @param options.fit List of parameters for fitting models. See  \code{\link{revolver_fit}}.
+#' @param options.clustering.withGL List of parameters for clustering with the germline node GL. See \code{\link{revolver_cluster}}.
+#' @param options.clustering.withoutGL List of parameters for clustering without the germline node GL. See \code{\link{revolver_cluster}}.
 #'
-#' @return none
+#' @return Nothing, as all functions dump to disk several PDF and RData files.
 #' @export
 #'
 #' @examples

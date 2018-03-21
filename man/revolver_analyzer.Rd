@@ -16,33 +16,33 @@ revolver_analyzer(cohort, type = "CCF", cohort.name = "REVOLVER-cohort",
   split.method = "cutreeDynamic"))
 }
 \arguments{
-\item{cohort}{A "rev_cohort" object.}
+\item{cohort}{A \code{"rev_cohort"} object.}
 
-\item{type}{Type of data: "CCF" or "binary". If NA it assumes that "cohort" contains
+\item{type}{Type of data: \code{"CCF"} or \code{"binary"}. If \code{NA} it assumes that \code{"cohort"} contains
 already the tree models for your patients.}
 
-\item{cohort.name}{Default is 'REVOLVER-cohort', use this to identify output files that
+\item{cohort.name}{Default is \code{"REVOLVER-cohort"}, use this to identify output files that
 will have this string as prefix.}
 
-\item{folder.output}{Output folder, default is current one ".".}
+\item{folder.output}{Output folder, default is current one.}
 
-\item{do.plots}{Set it to TRUE if you want also plots as output.}
+\item{do.plots}{Set it to \code{TRUE} if you want also plots as output.}
 
-\item{options.trees}{List of parameters for building input trees. See "revolver_compute_phylogenies"
-or "revolver_compute_CLtrees"}
+\item{options.trees}{List of parameters for building input trees. See \code{\link{revolver_compute_phylogenies}}.
+or \code{\link{revolver_compute_CLtrees}}.}
 
-\item{options.fit}{List of parameters for fitting models. See "revolver_fit".}
+\item{options.fit}{List of parameters for fitting models. See  \code{\link{revolver_fit}}.}
 
-\item{options.clustering.withGL}{List of parameters for clustering with the germline node GL. See "revolver_cluster".}
+\item{options.clustering.withGL}{List of parameters for clustering with the germline node GL. See \code{\link{revolver_cluster}}.}
 
-\item{options.clustering.withoutGL}{List of parameters for clustering without the germline node GL. See "revolver_cluster".}
+\item{options.clustering.withoutGL}{List of parameters for clustering without the germline node GL. See \code{\link{revolver_cluster}}.}
 }
 \value{
-none
+Nothing, as all functions dump to disk several PDF and RData files.
 }
 \details{
 This is convenient wrapper to run all REVOLVER's analysis within one command.
-It takes as input a "rev_cohort" object and performs the following steps:
+It takes as input a \code{"rev_cohort"} object and performs the following steps:
 1) it computes phylogenetic trees (either from binary or CCF data);
 2) it performs model fit;
 3) if performs clustering.

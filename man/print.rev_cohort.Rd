@@ -2,12 +2,12 @@
 % Please edit documentation in R/rev_cohort.R
 \name{print.rev_cohort}
 \alias{print.rev_cohort}
-\title{Print for class "rev_cohort"}
+\title{Print a \code{"rev_cohort"} object}
 \usage{
 \method{print}{rev_cohort}(x, digits = max(3, getOption("digits") - 3), ...)
 }
 \arguments{
-\item{x}{obj of class "rev_cohort"}
+\item{x}{obj of class \code{"rev_cohort"}}
 
 \item{digits}{number of output digits}
 }
@@ -15,7 +15,7 @@
 nothing
 }
 \description{
-Print for class "rev_cohort"
+Print a \code{"rev_cohort"} object
 }
 \examples{
 data(CRC.cohort)

@@ -2,18 +2,18 @@
 % Please edit documentation in R/rev_fit.R
 \name{print.rev_cohort_fit}
 \alias{print.rev_cohort_fit}
-\title{Print a 'rev_cohort_fit' object that summarizes REVOLVER fits.}
+\title{Print a REVOLVER cohort object with fits.}
 \usage{
 \method{print}{rev_cohort_fit}(x)
 }
 \arguments{
-\item{x}{A 'rev_cohort_fit' object}
+\item{x}{A \code{"rev_cohort_fit"} object}
 }
 \value{
 none
 }
 \description{
-Print a 'rev_cohort_fit' object that summarizes REVOLVER fits.
+Print a REVOLVER cohort object with fits.
 }
 \examples{
 data(CRC.cohort)

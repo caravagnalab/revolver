@@ -21,20 +21,31 @@ lists the edges of the model, or a list of edges (vector) in the format "A~B" to
 \item{annotation}{A string to annotate this tree.}
 }
 \value{
-An object of class "rev_phylo"
+An object of class \code{"rev_phylo"}
 }
 \details{
 REVOLVER constructor to create an object of type "rev_phylo", which represents a model
 for a patient. This is the same object regarldess data are CCF or binary values.
 }
 \examples{
-data(CRC)
-# This has just one cluster -- we make up its adj_matrix for the tree
+# Take data from CRC, inspect sample and dataset
+data("CRC")
 dataset = CRC[CRC$patientID == 'adenoma_3', ]
-samples_ID = paste('R', 1:6, sep = '')
+samples = paste('R', 1:5, sep = '')
 
-m = matrix(1, ncol = 1, nrow = 1)
-colnames(m) = rownames(m) = '1'
-revolver_phylogeny(m, 'adenoma_1', dataset, samples_ID, 52)
+# Extract CCF values
+CCF = sapply(dataset$CCF, revolver:::CCF.parser)
+CCF = t(apply(CCF, 2, as.numeric))
+rownames(CCF) = rownames(dataset)
+colnames(CCF) = samples
 
+# Bind a dataset with explicit data
+dataset = cbind(dataset, CCF)
+
+# Create empty adj_mat
+m = matrix(0, ncol = 4, nrow = 4)
+colnames(m) = rownames(m) = 1:4
+# Phylogeny: will attach a GL (germline) to the root
+# of the tree. In this case all nodes are roots.
+revolver_phylogeny(m, 'adenoma_1', dataset, samples, 52)
 }

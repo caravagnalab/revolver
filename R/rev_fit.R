@@ -1,7 +1,7 @@
 
-#' Print a 'rev_cohort_fit' object that summarizes REVOLVER fits.
+#' Print a REVOLVER cohort object with fits.
 #'
-#' @param x A 'rev_cohort_fit' object
+#' @param x A \code{"rev_cohort_fit"} object
 #'
 #' @return none
 #' @export
@@ -17,17 +17,17 @@ print.rev_cohort_fit = function(x)
 }
 
 
-#' @title Plot fits for a subset of patients in the cohort.
+#' @title Plot REVOLVER fits for a subset of patients in the cohort.
 #'
 #' @details
 #' This function performs the plots for each one of a set of input patient IDs. Each plot
 #' contain the tree fit, its expanded version and the information transfer.
 #'
-#' @param x A 'rev_cohort_fit' object
+#' @param x A \code{"rev_cohort_fit"} object
 #' @param patients The patients to plot, default is all the one available.
-#' @param plot.stat Set it to TRUE to visualize also some statistics about each tree
+#' @param plot.stat Set it to \code{TRUE} to visualize also some statistics about each tree
 #' @param palette RColorBrewer palette for colours of each model.
-#' @param out.file Output PDF file, default 'REVOLVER-cohort.pdf'.
+#' @param out.file Output PDF file, default \code{"REVOLVER-cohort.pdf"}.
 #' @param layout The layout of to arrange the plots.
 #' @param alpha Transparency
 #' @param verbose Verbose output.
@@ -240,23 +240,23 @@ plot.rev_cohort_fit = function(
 }
 
 
-#' @title Main fit function for REVOLVER algorithm
+#' @title REVOLVER fit function.
 #'
 #' @details  The main fitting function for REVOLVER, implements the 2-steps EM-algorithm described
 #' in the main paper.
 #'
-#' @param x A 'rev_cohort' object with available trees.
-#' @param initial.solution Either a scalar to fix it, or NA to sample it randomly.
+#' @param x A \code{"rev_cohort"} object with available trees.
+#' @param initial.solution Either a scalar to fix one initial condition (rank id), or \code{NA} to sample it randomly.
 #' @param max.iterations Maximum number of EM steps before forcing stop.
 #' @param restarts Number of initial conditions sampled to compute optimal fit
-#' @param parallel Use a parallel engine with TRUE, hides ouptut. Exploits doParallel.
-#' @param cores.ratio Ratio of the number of cores to use, after the overall number of
-#' available cores has been detected by doParallel.
+#' @param parallel Use a parallel engine with \code{TRUE}, hides ouptut. Exploits \code{doParallel}.
+#' @param cores.ratio Percentage of the number of cores to use, after the overall number of
+#' available cores has been detected by \code{doParallel}.
 #' @param transitive.orderings If transitive orderings should be computed before the second
-#' fitting step (transfering of orderings). The default is FALSE, which we suggest.
+#' fitting step (transfering of orderings). The default is \code{FALSE}, which we suggest.
 #' @param verbose Verbose output
 #'
-#' @return A 'rev_cohort_fit' object
+#' @return A \code{"rev_cohort_fit"} object
 #' @export
 #' @import RColorBrewer
 #' @import igraph
@@ -657,12 +657,14 @@ tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
 
   npatients = length(x$fit$phylogenies)
   pb = txtProgressBar(min = 0, max = npatients, style = 3)
+  pb.status = getOption('revolver.progressBar', default = TRUE)
+
 
   x$fit$exploded = list()
   for(patient in 1:npatients)
   {
     # update progress bar
-    setTxtProgressBar(pb, patient)
+    if(pb.status) setTxtProgressBar(pb, patient)
 
     patient = names(x$fit$phylogenies)[patient]
 
@@ -961,11 +963,12 @@ rev_table.orderings = function(x, intelli.cutoff = 3)
 }
 
 
-#' Plot penalty for a fit cohort, it uses non parametric bootstrap.
+#' Plot penalty for a REVOLVER cohort, via non parametric bootstrap.
 #'
-#' @param x A 'rev_cohort_fit' object
+#' @param x A \code{"rev_cohort_fit"} object
 #' @param n.boot Number of non-parametric bootstrap resamples.
-#' @param DET.type Index type, default is 'Shannon' (Shannon's equitability, which is entropy)
+#' @param DET.type Index type, default is \code{"Shannon"} (Shannon's equitability,
+#' which is entropy), also available is \code{"VA"} (Variance Analog index in \code{VA})
 #' @param file Output file.
 #' @param ... Extra parameters.
 #'

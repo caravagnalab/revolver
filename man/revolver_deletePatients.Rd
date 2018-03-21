@@ -9,10 +9,10 @@ revolver_deletePatients(x, list)
 \arguments{
 \item{list}{A vector of patient IDs to subset the data to.}
 
-\item{cohort}{An object of class "rev_cohort"}
+\item{cohort}{An object of class \code{"rev_cohort"}}
 }
 \value{
-A REVOLVER cohort with only patients in the list "list".
+A REVOLVER cohort with only patients in the \code{list}.
 }
 \description{
 Subset the patients in the cohort to match the input list.

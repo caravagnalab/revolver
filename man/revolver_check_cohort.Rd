@@ -7,14 +7,14 @@
 revolver_check_cohort(x, auto.fix = FALSE, return.value = FALSE)
 }
 \arguments{
-\item{x}{An object of class "rev_cohort"}
+\item{x}{An object of class \code{"rev_cohort"}}
 
 \item{auto.fix}{Unused parameter; ideally we will implement some automatic fixing one day.}
 
 \item{return.value}{If the method should return or not a report with the errors. By default is just prints to screen}
 }
 \value{
-see "return.value"
+depends on \code{return.value}
 }
 \details{
 Perform some basic diagnostic of a cohort object. It will inform of patients without drivers and other

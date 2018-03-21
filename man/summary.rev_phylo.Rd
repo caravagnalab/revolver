@@ -2,12 +2,12 @@
 % Please edit documentation in R/rev_phylogeny.R
 \name{summary.rev_phylo}
 \alias{summary.rev_phylo}
-\title{Summary for a "rev_phylo" object.}
+\title{Summary of a \code{"rev_phylo"} object.}
 \usage{
 \method{summary}{rev_phylo}(x, ..., print.stat = TRUE)
 }
 \arguments{
-\item{x}{An object of class "rev_phylo".}
+\item{x}{An object of class \code{"rev_phylo"}.}
 
 \item{...}{Extra parameters}
 
@@ -17,7 +17,7 @@
 none
 }
 \details{
-Reports some summary for a "rev_phylo" object, this is a bit more than just using "print".
+Reports some summary for a \code{"rev_phylo"} object, this is a bit more than just using print.
 }
 \examples{
 data(CRC.cohort)

@@ -2,17 +2,18 @@
 % Please edit documentation in R/rev_fit.R
 \name{revolver_penaltyPlot}
 \alias{revolver_penaltyPlot}
-\title{Plot penalty for a fit cohort, it uses non parametric bootstrap.}
+\title{Plot penalty for a REVOLVER cohort, via non parametric bootstrap.}
 \usage{
 revolver_penaltyPlot(x, n.boot = 100, DET.type = "Shannon",
   file = "REVOLVER-penalty.pdf", ...)
 }
 \arguments{
-\item{x}{A 'rev_cohort_fit' object}
+\item{x}{A \code{"rev_cohort_fit"} object}
 
 \item{n.boot}{Number of non-parametric bootstrap resamples.}
 
-\item{DET.type}{Index type, default is 'Shannon' (Shannon's equitability, which is entropy)}
+\item{DET.type}{Index type, default is \code{"Shannon"} (Shannon's equitability,
+which is entropy), also available is \code{"VA"} (Variance Analog index in \code{VA})}
 
 \item{file}{Output file.}
 
@@ -22,7 +23,7 @@ revolver_penaltyPlot(x, n.boot = 100, DET.type = "Shannon",
 none
 }
 \description{
-Plot penalty for a fit cohort, it uses non parametric bootstrap.
+Plot penalty for a REVOLVER cohort, via non parametric bootstrap.
 }
 \examples{
 #' data(CRC.cohort)

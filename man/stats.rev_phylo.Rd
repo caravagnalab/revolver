@@ -2,18 +2,18 @@
 % Please edit documentation in R/rev_phylogeny.R
 \name{stats.rev_phylo}
 \alias{stats.rev_phylo}
-\title{VCompute some statistics for a "rev_phylo" tree.}
+\title{Compute statistics for a \code{"rev_phylo"} tree.}
 \usage{
 stats.rev_phylo(x)
 }
 \arguments{
-\item{x}{An object of class "rev_phylo".}
+\item{x}{An object of class \code{"rev_phylo"}.}
 }
 \value{
 A list with all computed statistics.
 }
 \details{
-Compute some statistics for a "rev_phylo" tree. Thee include violations of the
+Compute some statistics for a \code{"rev_phylo"} tree. Thee include violations of the
 pigeonhole principle, Suppes' conditions etc. Stats are compute no matter what
 data is used to create the trees, but one should only consider those relevant
 to the actual type of data.

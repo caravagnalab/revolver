@@ -2,13 +2,13 @@
 % Please edit documentation in R/rev_cohort.R
 \name{plot.rev_cohort}
 \alias{plot.rev_cohort}
-\title{Plotting function for a REVOLVER cohort.}
+\title{Plot a REVOLVER cohort.}
 \usage{
 \method{plot}{rev_cohort}(x, patients = x$patients, max.phylogenies = 12,
   cex = 1, plot.stat = TRUE)
 }
 \arguments{
-\item{x}{An object of class "rev_cohort"}
+\item{x}{An object of class \code{"rev_cohort"}}
 
 \item{patients}{The patients to plot, default is all the one available.}
 
@@ -22,9 +22,9 @@
 nothing
 }
 \details{
-Iterative plotting functions that scans some samples from a cohort. It will plot
+Iterative plotting functions that scans samples from a cohort. It will plot
 a patient's data (original and binarized), the score for the trees associated to
-the patient, and a number of such trees.
+the patient, and a number of possible trees per patient.
 }
 \examples{
 data(CRC.cohort)

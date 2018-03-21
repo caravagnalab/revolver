@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev_clustering.R
 \name{revolver_cluster}
 \alias{revolver_cluster}
-\title{Compute hierarchical clustering for a REVOLVER cohort with fit models.}
+\title{Compute hierarchical clustering for a REVOLVER cohort}
 \usage{
 revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
   dendogram.type = "rectangle", cutoff.features_annotation = 3,
@@ -10,31 +10,34 @@ revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
   file = "REVOLVER-clustering.pdf", ...)
 }
 \arguments{
-\item{x}{A 'rev_cohort_fit' object for which the evolutionary distance has been computed.}
+\item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
 
-\item{hc.method}{Method for hierarchial clustering, see "revolver_infoclustering".}
+\item{hc.method}{Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.}
 
-\item{split.method}{Method to cut the dendogram, see "revolver_infoclustering".}
+\item{split.method}{Method to cut the dendogram, see \code{\link{revolver_infoclustering}}.}
 
-\item{dendogram.type}{"rectangle", "triangle" or other formats supported by a dendogram object.}
+\item{dendogram.type}{\code{"rectangle"}, \code{"triangle"} or other formats supported by a \code{dendogram} object.}
 
 \item{cutoff.features_annotation}{Minimum number of observations to include a certain feature
-in the plot. The number is absolute; e.g., with n = 3 we annotate only edges that occurr at least
+in the plot. The number is absolute; e.g., with \code{n = 3} we annotate only edges that occurr at least
 in 3 patients}
 
-\item{min.group.size}{Minimum group size for dynamicTreeCut functions.}
+\item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
 
-\item{plot.groups}{Set this to TRUE if you want to plot also the resulting groups and their models.}
+\item{plot.groups}{Set this to \code{TRUE} if you want to plot also the resulting groups and their models.}
 
 \item{file}{Output file}
 
 \item{...}{Extra parameters}
 }
 \value{
-A 'rev_cohort_fit' object mod a new field "cluster" that contains the computation's results.
+The input \code{x} with a modified field \code{cluster} with results.
 }
 \details{
 Compute hierarchical clustering for a REVOLVER cohort with fit models.
+You might want to see functions \code{\link{revolver_evo_distance}} and
+\code{\link{revolver_infoclustering}} to first compute REVOLVER's
+evolutionary distance, and inspect basic parameter values.
 }
 \examples{
 data(CRC.cohort)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev_fit.R
 \name{plot.rev_cohort_fit}
 \alias{plot.rev_cohort_fit}
-\title{Plot fits for a subset of patients in the cohort.}
+\title{Plot REVOLVER fits for a subset of patients in the cohort.}
 \usage{
 \method{plot}{rev_cohort_fit}(x, patients = names(x$fit$phylogenies),
   plot.stat = TRUE, palette = "Set1", out.file = "REVOLVER-cohort.pdf",
@@ -10,15 +10,15 @@
   verbose = FALSE, ...)
 }
 \arguments{
-\item{x}{A 'rev_cohort_fit' object}
+\item{x}{A \code{"rev_cohort_fit"} object}
 
 \item{patients}{The patients to plot, default is all the one available.}
 
-\item{plot.stat}{Set it to TRUE to visualize also some statistics about each tree}
+\item{plot.stat}{Set it to \code{TRUE} to visualize also some statistics about each tree}
 
 \item{palette}{RColorBrewer palette for colours of each model.}
 
-\item{out.file}{Output PDF file, default 'REVOLVER-cohort.pdf'.}
+\item{out.file}{Output PDF file, default \code{"REVOLVER-cohort.pdf"}.}
 
 \item{layout}{The layout of to arrange the plots.}
 

@@ -7,18 +7,20 @@
 revolver_evo_distance(x, use.GL = TRUE, transitive.closure = FALSE)
 }
 \arguments{
-\item{x}{A 'rev_cohort_fit' object.}
+\item{x}{A \code{"rev_cohort_fit"} object.}
 
 \item{use.GL}{Whether or not the germline node (GL) should be used to compute the distance.
-Default is TRUE.}
+Default is \code{TRUE}.}
 
 \item{transitive.closure}{Whether or not the transitive closure of the ordering relations
-should be computed, or not. Default is FALSE.}
+should be computed, or not. Default is \code{FALSE}.}
 }
 \value{
-A 'rev_cohort_fit' object with a new field "cluster" that contains the computation's results.
+A \code{"rev_cohort_fit"}. object with a new field \code{"cluster"} that contains the computation's results.
 }
 \details{
+This function can be applied only to an object that contains a fit result,
+which is then of class \code{"rev_cohort_fit"}.
 Default values represent the most common configuration that one should use.
 }
 \examples{

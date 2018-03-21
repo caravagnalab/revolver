@@ -85,15 +85,17 @@ evo_distance = function(transfer, patient.one, patient.two)
 #' @title Compute REVOLVER's evolutionary distance h(P_i, P_j).
 #'
 #' @details
+#' This function can be applied only to an object that contains a fit result,
+#' which is then of class \code{"rev_cohort_fit"}.
 #' Default values represent the most common configuration that one should use.
 #'
-#' @param x A 'rev_cohort_fit' object.
+#' @param x A \code{"rev_cohort_fit"} object.
 #' @param use.GL Whether or not the germline node (GL) should be used to compute the distance.
-#' Default is TRUE.
+#' Default is \code{TRUE}.
 #' @param transitive.closure Whether or not the transitive closure of the ordering relations
-#' should be computed, or not. Default is FALSE.
+#' should be computed, or not. Default is \code{FALSE}.
 #'
-#' @return A 'rev_cohort_fit' object with a new field "cluster" that contains the computation's results.
+#' @return A \code{"rev_cohort_fit"}. object with a new field \code{"cluster"} that contains the computation's results.
 #' @export
 #' @import crayon
 #'
@@ -152,12 +154,13 @@ revolver_evo_distance = function(x, use.GL = TRUE, transitive.closure = FALSE)
   i = 0
   idx = 1:length(fit.patients)
   pb = txtProgressBar(min = 0, max = length(fit.patients) * (length(fit.patients) - 1) / 2, style = 3)
+  pb.status = getOption('revolver.progressBar', default = TRUE)
 
   for(p1 in idx){
     for(p2 in p1:length(fit.patients)){
 
       # update progress bar
-      setTxtProgressBar(pb, i)
+      if(pb.status) setTxtProgressBar(pb, i)
       i = i + 1
 
       if(p1 == p2) next;
@@ -187,19 +190,20 @@ revolver_evo_distance = function(x, use.GL = TRUE, transitive.closure = FALSE)
 #' @title Compute possible clusterings for standard parameters.
 #'
 #' @details
+#' This requires to have computed the distance via function \code{\link{revolver_evo_distance}}.
 #' Compute possible clusterings for standard parameters. This helps
 #' to determine and select clusters in an output dendogram. This function uses
-#' dendogram cutting strategies available through packages such as cluster and
-#' dynamicTreeCut.
+#' dendogram cutting strategies available through packages such as \code{cluster} and
+#' \code{dynamicTreeCut}.
 #'
-#' @param x A 'rev_cohort_fit' object for which the evolutionary distance has been computed.
+#' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
 #' @param methods Dendogram methods supported by agnes and cluster packages. Default
-#' are c( "average", "single", "complete", "ward").
-#' @param min.group.size Minimum group size for dynamicTreeCut functions.
-#' @param do.plot TRUE if you want plots to be saved to file "file"
+#' are all of the following: \code{"average"}, \code{"single"}, \code{"complete"}, \code{"ward"}.
+#' @param min.group.size Minimum group size for \code{dynamicTreeCut} functions.
+#' @param do.plot \code{TRUE} if you want plots to be saved to \code{file}
 #' @param file PDF output file.
 #'
-#' @return None
+#' @return None, this function just produces a report to inspect offline.
 #' @export
 #' @import crayon
 #' @import cluster
@@ -272,23 +276,28 @@ revolver_infoclustering = function(x,
 
 
 
-#' @title Compute hierarchical clustering for a REVOLVER cohort with fit models.
+#' @title Compute hierarchical clustering for a REVOLVER cohort
 #'
-#' @details Compute hierarchical clustering for a REVOLVER cohort with fit models.
+#' @details
+#' Compute hierarchical clustering for a REVOLVER cohort with fit models.
+#' You might want to see functions \code{\link{revolver_evo_distance}} and
+#' \code{\link{revolver_infoclustering}} to first compute REVOLVER's
+#' evolutionary distance, and inspect basic parameter values.
 #'
-#' @param x A 'rev_cohort_fit' object for which the evolutionary distance has been computed.
-#' @param hc.method Method for hierarchial clustering, see "revolver_infoclustering".
-#' @param split.method Method to cut the dendogram, see "revolver_infoclustering".
-#' @param dendogram.type "rectangle", "triangle" or other formats supported by a dendogram object.
+#'
+#' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
+#' @param hc.method Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.
+#' @param split.method Method to cut the dendogram, see \code{\link{revolver_infoclustering}}.
+#' @param dendogram.type \code{"rectangle"}, \code{"triangle"} or other formats supported by a \code{dendogram} object.
 #' @param cutoff.features_annotation Minimum number of observations to include a certain feature
-#' in the plot. The number is absolute; e.g., with n = 3 we annotate only edges that occurr at least
+#' in the plot. The number is absolute; e.g., with \code{n = 3} we annotate only edges that occurr at least
 #' in 3 patients
-#' @param min.group.size Minimum group size for dynamicTreeCut functions.
-#' @param plot.groups Set this to TRUE if you want to plot also the resulting groups and their models.
+#' @param min.group.size Minimum group size for \code{dynamicTreeCut} functions.
+#' @param plot.groups Set this to \code{TRUE} if you want to plot also the resulting groups and their models.
 #' @param file Output file
 #' @param ... Extra parameters
 #'
-#' @return A 'rev_cohort_fit' object mod a new field "cluster" that contains the computation's results.
+#' @return The input \code{x} with a modified field \code{cluster} with results.
 #' @export
 #' @import crayon
 #' @import cluster
