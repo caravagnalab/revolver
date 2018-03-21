@@ -3,7 +3,10 @@ Type: Package
 Title: Repeated Evolution in Cancer (REVOLVER)
 Version: 0.1.0
 Author: Giulio Caravagna
-Authors@R: person("Giulio", "Caravagna", role = c("aut", "cre"), email = "giulio.caravagna@icr.ac.uk")
+Authors@R: c(
+    person("Giulio", "Caravagna", email = "giulio.caravagna@icr.ac.uk", c("aut", "cre")),
+    person("Ylenia", "Giarratano", email = "ylenia.giarratano@gmail.com", role = "ctb"),
+    person("Daniele", "Ramazzotti", email = "daniele.ramazzotti@yahoo.com", role = "ctb"))
 Maintainer: Giulio Caravagna <gcaravagna@gmail.com>
 Description: The R package that implements the REVOLVER algorithm to compute Repeated Evolution in Cancer from multi-region sequencing data.
 License: GPL
@@ -11,5 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: crayon, RColorBrewer, purrr, cluster, igraph, pheatmap, TRONCO, parallel, doParallel, matrixcalc, entropy, matrixStats, gridExtra, Rgraphviz, qualvar, vegan, xlsx, rJava
 RoxygenNote: 6.0.1
-
-
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

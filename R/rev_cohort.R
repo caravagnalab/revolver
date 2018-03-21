@@ -130,9 +130,11 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 
     cat(cyan('\n\tTL Model Fit  :'), ifelse(is.null(x$fit), red('NO\n'), green('YES ')), '\n')
 
+    longest.name = max(nchar(names(x$phylogenies)))
+
     patf = function(w, fit){
       s = paste(
-        yellow(sprintf('%15s', names(x$phylogenies)[w])),  ': ',
+        yellow(sprintf(paste('%', longest.name, 's', sep = ''), names(x$phylogenies)[w])),  ': ',
           sprintf('k = %3s | t = %3s | n = %2s | r = %2s | m = %4s | d = %2s',
                   length(x$phylogenies[[w]]),
                   rev_count_information_transfer_comb(x, names(x$phylogenies)[w]),
