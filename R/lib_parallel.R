@@ -9,9 +9,9 @@ setup_parallel = function(cores.ratio)
   cores = as.integer(cores.ratio * (detectCores() - 1))
   if (cores < 1) cores = 1
 
-  cat(cyan('Registering to use', cores, 'cores out of', detectCores(), 'via \"parallel\" ...'))
-  cl = makeCluster(cores)
-  registerDoParallel(cl)
+  cat(cyan('Registering to use', cores, 'cores out of', parallel::detectCores(), 'via \"parallel\" ...'))
+  cl = parallel::makeCluster(cores)
+  doParallel::registerDoParallel(cl)
   cat(bgGreen(" OK.\n"))
 
   return(cl)

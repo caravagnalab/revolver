@@ -12,7 +12,7 @@ Description: The R package that implements the REVOLVER algorithm to compute Rep
 License: GPL
 Encoding: UTF-8
 LazyData: true
-Imports: crayon, RColorBrewer, purrr, cluster, igraph, pheatmap, TRONCO, parallel, doParallel, matrixcalc, entropy, matrixStats, gridExtra, Rgraphviz, qualvar, vegan, xlsx, rJava
+Imports: crayon, parallel, doParallel
 RoxygenNote: 6.0.1
 Suggests: 
     knitr,

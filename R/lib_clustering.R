@@ -7,7 +7,7 @@ infoclustering = function(dist.obj, methods, do.plot = FALSE){
   stats = purrr::map_dbl(
     methods,
     function(w) {
-      c = agnes(dist.obj, method = w)
+      c = cluster::agnes(dist.obj, method = w)
       if(do.plot) plot(c, which.plots = 2, cex = .5)
       return(c$ac)
     })
@@ -26,35 +26,35 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
   # cutreeDynamic
   if(method == 'cutreeDynamic')
   {
-    clusters = cutreeDynamic(as.hclust(hc),
+    clusters = dynamicTreeCut::cutreeDynamic(as.hclust(hc),
                              minClusterSize = min.group,
                              method = 'tree')
 
-    clusters = clusters[order.dendrogram(dendogram)]
+    clusters = clusters[stats::order.dendrogram(dendogram)]
     names(clusters) = hc$order.lab
   }
 
   if(method == 'cutreeDynamicTree')
   {
-    clusters = cutreeDynamicTree(
-      as.hclust(hc),
+    clusters = dynamicTreeCut::cutreeDynamicTree(
+      stats::as.hclust(hc),
       deepSplit = TRUE,
       minModuleSize = min.group)
 
-    clusters = clusters[order.dendrogram(dendogram)]
+    clusters = clusters[stats::order.dendrogram(dendogram)]
     names(clusters) = hc$order.lab
   }
 
   if(method == 'cutreeHybrid')
   {
     w = capture.output({
-      clusters = cutreeHybrid(
-        as.hclust(hc),
+      clusters = dynamicTreeCut::cutreeHybrid(
+        stats::as.hclust(hc),
         distance,
         minClusterSize = min.group)$labels
       })
 
-    clusters = clusters[order.dendrogram(dendogram)]
+    clusters = clusters[stats::order.dendrogram(dendogram)]
     names(clusters) = hc$order.lab
   }
 
@@ -62,8 +62,8 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
   {
     # require(dendextend)
 
-    hcl = as.hclust(hc)
-    dend_k = find_k(dendogram, krange = 1:ceiling(length(hcl$labels)/min.group))
+    hcl = stats::as.hclust(hc)
+    dend_k = dendextend::find_k(dendogram, krange = 1:ceiling(length(hcl$labels)/min.group))
 
     clusters = dend_k$pamobject$clustering
   }
@@ -107,7 +107,7 @@ plot_dendogram = function(hc, dendogram, clusters, palette = 'Set1', plot.type =
     if(all(is.na(colors))) labels.colors = scols(labels, palette)
     else labels.colors = colors
 
-    labels_cex(dendogram) = .5
+    dendextend::labels_cex(dendogram) = .5
 
     colLab <- function(n, groups) {
       if (is.leaf(n)) {
@@ -120,7 +120,7 @@ plot_dendogram = function(hc, dendogram, clusters, palette = 'Set1', plot.type =
       }
       n
     }
-    dendogram <- dendrapply(dendogram, colLab)
+    dendogram <- stats::dendrapply(dendogram, colLab)
 
     plot(
       dendogram,
@@ -141,36 +141,36 @@ plot_tanglegram = function(x, versus = 'binary', hc.method = 'ward', dendogram, 
   if(versus == 'binary') {
     features = revolver.featureMatrix(x)$occurrences
     features[features > 0] = 1
-    hc = agnes(dist(as.matrix(features)), method = hc.method)
+    hc = cluster::agnes(dist(as.matrix(features)), method = hc.method)
 
-    dendogram = as.dendrogram(hc)
-    labels_cex(dendogram) = 0.5
+    dendogram = stats::as.dendrogram(hc)
+    dendextend::labels_cex(dendogram) = 0.5
 
     main = 'Binary'
   }
 
   if(versus == 'clonal-subclonal') {
     features = revolver.featureMatrix(x)$occurrences.clonal.subclonal
-    hc = agnes(dist(features), method = hc.method)
+    hc = cluster::agnes(dist(features), method = hc.method)
 
-    dendogram = as.dendrogram(hc)
-    labels_cex(dendogram) = 0.5
+    dendogram = stats::as.dendrogram(hc)
+    dendextend::labels_cex(dendogram) = 0.5
 
     main = 'Clonal/subclonal'
   }
 
   xdendogram = x$cluster$dendogram
-  dend_list <- dendlist(xdendogram, dendogram)
+  dend_list <- dendextend::dendlist(xdendogram, dendogram)
 
   if(!is.na(file)) pdf(file, width = width, height = height)
 
-  tanglegram(xdendogram, dendogram,
+  dendextend::tanglegram(xdendogram, dendogram,
              highlight_distinct_edges = FALSE, # Turn-off dashed lines
              common_subtrees_color_lines = TRUE, # Turn-off line colors
              common_subtrees_color_branches = TRUE, # Color common branches
              cex_main = 1,
              main = main,
-             sub = paste("entanglement =", round(entanglement(dend_list), 4))
+             sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
   )
 
   if(!is.na(file)) dev.off()

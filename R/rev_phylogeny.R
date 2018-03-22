@@ -417,8 +417,6 @@ stats.rev_phylo = function(x)
 #' @return Nothing
 #' @export
 #' @import crayon
-#' @import RColorBrewer
-#' @import igraph
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -444,10 +442,7 @@ plot.rev_phylo = function(
   nodesWithDriver = names(nodesWithDriver)[nodesWithDriver]
   nodesWithDriver = sort(nodesWithDriver)
 
-  nonw.colors = colorRampPalette(
-    brewer.pal(
-      palette,
-      n = brewer.pal.info[palette, 'maxcolors'])) (length(nodesWithDriver))
+  nonw.colors = scols(nodesWithDriver, palette, alpha)
   names(nonw.colors) = nodesWithDriver
 
   colors[nodesWithDriver] = nonw.colors
@@ -456,17 +451,8 @@ plot.rev_phylo = function(
 
   colors = c(colors, GL = 'white')
 
-  add.alpha <- function(col, alpha=1){
-    if(missing(col))
-      stop("Please provide a vector of colors.")
-    apply(sapply(col, col2rgb)/255, 2,
-          function(x)
-            rgb(x[1], x[2], x[3], alpha=alpha))
-  }
-  colors = add.alpha(colors, alpha)
-
-  g = graph_from_adjacency_matrix(x$adj_mat)
-  edList = as_edgelist(g)
+  g = igraph::graph_from_adjacency_matrix(x$adj_mat)
+  edList = igraph::as_edgelist(g)
 
   if(!all(is.na(edge.label))) {
     edLabel = apply(
@@ -485,7 +471,7 @@ plot.rev_phylo = function(
       function(x) edge.width[x[1], x[2]] )
   } else edWeights = 1
 
-  nodList = V(g)$name
+  nodList = igraph::V(g)$name
   drivers = x$dataset[x$dataset$is.driver, ]
 
   drvCol = sapply(
@@ -529,9 +515,9 @@ plot.rev_phylo = function(
   }
 
   plot(g,
-       layout = layout.reingold.tilford(g, root = x$root),
+       layout = igraph::layout.reingold.tilford(g, root = x$root),
        vertex.size = 20 * graph.cex,
-       vertex.color = colors[V(g)$name],
+       vertex.color = colors[igraph::V(g)$name],
        # vertex.frame.color = drvCol,
        vertex.frame.color = 'white',
        edge.label = edLabel,

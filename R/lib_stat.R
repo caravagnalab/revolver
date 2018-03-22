@@ -14,7 +14,7 @@ revolver_DETindex <- function(x, n.boot = 1, table = F, index = 'Shannon')
     }
 
     if(index == 'VA'){
-      values = apply(M, 2, VA::VA)
+      values = apply(M, 2, qualvar::VA)
       return(values)
     }
 
@@ -29,11 +29,13 @@ revolver_DETindex <- function(x, n.boot = 1, table = F, index = 'Shannon')
     npbs <- c()
 
     pb = txtProgressBar(min = 1, max = n.boot, style = 3)
+    pb.status = getOption('revolver.progressBar', default = TRUE)
 
     cat(cyan('Bootstrapping the DET index \n\tNon-parametric replicates n = ', n.boot,'\n\tIndex type: ', index, '\n'))
 
     for( i in 1:n.boot) {
-      setTxtProgressBar(pb, i) # update progress bar
+      # update progress bar
+      if(pb.status) setTxtProgressBar(pb, i)
 
       npb = w[, sample(ncol(w), replace = TRUE)]
       npbs[i] <- sum(eval(npb, index))
@@ -53,7 +55,20 @@ revolver_DETindex <- function(x, n.boot = 1, table = F, index = 'Shannon')
 }
 
 
-revolver_dump_statistics = function(x, file = 'REVOLVER-Statistics.xslx') {
+
+#' Dump statistics for fit to an Excel file.
+#'
+#' @param x REVOLVER cohort fit
+#' @param file output file
+#'
+#' @return none
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' fit = revolver_fit(CRC.cohort)
+#' revolver_dumpStatistics(CRC.cohort)
+revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
   # require(xlsx)
   # dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
   # require(rJava)
@@ -61,26 +76,26 @@ revolver_dump_statistics = function(x, file = 'REVOLVER-Statistics.xslx') {
 
   ft = revolver.featureMatrix(x)
 
-  write.xlsx(x$dataset[fit$dataset$is.driver, ], file = file, sheetName = 'Drivers', row.names = FALSE)
-  write.xlsx(ft$occurrences, file = file, sheetName = 'Occurrences', append = TRUE)
-  write.xlsx(ft$consensus.explosion, file = file, sheetName = 'Information_Transfer', append = TRUE,  row.names = FALSE)
+  xlsx::write.xlsx(x$dataset[fit$dataset$is.driver, ], file = file, sheetName = 'Drivers', row.names = FALSE)
+  xlsx::write.xlsx(ft$occurrences, file = file, sheetName = 'Occurrences', append = TRUE)
+  xlsx::write.xlsx(ft$consensus.explosion, file = file, sheetName = 'Information_Transfer', append = TRUE,  row.names = FALSE)
 
   if(!is.null(x$fit)) {
-    write.xlsx(x$fit$multinomial.penalty, file = file, sheetName = 'Multinomial', append = TRUE)
-    write.xlsx(x$fit$penalty, file = file, sheetName = 'Penalty', append = TRUE)
-    write.xlsx(x$fit$solutionID, file = file, sheetName = 'Fit', append = TRUE)
+    xlsx::write.xlsx(x$fit$multinomial.penalty, file = file, sheetName = 'Multinomial', append = TRUE)
+    xlsx::write.xlsx(x$fit$penalty, file = file, sheetName = 'Penalty', append = TRUE)
+    xlsx::write.xlsx(x$fit$solutionID, file = file, sheetName = 'Fit', append = TRUE)
   }
 
   if(!is.null(x$fit)) {
-    write.xlsx(x$cluster$distances, file = file, sheetName = 'Distance', append = TRUE)
-    write.xlsx(x$cluster$clusters, file = file, sheetName = 'Clusters', append = TRUE)
+    xlsx::write.xlsx(x$cluster$distances, file = file, sheetName = 'Distance', append = TRUE)
+    xlsx::write.xlsx(x$cluster$clusters, file = file, sheetName = 'Clusters', append = TRUE)
 
     groups = sort(x$cluster$clusters)
 
     for(g in sort(names(x$cluster$labels.colors)))
     {
       ft = revolver.featureMatrix(x, patients = names(groups[groups == as.character(g)]))
-      write.xlsx(ft$consensus.explosion, file = file, sheetName = g, append = TRUE,  row.names = FALSE)
+      xlsx::write.xlsx(ft$consensus.explosion, file = file, sheetName = g, append = TRUE,  row.names = FALSE)
     }
   }
 

@@ -35,8 +35,6 @@ print.rev_cohort_fit = function(x)
 #'
 #' @return None
 #' @export
-#' @import RColorBrewer
-#' @import igraph
 #' @import crayon
 #'
 #' @examples
@@ -74,7 +72,7 @@ plot.rev_cohort_fit = function(
   wrapTS = function(M){
     tryCatch(
       {
-        TS = topo_sort(graph_from_adjacency_matrix(M), mode = 'out')$name
+        TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
         return(TS)
       },
       warning = function(w) { },
@@ -119,34 +117,30 @@ plot.rev_cohort_fit = function(
       groups = unique(phylo$dataset[phylo$dataset$is.driver, 'cluster'])
       adj_matrix = x$fit$exploded[[patient]]
 
-      G = graph_from_adjacency_matrix(adj_matrix)
+      G = igraph::graph_from_adjacency_matrix(adj_matrix)
 
       # visit groups in order according to a topological sort, ensures correct expansions
       TS = wrapTS(phylo$adj_mat)
       TS = TS[TS %in% groups]
 
       # colors for the nodes...
-      V(G)$color  = "gainsboro"
-      V(G)["GL"]$color<-"white"
+      igraph::V(G)$color  = "gainsboro"
+      igraph::V(G)["GL"]$color<-"white"
 
       ncolors = length(subst)
-      colors = colorRampPalette(
-        brewer.pal(
-          palette,
-          n = brewer.pal.info[palette, 'maxcolors'])) (ncolors)
-      names(colors) = sort(names(subst))
+      colors = scols(sort(names(subst)), palette)
       colors = add.alpha(colors, alpha)
 
       # nodes get colored according to their cluster color
       for(g in TS) {
         m = subst[[g]]
 
-        for(n in colnames(m)) V(G)[n]$color = colors[g]
+        for(n in colnames(m)) igraph::V(G)[n]$color = colors[g]
       }
 
       # we work on the layout as well
-      lay = layout.reingold.tilford(G, root = 'GL',  mode = 'all')
-      rownames(lay) =  V(G)$name
+      lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
+      rownames(lay) =  igraph::V(G)$name
 
       TS = wrapTS(adj_matrix)
       for(node in TS) lay = fixLayer(node, lay)
@@ -194,17 +188,17 @@ plot.rev_cohort_fit = function(
       colnames(adj_matrix) = sapply(colnames(adj_matrix), lbify)
       rownames(adj_matrix) = sapply(rownames(adj_matrix), lbify)
 
-      G = graph_from_adjacency_matrix(adj_matrix)
+      G = igraph::graph_from_adjacency_matrix(adj_matrix)
 
       # colors for the nodes...
-      V(G)$color  = "white"
+      igraph::V(G)$color  = "white"
 
-      edLabel = apply(as_edgelist(G), 1, edgeify)
+      edLabel = apply(igraph::as_edgelist(G), 1, edgeify)
       edLabel = as.matrix(edLabel, ncol = 1)
 
       # we work on the layout as well, as before
-      lay = layout.reingold.tilford(G, root = 'GL',  mode = 'all')
-      rownames(lay) =  V(G)$name
+      lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
+      rownames(lay) =  igraph::V(G)$name
 
       TS = wrapTS(adj_matrix)
       for(node in TS) lay = fixLayer(node, lay, offset = 2)
@@ -258,9 +252,8 @@ plot.rev_cohort_fit = function(
 #'
 #' @return A \code{"rev_cohort_fit"} object
 #' @export
-#' @import RColorBrewer
-#' @import igraph
 #' @import parallel
+#' @import crayon
 #' @import doParallel
 #'
 #'
@@ -324,7 +317,6 @@ revolver_fit = function(x,
 
     r = foreach(num = 0:restarts, .packages = c("crayon", "igraph", 'matrixStats', 'matrixcalc'), .export = ls(globalenv())) %dopar%
     {
-      pline()
       tl_revolver_fit(x, initial.solution, max.iterations, transitive.orderings, verbose)
     }
 
@@ -410,12 +402,12 @@ tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
 
     # loops are bastards, we need a special modified root and leaves function
     spec.root = function(w){
-      r.G = graph_from_adjacency_matrix(w)
+      r.G = igraph::graph_from_adjacency_matrix(w)
       r.w = root(w)
 
-      if(!is_dag(r.G)) {
+      if(!igraph::is_dag(r.G)) {
         if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
-        comp = names(components(r.G)$membership)
+        comp = names(igraph::components(r.G)$membership)
         r.w = c(r.w, comp)
         r.w = unique(r.w)
       }
@@ -423,12 +415,12 @@ tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
     }
 
     spec.leaves = function(w){
-      r.G = graph_from_adjacency_matrix(w)
+      r.G = igraph::graph_from_adjacency_matrix(w)
       r.w = leaves(w)
 
-      if(!is_dag(r.G)) {
+      if(!igraph::is_dag(r.G)) {
         if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
-        comp = names(components(r.G)$membership)
+        comp = names(igraph::components(r.G)$membership)
         r.w = c(r.w, comp)
         r.w = unique(r.w)
       }
@@ -492,7 +484,7 @@ tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
   wrapTS = function(M){
     tryCatch(
       {
-        TS = topo_sort(graph_from_adjacency_matrix(M), mode = 'out')$name
+        TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
         return(TS)
       },
       warning = function(w) { },
@@ -975,11 +967,10 @@ rev_table.orderings = function(x, intelli.cutoff = 3)
 #' @return none
 #' @export
 #'
-#' @import pheatmap
 #' @import crayon
 #'
 #' @examples
-#' #' data(CRC.cohort)
+#' data(CRC.cohort)
 #' fit = revolver_fit(CRC.cohort)
 #' revolver_penaltyPlot(fit)
 revolver_penaltyPlot = function(x, n.boot = 100, DET.type = 'Shannon', file = 'REVOLVER-penalty.pdf', ...)
@@ -1013,7 +1004,7 @@ revolver_penaltyPlot = function(x, n.boot = 100, DET.type = 'Shannon', file = 'R
 
     colors = scols(1:max(counts), palette[i])
 
-    pheatmap(
+    pheatmap::pheatmap(
       counts[order(colnames(counts)), order(colnames(counts))],
       main = paste(tit, "expansion: w"),
       breaks = -1:max(counts),
@@ -1031,7 +1022,7 @@ revolver_penaltyPlot = function(x, n.boot = 100, DET.type = 'Shannon', file = 'R
     counts = sweep(counts, 2, colSums(counts), FUN="/")
     colors = scols(seq(0.0001, 1.1, by = 0.01), palette[i])
 
-    pheatmap(
+    pheatmap::pheatmap(
       counts[order(colnames(counts)), order(colnames(counts))],
       breaks = c(-0.00001, seq(0.0001, 1.1, 0.01)),
       main = paste(tit, "expansion: normalized w"),

@@ -26,7 +26,7 @@ none
 Plot penalty for a REVOLVER cohort, via non parametric bootstrap.
 }
 \examples{
-#' data(CRC.cohort)
+data(CRC.cohort)
 fit = revolver_fit(CRC.cohort)
 revolver_penaltyPlot(fit)
 }

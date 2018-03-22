@@ -242,7 +242,7 @@ revolver_infoclustering = function(x,
   dendogram = as.dendrogram(hc)
 
   ############### Optimal number of clusters with dynamicTreeCut (automatic suggestion)
-  require(dynamicTreeCut)
+  # require(dynamicTreeCut)
   cat(cyan('\n[dynamicTreeCut/dendextend] Optimal number of clusters k.'), yellow('\t with min. group size'), ':', min.group.size, '\n')
 
   cat(
@@ -300,11 +300,7 @@ revolver_infoclustering = function(x,
 #' @return The input \code{x} with a modified field \code{cluster} with results.
 #' @export
 #' @import crayon
-#' @import cluster
-#' @import dendextend
-#' @import grid
-#' @import dynamicTreeCut
-#' @import pheatmap
+#'
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -331,9 +327,9 @@ revolver_cluster = function(
 
   # Compute HC and dendogram
   cat(cyan('[agnes] Hierarchical clustering\n'))
-  hc = agnes(dist.obj, method = hc.method)
-  dendogram = as.dendrogram(hc)
-  labels_cex(dendogram) = .5 # decrease cex if there are many elements
+  hc = cluster::agnes(dist.obj, method = hc.method)
+  dendogram = stats::as.dendrogram(hc)
+  dendextend::labels_cex(dendogram) = .5 # decrease cex if there are many elements
 
   cat(cyan('\tmethod :'), hc.method, '\n')
   cat(cyan('\t    AC :'), hc$ac)
@@ -347,6 +343,7 @@ revolver_cluster = function(
   clusters = split_dendogram(
     dendogram, hc, distance,
     split.method, min.group = min.group.size, do.plot = FALSE)
+
   x$cluster$clusters = clusters$clusters
   x$cluster$k = clusters$k
   x$cluster$split.method = split.method
@@ -371,66 +368,11 @@ revolver_cluster = function(
   )
 
   # bannerplot associated to the custering
-  bannerplot(hc, main = 'Banner plot', col = c('gainsboro', 'steelblue'))
+  cluster::bannerplot(hc, main = 'Banner plot', col = c('gainsboro', 'steelblue'))
   dev.off()
 
    #################### Features plot -- the most important one?
   revolver_featurePlot(x, width = length(x$patients), height = length(x$patients), file = 'Clonal-table.pdf')
-
-  # features = revolver.featureMatrix(x)
-  # use.GL = x$cluster$distances.params['use.GL']
-  #
-  # features$occurrences = features$occurrences[, names(sort(colSums(features$occurrences), decreasing = T))]
-  #
-  # # Annotate each sample with the cluster ID
-  # annotations.samples = data.frame(cluster = clusters$clusters)
-  # annotations.samples = annotations.samples[rownames(features$occurrences), , drop = FALSE]
-  #
-  # clusters = split(annotations.samples, f = annotations.samples$cluster)
-  # transfer = x$cluster$transfer
-  #
-  # # Featured as edges: get all edges in at least cutoff.features_annotation patients; if required remove GL
-  # which.features = features$consensus.explosion[features$consensus.explosion$count > cutoff.features_annotation, , drop  = F]
-  # if(!use.GL) which.features = which.features[which.features$from != 'GL', , drop = FALSE]
-  # cat(cyan('Features that will be annotated [ use.GL ='), use.GL, cyan(']'), '\n')
-  # print(which.features)
-  #
-  # edges.annotation = features$edges.explosion[, which.features$edge, drop = FALSE]
-  # colnames(edges.annotation) = gsub('~', ' --> ', colnames(edges.annotation))
-  # annotations.samples = cbind(annotations.samples, edges.annotation)
-  #
-  # colors.edges.annotation = sapply(
-  #   colnames(edges.annotation),
-  #   function(w) list(c('0' = 'gainsboro', '1' = 'darkgray')))
-  #
-  # numbers.matrix = features$clonal.status[, colnames(features$occurrences), drop = FALSE]
-  # numbers.matrix[numbers.matrix == 1] = 'X'
-  # numbers.matrix[numbers.matrix == 0] = ''
-  #
-  # pheatmap::pheatmap(features$occurrences,
-  #          cluster_cols = F,
-  #          cluster_rows = as.hclust(hc),
-  #          # clustering_distance_rows = dist.obj,
-  #          clustering_method = ifelse(hc.method == 'ward', 'ward.D2', hc.method),
-  #          color = c("white", brewer.pal(9, "Blues")),
-  #          breaks = seq(0, 1.1, 0.1),
-  #          main = "Clusters of variants' patterns",
-  #          annotation_row = annotations.samples,
-  #          display_numbers = numbers.matrix,
-  #          number_color = 'orange',
-  #          # legend_breaks = unique(annotations.samples$cluster),
-  #          annotation_legend = FALSE,
-  #          # annotation_col = annotations.cols,
-  #          annotation_colors = append(
-  #            list(cluster = x$clusters$labels.colors),
-  #            colors.edges.annotation),
-  #          # cutree_rows = nGroups,
-  #          treeheight_row = max(hc$height)/1.5,
-  #          cellwidth = 10, cellheight = 12,
-  #          na_col = 'gainsboro',
-  #          legend = TRUE,
-  #          file = paste('Clonal-table.pdf')
-  #          )
 
   # ##############################
   # #### Compare against other clusterings via tanglegram
@@ -443,20 +385,20 @@ revolver_cluster = function(
   occurrences.binarized[occurrences.binarized > 0] = 1
 
   occurrences.binarized = as.matrix(occurrences.binarized)
-  hc2 = agnes(dist(occurrences.binarized), method = hc.method)
-  dendogram2 = as.dendrogram(hc2)
-  labels_cex(dendogram2) = 0.5
+  hc2 = cluster::agnes(stats::dist(occurrences.binarized), method = hc.method)
+  dendogram2 = stats::as.dendrogram(hc2)
+  dendextend::labels_cex(dendogram2) = 0.5
 
   pdf('tanglegram.pdf', width = 10, height = 10)
-  dend_list <- dendlist(dendogram, dendogram2)
+  dend_list <- dendextend::dendlist(dendogram, dendogram2)
 
-  tanglegram(dendogram, dendogram2,
+  dendextend::tanglegram(dendogram, dendogram2,
              highlight_distinct_edges = FALSE, # Turn-off dashed lines
              common_subtrees_color_lines = TRUE, # Turn-off line colors
              common_subtrees_color_branches = TRUE, # Color common branches
              cex_main = 1,
              main = paste("Binary occurrences"),
-             sub = paste("entanglement =", round(entanglement(dend_list), 4))
+             sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
   )
 
   plot_dendogram(
@@ -469,19 +411,19 @@ revolver_cluster = function(
     colors = x$cluster$labels.colors
   )
 
-  hc3 = agnes(dist(features$occurrences.clonal.subclonal), method = hc.method)
-  dendogram3 = as.dendrogram(hc3)
-  labels_cex(dendogram3) = 0.5
+  hc3 = cluster::agnes(dist(features$occurrences.clonal.subclonal), method = hc.method)
+  dendogram3 = stats::as.dendrogram(hc3)
+  dendextend::labels_cex(dendogram3) = 0.5
   #
-  dend_list <- dendlist(dendogram, dendogram3)
+  dend_list = dendextend::dendlist(dendogram, dendogram3)
 
-  tanglegram(dendogram, dendogram3,
+  dendextend::tanglegram(dendogram, dendogram3,
              highlight_distinct_edges = FALSE, # Turn-off dashed lines
              common_subtrees_color_lines = TRUE, # Turn-off line colors
              common_subtrees_color_branches = TRUE, # Color common branches
              cex_main = 1,
              main = paste("Clonal/Subclonal occurrences"),
-             sub = paste("entanglement =", round(entanglement(dend_list), 4))
+             sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
   )
 
   plot_dendogram(
@@ -514,7 +456,7 @@ revolver_cluster = function(
                        'Transitive closure:', params['transitive.closure'])),
     cluster_rows = as.hclust(hc),
     cluster_cols = as.hclust(hc),
-    color = colorRampPalette(brewer.pal(8, "YlOrRd"))(100),
+    color = scols(1:100, "YlOrRd"),
     border_color = NA,
     show_rownames = T,
     show_colnames = T,
@@ -577,8 +519,7 @@ revolver_cluster = function(
 
         pdf("data_output.pdf", height = nrow(tr), width = 8.5)
 
-        require(gridExtra)
-        grid.arrange(tableGrob(tr))
+        gridExtra::grid.arrange(gridExtra::tableGrob(tr))
         dev.off()
 
         jamPDF(
@@ -592,25 +533,6 @@ revolver_cluster = function(
 
     # jamPDF(in.files = files, out.file = 'groups.pdf', layout = '1x1')
   }
-
-
-
-  # pheatmap(features$transfer,
-  #          cluster_cols = F,
-  #          clustering_distance_rows = as.dist(x$cluster$distances),
-  #          color = c("white", brewer.pal(9, "Blues")),
-  #          main = "Clusters of variants' patterns",
-  #          # annotation_row = annotations,
-  #          # annotation_col = annotations.cols,
-  #          # annotation_colors = annotation_colors,
-  #          # cutree_rows = nGroups,
-  #          treeheight_row = 150,
-  #          cellwidth = 10, cellheight = 12, legend = F
-  # )
-
-  # pheatmap(features$transfer)
-  # dev.off()
-
   # Plot consensus model for each group
   groups = x$cluster$clusters
   for(g in unique(groups))
@@ -789,19 +711,19 @@ revolver_plotrj_consensus = function(x, annotation = NA, col.annotation = 'white
   colnames(adj_matrix) = sapply(colnames(adj_matrix), lbify)
   rownames(adj_matrix) = sapply(rownames(adj_matrix), lbify)
 
-  G = graph_from_adjacency_matrix(adj_matrix)
+  G = igraph::graph_from_adjacency_matrix(adj_matrix)
 
   # colors for the nodes...
-  V(G)$color  = "white"
+  igraph::V(G)$color  = "white"
 
-  edLabel = apply(as_edgelist(G), 1, edgeify)
+  edLabel = apply(igraph::as_edgelist(G), 1, edgeify)
   edLabel = as.matrix(edLabel, ncol = 1)
 
   # we work on the layout -- tree if it has GL
   lay = NULL
-  if('GL' %in%  V(G)$name) {
-    lay = layout.reingold.tilford(G, root = 'GL',  mode = 'all')
-    rownames(lay) =  V(G)$name
+  if('GL' %in%  igraph::V(G)$name) {
+    lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
+    rownames(lay) =  igraph::V(G)$name
   }
 
   # TS = wrapTS(adj_matrix)
@@ -901,7 +823,7 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
   # device
   if(!is.na(file)) dodev(width = width, height = height, device = device)
 
-  setHook("grid.newpage", function() pushViewport(viewport(x=1,y=1,width=0.9, height=0.9, name="vp", just=c("right","top"))), action="prepend")
+  setHook("grid.newpage", function() grid::pushViewport(grid::viewport(x=1,y=1,width=0.9, height=0.9, name="vp", just=c("right","top"))), action="prepend")
 
 
   pheatmap::pheatmap(features$occurrences,
@@ -909,7 +831,7 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
                      cluster_rows = as.hclust(hc),
                      # clustering_distance_rows = dist.obj,
                      clustering_method = ifelse(hc.method == 'ward', 'ward.D2', hc.method),
-                     color = c("white", brewer.pal(9, "Blues")),
+                     color = c("white", scols(1:9, "Blues")),
                      breaks = seq(0, 1.1, 0.1),
                      # main = "Input data",
                      annotation_row = annotations.samples,
@@ -931,21 +853,21 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
 
   params = paste('use.GL =', x$cluster$distances.params['use.GL'], '& transitive.closure =', x$cluster$distances.params['transitive.closure'])
 
-  grid.text(
+  grid::grid.text(
     bquote(bold('Distance ')~italic(h)~' : '~.(params)~bold('  Clustering : ')~.(hc.method)~ ' / '~.(x$cluster$split.method)~' / k ='~.(x$cluster$k)~""),
-    y=-0.07, gp=gpar(fontsize=16))
+    y=-0.07, gp=grid::gpar(fontsize=16))
 
-  grid.text(
+  grid::grid.text(
     bquote(bold('REVOLVER Clusters : ')~.(x$annotation)),
-    y=0.97, gp=gpar(fontsize=16))
+    y=0.97, gp=grid::gpar(fontsize=16))
 
-  grid.text(
+  grid::grid.text(
     bquote(bold('Left : ')~.('Evolutionary trajectories')),
-    x=-0.07, rot=90, gp=gpar(fontsize=16))
+    x=-0.07, rot=90, gp=grid::gpar(fontsize=16))
 
-  grid.text(
+  grid::grid.text(
     bquote(bold('Right : ')~.('Input data (mean CCF value, \u25a0 is clonal)')),
-    x=0.97, rot=270, gp=gpar(fontsize=16))
+    x=0.97, rot=270, gp=grid::gpar(fontsize=16))
 
   if(!is.na(file)) udodev(file = file)
 }

@@ -14,7 +14,7 @@ clusters.table = function(d, sample.groups)
   counts = lapply(d, nrow)
 
   CCF.means = lapply(d, function(x) {
-    colMedians(as.matrix(x[, sample.groups, drop = F]))
+    matrixStats::colMedians(as.matrix(x[, sample.groups, drop = F]))
   })
   CCF.means = Reduce(rbind, CCF.means)
 
@@ -52,7 +52,6 @@ panelToList = function(d)
   colnames(d) = c('to', 'from')
   return(d)
 }
-
 
 hashTrees = function(clonevol.obj, sample.groups)
 {
@@ -252,7 +251,7 @@ all.possible.trees = function(
       next;
     }
 
-    if(!is_dag(graph_from_adjacency_matrix(test.tree))){
+    if(!igraph::is_dag(igraph::graph_from_adjacency_matrix(test.tree))){
       # cat('Solution', DataFrameToEdges(tree), 'has loops, removed\n')
       next;
     }
@@ -341,7 +340,6 @@ useClonevo = function(my.data, sample.groups, clonal.cluster)
     }
   }
 
-
   # Clonevo wants progressive IDs for clusters...
   my.data$cluster.tracerx = my.data$cluster
   my.data = permuteClusterIds(my.data)
@@ -355,7 +353,7 @@ useClonevo = function(my.data, sample.groups, clonal.cluster)
   clusterIdsMapping$cluster = NULL
 
 
-  # Clonevo -- modified...
+  # Clonevol -- modified...
   capture.output({ clonevol.obj = infer.clonal.models(
     variants = my.data,
     cluster.col.name = 'cluster',
@@ -412,8 +410,6 @@ useClonevo = function(my.data, sample.groups, clonal.cluster)
 
 computeMI.table = function(binary.data, MI.Bayesian.prior = 0, add.control = FALSE)
 {
-  require(entropy)
-
   if(add.control) binary.data = rbind(binary.data, wt = 0)
 
   # • a=0:maximum likelihood estimator (see entropy.empirical)
@@ -434,7 +430,7 @@ computeMI.table = function(binary.data, MI.Bayesian.prior = 0, add.control = FAL
         jo10 = (binary.data[, i] %*% (1-binary.data[, j]))/nrow(binary.data)
         jo01 = ((1-binary.data[, i]) %*% binary.data[, j])/nrow(binary.data)
         jo00 = 1 - (jo10 + jo01 + jo11)
-        mi.Dirichlet(matrix(c(jo11, jo10, jo01, jo00), nrow = 2), a = MI.Bayesian.prior)
+        entropy::mi.Dirichlet(matrix(c(jo11, jo10, jo01, jo00), nrow = 2), a = MI.Bayesian.prior)
       }),
     byrow = TRUE, ncol = ncol(binary.data))
   colnames(MI.table) = rownames(MI.table) = colnames(binary.data)
@@ -452,7 +448,7 @@ weightMI.byMultinomial = function(MI.table, W)
   for(j in names(W))
     Coeff[ names(W[[j]]) , j] = unlist(W[[j]])
 
-  return(hadamard.prod(MI.table, Coeff))
+  return(matrixcalc::hadamard.prod(MI.table, Coeff))
 }
 
 weighted.sampling = function(G, W, n)

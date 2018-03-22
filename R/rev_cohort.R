@@ -211,6 +211,7 @@ rev_count_information_transfer_comb = function(x, p) {
 #' @return a modififed object of class \code{"rev_cohort"} with available phylogeneis for \code{patient}.
 #' @export
 #' @import crayon
+#' @import igraph
 #'
 #' @examples TODO
 revolver_compute_phylogenies = function(
@@ -311,7 +312,7 @@ revolver_compute_phylogenies = function(
 
       x$dataset[, samples] =  x$dataset[, samples] * 100
 
-      cat(cyan('Clonevo: '))
+      cat(cyan('Clonevol: '))
       clonal.cluster = as.character(unique(x$dataset$cluster[x$dataset$is.clonal]))
       clonevol.obj = useClonevo(x$dataset, samples, clonal.cluster)
 
@@ -473,138 +474,6 @@ revolver_compute_phylogenies = function(
 
 
   return(x)
-
-  # ################## Generate all trees that are compatible with the observed CCFs, we do this
-  # ################## by analyzing one sample at a time.
-  # clonal.cluster = as.character(unique(my.data$cluster[my.data$is.clonal]))
-  # clonevol.obj = useClonevo(my.data, sample.groups, clonal.cluster)
-  #
-  # STAT.ENTRY = c(
-  #   STAT.ENTRY,
-  #   numPhylogenies = paste(names(clonevol.obj$models), unlist(lapply(clonevol.obj$models, length)), collapse = ', '))
-  #
-  # ################## Generate binary data from CCFs
-  # binary.data = binarize(my.data, sample.groups)
-  #
-  # ################## Build all possible clonal trees
-  # # 1) hash them
-  # # 2) create a consensus as the union of all trees
-  # # 3) generate or sample a large number of possible trees, where a parent x --> y is assigned
-  # #    with probability proportional to how often the edge is detected
-  # CLONAL.TREES = hashTrees(clonevol.obj, sample.groups)
-  #
-  # CONSENSUS = consensusModel(clonevol.obj, sample.groups)
-  # CONSENSUS.TREE = CONSENSUS$S
-  # WEIGHTS.CONSENSUS.TREE = CONSENSUS$weights
-  #
-  # # Sampling is carried out if there are more than 'sspace.cutoff' trees, in that case we
-  # # sample 'n.sampling' possible trees. Otherwise all possible trees are generated.
-  # TREES = all.possible.trees(
-  #   CONSENSUS.TREE,
-  #   WEIGHTS.CONSENSUS.TREE,
-  #   sspace.cutoff = 10000,
-  #   n.sampling = 5000
-  # )
-  #
-  # ################## Ranking trees. A tree is good according to the following factors:
-  # # 1) the MI among the variables x and y, if they are connected by an edge x --> y [TODO: consider if we really need MI]
-  # # 2) the Multinomial probability of edge x --> y in the trees determined by the CCF
-  # # 3) for every edge  x --> y, the number of times that the CCF of x is greater than the CCF of y
-  # # 3) for every node  x --> y1 ... yK, the number of times that the CCF of x is greater than the sum of the CCFs of y1 ... yK
-  #
-  # # 1) MI from binarized data -- different options, with a control sample which avoids 0log(0)
-  # # • a=0:maximum likelihood estimator (see entropy.empirical)
-  # # • a=1/2:Jeffreys’ prior; Krichevsky-Trovimov (1991) entropy estimator
-  # # • a=1:Laplace’s prior
-  # # • a=1/length(y):Schurmann-Grassberger (1996) entropy estimator
-  # # • a=sqrt(sum(y))/length(y):minimax prior
-  # MI.table = computeMI.table(binary.data, MI.Bayesian.prior = 0, add.control = TRUE)
-  #
-  # # Steps 1 and 2 are collapsed, multiply MI by the Multinomial probability
-  # MI.table = weightMI.byMultinomial(MI.table, WEIGHTS.CONSENSUS.TREE)
-  #
-  # # 3) Get penalty for direction given CCFs -- this is done for all possible edges in the data
-  # CCF = clusters.table(my.data, sample.groups)[, sample.groups]
-  # penalty.CCF.direction = edge.penalty.for.direction(TREES, CCF)
-  #
-  # # 4) Compute the branching penalty  --  this is done for each tree that we are considering
-  # penalty.CCF.branching = node.penalty.for.branching(TREES, CCF)
-  #
-  # structural.score = apply(
-  #   cbind(penalty.CCF.direction,penalty.CCF.branching),
-  #   1,
-  #   function(x) prod(x))
-  #
-  # RANKED = rankTrees(TREES, MI.table, structural.score)
-  # TREES = RANKED$TREES
-  # SCORES = RANKED$SCORES
-  #
-  # TREES = TREES[SCORES > 0]
-  # SCORES = SCORES[SCORES > 0]
-  #
-  # STAT.ENTRY = c(
-  #   STAT.ENTRY,
-  #   numSolutions = length(TREES))
-  #
-  # REVOLVER.TREES = NULL
-  # for(x in 1:length(TREES))
-  # {
-  #   cat('@ ', x, '\r')
-  #
-  #   tree = revolver_phylogeny(
-  #     M = TREES[[x]],
-  #     patient = PATIENT,
-  #     dataset = my.data,
-  #     score = SCORES[x],
-  #     annotation = paste('Ranked ', x, '/', length(TREES), sep ='')
-  #   )
-  #
-  #   REVOLVER.TREES = append(REVOLVER.TREES, list(tree))
-  # }
-  #
-  # # quartz()
-  # # lapply(REVOLVER.TREES, plot, plot.stat = T, file = 's.pdf')
-  # #
-  # plot(REVOLVER.TREES[[1]], edge.label = round(MI.table, 2))
-  #
-  # # TREES = weighted.sampling(
-  # #   DataFrameToMatrix(CONSENSUS.TREE),
-  # #   WEIGHTS.CONSENSUS.TREE,
-  # #   1000
-  # # )
-  # # TREES = checkColinearity(TREES, binary.data)
-  #
-  # quartz()
-  # plotCCFTrees(
-  #   CLONAL.TREES,
-  #   my.data,
-  #   binary.data,
-  #   CONSENSUS,
-  #   MI.table,
-  #   REVOLVER.TREES,
-  #   SCORES,
-  #   PATIENT,
-  #   max.trees.in.plots = 10,
-  #   cex = 1)
-  #
-  # ccf = list(
-  #   CLONAL.TREES = CLONAL.TREES,
-  #   my.data = my.data,
-  #   binary.data = binary.data,
-  #   CONSENSUS = CONSENSUS,
-  #   MI.table = MI.table,
-  #   TREES = TREES,
-  #   PATIENT = PATIENT
-  # )
-  #
-  # save(ccf,file = paste(PATIENT, '-CCF-Analysis.RData'))
-  #
-  # PROCESSED = c(PROCESSED, PATIENT)
-  # STATS = rbind(STATS, STAT.ENTRY)
-  #
-  # cat(PATIENT, 'processed ... moving to next patient in 2 seconds.\n')
-  # Sys.sleep(2)
-
 }
 
 #' @title  Compute/ add CCF-based mutation trees to a REVOLVER cohort.
@@ -625,6 +494,7 @@ revolver_compute_phylogenies = function(
 #' mutation trees for \code{patient}.
 #' @export
 #' @import crayon
+#' @import igraph
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -850,141 +720,7 @@ revolver_compute_CLtrees = function(
   comb = rev_count_information_transfer_comb(x, patient)
   cat(cyan('#Information Transfer'), ifelse(comb == 1, red(comb), green(comb)), '\n\n')
 
-
-
   return(x)
-
-  # ################## Generate all trees that are compatible with the observed CCFs, we do this
-  # ################## by analyzing one sample at a time.
-  # clonal.cluster = as.character(unique(my.data$cluster[my.data$is.clonal]))
-  # clonevol.obj = useClonevo(my.data, sample.groups, clonal.cluster)
-  #
-  # STAT.ENTRY = c(
-  #   STAT.ENTRY,
-  #   numPhylogenies = paste(names(clonevol.obj$models), unlist(lapply(clonevol.obj$models, length)), collapse = ', '))
-  #
-  # ################## Generate binary data from CCFs
-  # binary.data = binarize(my.data, sample.groups)
-  #
-  # ################## Build all possible clonal trees
-  # # 1) hash them
-  # # 2) create a consensus as the union of all trees
-  # # 3) generate or sample a large number of possible trees, where a parent x --> y is assigned
-  # #    with probability proportional to how often the edge is detected
-  # CLONAL.TREES = hashTrees(clonevol.obj, sample.groups)
-  #
-  # CONSENSUS = consensusModel(clonevol.obj, sample.groups)
-  # CONSENSUS.TREE = CONSENSUS$S
-  # WEIGHTS.CONSENSUS.TREE = CONSENSUS$weights
-  #
-  # # Sampling is carried out if there are more than 'sspace.cutoff' trees, in that case we
-  # # sample 'n.sampling' possible trees. Otherwise all possible trees are generated.
-  # TREES = all.possible.trees(
-  #   CONSENSUS.TREE,
-  #   WEIGHTS.CONSENSUS.TREE,
-  #   sspace.cutoff = 10000,
-  #   n.sampling = 5000
-  # )
-  #
-  # ################## Ranking trees. A tree is good according to the following factors:
-  # # 1) the MI among the variables x and y, if they are connected by an edge x --> y [TODO: consider if we really need MI]
-  # # 2) the Multinomial probability of edge x --> y in the trees determined by the CCF
-  # # 3) for every edge  x --> y, the number of times that the CCF of x is greater than the CCF of y
-  # # 3) for every node  x --> y1 ... yK, the number of times that the CCF of x is greater than the sum of the CCFs of y1 ... yK
-  #
-  # # 1) MI from binarized data -- different options, with a control sample which avoids 0log(0)
-  # # • a=0:maximum likelihood estimator (see entropy.empirical)
-  # # • a=1/2:Jeffreys’ prior; Krichevsky-Trovimov (1991) entropy estimator
-  # # • a=1:Laplace’s prior
-  # # • a=1/length(y):Schurmann-Grassberger (1996) entropy estimator
-  # # • a=sqrt(sum(y))/length(y):minimax prior
-  # MI.table = computeMI.table(binary.data, MI.Bayesian.prior = 0, add.control = TRUE)
-  #
-  # # Steps 1 and 2 are collapsed, multiply MI by the Multinomial probability
-  # MI.table = weightMI.byMultinomial(MI.table, WEIGHTS.CONSENSUS.TREE)
-  #
-  # # 3) Get penalty for direction given CCFs -- this is done for all possible edges in the data
-  # CCF = clusters.table(my.data, sample.groups)[, sample.groups]
-  # penalty.CCF.direction = edge.penalty.for.direction(TREES, CCF)
-  #
-  # # 4) Compute the branching penalty  --  this is done for each tree that we are considering
-  # penalty.CCF.branching = node.penalty.for.branching(TREES, CCF)
-  #
-  # structural.score = apply(
-  #   cbind(penalty.CCF.direction,penalty.CCF.branching),
-  #   1,
-  #   function(x) prod(x))
-  #
-  # RANKED = rankTrees(TREES, MI.table, structural.score)
-  # TREES = RANKED$TREES
-  # SCORES = RANKED$SCORES
-  #
-  # TREES = TREES[SCORES > 0]
-  # SCORES = SCORES[SCORES > 0]
-  #
-  # STAT.ENTRY = c(
-  #   STAT.ENTRY,
-  #   numSolutions = length(TREES))
-  #
-  # REVOLVER.TREES = NULL
-  # for(x in 1:length(TREES))
-  # {
-  #   cat('@ ', x, '\r')
-  #
-  #   tree = revolver_phylogeny(
-  #     M = TREES[[x]],
-  #     patient = PATIENT,
-  #     dataset = my.data,
-  #     score = SCORES[x],
-  #     annotation = paste('Ranked ', x, '/', length(TREES), sep ='')
-  #   )
-  #
-  #   REVOLVER.TREES = append(REVOLVER.TREES, list(tree))
-  # }
-  #
-  # # quartz()
-  # # lapply(REVOLVER.TREES, plot, plot.stat = T, file = 's.pdf')
-  # #
-  # plot(REVOLVER.TREES[[1]], edge.label = round(MI.table, 2))
-  #
-  # # TREES = weighted.sampling(
-  # #   DataFrameToMatrix(CONSENSUS.TREE),
-  # #   WEIGHTS.CONSENSUS.TREE,
-  # #   1000
-  # # )
-  # # TREES = checkColinearity(TREES, binary.data)
-  #
-  # quartz()
-  # plotCCFTrees(
-  #   CLONAL.TREES,
-  #   my.data,
-  #   binary.data,
-  #   CONSENSUS,
-  #   MI.table,
-  #   REVOLVER.TREES,
-  #   SCORES,
-  #   PATIENT,
-  #   max.trees.in.plots = 10,
-  #   cex = 1)
-  #
-  # ccf = list(
-  #   CLONAL.TREES = CLONAL.TREES,
-  #   my.data = my.data,
-  #   binary.data = binary.data,
-  #   CONSENSUS = CONSENSUS,
-  #   MI.table = MI.table,
-  #   TREES = TREES,
-  #   PATIENT = PATIENT
-  # )
-  #
-  # save(ccf,file = paste(PATIENT, '-CCF-Analysis.RData'))
-  #
-  # PROCESSED = c(PROCESSED, PATIENT)
-  # STATS = rbind(STATS, STAT.ENTRY)
-  #
-  # cat(PATIENT, 'processed ... moving to next patient in 2 seconds.\n')
-  # Sys.sleep(2)
-
 }
 
 
@@ -1003,9 +739,6 @@ revolver_compute_CLtrees = function(
 #'
 #' @return nothing
 #' @export
-#' @import RColorBrewer
-#' @import pheatmap
-#' @import TRONCO
 #' @import crayon
 #'
 #' @examples
@@ -1137,7 +870,6 @@ plot.rev_cohort = function(x, patients = x$patients, max.phylogenies = 12, cex =
     cat('\n')
   }
 }
-
 
 clonal.subclonal.table = function(x)
 {
