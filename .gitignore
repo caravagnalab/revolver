@@ -12,3 +12,4 @@
 .Rproj.user
 .Rbuildignore
 inst/doc
+*.Rproj
