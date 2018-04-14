@@ -1,3 +1,15 @@
+revolver_version = function()
+{
+  REVOLVER_VERSION = "\"Haggis and tatties\""
+  REVOLVER_AUTHOR = "\"Giulio Caravagna (ICR, UK) <giulio.caravagna@icr.ac.uk>\""
+  list(REVOLVER_VERSION = REVOLVER_VERSION, REVOLVER_AUTHOR = REVOLVER_AUTHOR)
+}
+
+# revolver_update_counts = function(x)
+# {
+#
+# }
+
 #' Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 #'
 #' @param dataset A dataframe in the specified format (see Online manual).
@@ -23,8 +35,7 @@ revolver_cohort = function(
   options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
   annotation = '')
 {
-  REVOLVER_VERSION = "\"Haggis and tatties\""
-  # by G.Caravagna <giulio.caravagna@icr.ac.uk>"
+  REVOLVER_VERSION = revolver_version()$REVOLVER_VERSION
 
   # Dataset with certain columns
   required.cols = c('Misc', 'patientID', 'variantID',  'cluster', 'is.driver', 'is.clonal', 'CCF')
@@ -32,7 +43,7 @@ revolver_cohort = function(
     stop('Dataset should have the following columns:', paste(required.cols, collapse = ', '))
 
   if(!is.function(CCF.parser))
-     stop('You need to provide a function to parse CCFs.')
+     stop('You need to provide a function to parse CCFs, check "CCF.parser".')
 
   cat(bgCyan('REVOLVER'), cyan(REVOLVER_VERSION))
   cat(blue(paste(' -- ', annotation, sep ='')), '\n')
@@ -60,17 +71,48 @@ revolver_cohort = function(
     data.reduced = lapply(
       data.split,
       function(p){
-        p = filter.clusters(p, cutoff.numMuts = options$MIN.CLUSTER.SIZ)
+        p = filter.clusters(p, cutoff.numMuts = options$MIN.CLUSTER.SIZE)
       })
 
     dataset = Reduce(rbind, data.reduced)
     cat('\tNumber of rows after filtering:', nrow(dataset), '\n')
   }
 
+  cat('Extracting CCF values\n')
+  data = split(dataset, f = dataset$patientID)
+  dataset.expanded = lapply(data, function(x) {
+
+    samples = names(CCF.parser(x[1, 'CCF']))
+
+    CCF.values = lapply(x$CCF, CCF.parser)
+    CCF.values = Reduce(rbind, CCF.values)
+
+    if(nrow(x) == 1) CCF.values = t(as.data.frame(CCF.values))
+    CCF.values = apply(CCF.values, 2, as.numeric)
+    if(nrow(x) == 1) CCF.values = t(as.data.frame(CCF.values))
+
+    rownames(CCF.values) = rownames(x)
+    cbind(x, CCF.values)
+    # clusters.table(x, samples)
+  })
+  names(dataset.expanded) = names(data)
+
+  CCF =  lapply(dataset.expanded, function(x) {
+    clusters.table(x,
+                   names(CCF.parser(x[1, 'CCF'])))
+  })
+
   patients = unique(dataset$patientID)
   variantIDs = unique(dataset$variantID)
   variantIDs.driver = unique(dataset[dataset$is.driver, 'variantID'])
+
   numVariants = nrow(dataset)
+
+  n = list(
+    patients = length(patients),
+    variants = nrow(dataset),
+    drivers = length(dataset[dataset$is.driver, 'variantID'])
+  )
 
   obj <-
     structure(
@@ -81,6 +123,9 @@ revolver_cohort = function(
         numVariants = numVariants,
         annotation = annotation,
         dataset = dataset,
+        data = data,
+        CCF = CCF,
+        n = n,
         CCF.parser = CCF.parser,
         REVOLVER_VERSION = REVOLVER_VERSION
       ),
@@ -781,7 +826,7 @@ plot.rev_cohort = function(x, patients = x$patients, max.phylogenies = 12, cex =
       border = NA,
       breaks = br,
       legend = F,
-      color = c('white', colorRampPalette(brewer.pal(9, 'Blues'))(length(br) - 1)),
+      color = c('white', scols(1:(length(br) - 1), 'Blues')),
       display_numbers = ccf.numbers,
       cellwidth = 34,
       cellheight = 12,
@@ -815,7 +860,7 @@ plot.rev_cohort = function(x, patients = x$patients, max.phylogenies = 12, cex =
 
     scores = lapply(x$phylogenies[[patient]], function(e) e$score)
     comb = rev_count_information_transfer_comb(x, patient)
-    colors = colorRampPalette(brewer.pal(8, 'Dark2'))(comb)
+    colors = scols(1:comb, 'Dark2')
 
     groups = lapply(x$phylogenies[[patient]],
                     function(w) paste(sort(DataFrameToEdges(w$transfer$drivers)), collapse = ':'))
@@ -831,7 +876,7 @@ plot.rev_cohort = function(x, patients = x$patients, max.phylogenies = 12, cex =
     distribution = x$phylogenies[[patient]]
 
     if(length(distribution) > max.phylogenies) distribution = distribution[1:max.phylogenies]
-    cat('| ', max.phylogenies, ' Phylogenies :')
+    cat('| max. ', max.phylogenies, ' Phylogenies :')
 
 
     toMerge = sapply(

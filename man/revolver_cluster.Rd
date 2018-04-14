@@ -6,7 +6,7 @@
 \usage{
 revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
   dendogram.type = "rectangle", cutoff.features_annotation = 3,
-  min.group.size = 2, plot.groups = TRUE,
+  min.group.size = 2, plot.clusters = TRUE, plot.groups = TRUE,
   file = "REVOLVER-clustering.pdf", ...)
 }
 \arguments{
@@ -23,6 +23,8 @@ in the plot. The number is absolute; e.g., with \code{n = 3} we annotate only ed
 in 3 patients}
 
 \item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
+
+\item{plot.clusters}{Plot clusters, default is \code{TRUE} and will print to PDF.}
 
 \item{plot.groups}{Set this to \code{TRUE} if you want to plot also the resulting groups and their models.}
 

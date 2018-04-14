@@ -255,6 +255,7 @@ plot.rev_cohort_fit = function(
 #' @import parallel
 #' @import crayon
 #' @import doParallel
+#' @import foreach
 #'
 #'
 #' @examples

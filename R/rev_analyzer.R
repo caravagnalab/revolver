@@ -78,9 +78,9 @@ revolver_analyzer = function(cohort,
 
     pdf('Orderings.pdf', width = 15)
     aa = lapply(names(table.orderings$intelli), function(w){
-      grid.arrange(
-        textGrob(w),
-        tableGrob(table.orderings$intelli[[w]]))
+      gridExtra::grid.arrange(
+        grid::textGrob(w),
+        gridExtra::tableGrob(table.orderings$intelli[[w]]))
     })
     dev.off()
   }

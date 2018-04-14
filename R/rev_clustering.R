@@ -293,6 +293,7 @@ revolver_infoclustering = function(x,
 #' in the plot. The number is absolute; e.g., with \code{n = 3} we annotate only edges that occurr at least
 #' in 3 patients
 #' @param min.group.size Minimum group size for \code{dynamicTreeCut} functions.
+#' @param plot.clusters Plot clusters, default is \code{TRUE} and will print to PDF.
 #' @param plot.groups Set this to \code{TRUE} if you want to plot also the resulting groups and their models.
 #' @param file Output file
 #' @param ... Extra parameters
@@ -314,12 +315,16 @@ revolver_cluster = function(
   dendogram.type = 'rectangle',
   cutoff.features_annotation = 3,
   min.group.size = 2,
+  plot.clusters = TRUE,
   plot.groups = TRUE,
   file = 'REVOLVER-clustering.pdf',
   ...
 )
 {
   if(is.null(x$cluster)) stop('Did you compute evo?')
+
+  if(!plot.clusters) cat(cyan('You did not ask for cluster\'s plots, skipping those.\n'))
+
 
   distance = x$cluster$distances
   params = x$cluster$distances.params
@@ -349,36 +354,42 @@ revolver_cluster = function(
   x$cluster$split.method = split.method
   x$cluster$labels.colors = clusters$labels.colors
 
-
   cat(cyan('\tmethod :'), split.method, '-', ifelse(split.method != 'static', 'from dynamicTreeCut', 'via silhouette scoring'), '\n')
   cat(cyan('\t   |g| :'), min.group.size, '\n')
   cat(cyan('\t     k :'), clusters$k, '\n')
 
-  pdf('Dendogram.pdf', width = 10, height = 10)
-  plot_dendogram(
-    hc,
-    dendogram,
-    clusters$clusters,
-    plot.type = dendogram.type,
-    main = paste("REVOLVER clustering of", x$annotation),
-    sub = paste(
-      'Agnes clustering (', hc.method, ' method; AC=', round(hc$ac, 3) ,') \nand ',
-      split.method,' as dendogram cutting method', sep =''),
-    colors = x$cluster$labels.colors
-  )
+  if(plot.clusters)
+  {
+    pdf('Dendogram.pdf', width = 10, height = 10)
+    plot_dendogram(
+      hc,
+      dendogram,
+      clusters$clusters,
+      plot.type = dendogram.type,
+      main = paste("REVOLVER clustering of", x$annotation),
+      sub = paste(
+        'Agnes clustering (', hc.method, ' method; AC=', round(hc$ac, 3) ,') \nand ',
+        split.method,' as dendogram cutting method', sep =''),
+      colors = x$cluster$labels.colors
+    )
 
-  # bannerplot associated to the custering
-  cluster::bannerplot(hc, main = 'Banner plot', col = c('gainsboro', 'steelblue'))
-  dev.off()
+    # bannerplot associated to the custering
+    cluster::bannerplot(hc, main = 'Banner plot', col = c('gainsboro', 'steelblue'))
+    dev.off()
+  }
 
-   #################### Features plot -- the most important one?
-  revolver_featurePlot(x, width = length(x$patients), height = length(x$patients), file = 'Clonal-table.pdf')
+  #################### Features plot -- the most important one?
+  if(plot.clusters)
+    revolver_featurePlot(x, width = length(x$patients), height = length(x$patients), file = 'Clonal-table.pdf')
 
   # ##############################
   # #### Compare against other clusterings via tanglegram
   # ##############################
-  cat(cyan('[tanglegram] Comparison against other clusterings: '))
   features = revolver.featureMatrix(x)
+
+  if(plot.clusters)
+  {
+  cat(cyan('[tanglegram] Comparison against other clusterings: '))
 
   # Occurrence of mutations (binarized from avg. CCFs in features$occurrences)
   occurrences.binarized = features$occurrences
@@ -389,94 +400,99 @@ revolver_cluster = function(
   dendogram2 = stats::as.dendrogram(hc2)
   dendextend::labels_cex(dendogram2) = 0.5
 
+  # Plotting comparative clusterings via tanglegrams
   pdf('tanglegram.pdf', width = 10, height = 10)
   dend_list <- dendextend::dendlist(dendogram, dendogram2)
 
   dendextend::tanglegram(dendogram, dendogram2,
-             highlight_distinct_edges = FALSE, # Turn-off dashed lines
-             common_subtrees_color_lines = TRUE, # Turn-off line colors
-             common_subtrees_color_branches = TRUE, # Color common branches
-             cex_main = 1,
-             main = paste("Binary occurrences"),
-             sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
+               highlight_distinct_edges = FALSE, # Turn-off dashed lines
+               common_subtrees_color_lines = TRUE, # Turn-off line colors
+               common_subtrees_color_branches = TRUE, # Color common branches
+               cex_main = 1,
+               main = paste("Binary occurrences"),
+               sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
   )
 
   plot_dendogram(
-    hc2,
-    dendogram2,
-    x$cluster$clusters,
-    plot.type = dendogram.type,
-    main = paste("Dendogram of Binary occurrences"),
-    sub = '',
-    colors = x$cluster$labels.colors
+      hc2,
+      dendogram2,
+      x$cluster$clusters,
+      plot.type = dendogram.type,
+      main = paste("Dendogram of Binary occurrences"),
+      sub = '',
+      colors = x$cluster$labels.colors
   )
 
   hc3 = cluster::agnes(dist(features$occurrences.clonal.subclonal), method = hc.method)
   dendogram3 = stats::as.dendrogram(hc3)
   dendextend::labels_cex(dendogram3) = 0.5
-  #
   dend_list = dendextend::dendlist(dendogram, dendogram3)
 
   dendextend::tanglegram(dendogram, dendogram3,
-             highlight_distinct_edges = FALSE, # Turn-off dashed lines
-             common_subtrees_color_lines = TRUE, # Turn-off line colors
-             common_subtrees_color_branches = TRUE, # Color common branches
-             cex_main = 1,
-             main = paste("Clonal/Subclonal occurrences"),
-             sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
+               highlight_distinct_edges = FALSE, # Turn-off dashed lines
+               common_subtrees_color_lines = TRUE, # Turn-off line colors
+               common_subtrees_color_branches = TRUE, # Color common branches
+               cex_main = 1,
+               main = paste("Clonal/Subclonal occurrences"),
+               sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
   )
 
   plot_dendogram(
-    hc3,
-    dendogram3,
-    x$cluster$clusters,
-    plot.type = dendogram.type,
-    main = paste("Dendogram of Clonal/Subclonal"),
-    sub = '',
-    colors = x$cluster$labels.colors
+      hc3,
+      dendogram3,
+      x$cluster$clusters,
+      plot.type = dendogram.type,
+      main = paste("Dendogram of Clonal/Subclonal"),
+      sub = '',
+      colors = x$cluster$labels.colors
   )
 
-  dev.off()
-  jamPDF(in.files = 'tanglegram.pdf', out.file = 'tanglegram.pdf', layout = '2x2')
-  cat(green('DONE\n'))
+    dev.off()
+    jamPDF(in.files = 'tanglegram.pdf', out.file = 'tanglegram.pdf', layout = '2x2')
+    cat(green('DONE\n'))
+  }
+
 
   ##############################
   # Plotting the evolutionary distance
-  cat(cyan('Plotting the evolutionary distance: '))
-
   # # Annotate each sample with the cluster ID
   annotations.samples = data.frame(cluster = clusters$clusters)
   annotations.samples = annotations.samples[rownames(features$occurrences), , drop = FALSE]
 
-  # pdf(file, ...)
-  pheatmap::pheatmap(
-    distance,
-    main = paste("Evolutionary Distance \n ",
-                 paste('GL:', params['use.GL'], '\n',
-                       'Transitive closure:', params['transitive.closure'])),
-    cluster_rows = as.hclust(hc),
-    cluster_cols = as.hclust(hc),
-    color = scols(1:100, "YlOrRd"),
-    border_color = NA,
-    show_rownames = T,
-    show_colnames = T,
-    # treeheight_row = max(hc$height)/3,
-    # treeheight_col = max(hc$height)/3,
-    annotation_row = annotations.samples[, 'cluster', drop = FALSE],
-    annotation_col = annotations.samples[, 'cluster', drop = FALSE],
-    annotation_colors = list(cluster = x$cluster$labels.colors),
-    fontsize_row = 3,
-    fontsize_col = 3,
-    # treeheight_col = 70,
-    # treeheight_row = 70,
-    cellwidth = 4,
-    cellheight = 4,
-    # width = 20,
-    # height = 20,
-    file = paste('Edistance.pdf')
-  )
-  jamPDF(in.files = c("Dendogram.pdf", 'Edistance.pdf'), out.file = 'Dendogram.pdf', layout = '3x1')
-  cat(green('DONE\n'))
+  if(plot.clusters)
+  {
+
+    cat(cyan('Plotting the evolutionary distance: '))
+
+    pheatmap::pheatmap(
+      distance,
+      main = paste("Evolutionary Distance \n ",
+                   paste('GL:', params['use.GL'], '\n',
+                         'Transitive closure:', params['transitive.closure'])),
+      cluster_rows = as.hclust(hc),
+      cluster_cols = as.hclust(hc),
+      color = scols(1:100, "YlOrRd"),
+      border_color = NA,
+      show_rownames = T,
+      show_colnames = T,
+      # treeheight_row = max(hc$height)/3,
+      # treeheight_col = max(hc$height)/3,
+      annotation_row = annotations.samples[, 'cluster', drop = FALSE],
+      annotation_col = annotations.samples[, 'cluster', drop = FALSE],
+      annotation_colors = list(cluster = x$cluster$labels.colors),
+      fontsize_row = 3,
+      fontsize_col = 3,
+      # treeheight_col = 70,
+      # treeheight_row = 70,
+      cellwidth = 4,
+      cellheight = 4,
+      # width = 20,
+      # height = 20,
+      file = paste('Edistance.pdf')
+    )
+    jamPDF(in.files = c("Dendogram.pdf", 'Edistance.pdf'), out.file = 'Dendogram.pdf', layout = '3x1')
+    cat(green('DONE\n'))
+  }
 
 
   if(plot.groups)
@@ -533,33 +549,37 @@ revolver_cluster = function(
 
     # jamPDF(in.files = files, out.file = 'groups.pdf', layout = '1x1')
   }
+
   # Plot consensus model for each group
-  groups = x$cluster$clusters
-  for(g in unique(groups))
-    revolver_plotrj_consensus(
-      x,
-      patients = names(groups[groups == g]), min.cutoff = 3, ML = TRUE, file = paste('Con', g, '.pdf', sep = ''),
-      annotation = paste("Cluster", g),
-      col.annotation = x$cluster$labels.colors[as.character(g)])
+  if(plot.clusters)
+  {
+    groups = x$cluster$clusters
+    for(g in unique(groups))
+      revolver_plotrj_consensus(
+        x,
+        patients = names(groups[groups == g]), min.cutoff = 3, ML = TRUE, file = paste('Con', g, '.pdf', sep = ''),
+        annotation = paste("Cluster", g),
+        col.annotation = x$cluster$labels.colors[as.character(g)])
 
-  revolver_plotrj_consensus(x, min.cutoff = 3, ML = TRUE, file = 'ConsensusModel.pdf', width = 10, height = 10, annotation = paste("All cohort"))
+    revolver_plotrj_consensus(x, min.cutoff = 3, ML = TRUE, file = 'ConsensusModel.pdf', width = 10, height = 10, annotation = paste("All cohort"))
 
-  jamPDF(
-    in.files = c("ConsensusModel.pdf", paste('Con', unique(groups), '.pdf', sep = '')),
-    out.file = 'Consensus.pdf',
-    layout = '1x1'
-    # page = 'a4'
-  )
+    jamPDF(
+      in.files = c("ConsensusModel.pdf", paste('Con', unique(groups), '.pdf', sep = '')),
+      out.file = 'Consensus.pdf',
+      layout = '1x1'
+      # page = 'a4'
+    )
 
 
-  cat(cyan('Assembling final PDF:'), yellow(file))
-  #
-  jamPDF(
-    in.files = c('Clonal-table.pdf', 'Dendogram.pdf', 'tanglegram.pdf'),
-    out.file = file,
-    # page = 'a4',
-    layout = '1x1'
-  )
+    cat(cyan('Assembling final PDF:'), yellow(file))
+    #
+    jamPDF(
+      in.files = c('Clonal-table.pdf', 'Dendogram.pdf', 'tanglegram.pdf'),
+      out.file = file,
+      # page = 'a4',
+      layout = '1x1'
+    )
+  }
 
   # cat(cyan('* jamming PDFs'))
   # jamPDF(in.files = c('mainClustering2.pdf', 'Edistance.pdf'), out.file = 'mainClustering2.pdf', layout = '2x2')
