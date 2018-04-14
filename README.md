@@ -5,3 +5,7 @@ An R package that implements the algorithm discussed in: G. Caravagna et al. *De
 
 Follow the Wiki to be introduced to REVOLVER, and download example case studies.
 
+| Branch              | Stato CI      |
+|---------------------|---------------|
+| travis | [![Build Status](https://travis-ci.org/caravagn/revolver.svg?branch=travis)](https://travis-ci.org/caravagn/revolver) |
+
