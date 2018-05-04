@@ -2,19 +2,34 @@
 % Please edit documentation in R/rev_jackknife.R
 \name{revolver_jackknife}
 \alias{revolver_jackknife}
-\title{Jackknife estimate}
+\title{Computation of fit confidence with the jackknife.}
 \usage{
-revolver_jackknife(cohort, cohort.name = "REVOLVER-cohort",
-  folder.output = ".", do.plots = TRUE, resamples = 100,
-  leave.out = 0.1, cores.ratio = 0.9, options.fit = list(initial.solution
-  = NA, transitive.orderings = FALSE, restarts = 10),
+revolver_jackknife(cohort, resamples = 100, leave.out = 0.1,
+  cores.ratio = 0.9, options.fit = list(initial.solution = NA,
+  transitive.orderings = FALSE, restarts = 0),
   options.clustering = list(use.GL = TRUE, transitive.closure = FALSE,
   min.group.size = 3, hc.method = "ward", cutoff.features_annotation = 3,
-  split.method = "cutreeHybrid"))
+  split.method = "cutreeHybrid"), dump.partial = FALSE)
 }
 \arguments{
-\item{options.clustering}{}
+\item{cohort}{A cohort object where fit and clusters have been computed/}
+
+\item{resamples}{Number of jackknife samples.}
+
+\item{cores.ratio}{Ratio of cores for parallel execution}
+
+\item{options.fit}{List of parameters for fitting models. See  \code{\link{revolver_fit}}.}
+
+\item{options.clustering}{List of parameters for clustering with the germline node GL. See \code{\link{revolver_cluster}}.}
+
+\item{removal}{A number in \code{[0,1]} for the percentage of samples to leave out in each jackknife iteration.}
+}
+\value{
+A cohort where a new jackknife field contains result from this analysis
 }
 \description{
-Jackknife estimate
+Computation of fit confidence with the jackknife.
+}
+\examples{
+TODO
 }

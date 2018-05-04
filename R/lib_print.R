@@ -24,7 +24,7 @@ jamPDF = function(in.files, out.file = 'jamPDF.pdf', layout = '3x3',
     aa = system(
       paste(
         paste(GIT,'/bin/pdfScale.sh', sep = ''),  '-v -r', page, out.file),
-        intern = hide.output, ignore.stderr = TRUE)
+      intern = hide.output, ignore.stderr = TRUE)
 
     f = gsub(out.file, pattern = '.pdf', replacement = '')
     file.rename(paste(f, page, 'pdf', sep ='.'), paste(f, 'pdf', sep ='.'))
@@ -79,7 +79,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
       matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
 
       print(plots[[i]], vp = grid::viewport(layout.pos.row = matchidx$row,
-                                      layout.pos.col = matchidx$col))
+                                            layout.pos.col = matchidx$col))
     }
   }
 }
@@ -120,3 +120,25 @@ udodev = function(file = NA){
   if(!is.na(file)) dev.copy2pdf(file = file)
   dev.off()
 }
+
+
+prtTit = function(title) {
+  ncharT = nchar(title)
+
+  line = cyan(paste(rep('-', ncharT), collapse = ''))
+
+  cat(paste('\n', line, '\n', sep = ''))
+  cat(cyan(title))
+  cat(paste('\n', line, '\n', sep = ''))
+}
+
+prtHdr = function(header, ..., format = '') {
+  cat(bgBlue(paste(" [", header, "] \n")))
+
+  toPrint = list(...)
+  ntoPrint = length(toPrint)/2
+
+  for(l in seq(1, length(toPrint), 2)) cat(format, cyan(toPrint[[l]]), toPrint[[l+1]], '\n')
+}
+
+
