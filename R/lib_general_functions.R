@@ -6,11 +6,6 @@
 #   # print(match.arg(arg = '...', choices = '...'))
 # }
 
-nmfy = function(x, y)
-{
-  names(y) = x
-  y
-}
 
 
 obj_has_clusters = function(x)
@@ -36,6 +31,26 @@ obj_has_trees = function(x)
 {
   if(is.null(x$cluster$phylogenies))
     stop('Cannot proceed without having computed the trees -- are you calling the right function?')
+}
+
+
+saveFile = function(descr, fname, ...)
+{
+  save(..., file = fname)
+
+  if(!is.na(descr))
+  {
+    cat(crayon::cyan(descr), '\n')
+
+    stat = file.info(fname, extra_cols = FALSE)
+    stat$size = utils:::format.object_size(stat$size, "auto")
+    stat$isdir = NULL
+    stat$ctime = stat$atime = NULL
+
+    print(stat)
+    cat(crayon::cyan("Path:"), getwd(), '\n')
+  }
+
 }
 
 

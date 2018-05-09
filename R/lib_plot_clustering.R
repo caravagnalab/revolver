@@ -26,7 +26,7 @@ revolver_plt_rdendogram = function(x,
 {
   obj_has_clusters(x)
 
-  args = nmfy(c('Dendogram type', 'Output file'), c(dendogram.type, file))
+  args = pio:::nmfy(c('Dendogram type', 'Output file'), c(dendogram.type, file))
   pio::pioHdr('REVOLVER Plot: Dendrogram of REVOLVER clusters', args, prefix = '\t')
 
   if (!is.na(file))
@@ -78,7 +78,7 @@ revolver_plt_rbannerplot = function(x,
 {
   obj_has_evodistance(x)
 
-  args = nmfy(c('Output file'), c(file))
+  args = pio:::nmfy(c('Output file'), c(file))
   pio::pioHdr('REVOLVER Plot: Bannerplot of REVOLVER clusters', args, prefix = '\t')
 
   if (!is.na(file))
@@ -120,7 +120,7 @@ revolver_plt_rclusters = function(x,
 {
   obj_has_clusters(x)
 
-  args = nmfy(c('Cutoff to annotate features (min. observations)', 'Output file'), c(cutoff.features_annotation, file))
+  args = pio:::nmfy(c('Cutoff to annotate features (min. observations)', 'Output file'), c(cutoff.features_annotation, file))
   pio::pioHdr('REVOLVER Plot: REVOLVER Cluster table with features table', args, prefix = '\t')
 
   if (!is.na(file))
@@ -175,8 +175,8 @@ revolver_plt_compare_dendograms = function(x,
 {
   obj_has_clusters(x)
 
-  args = nmfy(c('Comparison against', 'Dendrogram type', 'Output file', 'Jam output PDFs', 'Layout for jam'),
-              c(type, dendogram.type, file, jamPDF, jam.layout))
+  args = pio:::nmfy(c('Comparison against', 'Dendrogram type', 'Output file', 'Jam output PDFs', 'Layout for jam'),
+                    c(type, dendogram.type, file, jamPDF, jam.layout))
   pio::pioHdr('REVOLVER Dendrogram Plot', args, prefix = '\t')
 
   if (!is.na(file))
@@ -291,7 +291,7 @@ revolver_plt_evodistance = function(x,
 {
   obj_has_clusters(x)
 
-  args = nmfy(c('Output file'), file)
+  args = pio:::nmfy(c('Output file'), file)
   pio::pioHdr('REVOLVER Evolutionary distance (h) Plot', args, prefix = '\t')
 
   distance = x$cluster$distances
@@ -356,11 +356,11 @@ revolver_plt_group_trajectories = function(x,
                                            cutoff.edges_annotation = 3,
                                            file = 'REVOLVER-Clusters-TrajectoriesConsensus.pdf',
                                            jamPDF = FALSE,
-                                           jam.layout = '2x1',)
+                                           jam.layout = '2x1')
 {
   obj_has_clusters(x)
 
-  args = nmfy(c('Cutoff for edges to be annotated (min. occurrences)', 'Output file'), c(cutoff.edges_annotation, file))
+  args = pio:::nmfy(c('Cutoff for edges to be annotated (min. occurrences)', 'Output file'), c(cutoff.edges_annotation, file))
   pio::pioHdr('REVOLVER Plot: Trajectories per cluster', args, prefix = '\t')
 
 
@@ -418,11 +418,11 @@ revolver_plt_group_trajectories = function(x,
 #' TODO
 revolver_plt_fit_by_group = function(x,
                                      cex = 1,
-                                     file.prefix = 'REVOLVER-Clusters-TrajectoriesConsensus.pdf',)
+                                     file.prefix = 'REVOLVER-Clusters-TrajectoriesConsensus.pdf')
 {
   obj_has_clusters(x)
 
-  args = nmfy(c('Output file'), c(file))
+  args = pio:::nmfy(c('Output file'), c(file))
   pio::pioHdr('REVOLVER Plot: Fits divided by cluster', args, prefix = '\t')
 
 
@@ -724,7 +724,6 @@ revolver_plotrj_consensus = function(x, annotation = NA, col.annotation = 'white
 
   if(!is.na(file)) dev.off()
 }
-
 
 
 #################### Features plot -- the most important one for clustering etc.

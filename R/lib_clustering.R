@@ -252,7 +252,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
 
   if(is.null(clusters)) stop('Unknown split method?')
 
-  k = max(clusters)
+  k = length(unique(clusters))
   labels.colors = scols(unique(clusters), palette)
 
 
