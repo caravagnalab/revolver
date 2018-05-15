@@ -30,5 +30,5 @@ Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 }
 \examples{
 data(CRC)
-cohort = revolver_cohort(CRC)
+cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
 }

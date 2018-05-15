@@ -1,15 +1,3 @@
-revolver_version = function()
-{
-  REVOLVER_VERSION = "\"Haggis and tatties\""
-  REVOLVER_AUTHOR = "\"Giulio Caravagna (ICR, UK) <giulio.caravagna@icr.ac.uk>\""
-  list(REVOLVER_VERSION = REVOLVER_VERSION, REVOLVER_AUTHOR = REVOLVER_AUTHOR)
-}
-
-# revolver_update_counts = function(x)
-# {
-#
-# }
-
 #' Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 #'
 #' @param dataset A dataframe in the specified format (see Online manual).
@@ -28,7 +16,7 @@ revolver_version = function()
 #'
 #' @examples
 #' data(CRC)
-#' cohort = revolver_cohort(CRC)
+#' cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
 revolver_cohort = function(
   dataset,
   CCF.parser = revolver:::CCF.parser,
@@ -36,6 +24,8 @@ revolver_cohort = function(
   annotation = '')
 {
   REVOLVER_VERSION = revolver_version()$REVOLVER_VERSION
+
+  # xx = lapply(revolver:::revolver_version(), cat)
 
   # Dataset with certain columns
   required.cols = c('Misc', 'patientID', 'variantID',  'cluster', 'is.driver', 'is.clonal', 'CCF')
@@ -45,40 +35,54 @@ revolver_cohort = function(
   if(!is.function(CCF.parser))
      stop('You need to provide a function to parse CCFs, check "CCF.parser".')
 
-  cat(bgCyan('REVOLVER'), cyan(REVOLVER_VERSION))
-  cat(blue(paste(' -- ', annotation, sep ='')), '\n')
-
-  cat('Options:\n')
-  cat('\t ONLY.DRIVER:', options$ONLY.DRIVER, '\n')
-  cat('\t MIN.CLUSTER.SIZE:', options$MIN.CLUSTER.SIZE, '\n')
+  pio::pioHdr(
+    paste('REVOLVER Cohort Constructor for version', REVOLVER_VERSION),
+    c(
+      `Use only alterations annotated as driver` = options$ONLY.DRIVER,
+      `Filter: minimum number of alterations in a group/ cluster` = options$MIN.CLUSTER.SIZE
+    ),
+    prefix = '\t')
 
   dataset = dataset[, required.cols]
 
   if(options$ONLY.DRIVER)
   {
-    cat('\n[DRIVER = F] Dropping all non DRIVER variants ... ')
     dataset = dataset[dataset$is.driver, , drop = FALSE]
-    cat('OK\n')
   }
 
-  if(options$MIN.CLUSTER.SIZE > 0){
-    cat('\n[MIN.CLUSTER.SIZE > 0] filtering clusters below that size ... \n')
+  pio::pioTit('Input data')
+  pio:::pioDisp(dataset)
 
-    cat('\tNumber of rows before filtering:', nrow(dataset), '\n')
+  if(options$MIN.CLUSTER.SIZE > 0){
+
+    pio::pioTit('Checking size of groups/ clusters')
+
+    cat('Rows before filtering:', nrow(dataset), '\n\n')
 
     data.split = split(dataset, f = dataset$patientID)
 
     data.reduced = lapply(
-      data.split,
+      seq(data.split),
       function(p){
+        patient = names(data.split)[p]
+        p = data.split[[p]]
+
         p = filter.clusters(p, cutoff.numMuts = options$MIN.CLUSTER.SIZE)
+
+        if(!is.null(p$removed))
+        {
+          message('\nRemoved from ', patient)
+          pio::pioDisp(p$removed)
+        }
+
+        p$remained
       })
 
     dataset = Reduce(rbind, data.reduced)
-    cat('\tNumber of rows after filtering:', nrow(dataset), '\n')
+    cat('\nRows after filtering:', nrow(dataset), '\n')
   }
 
-  cat('Extracting CCF values\n')
+  pio::pioTit('Extracting CCF values')
   data = split(dataset, f = dataset$patientID)
   dataset.expanded = lapply(data, function(x) {
 
@@ -152,34 +156,46 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
   stopifnot(inherits(x, "rev_cohort"))
 
-  cat(bgCyan('REVOLVER'), cyan(x$REVOLVER_VERSION))
-  cat(blue(paste(' -- ', x$annotation, sep ='')), '\n')
+  pio::pioHdr(paste('REVOLVER ', x$REVOLVER_VERSION), toPrint = NULL)
 
-  cat(cyan('\n\tPatients      :'), paste(head(x$patients), collape =', ', sep =''), '... \n')
-  cat(cyan('\tNum. Patients :'), length(x$patients), '\n')
-  cat(cyan('\tVariants      :'), x$numVariants, 'of which', length(x$variantIDs.driver), 'drivers\n')
+  # cat(bgCyan('REVOLVER'), cyan(x$REVOLVER_VERSION))
+  # cat(blue(paste(' -- ', x$annotation, sep ='')), '\n')
 
-  cat(cyan('\n\tPhylogenies   :'),
+  cat('\n\t', blue(x$annotation, sep =''), '\n')
+  cat('\n\t', cyan('Patient IDs     :'), paste(head(x$patients), collape =', ', sep =''), '...')
+  cat('\n\t', cyan('Cohort size     :'), length(x$patients), 'patients,', x$numVariants, 'alterations,', length(x$variantIDs.driver), 'drivers')
+  cat('\n\t', cyan('Drivers         :'), paste(head(x$variantIDs.driver), collape =', ', sep =''), '... \n')
+
+  pio::pioTit('Computations available', prefix = '\t')
+
+  cat('\n\t', cyan('Trees per patient    :'),
       ifelse(is.null(x$phylogenies), red('NO'), green('YES')))
 
-  cat(cyan('\n\tFit           :'),
+  cat('\n\t', cyan('Fit via TL           :'),
       ifelse(is.null(x$fit), red('NO'), green('YES')))
 
-  cat(cyan('\n\tClusters      :'),
+  cat('\n\t', cyan('REVOLVER clustering  :'),
       ifelse(is.null(x$cluster), red('NO'), green('YES')))
 
+  cat('\n\t', cyan('Jackknife statistics :'),
+      ifelse(is.null(x$jackknife), red('NO'), green('YES')))
+
+  cat('\n')
 
   if(!is.null(x$phylogenies))
   {
-    # cat('-- There are phylogenies for', length(names(x$phylogenies)), 'patient(s)')
+    pio::pioTit('Summary for data and models', prefix = '\t')
 
-    cat(cyan('\n\tTL Model Fit  :'), ifelse(is.null(x$fit), red('NO\n'), green('YES ')), '\n')
+    # cat(cyan('\n\tTL Model Fit  :'), ifelse(is.null(x$fit), red('NO\n'), green('YES ')), '\n')
 
     longest.name = max(nchar(names(x$phylogenies)))
 
-    patf = function(w, fit){
+    patf = function(w, fit, clusters) {
+
+      patient = names(x$phylogenies)[w]
+
       s = paste(
-        yellow(sprintf(paste('%', longest.name, 's', sep = ''), names(x$phylogenies)[w])),  ': ',
+        yellow(sprintf(paste('%', longest.name, 's', sep = ''), patient)),  ': ',
           sprintf('k = %3s | t = %3s | n = %2s | r = %2s | m = %4s | d = %2s',
                   length(x$phylogenies[[w]]),
                   rev_count_information_transfer_comb(x, names(x$phylogenies)[w]),
@@ -193,40 +209,82 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 
       if(fit)
       {
-        cat(bgBlue('[ Fit ]'))
         stas = stats.rev_phylo(x$fit$phylogenies[[w]])
-        cat(sprintf(' # %3s', blue(x$fit$solutionID[w])))
-        cat('| g', red(sprintf('%8s', round(stas$gofit, 6))))
-        cat('| f', green(sprintf('%s', x$fit$phylogenies[[w]]$score)))
+
+        rank = x$fit$solutionID[w]
+        score = format(x$fit$phylogenies[[w]]$score, scientific = TRUE, digits = 2)
+        gofit = format(stas$gofit, scientific = TRUE, digits = 2)
+
+        cat(
+          bgBlue('[ Fit ]', sprintf(' # %3s', yellow(rank)), ' '),
+          '| g =', red(sprintf('%8s', gofit)),
+          '| f =', green(sprintf('%8s', score)), '  '
+          )
       }
+
+      if(clusters)
+      {
+        cluster = x$cluster$clusters[patient]
+
+        cat(bgMagenta('[ Cluster', sprintf('%3s', yellow(cluster)), ']'))
+
+      }
+
       cat('\n')
     }
 
-    sapply(1:length(x$phylogenies), patf, fit = !is.null(x$fit))
+    cat('\n')
+    sapply(1:length(x$phylogenies), patf, fit = !is.null(x$fit), cluster = !is.null(x$cluster))
+
 
     cat('\n\tLegend \n\t\t k : phylogenies  \n\t\t t : combinations of information transfer \n\t\t n : groups (nodes of the tree) \n\t\t r : regions (inputs per patient) \n\t\t m : number of alterations \n\t\t d : number of driver alterations\n')
 
     if(!is.null(x$fit))
       cat('\t\t # : number of the solution selection (out of k)  \n\t\t g : goodness-of-fit \n\t\t f : score of the model\n')
 
+    if(!is.null(x$cluster))
+    {
+      pio::pioTit('Summary for clusters', prefix = '\t')
+
+      ids = names(x$cluster$labels.colors)
+
+      medians = rep(NA, length(ids))
+
+      if(!is.null(x$jackknife)) {
+        medians = x$jackknife$cluster.medians
+      }
+
+      size = as.vector(table(x$cluster$clusters))
+
+      df = data.frame(Cluster = ids, n = size, Jackknife = medians)
+      apply(df, 1, function(w){
+
+        cat(
+          '\n\t',
+          paste(yellow(sprintf('%4s', w['Cluster'])),  ': ',
+          sprintf('n = %4s | jackknife = %4s',
+                  w['n'],
+                  w['Jackknife'])
+          ))
+
+      })
+
+      cat('\n\n\tLegend \n\t\t         n : number of patients in the cluster')
+
+      if(!is.null(x$jackknife))
+        cat('\n\t\t jackknife : median co-clustering probability estiamted with jackknife\n')
+
+      # assignments = x$cluster$clusters
+      # edges = x$jackknife$edges
+      # pio::pioTit('Summary for edges', prefix = '\t')
+      # colnames(edges)[3] = 'Jackknife'
+      # pio::pioDisp(edges)
+    }
   }
 
   cat('\n')
   revolver_check_cohort(x)
 
-}
-
-rev_count_information_transfer_comb = function(x, p) {
-  stopifnot(!is.null(x$phylogenies))
-  stopifnot(p %in% names(x$phylogenies))
-
-  keys = lapply(
-    x$phylogenies[[p]],
-        function(w)
-          paste(sort(DataFrameToEdges(w$transfer$driver)), collapse = ' '))
-
-  keys = Reduce(rbind, keys)
-  length(unique(keys))
 }
 
 
@@ -240,7 +298,6 @@ rev_count_information_transfer_comb = function(x, p) {
 #'
 #' @param x An object of class \code{"rev_cohort"}
 #' @param patient A patient in the cohort, for which phylogenies are created
-#' @param use.MI If MI should be used to weight each phylogenetic model (should be FALSE).
 #' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
 #' adjacency matrix. No computation will be carried out in this case.
 #' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
@@ -262,7 +319,6 @@ rev_count_information_transfer_comb = function(x, p) {
 revolver_compute_phylogenies = function(
   x,
   patient,
-  use.MI = FALSE,
   precomputed.trees = NULL,
   precomputed.scores = NULL,
   options = list(sspace.cutoff = 10000,
@@ -273,25 +329,40 @@ revolver_compute_phylogenies = function(
   )
 {
   Original.dataset = x$dataset
+  use.MI = FALSE
 
-  cat(cyan('\n\nCreating phylogenies for'), yellow(patient))
+  pio::pioHdr(paste("REVOLVER Construct phylogenetic trees for", patient),
+              c(
+                `Use precomputed trees` = paste(all(!is.null(precomputed.trees))),
+                `Maximum state space size to switch from exhaustive to Montecarlo search` = options$sspace.cutoff,
+                `Number of Montecarlo samples, if not exhaustive` = options$n.sampling,
+                `Overwrite the tree if it is already available` = options$overwrite,
+                `Maximumum number of trees to store, if multiple are available` = options$store.max
+              ),
+              prefix = '\t'
+              )
 
   if(!is.null(x$phylogenies))
   {
     if(patient %in% names(x$phylogenies))
     {
-      if(as.logical(options['overwrite']))
-        cat(red('\t overwrite = TRUE -- Overwriting them.'))
-      else
-        {
-          cat(red('overwrite = FALSE -- Skipping patient.'))
-          Sys.sleep(0.5)
-          return(x)
-        }
+      if(!as.logical(options['overwrite']))
+      {
+        cat(red('\nModels already available and overwrite is FALSE -- skipping patient.\n'))
+        return(x)
+      }
+
+      # if(as.logical(options['overwrite']))
+      #   cat(red('\t overwrite = TRUE -- Overwriting them.'))
+      # else
+      #   {
+      #     cat(red('overwrite = FALSE -- Skipping patient.'))
+      #     Sys.sleep(0.5)
+      #     return(x)
+      #   }
     }
   }
   cat('\n')
-
 
 
   # Phylo creation
@@ -325,23 +396,24 @@ revolver_compute_phylogenies = function(
   clusters = clusters.table(x$dataset, samples)
   nclusters = nrow(clusters)
 
-  print(clusters)
-
-
   TREES = SCORES = NULL
+
   if(!any(is.null(precomputed.trees))){
-    cat(yellow('\nPrecomputed trees given as input ... using them.\n'))
+    cat(yellow('\n\nPrecomputed trees given as input ... using them.\n\n'))
 
     TREES = precomputed.trees
     SCORES = precomputed.scores
   }
   else
   {
+    pio::pioTit("Groups/ Clusters in the data of this patient")
+    print(clusters)
+
     # cat(yellow('\nPhylogenies for', patient, ':'))
 
     if(nclusters == 1)
     {
-      cat(red('1 single cluster (no-edge model with fictitious score 1)'))
+      cat(red('\nThis model has 1 node, we cannot compute its score.'))
 
       M = matrix(0, ncol = 1, nrow = 1)
       colnames(M) = rownames(M) = rownames(clusters)
@@ -357,14 +429,17 @@ revolver_compute_phylogenies = function(
 
       x$dataset[, samples] =  x$dataset[, samples] * 100
 
-      cat(cyan('Clonevol: '))
+      pio::pioTit("Using ClonEvol to build phylogentic trees, per region (this might take some time)")
+
       clonal.cluster = as.character(unique(x$dataset$cluster[x$dataset$is.clonal]))
       clonevol.obj = useClonevo(x$dataset, samples, clonal.cluster)
 
       x$dataset[, samples] =  x$dataset[, samples] / 100
 
+      numSol = unlist(lapply(clonevol.obj$models, length))
+      pio::pioDisp(data.frame(region = names(clonevol.obj$models), Solutions = numSol))
 
-      cat(paste(names(clonevol.obj$models), unlist(lapply(clonevol.obj$models, length)), collapse = ', '), ' ')
+      # cat(paste(names(clonevol.obj$models), , collapse = ', '), ' ')
 
 
       ################## Build all possible clonal trees
@@ -375,28 +450,32 @@ revolver_compute_phylogenies = function(
       # cat(yellow('2) Build or sample all possible clonal trees ...\n'))
 
       # cat(cyan('[compute_rev_phylogenies] Hashing trees\n'))
-      cat(cyan(' | Trees '))
+      pio::pioTit("Hashing, merging and generating solutions (this might take some time)")
       CLONAL.TREES = hashTrees(clonevol.obj, samples)
       # print(CLONAL.TREES)
 
       # cat(cyan('[compute_rev_phylogenies] Computing consensus\n'))
-      cat(cyan('| Consensus '))
+      # cat(cyan('| Consensus '))
       CONSENSUS = consensusModel(clonevol.obj, samples)
       CONSENSUS.TREE = CONSENSUS$S
       WEIGHTS.CONSENSUS.TREE = CONSENSUS$weights
-      cat('OK')
+      # cat('OK')
 
+      cat("Created graph of all possible ancestries\n")
 
       # # Sampling is carried out if there are more than 'sspace.cutoff' trees, in that case we
       # # sample 'n.sampling' possible trees. Otherwise all possible trees are generated.
       # cat(cyan('[compute_rev_phylogenies] Generating possible solutions (it might take time) ... \n'))
-      cat(cyan('\nSolutions '))
+      # cat(cyan('\nSolutions '))
       TREES = all.possible.trees(
         CONSENSUS.TREE,
         WEIGHTS.CONSENSUS.TREE,
         sspace.cutoff = options['sspace.cutoff'],
         n.sampling = options['n.sampling']
       )
+
+
+      pio::pioTit("Scoring and ranking solutions (this might take some time)")
 
       # ################## Ranking trees. A tree is good according to the following factors:
       # # 1) the MI among the variables x and y, if they are connected by an edge x --> y [TODO: consider if we really need MI]
@@ -426,7 +505,7 @@ revolver_compute_phylogenies = function(
 
       # cat(cyan('[compute_rev_phylogenies] Mutual Information weighted by Multinomial score\n'))
       # print(MI.table)
-      cat(cyan('Mutual Information'), ifelse(use.MI, green('YES'), red('NO')))
+      # cat(cyan('Mutual Information'), ifelse(use.MI, green('YES'), red('NO')))
 
 
 
@@ -437,16 +516,22 @@ revolver_compute_phylogenies = function(
 
       # 4) Compute the branching penalty  --  this is done for each tree that we are considering
       # cat(cyan('[compute_rev_phylogenies] Computing violations of the Pigeonhole principle for every model\n'))
-      cat(cyan(' | Pigeonhole principle \n'))
+      # cat(cyan(' | Pigeonhole principle \n'))
+
+      cat('Computing Pigeonhole Principle\n')
       penalty.CCF.branching = node.penalty.for.branching(TREES, CCF)
 
 
+      # message("rank")
 
       # cat(cyan('[compute_rev_phylogenies] Ranking trees, and removing 0-scoring ones\n'))
-      cat(cyan('Ranking trees\n'))
+      # cat(cyan('Ranking trees\n'))
+      cat('Computing rank\n')
       RANKED = rankTrees(TREES, MI.table, penalty.CCF.branching)
       TREES = RANKED$TREES
       SCORES = RANKED$SCORES
+
+      # message("rank2")
 
       TREES = TREES[SCORES > 0]
       SCORES = SCORES[SCORES > 0]
@@ -461,27 +546,27 @@ revolver_compute_phylogenies = function(
   }
 
 
-  if(length(TREES) > options['store.max']){
-    cat(cyan('Phylogenies found'), length(TREES), red('-- storing', options['store.max'], ' '))
+  pio::pioTit("Creating rev_phylo object for REVOLVER (this might take some time)")
+
+  # cat(cyan('Creating'), length(TREES), cyan('revolver_phylogeny objects\n'))
+  cat("Total number of trees with non-zero scores is", length(TREES))
+
+  if(length(TREES) > options['store.max'])
+  {
+    cat(red(' -- too many, storing top', options['store.max'], '\n'))
+
     TREES = TREES[1:as.numeric(options['store.max'])]
     SCORES = SCORES[1:as.numeric(options['store.max'])]
   }
+  else cat(green(' -- storing all\n'))
 
-  cat(cyan('Creating'), length(TREES), cyan('revolver_phylogeny objects\n'))
 
   LSCORES = as.data.frame(SCORES)
   LSCORES = split(LSCORES, f = LSCORES[,1])
-  # print(SCORES)
   LSCORES = lapply(LSCORES, function(w) w[sample(1:nrow(w), replace = FALSE), , drop = FALSE])
-  # print(SCORES)
 
   permuted.indexes = as.integer(rev(unlist(lapply(LSCORES, rownames))))
   names(permuted.indexes) = NULL
-  #
-  #
-  # print(SCORES)
-  # print(LSCORES)
-  # print(permuted.indexes)
 
   TREES = TREES[permuted.indexes]
   SCORES = SCORES[permuted.indexes]
@@ -491,10 +576,16 @@ revolver_compute_phylogenies = function(
 
   # print(permuted.indexes)
 
+  pb = txtProgressBar(min = 1,
+                      max = length(TREES),
+                      style = 3)
+  pb.status = getOption('revolver.progressBar', default = TRUE)
+
   REVOLVER.TREES = NULL
   for(i in 1:length(TREES))
   {
-    cat('@ ', i, '\r')
+    if (pb.status)
+      setTxtProgressBar(pb, i)
 
     tree = revolver_phylogeny(
       M = TREES[[i]],
@@ -509,19 +600,22 @@ revolver_compute_phylogenies = function(
 
     REVOLVER.TREES = append(REVOLVER.TREES, list(tree))
   }
+
+  close(pb)
+
+
   x$dataset = Original.dataset
   if(is.null(x$phylogenies)) x$phylogenies = NULL
   x$phylogenies[[patient]] = REVOLVER.TREES
 
   comb = rev_count_information_transfer_comb(x, patient)
-  cat(cyan('#Information Transfer'), ifelse(comb == 1, red(comb), green(comb)), '\n\n')
 
-
+  cat(cyan('\n Combinations of Information Transfer for the models created'), yellow(comb), '\n')
 
   return(x)
 }
 
-#' @title  Compute/ add CCF-based mutation trees to a REVOLVER cohort.
+#' @title Compute/ add CCF-based mutation trees to a REVOLVER cohort.
 #'
 #' @details
 #' This is the analogous of \code{\link{revolver_compute_phylogenies}}, but for binary data and
@@ -559,24 +653,29 @@ revolver_compute_CLtrees = function(
 {
   Original.dataset = x$dataset
 
-  cat(cyan('\n\nCreating phylogenies for'), yellow(patient))
+  pio::pioHdr(paste("REVOLVER Construct mutational trees (Chow-Liu) for", patient),
+              c(
+                `Use precomputed trees` = paste(all(!is.null(precomputed.trees))),
+                `Maximum state space size to switch from exhaustive to Montecarlo search` = options$sspace.cutoff,
+                `Number of Montecarlo samples, if not exhaustive` = options$n.sampling,
+                `Overwrite the tree if it is already available` = options$overwrite,
+                `Maximumum number of trees to store, if multiple are available` = options$store.max
+              ),
+              prefix = '\t'
+  )
 
   if(!is.null(x$phylogenies))
   {
     if(patient %in% names(x$phylogenies))
     {
-      if(as.logical(options['overwrite']))
-        cat(red('\t overwrite = TRUE -- Overwriting them.'))
-      else
+      if(!as.logical(options['overwrite']))
       {
-        cat(red('overwrite = FALSE -- Skipping patient.'))
-        Sys.sleep(0.5)
+        cat(red('\nModels already available and overwrite is FALSE -- skipping patient.\n'))
         return(x)
       }
     }
   }
   cat('\n')
-
 
 
   # Phylo creation
@@ -615,9 +714,6 @@ revolver_compute_CLtrees = function(
   clusters = clusters.table(x$dataset, samples)
   nclusters = nrow(clusters)
 
-  print(clusters)
-
-
   TREES = SCORES = NULL
   if(!any(is.null(precomputed.trees))){
     cat(yellow('\nPrecomputed trees given as input ... using them.\n'))
@@ -627,11 +723,12 @@ revolver_compute_CLtrees = function(
   }
   else
   {
-    # cat(yellow('\nPhylogenies for', patient, ':'))
+    pio::pioTit("Groups/ Clusters in the data of this patient")
+    print(clusters)
 
     if(nclusters == 1)
     {
-      cat(red('1 single cluster (no-edge model with fictitious score 1)'))
+      cat(red('\nThis model has 1 node, we cannot compute its score.'))
 
       M = matrix(0, ncol = 1, nrow = 1)
       colnames(M) = rownames(M) = rownames(clusters)
@@ -641,8 +738,10 @@ revolver_compute_CLtrees = function(
     }
     else
     {
+      pio::pioTit("Computing Suppes' extended poset")
+
       ################### Generate Suppes poset
-      cat(cyan('| Suppes '))
+      # cat(cyan('| Suppes '))
       POSET = poset(x = clusters, regions = samples)
 
       # we transform it in the input for the tree sampler
@@ -659,18 +758,24 @@ revolver_compute_CLtrees = function(
         expand.grid(from = POSET.EDGES[[w]], to = w, stringsAsFactors = FALSE)
       })
       POSET.EDGES = Reduce(rbind, POSET.EDGES)
-      cat('OK')
+
+      pio::pioDisp(POSET.EDGES)
+      # cat('OK')
 
       # # Sampling is carried out if there are more than 'sspace.cutoff' trees, in that case we
       # # sample 'n.sampling' possible trees. Otherwise all possible trees are generated.
       # cat(cyan('[compute_rev_phylogenies] Generating possible solutions (it might take time) ... \n'))
-      cat(cyan('\nSolutions '))
+
+      pio::pioTit("Computing solutions from poset (this might take some time)")
+
       TREES = all.possible.trees(
         G = POSET.EDGES,
         W = POSET,
         sspace.cutoff = options['sspace.cutoff'],
         n.sampling = options['n.sampling']
       )
+
+      pio::pioTit("Scoring and ranking solutions (this might take some time)")
 
       # ################## Ranking trees. A tree is good according to the following factors:
       # # 1) the MI among the variables x and y, if they are connected by an edge x --> y [TODO: consider if we really need MI]
@@ -689,10 +794,11 @@ revolver_compute_CLtrees = function(
       # • a=1:Laplace’s prior
       # • a=1/length(y):Schurmann-Grassberger (1996) entropy estimator
       # • a=sqrt(sum(y))/length(y):minimax prior
+      cat('Computing Mutual Information from data\n')
       MI.table = computeMI.table(binary.data, MI.Bayesian.prior = 0, add.control = TRUE)
-      cat(cyan('Mutual Information'), green('YES '))
+      # cat(cyan('Mutual Information'), green('YES '))
 
-      cat(cyan('Ranking trees\n'))
+      cat('Computing rank\n')
       RANKED = rankTrees(TREES, MI.table, structural.score = NULL)
       TREES = RANKED$TREES
       SCORES = RANKED$SCORES
@@ -709,14 +815,18 @@ revolver_compute_CLtrees = function(
     return(x)
   }
 
+  pio::pioTit("Creating rev_phylo objects for REVOLVER (this might take some time)")
+  cat("Total number of trees with non-zero scores is", length(TREES))
+
 
   if(length(TREES) > options['store.max']){
-    cat(cyan('Phylogenies found'), length(TREES), red('-- storing', options['store.max'], ' '))
+
+    cat(red(' -- too many, storing top', options['store.max'], '\n'))
+
     TREES = TREES[1:as.numeric(options['store.max'])]
     SCORES = SCORES[1:as.numeric(options['store.max'])]
-  }
+  } else cat(green(' -- storing all\n'))
 
-  cat(cyan('Creating'), length(TREES), cyan('revolver_phylogeny objects\n'))
 
   LSCORES = as.data.frame(SCORES)
   LSCORES = split(LSCORES, f = LSCORES[,1])
@@ -735,15 +845,16 @@ revolver_compute_CLtrees = function(
   TREES = TREES[permuted.indexes]
   SCORES = SCORES[permuted.indexes]
 
-  # print(TREES)
-  # print(SCORES)
-
-  # print(permuted.indexes)
+  pb = txtProgressBar(min = 1,
+                      max = length(TREES),
+                      style = 3)
+  pb.status = getOption('revolver.progressBar', default = TRUE)
 
   REVOLVER.TREES = NULL
   for(i in 1:length(TREES))
   {
-    cat('@ ', i, '\r')
+    if (pb.status)
+      setTxtProgressBar(pb, i)
 
     tree = revolver_phylogeny(
       M = TREES[[i]],
@@ -754,7 +865,7 @@ revolver_compute_CLtrees = function(
       annotation = paste('Ranked ', i, '/', length(TREES), sep ='')
     )
 
-    # print('afaasas')
+    close(pb)
 
     REVOLVER.TREES = append(REVOLVER.TREES, list(tree))
   }
@@ -763,184 +874,11 @@ revolver_compute_CLtrees = function(
   x$phylogenies[[patient]] = REVOLVER.TREES
 
   comb = rev_count_information_transfer_comb(x, patient)
-  cat(cyan('#Information Transfer'), ifelse(comb == 1, red(comb), green(comb)), '\n\n')
+  cat(cyan('\n Combinations of Information Transfer for the models created'), yellow(comb), '\n')
 
   return(x)
 }
 
-
-#' @title Plot a REVOLVER cohort.
-#'
-#' @details
-#' Iterative plotting functions that scans samples from a cohort. It will plot
-#' a patient's data (original and binarized), the score for the trees associated to
-#' the patient, and a number of possible trees per patient.
-#'
-#' @param x An object of class \code{"rev_cohort"}
-#' @param patients The patients to plot, default is all the one available.
-#' @param max.phylogenies How many trees should be computed for each patient
-#' @param cex Scale cex for graphics
-#' @param plot.stat Set it to TRUE to visualize also some statistics about each tree
-#'
-#' @return nothing
-#' @export
-#' @import crayon
-#'
-#' @examples
-#' data(CRC.cohort)
-#' plot(CRC.cohort, patients = 'adenoma_3')
-plot.rev_cohort = function(x, patients = x$patients, max.phylogenies = 12, cex = 1, plot.stat = TRUE)
-{
-  for(patient in patients)
-  {
-    cat(yellow(patient), ':')
-
-    ################################# Clusters table
-    cat('\tCCF')
-
-    pat = x$phylogenies[[patient]][[1]]
-    ccf = pat$CCF[, pat$samples_ID, drop = F]
-
-    ccf.numbers = ccf
-    ccf.numbers = round(ccf.numbers, 3)
-    ccf.numbers[ccf.numbers == 0] = ''
-
-    annot = pat$CCF[, c('is.driver', 'is.clonal')]
-    annot$is.clonal = as.character(annot$is.clonal)
-    annot$is.driver = as.character(annot$is.driver)
-
-    # annot = apply(annot, 2, as.character)
-
-    yes_no_col = c('forestgreen', 'gainsboro')
-    names(yes_no_col) = c('TRUE', 'FALSE')
-    ann_colors = list(is.driver = yes_no_col, is.clonal = yes_no_col)
-
-    # pheatmap(ccf)
-
-    br = c(0, 1e-3, seq(0.1, 1, 0.1))
-    capture.output({pheatmap::pheatmap(
-      ccf,
-      main = 'CCF',
-      cluster_cols = FALSE,
-      cluster_rows = FALSE,
-      border = NA,
-      breaks = br,
-      legend = F,
-      color = c('white', scols(1:(length(br) - 1), 'Blues')),
-      display_numbers = ccf.numbers,
-      cellwidth = 34,
-      cellheight = 12,
-      number_color = 'orange',
-      # width = 3,
-      annotation_row = annot,
-      annotation_colors = ann_colors,
-      # height = 8, width = 8,
-      # height = 8,
-      file = paste(patient, '-CCF.pdf', sep = '')
-    )})
-
-    ################################# Binarized data
-    cat('| Binary data')
-
-    capture.output({
-    TRONCO::oncoprint(
-      TRONCO::import.genotypes(rbind(pat$binary.data, wt = 0), color = 'steelblue'),
-      cellwidth = 22,
-      cellheight = 10,
-      sample.id = TRUE,
-      font.row = 8,
-      ann.hits = FALSE,
-      legend = FALSE,
-      title = 'Binarized data',
-      file = paste(patient, '-data.pdf', sep = '')
-    )})
-
-    ################################# Scores for phylogenies
-    cat('| Phylogeny scores')
-
-    scores = lapply(x$phylogenies[[patient]], function(e) e$score)
-    comb = rev_count_information_transfer_comb(x, patient)
-    colors = scols(1:comb, 'Dark2')
-
-    groups = lapply(x$phylogenies[[patient]],
-                    function(w) paste(sort(DataFrameToEdges(w$transfer$drivers)), collapse = ':'))
-    groups = unlist(groups)
-    names(colors) = unique(groups)
-
-    pdf(paste(patient,'-scoreplot.pdf', sep =''), width = 2, height = 3)
-    barplot(unlist(scores), col = colors[groups], border = NA, main = patient,  horiz = T, ylab = 'Phylogenies', xlab = 'Score')
-    legend('topright', legend = comb, bty = 'n')
-    dev.off()
-
-    ##### Plot the distribution
-    distribution = x$phylogenies[[patient]]
-
-    if(length(distribution) > max.phylogenies) distribution = distribution[1:max.phylogenies]
-    cat('| max. ', max.phylogenies, ' Phylogenies :')
-
-
-    toMerge = sapply(
-      1:length(distribution),
-      function(x){
-        f = paste(patient, x, 'distribution.pdf', sep = '-')
-
-        plot(
-          distribution[[x]],
-          plot.stat = plot.stat,
-          graph.cex = cex,
-          table.cex = cex,
-          # edge.label = round(MI.table, 2),
-          file = f
-        )
-
-        cat('+')
-
-        return(f)
-      })
-
-    xx = jamPDF(
-      in.files = toMerge,
-      out.file =  paste(patient, '-distribution.pdf', sep = ''),
-      layout = '2x2'
-    )
-
-    xx = jamPDF(in.files = paste(patient, c('-CCF.pdf', '-data.pdf', '-scoreplot.pdf'), sep =''), out.file = paste(patient, '-scoreplot.pdf', sep = ''), layout = '3x1')
-
-    xx =  jamPDF(
-      in.files = paste(patient, c('-scoreplot.pdf', '-distribution.pdf'), sep =''),
-      out.file =  paste(patient, '.pdf', sep = ''),
-      layout = '1x1'
-    )
-
-    cat('\n')
-  }
-}
-
-clonal.subclonal.table = function(x)
-{
-  clonal.drivers = table(x$dataset[x$dataset$is.driver & x$dataset$is.clonal, 'variantID'])
-  subclonal.drivers = table(x$dataset[x$dataset$is.driver & !x$dataset$is.clonal, 'variantID'])
-
-  tableD = data.frame(
-    variantID = unique(x$dataset[x$dataset$is.driver, 'variantID']),
-    stringsAsFactors = FALSE)
-  rownames(tableD) = tableD$variantID
-
-  tableD = cbind(tableD, Clonal = 0)
-  tableD = cbind(tableD, SubClonal = 0)
-
-  for(d in tableD$variantID){
-    tableD[d, 'Clonal'] = clonal.drivers[d]
-    tableD[d, 'SubClonal'] = subclonal.drivers[d]
-  }
-  tableD[is.na(tableD)] = 0
-  tableD$Counts = tableD$Clonal + tableD$SubClonal
-
-  tableD = tableD[order(tableD$Counts, decreasing = T), ]
-  tableD$variantID = NULL
-
-  tableD
-}
 
 
 #' @title Check basic inconsistencies in a REVOLVER cohort.
@@ -1075,6 +1013,14 @@ revolver_removeDriver = function(
   misc,
   cluster)
 {
+  pio::pioHdr('REVOLVER remove driver across all samples',
+              toPrint = c(
+                `Patient` = patient,
+                `Alteration ID` = variantID,
+                `Misc` = misc,
+                `Group/ cluster` = cluster
+              ))
+
   x$dataset[
     x$dataset$is.driver &
       x$dataset$patientID == patient &
@@ -1115,6 +1061,11 @@ revolver_removeDriver = function(
 #' revolver_subsetDrivers(CRC.cohort, 'APC')
 revolver_subsetDrivers = function(cohort, list)
 {
+  pio::pioHdr('REVOLVER subsetting drivers according to list',
+              toPrint = c(
+                `Drivers to keep` = paste(list, collapse = ', ')
+              ))
+
   current.drivers = rownames(clonal.subclonal.table(cohort))
   toDelete = setdiff(current.drivers, list)
 
@@ -1125,6 +1076,8 @@ revolver_subsetDrivers = function(cohort, list)
 
   if(!is.null(cohort$phylogenies))
   {
+    pio::pioTit("Propagating modification across trees stored in the cohort")
+
     # remove the driver even from the local copy of the data
     for(p in names(cohort$phylogenies))
     {
@@ -1141,7 +1094,7 @@ revolver_subsetDrivers = function(cohort, list)
 
   }
 
-  cat(cyan('\nChecking cohort.\n'))
+  # cat(cyan('\nChecking cohort.\n'))
   revolver_check_cohort(cohort)
 
   return(cohort)
@@ -1163,6 +1116,11 @@ revolver_subsetDrivers = function(cohort, list)
 #' revolver_deletePatients(CRC.cohort, "adenoma_2")
 revolver_deletePatients = function(x, list)
 {
+  pio::pioHdr('REVOLVER subsetting patients according to list',
+              toPrint = c(
+                `Patients to keep` = paste(list, collapse = ', ')
+              ))
+
   new.patients = setdiff(x$patients, list)
   x$dataset = x$dataset[x$dataset$patientID %in% new.patients, , drop = FALSE]
   x$patients = new.patients
@@ -1177,16 +1135,87 @@ revolver_deletePatients = function(x, list)
   return(x)
 }
 
-CCF.parser = function(x)
+
+#' @title Plot data and trees for a REVOLVER cohort.
+#'
+#' @details
+#' Iterative plotting functions that scans a cohort and runs \code{\link{revolver_report_patient}}
+#' on a set of patients (default all).
+#'
+#' @param x An object of class \code{"rev_cohort"}.
+#' @param patients The patients to plot, default is all the one available.
+#' @param max.phylogenies How many trees should be computed for each patient.
+#' @param cex Scale cex for graphics.
+#'
+#' @return nothing
+#' @export
+#' @import crayon
+#'
+#' @examples
+#' data(Breast.fit)
+#' plot.rev_cohort(Breast.fit, patients = Breast.fit$patients[1:10])
+plot.rev_cohort = function(x,
+                           patients = x$patients,
+                           max.phylogenies = 12,
+                           cex = 1,
+                           file = "REVOLVER-cohort-data_trees_scores.pdf")
 {
-  tk = strsplit(x, ';')[[1]]
-  tk = unlist(strsplit(tk, ':'))
+  obj_has_trees(x)
+  plot.stat = TRUE
 
-  samples = tk[seq(1, length(tk), 2)]
+  pio::pioHdr('REVOLVER Plot: Cohort (models)',
+              pio:::nmfy(
+                c('Patients', "Number of trees per patient", "Output file"),
+                c(paste(patients, collapse = ', '), max.phylogenies, file)
+              ))
 
-  values = tk[seq(2, length(tk), 2)]
-  names(values) = samples
+  if(is.na(file)) stop('A file is required for this plot!')
 
-  return(values)
+  # lot = mylayout.on(file, 1, c(20, 20), cex)
+
+  for (patient in patients)
+  {
+    pio::pioTit(paste("Processing", patient))
+
+    revolver_report_patient(x, patient, cex = cex, max.phylogenies = max.phylogenies)
+  }
+
+  pio::pioTit("Assempling all PDFs")
+
+  xx =  jamPDF(
+    in.files =  paste0('REVOLVER-report-patient-', patients, '.pdf'),
+    out.file = file,
+    layout = '1x1',
+    page = 'a4'
+  )
+
+
+  # mylayout.off(lot)
+  # for (patient in patients)
+  # {
+  #   pio::pioTit(paste("Processing", patient))
+  #   fname = paste(patient, '.pdf', sep = '')
+  #
+  #   revolver_plot_patient_data(x, patient, cex = cex, file = paste('1-',fname, sep = ''))
+  #   revolver_plt_patient_trees_scores(x, patient, cex = cex, file  = paste('2-', fname, sep = ''))
+  #   revolver_plt_patient_trees(x, patient, max.phylogenies = max.phylogenies, cex = cex, file  = paste('3-', fname, sep = ''))
+  #
+  #   # xx =  jamPDF(
+  #   #   in.files = paste(1:3, '-', fname, sep = ''),
+  #   #   out.file =  paste(patient, '.pdf', sep = ''),
+  #   #   layout = '1x1',
+  #   #   page = 'a4'
+  #   # )
+  # }
+  #
+  # pio::pioTit("Assempling all PDFs")
+  #
+  # xx =  jamPDF(
+  #   in.files =  paste(patients, '.pdf', sep = ''),
+  #   out.file = file,
+  #   layout = '1x1',
+  #   page = 'a4'
+  # )
 }
+
 

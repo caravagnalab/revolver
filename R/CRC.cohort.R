@@ -1,6 +1,6 @@
 #' Colorectal Cancer Data by Cross et al., in the cohort format by REVOLVER.
 #'
-#' Driver mutations detected by Cross et al. in Nature Genetics 2018, to appear.
+#' Driver mutations detected by Cross et al. in a cohort of colorecta adenomas and carcinomas.
 #' This dataset has already been wrapped to a REVOLVER cohort object
 #'
 #' @docType data
@@ -11,9 +11,7 @@
 #'
 #' @keywords datasets
 #'
-#' @references Cross et al. (2018) Nature Genetics 2018, to appear.
-#' (\href{to-appear}{PubMed})
-#'
+#' @references Cross et al. (2018) to appear.
 #'
 #' @examples
 #' data(CRC.cohort)

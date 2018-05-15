@@ -16,7 +16,6 @@ none
 Print a REVOLVER cohort object with fits.
 }
 \examples{
-data(CRC.cohort)
-fit = revolver_fit(CRC.cohort)
-fit
+data(Breast.fit)
+Breast.fit
 }

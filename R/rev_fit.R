@@ -7,231 +7,66 @@
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' fit = revolver_fit(CRC.cohort)
-#' fit
+#' data(Breast.fit)
+#' Breast.fit
 print.rev_cohort_fit = function(x)
 {
   class(x) = 'rev_cohort'
   print(x)
 }
 
-
-#' @title Plot REVOLVER fits for a subset of patients in the cohort.
+#' @title Plot fits from a REVOLVER cohort.
 #'
 #' @details
-#' This function performs the plots for each one of a set of input patient IDs. Each plot
-#' contain the tree fit, its expanded version and the information transfer.
+#' Iterative plotting functions that scans a cohort and runs \code{\link{revolver_report_fit_patient}}
+#' on a set of patients (default all).
 #'
-#' @param x A \code{"rev_cohort_fit"} object
+#' @param x An object of class \code{"rev_cohort"}
 #' @param patients The patients to plot, default is all the one available.
-#' @param plot.stat Set it to \code{TRUE} to visualize also some statistics about each tree
-#' @param palette RColorBrewer palette for colours of each model.
-#' @param out.file Output PDF file, default \code{"REVOLVER-cohort.pdf"}.
-#' @param layout The layout of to arrange the plots.
-#' @param alpha Transparency
-#' @param verbose Verbose output.
-#' @param ... Extra parameters
+#' @param max.phylogenies How many trees should be computed for each patient
+#' @param cex Scale cex for graphics
 #'
-#' @return None
+#' @return nothing
 #' @export
 #' @import crayon
 #'
 #' @examples
-#' #' data(CRC.cohort)
-#' fit = revolver_fit(CRC.cohort)
-#' plot(fit, "adenoma_3")
-plot.rev_cohort_fit = function(
-  x,
-  patients = names(x$fit$phylogenies),
-  plot.stat = TRUE,
-  palette = 'Set1',
-  out.file = 'REVOLVER-cohort.pdf',
-  layout = paste(length(patients), 'x1', sep =''),
-  alpha = 0.7,
-  verbose = FALSE,
-  ...
-)
+#' data(Breast.fit)
+#' plot.rev_cohort_fit(Breast.fit, patients = Breast.fit$patients[1:10])
+plot.rev_cohort_fit = function(x,
+                           patients = x$patients,
+                           cex = 1,
+                           file = "REVOLVER-cohort-fits.pdf")
 {
-  fixLayer = function(w, L, offset = 2)
+  obj_has_trees(x)
+  plot.stat = TRUE
+
+  pio::pioHdr('REVOLVER Plot: fits (tree, trajectories, information transfer)',
+              pio:::nmfy(
+                c('Patients',"Output file"),
+                c(paste(patients, collapse = ', '), max.phylogenies, plot.stat, file)
+              ))
+
+  if(is.na(file)) stop('A file is required for this plot!')
+
+  for (patient in patients)
   {
-    # all downstream nodes and the highest in the layout
-    r.w = reach(MatrixToDataFrame(adj_matrix), w)
+    pio::pioTit(paste("Processing", patient))
 
-    if(length(r.w) == 0) return(L)
+    revolver_report_fit_patient(x, patient = patient, cex = cex,
+                                file = paste0('REVOLVER-report-fit-patient-', patient, '.pdf'))
+    }
 
-    l.w = L[w, 2]
-    m = max(L[r.w, 2, drop = F])
+  pio::pioTit("Assempling all PDFs")
 
-    if(l.w <= m)
-      L[r.w, 2] =  L[r.w, 2] - offset - abs(l.w-m)
-
-    return(L)
-  }
-
-  wrapTS = function(M){
-    tryCatch(
-      {
-        TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
-        return(TS)
-      },
-      warning = function(w) { },
-      error = function(w) { },
-      finally = {return(TS)}
-    )
-  }
-
-  ######################  ######################  ######################
-  ######################  ######################  ######################
-
-  cat(cyan('Plotting REVOLVER\'s models for:'), blue(x$annotation), '\n')
-  FILES = NULL
-
-  occ.table = clonal.subclonal.table(x)
-  edge.table = rev_table.orderings(x, intelli.cutoff = 0)
-
-  for(patient in patients)
-  {
-    cat(yellow(patient), ': ')
-
-    fname = paste(patient, '-revolver-model.pdf', sep = '')
-    phylo = x$fit$phylogenies[[patient]]
-    subst = x$fit$substitutions[[patient]]
-
-    ##### Print the phylogeny...
-    result = tryCatch({
-      cat(sprintf('%15s ', 'Phylogeny'))
-      plot(phylo, file = fname, plot.stat = plot.stat, palette = palette, alpha = alpha, verbose = verbose, ...)
-      cat(green('OK'), '| ')
-    },
-    warning = function(w) { cat(red('WARNING'), '| '); warning(w) },
-    error = function(w) { cat(red('ERROR'), '| '); warning(w) },
-    finally = { }
-    )
-
-    ##### Print the trajectories
-    result = tryCatch({
-      cat(sprintf('%15s ', 'Trajectories'))
-
-      # get groups, and the adj matrix
-      groups = unique(phylo$dataset[phylo$dataset$is.driver, 'cluster'])
-      adj_matrix = x$fit$exploded[[patient]]
-
-      G = igraph::graph_from_adjacency_matrix(adj_matrix)
-
-      # visit groups in order according to a topological sort, ensures correct expansions
-      TS = wrapTS(phylo$adj_mat)
-      TS = TS[TS %in% groups]
-
-      # colors for the nodes...
-      igraph::V(G)$color  = "gainsboro"
-      igraph::V(G)["GL"]$color<-"white"
-
-      ncolors = length(subst)
-      colors = scols(sort(names(subst)), palette)
-      colors = add.alpha(colors, alpha)
-
-      # nodes get colored according to their cluster color
-      for(g in TS) {
-        m = subst[[g]]
-
-        for(n in colnames(m)) igraph::V(G)[n]$color = colors[g]
-      }
-
-      # we work on the layout as well
-      lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
-      rownames(lay) =  igraph::V(G)$name
-
-      TS = wrapTS(adj_matrix)
-      for(node in TS) lay = fixLayer(node, lay)
-
-      mark.groups = lapply(subst, function(w) colnames(w))
-      mark.col = add.alpha(colors[names(subst)], alpha/2)
-      mark.border = colors[names(subst)]
-
-      # print this plot, and merge it to the phylogeny
-      pdf('evo.pdf', ...)
-      plot(G,
-           vertex.frame.color = 'white',
-           edge.arrow.size = .5,
-           mark.groups = mark.groups,
-           mark.col = mark.col,
-           mark.border = mark.border,
-           edge.color = 'steelblue',
-           # vertex.color = colors[membership(wc)],
-           layout = lay)
-      title("Evolutionary trajectories (expanded)")
-      dev.off()
-      cat(green('OK'), '| ')
-
-      ###########
-      ########### Plot just information transfer
-      ###########
-      cat(sprintf('%15s ', 'Information Transfer'))
-
-      inf.transf = x$fit$transfer[[patient]]
-      adj_matrix = DataFrameToMatrix(inf.transf)
-
-      # Augment labels
-      lbify = function(w){
-        if(w == 'GL') return(w)
-        else paste(w, ' [', occ.table[w, 'Clonal'], ', ', occ.table[w, 'SubClonal']  ,']', sep = '')
-      }
-
-      edgeify = function(w){
-        w[1] = strsplit(w[1], split = ' ')[[1]][1]
-        w[2] = strsplit(w[2], split = ' ')[[1]][1]
-
-        edge.table$tab[edge.table$tab$from == w[1] & edge.table$tab$to == w[2], 'Count']
-      }
-
-      colnames(adj_matrix) = sapply(colnames(adj_matrix), lbify)
-      rownames(adj_matrix) = sapply(rownames(adj_matrix), lbify)
-
-      G = igraph::graph_from_adjacency_matrix(adj_matrix)
-
-      # colors for the nodes...
-      igraph::V(G)$color  = "white"
-
-      edLabel = apply(igraph::as_edgelist(G), 1, edgeify)
-      edLabel = as.matrix(edLabel, ncol = 1)
-
-      # we work on the layout as well, as before
-      lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
-      rownames(lay) =  igraph::V(G)$name
-
-      TS = wrapTS(adj_matrix)
-      for(node in TS) lay = fixLayer(node, lay, offset = 2)
-
-      pdf('itrn.pdf', ...)
-      plot(G,
-           vertex.frame.color = 'white',
-           edge.arrow.size = .5,
-           edge.color = 'black',
-           edge.label = edLabel,
-           layout = lay)
-      title("Information transfer")
-      # legend('topright', '[Clonal, Subclonal]')
-      dev.off()
-
-
-      jamPDF(c(fname, 'evo.pdf', 'itrn.pdf'), out.file = fname, layout = '3x1')
-
-      cat(green('OK'), '| ')
-
-    },
-    warning = function(w) { cat(red('WARNING'), '| '); warning(w) },
-    error = function(w) { cat(red('ERROR'), '| '); warning(w) },
-    finally = { }
-    )
-
-    cat((fname), '\n')
-    FILES = c(FILES, fname)
-  }
-
-  cat(cyan('PDFJamming @'), out.file, cyan('with layout'), layout, '\n')
-  aa  = jamPDF(FILES, out.file = out.file, layout = layout)
+  xx =  jamPDF(
+    in.files =  paste0('REVOLVER-report-fit-patient-', patients, '.pdf'),
+    out.file = file,
+    layout = '1x1',
+    page = 'a4'
+  )
 }
+
 
 
 #' @title REVOLVER fit function.
@@ -955,139 +790,3 @@ rev_table.orderings = function(x, intelli.cutoff = 3)
   return(list(tab = tab, intelli = intelli))
 }
 
-
-#' Plot penalty for a REVOLVER cohort, via non parametric bootstrap.
-#'
-#' @param x A \code{"rev_cohort_fit"} object
-#' @param n.boot Number of non-parametric bootstrap resamples.
-#' @param DET.type Index type, default is \code{"Shannon"} (Shannon's equitability,
-#' which is entropy), also available is \code{"VA"} (Variance Analog index in \code{VA})
-#' @param file Output file.
-#' @param ... Extra parameters.
-#'
-#' @return none
-#' @export
-#'
-#' @import crayon
-#'
-#' @examples
-#' data(CRC.cohort)
-#' fit = revolver_fit(CRC.cohort)
-#' revolver_penaltyPlot(fit)
-revolver_penaltyPlot = function(x, n.boot = 100, DET.type = 'Shannon', file = 'REVOLVER-penalty.pdf', ...)
-{
-  if(is.null(x$fit)) stop("Fit a model first?")
-
-  palette = c('Blues', 'Greens')
-
-  pdf(file, ...)
-
-  # Trivial penalty barplots
-  pen = x$fit$penalty
-  pen = pen[order(pen, decreasing = T)]
-  barplot(pen,
-          log = 'x',
-          col = scols(names(x$fit$penalty), 'YlOrRd'),
-          pch = 19,
-          xlab = ,
-          border = NA,
-          ylab = 'Patient',
-          horiz = T,
-          las = 2,
-          cex.names = .5)
-  title(
-    bquote(bold('Penalty per patient:')~'log'~'p('~T[i]~'|'~bold(w)~')'^alpha),
-    sub = 'Value (the lower, the worst)')
-  dev.off()
-
-
-  pplot = function(counts, i, tit) {
-
-    colors = scols(1:max(counts), palette[i])
-
-    pheatmap::pheatmap(
-      counts[order(colnames(counts)), order(colnames(counts))],
-      main = paste(tit, "expansion: w"),
-      breaks = -1:max(counts),
-      color = c('gainsboro', colors),
-      fontsize_row = 6,
-      border = NA,
-      fontsize_col = 6,
-      cellwidth = 8,
-      cellheight= 8,
-      cluster_rows = FALSE,
-      cluster_cols = FALSE,
-      file = paste('a', i , '.pdf', sep = '')
-    )
-
-    counts = sweep(counts, 2, colSums(counts), FUN="/")
-    colors = scols(seq(0.0001, 1.1, by = 0.01), palette[i])
-
-    pheatmap::pheatmap(
-      counts[order(colnames(counts)), order(colnames(counts))],
-      breaks = c(-0.00001, seq(0.0001, 1.1, 0.01)),
-      main = paste(tit, "expansion: normalized w"),
-      color = c('gainsboro', colors),
-      fontsize_row = 6,
-      border = NA,
-      fontsize_col = 6,
-      cellwidth = 8,
-      cellheight= 8,
-      cluster_rows = FALSE,
-      cluster_cols = FALSE,
-      file = paste('b', i , '.pdf', sep = '')
-    )
-  }
-
-  # Before and fter expansion
-  feat = revolver.featureMatrix(x)
-
-  pplot(x$fit$multinomial.penalty, 1, tit = 'Before')
-  pplot(DFW2Matrix(feat$consensus.explosion), 2, tit = 'After')
-
-  # DET index
-  DET = revolver_DETindex(x, n.boot = n.boot, table = T, index = DET.type)
-  min = min(c(DET[[1]]$DET.cohort, DET[[2]]$DET.cohort)) - 2
-  max = max(c(DET[[1]]$DET.cohort, DET[[2]]$DET.cohort)) + 2
-
-  pdf(file = 'c.pdf')
-
-  hist(DET[[1]]$DET.cohort, col = 'steelblue', breaks = 22, border = NA, main = bquote(bold('DET(w)')~.(DET.type)~italic('before expansion, all cohort')), ylab = NA, xlab = NA, xlim = c(min, max))
-  abline(v = median(DET[[1]]$DET.cohort), col = 'red', lty = 2, lwd = 2)
-
-  hist(DET[[2]]$DET.cohort, col = 'forestgreen', breaks = 22, border = NA, main = bquote(bold('DET(w)')~.(DET.type)~italic('after expansion, all cohort')), ylab = NA, xlab = NA, xlim = c(min, max))
-  abline(v = median(DET[[2]]$DET.cohort), col = 'red', lty = 2, lwd = 2)
-  dev.off()
-
-  jamPDF('c.pdf', 'c.pdf', layout = '1x2')
-
-  pdf(file = 'd.pdf')
-
-  barplot(sort(DET[[1]]$DET.driver),
-          col = scols(seq(0, 1, 0.01), palette[1]),
-          border = NA,
-          pch = 19,
-          xlab = NA,
-          ylab = NA,
-          main = bquote(bold('DET(w)')~.(DET.type)~italic('before expansion, per driver')),
-          horiz = T,
-          las = 2,
-          cex.names = .5)
-
-  barplot(sort(DET[[2]]$DET.driver),
-          col = scols(seq(0, 1, 0.01), palette[2]),
-          border = NA,
-          pch = 19,
-          xlab = NA,
-          ylab = NA,
-          main = bquote(bold('DET(w)')~.(DET.type)~italic('after expansion, per driver')),
-          horiz = T,
-          las = 2,
-          cex.names = .5)
-  dev.off()
-
-  jamPDF('d.pdf', 'd.pdf', layout = '1x2')
-  jamPDF(c('c.pdf', 'd.pdf'), 'c.pdf', layout = '2x1')
-
-  jamPDF(c(file, 'a1.pdf', 'b1.pdf', 'c.pdf', 'a2.pdf', 'b2.pdf'), file, layout = '3x2')
-}

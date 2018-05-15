@@ -11,20 +11,33 @@ jamPDF = function(in.files, out.file = 'jamPDF.pdf', layout = '3x3',
               paste(in.files, collapse = ' '),
               ' --nup ', layout, ' --landscape --outfile ', out.file, sep = ' ')
 
-  aa = system(cmd, intern = hide.output, ignore.stderr = TRUE)
+  # print(cmd)
+
+  # aa = system(cmd, intern = hide.output, ignore.stderr = TRUE)
+  aa = system(cmd)
 
   if(crop.white)
-    aa = system(
-      paste('pdfcrop --margins "3 3 3 3"', out.file, out.file),
-      intern = hide.output, ignore.stderr = TRUE)
+    # aa = system(
+    #   paste('pdfcrop --margins "3 3 3 3"', out.file, out.file),
+    #   intern = hide.output, ignore.stderr = TRUE)
+    aa = system(paste('pdfcrop --margins "3 3 3 3"', out.file, out.file))
+
 
   if(!is.null(page))
   {
     page = R.utils::capitalize(page)
+
+    installation = find.package('revolver')
+    cmd = paste(paste0(installation,'/inst/bin/pdfScale.sh'), '-v -r', page, out.file)
+    print(cmd)
+
+    # aa = system(
+    #   paste(
+    #     paste(installation,'/bin/pdfScale.sh', sep = ''),  '-v -r', page, out.file),
+    #   intern = hide.output, ignore.stderr = TRUE)
     aa = system(
       paste(
-        paste(GIT,'/bin/pdfScale.sh', sep = ''),  '-v -r', page, out.file),
-      intern = hide.output, ignore.stderr = TRUE)
+        paste(installation,'/bin/pdfScale.sh', sep = ''),  '-v -r', page, out.file))
 
     f = gsub(out.file, pattern = '.pdf', replacement = '')
     file.rename(paste(f, page, 'pdf', sep ='.'), paste(f, 'pdf', sep ='.'))
@@ -32,7 +45,7 @@ jamPDF = function(in.files, out.file = 'jamPDF.pdf', layout = '3x3',
 
   if(delete.original) file.remove(setdiff(in.files, out.file))
 
-  invisible(return())
+  invisible(NULL)
 }
 
 
@@ -122,23 +135,46 @@ udodev = function(file = NA){
 }
 
 
-prtTit = function(title) {
-  ncharT = nchar(title)
+mylayout.on = function(file = NA, nplots = 1, size = c(10, 10), cex = 1)
+{
+  cur.params = par()
+  cur.size = dev.size()
 
-  line = cyan(paste(rep('-', ncharT), collapse = ''))
+  if(!is.na(file))
+    pdf(file, width = size[1] * cex, height = size[2] * cex)
+  else
+  {
+    sq = ceiling(sqrt(nplots))
 
-  cat(paste('\n', line, '\n', sep = ''))
-  cat(cyan(title))
-  cat(paste('\n', line, '\n', sep = ''))
+      # size = size * sq
+      # if(any(size > cur.size))
+      # {
+      #   dev.off()
+      #
+      #   dev.new(noRStudioGD = TRUE,
+      #           width = size[1],
+      #           height = size[2])
+      # }
+
+      if(nplots > 1) par(mfrow = c(sq, sq))
+  }
+
+  dev = list(cur.params = cur.params, cur.size = cur.size, file = file, nplots = nplots)
+
+  return(dev)
 }
 
-prtHdr = function(header, ..., format = '') {
-  cat(bgBlue(paste(" [", header, "] \n")))
 
-  toPrint = list(...)
-  ntoPrint = length(toPrint)/2
-
-  for(l in seq(1, length(toPrint), 2)) cat(format, cyan(toPrint[[l]]), toPrint[[l+1]], '\n')
+mylayout.off = function(config) {
+  if(!is.na(config$file)) dev.off()
+  else {
+    if(config$nplots > 1) par(mfrow = config$cur.params$mfrow)
+#
+#     dev.off()
+#
+#     dev.new(noRStudioGD = TRUE,
+#             width = config$cur.size[1],
+#             height = config$cur.size[2])
+  }
 }
-
 

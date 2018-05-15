@@ -4,17 +4,14 @@
 \alias{revolver_compute_phylogenies}
 \title{Compute/ add CCF-based phylogenies to a REVOLVER cohort.}
 \usage{
-revolver_compute_phylogenies(x, patient, use.MI = FALSE,
-  precomputed.trees = NULL, precomputed.scores = NULL,
-  options = list(sspace.cutoff = 10000, n.sampling = 5000, overwrite = FALSE,
-  store.max = 100), verbose = FALSE)
+revolver_compute_phylogenies(x, patient, precomputed.trees = NULL,
+  precomputed.scores = NULL, options = list(sspace.cutoff = 10000,
+  n.sampling = 5000, overwrite = FALSE, store.max = 100), verbose = FALSE)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_cohort"}}
 
 \item{patient}{A patient in the cohort, for which phylogenies are created}
-
-\item{use.MI}{If MI should be used to weight each phylogenetic model (should be FALSE).}
 
 \item{precomputed.trees}{If a list a of precomputed trees is available, this list should contain their
 adjacency matrix. No computation will be carried out in this case.}

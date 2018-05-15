@@ -207,7 +207,6 @@ revolver_infoclustering = function(x,
 }
 
 
-
 #' @title Compute hierarchical clustering for a REVOLVER cohort
 #'
 #' @details

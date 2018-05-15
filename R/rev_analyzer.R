@@ -288,26 +288,14 @@ revolver_analyzer = function(cohort,
     revolver_plt_fit_by_groupn(fit, cex = 1)
   }
 
-
   setwd(current.folder)
 
-  #################### Plots
-  if(do.plots) {
-
-  pio::pioTit("Analyzer: plotting all the analysis\'s results (this might take some time ...)")
-
-  cutoff.features_annotation = options.clustering.withGL$cutoff.features_annotation,
-
-  if(do.plots) {
-    revolver_penaltyPlot(fit)
-    plot(fit, out.file = paste(cohort.name, '.fit.pdf', sep = ''), plot.stat = TRUE, layout = '1x1',  palette = 'Dark2')
-  }
   #################### Summary table of edges counts
   if(do.plots) {
     table.orderings = rev_table.orderings(fit, intelli.cutoff = 3)
     table.orderings$intelli
 
-    pdf('Orderings.pdf', width = 15)
+    pdf('REVOLVER-Orderings.pdf', width = 15)
     aa = lapply(names(table.orderings$intelli), function(w){
       gridExtra::grid.arrange(
         grid::textGrob(w),
@@ -316,7 +304,6 @@ revolver_analyzer = function(cohort,
     dev.off()
   }
 
-  }
 
   #################### Closing
   if(folder.output != '.') setwd('..')

@@ -2,11 +2,10 @@ revolver_DETindex <-
   function(x,
            n.boot = 1,
            table = F,
-           index = 'Shannon')
+           index = 'Shannon',
+           type = 'after.expansion',
+           driver.only = FALSE)
   {
-    if (is.null(x$fit))
-      stop("Fit a model first?")
-
     # require(qualvar)
     # require(vegan)
 
@@ -30,7 +29,9 @@ revolver_DETindex <-
     {
       w <- w[, -1]
 
-      DET = eval(w, index)
+      DET = eval(w, index) # empirical
+
+      # DET = 0
       npbs <- c()
 
       pb = txtProgressBar(min = 1,
@@ -38,36 +39,55 @@ revolver_DETindex <-
                           style = 3)
       pb.status = getOption('revolver.progressBar', default = TRUE)
 
-      cat(
-        cyan(
-          'Bootstrapping the DET index \n\tNon-parametric replicates n = ',
-          n.boot,
-          '\n\tIndex type: ',
-          index,
-          '\n'
-        )
-      )
-
       for (i in 1:n.boot) {
         # update progress bar
         if (pb.status)
           setTxtProgressBar(pb, i)
 
         npb = w[, sample(ncol(w), replace = TRUE)]
+
         npbs[i] <- sum(eval(npb, index))
+        # DET = DET + eval(npb, index)/n.boot
       }
 
-      cat(green(' DONE\n'))
+      close(pb)
+
+      cat(green(' DONE\n\n'))
       return(list(DET.cohort = npbs, DET.driver = DET))
     }
 
-    feat = revolver.featureMatrix(x)
-    results = list(
-      `before` = indexFun(x, w = x$fit$multinomial.penalty, n.boot, table),
-      `after` = indexFun(x, w = DFW2Matrix(feat$consensus.explosion), n.boot, table)
-    )
+    dr.indexFun = function(x, w, n, table = F)
+    {
+      w <- w[, -1]
 
-    return(results)
+      DET = eval(w, index) # empirical
+
+      return(list(DET.cohort = NULL, DET.driver = DET))
+    }
+
+
+    feat = revolver.featureMatrix(x)
+
+    if(driver.only) {
+
+      if (type == 'before.expansion')
+        return(dr.indexFun(x, w = x$fit$multinomial.penalty, n.boot, table))
+      else
+        return(dr.indexFun(x, w = DFW2Matrix(feat$consensus.explosion), n.boot, table))
+    }
+
+
+    if (type == 'before.expansion')
+      return(indexFun(x, w = x$fit$multinomial.penalty, n.boot, table))
+    else
+      return(indexFun(x, w = DFW2Matrix(feat$consensus.explosion), n.boot, table))
+
+    # results = list(
+    #   `before` = indexFun(x, w = x$fit$multinomial.penalty, n.boot, table),
+    #   `after` = indexFun(x, w = DFW2Matrix(feat$consensus.explosion), n.boot, table)
+    # )
+    #
+    # return(results)
   }
 
 

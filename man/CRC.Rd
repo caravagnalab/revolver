@@ -13,9 +13,9 @@ data(CRC)
 data(CRC.cohort)
 }
 \description{
-Driver mutations detected by Cross et al. in Nature Genetics 2018, to appear.
+Driver mutations detected by Cross et al. in a cohort of colorecta adenomas and carcinomas.
 
-Driver mutations detected by Cross et al. in Nature Genetics 2018, to appear.
+Driver mutations detected by Cross et al. in a cohort of colorecta adenomas and carcinomas.
 This dataset has already been wrapped to a REVOLVER cohort object
 }
 \examples{
@@ -27,10 +27,8 @@ print(CRC.cohort)
 
 }
 \references{
-Cross et al. (2018) Nature Genetics 2018, to appear.
-(\href{to-appear}{PubMed})
+Cross et al. (2018), to appear.
 
-Cross et al. (2018) Nature Genetics 2018, to appear.
-(\href{to-appear}{PubMed})
+Cross et al. (2018) to appear.
 }
 \keyword{datasets}

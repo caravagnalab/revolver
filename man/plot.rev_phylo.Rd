@@ -2,30 +2,21 @@
 % Please edit documentation in R/rev_phylogeny.R
 \name{plot.rev_phylo}
 \alias{plot.rev_phylo}
-\title{Plot a phylogenetic or a mutation tree for a patient.}
+\title{S3 method calling \code{\link{revolver_plt_tree}}.}
 \usage{
-\method{plot}{rev_phylo}(x, file = NA, edge.width = NA, edge.label = NA,
-  palette = "Set1", graph.cex = 1, table.cex = 1, alpha = 0.7,
-  plot.stat = FALSE, verbose = FALSE, ...)
+\method{plot}{rev_phylo}(x, file = NA, palette = "Set1", cex = 1,
+  alpha = 0.7)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_phylo"}.}
 
 \item{file}{Output file, or \code{NA}.}
 
-\item{edge.width}{Edge width}
-
-\item{edge.label}{Edge label}
-
 \item{palette}{RColorBrewer palette to colour clusters.}
 
-\item{graph.cex}{Cex for the graph.}
-
-\item{table.cex}{Cex for the table.}
+\item{cex}{Cex for the graph.}
 
 \item{alpha}{Transparency.}
-
-\item{plot.stat}{\code{TRUE} if you want to show some statistics for the tree.}
 
 \item{verbose}{Output.}
 
@@ -35,7 +26,7 @@
 Nothing
 }
 \description{
-Plot a phylogenetic or a mutation tree for a patient.
+S3 method calling \code{\link{revolver_plt_tree}}.
 }
 \examples{
 data(CRC.cohort)

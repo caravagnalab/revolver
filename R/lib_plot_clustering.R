@@ -10,6 +10,9 @@
 #' hierarchical clustering, and will color labels by group assignment.
 #'
 #' @param x A cohort object with fits and clusters.
+#' @param type What clustering should be used: "REVOLVER" is for REVOLVER clustering,
+#' "binary" or "clonality" are for occurrence-based clusterings. In any case leaves are
+#' colored according to REVOLVER's clusters.
 #' @param cex Cex for the plot
 #' @param dendogram.type Type of dendrogram (rectangle, triangle, circular)
 #' @param file Output file, if NA no file is used
@@ -19,40 +22,82 @@
 #'
 #' @examples
 #' TODO
-revolver_plt_rdendogram = function(x,
-                                   cex = 1,
-                                   dendogram.type = 'rectangle',
-                                   file = 'REVOLVER-Clusters-Dendogram.pdf')
+revolver_plt_dendogram = function(x,
+                                  type = 'REVOLVER',
+                                  cex = 1,
+                                  dendogram.type = 'rectangle',
+                                  file = NA)
 {
   obj_has_clusters(x)
 
-  args = pio:::nmfy(c('Dendogram type', 'Output file'), c(dendogram.type, file))
+  args = pio:::nmfy(c('Dendogram', 'Dendogram type', 'Output file'),
+                    c(cex, dendogram.type, file))
   pio::pioHdr('REVOLVER Plot: Dendrogram of REVOLVER clusters', args, prefix = '\t')
 
-  if (!is.na(file))
-    pdf(file, width = 10 * cex, height = 10 * cex)
+  hc = dendogram = main = sub = NULL
+
+  ##### Extract the relevant clustering object
+  if (type == 'REVOLVER')
+  {
+    hc = x$cluster$hc
+    dendogram = x$cluster$dendogram
+    main = paste("REVOLVER clustering of", x$annotation)
+    sub = paste(
+      x$cluster$hc.method,
+      ', AC = ',
+      round(hc$ac, 3),
+      '; Dendogram cut: ',
+      x$cluster$split.method,
+      sep = ''
+    )
+  }
+
+  # Binary occurrences
+  if (type == 'binary')
+  {
+    features = revolver.featureMatrix(x)
+
+    # Occurrence of mutations (binarized from avg. CCFs in features$occurrences)
+    data = features$occurrences
+    data[data > 0] = 1
+
+    data = as.matrix(data)
+    hc = cluster::agnes(stats::dist(data), method = x$cluster$hc.method)
+    dendogram = stats::as.dendrogram(hc)
+
+    main = "Clustering binary occurrences"
+    sub = "Colors: REVOLVER clusters"
+  }
+
+  # Clonal/ subclonal status
+  if (type == 'clonality')
+  {
+    features = revolver.featureMatrix(x)
+
+    data = features$occurrences.clonal.subclonal
+    hc = cluster::agnes(
+      stats::dist(features$occurrences.clonal.subclonal),
+      method = x$cluster$hc.method
+    )
+    dendogram = stats::as.dendrogram(hc)
+
+    main = "Clustering clonal/ subclonal occurrences"
+    sub = "Colors: REVOLVER clusters"
+  }
+
+  lot = mylayout.on(file, 1, c(10, 10), cex)
 
   plot_dendogram(
     hc,
-    x$cluster$dendogram,
+    dendogram,
     x$cluster$cluster,
     plot.type = dendogram.type,
-    main = paste("REVOLVER clustering of", x$annotation),
-    sub = paste(
-      'Agnes: ',
-      x$cluster$hc.method,
-      ' method with AC =',
-      round(hc$ac, 3) ,
-      '\nand ',
-      'Dendogram cut: ',
-      x$cluster$split.method,
-      sep = ''
-    ),
+    main = main,
+    sub = sub,
     colors = x$cluster$labels.colors
   )
 
-  if (!is.na(file))
-    dev.off()
+  mylayout.off(lot)
   invisible(NULL)
 }
 
@@ -74,22 +119,23 @@ revolver_plt_rdendogram = function(x,
 #' TODO
 revolver_plt_rbannerplot = function(x,
                                     cex = 1,
-                                    file = 'REVOLVER-Clusters-Bannerplot.pdf')
+                                    file = NA)
 {
   obj_has_evodistance(x)
 
   args = pio:::nmfy(c('Output file'), c(file))
   pio::pioHdr('REVOLVER Plot: Bannerplot of REVOLVER clusters', args, prefix = '\t')
 
-  if (!is.na(file))
-    pdf(file, width = 10 * cex, height = 10 * cex)
+
+  lot = mylayout.on(file, 1, c(10, 10), cex)
 
   # bannerplot associated to the custering
   cluster::bannerplot(x$cluster$hc,
                       main = 'Banner plot',
                       col = c('gainsboro', 'steelblue'))
 
-  if (!is.na(file)) dev.off()
+  mylayout.off(lot)
+
   invisible(NULL)
 }
 
@@ -116,15 +162,22 @@ revolver_plt_rbannerplot = function(x,
 revolver_plt_rclusters = function(x,
                                   cex = 1,
                                   cutoff.features_annotation = 2,
-                                  file = 'REVOLVER-Clusters-FeaturesHeatmap.pdf')
+                                  file = NA)
 {
   obj_has_clusters(x)
 
-  args = pio:::nmfy(c('Cutoff to annotate features (min. observations)', 'Output file'), c(cutoff.features_annotation, file))
-  pio::pioHdr('REVOLVER Plot: REVOLVER Cluster table with features table', args, prefix = '\t')
+  args = pio:::nmfy(
+    c(
+      'Cutoff to annotate features (min. observations)',
+      'Output file'
+    ),
+    c(cutoff.features_annotation, file)
+  )
+  pio::pioHdr('REVOLVER Plot: REVOLVER Cluster table with features table',
+              args,
+              prefix = '\t')
 
-  if (!is.na(file))
-    pdf(file, width = 10 * cex, height = 10 * cex)
+  lot = mylayout.on(file, 1, c(20, 20), cex)
 
   #################### Features plot -- the most important one?
   revolver_featurePlot(
@@ -135,8 +188,7 @@ revolver_plt_rclusters = function(x,
     file = file
   )
 
-  if (!is.na(file))
-    dev.off()
+  mylayout.off(lot)
   invisible(NULL)
 }
 
@@ -154,11 +206,9 @@ revolver_plt_rclusters = function(x,
 #'
 #' @param x A cohort object with fits and clusters.
 #' @param cex Cex for the plot
-#' @param dendogram.type Type of dendrogram (rectangle, triangle, circular)
+#' @param type Compare against "binary" or "clonality" (see Description).
+#' @param dendogram.type Type of dendrogram ("rectangle", "triangle", "circular")
 #' @param file Output file, if NA no file is used
-#' @param jamPDF If TRUE, the produced figures will be jammed. This makes sense
-#' only if you set file not NA.
-#' @param jam.layout Layout to jam PDFS, e.g. '2x1'
 #'
 #' @return nothing
 #' @export
@@ -169,18 +219,15 @@ revolver_plt_compare_dendograms = function(x,
                                            cex = 1,
                                            type = 'binary',
                                            dendogram.type = 'rectangle',
-                                           file = paste('REVOLVER-Compare-Dendogram', type, '.pdf', sep = ''),
-                                           jamPDF = FALSE,
-                                           jam.layout = '2x1')
+                                           file = NA)
 {
   obj_has_clusters(x)
 
-  args = pio:::nmfy(c('Comparison against', 'Dendrogram type', 'Output file', 'Jam output PDFs', 'Layout for jam'),
-                    c(type, dendogram.type, file, jamPDF, jam.layout))
+  args = pio:::nmfy(
+    c('Comparison against', 'Dendrogram type', 'Output file'),
+    c(type, dendogram.type, file)
+  )
   pio::pioHdr('REVOLVER Dendrogram Plot', args, prefix = '\t')
-
-  if (!is.na(file))
-    pdf(file, width = 10 * cex, height = 10 * cex)
 
   # ##############################
   # #### Compare against other clusterings via tanglegram
@@ -205,7 +252,7 @@ revolver_plt_compare_dendograms = function(x,
     data[data > 0] = 1
 
     data = as.matrix(data)
-    hc2 = cluster::agnes(stats::dist(occurrences.binarized), method = hc.method)
+    hc2 = cluster::agnes(stats::dist(data), method = hc.method)
   }
 
   # Clonal/ subclonal status
@@ -220,15 +267,14 @@ revolver_plt_compare_dendograms = function(x,
   dendogram2 = stats::as.dendrogram(hc2)
   dendextend::labels_cex(dendogram2) = 0.5
 
-  # Plotting comparative clusterings via tanglegrams
-  pdf(file, width = 10 * cex, height = 10 * cex)
-
   dend_list = dendextend::dendlist(dendogram, dendogram2)
   ent = round(dendextend::entanglement(dend_list), 4)
 
   lbl = ifelse(type == 'binary',
                "Binary Occurrences",
                "Clonal/ Subclonal Occurrences")
+
+  lot = mylayout.on(file, 1, c(10, 10), cex)
 
   # Tanglegram
   dendextend::tanglegram(
@@ -245,25 +291,8 @@ revolver_plt_compare_dendograms = function(x,
     sub = paste("entanglement =", ent)
   )
 
-  pio::pioTit(paste('Dendrogram of alternative clustering '))
+  mylayout.off(lot)
 
-  # Dendogram of the alternative, coloured with revolver
-  plot_dendogram(
-    hc2,
-    dendogram2,
-    x$cluster$clusters,
-    plot.type = dendogram.type,
-    main = lbl,
-    sub = 'Colors: REVOLVER\'s clusters',
-    colors = x$cluster$labels.colors
-  )
-
-  if (!is.na(file))
-    dev.off()
-  if (jam.PDF)
-    jamPDF(in.files = file,
-           out.file = file,
-           layout = jam.layout)
 
   invisible(NULL)
 }
@@ -287,7 +316,7 @@ revolver_plt_compare_dendograms = function(x,
 #' TODO
 revolver_plt_evodistance = function(x,
                                     cex = 1,
-                                    file = 'REVOLVER-Clusters-EvolutionaryDistance.pdf')
+                                    file = NA)
 {
   obj_has_clusters(x)
 
@@ -300,7 +329,7 @@ revolver_plt_evodistance = function(x,
   features = revolver.featureMatrix(x)
 
   # Annotate each sample with the cluster ID
-  annotations.samples = data.frame(cluster = x$cluster$cluster$clusters)
+  annotations.samples = data.frame(cluster = x$cluster$clusters)
   annotations.samples = annotations.samples[rownames(features$occurrences), , drop = FALSE]
 
   pheatmap::pheatmap(
@@ -354,20 +383,25 @@ revolver_plt_evodistance = function(x,
 revolver_plt_group_trajectories = function(x,
                                            cex = 1,
                                            cutoff.edges_annotation = 3,
-                                           file = 'REVOLVER-Clusters-TrajectoriesConsensus.pdf',
+                                           file = NA,
                                            jamPDF = FALSE,
                                            jam.layout = '2x1')
 {
   obj_has_clusters(x)
 
-  args = pio:::nmfy(c('Cutoff for edges to be annotated (min. occurrences)', 'Output file'), c(cutoff.edges_annotation, file))
+  args = pio:::nmfy(
+    c(
+      'Cutoff for edges to be annotated (min. occurrences)',
+      'Output file'
+    ),
+    c(cutoff.edges_annotation, file)
+  )
   pio::pioHdr('REVOLVER Plot: Trajectories per cluster', args, prefix = '\t')
 
-
   groups = x$cluster$clusters
+  ngroups = length(unique(groups))
 
-  if (!is.na(file))
-    pdf(file, width = 10 * cex, height = 10 * cex)
+  lot = mylayout.on(file, ngroups, c(15, 15), cex)
 
   for (g in unique(groups))
     revolver_plotrj_consensus(
@@ -375,25 +409,28 @@ revolver_plt_group_trajectories = function(x,
       patients = names(groups[groups == g]),
       min.cutoff = cutoff.edges_annotation,
       ML = TRUE,
-      file = NA,
       annotation = paste("Cluster", g),
       col.annotation = x$cluster$labels.colors[as.character(g)]
     )
 
-  revolver_plotrj_consensus(
-    x,
-    min.cutoff = cutoff.edges_annotation,
-    ML = TRUE,
-    file = NA,
-    annotation = paste("All cohort")
-  )
+  mylayout.off(lot)
 
-  if (!is.na(file))
-    dev.off()
-  if (jam.PDF)
-    jamPDF(in.files = file,
-           out.file = file,
-           layout = jam.layout)
+  # lot = mylayout.on(file, 1, c(30, 30), cex)
+  #
+  # revolver_plotrj_consensus(
+  #   x,
+  #   min.cutoff = cutoff.edges_annotation,
+  #   ML = TRUE,
+  #   file = NA,
+  #   annotation = paste("All cohort")
+  # )
+  #
+  # mylayout.off(lot)
+
+  # if (jam.PDF)
+  #   jamPDF(in.files = file,
+  #          out.file = file,
+  #          layout = jam.layout)
 
   invisible(NULL)
 }
@@ -408,7 +445,7 @@ revolver_plt_group_trajectories = function(x,
 #'
 #' @param x A cohort object with fits and clusters.
 #' @param cex Cex for the plot.
-#' @param file.prefix Each filename will be prefixed by this string,
+#' @param file.suggix Each filename will be suffixed by this string,
 #' and annotated also with the cluster ID.
 #'
 #' @return nothing
@@ -418,16 +455,21 @@ revolver_plt_group_trajectories = function(x,
 #' TODO
 revolver_plt_fit_by_group = function(x,
                                      cex = 1,
-                                     file.prefix = 'REVOLVER-Clusters-TrajectoriesConsensus.pdf')
+                                     file.suffix = 'REVOLVER-Clusters-FitsPerCluster.pdf')
 {
   obj_has_clusters(x)
 
-  args = pio:::nmfy(c('Output file'), c(file))
-  pio::pioHdr('REVOLVER Plot: Fits divided by cluster', args, prefix = '\t')
+  args = pio:::nmfy()
+  pio::pioHdr(
+    'REVOLVER Plot: Fits divided by cluster',
+    c(`Output file(s) will have suffix` = file.suffix),
+    prefix = '\t'
+  )
 
+  features = revolver.featureMatrix(x)
 
   # Annotate each sample with the cluster ID
-  annotations.samples = data.frame(cluster = x$cluster$cluster$clusters)
+  annotations.samples = data.frame(cluster = x$cluster$clusters)
   annotations.samples = annotations.samples[rownames(features$occurrences), , drop = FALSE]
 
   groups = split(annotations.samples, f = annotations.samples$cluster)
@@ -435,7 +477,7 @@ revolver_plt_fit_by_group = function(x,
 
   files = sapply(1:length(groups),
                  function(w) {
-                   fname = paste('Cluster', names(groups)[w], file, sep = '-')
+                   fname = paste('Cluster', names(groups)[w], file.suffix, sep = '-')
 
                    pio::pioTit(paste("Plotting", fname))
 
@@ -570,6 +612,7 @@ plot_dendogram = function(hc,
          type = plot.type,
          ...)
 
+    labels = rep("", length(labels))
     legend(
       'topleft',
       legend = labels,
@@ -597,9 +640,15 @@ plot_dendogram = function(hc,
   })
 }
 
-plot_tanglegram = function(x, versus = 'binary', hc.method = 'ward', dendogram, hc, file = NA, width = 10, height = 10) {
-
-  if(versus == 'binary') {
+plot_tanglegram = function(x,
+                           versus = 'binary',
+                           hc.method = 'ward',
+                           dendogram,
+                           hc,
+                           file = NA,
+                           width = 10,
+                           height = 10) {
+  if (versus == 'binary') {
     features = revolver.featureMatrix(x)$occurrences
     features[features > 0] = 1
     hc = cluster::agnes(dist(as.matrix(features)), method = hc.method)
@@ -610,7 +659,7 @@ plot_tanglegram = function(x, versus = 'binary', hc.method = 'ward', dendogram, 
     main = 'Binary'
   }
 
-  if(versus == 'clonal-subclonal') {
+  if (versus == 'clonal-subclonal') {
     features = revolver.featureMatrix(x)$occurrences.clonal.subclonal
     hc = cluster::agnes(dist(features), method = hc.method)
 
@@ -623,37 +672,52 @@ plot_tanglegram = function(x, versus = 'binary', hc.method = 'ward', dendogram, 
   xdendogram = x$cluster$dendogram
   dend_list <- dendextend::dendlist(xdendogram, dendogram)
 
-  if(!is.na(file)) pdf(file, width = width, height = height)
+  if (!is.na(file))
+    pdf(file, width = width, height = height)
 
-  dendextend::tanglegram(xdendogram, dendogram,
-                         highlight_distinct_edges = FALSE, # Turn-off dashed lines
-                         common_subtrees_color_lines = TRUE, # Turn-off line colors
-                         common_subtrees_color_branches = TRUE, # Color common branches
-                         cex_main = 1,
-                         main = main,
-                         sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
+  dendextend::tanglegram(
+    xdendogram,
+    dendogram,
+    highlight_distinct_edges = FALSE,
+    # Turn-off dashed lines
+    common_subtrees_color_lines = TRUE,
+    # Turn-off line colors
+    common_subtrees_color_branches = TRUE,
+    # Color common branches
+    cex_main = 1,
+    main = main,
+    sub = paste("entanglement =", round(
+      dendextend::entanglement(dend_list), 4
+    ))
   )
 
-  if(!is.na(file)) dev.off()
+  if (!is.na(file))
+    dev.off()
 
   return(list(hc = hc, dendogram = dendogram))
 }
 
 
 ########### Plot ML estimates for the information transfer
-revolver_plotrj_consensus = function(x, annotation = NA, col.annotation = 'white',
-                                     patients = x$patients, min.cutoff = 3, ML = TRUE,
-                                     file = NA, ...)
+revolver_plotrj_consensus = function(x,
+                                     annotation = NA,
+                                     col.annotation = 'white',
+                                     patients = x$patients,
+                                     min.cutoff = 3,
+                                     ML = TRUE,
+                                     ...)
 {
-  if(is.null(x$fit)) stop('Fit a model first, stopping.')
+  if (is.null(x$fit))
+    stop('Fit a model first, stopping.')
 
   features = revolver.featureMatrix(x, patients = patients)
   inf.transf = features$consensus.explosion
 
-  if(min.cutoff >= max(inf.transf$count)) min.cutoff = max(inf.transf$count) - 1
+  if (min.cutoff >= max(inf.transf$count))
+    min.cutoff = max(inf.transf$count) - 1
   inf.transf = inf.transf[inf.transf$count > min.cutoff, , drop = FALSE]
 
-  if(ML) {
+  if (ML) {
     inf.transf = split(inf.transf, f = inf.transf$to)
     inf.transf = lapply(inf.transf, function(w) {
       w[which(w$count == max(w$count)), , drop = FALSE]
@@ -665,16 +729,19 @@ revolver_plotrj_consensus = function(x, annotation = NA, col.annotation = 'white
   occ.table = clonal.subclonal.table(x)
 
   # Augment labels
-  lbify = function(w){
-    if(w == 'GL') return(w)
-    else paste(w, ' [', occ.table[w, 'Clonal'], ', ', occ.table[w, 'SubClonal']  ,']', sep = '')
+  lbify = function(w) {
+    if (w == 'GL')
+      return(w)
+    else
+      paste(w, ' [', occ.table[w, 'Clonal'], ', ', occ.table[w, 'SubClonal']  , ']', sep = '')
   }
 
-  edgeify = function(w){
+  edgeify = function(w) {
     w[1] = strsplit(w[1], split = ' ')[[1]][1]
     w[2] = strsplit(w[2], split = ' ')[[1]][1]
 
-    inf.transf[inf.transf$from == w[1] & inf.transf$to == w[2], 'count']
+    inf.transf[inf.transf$from == w[1] &
+                 inf.transf$to == w[2], 'count']
   }
 
   colnames(adj_matrix) = sapply(colnames(adj_matrix), lbify)
@@ -690,7 +757,7 @@ revolver_plotrj_consensus = function(x, annotation = NA, col.annotation = 'white
 
   # we work on the layout -- tree if it has GL
   lay = NULL
-  if('GL' %in%  igraph::V(G)$name) {
+  if ('GL' %in%  igraph::V(G)$name) {
     lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
     rownames(lay) =  igraph::V(G)$name
   }
@@ -698,42 +765,54 @@ revolver_plotrj_consensus = function(x, annotation = NA, col.annotation = 'white
   # TS = wrapTS(adj_matrix)
   # for(node in TS) lay = fixLayer(node, lay, offset = 2)
 
-  if(!is.na(file)) pdf(file, ...)
-  plot(G,
-       vertex.frame.color = 'white',
-       edge.arrow.size = .5,
-       edge.color = 'black',
-       edge.label = edLabel,
-       layout = lay)
+  plot(
+    G,
+    vertex.frame.color = 'white',
+    edge.arrow.size = .5,
+    edge.color = 'black',
+    edge.label = edLabel,
+    layout = lay
+  )
   title(main = 'Information transfer (consensus)')
 
-  legend('topleft',  title = 'Parameters',
-         legend = as.expression(
-           c(
-             bquote(italic(n) == ~ .(length(patients)) ~ '(patients)' ),
-             bquote(rho == ~ .(min.cutoff) ~ '(min. freq.)'),
-             bquote(ML == ~ .(as.character(ML)) ~ '(MLE)')
-           )),
-         pch = 19,
-         col = c('forestgreen'),
-         bg = add.alpha('forestgreen', .3),
-         box.col = 'white'
+  legend(
+    'topleft',
+    title = 'Parameters',
+    legend = as.expression(c(
+      bquote(italic(n) == ~ .(length(patients)) ~ '(patients)'),
+      bquote(rho == ~ .(min.cutoff) ~ '(min. freq.)'),
+      bquote(ML == ~ .(as.character(ML)) ~ '(MLE)')
+    )),
+    pch = 19,
+    col = c('forestgreen'),
+    bg = add.alpha('forestgreen', .3),
+    box.col = 'white'
   )
 
-  legend('topright', legend = annotation, bg = add.alpha(col.annotation, .7), pch = 19,  box.col = 'white')
-
-  if(!is.na(file)) dev.off()
+  legend(
+    'topright',
+    legend = annotation,
+    bg = add.alpha(col.annotation, .7),
+    pch = 19,
+    box.col = 'white'
+  )
 }
 
 
 #################### Features plot -- the most important one for clustering etc.
-revolver_featurePlot = function(x, cutoff.features_annotation = 2,
-                                file = NA, width = 20, height = 15, device = 'quartz',
-                                annotate.alterations = NA, clinical.covariates = NA)
+revolver_featurePlot = function(x,
+                                cutoff.features_annotation = 2,
+                                file = NA,
+                                width = 20,
+                                height = 15,
+                                device = 'quartz',
+                                annotate.alterations = NA,
+                                clinical.covariates = NA)
 {
-
-  if(is.null(x$fit)) stop('Fit a model first, stopping.')
-  if(is.null(x$cluster)) stop('Cluster your cohort first, stopping.')
+  if (is.null(x$fit))
+    stop('Fit a model first, stopping.')
+  if (is.null(x$cluster))
+    stop('Cluster your cohort first, stopping.')
 
   # Obvious things that we need for this plot
   clusters = x$cluster
@@ -743,7 +822,7 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
   hc.method = x$cluster$hc$method
   labels.colors = x$cluster$labels.colors
 
-  if(!all(is.na(annotate.alterations))) {
+  if (!all(is.na(annotate.alterations))) {
     features$occurrences = features$occurrences[, annotate.alterations, drop = FALSE]
   }
   features$occurrences = features$occurrences[, names(sort(colSums(features$occurrences), decreasing = T))]
@@ -758,16 +837,19 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
   # Featured as edges: get all edges in at least cutoff.features_annotation patients; if required remove GL
   which.features = features$consensus.explosion[features$consensus.explosion$count > cutoff.features_annotation, , drop  = F]
 
-  if(!all(is.na(annotate.alterations))) {
+  if (!all(is.na(annotate.alterations))) {
     annotate.alterations = c(annotate.alterations, 'GL') # We add germline
 
-    which.features = which.features[
-      which.features$from %in% annotate.alterations &
-        which.features$to %in% annotate.alterations, , drop = FALSE]
+    which.features = which.features[which.features$from %in% annotate.alterations &
+                                      which.features$to %in% annotate.alterations, , drop = FALSE]
   }
 
-  if(!use.GL) which.features = which.features[which.features$from != 'GL', , drop = FALSE]
-  cat(cyan('Features that will be annotated [ use.GL ='), use.GL, cyan(']'), '\n')
+  if (!use.GL)
+    which.features = which.features[which.features$from != 'GL', , drop = FALSE]
+  cat(cyan('Features that will be annotated [ use.GL ='),
+      use.GL,
+      cyan(']'),
+      '\n')
   print(which.features)
 
   edges.annotation = features$edges.explosion[, which.features$edge, drop = FALSE]
@@ -775,13 +857,14 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
 
   annotations.samples = cbind(annotations.samples, edges.annotation)
 
-  if(!all(is.na(clinical.covariates))) annotations.samples = cbind(annotations.samples, clinical.covariates)
+  if (!all(is.na(clinical.covariates)))
+    annotations.samples = cbind(annotations.samples, clinical.covariates)
 
   # rownames(clinical.covariates) %in% rownames(annotations.samples)
 
-  colors.edges.annotation = sapply(
-    colnames(edges.annotation),
-    function(w) list(c('0' = 'gainsboro', '1' = 'darkgray')))
+  colors.edges.annotation = sapply(colnames(edges.annotation),
+                                   function(w)
+                                     list(c('0' = 'gainsboro', '1' = 'darkgray')))
 
   numbers.matrix = features$clonal.status[, colnames(features$occurrences), drop = FALSE]
   numbers.matrix[numbers.matrix == 1] = '\u25a0'
@@ -789,54 +872,88 @@ revolver_featurePlot = function(x, cutoff.features_annotation = 2,
 
 
   # device
-  if(!is.na(file)) dodev(width = width, height = height, device = device)
+  if (!is.na(file))
+    dodev(width = width,
+          height = height,
+          device = device)
 
-  setHook("grid.newpage", function() grid::pushViewport(grid::viewport(x=1,y=1,width=0.9, height=0.9, name="vp", just=c("right","top"))), action="prepend")
+  setHook("grid.newpage", function()
+    grid::pushViewport(
+      grid::viewport(
+        x = 1,
+        y = 1,
+        width = 0.9,
+        height = 0.9,
+        name = "vp",
+        just = c("right", "top")
+      )
+    ), action = "prepend")
 
 
-  pheatmap::pheatmap(features$occurrences,
-                     cluster_cols = F,
-                     cluster_rows = as.hclust(hc),
-                     # clustering_distance_rows = dist.obj,
-                     clustering_method = ifelse(hc.method == 'ward', 'ward.D2', hc.method),
-                     color = c("white", scols(1:9, "Blues")),
-                     breaks = seq(0, 1.1, 0.1),
-                     # main = "Input data",
-                     annotation_row = annotations.samples,
-                     display_numbers = numbers.matrix,
-                     number_color = 'orange',
-                     # legend_breaks = unique(annotations.samples$cluster),
-                     annotation_legend = FALSE,
-                     # annotation_col = annotations.cols,
-                     annotation_colors = append(list(cluster = labels.colors), colors.edges.annotation),
-                     # cutree_rows = nGroups,
-                     treeheight_row = max(hc$height)/1.5,
-                     cellwidth = 10, cellheight = 12,
-                     na_col = 'gainsboro',
-                     legend = TRUE
+  pheatmap::pheatmap(
+    features$occurrences,
+    cluster_cols = F,
+    cluster_rows = as.hclust(hc),
+    # clustering_distance_rows = dist.obj,
+    clustering_method = ifelse(hc.method == 'ward', 'ward.D2', hc.method),
+    color = c("white", scols(1:9, "Blues")),
+    breaks = seq(0, 1.1, 0.1),
+    # main = "Input data",
+    annotation_row = annotations.samples,
+    display_numbers = numbers.matrix,
+    number_color = 'orange',
+    # legend_breaks = unique(annotations.samples$cluster),
+    annotation_legend = FALSE,
+    # annotation_col = annotations.cols,
+    annotation_colors = append(list(cluster = labels.colors), colors.edges.annotation),
+    # cutree_rows = nGroups,
+    treeheight_row = max(hc$height) / 1.5,
+    cellwidth = 10,
+    cellheight = 12,
+    na_col = 'gainsboro',
+    legend = TRUE
   )
 
 
   setHook("grid.newpage", NULL, "replace")
 
-  params = paste('use.GL =', x$cluster$distances.params['use.GL'], '& transitive.closure =', x$cluster$distances.params['transitive.closure'])
+  params = paste(
+    'use.GL =',
+    x$cluster$distances.params['use.GL'],
+    '& transitive.closure =',
+    x$cluster$distances.params['transitive.closure']
+  )
 
   grid::grid.text(
-    bquote(bold('Distance ')~italic(h)~' : '~.(params)~bold('  Clustering : ')~.(hc.method)~ ' / '~.(x$cluster$split.method)~' / k ='~.(x$cluster$k)~""),
-    y=-0.07, gp=grid::gpar(fontsize=16))
+    bquote(
+      bold('Distance ') ~ italic(h) ~ ' : ' ~ .(params) ~ bold('  Clustering : ') ~
+        .(hc.method) ~ ' / ' ~ .(x$cluster$split.method) ~ ' / k =' ~ .(x$cluster$k) ~
+        ""
+    ),
+    y = -0.07,
+    gp = grid::gpar(fontsize = 16)
+  )
+
+  grid::grid.text(bquote(bold('REVOLVER Clusters : ') ~ .(x$annotation)),
+                  y = 0.97,
+                  gp = grid::gpar(fontsize = 16))
 
   grid::grid.text(
-    bquote(bold('REVOLVER Clusters : ')~.(x$annotation)),
-    y=0.97, gp=grid::gpar(fontsize=16))
+    bquote(bold('Left : ') ~ .('Evolutionary trajectories')),
+    x = -0.07,
+    rot = 90,
+    gp = grid::gpar(fontsize = 16)
+  )
 
   grid::grid.text(
-    bquote(bold('Left : ')~.('Evolutionary trajectories')),
-    x=-0.07, rot=90, gp=grid::gpar(fontsize=16))
+    bquote(
+      bold('Right : ') ~ .('Input data (mean CCF value, \u25a0 is clonal)')
+    ),
+    x = 0.97,
+    rot = 270,
+    gp = grid::gpar(fontsize = 16)
+  )
 
-  grid::grid.text(
-    bquote(bold('Right : ')~.('Input data (mean CCF value, \u25a0 is clonal)')),
-    x=0.97, rot=270, gp=grid::gpar(fontsize=16))
-
-  if(!is.na(file)) udodev(file = file)
+  if (!is.na(file))
+    udodev(file = file)
 }
-
