@@ -1,11 +1,3 @@
-# nmfy = function(...)
-# {
-#   l = list(...)
-#   # print(l)
-#   print(match.call())
-#   # print(match.arg(arg = '...', choices = '...'))
-# }
-
 revolver_version = function()
 {
   REVOLVER_VERSION_NUMBER = "1.0"
@@ -19,6 +11,9 @@ revolver_version = function()
 }
 
 
+
+
+####### Functions to check if the objetc has what it should
 obj_has_clusters = function(x)
 {
   if(is.null(x$cluster))
@@ -52,13 +47,14 @@ obj_has_jackknife = function(x)
 }
 
 
+#
 saveFile = function(descr, fname, ...)
 {
   save(..., file = fname)
 
   if(!is.na(descr))
   {
-    cat(crayon::cyan(descr), '\n')
+    pio::pioHdr("REVOLVER Save file", toPrint = c(`What`= descr), sep = '\t -')
 
     stat = file.info(fname, extra_cols = FALSE)
     stat$size = utils:::format.object_size(stat$size, "auto")
@@ -66,7 +62,7 @@ saveFile = function(descr, fname, ...)
     stat$ctime = stat$atime = NULL
 
     print(stat)
-    cat(crayon::cyan("Path:"), getwd(), '\n')
+    pio::pioStr("Path:", getwd(), suffix = '\n')
   }
 
 }

@@ -250,7 +250,7 @@ all.possible.trees = function(
   if(!is.null(sglt) && !is.null(altn)) comb =  cbind(altn, sglt)
 
 
-  pb = txtProgressBar(min = 1,
+  pb = txtProgressBar(min = 0,
                       max = nrow(comb),
                       style = 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
@@ -316,11 +316,7 @@ reverse.mapping = function(M, map, from = rownames(M), cols = TRUE, rows = TRUE)
 
 rankTrees = function(TREES, MI.table, structural.score)
 {
-  # cat('* Computing score for', length(TREES),'trees\n')
-
-
-
-  pb = txtProgressBar(min = 1,
+  pb = txtProgressBar(min = 0,
                       max = length(TREES),
                       style = 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
@@ -339,31 +335,26 @@ rankTrees = function(TREES, MI.table, structural.score)
         if(all(is.null(structural.score))) val = prod(M.entries)
         else val = prod(M.entries) * structural.score[i]
 
+        # print(paste(prod(M.entries), sum(log(M.entries))))
+
+        if(any(M.entries == 0))
+        {
+          n = sum(M.entries == 0)
+          M.entries[M.entries == 0] = 1e-9
+
+          # cat("\nMI correction for", n, "entries equal 0; set equal to 1e-9.", prod(M.entries))
+
+          warning("Usud MI correction for", n, "entries equal 0; set equal to 1e-9.")
+        }
+#
+#         print(TREES[[i]])
+#         print(M)
+#         print(M.entries)
+#         readline("")
+
         MI.TREES = c(MI.TREES, val)
   }
   close(pb)
-
-  # MI.TREES = sapply(
-  #
-  #   function(x)
-  #   {
-  #     # if(pb.status) cat('@ ', x, '\r')
-  #     if (pb.status) setTxtProgressBar(pb, i)
-  #
-  #     M = DataFrameToMatrix(TREES[[x]])
-  #     M = M[colnames(MI.table), colnames(MI.table)]
-  #
-  #     # print(TREES[[x]])
-  #     # print(M)
-  #     # print(structural.score[x])
-  #     M.entries = MI.table[which(M > 0, arr.ind = TRUE)]
-  #     # print(M.entries)
-  #
-  #     # M = hadamard.prod(M, MI.table)
-  #     if(all(is.null(structural.score))) prod(M.entries)
-  #     else prod(M.entries) * structural.score[x]
-  #   })
-
 
   cat('Scores range from ', max(MI.TREES), '(max) to', min(MI.TREES), '(min)\n')
   # print(head(sort(table(MI.TREES), decreasing = T)))

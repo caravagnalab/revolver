@@ -5,7 +5,7 @@
 \title{Plot data and trees for a REVOLVER cohort.}
 \usage{
 \method{plot}{rev_cohort}(x, patients = x$patients, max.phylogenies = 12,
-  cex = 1, file = "REVOLVER-cohort-data_trees_scores.pdf")
+  cex = 1)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_cohort"}.}

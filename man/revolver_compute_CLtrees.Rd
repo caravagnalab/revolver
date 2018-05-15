@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev_cohort.R
 \name{revolver_compute_CLtrees}
 \alias{revolver_compute_CLtrees}
-\title{Compute/ add CCF-based mutation trees to a REVOLVER cohort.}
+\title{Compute/ add mutation trees to a REVOLVER cohort.}
 \usage{
 revolver_compute_CLtrees(x, patient, precomputed.trees = NULL,
   precomputed.scores = NULL, options = list(sspace.cutoff = 10000,

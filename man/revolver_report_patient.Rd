@@ -4,8 +4,8 @@
 \alias{revolver_report_patient}
 \title{Generate PDF report for a patient's data and trees}
 \usage{
-revolver_report_patient(x, patient, cex = 1,
-  file = paste0("REVOLVER-report-patient-", patient, ".pdf"))
+revolver_report_patient(x, patient, cex = 1, max.phylogenies = 12,
+  file = paste0("REVOLVER-report-patient-data-models-", patient, ".pdf"))
 }
 \arguments{
 \item{x}{An object of class \code{"rev_cohort"}}
@@ -13,6 +13,8 @@ revolver_report_patient(x, patient, cex = 1,
 \item{patient}{The patient to plot}
 
 \item{cex}{Cex for graphics}
+
+\item{max.phylogenies}{Max number of trees to plot.}
 
 \item{file}{Output file, cannot be NA.}
 }

@@ -296,8 +296,6 @@ enumerate.clones <- function(v, sample=NULL, variants=NULL,
 }
 
 
-
-
 # REQUIRED
 determine.subclone <- function(v, r){
     rownames(v) = v$lab
@@ -709,46 +707,9 @@ estimate.clone.vaf <- function(v, cluster.col.name='cluster',
 }
 
 
-#' # REQUIRED BUT I FORCED ITS REMOVAL AS IT WAS ALWAYS EXPORTED IN OUR PACKAGE
-#' get.clonevol.colors = function(num.colors, strong.color=FALSE) {
-#'     colors = c('#cccccc',
-#'                #'#b3b3b3',
-#'                #'#999999',
-#'                '#a6cee3', '#b2df8a', '#cab2d6','#ff99ff', '#fdbf6f', '#fb9a99',
-#'                #'#bf812d',
-#'                '#bbbb77',
-#'                '#cf8d30',
-#'                '#41ae76', '#ff7f00',
-#'                '#3de4c5',
-#'                #'#aaaa55',
-#'                '#ff1aff',
-#'                #'#c51b7d',
-#'                '#9933ff', '#3690c0','#8c510a', '#666633', '#54278f',
-#'                '#e6e600',
-#'                '#e31a1c', '#00cc00', '#0000cc', '#252525',
-#'                #'#ef6548',
-#'                '#fccde5',  '#d9d9d9',
-#'                #'#33a02c', '#3f007d', '#1f78b4',
-#'                '#f0ecd7', '#ffffb3',
-#'                #'#ffcc00',
-#'                #'#fca27e', '#fb8072',
-#'                '#ffff00', rep('#e5f5f9',10000))
-#'     if(strong.color){
-#'         colors = c('#e41a1c', '#377eb8', '#4daf4a', '#984ea3',
-#'             '#ff7f00', 'black', 'darkgray', rep('lightgray',10000))
-#'         colors[1:3] = c('red', 'blue', 'green')
-#'     }
-#'     if (num.colors > length(colors)){
-#'         stop('ERROR: Not enough colors!\n')
-#'     }else{
-#'         return(colors[1:num.colors])
-#'     }
-#' }
-
-
 
 # REQUIRED
-subclonal.test <- function(vaf.col.name, parent.cluster, sub.clusters=NULL,
+subclonal.test = function(vaf.col.name, parent.cluster, sub.clusters=NULL,
                            boot=NULL, cdf=NULL, min.cluster.vaf=0, alpha=0.05,
                            alternative='greater'){
   # debug
@@ -806,7 +767,8 @@ subclonal.test <- function(vaf.col.name, parent.cluster, sub.clusters=NULL,
       #cat(vaf.col.name, parent.cluster, '\n')
       #print(sub.clusters)
     }
-    zz <<- free.vaf
+    # zz <<- free.vaf
+    zz = free.vaf
     zero.vaf = 0
     # p = probability that clone has non-negative ccf
     # also equal p-value of test to reject Ho: ccf < 0

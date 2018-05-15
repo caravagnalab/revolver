@@ -6,10 +6,14 @@
 \title{Plot REVOLVER fits for a subset of patients in the cohort.}
 \usage{
 \method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1,
-  file = "REVOLVER-cohort-fits.pdf")
+  file = "REVOLVER-cohort-fits.pdf", jam.options = list(layout = "1x1", page
+  = "none", crop.white = FALSE, delete.original = FALSE, hide.output = FALSE,
+  ignore.stderr = TRUE))
 
 \method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1,
-  file = "REVOLVER-cohort-fits.pdf")
+  file = "REVOLVER-cohort-fits.pdf", jam.options = list(layout = "1x1", page
+  = "none", crop.white = FALSE, delete.original = FALSE, hide.output = FALSE,
+  ignore.stderr = TRUE))
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}
@@ -17,6 +21,8 @@
 \item{patients}{The patients to plot, default is all the one available.}
 
 \item{cex}{Scale cex for graphics}
+
+\item{jam.options}{Options for jamming PDFs.}
 
 \item{plot.stat}{Set it to \code{TRUE} to visualize also some statistics about each tree}
 
@@ -55,5 +61,5 @@ on a set of patients (default all).
 fit = revolver_fit(CRC.cohort)
 plot(fit, "adenoma_3")
 data(Breast.fit)
-plot.rev_cohort_fit(Breast.fit, patients = Breast.fit$patients[1:10])
+plot.rev_cohort_fit(Breast.fit, patients = Breast.fit$patients[1:4])
 }

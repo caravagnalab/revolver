@@ -21,9 +21,8 @@ print.rev_cohort_fit = function(x)
 #' Iterative plotting functions that scans a cohort and runs \code{\link{revolver_report_fit_patient}}
 #' on a set of patients (default all).
 #'
-#' @param x An object of class \code{"rev_cohort"}
+#' @param x An object of class \code{"rev_cohort_fit"}
 #' @param patients The patients to plot, default is all the one available.
-#' @param max.phylogenies How many trees should be computed for each patient
 #' @param cex Scale cex for graphics
 #'
 #' @return nothing
@@ -32,20 +31,18 @@ print.rev_cohort_fit = function(x)
 #'
 #' @examples
 #' data(Breast.fit)
-#' plot.rev_cohort_fit(Breast.fit, patients = Breast.fit$patients[1:10])
+#' plot.rev_cohort_fit(Breast.fit, patients = Breast.fit$patients[1:4])
 plot.rev_cohort_fit = function(x,
                            patients = x$patients,
-                           cex = 1,
-                           file = "REVOLVER-cohort-fits.pdf")
+                           cex = 1)
 {
   obj_has_trees(x)
-  plot.stat = TRUE
 
   pio::pioHdr('REVOLVER Plot: fits (tree, trajectories, information transfer)',
-              pio:::nmfy(
-                c('Patients',"Output file"),
-                c(paste(patients, collapse = ', '), max.phylogenies, plot.stat, file)
-              ))
+              c(
+                `Patients` = paste(patients, collapse = ', ')
+              ),
+              prefix = '\t -')
 
   if(is.na(file)) stop('A file is required for this plot!')
 
@@ -55,16 +52,9 @@ plot.rev_cohort_fit = function(x,
 
     revolver_report_fit_patient(x, patient = patient, cex = cex,
                                 file = paste0('REVOLVER-report-fit-patient-', patient, '.pdf'))
-    }
+  }
 
-  pio::pioTit("Assempling all PDFs")
-
-  xx =  jamPDF(
-    in.files =  paste0('REVOLVER-report-fit-patient-', patients, '.pdf'),
-    out.file = file,
-    layout = '1x1',
-    page = 'a4'
-  )
+  invisible(NULL)
 }
 
 

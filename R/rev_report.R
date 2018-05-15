@@ -4,6 +4,7 @@
 #' @param x An object of class \code{"rev_cohort"}
 #' @param patient The patient to plot
 #' @param cex Cex for graphics
+#' @param max.phylogenies Max number of trees to plot.
 #' @param file Output file, cannot be NA.
 #'
 #' @return nothing
@@ -16,27 +17,26 @@
 revolver_report_patient = function(x,
                                    patient,
                                    cex = 1,
-                                   file = paste0('REVOLVER-report-patient-', patient, '.pdf'))
+                                   max.phylogenies = 12,
+                                   file = paste0('REVOLVER-report-patient-data-models-', patient, '.pdf'))
 {
   obj_has_trees(x)
   pio::pioHdr(paste('REVOLVER Plot: report on data and trees for', patient), toPrint = NULL)
 
   if(is.na(file)) stop("Output file cannot be NA")
 
-  max.phylogenies = 20
+  f = paste(patient,
+            c('data.pdf', 'trees_scores.pdf', 'trees.pdf'), sep = '-')
 
-  revolver_plt_patient_data(x, patient, cex = cex, file = '1.pdf')
-  revolver_plt_patient_trees_scores(x, patient, cex = cex, file = '2.pdf')
-  revolver_plt_patient_trees(x, patient, max.phylogenies = max.phylogenies, cex = cex, file = '3.pdf')
+  revolver_plt_patient_data(x, patient, cex = cex, file = f[1])
+  revolver_plt_patient_trees_scores(x, patient, cex = cex, file = f[2])
+  revolver_plt_patient_trees(x, patient, max.phylogenies = max.phylogenies, cex = cex, file = f[3])
 
-  ch = round(sqrt(max.phylogenies))
-  # xx =  jamPDF('3.pdf', out.file = '3.pdf', layout = paste0(ch,'x',ch), hide.output = TRUE, delete.original = TRUE)
+  ch = ceiling(sqrt(max.phylogenies))
 
-  # xx =  jamPDF(c('1.pdf', '2.pdf'), out.file = '12.pdf', layout = '2x1', page = 'a4')
-  # xx =  jamPDF(c('12.pdf', '3.pdf'), out.file = '12.pdf', layout = '2x1', page = 'a4')
-  # xx =  jamPDF(c('1.pdf', '2.pdf', '3.pdf'), out.file = 'K.pdf', layout = '3x1', page = 'a4', hide.output = FALSE, delete.original = FALSE)
-  xx =  jamPDF(c('1.pdf', '2.pdf', '3.pdf'), out.file = file, layout = '1x1', hide.output = TRUE, delete.original = T, crop.white = F)
-  xx =  jamPDF(file, out.file = file, layout = '4x4', hide.output = TRUE, delete.original = T, crop.white = F)
+  jamPDF(f[1:2], out.file = paste0(patient, '-data_scores.pdf'), layout = '2x1',crop.white = TRUE, page = 'a4')
+  jamPDF(f[3], f[3], layout = paste0(ch,'x',ch), crop.white = TRUE,  page = 'a4')
+  jamPDF(c(paste0(patient, '-data_scores.pdf'), f[3]), file, layout = '1x2', crop.white = TRUE, page = 'a4')
 
   invisible(NULL)
 }
@@ -67,11 +67,14 @@ revolver_report_fit_patient =  function(x,
 
   if(is.na(file)) stop("Output file cannot be NA")
 
-  revolver_plt_fit_patient(x, patient, cex = cex, file = '1.pdf')
-  revolver_plt_trajectories_patient(x, patient, cex = cex, file = '2.pdf')
-  revolver_plt_itransfer_patient(x, patient, cex = cex, file = '3.pdf')
+  f = paste(patient,
+            c('fit.pdf', 'trajectories.pdf', 'itransfer.pdf'), sep = '-')
 
-  xx =  jamPDF(c('1.pdf', '2.pdf', '3.pdf'), out.file = file, layout = '3x1')
+  revolver_plt_fit_patient(x, patient, cex = cex, file = f[1])
+  revolver_plt_trajectories_patient(x, patient, cex = cex, file = f[2])
+  revolver_plt_itransfer_patient(x, patient, cex = cex, file = f[3])
+
+  jamPDF(f, out.file = file, layout = '3x1', page = 'a4', crop.white = TRUE)
 
   invisible(NULL)
 }
