@@ -5,15 +5,9 @@
 \alias{plot.rev_cohort_fit}
 \title{Plot REVOLVER fits for a subset of patients in the cohort.}
 \usage{
-\method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1,
-  file = "REVOLVER-cohort-fits.pdf", jam.options = list(layout = "1x1", page
-  = "none", crop.white = FALSE, delete.original = FALSE, hide.output = FALSE,
-  ignore.stderr = TRUE))
+\method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1)
 
-\method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1,
-  file = "REVOLVER-cohort-fits.pdf", jam.options = list(layout = "1x1", page
-  = "none", crop.white = FALSE, delete.original = FALSE, hide.output = FALSE,
-  ignore.stderr = TRUE))
+\method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}
@@ -21,8 +15,6 @@
 \item{patients}{The patients to plot, default is all the one available.}
 
 \item{cex}{Scale cex for graphics}
-
-\item{jam.options}{Options for jamming PDFs.}
 
 \item{plot.stat}{Set it to \code{TRUE} to visualize also some statistics about each tree}
 
@@ -38,11 +30,9 @@
 
 \item{...}{Extra parameters}
 
-\item{x}{An object of class \code{"rev_cohort"}}
+\item{x}{An object of class \code{"rev_cohort_fit"}}
 
 \item{patients}{The patients to plot, default is all the one available.}
-
-\item{max.phylogenies}{How many trees should be computed for each patient}
 }
 \value{
 None

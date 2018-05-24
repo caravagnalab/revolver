@@ -201,10 +201,13 @@ revolver_plt_DET_index = function(x,
   min = min(DET) - 2
   max = max(DET) + 2
 
-  type = ifelse(type == 'Shannon',
+  DET.type = ifelse(DET.type == 'Shannon',
                 'Shannon\'s equitability',
                 'Variance Analog Index')
 
+  type = ifelse(type == 'after.expansion',
+                'Likelihood-fit/ Expansion',
+                'Likelihood-fit')
   hist(
     DET,
     col = colour,
@@ -286,7 +289,8 @@ revolver_plt_DET_index_driver = function(x,
   DET.type = ifelse(DET.type == 'Shannon',
                     'Shannon\'s equitability',
                     'Variance Analog Index')
-  type = ifelse(type == 'after.expansion',
+
+    type = ifelse(type == 'after.expansion',
                 'Likelihood-fit/ Expansion',
                 'Likelihood-fit')
 
