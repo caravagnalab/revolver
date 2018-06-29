@@ -1,6 +1,6 @@
-#' Fit from the Yates et al. cohort of Breast cancers, with REVOLVER.
+#' Fit from the Yates et al. cohort of Breast cancers, with REVOLVER. This file contains also clustering assignments and jacckknife results.
 #'
-#' Driver mutations annotated in the original paper
+#' Driver mutations annotated in the original paper.
 #'
 #' @docType data
 #'

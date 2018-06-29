@@ -11,7 +11,7 @@
 #'
 #' @keywords datasets
 #'
-#' @references Cross et al. (2018), to appear.
+#' @references Cross et al. (2018), to appear in Nature Ecology and Evolution.
 #'
 #' @examples
 #' data(CRC)

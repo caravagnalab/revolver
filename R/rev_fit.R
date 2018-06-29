@@ -34,17 +34,19 @@ print.rev_cohort_fit = function(x)
 #' plot.rev_cohort_fit(Breast.fit, patients = Breast.fit$patients[1:4])
 plot.rev_cohort_fit = function(x,
                            patients = x$patients,
+                           merge.files = FALSE,
                            cex = 1)
 {
   obj_has_trees(x)
 
   pio::pioHdr('REVOLVER Plot: fits (tree, trajectories, information transfer)',
               c(
-                `Patients` = paste(patients, collapse = ', ')
+                `Patients` = paste(patients, collapse = ', '),
+                `Merge output PDFs` = merge.files
               ),
               prefix = '\t -')
 
-  if(is.na(file)) stop('A file is required for this plot!')
+  # if(is.na(file)) stop('A file is required for this plot!')
 
   for (patient in patients)
   {
@@ -53,6 +55,15 @@ plot.rev_cohort_fit = function(x,
     revolver_report_fit_patient(x, patient = patient, cex = cex,
                                 file = paste0('REVOLVER-report-fit-patient-', patient, '.pdf'))
   }
+
+  if(merge.files)
+    revolver:::jamPDF(
+      in.files = paste0('REVOLVER-report-fit-patient-', patients, '.pdf'),
+      out.file = paste0('REVOLVER-report-fit-all-cohort-merged.pdf'),
+      delete.original = FALSE,
+      layout = '1x1'
+      )
+
 
   invisible(NULL)
 }

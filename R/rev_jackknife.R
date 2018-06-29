@@ -36,12 +36,13 @@ revolver_jackknife = function(cohort,
   toCompute = (overwrite == TRUE && hasField) || !hasField
 
   if(toCompute)
-    prtHdr('REVOLVER Jackknife',
-           "Resamples: ", resamples,
-           "Leave out: ", leave.out,
-           format = '\t')
+    pio::pioHdr('REVOLVER Jackknife',
+                toPrint = c(
+                  `Resamples` = resamples,
+                  `Leave out` = leave.out),
+                prefix = '\t -')
   else {
-    prtHdr('REVOLVER Jackknife')
+    pio::pioHdr('REVOLVER Jackknife')
     cat(red('\tUsing cached computation\n'))
   }
 
@@ -52,7 +53,7 @@ revolver_jackknife = function(cohort,
     pclusters = setup_parallel(cores.ratio)
 
     ##################### FIT and CLUSTERING
-    cat(cyan("Computing ... (this might take some time)\n"))
+    pio::pioTit("Computing ... (this might take some time)")
 
     actual.resamples = resamples
 
@@ -60,7 +61,7 @@ revolver_jackknife = function(cohort,
       single.run = jackknife_aux_err_function(cohort, actual.resamples, leave.out, options.fit, options.clustering)
       nsingle.run = length(single.run)
 
-      cat(paste('Collected', nsingle.run), '\n')
+      cat(paste('Collected N =', nsingle.run), 'resamples\n')
 
       if(actual.resamples == 0) break;
 
@@ -68,7 +69,7 @@ revolver_jackknife = function(cohort,
       actual.resamples = actual.resamples - nsingle.run
     }
 
-    cat(cyan('Jackknife completed, analyzing results: ', length(r)))
+    pio::pioTit(paste0('Jackknife completed, analyzing results: N =', length(r)))
     stop_parallel(pclusters)
 
     cohort$jackknife$results = r
@@ -94,7 +95,7 @@ revolver_jackknife = function(cohort,
     M
   }
 
-  prtTit('Co-clustering of input patients (stability matrix, non-normalized)')
+  pio::pioTit('Co-clustering of input patients (stability matrix, non-normalized)')
 
   co.clustering = matrix(0, nrow = npatients, ncol = npatients)
   rownames(co.clustering) = colnames(co.clustering) = patients
@@ -106,7 +107,7 @@ revolver_jackknife = function(cohort,
   cohort$jackknife$cluster = co.clustering/cohort$jackknife$params$resamples
 
   # median Jackknife statistics
-  cat(cyan('\nMedian per cluster:\n'))
+  pio::pioTit('Median per cluster')
 
   # print(co.clustering)
 
@@ -136,7 +137,7 @@ revolver_jackknife = function(cohort,
   cohort$jackknife$cluster.medians = medians
 
   ##################### EDGE ESTIMATORS
-  prtTit('Edge frequency across resamples')
+  pio::pioTit('Edge frequency across resamples')
 
   all.edges = NULL
   for(p in 1:length(r)) all.edges = c(all.edges, r[[p]]$features$consensus.explosion$edge)
@@ -168,6 +169,7 @@ revolver_jackknife = function(cohort,
 jackknife_aux_err_function = function(cohort, resamples, leave.out, options.fit, options.clustering) {
 
   r = foreach(num = 1:resamples, .packages = c("crayon", "igraph", 'matrixStats', 'matrixcalc'), .export = ls(globalenv())) %dopar%
+  # for(num in 1:resamples)
   {
     # Error handling is explicit here
     tryCatch(
@@ -188,10 +190,11 @@ jackknife_aux_err_function = function(cohort, resamples, leave.out, options.fit,
         # Fit the cohort, compute the distance, and the clusters
         fit = revolver_fit(subsetted.cohort, initial.solution = options.fit$initial.solution, transitive.orderings = options.fit$transitive.orderings, restarts = options.fit$restarts)
         fit = revolver_evo_distance(fit, use.GL = options.clustering$use.GL, transitive.closure = options.clustering$transitive.closure)
-        fit = revolver_cluster(fit, plot.clusters = FALSE, plot.groups = FALSE,
+        fit = revolver_cluster(fit,
+                               # plot.clusters = FALSE, plot.groups = FALSE,
                                hc.method = options.clustering$hc.method,
                                min.group.size = options.clustering$min.group.size,
-                               cutoff.features_annotation = options.clustering$cutoff.features_annotation,
+                               # cutoff.features_annotation = options.clustering$cutoff.features_annotation,
                                split.method  = options.clustering$split.method)
 
         # Results from the features
@@ -202,11 +205,18 @@ jackknife_aux_err_function = function(cohort, resamples, leave.out, options.fit,
         result
       },
       error = function(e) { # Errors intercepted output a NULL
+        # sink("error.jacknife.log")
+        # print(e)
+        # sink()
         return(NULL)
       },
       finally = { }
     )
+
+
   }
+
+  # print(r)
 
   # Filter entries that are NULL
   mask = sapply(r, function(w) !all(is.null(w)))

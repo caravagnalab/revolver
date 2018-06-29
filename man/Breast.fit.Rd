@@ -3,13 +3,13 @@
 \docType{data}
 \name{Breast.fit}
 \alias{Breast.fit}
-\title{Fit from the Yates et al. cohort of Breast cancers, with REVOLVER.}
+\title{Fit from the Yates et al. cohort of Breast cancers, with REVOLVER. This file contains also clustering assignments and jacckknife results.}
 \format{An S3 object of class "rev_cohort_fit".}
 \usage{
 data(Breast.fit)
 }
 \description{
-Driver mutations annotated in the original paper
+Driver mutations annotated in the original paper.
 }
 \examples{
 data(Breast.fit)

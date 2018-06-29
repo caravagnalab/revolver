@@ -27,8 +27,8 @@ print(CRC.cohort)
 
 }
 \references{
-Cross et al. (2018), to appear.
+Cross et al. (2018), to appear in Nature Ecology and Evolution.
 
-Cross et al. (2018) to appear.
+Cross et al. (2018) to appear in Nature Ecology and Evolution.
 }
 \keyword{datasets}
