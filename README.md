@@ -5,7 +5,7 @@ An R package that implements the algorithm discussed in:
 
 * G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A. Graham, G. Sanguinetti, A. Sottoriva. *Detecting repeated cancer evolution in human tumours from multi-region sequencing data.* To appear, 2018.
 
-Follow the Wiki to be introduced to REVOLVER, and download example case studies.
+Follow the Wiki to be introduced to REVOLVER, see case studies and vignettes.
 
 | Branch              | Stato CI      |
 |---------------------|---------------|
