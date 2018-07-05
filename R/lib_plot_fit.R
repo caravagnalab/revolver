@@ -435,9 +435,13 @@ revolver_plt_trajectories_patient = function(x,
     lay = igraph::layout.reingold.tilford(G, root = 'GL',  mode = 'all')
     rownames(lay) =  igraph::V(G)$name
 
-    TS = wrapTS(adj_matrix)
-    for (node in TS)
-      lay = fixLayer(adj_matrix, node, lay)
+    # This topological sort can work only if G has no loops
+    if(igraph::is_dag(G))
+    {
+      TS = wrapTS(adj_matrix)
+      for (node in TS)
+        lay = fixLayer(adj_matrix, node, lay)
+    }
 
     mark.groups = lapply(subst, function(w)
       colnames(w))
@@ -459,11 +463,11 @@ revolver_plt_trajectories_patient = function(x,
     title(bquote(bold(.(patient) ~ ':') ~ "evolutionary trajectories"), sub = "Exploded trajectories")
   },
   warning = function(w) {
-    cat(red('WARNING'), '| ')
+    cat(crayon::red('WARNING'), '| ')
     warning(w)
   },
   error = function(w) {
-    cat(red('ERROR'), '| ')
+    cat(crayon::red('ERROR'), '| ')
     warning(w)
   },
   finally = {
@@ -566,9 +570,13 @@ revolver_plt_itransfer_patient = function(x,
 
     # print(adj_matrix)
 
-    TS = wrapTS(adj_matrix)
-    for (node in TS)
-      lay = fixLayer(adj_matrix, node, lay, offset = 2)
+    # This topological sort can work only if G has no loops
+    if(igraph::is_dag(G))
+    {
+      TS = wrapTS(adj_matrix)
+      for (node in TS)
+        lay = fixLayer(adj_matrix, node, lay, offset = 2)
+      }
 
     plot(
       G,
@@ -832,7 +840,7 @@ wrapTS = function(M) {
 
   },
   finally = {
-    return(TS)
+    return(colnames(M))
   })
 }
 
