@@ -40,6 +40,16 @@ or \code{\link{revolver_compute_CLtrees}}.}
 \value{
 Nothing, as all functions dump to disk several PDF and RData files.
 }
+\details{
+This is convenient wrapper to run all REVOLVER's analysis within one command.
+It takes as input a \code{"rev_cohort"} object and performs the following steps:
+1) it computes phylogenetic trees (either from binary or CCF data);
+2) it performs model fit;
+3) if performs clustering.
+This function requires as parameters all the parameters that would have been
+passed to the repective functions, where you to run the analysis in single steps.
+This function saves relevant RData objects for its main steps.
+}
 \examples{
 data(CRC.cohort)
 revolver_analyzer(CRC.cohort, type = 'binary', do.plots = FALSE)

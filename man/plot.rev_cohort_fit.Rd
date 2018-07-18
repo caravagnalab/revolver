@@ -5,9 +5,11 @@
 \alias{plot.rev_cohort_fit}
 \title{Plot REVOLVER fits for a subset of patients in the cohort.}
 \usage{
-\method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1)
+\method{plot}{rev_cohort_fit}(x, patients = x$patients, merge.files = FALSE,
+  cex = 1)
 
-\method{plot}{rev_cohort_fit}(x, patients = x$patients, cex = 1)
+\method{plot}{rev_cohort_fit}(x, patients = x$patients, merge.files = FALSE,
+  cex = 1)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}

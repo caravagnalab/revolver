@@ -1,15 +1,46 @@
-
-.DS_Store
-.Rhistory
-.Rproj.user/F9589ABC/cpp-definition-cache
-.Rproj.user/F9589ABC/pcs/debug-breakpoints.pper
-.Rproj.user/F9589ABC/pcs/files-pane.pper
-.Rproj.user/F9589ABC/pcs/windowlayoutstate.pper
-.Rproj.user/F9589ABC/pcs/source-pane.pper
-.Rproj.user/F9589ABC/rmd-outputs
-.Rproj.user/F9589ABC/pcs/workbench-pane.pper
-.Rproj.user/F9589ABC/saved_source_markers
-.Rproj.user
-.Rbuildignore
+# Vignette
 inst/doc
+/inst/doc/vignette.R
+/inst/doc/vignette.Rnw
+/vignettes/vignette.R
+/cfg.R
+
+# History files
+.Rhistory
+.Rapp
+*.history
+
+# Example code in package build process
+*-Ex.R
+
+# RStudio files
+*.RData
+!/data/*.RData
+.Rproj.user/
+.Rproj
+.Rproj.user
+*.Rdata
 *.Rproj
+
+
+# TRONCO Output
+*.pdf
+*.tar.gz
+*.tex
+*.mat
+*.zip
+*.png
+
+# Configuration file
+cfg.R
+
+# Other file
+*.log
+*.out
+*.toc
+*.DS_Store
+
+# C++ file
+*.o
+*.so
+*.dll
