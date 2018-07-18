@@ -11,6 +11,10 @@ before_install:
 
 warnings_are_errors: false
 
+r_build_args: "--resave-data"
+
+r_check_args: "--as-cran --no-examples"
+
 r_packages: 
   - RColorBrewer
   - pheatmap
