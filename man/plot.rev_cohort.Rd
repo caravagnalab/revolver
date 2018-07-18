@@ -2,31 +2,28 @@
 % Please edit documentation in R/rev_cohort.R
 \name{plot.rev_cohort}
 \alias{plot.rev_cohort}
-\title{Plot a REVOLVER cohort.}
+\title{Plot data and trees for a REVOLVER cohort.}
 \usage{
 \method{plot}{rev_cohort}(x, patients = x$patients, max.phylogenies = 12,
-  cex = 1, plot.stat = TRUE)
+  cex = 1)
 }
 \arguments{
-\item{x}{An object of class \code{"rev_cohort"}}
+\item{x}{An object of class \code{"rev_cohort"}.}
 
 \item{patients}{The patients to plot, default is all the one available.}
 
-\item{max.phylogenies}{How many trees should be computed for each patient}
+\item{max.phylogenies}{How many trees should be computed for each patient.}
 
-\item{cex}{Scale cex for graphics}
-
-\item{plot.stat}{Set it to TRUE to visualize also some statistics about each tree}
+\item{cex}{Scale cex for graphics.}
 }
 \value{
 nothing
 }
 \details{
-Iterative plotting functions that scans samples from a cohort. It will plot
-a patient's data (original and binarized), the score for the trees associated to
-the patient, and a number of possible trees per patient.
+Iterative plotting functions that scans a cohort and runs \code{\link{revolver_report_patient}}
+on a set of patients (default all).
 }
 \examples{
-data(CRC.cohort)
-plot(CRC.cohort, patients = 'adenoma_3')
+data(Breast.fit)
+plot.rev_cohort(Breast.fit, patients = Breast.fit$patients[1:10])
 }

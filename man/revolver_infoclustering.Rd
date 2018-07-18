@@ -5,7 +5,8 @@
 \title{Compute possible clusterings for standard parameters.}
 \usage{
 revolver_infoclustering(x, methods = c("average", "single", "complete",
-  "ward"), min.group.size = 2, do.plot = FALSE, file = "Rplot.pdf")
+  "ward"), min.group.size = 2, cex = 1, do.plot = FALSE,
+  file = ifelse(!do.plot, NA, "REVOLVER-infoClustering.pdf"))
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
@@ -15,12 +16,14 @@ are all of the following: \code{"average"}, \code{"single"}, \code{"complete"}, 
 
 \item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
 
+\item{cex}{Cex for the plot}
+
 \item{do.plot}{\code{TRUE} if you want plots to be saved to \code{file}}
 
 \item{file}{PDF output file.}
 }
 \value{
-None, this function just produces a report to inspect offline.
+None, this function just produces a report to be inspected offline.
 }
 \details{
 This requires to have computed the distance via function \code{\link{revolver_evo_distance}}.

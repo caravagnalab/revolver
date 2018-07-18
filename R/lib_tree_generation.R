@@ -3,7 +3,17 @@ filter.clusters = function(d, cutoff.numMuts = 5)
   d = split(d, f = d$cluster)
   counts = lapply(d, nrow)
 
-  return(Reduce(rbind, d[counts > cutoff.numMuts]))
+  # removed = d[counts <= cutoff.numMuts]
+  # #
+  # lapply(removed, function(w) print())
+
+  return(
+    list(
+      removed = Reduce(rbind, d[counts <= cutoff.numMuts]),
+      remained = Reduce(rbind, d[counts > cutoff.numMuts])
+    ))
+
+  # return(Reduce(rbind, d[counts > cutoff.numMuts]))
 }
 
 clusters.table = function(d, sample.groups)
@@ -85,7 +95,7 @@ hashTrees = function(clonevol.obj, sample.groups)
 
   # cat('Total trees  :', nrow(trees), '\n')
   # cat('Unique trees : ', length(unique(trees$model)), '\n')
-  cat(length(unique(trees$model)), ' ')
+  cat("Hashed", length(unique(trees$model)), 'trees\n')
 
   trees$model = as.factor(trees$model)
 
@@ -205,12 +215,13 @@ all.possible.trees = function(
   {
     combalternatives = prod(unlist(lapply(alternatives, length)))
     # cat('* Alternatives:', names(alternatives), '-- num.', combalternatives, '\n')
-    cat(combalternatives, ' ')
+    cat(combalternatives, 'solutions; ')
 
 
     if(combalternatives > sspace.cutoff)
     {
-      cat(red('Sampler', sspace.cutoff, '\n'))
+      cat("sampling is", red('Montecarlo for', n.sampling, 'distinct trees\n'))
+
       return(
         weighted.sampling(
           DataFrameToMatrix(G),
@@ -219,7 +230,8 @@ all.possible.trees = function(
         )
       )
     }
-    else cat(green('Enumeration\n'))
+    else cat("sampling is", green('Exhaustive.\n'))
+
 
 
 
@@ -228,7 +240,7 @@ all.possible.trees = function(
 
     altn = expand.grid(alternatives, stringsAsFactors = FALSE)
   }
-  else cat('* There are no alternatives!\n')
+  else cat(red('There are no alternatives!\n'))
 
   # all combinations
   if(is.null(altn) && is.null(sglt)) stop('Error -- no trees?')
@@ -238,10 +250,16 @@ all.possible.trees = function(
   if(!is.null(sglt) && !is.null(altn)) comb =  cbind(altn, sglt)
 
 
+  pb = txtProgressBar(min = 0,
+                      max = nrow(comb),
+                      style = 3)
+  pb.status = getOption('revolver.progressBar', default = TRUE)
+
   models = NULL
   for(i in 1:nrow(comb))
   {
-    cat('@ ', i, '\r')
+    if (pb.status)
+      setTxtProgressBar(pb, i)
 
     tree = data.frame(from = unlist(comb[i, ]), to = colnames(comb), stringsAsFactors = FALSE)
     test.tree = DataFrameToMatrix(tree)
@@ -264,8 +282,11 @@ all.possible.trees = function(
     models = append(models, list(tree))
   }
 
+  close(pb)
+
+
   # cat(length(models), ' ')
-  cat('\r')
+  # cat('\r')
 
   return(models)
 }
@@ -295,29 +316,47 @@ reverse.mapping = function(M, map, from = rownames(M), cols = TRUE, rows = TRUE)
 
 rankTrees = function(TREES, MI.table, structural.score)
 {
-  # cat('* Computing score for', length(TREES),'trees\n')
+  pb = txtProgressBar(min = 0,
+                      max = length(TREES),
+                      style = 3)
+  pb.status = getOption('revolver.progressBar', default = TRUE)
 
-  MI.TREES = sapply(
-    1:length(TREES),
-    function(x)
-    {
-      cat('@ ', x, '\r')
+  MI.TREES = NULL
+  for(i in 1:length(TREES))
+  {
+      if (pb.status) setTxtProgressBar(pb, i)
 
-      M = DataFrameToMatrix(TREES[[x]])
-      M = M[colnames(MI.table), colnames(MI.table)]
+        M = DataFrameToMatrix(TREES[[i]])
+        M = M[colnames(MI.table), colnames(MI.table)]
 
-      # print(TREES[[x]])
-      # print(M)
-      # print(structural.score[x])
-      M.entries = MI.table[which(M > 0, arr.ind = TRUE)]
-      # print(M.entries)
+        M.entries = MI.table[which(M > 0, arr.ind = TRUE)]
 
-      # M = hadamard.prod(M, MI.table)
-      if(all(is.null(structural.score))) prod(M.entries)
-      else prod(M.entries) * structural.score[x]
-    })
+        val = NA
+        if(all(is.null(structural.score))) val = prod(M.entries)
+        else val = prod(M.entries) * structural.score[i]
 
-  cat('Scores: [', max(MI.TREES), ' -- ', min(MI.TREES), ']\n')
+        # print(paste(prod(M.entries), sum(log(M.entries))))
+
+        if(any(M.entries == 0))
+        {
+          n = sum(M.entries == 0)
+          M.entries[M.entries == 0] = 1e-9
+
+          # cat("\nMI correction for", n, "entries equal 0; set equal to 1e-9.", prod(M.entries))
+
+          warning("Usud MI correction for", n, "entries equal 0; set equal to 1e-9.")
+        }
+#
+#         print(TREES[[i]])
+#         print(M)
+#         print(M.entries)
+#         readline("")
+
+        MI.TREES = c(MI.TREES, val)
+  }
+  close(pb)
+
+  cat('Scores range from ', max(MI.TREES), '(max) to', min(MI.TREES), '(min)\n')
   # print(head(sort(table(MI.TREES), decreasing = T)))
 
   o = order(MI.TREES, decreasing = TRUE)
@@ -354,30 +393,32 @@ useClonevo = function(my.data, sample.groups, clonal.cluster)
 
 
   # Clonevol -- modified...
-  capture.output({ clonevol.obj = infer.clonal.models(
-    variants = my.data,
-    cluster.col.name = 'cluster',
-    # vaf.col.names = vaf.col.names,
-    ccf.col.names = sample.groups,
-    sample.names = sample.groups,
-    cancer.initiation.model = 'monoclonal',
-    # cancer.initiation.model = 'polyclonal',
-    # subclonal.test = 'bootstrap',
-    subclonal.test = 'none',
-    subclonal.test.model = 'non-parametric',
-    # subclonal.test.model = 'beta-binomial',
-    num.boots = 1000,
-    founding.cluster = clonal.cluster,
-    cluster.center = 'median',
-    ignore.clusters = NULL,
-    clone.colors = NULL,
-    min.cluster.vaf = 0.01,
-    # min probability that CCF(clone) is non-negative
-    sum.p = 0.05,
-    # alpha level in confidence interval estimate for CCF(clone)
-    alpha = 0.05,
-    verbose = F
-  ) })
+  capture.output({
+    clonevol.obj = infer.clonal.models(
+      variants = my.data,
+      cluster.col.name = 'cluster',
+      # vaf.col.names = vaf.col.names,
+      ccf.col.names = sample.groups,
+      sample.names = sample.groups,
+      cancer.initiation.model = 'monoclonal',
+      # cancer.initiation.model = 'polyclonal',
+      # subclonal.test = 'bootstrap',
+      subclonal.test = 'none',
+      subclonal.test.model = 'non-parametric',
+      # subclonal.test.model = 'beta-binomial',
+      num.boots = 1000,
+      founding.cluster = clonal.cluster,
+      cluster.center = 'median',
+      ignore.clusters = NULL,
+      clone.colors = NULL,
+      min.cluster.vaf = 0.01,
+      # min probability that CCF(clone) is non-negative
+      sum.p = 0.05,
+      # alpha level in confidence interval estimate for CCF(clone)
+      alpha = 0.05,
+      verbose = F
+    )
+  })
 
   clonevol.obj$matched = NULL
   clonevol.obj$params = NULL
@@ -480,6 +521,8 @@ weighted.sampling = function(G, W, n)
     return(tree)
   }
 
+  pb.status = getOption('revolver.progressBar', default = TRUE)
+
   c = 0
   repeat{
     Tree = sampleT()
@@ -495,7 +538,7 @@ weighted.sampling = function(G, W, n)
     }
     # else {cat('Already sampled tree\n')}
 
-    cat('@ ', c, '\r')
+    if(pb.status) cat('@ ', c, '\r')
 
 
     if(c == n) break;
@@ -648,9 +691,20 @@ node.penalty.for.branching = function(TREES, ccf)
 {
   nodes = rownames(ccf)
 
-  scores = sapply(1:length(TREES), function(x)
+  if(length(TREES) > 1)
   {
-    cat('@ ', x, '\r')
+    pb = txtProgressBar(min = 1,
+                      max = length(TREES),
+                      style = 3)
+    pb.status = getOption('revolver.progressBar', default = TRUE)
+  }
+
+  scores = NULL
+  for(x in 1:length(TREES))
+  {
+    # update progress bar
+    if(length(TREES) > 1)
+      if (pb.status) setTxtProgressBar(pb, x)
 
     t = DataFrameToMatrix(TREES[[x]])
 
@@ -663,8 +717,11 @@ node.penalty.for.branching = function(TREES, ccf)
       1 - sum(as.numeric(ccf[n, ] < colSums(ccf[cl, , drop = FALSE])))/ncol(ccf)
     })
 
-    return(prod(c))
-  })
+    scores = c(scores, prod(c))
+  }
+
+  if(length(TREES) > 1)
+    close(pb)
 
 
   return(scores)

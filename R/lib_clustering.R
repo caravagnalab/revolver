@@ -1,3 +1,180 @@
+
+# Features are organized as follows:
+# occurrences: average CCF of driver in a sample
+# occurrences.clonal.subclonal : each driver is split into clonal or subclonal, and annotated per sample
+# clonal.status: 1 if a driver in a sample is clonal
+# edges.noexplosion: edges per sample, not exploded
+# edges.explosion: edges per sample, exploded
+# counts are:
+# consensus.noexplosion: counts for edges.noexplosion
+# consensus.explosion: counts for edges.explosion
+revolver.featureMatrix = function(x, patients = x$patients)
+{
+  # 0/1 drivers matrices
+  occurrences = matrix(0, ncol = length(x$variantIDs.driver), nrow = length(patients))
+  colnames(occurrences) = x$variantIDs.driver
+  rownames(occurrences) = patients
+  clonal.status = occurrences
+  clonal.status[clonal.status == 0] = FALSE
+
+  occurrences.clonal.subclonal = matrix(0, ncol = 2 * length(x$variantIDs.driver), nrow = length(patients))
+  colnames(occurrences.clonal.subclonal) = c(paste('Clonal', x$variantIDs.driver), paste('Subclonal', x$variantIDs.driver))
+  rownames(occurrences.clonal.subclonal) = patients
+
+  # consensus dfs for edges
+  consensus.noexplosion = Reduce(rbind, lapply(x$fit$phylogenies[patients], function(w) w$transfer$drivers))
+  consensus.explosion = Reduce(rbind, x$fit$transfer[patients])
+
+  e.noexp = unique(DataFrameToEdges(consensus.noexplosion))
+  e.exp = unique(DataFrameToEdges(consensus.explosion))
+
+  # 0/1 edge matrices
+  edges.noexplosion = matrix(0, ncol = length(e.noexp), nrow = length(patients))
+  colnames(edges.noexplosion) = e.noexp
+  rownames(edges.noexplosion) = patients
+
+  edges.explosion = matrix(0, ncol = length(e.exp), nrow = length(patients))
+  colnames(edges.explosion) = e.exp
+  rownames(edges.explosion) = patients
+
+  # annotate every matrix
+  for(pat in patients)
+  {
+    # this patient
+    phylo = x$fit$phylogenies[[pat]]
+    data = phylo$dataset
+    drivers = data[data$is.driver, 'variantID']
+
+    # edges
+    edges.noexplosion[pat, DataFrameToEdges(x$fit$phylogenies[[pat]]$transfer$drivers)] = 1
+    edges.explosion[pat, DataFrameToEdges(x$fit$transfer[[pat]])] = 1
+
+    # status of each driver
+    for(n in drivers)
+    {
+      clone = as.character(driver.indexOf(phylo, n))
+      ccf = phylo$CCF[clone, phylo$samples_ID]
+
+      occurrences[pat, n] = sum(ccf) / phylo$numRegions
+      clonal.status[pat, n] = data[
+        data$cluster == clone & data$variantID == n & data$is.driver, 'is.clonal']
+
+      if(data[data$cluster == clone & data$variantID == n & data$is.driver, 'is.clonal'])
+        occurrences.clonal.subclonal[pat, paste('Clonal', n)] = 1
+      else
+        occurrences.clonal.subclonal[pat, paste('Subclonal', n)] = 1
+    }
+  }
+
+  # Get counts
+  consensus.noexplosion$edge = DataFrameToEdges(consensus.noexplosion)
+  n = table(consensus.noexplosion$edge)
+  cnoexp = consensus.noexplosion[!duplicated(consensus.noexplosion$edge), ]
+  cnoexp$count = n[cnoexp$edge]
+  cnoexp = cnoexp[order(cnoexp$count, decreasing = TRUE) , , drop = FALSE]
+
+  consensus.explosion$edge = DataFrameToEdges(consensus.explosion)
+  n = table(consensus.explosion$edge)
+  cexp = consensus.explosion[!duplicated(consensus.explosion$edge), ]
+  cexp$count = n[cexp$edge]
+  cexp = cexp[order(cexp$count, decreasing = TRUE) , , drop = FALSE]
+
+  return(list(
+    occurrences = occurrences,
+    occurrences.clonal.subclonal = occurrences.clonal.subclonal,
+    clonal.status = clonal.status,
+    edges.noexplosion = edges.noexplosion,
+    edges.explosion = edges.explosion,
+    consensus.noexplosion = cnoexp,
+    consensus.explosion = cexp
+  ))
+}
+
+
+information.transfer_exploded_nodes = function(x, patient, transitive.closure = FALSE)
+{
+  f = function(model, var, stopVars)
+  {
+    aux = function(r)
+    {
+      # cat(r)
+      if(r %in% stopVars) return(r) # stop recursion
+      if(is.null(r)) return(NULL) # leaf
+
+      c = children(model, r)
+
+      # recursion, reduction etc.
+      return(
+        Reduce(union,
+               sapply(c, aux))
+      )
+    }
+
+    return(
+      Reduce(union, sapply(children(model, var), aux))
+    )
+  }
+
+  variables = unlist(lapply(x$fit$substitutions[[patient]], function(w) colnames(w)))
+  M = x$fit$exploded[[patient]]
+
+  df = Reduce(
+    rbind,
+    lapply(c(variables, 'GL'),
+           function(v)
+             expand.grid(
+               from = v,
+               to = f(M, v, variables),
+               stringsAsFactors = FALSE
+             )
+    ))
+
+  if(transitive.closure){
+    df = DataFrameToMatrix(df)
+    df = nem::transitive.closure(df, mat = T, loops = FALSE)
+
+    df = MatrixToDataFrame(df)
+  }
+
+  return(df)
+}
+
+evo_distance = function(transfer, patient.one, patient.two)
+{
+  trp1 = patient.one
+  trp2 = patient.two
+
+  if(nrow(trp1) > 0){
+    rownames(trp1) = DataFrameToEdges(trp1)
+    trp1 = cbind(trp1, count = apply(trp1, 1, function(w) transfer[w[1],w[2]]))
+  }
+
+  if(nrow(trp2) > 0){
+    rownames(trp2) = DataFrameToEdges(trp2)
+    trp2 = cbind(trp2, count = apply(trp2, 1, function(w) transfer[w[1],w[2]]))
+  }
+
+  if(nrow(trp1) == 0 && nrow(trp2) > 0) return(sum(trp2$count))
+  if(nrow(trp1) > 0 && nrow(trp2) == 0) return(sum(trp1$count))
+  if(nrow(trp1) == 0 && nrow(trp2) == 0) return(0)
+
+  trp1 = split(trp1, f = trp1$to)
+  trp2 = split(trp2, f = trp2$to)
+
+  common.variantsID = intersect(names(trp1), names(trp2))
+
+  trp1.specific = setdiff(names(trp1), common.variantsID)
+  trp2.specific = setdiff(names(trp2), common.variantsID)
+
+  dist = sum(unlist(lapply(trp1[trp1.specific], function(x) sum(x$count)))) +
+    sum(unlist(lapply(trp2[trp2.specific], function(x) sum(x$count))))
+
+  for(c in common.variantsID) dist = dist + abs(sum(trp1[[c]]$count) - sum(trp2[[c]]$count))
+
+  return(dist)
+}
+
+
 infoclustering = function(dist.obj, methods, do.plot = FALSE){
 
   # HC -- find best method to agglomerate clusters with AGNES
@@ -75,7 +252,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
 
   if(is.null(clusters)) stop('Unknown split method?')
 
-  k = max(clusters)
+  k = length(unique(clusters))
   labels.colors = scols(unique(clusters), palette)
 
 
@@ -87,93 +264,3 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
 
 
 ### Plotting functions
-
-plot_dendogram = function(hc, dendogram, clusters, palette = 'Set1', plot.type = 'rectangle', main = 'Dendogram', colors = NA, ...) {
-  # require(dendextend)
-
-
-  tryCatch({
-    clusters = clusters[hc$order.lab]
-    clusters = as.character(clusters)
-    clusters[clusters == '0'] = '0: Not assigned'
-    names(clusters) = hc$order.lab
-
-
-    # cat('\nPlotting\n')
-    #print(clusters)
-
-    labels = unique(clusters)
-
-    if(all(is.na(colors))) labels.colors = scols(labels, palette)
-    else labels.colors = colors
-
-    dendextend::labels_cex(dendogram) = .5
-
-    colLab <- function(n, groups) {
-      if (is.leaf(n)) {
-        a <- attributes(n)
-        # find group name
-        a.group <- clusters[a$label]
-        # retrieve the corresponding color
-        attr(n, "nodePar") <- c(a$nodePar, list(lab.col = labels.colors[a.group], lab.bg = "grey50", pch = 20))
-        attr(n, "frame.plot") <- TRUE
-      }
-      n
-    }
-    dendogram <- stats::dendrapply(dendogram, colLab)
-
-    plot(
-      dendogram,
-      main = main,
-      type = plot.type,
-      ...)
-
-    legend('topleft', legend = labels, col = labels.colors, pch = 19, bty = 'n')
-  },
-  warning = function(w) { cat(red('PLOTTING ERROR -- maybe some method returned no clusters?\n', w)); },
-  error = function(w) { cat(red('PLOTTING ERROR -- maybe some method returned no clusters?\n', w));  },
-  finally = { }
-  )
-}
-
-plot_tanglegram = function(x, versus = 'binary', hc.method = 'ward', dendogram, hc, file = NA, width = 10, height = 10) {
-
-  if(versus == 'binary') {
-    features = revolver.featureMatrix(x)$occurrences
-    features[features > 0] = 1
-    hc = cluster::agnes(dist(as.matrix(features)), method = hc.method)
-
-    dendogram = stats::as.dendrogram(hc)
-    dendextend::labels_cex(dendogram) = 0.5
-
-    main = 'Binary'
-  }
-
-  if(versus == 'clonal-subclonal') {
-    features = revolver.featureMatrix(x)$occurrences.clonal.subclonal
-    hc = cluster::agnes(dist(features), method = hc.method)
-
-    dendogram = stats::as.dendrogram(hc)
-    dendextend::labels_cex(dendogram) = 0.5
-
-    main = 'Clonal/subclonal'
-  }
-
-  xdendogram = x$cluster$dendogram
-  dend_list <- dendextend::dendlist(xdendogram, dendogram)
-
-  if(!is.na(file)) pdf(file, width = width, height = height)
-
-  dendextend::tanglegram(xdendogram, dendogram,
-             highlight_distinct_edges = FALSE, # Turn-off dashed lines
-             common_subtrees_color_lines = TRUE, # Turn-off line colors
-             common_subtrees_color_branches = TRUE, # Color common branches
-             cex_main = 1,
-             main = main,
-             sub = paste("entanglement =", round(dendextend::entanglement(dend_list), 4))
-  )
-
-  if(!is.na(file)) dev.off()
-
-  return(list(hc = hc, dendogram = dendogram))
-}

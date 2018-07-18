@@ -5,9 +5,7 @@
 \title{Compute hierarchical clustering for a REVOLVER cohort}
 \usage{
 revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
-  dendogram.type = "rectangle", cutoff.features_annotation = 3,
-  min.group.size = 2, plot.groups = TRUE,
-  file = "REVOLVER-clustering.pdf", ...)
+  min.group.size = 2)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
@@ -16,19 +14,7 @@ revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
 
 \item{split.method}{Method to cut the dendogram, see \code{\link{revolver_infoclustering}}.}
 
-\item{dendogram.type}{\code{"rectangle"}, \code{"triangle"} or other formats supported by a \code{dendogram} object.}
-
-\item{cutoff.features_annotation}{Minimum number of observations to include a certain feature
-in the plot. The number is absolute; e.g., with \code{n = 3} we annotate only edges that occurr at least
-in 3 patients}
-
 \item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
-
-\item{plot.groups}{Set this to \code{TRUE} if you want to plot also the resulting groups and their models.}
-
-\item{file}{Output file}
-
-\item{...}{Extra parameters}
 }
 \value{
 The input \code{x} with a modified field \code{cluster} with results.
@@ -37,7 +23,8 @@ The input \code{x} with a modified field \code{cluster} with results.
 Compute hierarchical clustering for a REVOLVER cohort with fit models.
 You might want to see functions \code{\link{revolver_evo_distance}} and
 \code{\link{revolver_infoclustering}} to first compute REVOLVER's
-evolutionary distance, and inspect basic parameter values.
+evolutionary distance, and inspect basic parameter values and the clusters
+that they allow to identify.
 }
 \examples{
 data(CRC.cohort)
