@@ -8,3 +8,9 @@ before_install:
   - tlmgr install nowidow
   - tlmgr install parnotes
   - tlmgr install marginfix
+
+warnings_are_errors: false
+
+r_packages: 
+  - RColorBrewer
+  - pheatmap
