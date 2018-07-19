@@ -71,6 +71,8 @@ revolver_plt_patient_data = function(x,
 #'
 #' @return nothing
 #' @export
+#' 
+#' @importFrom graphics barplot
 #'
 #' @examples
 #' data(Breast.fit)

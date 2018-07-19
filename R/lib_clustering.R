@@ -8,6 +8,7 @@
 # counts are:
 # consensus.noexplosion: counts for edges.noexplosion
 # consensus.explosion: counts for edges.explosion
+#' @importFrom stats as.hclust
 revolver.featureMatrix = function(x, patients = x$patients)
 {
   # 0/1 drivers matrices
@@ -195,6 +196,8 @@ infoclustering = function(dist.obj, methods, do.plot = FALSE){
   return(list(stats = stats, max = max))
 }
 
+#' @importFrom stats order.dendrogram
+#' @importFrom utils capture.output
 split_dendogram = function(dendogram, hc, distance, method, min.group,
                            do.plot = FALSE,
                            plot.type = 'rectangle',
@@ -207,18 +210,18 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
                              minClusterSize = min.group,
                              method = 'tree')
 
-    clusters = clusters[stats::order.dendrogram(dendogram)]
+    clusters = clusters[order.dendrogram(dendogram)]
     names(clusters) = hc$order.lab
   }
 
   if(method == 'cutreeDynamicTree')
   {
     clusters = dynamicTreeCut::cutreeDynamicTree(
-      stats::as.hclust(hc),
+      as.hclust(hc),
       deepSplit = TRUE,
       minModuleSize = min.group)
 
-    clusters = clusters[stats::order.dendrogram(dendogram)]
+    clusters = clusters[order.dendrogram(dendogram)]
     names(clusters) = hc$order.lab
   }
 
@@ -226,12 +229,12 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
   {
     w = capture.output({
       clusters = dynamicTreeCut::cutreeHybrid(
-        stats::as.hclust(hc),
+        as.hclust(hc),
         distance,
         minClusterSize = min.group)$labels
       })
 
-    clusters = clusters[stats::order.dendrogram(dendogram)]
+    clusters = clusters[order.dendrogram(dendogram)]
     names(clusters) = hc$order.lab
   }
 
@@ -239,7 +242,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
   {
     # require(dendextend)
 
-    hcl = stats::as.hclust(hc)
+    hcl = as.hclust(hc)
     dend_k = dendextend::find_k(dendogram, krange = 1:ceiling(length(hcl$labels)/min.group))
 
     clusters = dend_k$pamobject$clustering

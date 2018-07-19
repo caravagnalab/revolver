@@ -151,6 +151,7 @@
 #' @export
 #' 
 #' @importFrom purrr map_dbl
+#' @importFrom pio pioHdr pioTit
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -168,7 +169,7 @@ revolver_analyzer = function(cohort,
 {
   args = pio:::nmfy(c('Type of tree', 'Cohort', 'Output folder', "Perform plots"),
                     c(type, cohort.name, folder.output, do.plots))
-  pio::pioHdr('REVOLVER Analyzer', args, prefix = '\t')
+  pioHdr('REVOLVER Analyzer', args, prefix = '\t')
 
   current.folder = getwd()
 
@@ -180,11 +181,11 @@ revolver_analyzer = function(cohort,
 
   #################### Create input trees
   if(is.na(type))
-    pio::pioTit("Analyzer: \"type\" is NA, trees will not be created and they should be already available in the input object")
+    pioTit("Analyzer: \"type\" is NA, trees will not be created and they should be already available in the input object")
   else
   {
     stopifnot(type %in% c('CCF', 'binary'))
-    pio::pioTit("Analyzer: starting creating trees per patient (this might take some time ...)")
+    pioTit("Analyzer: starting creating trees per patient (this might take some time ...)")
 
     if(type == 'CCF')
     {
@@ -206,7 +207,7 @@ revolver_analyzer = function(cohort,
 
 
   #################### Fit model
-  pio::pioTit("Analyzer: fitting model to data")
+  pioTit("Analyzer: fitting model to data")
   fit = revolver_fit(cohort, initial.solution = options.fit$initial.solution, transitive.orderings = options.fit$transitive.orderings, restarts = options.fit$restarts)
 
   saveFile(descr = "Output object with fit saved to file", fname = paste(cohort.name, '.fit.RData', sep = ''), fit)
@@ -229,7 +230,7 @@ revolver_analyzer = function(cohort,
   }
 
   #################### Clustering with GL
-  pio::pioTit("Analyzer: clustering with germline (GL)")
+  pioTit("Analyzer: clustering with germline (GL)")
 
   dir.create('Clustering with GL')
   setwd('Clustering with GL')
@@ -246,7 +247,7 @@ revolver_analyzer = function(cohort,
 
   if(do.plots)
   {
-    pio::pioTit("Analyzer: plotting clustering results (this might take some time ...)")
+    pioTit("Analyzer: plotting clustering results (this might take some time ...)")
 
     revolver_plt_rdendogram(fit, cex = 1)
     revolver_plt_rbannerplot(fit, cex = 1)
@@ -261,7 +262,7 @@ revolver_analyzer = function(cohort,
   setwd('..')
 
   #################### Clustering without GL
-  pio::pioTit("Analyzer: clustering without germline (GL)")
+  pioTit("Analyzer: clustering without germline (GL)")
 
   dir.create('Clustering without GL')
   setwd('Clustering without GL')

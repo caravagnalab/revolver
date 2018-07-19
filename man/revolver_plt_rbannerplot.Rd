@@ -22,5 +22,8 @@ and clusters. The function will plot the bannerplot for the results of
 hierarchical clustering.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

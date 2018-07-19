@@ -12,6 +12,9 @@
 #'
 #' @return None
 #' @export
+#' 
+#' @importFrom graphics boxplot
+#' @importFrom stats reorder
 #'
 #' @examples
 #' data(Breast.fit)

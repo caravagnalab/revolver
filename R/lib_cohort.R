@@ -57,7 +57,7 @@ clonal.subclonal.table = function(x)
 }
 
 
-
+#' @importFrom utils setTxtProgressBar txtProgressBar
 create_trees_in_revolver_format = function(options, TREES, SCORES, patient, dataset, samples)
 {
   cat("Total number of trees with non-zero scores is", length(TREES))

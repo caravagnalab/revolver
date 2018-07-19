@@ -1,3 +1,4 @@
+#' @importFrom graphics layout par
 plot_fitStats = function(x, palette = 'Accent', file = NA)
 {
   IDs = sort(x$fit$solutionID)

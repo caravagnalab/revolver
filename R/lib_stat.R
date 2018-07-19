@@ -99,21 +99,23 @@ revolver_DETindex <-
 #'
 #' @return none
 #' @export
+#' 
+#' @importFrom pio pioHdr pioTit
 #'
 #' @examples
 #' data(CRC.cohort)
 #' fit = revolver_fit(CRC.cohort)
 #' revolver_dumpStatistics(CRC.cohort)
 revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
-  prtHdr('REVOLVER Dump statistics to Excel',
+  pioHdr('REVOLVER Dump statistics to Excel',
          "File: ", file,
-         format = '\t')
+         suffix = '\t')
 
   # require(xlsx)
   # dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
   # require(rJava)
 
-  prtTit('Features: drivers, occurrences & information transfer')
+  pioTit('Features: drivers, occurrences & information transfer')
 
   ft = revolver.featureMatrix(x)
 
@@ -138,7 +140,7 @@ revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
   )
 
   if (!is.null(x$fit)) {
-    prtTit('Fit: multinomial, penalty & fit')
+    pioTit('Fit: multinomial, penalty & fit')
 
     xlsx::write.xlsx(
       x$fit$multinomial.penalty,
@@ -161,7 +163,7 @@ revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
   }
 
   if (!is.null(x$cluster)) {
-    prtTit('Clustering: distance, clusters & features per cluster')
+    pioTit('Clustering: distance, clusters & features per cluster')
 
     xlsx::write.xlsx(
       x$cluster$distances,
@@ -192,7 +194,7 @@ revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
   }
 
   if (!is.null(x$jackknife)) {
-    prtTit('Jackknife: co-clustering, clusters & features per cluster')
+    pioTit('Jackknife: co-clustering, clusters & features per cluster')
 
     xlsx::write.xlsx(
       x$jackknife$cluster,

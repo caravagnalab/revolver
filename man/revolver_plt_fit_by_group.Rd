@@ -24,5 +24,8 @@ and clusters. For each cluster, this function plots the fit of the models
 in the cluster. All outputs are directed to separate PDF files.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

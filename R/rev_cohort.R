@@ -315,7 +315,11 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 #' @import crayon
 #' @import igraph
 #'
-#' @examples TODO
+#' @examples
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_compute_phylogenies = function(
   x,
   patient,

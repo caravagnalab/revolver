@@ -186,6 +186,7 @@ revolver_fit = function(x,
 
 
 ############################## TL main function
+#' @importFrom stats sd
 tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
                         transitive.orderings = TRUE, verbose = FALSE)
 {
