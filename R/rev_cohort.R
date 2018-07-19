@@ -146,7 +146,7 @@ revolver_cohort = function(
 #' @param digits number of output digits
 #'
 #' @return nothing
-#' @export
+#' @export print.rev_cohort
 #' @import crayon
 #'
 #' @examples
@@ -979,7 +979,7 @@ revolver_deletePatients = function(x, list)
 #' @param cex Scale cex for graphics.
 #'
 #' @return nothing
-#' @export
+#' @export plot.rev_cohort
 #' @import crayon
 #'
 #' @examples

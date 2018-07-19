@@ -17,10 +17,12 @@
 #' to avoid this step
 #' @param ignore.stderr TRUE to ignore standard error
 #'
+#' @importFrom grDevices col2rgb colorRampPalette dev.copy2pdf dev.new
+#' @importFrom grDevices dev.off dev.size pdf quartz rgb
+#' 
 #' @return None
 #' @export
 #'
-#' @examples
 jamPDF = function(in.files,
                   out.file = 'jamPDF.pdf',
                   layout = '3x3',

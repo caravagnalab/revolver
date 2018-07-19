@@ -635,7 +635,7 @@ revolver_plt_itransfer_patient = function(x,
 #' @param ... Extra parameters
 #'
 #' @return None
-#' @export
+#' @export plot.rev_cohort_fit
 #' @import crayon
 #'
 #' @examples

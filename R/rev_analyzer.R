@@ -149,6 +149,8 @@
 #'
 #' @return Nothing, as all functions dump to disk several PDF and RData files.
 #' @export
+#' 
+#' @importFrom purrr map_dbl
 #'
 #' @examples
 #' data(CRC.cohort)
