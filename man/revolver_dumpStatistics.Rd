@@ -4,7 +4,7 @@
 \alias{revolver_dumpStatistics}
 \title{Dump statistics for fit to an Excel file.}
 \usage{
-revolver_dumpStatistics(x, file = "REVOLVER-Statistics.xslx")
+revolver_dumpStatistics(x, file = "REVOLVER-Statistics.xlsx")
 }
 \arguments{
 \item{x}{REVOLVER cohort fit}
@@ -20,5 +20,5 @@ Dump statistics for fit to an Excel file.
 \examples{
 data(CRC.cohort)
 fit = revolver_fit(CRC.cohort)
-revolver_dumpStatistics(CRC.cohort)
+revolver_dumpStatistics(fit)
 }

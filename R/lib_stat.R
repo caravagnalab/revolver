@@ -101,12 +101,13 @@ revolver_DETindex <-
 #' @export
 #' 
 #' @importFrom pio pioHdr pioTit
+#' @importFrom xlsx write.xlsx
 #'
 #' @examples
 #' data(CRC.cohort)
 #' fit = revolver_fit(CRC.cohort)
 #' revolver_dumpStatistics(fit)
-revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
+revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xlsx') {
   pioHdr('REVOLVER Dump statistics to Excel',
          "File: ", file,
          suffix = '\t')

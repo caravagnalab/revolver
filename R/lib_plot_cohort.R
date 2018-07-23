@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' data(Breast.fit)
-#' revolver_plot_patient_data(Breast.fit, 'PD14767')
+#' revolver_plt_patient_data(Breast.fit, 'PD14767')
 revolver_plt_patient_data = function(x,
                                       patient,
                                       cex = 1,
