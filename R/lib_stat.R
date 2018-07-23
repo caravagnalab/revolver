@@ -105,7 +105,7 @@ revolver_DETindex <-
 #' @examples
 #' data(CRC.cohort)
 #' fit = revolver_fit(CRC.cohort)
-#' revolver_dumpStatistics(CRC.cohort)
+#' revolver_dumpStatistics(fit)
 revolver_dumpStatistics = function(x, file = 'REVOLVER-Statistics.xslx') {
   pioHdr('REVOLVER Dump statistics to Excel',
          "File: ", file,
