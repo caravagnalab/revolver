@@ -15,6 +15,9 @@ revolver_plt_patient_trees_scores(x, patient, cex = 1, file = NA)
 
 \item{file}{Output file, if not NA.}
 }
+\value{
+nothing
+}
 \description{
 Plot the scores for the trees of each patient.
 }

@@ -31,5 +31,8 @@ A cohort where a new jackknife field contains result from this analysis
 Computation of fit confidence with the jackknife.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

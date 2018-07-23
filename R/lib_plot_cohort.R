@@ -69,8 +69,10 @@ revolver_plt_patient_data = function(x,
 #' @param cex Cex for graphics (pheatmap cells)
 #' @param file Output file, if not NA.
 #'
-#' @return
+#' @return nothing
 #' @export
+#' 
+#' @importFrom graphics barplot
 #'
 #' @examples
 #' data(Breast.fit)

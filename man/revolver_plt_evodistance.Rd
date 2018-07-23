@@ -23,5 +23,8 @@ of the distance h(.) applied to the samples. The heatmap is annotated with the
 clustering's dendrogram, as well with coloured labels.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

@@ -5,6 +5,8 @@
 #'
 #' @return none
 #' @export
+#' 
+#' @importFrom graphics title
 #'
 #' @examples
 #' data(Breast.fit)
@@ -159,6 +161,8 @@ revolver_plt_penalty_matrix = function(x,
 #'
 #' @return The DET values
 #' @export
+#' 
+#' @importFrom graphics abline barplot hist
 #'
 #'
 #' @examples
@@ -635,7 +639,7 @@ revolver_plt_itransfer_patient = function(x,
 #' @param ... Extra parameters
 #'
 #' @return None
-#' @export
+#' @export plot.rev_cohort_fit
 #' @import crayon
 #'
 #' @examples

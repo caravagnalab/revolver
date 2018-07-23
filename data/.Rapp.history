@@ -1,6 +1,0 @@
-load("/Users/gcaravagna/Documents/GitHub/revolver/data/CRC.cohort.RData")
-ls()
-cohort
-load("/Users/gcaravagna/Documents/GitHub/revolver/data/CRC-prepared-data.RData")
-ls()
-data

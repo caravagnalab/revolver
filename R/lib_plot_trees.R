@@ -11,6 +11,7 @@
 #' @return Nothing
 #' @export
 #' @import crayon
+#' @importFrom graphics legend
 #'
 #' @examples
 #' data(CRC.cohort)

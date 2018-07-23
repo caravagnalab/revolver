@@ -19,9 +19,14 @@
 #'
 #' @return nothing
 #' @export
+#' 
+#' @importFrom stats as.dendrogram dist dendrapply
 #'
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_dendogram = function(x,
                                   type = 'REVOLVER',
                                   cex = 1,
@@ -62,8 +67,8 @@ revolver_plt_dendogram = function(x,
     data[data > 0] = 1
 
     data = as.matrix(data)
-    hc = cluster::agnes(stats::dist(data), method = x$cluster$hc.method)
-    dendogram = stats::as.dendrogram(hc)
+    hc = cluster::agnes(dist(data), method = x$cluster$hc.method)
+    dendogram = as.dendrogram(hc)
 
     main = "Clustering binary occurrences"
     sub = "Colors: REVOLVER clusters"
@@ -76,10 +81,10 @@ revolver_plt_dendogram = function(x,
 
     data = features$occurrences.clonal.subclonal
     hc = cluster::agnes(
-      stats::dist(features$occurrences.clonal.subclonal),
+      dist(features$occurrences.clonal.subclonal),
       method = x$cluster$hc.method
     )
-    dendogram = stats::as.dendrogram(hc)
+    dendogram = as.dendrogram(hc)
 
     main = "Clustering clonal/ subclonal occurrences"
     sub = "Colors: REVOLVER clusters"
@@ -116,7 +121,10 @@ revolver_plt_dendogram = function(x,
 #' @export
 #'
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_rbannerplot = function(x,
                                     cex = 1,
                                     file = NA)
@@ -158,7 +166,10 @@ revolver_plt_rbannerplot = function(x,
 #' @export
 #'
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_rclusters = function(x,
                                   cex = 1,
                                   cutoff.features_annotation = 2,
@@ -214,7 +225,10 @@ revolver_plt_rclusters = function(x,
 #' @export
 #'
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_compare_dendograms = function(x,
                                            cex = 1,
                                            type = 'binary',
@@ -252,19 +266,19 @@ revolver_plt_compare_dendograms = function(x,
     data[data > 0] = 1
 
     data = as.matrix(data)
-    hc2 = cluster::agnes(stats::dist(data), method = hc.method)
+    hc2 = cluster::agnes(dist(data), method = hc.method)
   }
 
   # Clonal/ subclonal status
   if (type == 'clonality')
   {
     data = features$occurrences.clonal.subclonal
-    hc2 = cluster::agnes(stats::dist(features$occurrences.clonal.subclonal),
+    hc2 = cluster::agnes(dist(features$occurrences.clonal.subclonal),
                          method = hc.method)
   }
 
   # Dendogram altearnative
-  dendogram2 = stats::as.dendrogram(hc2)
+  dendogram2 = as.dendrogram(hc2)
   dendextend::labels_cex(dendogram2) = 0.5
 
   dend_list = dendextend::dendlist(dendogram, dendogram2)
@@ -313,7 +327,10 @@ revolver_plt_compare_dendograms = function(x,
 #' @export
 #'
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_evodistance = function(x,
                                     cex = 1,
                                     file = NA)
@@ -379,7 +396,10 @@ revolver_plt_evodistance = function(x,
 #' @export
 #'
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_group_trajectories = function(x,
                                            cex = 1,
                                            cutoff.edges_annotation = 3,
@@ -451,8 +471,13 @@ revolver_plt_group_trajectories = function(x,
 #' @return nothing
 #' @export
 #'
+#' @importFrom graphics plot
+#' 
 #' @examples
-#' TODO
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_plt_fit_by_group = function(x,
                                      cex = 1,
                                      file.suffix = 'REVOLVER-Clusters-FitsPerCluster.pdf')
@@ -558,6 +583,7 @@ revolver_plt_fit_by_group = function(x,
 ########################################## Auxiliary plotting functions for clustering
 ##########################################
 
+#' @importFrom stats is.leaf
 plot_dendogram = function(hc,
                           dendogram,
                           clusters,
@@ -605,7 +631,7 @@ plot_dendogram = function(hc,
       }
       n
     }
-    dendogram <- stats::dendrapply(dendogram, colLab)
+    dendogram <- dendrapply(dendogram, colLab)
 
     plot(dendogram,
          main = main,
@@ -653,7 +679,7 @@ plot_tanglegram = function(x,
     features[features > 0] = 1
     hc = cluster::agnes(dist(as.matrix(features)), method = hc.method)
 
-    dendogram = stats::as.dendrogram(hc)
+    dendogram = as.dendrogram(hc)
     dendextend::labels_cex(dendogram) = 0.5
 
     main = 'Binary'
@@ -663,7 +689,7 @@ plot_tanglegram = function(x,
     features = revolver.featureMatrix(x)$occurrences.clonal.subclonal
     hc = cluster::agnes(dist(features), method = hc.method)
 
-    dendogram = stats::as.dendrogram(hc)
+    dendogram = as.dendrogram(hc)
     dendextend::labels_cex(dendogram) = 0.5
 
     main = 'Clonal/subclonal'

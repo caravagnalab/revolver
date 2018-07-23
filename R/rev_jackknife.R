@@ -13,8 +13,14 @@
 #' @import crayon
 #' @import doParallel
 #' @import foreach
+#' 
+#' @importFrom utils combn
 #'
-#' @examples TODO
+#' @examples
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_jackknife = function(cohort,
                               resamples = 100,
                               leave.out = 0.1,

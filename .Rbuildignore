@@ -1,0 +1,12 @@
+^README.md$
+^LICENSE.md$
+^.gitignore$
+^.travis.yml$
+^.git/.*$
+
+# Vignette
+inst/doc
+/inst/doc/vignette.R
+/inst/doc/vignette.Rnw
+/vignettes/vignette.R
+/cfg.R

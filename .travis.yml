@@ -1,0 +1,20 @@
+language: r
+
+cache: packages
+
+before_install:
+  - tlmgr install tcolorbox
+  - tlmgr install bera
+  - tlmgr install nowidow
+  - tlmgr install parnotes
+  - tlmgr install marginfix
+
+warnings_are_errors: false
+
+r_build_args: "--resave-data"
+
+r_check_args: "--no-examples"
+
+r_packages: 
+  - RColorBrewer
+  - pheatmap

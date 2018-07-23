@@ -4,7 +4,7 @@
 #' @param x A \code{"rev_cohort_fit"} object
 #'
 #' @return none
-#' @export
+#' @export print.rev_cohort_fit
 #'
 #' @examples
 #' data(Breast.fit)
@@ -26,7 +26,7 @@ print.rev_cohort_fit = function(x)
 #' @param cex Scale cex for graphics
 #'
 #' @return nothing
-#' @export
+#' @export plot.rev_cohort_fit
 #' @import crayon
 #'
 #' @examples
@@ -186,6 +186,7 @@ revolver_fit = function(x,
 
 
 ############################## TL main function
+#' @importFrom stats sd
 tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
                         transitive.orderings = TRUE, verbose = FALSE)
 {

@@ -28,5 +28,8 @@ trajectories detected by the method. This plot is probably the most common one
 that you want to inspect to analyze your clusters
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

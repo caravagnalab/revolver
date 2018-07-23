@@ -151,7 +151,7 @@ revolver_phylogeny = function(M,
 #' @param print.stat Print or not statistics to screen.
 #'
 #' @return none
-#' @export
+#' @export summary.rev_phylo
 #' @import crayon
 #'
 #' @examples
@@ -219,7 +219,7 @@ summary.rev_phylo <- function(x, ..., print.stat = TRUE) {
 #' @param digits Digits to use.
 #'
 #' @return none
-#' @export
+#' @export print.rev_phylo
 #' @import crayon
 #'
 #' @examples
@@ -455,7 +455,7 @@ stats.rev_phylo = function(x)
 #' @param ... Extra parameters
 #'
 #' @return Nothing
-#' @export
+#' @export plot.rev_phylo
 #' @import crayon
 #'
 #' @examples

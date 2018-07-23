@@ -30,5 +30,8 @@ clonal/ subclonal patterns of occurrence (type = 'clonality'). Besides the
 dendrogram, a tanglegram against REVOLVER's clusters is also computed.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

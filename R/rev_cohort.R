@@ -146,7 +146,7 @@ revolver_cohort = function(
 #' @param digits number of output digits
 #'
 #' @return nothing
-#' @export
+#' @export print.rev_cohort
 #' @import crayon
 #'
 #' @examples
@@ -315,7 +315,11 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 #' @import crayon
 #' @import igraph
 #'
-#' @examples TODO
+#' @examples
+#' \dontrun{
+#'  TODO
+#' }
+#' 
 revolver_compute_phylogenies = function(
   x,
   patient,
@@ -979,7 +983,7 @@ revolver_deletePatients = function(x, list)
 #' @param cex Scale cex for graphics.
 #'
 #' @return nothing
-#' @export
+#' @export plot.rev_cohort
 #' @import crayon
 #'
 #' @examples

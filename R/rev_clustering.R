@@ -15,6 +15,7 @@
 #' @return A \code{"rev_cohort_fit"}. object with a new field \code{"cluster"} that contains the computation's results.
 #' @export
 #' @import crayon
+#' @importFrom stats as.dist
 #'
 #' @examples
 #' data(CRC.cohort)

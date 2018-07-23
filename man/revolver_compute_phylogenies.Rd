@@ -36,5 +36,8 @@ Create or compute phylogenies for REVOLVER fit from CCF data. This method should
 has already pre-computed trees to use for fitting.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

@@ -50,11 +50,12 @@ obj_has_jackknife = function(x)
 #
 saveFile = function(descr, fname, ...)
 {
-  save(..., file = fname)
+  input_list <- as.list(substitute(list(...)))
+  save(input_list, file = fname)
 
   if(!is.na(descr))
   {
-    pio::pioHdr("REVOLVER Save file", toPrint = c(`What`= descr), sep = '\t -')
+    pio::pioHdr("REVOLVER Save file", toPrint = c(`What`= descr), suffix = '\t -')
 
     stat = file.info(fname, extra_cols = FALSE)
     stat$size = utils:::format.object_size(stat$size, "auto")

@@ -31,5 +31,8 @@ and clusters. For each group and for the overall cohort, this function
 plots the consensus model of the edges, annotated with counts.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }

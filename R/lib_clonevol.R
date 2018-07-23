@@ -106,7 +106,7 @@ estimate.ccf <- function(vx, sample, i, boot, min.cluster.vaf,
 
 }
 
-
+#' @importFrom utils head
 enumerate.clones <- function(v, sample=NULL, variants=NULL,
                              founding.cluster = NULL,
                              ignore.clusters=NULL,
@@ -342,6 +342,7 @@ determine.subclone <- function(v, r){
 
 
 # REQUIRED
+#' @importFrom stats rnorm
 infer.clonal.models <- function(c=NULL, variants=NULL,
                                 cluster.col.name='cluster',
                                 founding.cluster=NULL,
@@ -648,6 +649,7 @@ infer.clonal.models <- function(c=NULL, variants=NULL,
 
 
 # REQUIRED
+#' @importFrom stats median
 estimate.clone.vaf <- function(v, cluster.col.name='cluster',
                                vaf.col.names=NULL,
                                vaf.in.percent=TRUE,
@@ -709,6 +711,7 @@ estimate.clone.vaf <- function(v, cluster.col.name='cluster',
 
 
 # REQUIRED
+#' @importFrom stats quantile
 subclonal.test = function(vaf.col.name, parent.cluster, sub.clusters=NULL,
                            boot=NULL, cdf=NULL, min.cluster.vaf=0, alpha=0.05,
                            alternative='greater'){

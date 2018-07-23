@@ -29,5 +29,8 @@ and clusters. The function will plot the dendrogram for the results of
 hierarchical clustering, and will color labels by group assignment.
 }
 \examples{
-TODO
+\dontrun{
+ TODO
+}
+
 }
