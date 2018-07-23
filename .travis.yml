@@ -15,6 +15,7 @@ r_build_args: "--resave-data"
 
 r_check_args: ""
 
-r_packages: 
-  - RColorBrewer
-  - pheatmap
+addons:
+  apt:
+    packages:
+      - texlive-extra-utils

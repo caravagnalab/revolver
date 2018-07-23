@@ -13,18 +13,18 @@ License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-	crayon,
-	parallel,
-	doParallel,
-	cluster,
-	dendextend,
-	dynamicTreeCut,
-	igraph,
-	foreach,
-	purrr,
-	xlsx,
-	pio,
-	grDevices,
+    crayon,
+    parallel,
+    doParallel,
+    cluster,
+    dendextend,
+    dynamicTreeCut,
+    igraph,
+    foreach,
+    purrr,
+    xlsx,
+    pio,
+    grDevices,
     graphics,
     stats,
     utils
@@ -32,5 +32,18 @@ Remotes: caravagn/pio
 RoxygenNote: 6.0.1
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    RColorBrewer,
+    R.utils,
+    entropy,
+    ggplot2,
+    gridExtra,
+    matrixStats,
+    matrixcalc,
+    nem,
+    pheatmap,
+    qualvar,
+    tibble,
+    vegan,
+    grid
 VignetteBuilder: knitr
