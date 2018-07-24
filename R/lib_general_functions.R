@@ -47,7 +47,7 @@ obj_has_jackknife = function(x)
 }
 
 
-#
+#' @importFrom utils object.size
 saveFile = function(descr, fname, ...)
 {
   input_list <- as.list(substitute(list(...)))
@@ -58,7 +58,7 @@ saveFile = function(descr, fname, ...)
     pio::pioHdr("REVOLVER Save file", toPrint = c(`What`= descr), suffix = '\t -')
 
     stat = file.info(fname, extra_cols = FALSE)
-    stat$size = utils:::format.object_size(stat$size, "auto")
+    stat$size = format(utils::object.size(stat$size), "auto")
     stat$isdir = NULL
     stat$ctime = stat$atime = NULL
 
