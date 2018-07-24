@@ -13,8 +13,13 @@ warnings_are_errors: false
 
 r_build_args: "--resave-data"
 
-r_check_args: "--no-examples"
+r_check_args: ""
 
-r_packages: 
-  - RColorBrewer
-  - pheatmap
+bioc_packages:
+  - nem
+
+addons:
+  apt:
+    packages:
+      - texlive-extra-utils
+      - ghostscript
