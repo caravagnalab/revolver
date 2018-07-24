@@ -4,12 +4,14 @@
 \alias{revolver_plt_jackknife_coclust_bplot}
 \title{Plot jackknife statistics for co-clustering (boxplot).}
 \usage{
-revolver_plt_jackknife_coclust_bplot(x, file = NA)
+revolver_plt_jackknife_coclust_bplot(x, file = NA, cex = 1)
 }
 \arguments{
 \item{x}{An object obtained as output of \code{\link{revolver_jackknife}}.}
 
 \item{file}{Output file, or NA.}
+
+\item{cex}{cex for the plot.}
 }
 \value{
 None
