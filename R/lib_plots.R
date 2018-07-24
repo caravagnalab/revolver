@@ -2,7 +2,7 @@
 plot_fitStats = function(x, palette = 'Accent', file = NA)
 {
   IDs = sort(x$fit$solutionID)
-  NumSols = sapply(names(IDs), function(w){ length(fit$phylogenies[[w]]) })
+  NumSols = sapply(names(IDs), function(w){ length(x$fit$phylogenies[[w]]) })
   InfTransf = sapply(names(IDs), rev_count_information_transfer_comb, x = x)
 
   ord = sort(IDs + NumSols + InfTransf)

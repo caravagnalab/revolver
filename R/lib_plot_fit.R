@@ -5,7 +5,7 @@
 #'
 #' @return none
 #' @export
-#' 
+#'
 #' @importFrom graphics title
 #'
 #' @examples
@@ -161,7 +161,7 @@ revolver_plt_penalty_matrix = function(x,
 #'
 #' @return The DET values
 #' @export
-#' 
+#'
 #' @importFrom graphics abline barplot hist
 #'
 #'
@@ -283,7 +283,7 @@ revolver_plt_DET_index_driver = function(x,
 
   DET = revolver_DETindex(
     x,
-    n.boot = N,
+    n.boot = 1,
     table = T,
     index = DET.type,
     type = type,

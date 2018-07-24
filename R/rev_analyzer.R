@@ -149,7 +149,7 @@
 #'
 #' @return Nothing, as all functions dump to disk several PDF and RData files.
 #' @export
-#' 
+#'
 #' @importFrom purrr map_dbl
 #' @importFrom pio pioHdr pioTit
 #'
@@ -222,10 +222,10 @@ revolver_analyzer = function(cohort,
     revolver_plt_compare_dendograms(fit, cex = 1, type = 'binary')
     revolver_plt_compare_dendograms(fit, cex = 1, type = 'clonality')
     revolver_plt_evodistance(fit, cex = 1)
-    revolver_plt_group_trajectories(fit, cex = 1, cutoff.features_annotation = options.clustering.withGL$cutoff.features_annotation)
+    revolver_plt_group_trajectories(fit, cex = 1, cutoff.edges_annotation = options.clustering.withGL$cutoff.features_annotation)
     revolver_plt_fit_by_groupn(fit, cex = 1)
 
-    revolver_penaltyPlot(fit)
+    revolver_plt_penalty_matrix(fit)
     plot(fit, out.file = paste(cohort.name, '.fit.pdf', sep = ''), plot.stat = TRUE, layout = '1x1',  palette = 'Dark2')
   }
 
@@ -255,7 +255,7 @@ revolver_analyzer = function(cohort,
     revolver_plt_compare_dendograms(fit, cex = 1, type = 'binary')
     revolver_plt_compare_dendograms(fit, cex = 1, type = 'clonality')
     revolver_plt_evodistance(fit, cex = 1)
-    revolver_plt_group_trajectories(fit, cex = 1, cutoff.features_annotation = options.clustering.withGL$cutoff.features_annotation)
+    revolver_plt_group_trajectories(fit, cex = 1, cutoff.edges_annotation = options.clustering.withGL$cutoff.features_annotation)
     revolver_plt_fit_by_groupn(fit, cex = 1)
   }
 
@@ -288,7 +288,7 @@ revolver_analyzer = function(cohort,
     revolver_plt_compare_dendograms(fit, cex = 1, type = 'clonality')
     revolver_plt_evodistance(fit, cex = 1)
     revolver_plt_group_trajectories(fit, cex = 1, cutoff.features_annotation = options.clustering.withoutGL$cutoff.features_annotation)
-    revolver_plt_fit_by_groupn(fit, cex = 1)
+    revolver_plt_fit_by_group(fit, cex = 1)
   }
 
   setwd(current.folder)

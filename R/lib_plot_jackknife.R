@@ -12,7 +12,7 @@
 #'
 #' @return None
 #' @export
-#' 
+#'
 #' @importFrom graphics boxplot
 #' @importFrom stats reorder
 #'
@@ -48,6 +48,7 @@ revolver_plt_jackknife_coclust = function(x,
   pio::pioDisp(x$jackknife$cluster)
 
   hc = as.hclust(x$cluster$hc)
+  hc.method = x$cluster$hc.method
 
   labels.colors = x$cluster$labels.colors
   annotations.samples = data.frame(cluster = x$cluster$clusters)
@@ -98,6 +99,7 @@ revolver_plt_jackknife_coclust = function(x,
 #'
 #' @param x An object obtained as output of \code{\link{revolver_jackknife}}.
 #' @param file Output file, or NA.
+#' @param cex cex for the plot.
 #'
 #' @return None
 #' @export
@@ -105,7 +107,7 @@ revolver_plt_jackknife_coclust = function(x,
 #' @examples
 #' data(Breast.fit)
 #' revolver_plt_jackknife_coclust_bplot(Breast.fit)
-revolver_plt_jackknife_coclust_bplot = function(x, file = NA)
+revolver_plt_jackknife_coclust_bplot = function(x, file = NA, cex = 1)
 {
   obj_has_clusters(x)
   obj_has_jackknife(x)

@@ -147,27 +147,27 @@ children = function(model, var)
 # mutations in Gamma that are directly reachable via
 # the transitive closure of the --> relation. So, these are the events
 # selected by "var"'s evolutionary trajectories.
-frontier = function(model, var, SHARED.VARIABLES, DICTIONARY)
-{
-  aux = function(r)
-  {
-    r.d = dictionary.get(DICTIONARY, r)
-
-    if(any(r.d %in% SHARED.VARIABLES)) return(r.d) # stop recursion
-
-    c = children(model, r)
-
-    if(is.null(c)) return(NULL) # leaf
-
-    # recursion, reduction etc.
-    return(
-      Reduce(union,
-             sapply(c, aux))
-    )
-  }
-
-  return(aux(var))
-}
+# frontier = function(model, var, SHARED.VARIABLES, DICTIONARY)
+# {
+#   aux = function(r)
+#   {
+#     r.d = dictionary.get(DICTIONARY, r)
+#
+#     if(any(r.d %in% SHARED.VARIABLES)) return(r.d) # stop recursion
+#
+#     c = children(model, r)
+#
+#     if(is.null(c)) return(NULL) # leaf
+#
+#     # recursion, reduction etc.
+#     return(
+#       Reduce(union,
+#              sapply(c, aux))
+#     )
+#   }
+#
+#   return(aux(var))
+# }
 
 # Return the parent of "variable" in model
 pi = function(model, variable)
