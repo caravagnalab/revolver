@@ -12,6 +12,8 @@ Description: The R package that implements the REVOLVER algorithm to compute Rep
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.4),
 Imports: 
     crayon,
     parallel,
