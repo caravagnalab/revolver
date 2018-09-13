@@ -17,8 +17,7 @@
 #' to avoid this step
 #' @param ignore.stderr TRUE to ignore standard error
 #'
-#' @importFrom grDevices col2rgb colorRampPalette dev.copy2pdf dev.new
-#' @importFrom grDevices dev.off dev.size pdf quartz rgb
+#' @import grDevices
 #' 
 #' @return None
 #' @export
