@@ -14,5 +14,6 @@ https://github.com/caravagn/revolver/wiki
 
 | Branch              | Stato CI      |
 |---------------------|---------------|
-| travis | [![Build Status](https://travis-ci.org/caravagn/revolver.svg?branch=travis)](https://travis-ci.org/caravagn/revolver) |
+| master | [![Build Status](https://travis-ci.org/caravagn/revolver.svg?branch=master)](https://travis-ci.org/caravagn/master) |
+| development | [![Build Status](https://travis-ci.org/caravagn/revolver.svg?branch=development)](https://travis-ci.org/caravagn/revolver.svg?branch=development) |
 
