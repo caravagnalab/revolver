@@ -57,7 +57,7 @@ plot.rev_cohort_fit = function(x,
   }
 
   if(merge.files)
-    revolver:::jamPDF(
+    jamPDF(
       in.files = paste0('REVOLVER-report-fit-patient-', patients, '.pdf'),
       out.file = paste0('REVOLVER-report-fit-all-cohort-merged.pdf'),
       delete.original = FALSE,

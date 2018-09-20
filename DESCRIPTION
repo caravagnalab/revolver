@@ -1,7 +1,7 @@
 Package: revolver
 Type: Package
 Title: Repeated Evolution in Cancer (REVOLVER)
-Version: 0.1.1
+Version: 0.1.2
 Author: Giulio Caravagna
 Authors@R: c(
     person("Giulio", "Caravagna", email = "gcaravagn@gmail.com", role = c("aut", "cre")),
@@ -13,6 +13,8 @@ Description: The R package that implements the REVOLVER algorithm to compute Rep
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.4),
 Imports: 
     crayon,
     parallel,

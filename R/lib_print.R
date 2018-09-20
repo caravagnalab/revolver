@@ -17,8 +17,7 @@
 #' to avoid this step
 #' @param ignore.stderr TRUE to ignore standard error
 #'
-#' @importFrom grDevices col2rgb colorRampPalette dev.copy2pdf dev.new
-#' @importFrom grDevices dev.off dev.size pdf quartz rgb
+#' @import grDevices
 #' 
 #' @return None
 #' @export
@@ -120,7 +119,6 @@ multiplot <-
            file,
            cols = 1,
            layout = NULL) {
-    library(grid)
 
     # Make a list from the ... arguments and plotlist
     plots <- c(list(...), plotlist)

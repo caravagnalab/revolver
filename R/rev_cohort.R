@@ -51,7 +51,7 @@ revolver_cohort = function(
   }
 
   pio::pioTit('Input data')
-  pio:::pioDisp(dataset)
+  pio::pioDisp(dataset)
 
   if(options$MIN.CLUSTER.SIZE > 0){
 
