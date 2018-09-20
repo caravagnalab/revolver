@@ -10,3 +10,5 @@ inst/doc
 /inst/doc/vignette.Rnw
 /vignettes/vignette.R
 /cfg.R
+^.*\.Rproj$
+^\.Rproj\.user$
