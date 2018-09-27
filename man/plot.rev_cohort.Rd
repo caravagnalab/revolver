@@ -4,8 +4,8 @@
 \alias{plot.rev_cohort}
 \title{Plot data and trees for a REVOLVER cohort.}
 \usage{
-\method{plot}{rev_cohort}(x, patients = x$patients, max.phylogenies = 12,
-  cex = 1)
+\method{plot}{rev_cohort}(x, patients = x$patients,
+  max.phylogenies = 12, cex = 1)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_cohort"}.}
@@ -18,6 +18,9 @@
 }
 \value{
 nothing
+}
+\description{
+Plot data and trees for a REVOLVER cohort.
 }
 \details{
 Iterative plotting functions that scans a cohort and runs \code{\link{revolver_report_patient}}

@@ -23,6 +23,9 @@ colored according to REVOLVER's clusters.}
 \value{
 nothing
 }
+\description{
+Plot the dendrogram for REVOLVER's clusters.
+}
 \details{
 This function can be applied only to an object that contains a fit result
 and clusters. The function will plot the dendrogram for the results of

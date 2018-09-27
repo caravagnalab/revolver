@@ -6,7 +6,8 @@
 \usage{
 revolver_compute_CLtrees(x, patient, precomputed.trees = NULL,
   precomputed.scores = NULL, options = list(sspace.cutoff = 10000,
-  n.sampling = 5000, overwrite = FALSE, store.max = 100), verbose = FALSE)
+  n.sampling = 5000, overwrite = FALSE, store.max = 100),
+  verbose = FALSE)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_cohort"}}
@@ -24,6 +25,9 @@ revolver_compute_CLtrees(x, patient, precomputed.trees = NULL,
 \value{
 a modififed object of class \code{"rev_cohort"} with available
 mutation trees for \code{patient}.
+}
+\description{
+Compute/ add mutation trees to a REVOLVER cohort.
 }
 \details{
 This is the analogous of \code{\link{revolver_compute_phylogenies}}, but for binary data and

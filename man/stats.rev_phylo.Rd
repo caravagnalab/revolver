@@ -12,6 +12,9 @@ stats.rev_phylo(x)
 \value{
 A list with all computed statistics.
 }
+\description{
+Compute statistics for a \code{"rev_phylo"} tree.
+}
 \details{
 Compute some statistics for a \code{"rev_phylo"} tree. Thee include violations of the
 pigeonhole principle, Suppes' conditions etc. Stats are compute no matter what

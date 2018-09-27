@@ -22,6 +22,10 @@ revolver_plt_compare_dendograms(x, cex = 1, type = "binary",
 \value{
 nothing
 }
+\description{
+Plot the comparison among REVOLVER's clusters and the one obtained
+by analyzing the occurence of mutations.
+}
 \details{
 This function can be applied only to an object that contains a fit result
 and clusters. The function will plot the dendrogram of the alternative

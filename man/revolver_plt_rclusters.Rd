@@ -20,6 +20,9 @@ to include it in the heatmap.}
 \value{
 nothing
 }
+\description{
+Plot the features of REVOLVER's clusters, in a heatmap.
+}
 \details{
 This function can be applied only to an object that contains a fit result
 and clusters. The function will plot the heatmap of all features that define

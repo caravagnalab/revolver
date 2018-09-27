@@ -16,6 +16,9 @@
 \value{
 none
 }
+\description{
+Summary of a \code{"rev_phylo"} object.
+}
 \details{
 Reports some summary for a \code{"rev_phylo"} object, this is a bit more than just using print.
 }

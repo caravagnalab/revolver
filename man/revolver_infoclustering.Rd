@@ -25,6 +25,9 @@ are all of the following: \code{"average"}, \code{"single"}, \code{"complete"}, 
 \value{
 None, this function just produces a report to be inspected offline.
 }
+\description{
+Compute possible clusterings for standard parameters.
+}
 \details{
 This requires to have computed the distance via function \code{\link{revolver_evo_distance}}.
 Compute possible clusterings for standard parameters. This helps

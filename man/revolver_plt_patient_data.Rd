@@ -18,6 +18,9 @@ revolver_plt_patient_data(x, patient, cex = 1, file = NA)
 \value{
 nothing
 }
+\description{
+Plot a patient's data
+}
 \examples{
 data(Breast.fit)
 revolver_plt_patient_data(Breast.fit, 'PD14767')

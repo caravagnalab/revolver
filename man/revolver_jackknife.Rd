@@ -9,7 +9,8 @@ revolver_jackknife(cohort, resamples = 100, leave.out = 0.1,
   transitive.orderings = FALSE, restarts = 0),
   options.clustering = list(use.GL = TRUE, transitive.closure = FALSE,
   min.group.size = 3, hc.method = "ward", cutoff.features_annotation = 3,
-  split.method = "cutreeHybrid"), dump.partial = FALSE, overwrite = FALSE)
+  split.method = "cutreeHybrid"), dump.partial = FALSE,
+  overwrite = FALSE)
 }
 \arguments{
 \item{cohort}{A cohort object where fit and clusters have been computed/}

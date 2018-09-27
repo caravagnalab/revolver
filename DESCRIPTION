@@ -1,7 +1,8 @@
 Package: revolver
-Type: Package
+Version: 0.1.3
+Date: 2018-09-27
 Title: Repeated Evolution in Cancer (REVOLVER)
-Version: 0.1.2
+Type: Package
 Author: Giulio Caravagna
 Authors@R: c(
     person("Giulio", "Caravagna", email = "gcaravagn@gmail.com", role = c("aut", "cre")),
@@ -32,7 +33,7 @@ Imports:
     stats,
     utils
 Remotes: caravagn/pio
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests: 
     knitr,
     rmarkdown,

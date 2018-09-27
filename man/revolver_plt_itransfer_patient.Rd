@@ -18,6 +18,9 @@ revolver_plt_itransfer_patient(x, patient, file = NA, cex = 1)
 \value{
 None
 }
+\description{
+Plot the information transfer from a patient's fit.
+}
 \details{
 From the phylogenetic tree fit to this patient, REVOLVER extracts and plots the
 information transfer depicted by the tree. The tree is annotated with the number

@@ -4,8 +4,8 @@
 \alias{revolver_plt_jackknife_edge_counts}
 \title{Plot jackknife statistics for the number of patients with an edge.}
 \usage{
-revolver_plt_jackknife_edge_counts(x, cutoff.annotate.numEdges = 3, cex = 1,
-  file = NA)
+revolver_plt_jackknife_edge_counts(x, cutoff.annotate.numEdges = 3,
+  cex = 1, file = NA)
 }
 \arguments{
 \item{x}{An object obtained as output of \code{\link{revolver_jackknife}}.}

@@ -3,7 +3,6 @@
 \docType{data}
 \name{CRC}
 \alias{CRC}
-\alias{CRC}
 \title{Colorectal Cancer Data by Cross et al.}
 \format{A dataframe that represents the CRC data analyzed in REVOLVER.
 See also the vignette associated to the case study.}
