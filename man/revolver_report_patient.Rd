@@ -21,6 +21,9 @@ revolver_report_patient(x, patient, cex = 1, max.phylogenies = 12,
 \value{
 nothing
 }
+\description{
+Generate PDF report for a patient's data and trees
+}
 \examples{
 data(Breast.fit)
 revolver_report_patient(Breast.fit, 'PD9770')

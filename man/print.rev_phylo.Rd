@@ -4,7 +4,8 @@
 \alias{print.rev_phylo}
 \title{Print a \code{"rev_phylo"} object.}
 \usage{
-\method{print}{rev_phylo}(x, digits = max(3, getOption("digits") - 3), ...)
+\method{print}{rev_phylo}(x, digits = max(3, getOption("digits") - 3),
+  ...)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_phylo"}.}
@@ -15,6 +16,9 @@
 }
 \value{
 none
+}
+\description{
+Print a \code{"rev_phylo"} object.
 }
 \details{
 Print a summary for a \code{"rev_phylo"} object, which includes MSDOS-like console layout for trees.

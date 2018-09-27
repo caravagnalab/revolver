@@ -4,8 +4,9 @@
 \alias{revolver_plt_DET_index}
 \title{Plot the DET index, via non parametric bootstrap.}
 \usage{
-revolver_plt_DET_index(x, DET.type = "Shannon", type = "after.expansion",
-  N = 100, colour = "steelblue", file = NA, cex = 1)
+revolver_plt_DET_index(x, DET.type = "Shannon",
+  type = "after.expansion", N = 100, colour = "steelblue",
+  file = NA, cex = 1)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}

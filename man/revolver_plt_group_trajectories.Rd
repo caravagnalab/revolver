@@ -4,8 +4,9 @@
 \alias{revolver_plt_group_trajectories}
 \title{Plot the consensus model of the trajectories/}
 \usage{
-revolver_plt_group_trajectories(x, cex = 1, cutoff.edges_annotation = 3,
-  file = NA, jamPDF = FALSE, jam.layout = "2x1")
+revolver_plt_group_trajectories(x, cex = 1,
+  cutoff.edges_annotation = 3, file = NA, jamPDF = FALSE,
+  jam.layout = "2x1")
 }
 \arguments{
 \item{x}{A cohort object with fits and clusters.}
@@ -24,6 +25,9 @@ only if you set file not NA.}
 }
 \value{
 nothing
+}
+\description{
+Plot the consensus model of the trajectories/
 }
 \details{
 This function can be applied only to an object that contains a fit result

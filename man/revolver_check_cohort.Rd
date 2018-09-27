@@ -16,6 +16,9 @@ revolver_check_cohort(x, auto.fix = FALSE, return.value = FALSE)
 \value{
 depends on \code{return.value}
 }
+\description{
+Check basic inconsistencies in a REVOLVER cohort.
+}
 \details{
 Perform some basic diagnostic of a cohort object. It will inform of patients without drivers and other
 information that can be used to reshape the data before fitting a model.

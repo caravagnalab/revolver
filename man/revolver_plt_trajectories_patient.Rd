@@ -4,8 +4,8 @@
 \alias{revolver_plt_trajectories_patient}
 \title{Plot the trajectories in a patient's fit model.}
 \usage{
-revolver_plt_trajectories_patient(x, patient, palette = "Set1", alpha = 0.8,
-  file = NA, cex = 1)
+revolver_plt_trajectories_patient(x, patient, palette = "Set1",
+  alpha = 0.8, file = NA, cex = 1)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}

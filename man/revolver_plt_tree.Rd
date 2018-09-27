@@ -4,8 +4,8 @@
 \alias{revolver_plt_tree}
 \title{Plot a phylogenetic or a mutation tree for a patient.}
 \usage{
-revolver_plt_tree(x, type = "CCF", file = NA, palette = "Set1", cex = 1,
-  alpha = 0.7)
+revolver_plt_tree(x, type = "CCF", file = NA, palette = "Set1",
+  cex = 1, alpha = 0.7)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_phylo"}.}

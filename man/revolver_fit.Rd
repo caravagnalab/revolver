@@ -4,9 +4,9 @@
 \alias{revolver_fit}
 \title{REVOLVER fit function.}
 \usage{
-revolver_fit(x, initial.solution = 1, max.iterations = 10, restarts = 0,
-  parallel = FALSE, cores.ratio = 0.8, transitive.orderings = FALSE,
-  verbose = FALSE)
+revolver_fit(x, initial.solution = 1, max.iterations = 10,
+  restarts = 0, parallel = FALSE, cores.ratio = 0.8,
+  transitive.orderings = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort"} object with available trees.}
@@ -29,6 +29,9 @@ fitting step (transfering of orderings). The default is \code{FALSE}, which we s
 }
 \value{
 A \code{"rev_cohort_fit"} object
+}
+\description{
+REVOLVER fit function.
 }
 \details{
 The main fitting function for REVOLVER, implements the 2-steps EM-algorithm described

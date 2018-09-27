@@ -4,7 +4,8 @@
 \alias{print.rev_cohort}
 \title{Print a \code{"rev_cohort"} object}
 \usage{
-\method{print}{rev_cohort}(x, digits = max(3, getOption("digits") - 3), ...)
+\method{print}{rev_cohort}(x, digits = max(3, getOption("digits") - 3),
+  ...)
 }
 \arguments{
 \item{x}{obj of class \code{"rev_cohort"}}

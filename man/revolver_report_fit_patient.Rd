@@ -19,6 +19,9 @@ revolver_report_fit_patient(x, patient, cex = 1,
 \value{
 nothing
 }
+\description{
+Generate PDF report for a patient's fit
+}
 \examples{
 data(Breast.fit)
 revolver_report_fit_patient(Breast.fit, 'PD9770')
