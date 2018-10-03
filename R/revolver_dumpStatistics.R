@@ -35,7 +35,7 @@ revolver_dumpStatistics <- function(x, file='REVOLVER-Statistics.xlsx') {
     pioTit('Fit: multinomial, penalty & fit')
     sheets[["Multinomial"]] <- dfWithRownames(x$fit$multinomial.penalty)
     sheets[["Penalty"]] <- dfWithRownames(x$fit$penalty)
-    sheets[["Fit"]] <- dfWithRownames(Fit=x$fit$solutionID)
+    sheets[["Fit"]] <- dfWithRownames(x$fit$solutionID)
   }
 
   if (!is.null(x$cluster)) {
