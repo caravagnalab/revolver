@@ -12,7 +12,7 @@
 #'
 #' @return An object of class \code{"rev_cohort"}
 #'
-#' @aliases revolver_cohort
+#' @aliases rev_cohort revolver_cohort
 #'
 #' @examples
 #' data(CRC)
@@ -21,7 +21,7 @@
 #' @import crayon
 #'
 #' @export
-rev_cohort = function(
+revolver_cohort = function(
   dataset,
   CCF.parser = revolver:::CCF.parser,
   options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
@@ -144,8 +144,8 @@ rev_cohort = function(
   return(obj)
 }
 
-# alias
-revolver_cohort <- rev_cohort
+#' @export 
+rev_cohort <- revolver_cohort
 
 
 #' Print a \code{"rev_cohort"} object

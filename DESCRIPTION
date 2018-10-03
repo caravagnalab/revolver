@@ -11,7 +11,7 @@ Authors@R: c(
     person("Luca", "De Sano", email = "luca.desano@gmail.com", role = "ctb"))
 Maintainer: Giulio Caravagna <gcaravagn@gmail.com>
 Description: The R package that implements the REVOLVER algorithm to compute Repeated Evolution in Cancer from multi-region sequencing data.
-License: file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends:

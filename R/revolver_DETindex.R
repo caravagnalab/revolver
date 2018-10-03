@@ -20,9 +20,9 @@ revolver_DETindex <- function(x,
     
   type <- match.arg(type)
   index <- match.arg(index)
+  feat <- revolver.featureMatrix(x)
   how <- paste0(ifelse(driver.only, "driver", "all"), 
                 ifelse(type=="before.expansion", "before", "after"))
-  if (type == "after.explosion") feat <- revolver.featureMatrix(x)
 
   switch(how, 
     "driverbefore"=doidx(x, x$fit$multinomial.penalty, n.boot, table),
