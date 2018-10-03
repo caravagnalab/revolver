@@ -27,9 +27,11 @@ revolver_report_patient = function(x,
   f = paste(patient,
             c('data.pdf', 'trees_scores.pdf', 'trees.pdf'), sep = '-')
 
+  # dumping everything to a PDF all the time does NOT make debugging easier... 
   revolver_plt_patient_data(x, patient, cex = cex, file = f[1])
   revolver_plt_patient_trees_scores(x, patient, cex = cex, file = f[2])
-  revolver_plt_patient_trees(x, patient, max.phylogenies = max.phylogenies, cex = cex, file = f[3])
+  revolver_plt_patient_trees(x, patient, max.phylogenies = max.phylogenies, 
+                             cex = cex, file = f[3])
 
   ch = ceiling(sqrt(max.phylogenies))
 
@@ -40,5 +42,3 @@ revolver_report_patient = function(x,
   # wat
   invisible(NULL)
 }
-
-
