@@ -23,7 +23,7 @@ revolver_dumpStatistics <- function(x, file='REVOLVER-Statistics.xlsx') {
   sheets <- list(
    "Drivers"=x$dataset[x$dataset$is.driver,],
    "Occurrences"=ft$occurrences,
-   "Information_Transfer"=ft$consensus.explosion,
+   "Information_Transfer"=ft$consensus.explosion
   )
 
   if (!is.null(x$fit)) {
