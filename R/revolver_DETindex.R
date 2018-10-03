@@ -67,14 +67,14 @@ idx <- function(x, w, n, index, table=FALSE) {
   w <- w[, -1]
   DET <- rev_eval(w, index) # empirical
   npbs <- c()
-  pb <- txtProgressBar(min = 1, max = n.boot, style = 3)
+  pb <- txtProgressBar(min = 1, max = n, style = 3)
   pb.status <- getOption('revolver.progressBar', default = TRUE)
-  for (i in 1:n.boot) {
+  for (i in seq_len(n)) {
     # update progress bar
     if (pb.status) setTxtProgressBar(pb, i)
     npb <- w[, sample(ncol(w), replace = TRUE)]
     npbs[i] <- sum(rev_eval(npb, index))
-    # DET = DET + rev_eval(npb, index)/n.boot
+    # DET = DET + rev_eval(npb, index)/n
   }
   close(pb)
   cat(green(' DONE\n\n'))
