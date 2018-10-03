@@ -25,17 +25,22 @@ revolver_DETindex <- function(x,
                 ifelse(type=="before.expansion", "before", "after"))
 
   switch(how, 
-    "driverbefore"=doidx(x, x$fit$multinomial.penalty, n.boot, table),
-    "allbefore"=idx(x, x$fit$multinomial.penalty, n.boot, table),
-    "driverafter"=doidx(x, DFW2Matrix(feat$consensus.explosion), n.boot, table),
-    "allafter"=idx(x, DFW2Matrix(feat$consensus.explosion), n.boot, table)
+    "driverbefore"=doidx(x=x, w=x$fit$multinomial.penalty, n=n.boot, 
+                         index=index, table=table),
+    "allbefore"=idx(x=x, w=x$fit$multinomial.penalty, n=n.boot, 
+                    index=index, table=table),
+    "driverafter"=doidx(x=x, w=DFW2Matrix(feat$consensus.explosion), n=n.boot, 
+                        index=index, table=table),
+    "allafter"=idx(x=x, w=DFW2Matrix(feat$consensus.explosion), n=n.boot, 
+                   index=index, table=table)
   )
 
 }
 
 
 # helper fn: Support 2 types of indices
-rev_eval <- function(M, index) { 
+rev_eval <- function(M, index=c("Shannon","VA")) { 
+  index <- match.arg(index)
   if (index == 'Shannon') {
     values <- vegan::diversity(M,MARGIN=2)/log(vegan::specnumber(M,MARGIN=2))
     values[is.na(values)] = 0 # normalized at 0 (100% homogenous trajectories)
@@ -49,7 +54,7 @@ rev_eval <- function(M, index) {
 
 
 # helper fn: driver-only index 
-doidx <- function(x, w, n, table = F) {
+doidx <- function(x, w, n, index, table=FALSE) {
   w <- w[, -1]
   DET <- rev_eval(w, index) # empirical
   res <- list(DET.cohort = NULL, DET.driver = DET)
@@ -58,10 +63,9 @@ doidx <- function(x, w, n, table = F) {
 
 
 # helper fn: all lesions index 
-idx <- function(x, w, n, table = F) { 
+idx <- function(x, w, n, index, table=FALSE) { 
   w <- w[, -1]
   DET <- rev_eval(w, index) # empirical
-  # DET = 0
   npbs <- c()
   pb <- txtProgressBar(min = 1, max = n.boot, style = 3)
   pb.status <- getOption('revolver.progressBar', default = TRUE)
