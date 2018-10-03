@@ -12,7 +12,7 @@ revolver_dumpStatistics(x, file = "REVOLVER-Statistics.xlsx")
 \item{file}{output file}
 }
 \value{
-none
+invisibly, the list of data.frames written to the Excel file
 }
 \description{
 Dump statistics for fit to an Excel file.

@@ -3,7 +3,7 @@
 #' @param x REVOLVER cohort fit
 #' @param file output file
 #'
-#' @return none
+#' @return invisibly, the list of data.frames written to the Excel file 
 #' 
 #' @importFrom writexl write_xlsx
 #' @importFrom pio pioHdr pioTit
@@ -16,41 +16,41 @@
 #' @export
 revolver_dumpStatistics <- function(x, file='REVOLVER-Statistics.xlsx') {
 
+  sheets <- list()
   pioHdr('REVOLVER: Dump statistics to Excel', "File: ", file, suffix='\t')
   pioTit('Features: drivers, occurrences & information transfer')
   ft <- revolver.featureMatrix(x)
 
-  sheets <- list(
-   "Drivers"=x$dataset[x$dataset$is.driver,],
-   "Occurrences"=ft$occurrences,
-   "Information_Transfer"=ft$consensus.explosion
-  )
+  sheets[["Drivers"]] <- x$dataset[x$dataset$is.driver,]
+  sheets[["Occurrences"]] <- as.data.frame(ft$occurrences)
+  sheets[["Information_Transfer"]] <- ft$consensus.explosion
 
   if (!is.null(x$fit)) {
     pioTit('Fit: multinomial, penalty & fit')
-    sheets[["Multinomial"]] <- x$fit$multinomial.penalty
-    sheets[["Penalty"]] <- x$fit$penalty
-    sheets[["Fit"]] <- x$fit$solutionID
+    sheets[["Multinomial"]] <- as.data.frame(x$fit$multinomial.penalty)
+    sheets[["Penalty"]] <- data.frame(Penalty=x$fit$penalty)
+    sheets[["Fit"]] <- data.frame(Fit=x$fit$solutionID)
   }
 
   if (!is.null(x$cluster)) {
     pioTit('Clustering: distance, clusters & features per cluster')
-    sheets[["Distance"]] <- x$cluster$distances
-    sheets[["Clusters"]] <- x$cluster$clusters
+    sheets[["Distance"]] <- data.frame(Distance=x$cluster$distances)
+    sheets[["Clusters"]] <- data.frame(Clusters=x$cluster$clusters)
     groups <- sort(x$cluster$clusters)
     for (g in sort(names(x$cluster$labels.colors))) {
       pts <- names(groups[groups==as.character(g)])
-      sheets[[g]] <- revolver.featureMatrix(x, patients=pts)$consensus.explosion
+      cexp <- revolver.featureMatrix(x, patients=pts)$consensus.explosion
+      sheets[[g]] <- as.data.frame(cexp)
     }
   }
 
   if (!is.null(x$jackknife)) {
     pioTit('Jackknife: co-clustering, clusters & features per cluster')
-    sheets[["Jackknife-clustering"]] <- x$jackknife$cluster
-    sheets[["Jackknife-edges-detection"]] <- x$jackknife$edges
+    sheets[["Jackknife-clustering"]] <- data.frame(Cluster=x$jackknife$cluster)
+    sheets[["Jackknife-edges-detection"]] <- data.frame(Edges=x$jackknife$edges)
   }
 
   write_xlsx(sheets, path=file) 
+  invisible(sheets)
 
 }
-
