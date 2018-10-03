@@ -22,8 +22,11 @@ revolver_dumpStatistics <- function(x, file='REVOLVER-Statistics.xlsx') {
 
   # helper fn for data.frame'ing
   dfWithRownames <- function(x) {
-    if (is(x, "matrix")) return(cbind(Name=rownames(x), as.data.frame(x)))
-    return(cbind(Name=names(x), Value=x))
+    if (is(x, "matrix")) {
+      return(cbind.data.frame(Name=rownames(x), as.data.frame(x)))
+    } else { 
+      return(data.frame(Name=names(x), Value=x))
+    }
   }
 
   sheets <- list()
