@@ -16,6 +16,9 @@ revolver_plt_rbannerplot(x, cex = 1, file = NA)
 \value{
 nothing
 }
+\description{
+Bannerplot for REVOLVER's clusters.
+}
 \details{
 This function can be applied only to an object that contains a fit result
 and clusters. The function will plot the bannerplot for the results of

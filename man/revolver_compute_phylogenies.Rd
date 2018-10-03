@@ -6,7 +6,8 @@
 \usage{
 revolver_compute_phylogenies(x, patient, precomputed.trees = NULL,
   precomputed.scores = NULL, options = list(sspace.cutoff = 10000,
-  n.sampling = 5000, overwrite = FALSE, store.max = 100), verbose = FALSE)
+  n.sampling = 5000, overwrite = FALSE, store.max = 100),
+  verbose = FALSE)
 }
 \arguments{
 \item{x}{An object of class \code{"rev_cohort"}}
@@ -30,6 +31,9 @@ scores. No computation will be carried out in this case.}
 }
 \value{
 a modififed object of class \code{"rev_cohort"} with available phylogeneis for \code{patient}.
+}
+\description{
+Compute/ add CCF-based phylogenies to a REVOLVER cohort.
 }
 \details{
 Create or compute phylogenies for REVOLVER fit from CCF data. This method should be used also if one

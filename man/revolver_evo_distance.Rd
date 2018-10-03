@@ -18,6 +18,9 @@ should be computed, or not. Default is \code{FALSE}.}
 \value{
 A \code{"rev_cohort_fit"}. object with a new field \code{"cluster"} that contains the computation's results.
 }
+\description{
+Compute REVOLVER's evolutionary distance h(P_i, P_j).
+}
 \details{
 This function can be applied only to an object that contains a fit result,
 which is then of class \code{"rev_cohort_fit"}.

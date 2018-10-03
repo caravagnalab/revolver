@@ -23,6 +23,9 @@ lists the edges of the model, or a list of edges (vector) in the format "A~B" to
 \value{
 An object of class \code{"rev_phylo"}
 }
+\description{
+REVOLVER constructor for an object of type "rev_phylo": a tree.
+}
 \details{
 REVOLVER constructor to create an object of type "rev_phylo", which represents a model
 for a patient. This is the same object regarldess data are CCF or binary values.

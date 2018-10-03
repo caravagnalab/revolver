@@ -2,14 +2,13 @@
 % Please edit documentation in R/lib_plot_fit.R, R/rev_fit.R
 \name{plot.rev_cohort_fit}
 \alias{plot.rev_cohort_fit}
-\alias{plot.rev_cohort_fit}
 \title{Plot REVOLVER fits for a subset of patients in the cohort.}
 \usage{
-\method{plot}{rev_cohort_fit}(x, patients = x$patients, merge.files = FALSE,
-  cex = 1)
+\method{plot}{rev_cohort_fit}(x, patients = x$patients,
+  merge.files = FALSE, cex = 1)
 
-\method{plot}{rev_cohort_fit}(x, patients = x$patients, merge.files = FALSE,
-  cex = 1)
+\method{plot}{rev_cohort_fit}(x, patients = x$patients,
+  merge.files = FALSE, cex = 1)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}
@@ -40,6 +39,11 @@
 None
 
 nothing
+}
+\description{
+Plot REVOLVER fits for a subset of patients in the cohort.
+
+Plot fits from a REVOLVER cohort.
 }
 \details{
 This function performs the plots for each one of a set of input patient IDs. Each plot

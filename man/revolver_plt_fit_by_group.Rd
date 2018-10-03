@@ -18,6 +18,9 @@ and annotated also with the cluster ID.}
 \value{
 nothing
 }
+\description{
+Plot model fit grouped by cluster.
+}
 \details{
 This function can be applied only to an object that contains a fit result
 and clusters. For each cluster, this function plots the fit of the models

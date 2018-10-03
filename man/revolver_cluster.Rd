@@ -19,6 +19,9 @@ revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
 \value{
 The input \code{x} with a modified field \code{cluster} with results.
 }
+\description{
+Compute hierarchical clustering for a REVOLVER cohort
+}
 \details{
 Compute hierarchical clustering for a REVOLVER cohort with fit models.
 You might want to see functions \code{\link{revolver_evo_distance}} and

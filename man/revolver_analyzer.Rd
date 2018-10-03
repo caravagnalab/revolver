@@ -4,13 +4,14 @@
 \alias{revolver_analyzer}
 \title{Wrapper for a full analysis with REVOLVER}
 \usage{
-revolver_analyzer(cohort, type = "CCF", cohort.name = "REVOLVER-cohort",
-  folder.output = ".", do.plots = TRUE, options.trees = list(sspace.cutoff
-  = 10000, n.sampling = 5000, store.max = 200, overwrite = FALSE),
+revolver_analyzer(cohort, type = "CCF",
+  cohort.name = "REVOLVER-cohort", folder.output = ".",
+  do.plots = TRUE, options.trees = list(sspace.cutoff = 10000,
+  n.sampling = 5000, store.max = 200, overwrite = FALSE),
   options.fit = list(initial.solution = NA, transitive.orderings = FALSE,
-  restarts = 10), options.clustering.withGL = list(transitive.closure = FALSE,
-  min.group.size = 3, hc.method = "ward", cutoff.features_annotation = 3,
-  split.method = "cutreeHybrid"),
+  restarts = 10), options.clustering.withGL = list(transitive.closure =
+  FALSE, min.group.size = 3, hc.method = "ward", cutoff.features_annotation
+  = 3, split.method = "cutreeHybrid"),
   options.clustering.withoutGL = list(transitive.closure = FALSE,
   min.group.size = 3, hc.method = "ward", cutoff.features_annotation = 3,
   split.method = "cutreeDynamic"))
@@ -39,6 +40,9 @@ or \code{\link{revolver_compute_CLtrees}}.}
 }
 \value{
 Nothing, as all functions dump to disk several PDF and RData files.
+}
+\description{
+Wrapper for a full analysis with REVOLVER
 }
 \details{
 This is convenient wrapper to run all REVOLVER's analysis within one command.

@@ -21,6 +21,9 @@ revolver_plt_patient_trees(x, patient, max.phylogenies = 12, file = NA,
 \value{
 nothing
 }
+\description{
+Plot a the top-scoring trees for a patient.
+}
 \details{
 Iterative plotting for the set of input trees of a patient (mutation
 trees or phylogenetic trees). This is usually used when ispecting the

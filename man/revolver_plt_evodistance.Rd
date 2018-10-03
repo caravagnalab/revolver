@@ -16,6 +16,9 @@ revolver_plt_evodistance(x, cex = 1, file = NA)
 \value{
 nothing
 }
+\description{
+Plot REVOLVER's evolutionary distance, in a heatmap.
+}
 \details{
 This function can be applied only to an object that contains a fit result
 and clusters. The function will plot the heatmap of all the distance values

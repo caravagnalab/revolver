@@ -20,6 +20,9 @@ revolver_removeDriver(x, patient, variantID, misc, cluster)
 \value{
 a modified cohort object of class \code{"rev_cohort"}
 }
+\description{
+Remove a driver event from a cohort.
+}
 \details{
 Basic editing function. Each event is identied through its ID,
 cluster assignment and its misc flag. With this function, you can remove it.
