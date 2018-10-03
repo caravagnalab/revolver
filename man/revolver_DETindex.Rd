@@ -4,8 +4,9 @@
 \alias{revolver_DETindex}
 \title{helper function to calculate diversity indices}
 \usage{
-revolver_DETindex(x, n.boot = 1, table = FALSE, index = "Shannon",
-  type = "after.expansion", driver.only = FALSE)
+revolver_DETindex(x, n.boot = 1, table = FALSE, index = c("Shannon",
+  "VA"), type = c("after.expansion", "before.expansion"),
+  driver.only = FALSE)
 }
 \arguments{
 \item{x}{revolver output}
@@ -14,7 +15,7 @@ revolver_DETindex(x, n.boot = 1, table = FALSE, index = "Shannon",
 
 \item{table}{return a table of results? (default is FALSE)}
 
-\item{index}{diversity index (Shannon or VA, default is Shannon)}
+\item{index}{'Shannon' or 'VA' (default is Shannon)}
 
 \item{type}{'before.expansion' or 'after.expansion' (default after)}
 

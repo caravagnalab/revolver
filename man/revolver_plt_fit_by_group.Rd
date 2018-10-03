@@ -12,7 +12,7 @@ revolver_plt_fit_by_group(x, cex = 1,
 
 \item{cex}{Cex for the plot.}
 
-\item{file.suggix}{Each filename will be suffixed by this string,
+\item{file.suffix}{Each filename will be suffixed by this string,
 and annotated also with the cluster ID.}
 }
 \value{

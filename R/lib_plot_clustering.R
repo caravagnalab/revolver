@@ -465,7 +465,7 @@ revolver_plt_group_trajectories = function(x,
 #'
 #' @param x A cohort object with fits and clusters.
 #' @param cex Cex for the plot.
-#' @param file.suggix Each filename will be suffixed by this string,
+#' @param file.suffix Each filename will be suffixed by this string,
 #' and annotated also with the cluster ID.
 #'
 #' @return nothing
