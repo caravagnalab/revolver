@@ -198,7 +198,7 @@ infoclustering = function(dist.obj, methods, do.plot = FALSE){
 
 #' @importFrom stats order.dendrogram
 #' @importFrom utils capture.output
-split_dendogram = function(dendogram, hc, distance, method, min.group,
+split_dendrogram = function(dendrogram, hc, distance, method, min.group,
                            do.plot = FALSE,
                            plot.type = 'rectangle',
                            palette = 'Set1')
@@ -210,7 +210,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
                              minClusterSize = min.group,
                              method = 'tree')
 
-    clusters = clusters[order.dendrogram(dendogram)]
+    clusters = clusters[order.dendrogram(dendrogram)]
     names(clusters) = hc$order.lab
   }
 
@@ -221,7 +221,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
       deepSplit = TRUE,
       minModuleSize = min.group)
 
-    clusters = clusters[order.dendrogram(dendogram)]
+    clusters = clusters[order.dendrogram(dendrogram)]
     names(clusters) = hc$order.lab
   }
 
@@ -234,7 +234,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
         minClusterSize = min.group)$labels
       })
 
-    clusters = clusters[order.dendrogram(dendogram)]
+    clusters = clusters[order.dendrogram(dendrogram)]
     names(clusters) = hc$order.lab
   }
 
@@ -243,7 +243,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
     # require(dendextend)
 
     hcl = as.hclust(hc)
-    dend_k = dendextend::find_k(dendogram, krange = 1:ceiling(length(hcl$labels)/min.group))
+    dend_k = dendextend::find_k(dendrogram, krange = 1:ceiling(length(hcl$labels)/min.group))
 
     clusters = dend_k$pamobject$clustering
   }
@@ -259,7 +259,7 @@ split_dendogram = function(dendogram, hc, distance, method, min.group,
   labels.colors = scols(unique(clusters), palette)
 
 
-  if(do.plot) plot_dendogram(hc, dendogram, clusters, plot.type = plot.type, main = method, colors = labels.colors)
+  if(do.plot) plot_dendrogram(hc, dendrogram, clusters, plot.type = plot.type, main = method, colors = labels.colors)
 
   return(list(k = k, clusters = clusters, labels.colors = labels.colors))
 }

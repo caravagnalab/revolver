@@ -14,7 +14,7 @@
 #' "binary" or "clonality" are for occurrence-based clusterings. In any case leaves are
 #' colored according to REVOLVER's clusters.
 #' @param cex Cex for the plot
-#' @param dendogram.type Type of dendrogram (rectangle, triangle, circular)
+#' @param dendrogram.type Type of dendrogram (rectangle, triangle, circular)
 #' @param file Output file, if NA no file is used
 #'
 #' @return nothing
@@ -27,25 +27,25 @@
 #'  TODO
 #' }
 #' 
-revolver_plt_dendogram = function(x,
+revolver_plt_dendrogram = function(x,
                                   type = 'REVOLVER',
                                   cex = 1,
-                                  dendogram.type = 'rectangle',
+                                  dendrogram.type = 'rectangle',
                                   file = NA)
 {
   obj_has_clusters(x)
 
   args = pio:::nmfy(c('Dendogram', 'Dendogram type', 'Output file'),
-                    c(cex, dendogram.type, file))
+                    c(cex, dendrogram.type, file))
   pio::pioHdr('REVOLVER Plot: Dendrogram of REVOLVER clusters', args, prefix = '\t')
 
-  hc = dendogram = main = sub = NULL
+  hc = dendrogram = main = sub = NULL
 
   ##### Extract the relevant clustering object
   if (type == 'REVOLVER')
   {
     hc = x$cluster$hc
-    dendogram = x$cluster$dendogram
+    dendrogram = x$cluster$dendrogram
     main = paste("REVOLVER clustering of", x$annotation)
     sub = paste(
       x$cluster$hc.method,
@@ -68,7 +68,7 @@ revolver_plt_dendogram = function(x,
 
     data = as.matrix(data)
     hc = cluster::agnes(dist(data), method = x$cluster$hc.method)
-    dendogram = as.dendrogram(hc)
+    dendrogram = as.dendrogram(hc)
 
     main = "Clustering binary occurrences"
     sub = "Colors: REVOLVER clusters"
@@ -84,7 +84,7 @@ revolver_plt_dendogram = function(x,
       dist(features$occurrences.clonal.subclonal),
       method = x$cluster$hc.method
     )
-    dendogram = as.dendrogram(hc)
+    dendrogram = as.dendrogram(hc)
 
     main = "Clustering clonal/ subclonal occurrences"
     sub = "Colors: REVOLVER clusters"
@@ -92,11 +92,11 @@ revolver_plt_dendogram = function(x,
 
   lot = mylayout.on(file, 1, c(10, 10), cex)
 
-  plot_dendogram(
+  plot_dendrogram(
     hc,
-    dendogram,
+    dendrogram,
     x$cluster$cluster,
-    plot.type = dendogram.type,
+    plot.type = dendrogram.type,
     main = main,
     sub = sub,
     colors = x$cluster$labels.colors
@@ -218,7 +218,7 @@ revolver_plt_rclusters = function(x,
 #' @param x A cohort object with fits and clusters.
 #' @param cex Cex for the plot
 #' @param type Compare against "binary" or "clonality" (see Description).
-#' @param dendogram.type Type of dendrogram ("rectangle", "triangle", "circular")
+#' @param dendrogram.type Type of dendrogram ("rectangle", "triangle", "circular")
 #' @param file Output file, if NA no file is used
 #'
 #' @return nothing
@@ -229,17 +229,17 @@ revolver_plt_rclusters = function(x,
 #'  TODO
 #' }
 #' 
-revolver_plt_compare_dendograms = function(x,
+revolver_plt_compare_dendrograms = function(x,
                                            cex = 1,
                                            type = 'binary',
-                                           dendogram.type = 'rectangle',
+                                           dendrogram.type = 'rectangle',
                                            file = NA)
 {
   obj_has_clusters(x)
 
   args = pio:::nmfy(
     c('Comparison against', 'Dendrogram type', 'Output file'),
-    c(type, dendogram.type, file)
+    c(type, dendrogram.type, file)
   )
   pio::pioHdr('REVOLVER Dendrogram Plot', args, prefix = '\t')
 
@@ -253,7 +253,7 @@ revolver_plt_compare_dendograms = function(x,
 
   # REVOLVER results
   hc = x$cluster$hc
-  dendogram = x$cluster$dendogram
+  dendrogram = x$cluster$dendrogram
 
   # ALternative
   data = hc2 = NULL
@@ -278,10 +278,10 @@ revolver_plt_compare_dendograms = function(x,
   }
 
   # Dendogram altearnative
-  dendogram2 = as.dendrogram(hc2)
-  dendextend::labels_cex(dendogram2) = 0.5
+  dendrogram2 = as.dendrogram(hc2)
+  dendextend::labels_cex(dendrogram2) = 0.5
 
-  dend_list = dendextend::dendlist(dendogram, dendogram2)
+  dend_list = dendextend::dendlist(dendrogram, dendrogram2)
   ent = round(dendextend::entanglement(dend_list), 4)
 
   lbl = ifelse(type == 'binary',
@@ -292,8 +292,8 @@ revolver_plt_compare_dendograms = function(x,
 
   # Tanglegram
   dendextend::tanglegram(
-    dendogram,
-    dendogram2,
+    dendrogram,
+    dendrogram2,
     highlight_distinct_edges = FALSE,
     # Turn-off dashed lines
     common_subtrees_color_lines = TRUE,
@@ -566,7 +566,7 @@ revolver_plt_fit_by_group = function(x,
 # hc.method = x$cluster$hc.method
 #
 # hc = x$cluster$hc
-# dendogram = x$cluster$dendogram
+# dendrogram = x$cluster$dendrogram
 # clusters = x$cluster$cluster
 # k = x$cluster$k
 # split.method = x$cluster$split.method
@@ -584,8 +584,8 @@ revolver_plt_fit_by_group = function(x,
 ##########################################
 
 #' @importFrom stats is.leaf
-plot_dendogram = function(hc,
-                          dendogram,
+plot_dendrogram = function(hc,
+                          dendrogram,
                           clusters,
                           palette = 'Set1',
                           plot.type = 'rectangle',
@@ -612,7 +612,7 @@ plot_dendogram = function(hc,
     else
       labels.colors = colors
 
-    dendextend::labels_cex(dendogram) = .5
+    dendextend::labels_cex(dendrogram) = .5
 
     colLab <- function(n, groups) {
       if (is.leaf(n)) {
@@ -631,9 +631,9 @@ plot_dendogram = function(hc,
       }
       n
     }
-    dendogram <- dendrapply(dendogram, colLab)
+    dendrogram <- dendrapply(dendrogram, colLab)
 
-    plot(dendogram,
+    plot(dendrogram,
          main = main,
          type = plot.type,
          ...)
@@ -669,7 +669,7 @@ plot_dendogram = function(hc,
 plot_tanglegram = function(x,
                            versus = 'binary',
                            hc.method = 'ward',
-                           dendogram,
+                           dendrogram,
                            hc,
                            file = NA,
                            width = 10,
@@ -679,8 +679,8 @@ plot_tanglegram = function(x,
     features[features > 0] = 1
     hc = cluster::agnes(dist(as.matrix(features)), method = hc.method)
 
-    dendogram = as.dendrogram(hc)
-    dendextend::labels_cex(dendogram) = 0.5
+    dendrogram = as.dendrogram(hc)
+    dendextend::labels_cex(dendrogram) = 0.5
 
     main = 'Binary'
   }
@@ -689,21 +689,21 @@ plot_tanglegram = function(x,
     features = revolver.featureMatrix(x)$occurrences.clonal.subclonal
     hc = cluster::agnes(dist(features), method = hc.method)
 
-    dendogram = as.dendrogram(hc)
-    dendextend::labels_cex(dendogram) = 0.5
+    dendrogram = as.dendrogram(hc)
+    dendextend::labels_cex(dendrogram) = 0.5
 
     main = 'Clonal/subclonal'
   }
 
-  xdendogram = x$cluster$dendogram
-  dend_list <- dendextend::dendlist(xdendogram, dendogram)
+  xdendrogram = x$cluster$dendrogram
+  dend_list <- dendextend::dendlist(xdendrogram, dendrogram)
 
   if (!is.na(file))
     pdf(file, width = width, height = height)
 
   dendextend::tanglegram(
-    xdendogram,
-    dendogram,
+    xdendrogram,
+    dendrogram,
     highlight_distinct_edges = FALSE,
     # Turn-off dashed lines
     common_subtrees_color_lines = TRUE,
@@ -720,7 +720,7 @@ plot_tanglegram = function(x,
   if (!is.na(file))
     dev.off()
 
-  return(list(hc = hc, dendogram = dendogram))
+  return(list(hc = hc, dendrogram = dendrogram))
 }
 
 

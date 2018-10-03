@@ -92,11 +92,11 @@ revolver_analyzer = function(cohort,
   {
     pio::pioTit("Analyzer: plotting fit results (this might take some time ...)")
 
-    revolver_plt_rdendogram(fit, cex = 1)
+    revolver_plt_rdendrogram(fit, cex = 1)
     revolver_plt_rbannerplot(fit, cex = 1)
     revolver_plt_rclusters(fit, cex = 1, cutoff.features_annotation = options.clustering.withGL$cutoff.features_annotation)
-    revolver_plt_compare_dendograms(fit, cex = 1, type = 'binary')
-    revolver_plt_compare_dendograms(fit, cex = 1, type = 'clonality')
+    revolver_plt_compare_dendrograms(fit, cex = 1, type = 'binary')
+    revolver_plt_compare_dendrograms(fit, cex = 1, type = 'clonality')
     revolver_plt_evodistance(fit, cex = 1)
     revolver_plt_group_trajectories(fit, cex = 1, cutoff.edges_annotation = options.clustering.withGL$cutoff.features_annotation)
     revolver_plt_fit_by_groupn(fit, cex = 1)
@@ -125,11 +125,11 @@ revolver_analyzer = function(cohort,
   {
     pioTit("Analyzer: plotting clustering results (this might take some time ...)")
 
-    revolver_plt_rdendogram(fit, cex = 1)
+    revolver_plt_rdendrogram(fit, cex = 1)
     revolver_plt_rbannerplot(fit, cex = 1)
     revolver_plt_rclusters(fit, cex = 1, cutoff.features_annotation = options.clustering.withGL$cutoff.features_annotation)
-    revolver_plt_compare_dendograms(fit, cex = 1, type = 'binary')
-    revolver_plt_compare_dendograms(fit, cex = 1, type = 'clonality')
+    revolver_plt_compare_dendrograms(fit, cex = 1, type = 'binary')
+    revolver_plt_compare_dendrograms(fit, cex = 1, type = 'clonality')
     revolver_plt_evodistance(fit, cex = 1)
     revolver_plt_group_trajectories(fit, cex = 1, cutoff.edges_annotation = options.clustering.withGL$cutoff.features_annotation)
     revolver_plt_fit_by_groupn(fit, cex = 1)
@@ -157,11 +157,11 @@ revolver_analyzer = function(cohort,
   {
     pio::pioTit("Analyzer: plotting clustering results (this might take some time ...)")
 
-    revolver_plt_rdendogram(fit, cex = 1)
+    revolver_plt_rdendrogram(fit, cex = 1)
     revolver_plt_rbannerplot(fit, cex = 1)
     revolver_plt_rclusters(fit, cex = 1, cutoff.features_annotation = options.clustering.withoutGL$cutoff.features_annotation)
-    revolver_plt_compare_dendograms(fit, cex = 1, type = 'binary')
-    revolver_plt_compare_dendograms(fit, cex = 1, type = 'clonality')
+    revolver_plt_compare_dendrograms(fit, cex = 1, type = 'binary')
+    revolver_plt_compare_dendrograms(fit, cex = 1, type = 'clonality')
     revolver_plt_evodistance(fit, cex = 1)
     revolver_plt_group_trajectories(fit, cex = 1, cutoff.edges_annotation = options.clustering.withoutGL$cutoff.features_annotation)
     revolver_plt_fit_by_group(fit, cex = 1)

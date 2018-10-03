@@ -12,7 +12,7 @@ revolver_cluster(x, hc.method = "ward", split.method = "cutreeHybrid",
 
 \item{hc.method}{Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.}
 
-\item{split.method}{Method to cut the dendogram, see \code{\link{revolver_infoclustering}}.}
+\item{split.method}{Method to cut the dendrogram, see \code{\link{revolver_infoclustering}}.}
 
 \item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
 }

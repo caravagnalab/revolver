@@ -31,8 +31,8 @@ Compute possible clusterings for standard parameters.
 \details{
 This requires to have computed the distance via function \code{\link{revolver_evo_distance}}.
 Compute possible clusterings for standard parameters. This helps
-to determine and select clusters in an output dendogram. This function uses
-dendogram cutting strategies available through packages such as \code{cluster} and
+to determine and select clusters in an output dendrogram. This function uses
+dendrogram cutting strategies available through packages such as \code{cluster} and
 \code{dynamicTreeCut}.
 }
 \examples{
