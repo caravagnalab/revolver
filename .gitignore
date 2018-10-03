@@ -39,6 +39,7 @@ cfg.R
 *.out
 *.toc
 *.DS_Store
+*.sw*
 
 # C++ file
 *.o
