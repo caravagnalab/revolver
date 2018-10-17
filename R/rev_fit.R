@@ -2,6 +2,7 @@
 #' Print a REVOLVER cohort object with fits.
 #'
 #' @param x A \code{"rev_cohort_fit"} object
+#' @param ... unused arguments from generic
 #'
 #' @return none
 #' @export print.rev_cohort_fit
@@ -9,7 +10,7 @@
 #' @examples
 #' data(Breast.fit)
 #' Breast.fit
-print.rev_cohort_fit = function(x)
+print.rev_cohort_fit = function(x, ...)
 {
   class(x) = 'rev_cohort'
   print(x)
@@ -23,6 +24,7 @@ print.rev_cohort_fit = function(x)
 #'
 #' @param x An object of class \code{"rev_cohort_fit"}
 #' @param patients The patients to plot, default is all the one available.
+#' @param merge.files Merge the output files? (FALSE) 
 #' @param cex Scale cex for graphics
 #'
 #' @return nothing

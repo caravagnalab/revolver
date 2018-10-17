@@ -4,10 +4,12 @@
 \alias{print.rev_cohort_fit}
 \title{Print a REVOLVER cohort object with fits.}
 \usage{
-\method{print}{rev_cohort_fit}(x)
+\method{print}{rev_cohort_fit}(x, ...)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object}
+
+\item{...}{unused arguments from generic}
 }
 \value{
 none
