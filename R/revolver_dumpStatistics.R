@@ -30,7 +30,7 @@ revolver_dumpStatistics <- function(x, file='REVOLVER-Statistics.xlsx') {
   }
 
   sheets <- list()
-  sheets[["Drivers"]] <- x$dataset[x$dataset$is.driver, -1] # wtf is Misc?
+  sheets[["Drivers"]] <- x$dataset[x$dataset$is.driver,]
   sheets[["Occurrences"]] <- dfWithRownames(ft$occurrences)
   sheets[["Information_Transfer"]] <- ft$consensus.explosion
 

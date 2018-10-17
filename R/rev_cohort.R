@@ -12,7 +12,7 @@
 #'
 #' @return An object of class \code{"rev_cohort"}
 #'
-#' @aliases rev_cohort revolver_cohort
+#' @aliases revolver_cohort
 #'
 #' @examples
 #' data(CRC)
@@ -143,9 +143,6 @@ revolver_cohort = function(
 
   return(obj)
 }
-
-#' @export 
-rev_cohort <- revolver_cohort
 
 
 #' Print a \code{"rev_cohort"} object

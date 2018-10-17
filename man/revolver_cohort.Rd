@@ -2,7 +2,6 @@
 % Please edit documentation in R/rev_cohort.R
 \name{revolver_cohort}
 \alias{revolver_cohort}
-\alias{rev_cohort}
 \title{Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).}
 \usage{
 revolver_cohort(dataset, CCF.parser = revolver:::CCF.parser,
