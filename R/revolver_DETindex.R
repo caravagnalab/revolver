@@ -9,8 +9,8 @@
 #' 
 #' @return
 #' 
-#' @import  vegan
-#' @import  qualvar
+#' @importFrom  vegan diversity specnumber
+#' @importFrom  qualvar VA
 revolver_DETindex <- function(x, 
                               n.boot=1, 
                               table=FALSE, 

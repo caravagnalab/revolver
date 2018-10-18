@@ -12,6 +12,9 @@
 #' @export
 #' @import crayon
 #' @importFrom graphics legend
+#' @importFrom igraph graph_from_adjacency_matrix V as_edgelist
+#' @importFrom igraph layout.reingold.tilford is_dag as_edgelist
+#' @importFrom igraph topo_sort components E
 #'
 #' @examples
 #' data(CRC.cohort)
