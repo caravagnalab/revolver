@@ -7,16 +7,20 @@
 #' \code{revolver:::CCF.parser} (the default of this parameter).
 #' @param options A list of 2 parameters that should be a boolean value for
 #' \code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.
-#' @param annotation A string for annotation of this cohort. This will be prompted
-#' in every print for this object.
+#' @param annotation String for annotation of this cohort. This will be prompted
+#'                   in every print for this object.
 #'
 #' @return An object of class \code{"rev_cohort"}
-#' @export
-#' @import crayon
+#'
+#' @aliases revolver_cohort
 #'
 #' @examples
 #' data(CRC)
 #' cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
+#'
+#' @import crayon
+#'
+#' @export
 revolver_cohort = function(
   dataset,
   CCF.parser = revolver:::CCF.parser,
@@ -139,6 +143,7 @@ revolver_cohort = function(
 
   return(obj)
 }
+
 
 #' Print a \code{"rev_cohort"} object
 #'

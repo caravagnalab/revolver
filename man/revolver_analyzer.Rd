@@ -2,7 +2,16 @@
 % Please edit documentation in R/rev_analyzer.R
 \name{revolver_analyzer}
 \alias{revolver_analyzer}
-\title{Wrapper for a full analysis with REVOLVER}
+\title{Wrapper for a full analysis with REVOLVER
+
+This is convenient wrapper to run all REVOLVER's analysis within one command.
+It takes as input a \code{"rev_cohort"} object and performs the following steps:
+1) it computes phylogenetic trees (either from binary or CCF data);
+2) it performs model fit;
+3) if performs clustering.
+This function requires as parameters all the parameters that would have been
+passed to the repective functions, where you to run the analysis in single steps.
+This function saves relevant RData objects for its main steps.}
 \usage{
 revolver_analyzer(cohort, type = "CCF",
   cohort.name = "REVOLVER-cohort", folder.output = ".",
@@ -43,8 +52,7 @@ Nothing, as all functions dump to disk several PDF and RData files.
 }
 \description{
 Wrapper for a full analysis with REVOLVER
-}
-\details{
+
 This is convenient wrapper to run all REVOLVER's analysis within one command.
 It takes as input a \code{"rev_cohort"} object and performs the following steps:
 1) it computes phylogenetic trees (either from binary or CCF data);
@@ -57,4 +65,5 @@ This function saves relevant RData objects for its main steps.
 \examples{
 data(CRC.cohort)
 revolver_analyzer(CRC.cohort, type = 'binary', do.plots = FALSE)
+
 }

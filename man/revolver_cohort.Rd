@@ -19,7 +19,7 @@ inside REVOLVER; since it is not exported but is available with
 \item{options}{A list of 2 parameters that should be a boolean value for
 \code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.}
 
-\item{annotation}{A string for annotation of this cohort. This will be prompted
+\item{annotation}{String for annotation of this cohort. This will be prompted
 in every print for this object.}
 }
 \value{
@@ -31,4 +31,5 @@ Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 \examples{
 data(CRC)
 cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
+
 }

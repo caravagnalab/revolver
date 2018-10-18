@@ -15,6 +15,8 @@
 
 \item{patients}{The patients to plot, default is all the one available.}
 
+\item{merge.files}{Merge the output files? (FALSE)}
+
 \item{cex}{Scale cex for graphics}
 
 \item{plot.stat}{Set it to \code{TRUE} to visualize also some statistics about each tree}

@@ -17,4 +17,4 @@
 #' data(CRC.cohort)
 #' print(CRC.cohort)
 #'
-"CRC"
+"CRC.cohort"

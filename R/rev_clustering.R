@@ -117,8 +117,8 @@ revolver_evo_distance = function(x, use.GL = TRUE, transitive.closure = FALSE)
 #' @details
 #' This requires to have computed the distance via function \code{\link{revolver_evo_distance}}.
 #' Compute possible clusterings for standard parameters. This helps
-#' to determine and select clusters in an output dendogram. This function uses
-#' dendogram cutting strategies available through packages such as \code{cluster} and
+#' to determine and select clusters in an output dendrogram. This function uses
+#' dendrogram cutting strategies available through packages such as \code{cluster} and
 #' \code{dynamicTreeCut}.
 #'
 #' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
@@ -174,29 +174,29 @@ revolver_infoclustering = function(x,
   if(max == 'ward.D2') max = 'ward'
 
   hc = agnes(dist.obj, method = max)
-  dendogram = as.dendrogram(hc)
+  dendrogram = as.dendrogram(hc)
 
   ############### Optimal number of clusters with dynamicTreeCut (automatic suggestion)
   pio::pioTit(paste('Dendrogram cut: optimal number "k" of clusters via dendextend'))
 
   cat(
     yellow('\t      cutreeDynamic'), ':',
-    split_dendogram(dendogram, hc, distance, 'cutreeDynamic', min.group = min.group.size, do.plot = do.plot)$k
+    split_dendrogram(dendrogram, hc, distance, 'cutreeDynamic', min.group = min.group.size, do.plot = do.plot)$k
   )
 
   cat(
     yellow('\n\t  cutreeDynamicTree'), ':',
-    split_dendogram(dendogram, hc, distance, 'cutreeDynamicTree', min.group = min.group.size, do.plot = do.plot)$k
+    split_dendrogram(dendrogram, hc, distance, 'cutreeDynamicTree', min.group = min.group.size, do.plot = do.plot)$k
   )
 
   cat(
     yellow('\n\t       cutreeHybrid'), ':',
-    split_dendogram(dendogram, hc, distance, 'cutreeHybrid', min.group = min.group.size, do.plot = do.plot)$k
+    split_dendrogram(dendrogram, hc, distance, 'cutreeHybrid', min.group = min.group.size, do.plot = do.plot)$k
   )
 
   cat(
     yellow('\n\tstatic (silhouette)'), ':',
-    split_dendogram(dendogram, hc, distance, 'static', min.group = min.group.size, do.plot = do.plot)$k,
+    split_dendrogram(dendrogram, hc, distance, 'static', min.group = min.group.size, do.plot = do.plot)$k,
     '\n'
   )
 
@@ -219,7 +219,7 @@ revolver_infoclustering = function(x,
 #'
 #' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
 #' @param hc.method Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.
-#' @param split.method Method to cut the dendogram, see \code{\link{revolver_infoclustering}}.
+#' @param split.method Method to cut the dendrogram, see \code{\link{revolver_infoclustering}}.
 #' @param min.group.size Minimum group size for \code{dynamicTreeCut} functions.
 #'
 #' @return The input \code{x} with a modified field \code{cluster} with results.
@@ -251,24 +251,24 @@ revolver_cluster = function(
   params = x$cluster$distances.params
   dist.obj = x$cluster$dist.obj
 
-  # Compute HC and dendogram
+  # Compute HC and dendrogram
   pio::pioTit('Computing Hierarchical clustering with agnes')
   hc = cluster::agnes(dist.obj, method = hc.method)
-  dendogram = stats::as.dendrogram(hc)
-  dendextend::labels_cex(dendogram) = .5 # decrease cex if there are many elements
+  dendrogram = stats::as.dendrogram(hc)
+  dendextend::labels_cex(dendrogram) = .5 # decrease cex if there are many elements
 
   cat(cyan('\tmethod :'), hc.method, '\n')
   cat(cyan('\t    AC :'), hc$ac)
 
   x$cluster$hc = hc
-  x$cluster$dendogram = dendogram
+  x$cluster$dendrogram = dendrogram
   x$cluster$hc.method = hc.method
 
   ############### Optimal number of clusters with dynamicTreeCut
-  pio::pioTit('Cutting dendogram with dendextend')
+  pio::pioTit('Cutting dendrogram with dendextend')
 
-  clusters = split_dendogram(
-    dendogram, hc, distance,
+  clusters = split_dendrogram(
+    dendrogram, hc, distance,
     split.method, min.group = min.group.size, do.plot = FALSE)
 
   x$cluster$clusters = clusters$clusters
