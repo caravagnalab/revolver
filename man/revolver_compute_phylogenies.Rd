@@ -17,6 +17,9 @@ revolver_compute_phylogenies(x, patient, precomputed.trees = NULL,
 \item{precomputed.trees}{If a list a of precomputed trees is available, this list should contain their
 adjacency matrix. No computation will be carried out in this case.}
 
+\item{precomputed.scores}{If a list a of precomputed trees is available, this list should contain their
+scores. No computation will be carried out in this case.}
+
 \item{options}{If one wants to generate new phylogenies for this patient, there named parameters should be
 passed through this list. \code{sspace.cutoff = 10000} is the state-space cutoff to generate trees in an
 exhaustive fashion, or to Montecarlo sample them. If Montecarlo is chosen \code{sampling} tells how
@@ -25,9 +28,6 @@ should be overwritten, in case they are already available. \code{store.max = 100
 be stored, if there are more than \code{store.max} available (ranked).}
 
 \item{verbose}{output type.}
-
-\item{precomputed.trees}{If a list a of precomputed trees is available, this list should contain their
-scores. No computation will be carried out in this case.}
 }
 \value{
 a modififed object of class \code{"rev_cohort"} with available phylogeneis for \code{patient}.

@@ -305,7 +305,7 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 #' @param patient A patient in the cohort, for which phylogenies are created
 #' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
 #' adjacency matrix. No computation will be carried out in this case.
-#' @param precomputed.trees If a list a of precomputed trees is available, this list should contain their
+#' @param precomputed.scores If a list a of precomputed trees is available, this list should contain their
 #' scores. No computation will be carried out in this case.
 #' @param options If one wants to generate new phylogenies for this patient, there named parameters should be
 #' passed through this list. \code{sspace.cutoff = 10000} is the state-space cutoff to generate trees in an
@@ -318,7 +318,6 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 #' @return a modififed object of class \code{"rev_cohort"} with available phylogeneis for \code{patient}.
 #' @export
 #' @import crayon
-#' @import igraph
 #'
 #' @examples
 #' \dontrun{
@@ -525,7 +524,7 @@ revolver_compute_phylogenies = function(
 #' @param x An object of class \code{"rev_cohort"}
 #' @param patient A patient in the cohort, for which mutation trees are created
 #' @param precomputed.trees See \code{\link{revolver_compute_phylogenies}}
-#' @param precomputed.trees See \code{\link{revolver_compute_phylogenies}}
+#' @param precomputed.scores See \code{\link{revolver_compute_phylogenies}}
 #' @param options See \code{\link{revolver_compute_phylogenies}}.
 #' @param verbose output type.
 #'
@@ -533,7 +532,6 @@ revolver_compute_phylogenies = function(
 #' mutation trees for \code{patient}.
 #' @export
 #' @import crayon
-#' @import igraph
 #'
 #' @examples
 #' data(CRC.cohort)

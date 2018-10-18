@@ -594,7 +594,7 @@ transfer.orderings = function(x, patient, verbose = FALSE)
              vertex.size = 20,
              vertex.color = 'steelblue',
              vertex.frame.color = 'white',
-             edge.label = E(GM)$weight)
+             edge.label = igraph::E(GM)$weight)
         title(paste('Group ', cluster.id,  ' - Mult. counts'))
 
         plot(GM.all,
@@ -602,7 +602,7 @@ transfer.orderings = function(x, patient, verbose = FALSE)
              vertex.size = 20,
              vertex.color = 'steelblue',
              vertex.frame.color = 'white',
-             edge.label = E(GM.all)$weight)
+             edge.label = igraph::E(GM.all)$weight)
         title('Max. Lik. parents')
         #
         # TSe = as.matrix(as_adjacency_matrix(M))

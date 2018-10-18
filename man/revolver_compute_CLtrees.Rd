@@ -16,11 +16,11 @@ revolver_compute_CLtrees(x, patient, precomputed.trees = NULL,
 
 \item{precomputed.trees}{See \code{\link{revolver_compute_phylogenies}}}
 
+\item{precomputed.scores}{See \code{\link{revolver_compute_phylogenies}}}
+
 \item{options}{See \code{\link{revolver_compute_phylogenies}}.}
 
 \item{verbose}{output type.}
-
-\item{precomputed.trees}{See \code{\link{revolver_compute_phylogenies}}}
 }
 \value{
 a modififed object of class \code{"rev_cohort"} with available

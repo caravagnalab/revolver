@@ -1,6 +1,6 @@
 Package: revolver
-Version: 0.1.5
-Date: 2018-10-03
+Version: 0.1.6
+Date: 2018-10-18
 Title: Repeated Evolution in Cancer (REVOLVER)
 Type: Package
 Author: Giulio Caravagna
@@ -33,7 +33,8 @@ Imports:
     stats,
     qualvar,
     writexl,
-    utils
+    utils,
+    methods
 Remotes: caravagn/pio
 RoxygenNote: 6.1.0
 Suggests: 

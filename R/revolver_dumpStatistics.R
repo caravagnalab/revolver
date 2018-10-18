@@ -7,6 +7,7 @@
 #' 
 #' @importFrom writexl write_xlsx
 #' @importFrom pio pioHdr pioTit
+#' @importFrom methods is
 #'
 #' @examples
 #' data(CRC.cohort)
