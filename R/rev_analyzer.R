@@ -123,7 +123,7 @@ revolver_analyzer = function(cohort,
  #   revolver_plt_evodistance(fit, cex = 1)
  #   revolver_plt_group_trajectories(fit, cex = 1, cutoff.edges_annotation = options.clustering.withGL$cutoff.features_annotation)
   #  revolver_plt_fit_by_group(fit, cex = 1)
-  }
+  #}
 
   setwd('..')
 
