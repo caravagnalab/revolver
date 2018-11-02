@@ -28,6 +28,15 @@ jamPDF = function(in.files,
                   hide.output = TRUE,
                   ignore.stderr = TRUE)
 {
+  # Global option to control for this untill I remove it.
+  toJam = getOption("revolver.jamPDF", default = FALSE)
+  if(!toJam)
+  {
+    message("jamPDF disabled")
+    return(invisible(1))
+  }
+  ######################################################
+  
   in.files = in.files[sapply(in.files, file.exists)]
 
   if(length(in.files) == 0) stop("All the input files that you asked to jam are missing -- check input!")
