@@ -323,7 +323,7 @@ print.rev_cohort <- function(x, digits = max(3, getOption("digits") - 3), ...)
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_compute_phylogenies = function(
   x,
   patient,
@@ -387,7 +387,7 @@ revolver_compute_phylogenies = function(
   if(verbose) print(head(x$dataset))
 
   # cat(cyan('[compute_rev_phylogenies] Clusters for this patient ... \n'))
-  clusters = clusters.table(x$dataset, samples)
+  clusters = revolver:::clusters.table(x$dataset, samples)
   nclusters = nrow(clusters)
 
   TREES = SCORES = NULL
@@ -405,7 +405,7 @@ revolver_compute_phylogenies = function(
 
     if(nclusters == 1)
     {
-      cat(red('\nThis model has 1 node, we cannot compute its score.'))
+      cat(red('\nThis model has 1 node, it has trivial models.'))
 
       M = matrix(0, ncol = 1, nrow = 1)
       colnames(M) = rownames(M) = rownames(clusters)
@@ -417,18 +417,28 @@ revolver_compute_phylogenies = function(
     {
       # ################## Generate all trees that are compatible with the observed CCFs, we do this
       # ################## by analyzing one sample at a time.
-      x$dataset[, samples] =  x$dataset[, samples] * 100
-
       pio::pioTit("Using ClonEvol to build phylogentic trees, per region (this might take some time)")
 
       clonal.cluster = as.character(unique(x$dataset$cluster[x$dataset$is.clonal]))
-      clonevol.obj = useClonevo(x$dataset, samples, clonal.cluster)
 
-      x$dataset[, samples] =  x$dataset[, samples] / 100
+      # December 2018 - https://github.com/caravagn/revolver/issues/13
+      #
+      # Original code which would run ClonEvol's functions
+      #
+      # x$dataset[, samples] =  x$dataset[, samples] * 100
+      # clonevol.obj = revolver:::useClonevo(x$dataset, samples, clonal.cluster)
+      # x$dataset[, samples] =  x$dataset[, samples] / 100
+      #
+      # Alternative implementation of ClonEvol's steps that we use. We use our function
+      # and reacreate an obj matching the expected output, so we do not need
+      # to update downstream functions.
+      alternative = NULL
+      alternative$models = ClonEvol_surrogate(clusters, samples, clonal.cluster, min.CCF = 0.01)
+      clonevol.obj = alternative
 
-      numSol = unlist(lapply(clonevol.obj$models, length))
+      # remove the trees which have no edges (returned for samples with only 1 cluster for instance)
+      numSol = sapply(clonevol.obj$models, function(w){ sum(sapply(w, nrow) > 0) })
       pio::pioDisp(data.frame(region = names(clonevol.obj$models), Solutions = numSol))
-
 
       ################## Build all possible clonal trees
       # 1) hash them
@@ -437,9 +447,9 @@ revolver_compute_phylogenies = function(
       #    with probability proportional to how often the edge is detected
 
       pio::pioTit("Hashing, merging and generating solutions (this might take some time)")
-      CLONAL.TREES = hashTrees(clonevol.obj, samples)
+      CLONAL.TREES = revolver:::hashTrees(clonevol.obj, samples)
 
-      CONSENSUS = consensusModel(clonevol.obj, samples)
+      CONSENSUS = revolver:::consensusModel(clonevol.obj, samples)
       CONSENSUS.TREE = CONSENSUS$S
       WEIGHTS.CONSENSUS.TREE = CONSENSUS$weights
 
@@ -447,7 +457,7 @@ revolver_compute_phylogenies = function(
 
       # # Sampling is carried out if there are more than 'sspace.cutoff' trees, in that case we
       # # sample 'n.sampling' possible trees. Otherwise all possible trees are generated.
-      TREES = all.possible.trees(
+      TREES = revolver:::all.possible.trees(
         CONSENSUS.TREE,
         WEIGHTS.CONSENSUS.TREE,
         sspace.cutoff = options['sspace.cutoff'],
@@ -461,7 +471,7 @@ revolver_compute_phylogenies = function(
       # # 2) the Multinomial probability of edge x --> y in the trees determined by the CCF
       # # 3) for every edge  x --> y, the number of times that the CCF of x is greater than the CCF of y
       # # 3) for every node  x --> y1 ... yK, the number of times that the CCF of x is greater than the sum of the CCFs of y1 ... yK
-      binary.data = binarize(x$dataset, samples)
+      binary.data = revolver:::binarize(x$dataset, samples)
 
       # 1) MI from binarized data -- different options, with a control sample which avoids 0log(0)
       # • a=0:maximum likelihood estimator (see entropy.empirical)
@@ -469,11 +479,11 @@ revolver_compute_phylogenies = function(
       # • a=1:Laplace’s prior
       # • a=1/length(y):Schurmann-Grassberger (1996) entropy estimator
       # • a=sqrt(sum(y))/length(y):minimax prior
-      MI.table = computeMI.table(binary.data, MI.Bayesian.prior = 0, add.control = TRUE)
+      MI.table = revolver:::computeMI.table(binary.data, MI.Bayesian.prior = 0, add.control = TRUE)
       if(!use.MI) MI.table[TRUE] = 1
 
       # Steps 1 and 2 are collapsed, multiply MI by the Multinomial probability
-      MI.table = weightMI.byMultinomial(MI.table, WEIGHTS.CONSENSUS.TREE)
+      MI.table = revolver:::weightMI.byMultinomial(MI.table, WEIGHTS.CONSENSUS.TREE)
 
       # 3) Get penalty for direction given CCFs -- this is done for all possible edges in the data
       CCF = clusters[, samples, drop = FALSE]
@@ -482,10 +492,10 @@ revolver_compute_phylogenies = function(
 
       # 4) Compute the branching penalty  --  this is done for each tree that we are considering
       cat('Computing Pigeonhole Principle\n')
-      penalty.CCF.branching = node.penalty.for.branching(TREES, CCF)
+      penalty.CCF.branching = revolver:::node.penalty.for.branching(TREES, CCF)
 
       cat('Computing rank\n')
-      RANKED = rankTrees(TREES, MI.table, penalty.CCF.branching)
+      RANKED = revolver:::rankTrees(TREES, MI.table, penalty.CCF.branching)
       TREES = RANKED$TREES
       SCORES = RANKED$SCORES
 

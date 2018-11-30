@@ -72,6 +72,9 @@ hashTrees = function(clonevol.obj, sample.groups)
       clonevol.obj$models[[s]],
       function(x, region)
       {
+        # Nothing to hash here -- empty tree
+        if(nrow(x) == 0) return(NULL)
+
         # hash ;)
         model = DataFrameToMatrix(x)
         model = sort(MatrixToEdges(model))
@@ -446,8 +449,15 @@ useClonevo = function(my.data, sample.groups, clonal.cluster)
 
   }
 
+
+
+
   return(clonevol.obj)
 }
+
+
+
+
 
 computeMI.table = function(binary.data, MI.Bayesian.prior = 0, add.control = FALSE)
 {

@@ -15,7 +15,7 @@
 #' @param ignore.stderr TRUE to ignore standard error
 #'
 #' @import grDevices
-#' 
+#'
 #' @return None
 #' @export
 #'
@@ -28,6 +28,14 @@ jamPDF = function(in.files,
                   hide.output = TRUE,
                   ignore.stderr = TRUE)
 {
+  toJam = getOption("revolver.jamPDF", default = FALSE)
+  if(!toJam)
+  {
+    message("jamPDF is disabled by default. Use \n\n\toptions('revolver.jamPDF' = TRUE)\n\nto use this funcitonality and merge PDFs scripts; jamPDF requires 'pdfjam' installed to work.")
+    return(invisible(1))
+  }
+
+  # DISABLED
   in.files = in.files[sapply(in.files, file.exists)]
 
   if(length(in.files) == 0) stop("All the input files that you asked to jam are missing -- check input!")
@@ -43,7 +51,6 @@ jamPDF = function(in.files,
               )
 
   stopifnot(!is.na(out.file))
-
 
   cmd = paste(
     'pdfjam ',
