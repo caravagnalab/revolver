@@ -9,6 +9,9 @@ Journal paper: [Nature Methods](https://www.nature.com/articles/s41592-018-0108-
 
 Case studies, vignettes, installation instructions etc.: [Wiki](https://github.com/caravagn/revolver/wiki)
 
+Bugs, help, etc.: [Issues](https://github.com/caravagn/revolver/issues)
+
+
 ## News
 - 12/2018: bug fixing, re-coded the parts of CloneEvol used in REVOLVER.
 - 11/2018: jamPDF is now associated to an option (default = FALSE) to increase compatibility.
