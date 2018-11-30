@@ -12,8 +12,8 @@ Follow the Wiki to see case studies, vignettes, installation instructions etc.
 https://github.com/caravagn/revolver/wiki
 
 ## News
-- 12/2018: minor modifications for bug fixing, removed the dependencies from cloneEvol.
-- 11/2018: minor modifications, disabled jamPDF via global options (default) to increase compatibility.
+- 12/2018: bug fixing, re-coded the parts of CloneEvol used in REVOLVER.
+- 11/2018: jamPDF is now associated to an option (default = FALSE) to increase compatibility.
 - 09/2018: released the first version of the tool.
 
 ## Build report
