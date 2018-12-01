@@ -15,7 +15,7 @@
 #' @param ignore.stderr TRUE to ignore standard error
 #'
 #' @import grDevices
-#' 
+#'
 #' @return None
 #' @export
 #'
@@ -52,7 +52,6 @@ jamPDF = function(in.files,
               )
 
   stopifnot(!is.na(out.file))
-
 
   cmd = paste(
     'pdfjam ',
