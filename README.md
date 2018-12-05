@@ -7,7 +7,7 @@ An R package that implements the algorithm discussed in:
 
 Journal paper: [Nature Methods](https://www.nature.com/articles/s41592-018-0108-x)
 
-Case studies, vignettes, installation instructions etc.: [Wiki](https://github.com/caravagn/revolver/wiki)
+Case studies, vignettes, FAQ etc.: [Wiki](https://github.com/caravagn/revolver/wiki)
 
 Bugs, help, etc.: [Issues](https://github.com/caravagn/revolver/issues)
 
