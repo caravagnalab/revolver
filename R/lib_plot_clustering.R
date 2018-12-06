@@ -19,14 +19,14 @@
 #'
 #' @return nothing
 #' @export
-#' 
+#'
 #' @importFrom stats as.dendrogram dist dendrapply
 #'
 #' @examples
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_dendrogram = function(x,
                                   type = 'REVOLVER',
                                   cex = 1,
@@ -124,7 +124,7 @@ revolver_plt_dendrogram = function(x,
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_rbannerplot = function(x,
                                     cex = 1,
                                     file = NA)
@@ -169,11 +169,14 @@ revolver_plt_rbannerplot = function(x,
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_rclusters = function(x,
                                   cex = 1,
                                   cutoff.features_annotation = 2,
-                                  file = NA)
+                                  file = NA,
+                                  symbol.clonal = '\u25a0',
+                                  symbol.arrow = "\u2192"
+                                  )
 {
   obj_has_clusters(x)
 
@@ -196,7 +199,9 @@ revolver_plt_rclusters = function(x,
     cutoff.features_annotation = cutoff.features_annotation,
     width = length(x$patients) * cex,
     height = length(x$patients) * cex,
-    file = file
+    file = file,
+    symbol.clonal = symbol.clonal,
+    symbol.arrow = symbol.arrow
   )
 
   mylayout.off(lot)
@@ -228,7 +233,7 @@ revolver_plt_rclusters = function(x,
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_compare_dendrograms = function(x,
                                            cex = 1,
                                            type = 'binary',
@@ -330,7 +335,7 @@ revolver_plt_compare_dendrograms = function(x,
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_evodistance = function(x,
                                     cex = 1,
                                     file = NA)
@@ -399,7 +404,7 @@ revolver_plt_evodistance = function(x,
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_group_trajectories = function(x,
                                            cex = 1,
                                            cutoff.edges_annotation = 3,
@@ -472,12 +477,12 @@ revolver_plt_group_trajectories = function(x,
 #' @export
 #'
 #' @importFrom graphics plot
-#' 
+#'
 #' @examples
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_plt_fit_by_group = function(x,
                                      cex = 1,
                                      file.suffix = 'REVOLVER-Clusters-FitsPerCluster.pdf')
@@ -833,7 +838,9 @@ revolver_featurePlot = function(x,
                                 height = 15,
                                 device = 'quartz',
                                 annotate.alterations = NA,
-                                clinical.covariates = NA)
+                                clinical.covariates = NA,
+                                symbol.clonal = '\u25a0',
+                                symbol.arrow = "\u2192")
 {
   if (is.null(x$fit))
     stop('Fit a model first, stopping.')
@@ -879,7 +886,7 @@ revolver_featurePlot = function(x,
   print(which.features)
 
   edges.annotation = features$edges.explosion[, which.features$edge, drop = FALSE]
-  colnames(edges.annotation) = gsub(pattern = '~', ' \u2192 ', colnames(edges.annotation))
+  colnames(edges.annotation) = gsub(pattern = '~', paste('', symbol.arrow, ''), colnames(edges.annotation))
 
   annotations.samples = cbind(annotations.samples, edges.annotation)
 
@@ -893,7 +900,7 @@ revolver_featurePlot = function(x,
                                      list(c('0' = 'gainsboro', '1' = 'darkgray')))
 
   numbers.matrix = features$clonal.status[, colnames(features$occurrences), drop = FALSE]
-  numbers.matrix[numbers.matrix == 1] = '\u25a0'
+  numbers.matrix[numbers.matrix == 1] = symbol.clonal
   numbers.matrix[numbers.matrix == 0] = ''
 
 

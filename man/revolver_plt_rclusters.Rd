@@ -5,7 +5,7 @@
 \title{Plot the features of REVOLVER's clusters, in a heatmap.}
 \usage{
 revolver_plt_rclusters(x, cex = 1, cutoff.features_annotation = 2,
-  file = NA)
+  file = NA, symbol.clonal = "■", symbol.arrow = "→")
 }
 \arguments{
 \item{x}{A cohort object with fits and clusters.}

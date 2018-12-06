@@ -2,7 +2,7 @@
 
 .onLoad <- function(libname, pkgname) {
     if(.Platform$OS.type=="windows") {
-        quartz<-function() windows()
+        quartz<-function(...) windows(...)
     }
 }
 
