@@ -489,7 +489,6 @@ revolver_plt_fit_by_group = function(x,
 {
   obj_has_clusters(x)
 
-  args = pio:::nmfy()
   pio::pioHdr(
     'REVOLVER Plot: Fits divided by cluster',
     c(`Output file(s) will have suffix` = file.suffix),
@@ -543,7 +542,7 @@ revolver_plt_fit_by_group = function(x,
                    cat(cyan('\n Counts > 1 table\n'))
                    print(tr[1:w,])
 
-                   pdf("data_output.pdf",
+                   pdf(paste0("Table_", fname),
                        height = nrow(tr),
                        width = 8.5)
 
@@ -551,7 +550,7 @@ revolver_plt_fit_by_group = function(x,
                    dev.off()
 
                    jamPDF(
-                     in.files = c("data_output.pdf", fname),
+                     in.files = c(paste0("Table_", fname), fname),
                      out.file = fname,
                      layout = '1x1'
                    )
