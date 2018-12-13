@@ -11,11 +11,12 @@
 #' @examples
 #' data(CRC.cohort)
 #' CCF(CRC.cohort, 'adenoma_3')
-D = function(x, p)
+Data = function(x, p)
 {
-  if(p %in% names(x$data)) return(x$data[[p]])
-
-  stop('Input does not have data.frame entries for', p)
+  x$dataset %>% filter(patientID %in% p)
+  # if(p %in% names(x$data)) return(x$data[[p]])
+  #
+  # stop('Input does not have data.frame entries for', p)
 }
 
 
@@ -32,10 +33,75 @@ D = function(x, p)
 #' CCF(CRC.cohort, 'adenoma_3')
 CCF = function(x, p)
 {
-  if(p %in% names(x$CCF)) return(x$CCF[[p]])
+  D = Data(x, p)
 
-  stop('Input does not have CCF for', p)
+  foo = function(w)
+  {
+    v = revolver:::CCF.parser(w)
+    tv = as_tibble(v)
+    tv$sample = names(v)
+
+    tv %>% spread(sample, value)
+  }
+
+  # CCF per row
+  CCF = D %>%
+    group_by(id) %>%
+    do(foo(.$CCF)) %>%
+    ungroup() %>%
+    select(-id)
+
+  CCF %>% mutate(cluster = D$cluster, id = D$id)
 }
+
+#' Extract samples name for a patient
+#'
+#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
+#' @param p a patient
+#'
+#' @return CCF/binary data for \code{p}
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' CCF(CRC.cohort, 'adenoma_3')
+Samples = function(x, p)
+{
+  colnames(CCF(x,p) %>% select(-cluster))
+}
+
+
+#' Extract cluster-level CCF/binary data for a patient
+#'
+#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
+#' @param p a patient
+#'
+#' @return CCF/binary data for \code{p}
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' CCF(CRC.cohort, 'adenoma_3')
+CCF_clusters = function(x, p)
+{
+  pCCF = CCF(x,p)
+  samples = colnames(pCCF)
+
+  D = Data(x, p)
+
+  nMuts = D %>% group_by(cluster) %>% summarise(nMuts = n())
+
+  values = D %>% reshape2::melt(id = 'cluster') %>%
+    as_tibble() %>%
+    filter(variable %in% !!samples) %>%
+    group_by(cluster) %>%
+    summarise(median = median(as.numeric(value)))
+
+  full_join(pCCF, nMuts, values, by = 'cluster') %>%
+    select(cluster, nMuts, !!samples)
+}
+
+
 
 #' Extract phylogenetic or mutation trees for a patient
 #'

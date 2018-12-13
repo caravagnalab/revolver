@@ -27,99 +27,113 @@ revolver_cohort = function(
   options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
   annotation = '')
 {
-  REVOLVER_VERSION = revolver_version()$REVOLVER_VERSION
-
-  # xx = lapply(revolver:::revolver_version(), cat)
-
   # Dataset with certain columns
   required.cols = c('Misc', 'patientID', 'variantID',  'cluster', 'is.driver', 'is.clonal', 'CCF')
+
+  if(!is.data.frame(dataset)) stop("'dataset' should be a data frame, aborting.")
+
   if(!all(required.cols %in% colnames(dataset)))
     stop('Dataset should have the following columns:', paste(required.cols, collapse = ', '))
+
+  # TODO -- add check for types
+
+  if(any(dataset[, required.cols[-1]] == '')) stop("Entries '' in 'dataset' are allowed only in 'Misc'.")
 
   if(!is.function(CCF.parser))
      stop('You need to provide a function to parse CCFs, check "CCF.parser".')
 
   pio::pioHdr(
-    paste('REVOLVER Cohort Constructor for version', REVOLVER_VERSION),
+    paste('REVOLVER Cohort constructor', REVOLVER_VERSION),
     c(
       `Use only alterations annotated as driver` = options$ONLY.DRIVER,
       `Filter: minimum number of alterations in a group/ cluster` = options$MIN.CLUSTER.SIZE
     ),
     prefix = '\t')
 
-  dataset = dataset[, required.cols]
+  dataset = as_tibble(dataset[, required.cols])
+  dataset$id = paste0('__revolver_id_', 1:nrow(dataset))
 
   if(options$ONLY.DRIVER)
-  {
-    dataset = dataset[dataset$is.driver, , drop = FALSE]
-  }
+    dataset = dataset %>% filter(is.driver)
 
   pio::pioTit('Input data')
   pio::pioDisp(dataset)
 
-  if(options$MIN.CLUSTER.SIZE > 0){
-
-    pio::pioTit('Checking size of groups/ clusters')
+  if(options$MIN.CLUSTER.SIZE > 0)
+  {
+    pio::pioTit('Checking size of clusters -- removing those below cutoff.')
 
     cat('Rows before filtering:', nrow(dataset), '\n\n')
 
-    data.split = split(dataset, f = dataset$patientID)
+    grp = dataset %>% group_by(patientID, cluster) %>%
+      summarize(count = n())
 
-    data.reduced = lapply(
-      seq(data.split),
-      function(p){
-        patient = names(data.split)[p]
-        p = data.split[[p]]
+    removed = left_join(dataset, grp, by = c('patientID', 'cluster')) %>%
+      filter(count < options$MIN.CLUSTER.SIZE)
 
-        p = filter.clusters(p, cutoff.numMuts = options$MIN.CLUSTER.SIZE)
+    dataset = left_join(dataset, grp, by = c('patientID', 'cluster')) %>%
+      filter(count >= options$MIN.CLUSTER.SIZE)
 
-        if(!is.null(p$removed))
-        {
-          message('\nRemoved from ', patient)
-          pio::pioDisp(p$removed)
-        }
-
-        p$remained
-      })
-
-    dataset = Reduce(rbind, data.reduced)
     cat('\nRows after filtering:', nrow(dataset), '\n')
+    print(dataset)
   }
 
   pio::pioTit('Extracting CCF values')
-  data = split(dataset, f = dataset$patientID)
-  dataset.expanded = lapply(data, function(x) {
 
-    samples = names(CCF.parser(x[1, 'CCF']))
+  foo = function(x)
+  {
+    v = revolver:::CCF.parser(x)
+    tv = as_tibble(v)
+    tv$sample = names(v)
 
-    CCF.values = lapply(x$CCF, CCF.parser)
-    CCF.values = Reduce(rbind, CCF.values)
+    tv %>% spread(sample, value)
+  }
 
-    if(nrow(x) == 1) CCF.values = t(as.data.frame(CCF.values))
-    CCF.values = apply(CCF.values, 2, as.numeric)
-    if(nrow(x) == 1) CCF.values = t(as.data.frame(CCF.values))
+  # CCF per row
+  expanded = dataset %>%
+    group_by(id) %>%
+    do(foo(.$CCF))
 
-    rownames(CCF.values) = rownames(x)
-    cbind(x, CCF.values)
-    # clusters.table(x, samples)
-  })
-  names(dataset.expanded) = names(data)
+  expanded = dataset %>%
+    left_join(expanded, by = 'id')
 
-  CCF =  lapply(dataset.expanded, function(x) {
-    clusters.table(x,
-                   names(CCF.parser(x[1, 'CCF'])))
+  # Unroll everything
+  expanded = expanded %>%
+    group_by(patientID) %>%
+    nest() %>%
+    select(data) %>%
+    unlist(recursive = F)
+
+  # remove NA columns
+  expanded = lapply(expanded, function(e) e %>% select_if(~!all(is.na(.))))
+  names(expanded) = unique(dataset$patientID)
+
+  # Extract CCF values
+  CCF =  lapply(expanded, function(x) {
+
+    samples = colnames(foo(x$CCF[1]))
+    data = x %>% select(cluster, !!samples)
+    nMuts = x %>% group_by(cluster) %>% summarise(nMuts = n())
+    values = x %>% reshape2::melt(id = 'cluster') %>%
+      as_tibble() %>%
+      filter(variable %in% !!samples) %>%
+      group_by(cluster) %>%
+      summarise(median = median(as.numeric(value)))
+
+    full_join(data, nMuts, values, by = 'cluster') %>%
+      select(cluster, nMuts, !!samples)
   })
 
   patients = unique(dataset$patientID)
   variantIDs = unique(dataset$variantID)
-  variantIDs.driver = unique(dataset[dataset$is.driver, 'variantID'])
+  variantIDs.driver = unique(dataset %>% filter(is.driver) %>% pull(variantID))
 
   numVariants = nrow(dataset)
 
   n = list(
     patients = length(patients),
     variants = nrow(dataset),
-    drivers = length(dataset[dataset$is.driver, 'variantID'])
+    drivers = nrow(dataset %>% filter(is.driver))
   )
 
   obj <-
@@ -134,8 +148,8 @@ revolver_cohort = function(
         data = data,
         CCF = CCF,
         n = n,
-        CCF.parser = CCF.parser,
-        REVOLVER_VERSION = REVOLVER_VERSION
+        CCF.parser = CCF.parser
+        # REVOLVER_VERSION = REVOLVER_VERSION
       ),
       class = "rev_cohort",
       call = match.call()
@@ -336,7 +350,6 @@ revolver_compute_phylogenies = function(
   verbose = FALSE
   )
 {
-  Original.dataset = x$dataset
   use.MI = FALSE
 
   # Prepare output
@@ -367,24 +380,10 @@ revolver_compute_phylogenies = function(
   }
   cat('\n')
 
+  pCCF = CCF(x, patient)
+  samples = Samples(x, patient)
 
-  x$dataset = x$dataset[x$dataset$patientID  == patient, ]
-
-  samples = names(x$CCF.parser(x$dataset[1, 'CCF']))
-
-  CCF = sapply(x$dataset$CCF, x$CCF.parser)
-  if(length(samples) == 1) {
-    CCF = matrix(CCF, ncol = 1)
-    colnames(CCF) = samples
-  } else CCF = t(CCF)
-
-  CCF = apply(CCF, 2, as.numeric)
-  rownames(CCF) = rownames(x$dataset)
-
-  x$dataset = x$dataset[, c('Misc', 'patientID', 'variantID', 'cluster', 'is.driver', 'is.clonal')]
-  x$dataset = cbind(x$dataset, CCF)
-
-  if(verbose) print(head(x$dataset))
+  dataset = left_join(Data(x, patient), pCCF, by = 'id')
 
   # cat(cyan('[compute_rev_phylogenies] Clusters for this patient ... \n'))
   clusters = revolver:::clusters.table(x$dataset, samples)
