@@ -197,9 +197,9 @@ ClonEvol_surrogate = function(clusters, samples, clonal.cluster, min.CCF = 0.01)
                      if(length(subclonal.clusters) > 0 & !all(w[clonal.cluster] >= w[subclonal.clusters])) {
                        warning(
                          '[CORRECTION] The clonal cluster has CCF ', w[clonal.cluster],
-                         ', lower than a subclonal cluster. We have set it to CCF=1 in that sample, but check your CCF estmates...')
+                         ', lower than a subclonal cluster; we set it to the max in the sample...')
 
-                       w[clonal.cluster] = 1
+                       w[clonal.cluster] = max(w) + 0.01
                      }
 
                      # trees from this sample, it is a list
