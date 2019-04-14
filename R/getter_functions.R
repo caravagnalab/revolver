@@ -13,12 +13,56 @@
 #' CCF(CRC.cohort, 'adenoma_3')
 Data = function(x, p)
 {
-  x$dataset %>% filter(patientID %in% p)
+  x$dataset[[p]]
   # if(p %in% names(x$data)) return(x$data[[p]])
   #
   # stop('Input does not have data.frame entries for', p)
 }
 
+#' Extract CCF/binary driver data for a patient
+#'
+#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
+#' @param p a patient
+#'
+#' @return CCF/binary drivers data for \code{p}
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Drivers(CRC.cohort, 'adenoma_3')
+Drivers = function(x, p){
+  Data(x, p) %>% filter(is.driver)
+}
+
+#' Extract CCF/binary data for truncal mutations of a patient
+#'
+#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
+#' @param p a patient
+#'
+#' @return CCF/binary data for \code{p}'s truncal mutations
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Drivers(CRC.cohort, 'adenoma_3')
+Truncal = function(x, p){
+  Data(x, p) %>% filter(is.clonal)
+}
+
+#' Extract CCF/binary data for subclonal mutations of a patient
+#'
+#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
+#' @param p a patient
+#'
+#' @return CCF/binary data for \code{p}'s subclonal mutations
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Subclonal(CRC.cohort, 'adenoma_3')
+Subclonal = function(x, p){
+  Data(x, p) %>% filter(!is.clonal)
+}
 
 #' Extract CCF/binary data for a patient
 #'
@@ -33,25 +77,17 @@ Data = function(x, p)
 #' CCF(CRC.cohort, 'adenoma_3')
 CCF = function(x, p)
 {
-  D = Data(x, p)
+  nbps = Samples(x,p)
 
-  foo = function(w)
-  {
-    v = revolver:::CCF.parser(w)
-    tv = as_tibble(v)
-    tv$sample = names(v)
-
-    tv %>% spread(sample, value)
-  }
-
-  # CCF per row
-  CCF = D %>%
-    group_by(id) %>%
-    do(foo(.$CCF)) %>%
-    ungroup() %>%
-    select(-id)
-
-  CCF %>% mutate(cluster = D$cluster, id = D$id)
+  Data(x,p) %>%
+    select(
+      id,
+      variantID,
+      is.driver,
+      is.clonal,
+      cluster,
+      !!nbps
+    )
 }
 
 #' Extract samples name for a patient
@@ -67,7 +103,7 @@ CCF = function(x, p)
 #' CCF(CRC.cohort, 'adenoma_3')
 Samples = function(x, p)
 {
-  colnames(CCF(x,p) %>% select(-cluster))
+  names(x$CCF.parser(Data(x,p) %>% filter(row_number() == 1) %>% pull(CCF)))
 }
 
 
@@ -84,21 +120,7 @@ Samples = function(x, p)
 #' CCF(CRC.cohort, 'adenoma_3')
 CCF_clusters = function(x, p)
 {
-  pCCF = CCF(x,p)
-  samples = colnames(pCCF)
-
-  D = Data(x, p)
-
-  nMuts = D %>% group_by(cluster) %>% summarise(nMuts = n())
-
-  values = D %>% reshape2::melt(id = 'cluster') %>%
-    as_tibble() %>%
-    filter(variable %in% !!samples) %>%
-    group_by(cluster) %>%
-    summarise(median = median(as.numeric(value)))
-
-  full_join(pCCF, nMuts, values, by = 'cluster') %>%
-    select(cluster, nMuts, !!samples)
+  x$CCF[[p]]
 }
 
 
@@ -116,7 +138,7 @@ CCF_clusters = function(x, p)
 #' Phylo(CRC.cohort, 'adenoma_3')
 Phylo = function(x, p)
 {
-  if(is.null(x$phylogenies[[p]])) stop('Input does not have phylogenies for', p)
+  if(is.null(x$phylogenies[[p]])) stop('There are no phylogenies for ', p)
 
   x$phylogenies[[p]]
 }
@@ -135,7 +157,7 @@ Phylo = function(x, p)
 #' Fit(revolver_fit(CRC.cohort), 'adenoma_3')
 Fit = function(x, p)
 {
-  if(is.null(x$fit$phylogenies[[p]])) stop('Input does not have a fit for', p)
+  if(is.null(x$fit$phylogenies[[p]])) stop('There is no fit for ', p)
 
   x$fit$phylogenies[[p]]
 }
@@ -165,3 +187,21 @@ Fit = function(x, p)
 # x= fit
 # p = 'CRUK0001'
 # load("/Users/gcaravagna/Documents/GitHub/test.revolver/TRACERx-release/Drivers_TabS23_in_>=2_patients/TRACERx.fit.RData")
+
+Stats = function(x) {
+
+  st = data.frame(
+    patientID = x$patients,
+    stringsAsFactors = FALSE
+  )
+
+  st$numBiopsies = sapply(st$patientID, function(w) length(Samples(x, w)))
+  st$numMutations = sapply(st$patientID, function(w) nrow(Data(x, w)))
+  st$numDriverMutations = sapply(st$patientID, function(w) nrow(Drivers(x, w)))
+  st$numTruncalMutations = sapply(st$patientID, function(w) nrow(Truncal(x, w)))
+  st$numSubclonalMutations = sapply(st$patientID, function(w) nrow(Subclonal(x, w)))
+
+
+  st %>% as_tibble()
+}
+
