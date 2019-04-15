@@ -167,9 +167,13 @@ CCF_clusters = function(x, p)
 #' Phylo(CRC.cohort, 'adenoma_3')
 Phylo = function(x, p, rank = NULL)
 {
-  # if(is.null(x$phylogenies[[p]])) stop('There are no phylogenies for ', p)
+  if(!has_patient_trees(x, p, rank))
+    stop('The requested tree does not exist, aborting.')
+
   if(is.null(rank)) x$phylogenies[[p]]
-  else x$phylogenies[[p]][[1]]
+  else {
+    x$phylogenies[[p]][[rank]]
+  }
 }
 
 # Phylo = Vectorize(Phylo, vectorize.args = 'p', SIMPLIFY = FALSE)
@@ -366,12 +370,15 @@ Stats_trees = function(x, patients = x$patients) {
 # These are non exported getters that help coding
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-has_patient_trees = function(x, p = NULL)
+has_patient_trees = function(x, p = NULL, rank = NULL)
 {
   if (is.null(p))
     return(!is.null(x$phylogenies))
+
+  if (is.null(rank))
+    return(p %in% names(x$phylogenies))
   else
-    return(!is.null(x$phylogenies[[p]]))
+    return(rank <= length(x$phylogenies[[p]]))
 }
 
 

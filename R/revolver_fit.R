@@ -107,151 +107,173 @@ tl_revolver_fit = function(x,
                            transitive.orderings = TRUE,
                            verbose = FALSE)
 {
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # Scoring function for a tree, in vectorized form
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  # Returns the score of a tree for a multinomial penalty E, and
+  # and alpha parameter. It can also return just the penalty (i.e.,
+  # without multiplying it for the actual score of the tree structure)
+  Penalize = function(x, patient, E, rank = 1, alpha = 1, just.pen = FALSE) {
+    IT = ITransfer(x, patient, rank)
+
+    prod_penalties = IT %>%
+      left_join(E, by = c("from", "to")) %>%
+      pull(penalty) %>%
+      prod()
+
+    if(is.na(prod_penalties)) prod_penalties = 0
+
+    if(just.pen) return(prod_penalties^alpha)
+
+    Phylo(x, patient, rank)$score * (prod_penalties^alpha)
+  }
+  Penalize = Vectorize(Penalize, vectorize.args = 'rank')
+
   ################################################ Some functions which make easier to implement TL
-  add.to.Matrix = function(M, df){
-    for(i in 1:nrow(df))
-      M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] + 1
-    M
-  }
+  # add.to.Matrix = function(M, df){
+  #   for(i in 1:nrow(df))
+  #     M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] + 1
+  #   M
+  # }
+  #
+  # del.from.Matrix = function(M, df){
+  #   for(i in 1:nrow(df))
+  #     M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] - 1
+  #   M
+  # }
+  #
+  # asWeightedMatrix = function(df){
+  #   entries.names = unique(unlist(df[ c(1,2)]))
+  #
+  #   M = matrix(0, ncol = length(entries.names), nrow = length(entries.names))
+  #   colnames(M) = rownames(M) = entries.names
+  #
+  #   for(i in 1:nrow(df))
+  #     M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] + 1
+  #   M
+  # }
+  #
+  # substitute.group.with.graph = function(g, G, S, verbose = FALSE)
+  # {
+  #   g = as.character(g)
+  #
+  #   S.w = S
+  #   S[S>1] = 1
+  #
+  #   if(verbose) {
+  #     cat(yellow('* Substitute '), g, '\n')
+  #     cat(cyan('* Adj Matrix\n'))
+  #     print(MatrixToDataFrame(G))
+  #     cat(cyan('* Substitution Matrix\n'))
+  #     print(S)
+  #     # print(MatrixToDataFrame(S))
+  #     # stop('sss')
+  #   }
+  #
+  #   parent = pi(G, g)
+  #   childrens = children(G, g)
+  #
+  #   # print(parent)
+  #   # print(childrens)
+  #   # print(length(childrens))
+  #
+  #   # loops are bastards, we need a special modified root and leaves function
+  #   spec.root = function(w){
+  #     r.G = igraph::graph_from_adjacency_matrix(w)
+  #     r.w = root(w)
+  #
+  #     if(!igraph::is_dag(r.G)) {
+  #       if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
+  #       comp = names(igraph::components(r.G)$membership)
+  #       r.w = c(r.w, comp)
+  #       r.w = unique(r.w)
+  #     }
+  #     r.w
+  #   }
+  #
+  #   spec.leaves = function(w){
+  #     r.G = igraph::graph_from_adjacency_matrix(w)
+  #     r.w = leaves(w)
+  #
+  #     if(!igraph::is_dag(r.G)) {
+  #       if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
+  #       comp = names(igraph::components(r.G)$membership)
+  #       r.w = c(r.w, comp)
+  #       r.w = unique(r.w)
+  #     }
+  #     r.w
+  #   }
+  #
+  #   roots = spec.root(S)
+  #   leaves = spec.leaves(S)
+  #
+  #   # print(roots)
+  #   # print(leaves)
+  #   attach.up = attach.down = NULL
+  #   attach.up = apply(
+  #     expand.grid(parent, roots, stringsAsFactors = FALSE),
+  #     1,
+  #     function(w)
+  #       paste(w[1], w[2], sep = '~'))
+  #   if(length(childrens) > 0) attach.down = apply(
+  #     expand.grid(leaves, childrens, stringsAsFactors = FALSE),
+  #     1,
+  #     function(w)
+  #       paste(w[1], w[2], sep = '~'))
+  #
+  #   # print(S)
+  #   # print(roots)
+  #   # print(expand.grid(parent, roots, stringsAsFactors = FALSE))
+  #
+  #   # paste(leaves, childrens, sep = '~')
+  #
+  #   delete.up = delete.down = NULL
+  #   delete.up = paste(parent, g, sep = '~')
+  #   if(length(childrens) > 0) delete.down = paste(g, childrens, sep = '~')
+  #
+  #   if(verbose) {
+  #     cat(cyan('* Delete edges (inward)'), delete.up, '\n')
+  #     cat(cyan('* Delete edges (outward)'), delete.down, '\n')
+  #     cat(cyan('* Attachment edges (inward)'), attach.up, '\n')
+  #     cat(cyan('* Attachment edges (outward)'), attach.down, '\n')
+  #   }
+  #
+  #   edges = c(attach.up, attach.down)
+  #   if(!all(S == 0)) edges = c(edges, MatrixToEdges(S))
+  #
+  #   # print(edges)
+  #   # print(S)
+  #
+  #   G = MatrixToEdges(G)
+  #
+  #   # print(G)
+  #
+  #   #
+  #   # print(attach.up)
+  #   # print(attach.down)
+  #
+  #   G = setdiff(G, c(delete.up, delete.down))
+  #   G = c(G, edges)
+  #
+  #   return(edgesToMatrix(G))
+  # }
+  #
+  # wrapTS = function(M){
+  #   tryCatch(
+  #     {
+  #       TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
+  #       return(TS)
+  #     },
+  #     warning = function(w) { },
+  #     error = function(w) { },
+  #     finally = {return(TS)}
+  #   )
+  # }
 
-  del.from.Matrix = function(M, df){
-    for(i in 1:nrow(df))
-      M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] - 1
-    M
-  }
-
-  asWeightedMatrix = function(df){
-    entries.names = unique(unlist(df[ c(1,2)]))
-
-    M = matrix(0, ncol = length(entries.names), nrow = length(entries.names))
-    colnames(M) = rownames(M) = entries.names
-
-    for(i in 1:nrow(df))
-      M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] + 1
-    M
-  }
-
-  substitute.group.with.graph = function(g, G, S, verbose = FALSE)
-  {
-    g = as.character(g)
-
-    S.w = S
-    S[S>1] = 1
-
-    if(verbose) {
-      cat(yellow('* Substitute '), g, '\n')
-      cat(cyan('* Adj Matrix\n'))
-      print(MatrixToDataFrame(G))
-      cat(cyan('* Substitution Matrix\n'))
-      print(S)
-      # print(MatrixToDataFrame(S))
-      # stop('sss')
-    }
-
-    parent = pi(G, g)
-    childrens = children(G, g)
-
-    # print(parent)
-    # print(childrens)
-    # print(length(childrens))
-
-    # loops are bastards, we need a special modified root and leaves function
-    spec.root = function(w){
-      r.G = igraph::graph_from_adjacency_matrix(w)
-      r.w = root(w)
-
-      if(!igraph::is_dag(r.G)) {
-        if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
-        comp = names(igraph::components(r.G)$membership)
-        r.w = c(r.w, comp)
-        r.w = unique(r.w)
-      }
-      r.w
-    }
-
-    spec.leaves = function(w){
-      r.G = igraph::graph_from_adjacency_matrix(w)
-      r.w = leaves(w)
-
-      if(!igraph::is_dag(r.G)) {
-        if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
-        comp = names(igraph::components(r.G)$membership)
-        r.w = c(r.w, comp)
-        r.w = unique(r.w)
-      }
-      r.w
-    }
-
-    roots = spec.root(S)
-    leaves = spec.leaves(S)
-
-    # print(roots)
-    # print(leaves)
-    attach.up = attach.down = NULL
-    attach.up = apply(
-      expand.grid(parent, roots, stringsAsFactors = FALSE),
-      1,
-      function(w)
-        paste(w[1], w[2], sep = '~'))
-    if(length(childrens) > 0) attach.down = apply(
-      expand.grid(leaves, childrens, stringsAsFactors = FALSE),
-      1,
-      function(w)
-        paste(w[1], w[2], sep = '~'))
-
-    # print(S)
-    # print(roots)
-    # print(expand.grid(parent, roots, stringsAsFactors = FALSE))
-
-    # paste(leaves, childrens, sep = '~')
-
-    delete.up = delete.down = NULL
-    delete.up = paste(parent, g, sep = '~')
-    if(length(childrens) > 0) delete.down = paste(g, childrens, sep = '~')
-
-    if(verbose) {
-      cat(cyan('* Delete edges (inward)'), delete.up, '\n')
-      cat(cyan('* Delete edges (outward)'), delete.down, '\n')
-      cat(cyan('* Attachment edges (inward)'), attach.up, '\n')
-      cat(cyan('* Attachment edges (outward)'), attach.down, '\n')
-    }
-
-    edges = c(attach.up, attach.down)
-    if(!all(S == 0)) edges = c(edges, MatrixToEdges(S))
-
-    # print(edges)
-    # print(S)
-
-    G = MatrixToEdges(G)
-
-    # print(G)
-
-    #
-    # print(attach.up)
-    # print(attach.down)
-
-    G = setdiff(G, c(delete.up, delete.down))
-    G = c(G, edges)
-
-    return(edgesToMatrix(G))
-  }
-
-  wrapTS = function(M){
-    tryCatch(
-      {
-        TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
-        return(TS)
-      },
-      warning = function(w) { },
-      error = function(w) { },
-      finally = {return(TS)}
-    )
-  }
-
-  #################################################################
-  #################################################################
-  #################################################################
-
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # What we fit
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   numPatients = length(x$phylogenies)
   fitPatients = names(x$phylogenies)
 
@@ -267,8 +289,8 @@ tl_revolver_fit = function(x,
     names(solutionID) = fitPatients
   }
 
-  bestScores = stopCondition = penalty =  rep(NA, numPatients)
-  names(bestScores) = names(stopCondition) = names(penalty) = fitPatients
+  # bestScores = stopCondition = penalty =  rep(NA, numPatients)
+  # names(bestScores) = names(stopCondition) = names(penalty) = fitPatients
 
   # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # Drivers that will be correlated, add GL
@@ -277,102 +299,90 @@ tl_revolver_fit = function(x,
   all.drivers = Reduce(bind_rows, all.drivers) %>% pull(variantID) %>% unique()
   all.drivers = c(all.drivers, "GL")
 
-  df.penalty = data.frame(matrix(nrow = 0, ncol = 3))
-  colnames(df.penalty) = c('Step', 'VariantID', 'penalty')
+  # df.penalty = data.frame(matrix(nrow = 0, ncol = 3))
+  # colnames(df.penalty) = c('Step', 'VariantID', 'penalty')
 
-  tb_penalty = data.frame(
-    VariantID = all.drivers,
-    Step = 0,
-    Penalty = NA,
-    stringsAsFactors = FALSE
-  ) %>% as_tibble()
+  # tb_penalty = data.frame(
+  #   VariantID = all.drivers,
+  #   Step = 0,
+  #   Penalty = NA,
+  #   stringsAsFactors = FALSE
+  # ) %>% as_tibble()
 
-  tb_solutionID = data.frame(
-    patientID = fitPatients,
-    Step = 0,
-    Solution = solutionID,
-    Penalty = NA,
-    stringsAsFactors = FALSE
-  ) %>% as_tibble()
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # A data structure that we keep to store the fit progress
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  tb_solutionID = Stats_trees(x, fitPatients)
+  tb_solutionID$Solution = solutionID
 
-  #######################################################################
-  ################################################ TL FIT -- step 1
+  #
+  #   data.frame(
+  #   patientID = fitPatients,
+  #   Step = 0,
+  #   Penalty = NA,
+  #   stringsAsFactors = FALSE
+  # ) %>% as_tibble()
+
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # Step 1) Fit via EM of the best tree for each patient
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   pio::pioStr('\n\n1] Expectation Maximization ', '\n')
 
-  st_trees = Stats_trees(x, patients = fitPatients)
-
   cat(inverse(sprintf("\n%27s", "Number of Solutions")))
-  sapply(st_trees$numTrees, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
+  sapply(tb_solutionID$numTrees, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
 
   cat(inverse(sprintf("\n%27s", "Combinations of Transfer")))
-  sapply(st_trees$combInfTransf, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
+  sapply(tb_solutionID$combInfTransf, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
 
   cat(inverse(sprintf("\n\n%27s", "Initialization")))
-  sapply(solutionID, function(s) cat(paste(green(sprintf('%4s', s)), '|', sep ='')))
+  sapply(tb_solutionID$Solution, function(s) cat(paste(green(sprintf('%4s', s)), '|', sep ='')))
   cat('\n')
 
   numIter = 1
-  repeat{ # Correlate models
+  E = NULL
+  repeat{
 
-    ################################################ E-step
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    # E-step
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
     cat(bgBlue("\n#", sprintf('%-3d', numIter), ' : '))
     cat(cyan("\tE: "))
 
-    # Compute consensus [E-step]
-    # consensus = lapply(
-    #   sapply(fitPatients, list),
-    #   function(pat){
-    #     phylo = x$phylogenies[[pat]][[solutionID[pat]]]
-    #     phylo$transfer$drivers
-    #   }
-    # )
-    # consensus = Reduce(rbind, consensus)
-
-    consensus = apply(
-      data.frame(tb_solutionID),
-      1,
-      function(entry)
-      {
-        ITransfer(x, entry['patientID'], rank = entry['Solution'], type = 'drivers')
-      }
-    )
-    consensus = Reduce(bind_rows, consensus)
-
-    penalty_pairs = consensus %>%
-      group_by(from, to) %>%
-      summarise(count = n()) %>%
-      group_by(to) %>%
-      mutate(penalty = count / sum(count)) %>%
-      ungroup()
-
-
-    stop("FINO QUI")
-
-    E.matrix = asWeightedMatrix(consensus)
-    E.matrix.norm = apply(E.matrix, 2, function(w)w/sum(w))
+    E = E_step(x, tb_solutionID)
     cat(green('OK'), cyan("\tM: "))
 
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    # M-step
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+    tb_solutionID$newSolution = M_step(x, E, st_trees)
+    tb_solutionID = tb_solutionID %>%
+      mutate(
+        converged = Solution == newSolution,
+        Solution = newSolution
+        ) %>%
+      select(-newSolution)
 
-    ################################################ M-step - this is a global optimum
-    for(patient in fitPatients)
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    # Print to screen some nice colouring etc.
+    # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+    for(i in 1:nrow(tb_solutionID))
     {
-      best = optimize(E.matrix, x$phylogenies[[patient]], solutionID[patient], greedy = FALSE)
+      string = sprintf('%4s |', tb_solutionID$Solution[i])
 
-      has.Improved = (solutionID[patient] != best['idx'])
-      solutionID[patient] = best['idx']
-      bestScores[patient] = best['score']
-      penalty[patient] = best['penalty']
-
-
-      if(has.Improved) cat(paste(red(sprintf('%4s', solutionID[patient])), '|', sep =''))
-      else cat(paste(green(sprintf('%4s', solutionID[patient])), '|', sep =''))
-
-      stopCondition[patient] = as.logical(has.Improved)
+      if(tb_solutionID$converged[i]) cat(green(string))
+      else cat(red(string))
     }
 
-    if(all(!stopCondition)) break;
-    if(numIter == max.iterations) {
+    # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    # Stopping conditions (convergence or interrupt)
+    # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+    if(all(tb_solutionID$converged)) break;
+    if(numIter == max.iterations)
+    {
       cat(red('\n\n == Interrupted -- reached number of max.iterations requested. =='))
       break
     }
@@ -380,15 +390,35 @@ tl_revolver_fit = function(x,
     numIter = numIter + 1
   }
 
-  cat(cyan('\n\nModels\' penalty:'), 'mean', mean(unlist(penalty)), ' - median', median(unlist(penalty)), ' - sd', sd(unlist(penalty)))
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # Report the penalty to screen
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  solutionID = tb_solutionID %>% pull(Solution)
 
-  # Store fit phylogenies
+  tb_solutionID$penalty = sapply(
+    seq(solutionID),
+    function(w) Penalize(x, tb_solutionID$patientID[w],
+                         E, rank = solutionID[w],
+                         alpha = 1, just.pen = TRUE))
+
+  print(tb_solutionID)
+
+
+
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # Store fits into a new object
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   fit = list()
-  fit$multinomial.penalty = E.matrix
-  fit$penalty = penalty
-  fit$phylogenies = list()
-  for(patient in fitPatients)  fit$phylogenies[[patient]] = x$phylogenies[[patient]][[solutionID[patient]]]
 
+  fit$penalty = E
+  fit$phylogenies = list()
+
+  for (patient in fitPatients)
+    fit$phylogenies[[patient]] = Phylo(x,
+                                       patient,
+                                       tb_solutionID %>% filter(id == !!patient) %>% pull(Solution))
+
+  stop("qui")
 
   #######################################################################
   ################################################ TL FIT -- step 2
@@ -462,3 +492,38 @@ tl_revolver_fit = function(x,
   return(x)
 }
 
+E_step = function(x, tb_solutionID)
+{
+  # Obtain all information transfers from the current solutions
+  E = apply(
+    data.frame(tb_solutionID),
+    1,
+    function(entry)
+    {
+      ITransfer(x, p = entry['patientID'], rank = as.numeric(entry['Solution']), type = 'drivers')
+    }
+  )
+
+  E = Reduce(bind_rows, E)
+
+  # Count and normalize them
+  E %>%
+    group_by(from, to) %>%
+    summarise(count = n()) %>%
+    group_by(to) %>%
+    mutate(penalty = count / sum(count)) %>%
+    ungroup()
+}
+
+M_step = function(x, E, st_trees)
+{
+  apply(st_trees,
+        1,
+        function(w) {
+          scores = Penalize(x, w['patientID'], E, rank = 1:w['numTrees'])
+          which.max(scores)
+        })
+}
+
+
+# Penalize(x, patient, E, rank = 1:3)
