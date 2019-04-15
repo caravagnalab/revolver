@@ -41,6 +41,7 @@ Data = function(x, p)
 Drivers = function(x, p){
   Data(x, p) %>% filter(is.driver)
 }
+# Drivers = Vectorize(Drivers, vectorize.args = 'p', SIMPLIFY = FALSE)
 
 #' Extract CCF/binary data for truncal mutations of a patient
 #'
@@ -171,6 +172,31 @@ Phylo = function(x, p, rank = NULL)
   else x$phylogenies[[p]][[1]]
 }
 
+# Phylo = Vectorize(Phylo, vectorize.args = 'p', SIMPLIFY = FALSE)
+
+
+#' Extract the information transfer for a patient's tree
+#'
+#' @param x A REVOLVER cohort
+#' @param p A patient
+#' @param rank The rank of the tree to extract
+#' @param type Either `clones` or `drivers`.
+#'
+#' @return The information transfer for a patient's tree
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Phylo(CRC.cohort, 'adenoma_3')
+ITransfer = function(x, p, rank = 1, type = 'drivers')
+{
+  tree = Phylo(x, p, rank)
+
+  if(type == 'drivers') return(tree$transfer$drivers)
+  if(type == 'clones') return(tree$transfer$clones)
+}
+
+
 #' Extract fitted model for a patient
 #'
 #' @param x a REVOLVER object of class "rev_cohort_fit"
@@ -193,9 +219,11 @@ Fit = function(x, p)
 #' Return summary stastics for the cohort's patients
 #'
 #' @description Returns the number of samples per patient, the number
-#' of drivers, the number of clonal and subclonal mutations etc.
+#' of drivers, the number of clonal and subclonal mutations etc. The
+#' function can be run on a subset of patients.
 #'
-#' @param x a REVOLVER object of class "rev_cohort"
+#' @param x A REVOLVER cohort.
+#' @param patients The patients for which the summaries are computed.
 #'
 #' @return A tibble with summary stastics.
 #'
@@ -204,16 +232,19 @@ Fit = function(x, p)
 #' @examples
 #' data(CRC.cohort)
 #' Stats(CRC.cohort)
-Stats = function(x) {
+Stats = function(x, patients = x$patients)  {
 
   st = data.frame(
-    patientID = x$patients,
+    patientID = patients,
     stringsAsFactors = FALSE
   )
 
   st$numBiopsies = sapply(st$patientID, function(w) length(Samples(x, w)))
   st$numMutations = sapply(st$patientID, function(w) nrow(Data(x, w)))
+
   st$numDriverMutations = sapply(st$patientID, function(w) nrow(Drivers(x, w)))
+  st$numClonesWithDriver = sapply(st$patientID, function(w) length(unique(Drivers(x, w) %>% pull(cluster))))
+
   st$numTruncalMutations = sapply(st$patientID, function(w) nrow(Truncal(x, w)))
   st$numSubclonalMutations = sapply(st$patientID, function(w) nrow(Subclonal(x, w)))
 
@@ -224,10 +255,11 @@ Stats = function(x) {
 #' Return summary stastics for the cohort's drivers
 #'
 #' @description Returns the number of clonal and subclonal occurrences
-#' of each driver in the cohort, and their percentage relative to the
-#' cohort size.
+#' of the drivers in the cohort, and their percentage relative to the
+#' cohort size. The function can be run on a subset of drivers.
 #'
 #' @param x a REVOLVER object of class "rev_cohort"
+#' @param drivers The drivers for which the summaries are computed.
 #'
 #' @return A tibble with the driver stastics.
 #'
@@ -236,23 +268,23 @@ Stats = function(x) {
 #' @examples
 #' data(CRC.cohort)
 #' Stats_drivers(CRC.cohort)
-Stats_drivers = function(x) {
+Stats_drivers = function(x, drivers = x$variantIDs.driver) {
 
   st = data.frame(
-    variantID = x$variantIDs.driver,
-    row.names = x$variantIDs.driver,
+    variantID = drivers,
+    row.names = drivers,
     stringsAsFactors = FALSE
   )
 
   clonal = sapply(
     x$patients,
-    function(p) { CCF(x, p) %>% filter(is.driver, is.clonal) %>% pull(variantID) }
+    function(p) { CCF(x, p) %>% filter(is.driver, is.clonal, variantID %in% drivers) %>% pull(variantID) }
   )
   clonal = table(unlist(clonal))
 
   subclonal = sapply(
     x$patients,
-    function(p) { CCF(x, p) %>% filter(is.driver, !is.clonal) %>% pull(variantID) }
+    function(p) { CCF(x, p) %>% filter(is.driver, !is.clonal, variantID %in% drivers) %>% pull(variantID) }
   )
   subclonal = table(unlist(subclonal))
 
@@ -280,6 +312,54 @@ Stats_drivers = function(x) {
   st %>% as_tibble()
 }
 
+# ' Return summary stastics for the cohort's trees
+#'
+#' @description Returns the number of clonal and subclonal occurrences
+#' of each driver in the cohort, and their percentage relative to the
+#' cohort size. The function can be run on a subset of patients.
+#'
+#' @param x a REVOLVER object of class "rev_cohort"
+#' @param patients The patients for which the summaries are computed.
+#'
+#' @return A tibble with the driver stastics.
+#'
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Stats_drivers(CRC.cohort)
+Stats_trees = function(x, patients = x$patients) {
+
+  st = data.frame(
+    patientID = patients,
+    row.names = patients,
+    stringsAsFactors = FALSE
+  )
+
+  st$hasTrees = st$patientID %in% names(x$phylogenies)
+
+  st$numTrees = sapply(st$patientID, function(p) length(x$phylogenies[[p]]))
+
+  MSc = function(p) {
+    if(p %in% names(x$phylogenies))
+      return(max(sapply(seq_along(x$phylogenies[[p]]), function(t) x$phylogenies[[p]][[t]]$score)))
+    NA
+  }
+
+  st$maxScore = sapply(st$patientID, MSc)
+
+  mSc = function(p) {
+    if(p %in% names(x$phylogenies))
+      return(min(sapply(seq_along(x$phylogenies[[p]]), function(t) x$phylogenies[[p]][[t]]$score)))
+    NA
+  }
+
+  st$minScore = sapply(st$patientID, mSc)
+
+  st$combInfTransf = sapply(st$patientID, combination_of_information_transfer,  x = x)
+
+  st %>% as_tibble()
+}
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

@@ -24,7 +24,7 @@
 revolver_cohort = function(dataset,
                            CCF.parser = revolver:::CCF.parser,
                            options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
-                           annotation = 'REVOLVER dataset')
+                           annotation = 'My REVOLVER dataset')
 {
 
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -304,7 +304,6 @@ print.rev_cohort <-
 
     pio::pioTit("Drivers summary statistics")
     print(Stats_drivers(x))
-
 
     pio::pioTit('Available computations', prefix = '\t')
 

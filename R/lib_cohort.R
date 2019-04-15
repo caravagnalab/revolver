@@ -1,17 +1,4 @@
 
-rev_count_information_transfer_comb = function(x, p) {
-  stopifnot(!is.null(x$phylogenies))
-  stopifnot(p %in% names(x$phylogenies))
-
-  keys = lapply(
-    x$phylogenies[[p]],
-        function(w)
-          paste(sort(DataFrameToEdges(w$transfer$driver)), collapse = ' '))
-
-  keys = Reduce(rbind, keys)
-  length(unique(keys))
-}
-
 
 
 

@@ -250,12 +250,23 @@ print.rev_phylo <- function(x, ...)
 #' plot(CRC.cohort$phylogenies[['adenoma_3']][[1]])
 plot.rev_phylo = function(x,
                           cex = 1,
-                          node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1"))
+                          node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
+                          tree.layout = 'tree'
                           )
 {
   # Get the tidygraph
   tree = x
   tb_tree = tree$tb_adj_mat
+
+  # TODO Color edges as of information transfer
+  #  - get path
+  #  - modify edges etc.
+  # tree$transfer
+  #
+  # %>%
+  #   mutate(
+  #     cluster = .N()$cluster[from]
+  #   )
 
   # Color the nodes by cluster id
   nDrivers = sum(tb_tree %>% pull(is.driver), na.rm = TRUE)
@@ -268,9 +279,9 @@ plot.rev_phylo = function(x,
   tb_node_colors[!is.na(tb_tree %>% pull(driver))] = node_palette(nDrivers)
 
   # Plot call
-  layout <- create_layout(tb_tree, layout = 'dendrogram')
+  layout <- create_layout(tb_tree, layout = tree.layout)
 
-  ggraph(layout, 'dendrogram') +
+  ggraph(layout) +
     geom_edge_link(
       arrow = arrow(length = unit(2 * cex, 'mm')),
       end_cap = circle(5 * cex, 'mm'),

@@ -1,5 +1,7 @@
-plot_data = function(x, p)
+plot_data = function(x, patient)
 {
+  p = patient
+
   sm = Samples(x, p)
   cl = CCF_clusters(x, p)
   st = Stats(x)

@@ -1,5 +1,5 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-
-# This function compute the information transfer from an object of class rev_phylo
+# These function compute the information transfer from REVOLVER trees
 # =-=-=-=-=-=-=-=-=-=-=-=-=-
 
 # This function takes the list of drivers in x and traverses backward the tree
@@ -79,4 +79,23 @@ information_transfer = function(x)
     select(-variantID)
 
   return(list(clones = clones %>% as_tibble(), drivers = drivers %>% as_tibble()))
+}
+
+
+# This function takes the list of drivers in x and traverses backward the tree
+# to determine the transitive closure used by REVOLVER's algorithm
+combination_of_information_transfer = function(x, patient)
+{
+  if(!has_patient_trees(x, patient)) return(0)
+
+  trees = Phylo(x, patient)
+
+  keys = lapply(
+    trees,
+      function(w)
+        paste(sort(DataFrameToEdges(w$transfer$clones)), collapse = ' ')
+    )
+
+    keys = Reduce(rbind, keys)
+    length(unique(keys))
 }

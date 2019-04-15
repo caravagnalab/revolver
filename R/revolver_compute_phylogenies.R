@@ -242,8 +242,9 @@ revolver_compute_phylogenies = function(
     x,
     samples)
 
-  comb = rev_count_information_transfer_comb(x, patient)
-  pio::pioStr('\n Combinations of Information Transfer : ', crayon::yellow(comb), suffix = '\n')
+  # Just show how many combinations we have
+  comb = combination_of_information_transfer(x, patient)
+  pio::pioStr('\n Combinations of Information Transfer : ', comb, suffix = '\n')
 
   return(x)
 }
