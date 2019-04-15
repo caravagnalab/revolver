@@ -282,40 +282,31 @@ check_input = function(dataset, CCF.parser)
 #' data(CRC.cohort)
 #' CRC.cohort
 print.rev_cohort <-
-  function(x, digits = max(3, getOption("digits") - 3), ...)
+  function(x, ...)
   {
     stopifnot(inherits(x, "rev_cohort"))
+    digits = max(3, getOption("digits") - 3)
 
-    pio::pioHdr(paste('REVOLVER ', x$REVOLVER_VERSION), toPrint = NULL)
+    pio::pioHdr('REVOLVER - Repeated Evolution in Cancer', toPrint = NULL, suffix = '\n')
 
-    # cat(bgCyan('REVOLVER'), cyan(x$REVOLVER_VERSION))
-    # cat(blue(paste(' -- ', x$annotation, sep ='')), '\n')
-
-    cat('\n\t', blue(x$annotation, sep = ''), '\n')
-    cat('\n\t',
-        cyan('Patient IDs     :'),
-        paste(head(x$patients), collape = ', ', sep = ''),
-        '...')
-    cat(
-      '\n\t',
-      cyan('Cohort size     :'),
-      length(x$patients),
-      'patients,',
-      x$numVariants,
-      'alterations,',
-      length(x$variantIDs.driver),
-      'drivers'
+    pio::pioStr("Dataset", x$annotation, suffix = '\n', prefix = '\n')
+    pio::pioStr(
+      "Cohort size",
+      paste0(x$n$patients, ' patients, ',
+             x$n$variants, ' variants and ',
+             x$n$drivers, ' driver events.'),
+      suffix = '\n'
     )
-    cat('\n\t',
-        cyan('Drivers         :'),
-        paste(
-          head(x$variantIDs.driver),
-          collape = ', ',
-          sep = ''
-        ),
-        '... \n')
 
-    pio::pioTit('Computations available', prefix = '\t')
+    pio::pioTit("Cohort summary statistics")
+    print(Stats(x))
+
+
+    pio::pioTit("Drivers summary statistics")
+    print(Stats_drivers(x))
+
+
+    pio::pioTit('Available computations', prefix = '\t')
 
     cat('\n\t',
         cyan('Trees per patient    :'),

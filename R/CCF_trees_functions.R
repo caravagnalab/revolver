@@ -168,18 +168,43 @@ CCF_phylogeny_univariate = function(x, clonal.cluster)
 ClonEvol_surrogate = function(clusters, samples, clonal.cluster, min.CCF = 0.01)
 {
   stopifnot(all(samples %in% colnames(clusters)))
-  clusters = clusters[, samples, drop = FALSE]
 
+  # clusters = data.frame(clusters[, samples, drop = FALSE])
+
+  clusters = clusters %>%
+    select(
+      cluster,
+      !!samples
+    ) %>%
+    reshape2::melt(id = 'cluster') %>%
+    as_tibble() %>%
+    mutate(
+      variable = paste(variable),
+      value = as.numeric(value)
+    ) %>%
+    rename(
+      region = variable,
+      CCF = value
+    )
 
   trees = lapply(samples,
                  function(w) {
                    regname = w
 
-                   w = clusters[, w]
-                   names(w) = rownames(clusters)
+                   this_region = clusters %>%
+                     filter(
+                       region == !!w,
+                       CCF > min.CCF
+                     )
+
+                   w = this_region$CCF
+                   names(w) = this_region$cluster
+
+                   # w = clusters[, w]
+                   # names(w) = rownames(clusters)
 
                    # CCF for this sample, we consider only clusters values above 1% CCF
-                   w = w[w > min.CCF]
+                   # w = w[w > min.CCF]
 
                    cat("\n Region: ", regname, " - #CCF clusters > 1%: ", length(w))
 

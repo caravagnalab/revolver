@@ -1,4 +1,12 @@
-### Getters
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# These functions are a series of getters that allow to query a cohort
+# object - i.e,, a REVOLVER S3 object of type "rev_cohort", or any
+# other S3 object that inherits from that class. These functions has been
+# introduced along with a new implementation of the internal REVOLVER
+# structure which is based on tibbles and the tidy paradigm.
+#
+# G. Caravagna. April 2019
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 #' Extract CCF/binary data for a patient
 #'
@@ -48,6 +56,26 @@ Drivers = function(x, p){
 Truncal = function(x, p){
   Data(x, p) %>% filter(is.clonal)
 }
+
+
+#' Return the id of the clonal cluster for this patient
+#'
+#' @param x a REVOLVER object of class "rev_cohort"
+#' @param p a patient
+#'
+#' @return The id of the clonal cluster for \code{p}
+#'
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Clonal_cluster(CRC.cohort, 'adenoma_3')
+Clonal_cluster = function(x, p)
+{
+  CCF_clusters(x, p) %>% filter(is.clonal) %>% pull(cluster)
+}
+
+
 
 #' Extract CCF/binary data for subclonal mutations of a patient
 #'
@@ -136,11 +164,11 @@ CCF_clusters = function(x, p)
 #' @examples
 #' data(CRC.cohort)
 #' Phylo(CRC.cohort, 'adenoma_3')
-Phylo = function(x, p)
+Phylo = function(x, p, rank = NULL)
 {
-  if(is.null(x$phylogenies[[p]])) stop('There are no phylogenies for ', p)
-
-  x$phylogenies[[p]]
+  # if(is.null(x$phylogenies[[p]])) stop('There are no phylogenies for ', p)
+  if(is.null(rank)) x$phylogenies[[p]]
+  else x$phylogenies[[p]][[1]]
 }
 
 #' Extract fitted model for a patient
@@ -162,32 +190,20 @@ Fit = function(x, p)
   x$fit$phylogenies[[p]]
 }
 
-
-# CCF = Vectorize(CCF, vectorize.args = 'p')
-# Phylo = Vectorize(Phylo, vectorize.args = 'p')
-# Fit = Vectorize(Fit, vectorize.args = 'p')
-#
-# TRACERx.cohort = fit
-# TRACERx.cohort$fit = NULL
-# class(TRACERx.cohort) = "rev_cohort"
-# save(TRACERx.cohort, file = 'TRACERx.cohort.RData')
-#
-# TRACERx = TRACERx.cohort$dataset
-# head(TRACERx)
-#
-# save(TRACERx, file = 'TRACERx.RData')
-#
-
-#
-# CCF(x, p)
-# Phylo(x, p)
-# Fit(x, p)
-# Fit(x, c(p,p))
-
-# x= fit
-# p = 'CRUK0001'
-# load("/Users/gcaravagna/Documents/GitHub/test.revolver/TRACERx-release/Drivers_TabS23_in_>=2_patients/TRACERx.fit.RData")
-
+#' Return summary stastics for the cohort's patients
+#'
+#' @description Returns the number of samples per patient, the number
+#' of drivers, the number of clonal and subclonal mutations etc.
+#'
+#' @param x a REVOLVER object of class "rev_cohort"
+#'
+#' @return A tibble with summary stastics.
+#'
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Stats(CRC.cohort)
 Stats = function(x) {
 
   st = data.frame(
@@ -205,3 +221,83 @@ Stats = function(x) {
   st %>% as_tibble()
 }
 
+#' Return summary stastics for the cohort's drivers
+#'
+#' @description Returns the number of clonal and subclonal occurrences
+#' of each driver in the cohort, and their percentage relative to the
+#' cohort size.
+#'
+#' @param x a REVOLVER object of class "rev_cohort"
+#'
+#' @return A tibble with the driver stastics.
+#'
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Stats_drivers(CRC.cohort)
+Stats_drivers = function(x) {
+
+  st = data.frame(
+    variantID = x$variantIDs.driver,
+    row.names = x$variantIDs.driver,
+    stringsAsFactors = FALSE
+  )
+
+  clonal = sapply(
+    x$patients,
+    function(p) { CCF(x, p) %>% filter(is.driver, is.clonal) %>% pull(variantID) }
+  )
+  clonal = table(unlist(clonal))
+
+  subclonal = sapply(
+    x$patients,
+    function(p) { CCF(x, p) %>% filter(is.driver, !is.clonal) %>% pull(variantID) }
+  )
+  subclonal = table(unlist(subclonal))
+
+  st$numClonal = st$numSubclonal = 0
+
+  st[names(clonal), 'numClonal'] = clonal
+  st[names(subclonal), 'numSubclonal'] = subclonal
+
+  st = st %>%
+    as_tibble() %>%
+    mutate(
+      p_clonal = numClonal/x$n$patients,
+      p_subclonal = numSubclonal/x$n$patients,
+      N_tot = numClonal + numSubclonal,
+      p_tot = N_tot / x$n$patient
+    ) %>%
+    select(
+      variantID,
+      numClonal, p_clonal,
+      numSubclonal, p_subclonal,
+      N_tot, p_tot
+    ) %>%
+    arrange (desc(numClonal), desc(numSubclonal))
+
+  st %>% as_tibble()
+}
+
+
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# These are non exported getters that help coding
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+has_patient_trees = function(x, p = NULL)
+{
+  if (is.null(p))
+    return(!is.null(x$phylogenies))
+  else
+    return(!is.null(x$phylogenies[[p]]))
+}
+
+
+
+# obj_has_trees = function(x)
+# {
+#   if(is.null(x$phylogenies))
+#     stop('Cannot proceed without having computed the trees -- are you calling the right function?')
+# }

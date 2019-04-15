@@ -58,7 +58,7 @@ clonal.subclonal.table = function(x)
 
 
 #' @importFrom utils setTxtProgressBar txtProgressBar
-create_trees_in_revolver_format = function(options, TREES, SCORES, patient, dataset, samples)
+create_trees_in_revolver_format = function(options, TREES, SCORES, patient, x, samples)
 {
   cat("Total number of trees with non-zero scores is", length(TREES))
 
@@ -96,10 +96,9 @@ create_trees_in_revolver_format = function(options, TREES, SCORES, patient, data
       setTxtProgressBar(pb, i)
 
     tree = revolver_phylogeny(
-      M = TREES[[i]],
+      x,
       patient = patient,
-      dataset = dataset,
-      samples = samples,
+      M = TREES[[i]],
       score = SCORES[i],
       annotation = paste('Ranked ', i, '/', length(TREES), sep ='')
     )

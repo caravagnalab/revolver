@@ -40,16 +40,11 @@ revolver_compute_phylogenies = function(
   verbose = FALSE
 )
 {
-  # Old parameter now fixed to FALSE
-  use.MI = FALSE
-
-  # Prepare output
-  if(is.null(x$phylogenies)) x$phylogenies = NULL
-
+  compute_trees_denovo = any(is.null(precomputed.trees))
 
   pio::pioHdr(paste("REVOLVER Construct phylogenetic trees for", patient),
               c(
-                `Use precomputed trees` = paste(all(!is.null(precomputed.trees))),
+                `Use precomputed trees` = compute_trees_denovo,
                 `Maximum state space size to switch from exhaustive to Montecarlo search` = options$sspace.cutoff,
                 `Number of Montecarlo samples, if not exhaustive` = options$n.sampling,
                 `Overwrite the tree if it is already available` = options$overwrite,
@@ -58,39 +53,59 @@ revolver_compute_phylogenies = function(
               prefix = '\t'
   )
 
-  if(!is.null(x$phylogenies))
-  {
-    if(patient %in% names(x$phylogenies))
-    {
-      if(!as.logical(options['overwrite']))
-      {
-        cat(red('\nModels already available and overwrite is FALSE -- skipping patient.\n'))
-        return(x)
-      }
-    }
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  # This function will not run for certain combination of parameters
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+  # Prepare output
+  if(!has_patient_trees(x)) x$phylogenies = NULL
+
+  # Check if you do not want to overwrite already computed trees
+  if(has_patient_trees(x, patient) & !as.logical(options['overwrite'])) {
+
+    message('Trees already available for', patient, 'and `options$overwrite = FALSE`.
+            The input cohort will be returned without modifications.\n')
+
+    return(x)
   }
-  cat('\n')
 
-  pCCF = CCF(x, patient)
-  samples = Samples(x, patient)
-
-  dataset = left_join(Data(x, patient), pCCF, by = 'id')
-
-  # cat(cyan('[compute_rev_phylogenies] Clusters for this patient ... \n'))
-  clusters = revolver:::clusters.table(x$dataset, samples)
-  nclusters = nrow(clusters)
-
+  # At this point some sort of computaiton will be done, and trees and their
+  # scores will be stored in these two variables (lists)
   TREES = SCORES = NULL
 
-  if(!any(is.null(precomputed.trees))){
-    cat(yellow('\n\nPrecomputed trees given as input ... using them.\n\n'))
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # This function allows to input precomputed trees and in that case
+  # no actual computation is done by REVOLVER and the trees are just
+  # used as if they were computed by the tool
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  if(!compute_trees_denovo)
+  {
+    pio::pioTit('Precomputed trees given as input')
+
+    are_suitable_precomputed_trees(x, patient, precomputed.trees, precomputed.scores)
 
     TREES = precomputed.trees
     SCORES = precomputed.scores
   }
-  else
+
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # This branch computes de novo all the trees for a patient
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  if(compute_trees_denovo)
   {
-    pio::pioTit("Groups/ Clusters in the data of this patient")
+    # We will need to use the CCF clusters for this patient
+    clusters = CCF_clusters(x, patient)
+    nclusters = nrow(clusters)
+
+    clonal.cluster = Clonal_cluster(x, patient)
+    samples = Samples(x, patient)
+
+    df_clusters = data.frame(
+      clusters[, samples],
+      row.names = clusters$cluster
+      )
+
+    pio::pioTit(paste("CCF clusters for patient", patient))
     print(clusters)
 
     if(nclusters == 1)
@@ -107,9 +122,10 @@ revolver_compute_phylogenies = function(
     {
       # ################## Generate all trees that are compatible with the observed CCFs, we do this
       # ################## by analyzing one sample at a time.
-      pio::pioTit("Using ClonEvol to build phylogentic trees, per region (this might take some time)")
+      pio::pioTit("Building phylogentic trees, per region (this might take some time)")
 
-      clonal.cluster = as.character(unique(x$dataset$cluster[x$dataset$is.clonal]))
+      # clonal.cluster = as.character(unique(x$dataset$cluster[x$dataset$is.clonal]))
+      # Get the data that we need to build a phylogenetic tree for a patient
 
       # December 2018 - https://github.com/caravagn/revolver/issues/13
       #
@@ -128,7 +144,8 @@ revolver_compute_phylogenies = function(
 
       # remove the trees which have no edges (returned for samples with only 1 cluster for instance)
       numSol = sapply(clonevol.obj$models, function(w){ sum(sapply(w, nrow) > 0) })
-      pio::pioDisp(data.frame(region = names(clonevol.obj$models), Solutions = numSol))
+
+      pio::pioDisp(data.frame(region = names(clonevol.obj$models), Trees = numSol, stringsAsFactors = FALSE))
 
       ################## Build all possible clonal trees
       # 1) hash them
@@ -154,14 +171,14 @@ revolver_compute_phylogenies = function(
         n.sampling = options['n.sampling']
       )
 
-      pio::pioTit("Scoring and ranking solutions (this might take some time)")
+      pio::pioTit("Scoring and ranking trees")
 
       # ################## Ranking trees. A tree is good according to the following factors:
       # # 1) the MI among the variables x and y, if they are connected by an edge x --> y [TODO: consider if we really need MI]
       # # 2) the Multinomial probability of edge x --> y in the trees determined by the CCF
       # # 3) for every edge  x --> y, the number of times that the CCF of x is greater than the CCF of y
       # # 3) for every node  x --> y1 ... yK, the number of times that the CCF of x is greater than the sum of the CCFs of y1 ... yK
-      binary.data = revolver:::binarize(x$dataset, samples)
+      # binary.data = revolver:::binarize(x$dataset, samples)
 
       # 1) MI from binarized data -- different options, with a control sample which avoids 0log(0)
       # • a=0:maximum likelihood estimator (see entropy.empirical)
@@ -169,20 +186,25 @@ revolver_compute_phylogenies = function(
       # • a=1:Laplace’s prior
       # • a=1/length(y):Schurmann-Grassberger (1996) entropy estimator
       # • a=sqrt(sum(y))/length(y):minimax prior
+      binary.data = t(df_clusters)
+      binary.data[binary.data > 0] = 1
+
       MI.table = revolver:::computeMI.table(binary.data, MI.Bayesian.prior = 0, add.control = TRUE)
+      # Old parameter now fixed to FALSE
+      use.MI = FALSE
       if(!use.MI) MI.table[TRUE] = 1
 
       # Steps 1 and 2 are collapsed, multiply MI by the Multinomial probability
       MI.table = revolver:::weightMI.byMultinomial(MI.table, WEIGHTS.CONSENSUS.TREE)
 
       # 3) Get penalty for direction given CCFs -- this is done for all possible edges in the data
-      CCF = clusters[, samples, drop = FALSE]
+      # CCF = clusters[, samples, drop = FALSE]
       # penalty.CCF.direction = edge.penalty.for.direction(TREES, CCF)
       penalty.CCF.direction = 1
 
       # 4) Compute the branching penalty  --  this is done for each tree that we are considering
       cat('Computing Pigeonhole Principle\n')
-      penalty.CCF.branching = revolver:::node.penalty.for.branching(TREES, CCF)
+      penalty.CCF.branching = revolver:::node.penalty.for.branching(TREES, df_clusters)
 
       cat('Computing rank\n')
       RANKED = revolver:::rankTrees(TREES, MI.table, penalty.CCF.branching)
@@ -191,25 +213,106 @@ revolver_compute_phylogenies = function(
 
       TREES = TREES[SCORES > 0]
       SCORES = SCORES[SCORES > 0]
+
+      TREES = lapply(TREES, DataFrameToMatrix)
     }
   }
 
-  if(length(TREES) == 0){
-    cat(red('No phylogenies found for this patient -- check data? -- returning original cohort.\n'))
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=
+  # Now we can transform the tree in our own format
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=
+  pio::pioTit("Creating `rev_phylo`` object for REVOLVER (this might take some time)")
 
-    x$dataset = Original.dataset
+  # Special case: there are none
+  if(length(TREES) == 0)
+  {
+    message(
+      'No trees for this patient -- check data and input? -- returning original cohort.\n'
+      )
+
     return(x)
   }
 
-  pio::pioTit("Creating rev_phylo object for REVOLVER (this might take some time)")
-
-  x$phylogenies[[patient]] = create_trees_in_revolver_format(options, TREES, SCORES, patient, x$dataset, samples)
-
-  # Restore data
-  x$dataset = Original.dataset
+  # Now we create them
+  x$phylogenies[[patient]] = create_trees_in_revolver_format(
+    options,
+    TREES,
+    SCORES,
+    patient,
+    x,
+    samples)
 
   comb = rev_count_information_transfer_comb(x, patient)
   pio::pioStr('\n Combinations of Information Transfer : ', crayon::yellow(comb), suffix = '\n')
 
   return(x)
+}
+
+
+# Check format of precomputed trees
+are_suitable_precomputed_trees = function(
+  x,
+  patient,
+  precomputed.trees = NULL,
+  precomputed.scores = NULL
+)
+{
+  # N clusters
+  required_clusters = CCF_clusters(x, patient)$cluster
+
+  # Check if they're all N x N
+  cmt_size = sapply(precomputed.trees, ncol)
+  rmt_size = sapply(precomputed.trees, nrow)
+
+  OK_size = (cmt_size == rmt_size) && (cmt_size == length(required_clusters))
+
+  if(!all(OK_size)) {
+    message("Input trees must be NxN adjacency matrices because this patient has N = ",
+            length(required_clusters), " clusters. Some are not.")
+
+    stop("Cannot use these trees, aborting")
+  }
+
+  # Check if they have all N clusters
+  OK_clusters = sapply(
+    precomputed.trees,
+    function(w) {
+      all(required_clusters %in% colnames(w)) &&
+        all(required_clusters %in% rownames(w))
+    }
+  )
+
+  if(!all(OK_clusters)) {
+    message("Input trees must contain entries for all clusters ",
+            paste(required_clusters, collapse = ', '), " but some are not.")
+
+    stop("Cannot use these trees, aborting")
+  }
+
+  # Check if they're actual trees
+  OK_trees = sapply(precomputed.trees, is_tree)
+
+  if(!all(OK_trees)) {
+    message("Input trees are not trees and might have multiple roots, disconnected components etc.")
+
+    stop("Cannot use these trees, aborting")
+  }
+
+  # All scores are not NA
+  OK_scores_na = !(sapply(precomputed.scores, is.na))
+
+  if(!all(OK_scores_na)) {
+    message("Some trees are scored as NA, while they should all be real values.")
+
+    stop("Cannot use these trees, aborting")
+  }
+
+  # Sorted scores
+  OK_scores_sort = !(is.unsorted(rev(precomputed.scores)))
+
+  if(!all(OK_scores_sort)) {
+    message("Trees should be passed in descreasing order of scores, but they are not.")
+
+    stop("Cannot use these trees, aborting")
+  }
 }
