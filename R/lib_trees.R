@@ -155,14 +155,7 @@ leaves = function(model){
 #   return(aux(var))
 # }
 
-# Return the parent of "variable" in model
-pi = function(model, variable)
-{
-  model = model[, variable]
-  if(any(model > 0)) model = model[model > 0]
-  else return(NULL)
-  return(names(model))
-}
+
 
 
 # Given a Data Frame representation of a model, compute the set of

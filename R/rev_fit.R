@@ -321,17 +321,7 @@ tl_revolver_fit = function(x, initial.solution = 1, max.iterations = 10,
     return(edgesToMatrix(G))
   }
 
-  wrapTS = function(M){
-    tryCatch(
-      {
-        TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
-        return(TS)
-      },
-      warning = function(w) { },
-      error = function(w) { },
-      finally = {return(TS)}
-    )
-  }
+
 
   #################################################################
   #################################################################

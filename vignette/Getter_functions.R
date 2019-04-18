@@ -3,7 +3,8 @@ data("TRACERx")
 LF = list.files(path = './R', all.files = TRUE, full.names = TRUE)
 sapply(LF, source)
 
-TRACERx = TRACERx %>% filter(patientID %in% c('CRUK0001', "CRUK0002", 'CRUK0003'))
+TRACERx = TRACERx %>% filter(patientID %in% c('CRUK0001', "CRUK0002", 'CRUK0003', 'CRUK0004', 'CRUK0005',
+                                              'CRUK0006', 'CRUK0007', 'CRUK0008', 'CRUK0009',  'CRUK0010'))
 
 
 # This will generate an erorr
@@ -21,12 +22,10 @@ cohort = revolver_cohort(TRACERx,
                        options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10))
 
 # Create also phylogenetic trees
-cohort = revolver_compute_phylogenies(cohort, patient = 'CRUK0001')
-cohort = revolver_compute_phylogenies(cohort, patient = 'CRUK0002')
-cohort = revolver_compute_phylogenies(cohort, patient = 'CRUK0003')
+for(p in cohort$patients) cohort = revolver_compute_phylogenies(cohort, patient = p)
 
 # Fit the REVOLVER model
-cohort = revolver_fit(cohort, patient = 'CRUK0001')
+cohort = revolver_fit(cohort, initial.solution = NA)
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -96,7 +95,12 @@ Stats_trees(cohort)
 Stats_trees(cohort, patients = "CRUK0001")
 
 
+# =-=-=-=-=-=-=-=-=-=-=-=-=-
+# Fitting of a model with REVOLVER
+# =-=-=-=-=-=-=-=-=-=-=-=-=-
 
+cohort = revolver_fit(cohort,
+                      initial.solution = NA)
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-

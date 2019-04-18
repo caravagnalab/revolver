@@ -84,8 +84,8 @@ revolver_phylogeny = function(
   adj_mat =  M
   df_mat = MatrixToDataFrame(M)
 
-  # We chack for that to be a tree
-  if(!is_tree(adj_mat)) stop("The input adjacency matrix is not a valid tree, aborting.")
+  # We chack for that to be a tree - empty is OK in this casem if monoclonal
+  if(!is_tree(adj_mat, allow.empty = nrow(obj$CCF) == 1)) stop("The input adjacency matrix is not a valid tree, aborting.")
 
   # Add GL node, beware of the special case of empty adj_mat (might happen for a monoclonal tumour)
   M_root = ifelse(sum(adj_mat) == 0, rownames(adj_mat), root(adj_mat))
@@ -118,7 +118,7 @@ revolver_phylogeny = function(
     rename(attachment = variable) %>%
     mutate(attachment = paste(attachment)) %>%
     group_by(cluster) %>%
-    mutate(attachment = paste(attachment, collapse = ', '))
+    summarise(attachment = paste(attachment, collapse = ', '))
 
   tb_adj_mat = tb_adj_mat %>%
     left_join(attachment, by = 'cluster')
@@ -233,17 +233,31 @@ print.rev_phylo <- function(x, ...)
 
 #' S3 method that plots a REVOLVER tree.
 #'
-#' @param x An object of class \code{"rev_phylo"}.
-#' @param file Output file, or \code{NA}.
-#' @param palette RColorBrewer palette to colour clusters.
-#' @param cex Cex for the graph.
-#' @param alpha Transparency.
-#' @param verbose Output.
+#' @param x A REVOLVER tree (object of class \code{"rev_phylo"}).
+#' @param cex Cex for the plot.
+#' @param node_palette A function that applied to a number will return a set of colors.
+#' By default this is a \code{colorRampPalette} applied to 9 colours of the \code{RColorBrewer}
+#' palette \code{Set1}. Colors are generated following a topological sort of the information
+#' transfer, which is obtained from \code{igraph}.
+#' @param tree_layout A layout that can be used by \code{tidygraph}, which wraps \code{igraph}'s
+#' layouts. By default this is a `tree` layout.
+#' @param add_information_transfer If `TRUE`, it will combine the plot of the input tree with
+#' a plot for the associated information transfer for the driver events annotated. The colouring
+#' of the nodes of the trees will match the colouring of the drivers. Combinations of plots is
+#' done via \code{ggarrange} of package \code{ggpubr}.
 #' @param ... Extra parameters
 #'
-#' @return Nothing
+#' @return The plot. If `add_information_transfer = TRUE` the object is a combined figure from
+#' package \code{ggpubr}, otherwise it is a single \code{ggplot} object.
+#'
 #' @export plot.rev_phylo
+#'
 #' @import crayon
+#' @import igraph
+#' @import tidygraph
+#' @import ggraph
+#' @import ggpubr
+#' @import RColorBrewer
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -251,7 +265,9 @@ print.rev_phylo <- function(x, ...)
 plot.rev_phylo = function(x,
                           cex = 1,
                           node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
-                          tree.layout = 'tree'
+                          tree_layout = 'tree',
+                          add_information_transfer = FALSE,
+                          ...
                           )
 {
   # Get the tidygraph
@@ -268,20 +284,43 @@ plot.rev_phylo = function(x,
   #     cluster = .N()$cluster[from]
   #   )
 
-  # Color the nodes by cluster id
-  nDrivers = sum(tb_tree %>% pull(is.driver), na.rm = TRUE)
+  # Color the nodes by cluster id, using a topological sort
+  # to pick the colors in the order of appeareance in the tree
+  clones_orderings = igraph::topo_sort(
+    igraph::graph_from_adjacency_matrix(DataFrameToMatrix(tree$transfer$clones)),
+    mode = 'out'
+  )$name
 
-  tb_node_colors = tb_tree %>% pull(cluster)
-  names(tb_node_colors) = tb_node_colors
+  nDrivers = length(clones_orderings) - 1 # avoid GL
 
-  tb_node_colors["GL"] = "white"
-  tb_node_colors[!tb_tree %>% pull(is.driver)] = 'gainsboro'
-  tb_node_colors[!is.na(tb_tree %>% pull(driver))] = node_palette(nDrivers)
+  drivers_colors = c('white', node_palette(nDrivers))
+  names(drivers_colors) = clones_orderings
+
+  # Add non-driver nodes, with the same colour
+  non_drivers = tb_tree %>%
+    activate(nodes) %>%
+    filter(!is.driver) %>%
+    pull(cluster) # GL is not selected because is NA for is.driver
+
+  non_drivers_colors = rep("gainsboro", length(non_drivers))
+  names(non_drivers_colors) = non_drivers
+
+  tb_node_colors = c(drivers_colors, non_drivers_colors)
+
+  # # Color the nodes by cluster id
+  # nDrivers = sum(tb_tree %>% pull(is.driver), na.rm = TRUE)
+  #
+  # tb_node_colors = tb_tree %>% pull(cluster)
+  # names(tb_node_colors) = tb_node_colors
+  #
+  # tb_node_colors["GL"] = "white"
+  # tb_node_colors[!tb_tree %>% pull(is.driver)] = 'gainsboro'
+  # tb_node_colors[!is.na(tb_tree %>% pull(driver))] = node_palette(nDrivers)
 
   # Plot call
-  layout <- create_layout(tb_tree, layout = tree.layout)
+  layout <- create_layout(tb_tree, layout = tree_layout)
 
-  ggraph(layout) +
+  mainplot = ggraph(layout) +
     geom_edge_link(
       arrow = arrow(length = unit(2 * cex, 'mm')),
       end_cap = circle(5 * cex, 'mm'),
@@ -325,5 +364,82 @@ plot.rev_phylo = function(x,
         format(tree$score, scientific = T),
         '.'
       )
+    )
+
+  # Add information_transfer if required
+  if(add_information_transfer) {
+    mainplot = ggarrange(
+      mainplot,
+      plot_information_transfer(x, cex = cex, node_palette = node_palette, tree_layout = tree_layout, ...),
+      nrow = 1,
+      ncol = 2
+    )
+  }
+
+  return(mainplot)
+}
+
+
+plot_information_transfer = function(x,
+                          cex = 1,
+                          node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
+                          tree_layout = 'tree',
+                          ...
+)
+{
+  tree = x
+
+  # Get the tidygraphs that we use here
+  tb_tree = as_tbl_graph(tree$transfer$drivers) %>%
+    activate(nodes) %>%
+    rename(driver = name)
+  tb_tree_all_tree = tree$tb_adj_mat
+
+  # Color the nodes by cluster id, as in the plot of the tree
+  # use a topological sort to pick the colors in the same order
+  clones_orderings = igraph::topo_sort(
+    igraph::graph_from_adjacency_matrix(DataFrameToMatrix(tree$transfer$clones)),
+    mode = 'out'
+  )$name
+
+  nDrivers = length(clones_orderings) - 1 # avoid GL
+
+  drivers_colors = c('white', node_palette(nDrivers))
+  names(drivers_colors) = clones_orderings
+
+  tb_tree = tb_tree %>%
+    activate(nodes) %>%
+    left_join(tree$drivers %>% rename(driver = variantID), by = 'driver') %>%
+    mutate(cluster = ifelse(driver == "GL", 'GL', cluster))
+
+  # Plot call
+  layout <- create_layout(tb_tree, layout = tree_layout)
+
+  ggraph(layout) +
+    geom_edge_diagonal(
+      arrow = arrow(length = unit(2 * cex, 'mm')),
+      end_cap = circle(5 * cex, 'mm'),
+      start_cap  = circle(5 * cex, 'mm')
+    ) +
+    geom_node_point(
+      aes(colour = cluster, fill = cluster),
+      alpha = .5,
+      size = 6
+    ) +
+    geom_node_text(aes(label = driver), color = 'black', size = 3) +
+    coord_cartesian(clip = 'off') +
+    theme_void(base_size = 8 * cex) +
+    theme(
+      legend.position = 'bottom',
+      legend.key.size = unit(3 * cex, "mm")
+          ) +
+    scale_fill_manual(values = drivers_colors) +
+    scale_color_manual(
+      values = drivers_colors,
+      guide = guide_legend(override.aes = list(shape = 21, size = 3), alpha = 1)
+      ) +
+    labs(
+      title = paste(tree$patient),
+      subtitle = paste0('Information transfer')
     )
 }

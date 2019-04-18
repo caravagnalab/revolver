@@ -39,7 +39,7 @@ revolver_fit = function(x,
   # =-=-=-=-=-=-=-=-=-=-=-
 
   # Fitting target
-  pio::pioStr('\nFitting ', paste0('n = ', numPatients, 'patients'), suffix = '\n\n')
+  pio::pioStr('\nFitting ', paste0('n = ', numPatients, ' patients'), suffix = '\n\n')
   print(Stats_trees(x, fitPatients))
 
   # Initial condition
@@ -108,9 +108,11 @@ tl_revolver_fit = function(x,
                            verbose = FALSE)
 {
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  # Scoring function for a tree, in vectorized form
+  # Auxiliary functions for the fitting algorithm
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+  # Scoring function for a tree, in vectorized form
+  #
   # Returns the score of a tree for a multinomial penalty E, and
   # and alpha parameter. It can also return just the penalty (i.e.,
   # without multiplying it for the actual score of the tree structure)
@@ -130,146 +132,188 @@ tl_revolver_fit = function(x,
   }
   Penalize = Vectorize(Penalize, vectorize.args = 'rank')
 
-  ################################################ Some functions which make easier to implement TL
-  # add.to.Matrix = function(M, df){
-  #   for(i in 1:nrow(df))
-  #     M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] + 1
-  #   M
-  # }
-  #
-  # del.from.Matrix = function(M, df){
-  #   for(i in 1:nrow(df))
-  #     M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] - 1
-  #   M
-  # }
-  #
-  # asWeightedMatrix = function(df){
-  #   entries.names = unique(unlist(df[ c(1,2)]))
-  #
-  #   M = matrix(0, ncol = length(entries.names), nrow = length(entries.names))
-  #   colnames(M) = rownames(M) = entries.names
-  #
-  #   for(i in 1:nrow(df))
-  #     M[df[i, 'from'], df[i, 'to']] = M[df[i, 'from'], df[i, 'to']] + 1
-  #   M
-  # }
-  #
-  # substitute.group.with.graph = function(g, G, S, verbose = FALSE)
-  # {
-  #   g = as.character(g)
-  #
-  #   S.w = S
-  #   S[S>1] = 1
-  #
-  #   if(verbose) {
-  #     cat(yellow('* Substitute '), g, '\n')
-  #     cat(cyan('* Adj Matrix\n'))
-  #     print(MatrixToDataFrame(G))
-  #     cat(cyan('* Substitution Matrix\n'))
-  #     print(S)
-  #     # print(MatrixToDataFrame(S))
-  #     # stop('sss')
-  #   }
-  #
-  #   parent = pi(G, g)
-  #   childrens = children(G, g)
-  #
-  #   # print(parent)
-  #   # print(childrens)
-  #   # print(length(childrens))
-  #
-  #   # loops are bastards, we need a special modified root and leaves function
-  #   spec.root = function(w){
-  #     r.G = igraph::graph_from_adjacency_matrix(w)
-  #     r.w = root(w)
-  #
-  #     if(!igraph::is_dag(r.G)) {
-  #       if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
-  #       comp = names(igraph::components(r.G)$membership)
-  #       r.w = c(r.w, comp)
-  #       r.w = unique(r.w)
-  #     }
-  #     r.w
-  #   }
-  #
-  #   spec.leaves = function(w){
-  #     r.G = igraph::graph_from_adjacency_matrix(w)
-  #     r.w = leaves(w)
-  #
-  #     if(!igraph::is_dag(r.G)) {
-  #       if(verbose) cat(red('Loops detected -- really bad temporal orderings within a cluster ... processing connected components ... \n', paste(MatrixToEdges(w), collapse = ' ')))
-  #       comp = names(igraph::components(r.G)$membership)
-  #       r.w = c(r.w, comp)
-  #       r.w = unique(r.w)
-  #     }
-  #     r.w
-  #   }
-  #
-  #   roots = spec.root(S)
-  #   leaves = spec.leaves(S)
-  #
-  #   # print(roots)
-  #   # print(leaves)
-  #   attach.up = attach.down = NULL
-  #   attach.up = apply(
-  #     expand.grid(parent, roots, stringsAsFactors = FALSE),
-  #     1,
-  #     function(w)
-  #       paste(w[1], w[2], sep = '~'))
-  #   if(length(childrens) > 0) attach.down = apply(
-  #     expand.grid(leaves, childrens, stringsAsFactors = FALSE),
-  #     1,
-  #     function(w)
-  #       paste(w[1], w[2], sep = '~'))
-  #
-  #   # print(S)
-  #   # print(roots)
-  #   # print(expand.grid(parent, roots, stringsAsFactors = FALSE))
-  #
-  #   # paste(leaves, childrens, sep = '~')
-  #
-  #   delete.up = delete.down = NULL
-  #   delete.up = paste(parent, g, sep = '~')
-  #   if(length(childrens) > 0) delete.down = paste(g, childrens, sep = '~')
-  #
-  #   if(verbose) {
-  #     cat(cyan('* Delete edges (inward)'), delete.up, '\n')
-  #     cat(cyan('* Delete edges (outward)'), delete.down, '\n')
-  #     cat(cyan('* Attachment edges (inward)'), attach.up, '\n')
-  #     cat(cyan('* Attachment edges (outward)'), attach.down, '\n')
-  #   }
-  #
-  #   edges = c(attach.up, attach.down)
-  #   if(!all(S == 0)) edges = c(edges, MatrixToEdges(S))
-  #
-  #   # print(edges)
-  #   # print(S)
-  #
-  #   G = MatrixToEdges(G)
-  #
-  #   # print(G)
-  #
-  #   #
-  #   # print(attach.up)
-  #   # print(attach.down)
-  #
-  #   G = setdiff(G, c(delete.up, delete.down))
-  #   G = c(G, edges)
-  #
-  #   return(edgesToMatrix(G))
-  # }
-  #
-  # wrapTS = function(M){
-  #   tryCatch(
-  #     {
-  #       TS = igraph::topo_sort(igraph::graph_from_adjacency_matrix(M), mode = 'out')$name
-  #       return(TS)
-  #     },
-  #     warning = function(w) { },
-  #     error = function(w) { },
-  #     finally = {return(TS)}
-  #   )
-  # }
+  # EM functions
+  E_step = function(x, tb_solutionID, E = NULL)
+  {
+    # This function can also get a list in E input, in that case it will just
+    # skip this step and straight away do the binding etc. This allows to use
+    # this function in different phases of the algorithm
+    if(all(is.null(E)))
+    {
+      # Obtain all information transfers from the current solutions
+      E = apply(
+        data.frame(tb_solutionID),
+        1,
+        function(entry)
+        {
+          ITransfer(x, p = entry['patientID'], rank = as.numeric(entry['Solution']), type = 'drivers')
+        }
+      )
+    }
+
+    E = Reduce(bind_rows, E)
+
+    # Count and normalize them
+    E %>%
+      group_by(from, to) %>%
+      summarise(count = n()) %>%
+      group_by(to) %>%
+      mutate(penalty = count / sum(count)) %>%
+      ungroup()
+  }
+
+  M_step = function(x, E, st_trees)
+  {
+    apply(st_trees,
+          1,
+          function(w) {
+            scores = Penalize(x, w['patientID'], E, rank = 1:w['numTrees'])
+            which.max(scores)
+          })
+  }
+
+  # Return for every clone in a patient, a possible ordering of its events
+  # based from the MLE estimate that we obtain from the multinomial model (counts)
+  ML_clones_expansion = function(x, patient, rank, E)
+  {
+    # Get clones
+    drivers = Phylo(x, patient, rank)$drivers %>%
+      rename(to = variantID)
+      # %>%
+      # group_by(cluster) %>%
+      # filter(n() > 1)
+
+    # Algorithm to expand a single group
+    expand_group = function(g)
+    {
+      g_drivers = drivers %>% filter(cluster == !!g)
+
+      # the MLE estimator for the drivers in a group is obtained couting
+      # only the orderings among these drivers. We re-normalize it as well
+      ML_E = E %>%
+        filter(
+          from %in% g_drivers$to,
+          to %in% g_drivers$to
+        ) %>%
+        group_by(to) %>%
+        mutate(penalty = count / sum(count)) %>%
+        ungroup()
+
+      # Create a graph with the nodes of this expansion
+      nodes_gp = data.frame(from = 'GL', to = g_drivers$to, stringsAsFactors = FALSE)
+
+      # The nodes are called "cluster" in this tb_graph
+      as_tbl_graph(bind_rows(nodes_gp, ML_E)) %>%
+        filter(name != 'GL') %>%
+        rename(cluster = name)
+    }
+
+    # Each group is expanded
+    expansions = lapply(
+      unique(drivers$cluster),
+      expand_group
+    )
+    names(expansions) = unique(drivers$cluster)
+
+    expansions
+  }
+
+  # For a given patient, it takes each one of the expanded clones after the second step of
+  # transfer learning, and connects them to their descendant as of the information transfer.
+  Attach_expanded = function(x, patient, rank, tb_graphs)
+  {
+    # Extract from a graph the nodes that are part of a loop
+    # as defined from the Strongly Connected Components.
+    loopy_nodes = function(M)
+    {
+      G = igraph::graph_from_adjacency_matrix(M)
+
+      # Strongly Connected Components have loops by definition
+      SCC = igraph::components(G, "strong")$membership
+
+      as_tibble(data.frame(node = names(SCC), SCC = SCC, stringsAsFactors = FALSE)) %>%
+        group_by(SCC) %>%
+        filter(n() > 1) %>%
+        pull(node)
+    }
+
+    # Get the clones to expand from the transfer
+    clones = ITransfer(x, patient, rank, type = 'clones')
+
+    # The topological sort of the transfer to understand in which order they shall be traversed
+    clones_orderings = igraph::topo_sort(
+      igraph::graph_from_adjacency_matrix(DataFrameToMatrix(clones)),
+      mode = 'out'
+      )$name
+
+    # Get the drivers which provide the actual nodes to attach, and add a special map for GL
+    # drivers = Phylo(x, patient, rank)$drivers
+    # drivers = bind_rows(drivers,
+    #                     data.frame(
+    #                       variantID = 'GL',
+    #                       cluster = "GL",
+    #                       stringsAsFactors = FALSE
+    #                     ))
+
+    # The expanded graph will start from GL
+    # current_expansion = clones %>%
+    #   filter(from == "GL")
+
+    # The initial condition is that nothing is expanded
+    current_expansion = clones
+
+    # Expand clones following the topological ordering
+    for (clone in clones_orderings)
+    {
+      # GL is not expanded by definition, any other node is
+      if (clone == 'GL')
+        next
+
+      # Get the adjaceny matrix of what we are expanding, and the list of edges as well
+      clone_adjM = TidyGraphToMatrix(tb_graphs[[clone]])
+      clone_df = TidyGraphToDataFrame(tb_graphs[[clone]])
+
+      # First we compute the roots and leaves of this subgraph
+      nodes_roots = root(clone_adjM)
+      nodes_leaves = leaves(clone_adjM)
+
+      # Get loopy nodes that are tricky to handle, we treat them as both roots/leaves
+      lnodes = loopy_nodes(M = clone_adjM)
+      nodes_roots = c(nodes_roots, lnodes)
+      nodes_leaves = c(nodes_leaves, lnodes)
+
+      # Then we take what are currently expanding, and the parent and children in there
+      current_expansion_adjM = DataFrameToMatrix(current_expansion)
+      parent_current_expansion = pi(current_expansion_adjM, clone)
+      children_current_expansion = children(current_expansion_adjM, clone)
+
+      # We now make the modification, we can essentially
+      # 1) take the current expansion and remove all edges that involve the current clone
+      # 2) attach all roots to the parental node of clone, in the graph that we are expanding,
+      # 2) attach all leaves to the children node of clone, in the graph that we are expanding,
+      # 2) copy all the rest (intermediate nodes) in the current expansion
+      current_expansion = bind_rows(
+        current_expansion %>%
+          filter(from != clone, to != clone),
+        rbind(
+          expand.grid(
+            from = parent_current_expansion,
+            to = nodes_roots,
+            stringsAsFactors = FALSE
+          ),
+          expand.grid(
+            from = nodes_leaves,
+            to = children_current_expansion,
+            stringsAsFactors = FALSE
+          ),
+          clone_df
+        ) %>%
+          as_tibble()
+      )
+    }
+
+    current_expansion
+  }
 
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # What we fit
@@ -289,9 +333,6 @@ tl_revolver_fit = function(x,
     names(solutionID) = fitPatients
   }
 
-  # bestScores = stopCondition = penalty =  rep(NA, numPatients)
-  # names(bestScores) = names(stopCondition) = names(penalty) = fitPatients
-
   # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # Drivers that will be correlated, add GL
   # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -299,29 +340,11 @@ tl_revolver_fit = function(x,
   all.drivers = Reduce(bind_rows, all.drivers) %>% pull(variantID) %>% unique()
   all.drivers = c(all.drivers, "GL")
 
-  # df.penalty = data.frame(matrix(nrow = 0, ncol = 3))
-  # colnames(df.penalty) = c('Step', 'VariantID', 'penalty')
-
-  # tb_penalty = data.frame(
-  #   VariantID = all.drivers,
-  #   Step = 0,
-  #   Penalty = NA,
-  #   stringsAsFactors = FALSE
-  # ) %>% as_tibble()
-
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  # A data structure that we keep to store the fit progress
+  # A data structure that we keep to store the fit progress in the first EM
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   tb_solutionID = Stats_trees(x, fitPatients)
   tb_solutionID$Solution = solutionID
-
-  #
-  #   data.frame(
-  #   patientID = fitPatients,
-  #   Step = 0,
-  #   Penalty = NA,
-  #   stringsAsFactors = FALSE
-  # ) %>% as_tibble()
 
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # Step 1) Fit via EM of the best tree for each patient
@@ -332,10 +355,10 @@ tl_revolver_fit = function(x,
   sapply(tb_solutionID$numTrees, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
 
   cat(inverse(sprintf("\n%27s", "Combinations of Transfer")))
-  sapply(tb_solutionID$combInfTransf, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
+  sapply(tb_solutionID$combInfTransf, function(p) cat(sprintf('%4s |', p)))
 
   cat(inverse(sprintf("\n\n%27s", "Initialization")))
-  sapply(tb_solutionID$Solution, function(s) cat(paste(green(sprintf('%4s', s)), '|', sep ='')))
+  sapply(tb_solutionID$Solution, function(s) cat(green(sprintf('%4s |', s))))
   cat('\n')
 
   numIter = 1
@@ -356,7 +379,7 @@ tl_revolver_fit = function(x,
     # M-step
     # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-    tb_solutionID$newSolution = M_step(x, E, st_trees)
+    tb_solutionID$newSolution = M_step(x, E, tb_solutionID)
     tb_solutionID = tb_solutionID %>%
       mutate(
         converged = Solution == newSolution,
@@ -397,94 +420,143 @@ tl_revolver_fit = function(x,
 
   tb_solutionID$penalty = sapply(
     seq(solutionID),
-    function(w) Penalize(x, tb_solutionID$patientID[w],
-                         E, rank = solutionID[w],
-                         alpha = 1, just.pen = TRUE))
+    function(w) Penalize(x,
+                         tb_solutionID$patientID[w],
+                         E,
+                         rank = solutionID[w],
+                         alpha = 1,
+                         just.pen = TRUE))
 
   print(tb_solutionID)
 
-
-
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  # Store fits into a new object
+  # Store fits into a new object which we later add to `x`
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   fit = list()
 
+  fit$fit_table = tb_solutionID
   fit$penalty = E
+
   fit$phylogenies = list()
 
   for (patient in fitPatients)
     fit$phylogenies[[patient]] = Phylo(x,
                                        patient,
-                                       tb_solutionID %>% filter(id == !!patient) %>% pull(Solution))
+                                       tb_solutionID %>% filter(patientID == !!patient) %>% pull(Solution))
 
-  stop("qui")
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  # 2) ML parent set transferred from the other patients
+  # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-  #######################################################################
-  ################################################ TL FIT -- step 2
+  pio::pioStr('\n\n2] Transfering orderings across patients : \n\n', '')
 
-  # Transitive closure of all information transfers
-  cat(cyan('\n\n2] Transfering orderings across patients : \n\n'))
+  fit$clones_expansions = fit$clones_to_expand = NULL
 
-  cat((sprintf('   %20s', 'Transitivities are')), ifelse(transitive.orderings, green('enabled'), red('disabled')), '\n\n')
-
-  cat(cyan(sprintf('   %20s : ', 'Information Transfer')))
-  fit$tcInfTransf = lapply(fit$phylogenies, information.transfer, transitive.closure = transitive.orderings, indistinguishable = FALSE)
-  names(fit$tcInfTransf) = names(fit$phylogenies)
-
-  fit$tcOrderings = Reduce(rbind, lapply(fit$tcInfTransf, function(w) w$drivers))
-  fit$tcOrderings = asWeightedMatrix(fit$tcOrderings)
-  fit$solutionID = solutionID
-  cat(green('OK\n'))
-
-  # Assign what computed so far to 'x'
-  x$fit = fit
-
-  # verbose = TRUE
-
-  # Then we take all ML orderings, for every patient
-  cat(cyan(sprintf('   %20s : ', 'Expansions')), '\n')
-  x$fit$substitutions = lapply(fitPatients, transfer.orderings, x = x, verbose = verbose)
-  names(x$fit$substitutions) = fitPatients
-
-  # print(x$fit$substitutions)
-
-  npatients = length(x$fit$phylogenies)
-  pb = txtProgressBar(min = 0, max = npatients, style = 3)
+  # We track this with a progress bar
+  pb = txtProgressBar(min = 0, max = length(fit$phylogenies), style = 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
 
-
-  x$fit$exploded = list()
-  for(patient in 1:npatients)
+  # For every patient we obtain the ML expansions for each patient, and then we
+  # assemble that in an expanded graph. After this, we add the expanded graph
+  # as the Information Transfer field of the driver events in each fit phylogeny,
+  # and we change the annotation of the model to make it clear
+  for (patient in seq_along(fitPatients))
   {
     # update progress bar
     if(pb.status) setTxtProgressBar(pb, patient)
 
-    patient = names(x$fit$phylogenies)[patient]
+    patient = fitPatients[patient]
 
-    phylo = x$fit$phylogenies[[patient]]
-    subst = x$fit$substitutions[[patient]]
+    fit$clones_to_expand[[patient]] = ML_clones_expansion(
+        x,
+        patient,
+        rank = tb_solutionID %>% filter(patientID == !!patient) %>% pull(Solution),
+        E
+      )
 
-    # get groups, and the adj matrix
-    groups = unique(phylo$dataset[phylo$dataset$is.driver, 'cluster'])
-    adj_matrix = phylo$adj_mat
+    fit$clones_expansions[[patient]] = Attach_expanded(
+        x,
+        patient,
+        rank = tb_solutionID %>% filter(patientID == !!patient) %>% pull(Solution),
+        tb_graphs = fit$clones_to_expand[[patient]]
+      )
 
-    # visit groups in order according to a topological sort, ensures correct expansions
-    TS = wrapTS(adj_matrix)
-    TS = TS[TS %in% groups]
+    fit$phylogenies[[patient]]$transfer$drivers =
+      fit$clones_expansions[[patient]]
 
-    for(g in TS) adj_matrix = substitute.group.with.graph(g, G = adj_matrix, S = subst[[g]], verbose = verbose)
-
-    x$fit$exploded[[patient]] = adj_matrix
+    fit$phylogenies[[patient]]$annotation =
+      paste0(
+        fit$phylogenies[[patient]]$annotation,
+        " - Information Transfer expanded via Transfer Learning"
+      )
   }
+  names(fit$clones_expansions) = names(fit$clones_to_expand) = fitPatients
+
+  # We can now get the penalty from the final fit output, re-using the E-step function
+  # because we are still computing an expectation here
+  fit$penalty = E_step(x, NULL, fit$clones_expansions)
+
+  x$fit = fit
+
+  # cat((sprintf('   %20s', 'Transitivities are')), ifelse(transitive.orderings, green('enabled'), red('disabled')), '\n\n')
+#
+#   cat(cyan(sprintf('   %20s : ', 'Information Transfer')))
+#   fit$tcInfTransf = lapply(fit$phylogenies, information.transfer, transitive.closure = transitive.orderings, indistinguishable = FALSE)
+#   names(fit$tcInfTransf) = names(fit$phylogenies)
+#
+#   fit$tcOrderings = Reduce(rbind, lapply(fit$tcInfTransf, function(w) w$drivers))
+#   fit$tcOrderings = asWeightedMatrix(fit$tcOrderings)
+#   fit$solutionID = solutionID
+#   cat(green('OK\n'))
+
+  # Assign what computed so far to 'x'
 
 
-  # Now that we have expanded, we have to update the information transfer
-  x$fit$transfer = lapply(names(x$fit$phylogenies),
-                          function(w){
-                            information.transfer_exploded_nodes(x, patient = w, transitive.orderings)
-                          } )
-  names(x$fit$transfer) = names(x$fit$phylogenies)
+  # verbose = TRUE
+
+  # Then we take all ML orderings, for every patient
+  # cat(cyan(sprintf('   %20s : ', 'Expansions')), '\n')
+  # x$fit$substitutions = lapply(fitPatients, transfer.orderings, x = x, verbose = verbose)
+  # names(x$fit$substitutions) = fitPatients
+
+  # print(x$fit$substitutions)
+
+  # npatients = length(x$fit$phylogenies)
+  # pb = txtProgressBar(min = 0, max = npatients, style = 3)
+  # pb.status = getOption('revolver.progressBar', default = TRUE)
+  #
+
+  # x$fit$exploded = list()
+  # for(patient in 1:npatients)
+  # {
+  #   # update progress bar
+  #   if(pb.status) setTxtProgressBar(pb, patient)
+  #
+  #   patient = names(x$fit$phylogenies)[patient]
+  #
+  #   phylo = x$fit$phylogenies[[patient]]
+  #   subst = x$fit$substitutions[[patient]]
+  #
+  #   # get groups, and the adj matrix
+  #   groups = unique(phylo$dataset[phylo$dataset$is.driver, 'cluster'])
+  #   adj_matrix = phylo$adj_mat
+  #
+  #   # visit groups in order according to a topological sort, ensures correct expansions
+  #   TS = wrapTS(adj_matrix)
+  #   TS = TS[TS %in% groups]
+  #
+  #   for(g in TS) adj_matrix = substitute.group.with.graph(g, G = adj_matrix, S = subst[[g]], verbose = verbose)
+  #
+  #   x$fit$exploded[[patient]] = adj_matrix
+  # }
+#
+#
+#   # Now that we have expanded, we have to update the information transfer
+#   x$fit$transfer = lapply(names(x$fit$phylogenies),
+#                           function(w){
+#                             information.transfer_exploded_nodes(x, patient = w, transitive.orderings)
+#                           } )
+#   names(x$fit$transfer) = names(x$fit$phylogenies)
 
 
   class(x) = "rev_cohort_fit"
@@ -492,38 +564,7 @@ tl_revolver_fit = function(x,
   return(x)
 }
 
-E_step = function(x, tb_solutionID)
-{
-  # Obtain all information transfers from the current solutions
-  E = apply(
-    data.frame(tb_solutionID),
-    1,
-    function(entry)
-    {
-      ITransfer(x, p = entry['patientID'], rank = as.numeric(entry['Solution']), type = 'drivers')
-    }
-  )
 
-  E = Reduce(bind_rows, E)
-
-  # Count and normalize them
-  E %>%
-    group_by(from, to) %>%
-    summarise(count = n()) %>%
-    group_by(to) %>%
-    mutate(penalty = count / sum(count)) %>%
-    ungroup()
-}
-
-M_step = function(x, E, st_trees)
-{
-  apply(st_trees,
-        1,
-        function(w) {
-          scores = Penalize(x, w['patientID'], E, rank = 1:w['numTrees'])
-          which.max(scores)
-        })
-}
 
 
 # Penalize(x, patient, E, rank = 1:3)

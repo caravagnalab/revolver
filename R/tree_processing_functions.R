@@ -82,6 +82,49 @@ DataFrameToMatrix = function(edges)
   return(edgesToMatrix(DataFrameToEdges(edges)))
 }
 
+# Tibble graph to data frame
+TidyGraphToDataFrame = function(x)
+{
+  M = TidyGraphToMatrix(x)
+
+  MatrixToDataFrame(M)
+}
+
+# Tibble graph to adjacency matrix
+TidyGraphToMatrix = function(x)
+{
+  # Nodes
+  nodes = x %>%
+    activate(nodes) %>%
+    as_tibble()
+
+  # Get nodes names and size
+  labels = nodes %>% pull(!!colnames(nodes)[1])
+  N_nodes = length(labels)
+
+  # Edges
+  edges = x %>%
+    activate(edges) %>%
+    as_tibble() %>%
+    mutate(
+      from = labels[from],
+      to = labels[to]
+    )
+
+  # Now we assemble the final graph -- we have to take care
+  # of the fact that a general graph is not a tree
+
+  M = matrix(0, nrow = N_nodes, ncol = N_nodes)
+  colnames(M) = rownames(M) = labels
+
+  if(nrow(edges) > 0)
+  {
+    for(i in 1:nrow(edges))  M[edges$from[i], edges$to[i]] = 1
+  }
+
+  M
+}
+
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Functions to query the properties of a tree, to check its
 # consistency etc. All these functions assume to be working
@@ -89,8 +132,10 @@ DataFrameToMatrix = function(edges)
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 # Return true if M is a tree
-is_tree = function(M)
+is_tree = function(M, allow.empty = FALSE)
 {
+  if(sum(M) == 0 & allow.empty) return(TRUE)
+
   cS = colSums(M)
 
   # - No more than 1 parent
@@ -115,4 +160,11 @@ children = function(model, var)
   return(names(model))
 }
 
-
+# Return the parent of "variable" in model
+pi = function(model, variable)
+{
+  model = model[, variable]
+  if(any(model > 0)) model = model[model > 0]
+  else return(NULL)
+  return(names(model))
+}
