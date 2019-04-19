@@ -1,14 +1,13 @@
+
+
 revolver_fit = function(x,
                         initial.solution = 1,
                         max.iterations = 10,
-                        restarts = 0,
-                        parallel = FALSE,
-                        cores.ratio = .8,
-                        transitive.orderings = FALSE,
-                        verbose = FALSE)
+                        n = 10,
+                        ...)
 {
-
-  pio::pioHdr(paste0("REVOLVER fit - ", x$annotation))
+  pio::pioHdr(paste0("REVOLVER Transfer Learning fit- ", x$annotation))
+  stopifnot(n > 0)
 
   # What we can actually fit
   numPatients = length(x$phylogenies)
@@ -26,12 +25,11 @@ revolver_fit = function(x,
     stop("Cannot fit a model unless there are multiple patients with available trees, aborting")
 
   # Check restarts
-  if(restarts > 0 & !is.na(initial.solution))
+  if(n > 1 & !is.na(initial.solution))
   {
-    message('Beware: because you have set a fixed initial condition `restarts` will be disregarded because this EM is exhaustive.')
+    message('Beware: because you have set a fixed initial condition `n` will be disregarded because this EM is exhaustive.')
 
-    restarts = 0
-    # paralllel = FALSE
+    n = 1
   }
 
   # =-=-=-=-=-=-=-=-=-=-=-
@@ -39,57 +37,74 @@ revolver_fit = function(x,
   # =-=-=-=-=-=-=-=-=-=-=-
 
   # Fitting target
-  pio::pioStr('\nFitting ', paste0('n = ', numPatients, ' patients'), suffix = '\n\n')
+  pio::pioStr('\nFitting ', paste0('N = ', numPatients, ' patients'), suffix = '\n\n')
   print(Stats_trees(x, fitPatients))
 
   # Initial condition
-  pio::pioStr('\nInitial solution :', ifelse(!is.na(initial.solution), paste0('Fixed to #', initial.solution), 'Randomized (uniform probability)'), suffix = '\n')
-  pio::pioStr('\nSampled solutions (restarts) :', restarts, suffix = '\n')
+  pio::pioStr(
+    '\nInitial solution :',
+    ifelse(
+      !is.na(initial.solution),
+      paste0('Fixed to #', initial.solution),
+      'Randomized (uniform probability)'
+    ),
+    suffix = '\n'
+  )
+  pio::pioStr('\nSampled solutions: ', paste0('n = ', n), suffix = '\n')
 
   will_run_parallel = getOption("easypar.parallel", default = NA)
-  pio::pioStr('\nParallel execuion (via \'easypar\') :',
-              ifelse(is.na(will_run_parallel), TRUE, will_run_parallel)
-              , suffix = '\n')
+  pio::pioStr(
+    '\nParallel exectuion (via \'easypar\') :',
+    ifelse(is.na(will_run_parallel), TRUE, will_run_parallel),
+    suffix = '\n'
+  )
 
-  results = NULL
-
-  # Parallel fit
-  if(parallel) {
-
-    pclusters = setup_parallel(cores.ratio)
-
-    r = foreach(num = 0:restarts, .packages = c("crayon", "igraph", 'matrixStats', 'matrixcalc'), .export = ls(globalenv())) %dopar%
+  results = easypar::run(
+    FUN = function(w)
     {
-      tl_revolver_fit(x, initial.solution, max.iterations, transitive.orderings, verbose)
-    }
+      print(ls())
 
-    results = r
+      tl_revolver_fit(x,
+                      initial.solution = initial.solution,
+                      max.iterations = max.iterations)
 
-    stop_parallel(pclusters)
-  }
-  else {
-    # NON Parallel fit
-    # Fancy prints
-    pline = function() {cat('\n\n\t'); for(i in 1:20)cat((cyan('~/-\\~')))}
+    },
+    PARAMS = lapply(1:n, list),
+    packages = c("crayon", "revolver", "tidygraph", "tidyverse", "igraph"),
+    export = ls(globalenv(), all.names = TRUE)
+  )
 
-    for(i in 0:restarts) {
-      pline()
-      model_fit = tl_revolver_fit(x, initial.solution, max.iterations, transitive.orderings, verbose)
-      results = append(results, list(model_fit))
-    }
+  if(easypar::numErrors(results))
+  {
+    message("Returned the following errors")
+    lapply(results,
+           function(w) {
+             if(inherits(w, 'simpleError') | inherits(w, 'try-error'))
+               print(w)
+             })
   }
 
   # Get the best solution
-  if(restarts > 0)
+  best = 1
+
+  if(n > 1)
   {
-    pline()
-    cat(cyan('\n\nMedian goodness-of-fit (from fit penalty): '))
-    scores = sapply(results, function(w) median(w$fit$penalty))
-    cat(paste(scores, collapse = ', '))
-    cat(cyan('\t Best is'), bgGreen('',scores[which.max(scores)], ''), '\n')
-    return(results[[which.max(scores)]])
+    pio::pioTit("Selecting solution with minimal median penalty")
+
+    # We take the max of the penalty variable (which is the same because at 1 the penalty is 0)
+    scores = sapply(seq_along(results), function(w) {
+
+      run_score = median(results[[w]]$fit$fit_table$penalty)
+
+      pio::pioStr(paste0("Solution #", w), run_score, suffix = '\n')
+      })
+
+    best = which.max(scores)
+
+    cat(cyan('\t Best solution is #'), bgGreen(best), '\n')
   }
-  else return(results[[1]])
+
+  return(results[[best]])
 }
 
 
@@ -103,9 +118,8 @@ revolver_fit = function(x,
 #' @importFrom stats sd
 tl_revolver_fit = function(x,
                            initial.solution = 1,
-                           max.iterations = 10,
-                           transitive.orderings = TRUE,
-                           verbose = FALSE)
+                           max.iterations = 10
+                           )
 {
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # Auxiliary functions for the fitting algorithm
@@ -349,7 +363,7 @@ tl_revolver_fit = function(x,
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # Step 1) Fit via EM of the best tree for each patient
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  pio::pioStr('\n\n1] Expectation Maximization ', '\n')
+  pio::pioTit('1] Expectation Maximization')
 
   cat(inverse(sprintf("\n%27s", "Number of Solutions")))
   sapply(tb_solutionID$numTrees, function(p) cat(paste(sprintf('%4s', p, '|', sep =''))))
@@ -448,7 +462,7 @@ tl_revolver_fit = function(x,
   # 2) ML parent set transferred from the other patients
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-  pio::pioStr('\n\n2] Transfering orderings across patients : \n\n', '')
+  pio::pioTit('2] Transfering orderings across patients')
 
   fit$clones_expansions = fit$clones_to_expand = NULL
 

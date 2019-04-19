@@ -307,16 +307,6 @@ plot.rev_phylo = function(x,
 
   tb_node_colors = c(drivers_colors, non_drivers_colors)
 
-  # # Color the nodes by cluster id
-  # nDrivers = sum(tb_tree %>% pull(is.driver), na.rm = TRUE)
-  #
-  # tb_node_colors = tb_tree %>% pull(cluster)
-  # names(tb_node_colors) = tb_node_colors
-  #
-  # tb_node_colors["GL"] = "white"
-  # tb_node_colors[!tb_tree %>% pull(is.driver)] = 'gainsboro'
-  # tb_node_colors[!is.na(tb_tree %>% pull(driver))] = node_palette(nDrivers)
-
   # Plot call
   layout <- create_layout(tb_tree, layout = tree_layout)
 
@@ -367,7 +357,8 @@ plot.rev_phylo = function(x,
     )
 
   # Add information_transfer if required
-  if(add_information_transfer) {
+  if(add_information_transfer)
+  {
     mainplot = ggarrange(
       mainplot,
       plot_information_transfer(x, cex = cex, node_palette = node_palette, tree_layout = tree_layout, ...),
@@ -379,7 +370,8 @@ plot.rev_phylo = function(x,
   return(mainplot)
 }
 
-
+# This function plots the information transfer of a specific tree. This function is not exported
+# directly but can be accessed from
 plot_information_transfer = function(x,
                           cex = 1,
                           node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
