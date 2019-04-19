@@ -25,7 +25,7 @@ cohort = revolver_cohort(TRACERx,
 for(p in cohort$patients) cohort = revolver_compute_phylogenies(cohort, patient = p)
 
 # Fit the REVOLVER model
-cohort = revolver_fit(cohort, initial.solution = NA)
+cohort = revolver_fit(cohort, initial.solution = NA, n = 3)
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-
