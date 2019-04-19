@@ -333,6 +333,13 @@ Stats_drivers = function(x, drivers = x$variantIDs.driver) {
 #' data(CRC.cohort)
 #' Stats_drivers(CRC.cohort)
 Stats_trees = function(x, patients = x$patients) {
+  
+  if(
+    !has_patient_trees(x) |
+    !all(sapply(patients, has_patient_trees, x = x))
+  ) 
+    stop("There are no trees in this cohort object, or trees for some of the required patients are missing. 
+         Cannot compute this summary statistics, aborting.")
 
   st = data.frame(
     patientID = patients,
@@ -366,6 +373,36 @@ Stats_trees = function(x, patients = x$patients) {
 }
 
 
+# ' Return summary stastics for the cohort's fits
+#'
+#' @description Returns a tibble that extends the result of 
+#' \code{Stats_trees} with information about the fit models.
+#' Compared to summaries returns by other \code{Stats_*} functions,
+#' the information from this one is precomputed.
+#'
+#' @param x A REVOLVER cohort object with fits.
+#' @param patients The patients for which the summaries are required.
+#'
+#' @return A tibble with the fits stastics.
+#'
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Stats_fits(CRC.cohort)
+Stats_fits = function(x, patients = x$patients) {
+  
+  if(
+    !has_fits(x) |
+    !all(sapply(patients, has_fits, x = x))
+    ) 
+    stop("There are no fits in this cohort object, or fits for some of the required patients are missing. 
+         Cannot compute this summary statistics, aborting.")
+  
+  x$fit$fit_table %>%
+    filter(patientID %in% patients)
+  }
+
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # These are non exported getters that help coding
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -381,6 +418,14 @@ has_patient_trees = function(x, p = NULL, rank = NULL)
     return(rank <= length(x$phylogenies[[p]]))
 }
 
+has_fits = function(x, p = NULL)
+{
+  if (is.null(p))
+    return(!is.null(x$fit))
+  
+  return(!is.null(x$fit$phylogenies[[p]]))
+}
+  
 
 
 # obj_has_trees = function(x)
