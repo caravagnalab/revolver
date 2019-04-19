@@ -1,6 +1,6 @@
 data("TRACERx")
 
-LF = list.files(path = './R', all.files = TRUE, full.names = TRUE)
+LF = list.files(path = '../R', all.files = TRUE, full.names = TRUE)
 sapply(LF, source)
 
 TRACERx = TRACERx %>% filter(patientID %in% c('CRUK0001', "CRUK0002", 'CRUK0003', 'CRUK0004', 'CRUK0005',
