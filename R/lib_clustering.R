@@ -140,40 +140,40 @@ information.transfer_exploded_nodes = function(x, patient, transitive.closure = 
   return(df)
 }
 
-evo_distance = function(transfer, patient.one, patient.two)
-{
-  trp1 = patient.one
-  trp2 = patient.two
-
-  if(nrow(trp1) > 0){
-    rownames(trp1) = DataFrameToEdges(trp1)
-    trp1 = cbind(trp1, count = apply(trp1, 1, function(w) transfer[w[1],w[2]]))
-  }
-
-  if(nrow(trp2) > 0){
-    rownames(trp2) = DataFrameToEdges(trp2)
-    trp2 = cbind(trp2, count = apply(trp2, 1, function(w) transfer[w[1],w[2]]))
-  }
-
-  if(nrow(trp1) == 0 && nrow(trp2) > 0) return(sum(trp2$count))
-  if(nrow(trp1) > 0 && nrow(trp2) == 0) return(sum(trp1$count))
-  if(nrow(trp1) == 0 && nrow(trp2) == 0) return(0)
-
-  trp1 = split(trp1, f = trp1$to)
-  trp2 = split(trp2, f = trp2$to)
-
-  common.variantsID = intersect(names(trp1), names(trp2))
-
-  trp1.specific = setdiff(names(trp1), common.variantsID)
-  trp2.specific = setdiff(names(trp2), common.variantsID)
-
-  dist = sum(unlist(lapply(trp1[trp1.specific], function(x) sum(x$count)))) +
-    sum(unlist(lapply(trp2[trp2.specific], function(x) sum(x$count))))
-
-  for(c in common.variantsID) dist = dist + abs(sum(trp1[[c]]$count) - sum(trp2[[c]]$count))
-
-  return(dist)
-}
+# evo_distance = function(transfer, patient.one, patient.two)
+# {
+#   trp1 = patient.one
+#   trp2 = patient.two
+# 
+#   if(nrow(trp1) > 0){
+#     rownames(trp1) = DataFrameToEdges(trp1)
+#     trp1 = cbind(trp1, count = apply(trp1, 1, function(w) transfer[w[1],w[2]]))
+#   }
+# 
+#   if(nrow(trp2) > 0){
+#     rownames(trp2) = DataFrameToEdges(trp2)
+#     trp2 = cbind(trp2, count = apply(trp2, 1, function(w) transfer[w[1],w[2]]))
+#   }
+# 
+#   if(nrow(trp1) == 0 && nrow(trp2) > 0) return(sum(trp2$count))
+#   if(nrow(trp1) > 0 && nrow(trp2) == 0) return(sum(trp1$count))
+#   if(nrow(trp1) == 0 && nrow(trp2) == 0) return(0)
+# 
+#   trp1 = split(trp1, f = trp1$to)
+#   trp2 = split(trp2, f = trp2$to)
+# 
+#   common.variantsID = intersect(names(trp1), names(trp2))
+# 
+#   trp1.specific = setdiff(names(trp1), common.variantsID)
+#   trp2.specific = setdiff(names(trp2), common.variantsID)
+# 
+#   dist = sum(unlist(lapply(trp1[trp1.specific], function(x) sum(x$count)))) +
+#     sum(unlist(lapply(trp2[trp2.specific], function(x) sum(x$count))))
+# 
+#   for(c in common.variantsID) dist = dist + abs(sum(trp1[[c]]$count) - sum(trp2[[c]]$count))
+# 
+#   return(dist)
+# }
 
 
 infoclustering = function(dist.obj, methods, do.plot = FALSE){
@@ -196,74 +196,74 @@ infoclustering = function(dist.obj, methods, do.plot = FALSE){
   return(list(stats = stats, max = max))
 }
 
-#' @importFrom stats order.dendrogram
-#' @importFrom utils capture.output
-split_dendrogram = function(dendrogram, hc, distance, method, min.group,
-                           do.plot = FALSE,
-                           plot.type = 'rectangle',
-                           palette = 'Set1')
-{
-  # cutreeDynamic
-  if(method == 'cutreeDynamic')
-  {
-    clusters = dynamicTreeCut::cutreeDynamic(as.hclust(hc),
-                             minClusterSize = min.group,
-                             method = 'tree')
-
-    clusters = clusters[order.dendrogram(dendrogram)]
-    names(clusters) = hc$order.lab
-  }
-
-  if(method == 'cutreeDynamicTree')
-  {
-    clusters = dynamicTreeCut::cutreeDynamicTree(
-      as.hclust(hc),
-      deepSplit = TRUE,
-      minModuleSize = min.group)
-
-    clusters = clusters[order.dendrogram(dendrogram)]
-    names(clusters) = hc$order.lab
-  }
-
-  if(method == 'cutreeHybrid')
-  {
-    w = capture.output({
-      clusters = dynamicTreeCut::cutreeHybrid(
-        as.hclust(hc),
-        distance,
-        minClusterSize = min.group)$labels
-      })
-
-    clusters = clusters[order.dendrogram(dendrogram)]
-    names(clusters) = hc$order.lab
-  }
-
-  if(method == 'static')
-  {
-    # require(dendextend)
-
-    hcl = as.hclust(hc)
-    dend_k = dendextend::find_k(dendrogram, krange = 1:ceiling(length(hcl$labels)/min.group))
-
-    clusters = dend_k$pamobject$clustering
-  }
-
-  nclusters = names(clusters)
-  clusters = paste('C', clusters, sep = '')
-  names(clusters) = nclusters
-
-
-  if(is.null(clusters)) stop('Unknown split method?')
-
-  k = length(unique(clusters))
-  labels.colors = scols(unique(clusters), palette)
-
-
-  if(do.plot) plot_dendrogram(hc, dendrogram, clusters, plot.type = plot.type, main = method, colors = labels.colors)
-
-  return(list(k = k, clusters = clusters, labels.colors = labels.colors))
-}
-
+#' #' @importFrom stats order.dendrogram
+#' #' @importFrom utils capture.output
+#' split_dendrogram = function(dendrogram, hc, distance, method, min.group,
+#'                            do.plot = FALSE,
+#'                            plot.type = 'rectangle',
+#'                            palette = 'Set1')
+#' {
+#'   # cutreeDynamic
+#'   if(method == 'cutreeDynamic')
+#'   {
+#'     clusters = dynamicTreeCut::cutreeDynamic(as.hclust(hc),
+#'                              minClusterSize = min.group,
+#'                              method = 'tree')
+#' 
+#'     clusters = clusters[order.dendrogram(dendrogram)]
+#'     names(clusters) = hc$order.lab
+#'   }
+#' 
+#'   if(method == 'cutreeDynamicTree')
+#'   {
+#'     clusters = dynamicTreeCut::cutreeDynamicTree(
+#'       as.hclust(hc),
+#'       deepSplit = TRUE,
+#'       minModuleSize = min.group)
+#' 
+#'     clusters = clusters[order.dendrogram(dendrogram)]
+#'     names(clusters) = hc$order.lab
+#'   }
+#' 
+#'   if(method == 'cutreeHybrid')
+#'   {
+#'     w = capture.output({
+#'       clusters = dynamicTreeCut::cutreeHybrid(
+#'         as.hclust(hc),
+#'         distance,
+#'         minClusterSize = min.group)$labels
+#'       })
+#' 
+#'     clusters = clusters[order.dendrogram(dendrogram)]
+#'     names(clusters) = hc$order.lab
+#'   }
+#' 
+#'   if(method == 'static')
+#'   {
+#'     # require(dendextend)
+#' 
+#'     hcl = as.hclust(hc)
+#'     dend_k = dendextend::find_k(dendrogram, krange = 1:ceiling(length(hcl$labels)/min.group))
+#' 
+#'     clusters = dend_k$pamobject$clustering
+#'   }
+#' 
+#'   nclusters = names(clusters)
+#'   clusters = paste('C', clusters, sep = '')
+#'   names(clusters) = nclusters
+#' 
+#' 
+#'   if(is.null(clusters)) stop('Unknown split method?')
+#' 
+#'   k = length(unique(clusters))
+#'   labels.colors = scols(unique(clusters), palette)
+#' 
+#' 
+#'   if(do.plot) plot_dendrogram(hc, dendrogram, clusters, plot.type = plot.type, main = method, colors = labels.colors)
+#' 
+#'   return(list(k = k, clusters = clusters, labels.colors = labels.colors))
+#' }
+#' 
 
 
 ### Plotting functions

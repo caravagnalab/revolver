@@ -4,6 +4,38 @@ library(ggraph)
 library(vegan)
 library(ggrepel)
 
+#' Plot summary statistics for the drivers on a graph.
+#' 
+#' @description 
+#' Plot a graph with driver genes and annotate with 
+#' different summary statistics for the trajectories that 
+#' involve the drivers. This visualisation shows the frequency
+#' of the driver in the cohort (node size), the penalty for
+#' each pair of odering (edge thickness), the significance for
+#' the pair of orderings as of a Fisher test (edge coloring)
+#' and the overall heterogeneity upstream a driver as of the
+#' DET index (node coloring). This function has parameters
+#' to subset the computation to a list of predefined drivers,
+#' or drivers associated to trajectories with a minimum
+#' recurrence in the fits.
+#'
+#' @param x A REVOLVER object with fits.
+#' @param drivers The list of drivers to consider, all by default.
+#' See also function \code{\link{plot_penalty}}.
+#' @param min.occurrences The minimum number of occurrences for
+#' a trajectory to be considered, zero by default. See also 
+#' function \code{\link{plot_penalty}}.
+#' @param alpha_level The significance level for the enrichment Fisher test.
+#' @param cex Cex of the plot.
+#' @param ... Extra parameters passed to the \code{create_layout} function
+#' by \code{ggraph}. For instance, passing \code{algorithm = 'kk'} and 
+#' \code{layout = 'igraph'} the `igraph` layout `kk` will be adopted.
+#'
+#' @return A `ggplot` object of the plot
+#' 
+#' @export
+#'
+#' @examples
 plot_graph_drivers = function(x,
                               drivers = x$variantIDs.driver,
                               min.occurrences = 0,
@@ -12,6 +44,9 @@ plot_graph_drivers = function(x,
                               ...
                               )
 {
+  lp = list(...)
+  print(lp)
+  
   # Subset E to make computations, and create a graph
   E = x$fit$penalty %>%
     filter(to %in% drivers, count >= min.occurrences)
@@ -55,7 +90,10 @@ plot_graph_drivers = function(x,
     left_join(index, by = c('driver')) 
   
   # Plot call
-  layout <- create_layout(G, ...)
+  if(length(lp) == 0)
+    layout <- create_layout(G, algorithm = 'kk', layout = 'igraph')
+  else
+    layout <- create_layout(G, ...)
   
   ggraph(layout) +
     geom_edge_link(

@@ -78,20 +78,20 @@ revolver_evo_distance = function(x, use.GL = TRUE, transitive.closure = FALSE)
   idx = 1:length(fit.patients)
   pb = txtProgressBar(min = 0, max = length(fit.patients) * (length(fit.patients) - 1) / 2, style = 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
+  
+  # Last expectation of the fit
+  E = x$fit$penalty
 
   for(p1 in idx){
-    for(p2 in p1:length(fit.patients)){
+    for(p2 in p1:N){
 
       # update progress bar
       if(pb.status) setTxtProgressBar(pb, i)
       i = i + 1
 
       if(p1 == p2) next;
-
-      # print(transfer[[p1]])
-      # print(transfer[[p2]])
-
-      distances[p1, p2] = evo_distance(transfer.matrix, transfer[[p1]], transfer[[p2]])
+      
+      
     }
   }
 
@@ -206,91 +206,6 @@ revolver_infoclustering = function(x,
 
   invisible(NULL)
 }
-
-
-#' @title Compute hierarchical clustering for a REVOLVER cohort
-#'
-#' @details
-#' Compute hierarchical clustering for a REVOLVER cohort with fit models.
-#' You might want to see functions \code{\link{revolver_evo_distance}} and
-#' \code{\link{revolver_infoclustering}} to first compute REVOLVER's
-#' evolutionary distance, and inspect basic parameter values and the clusters
-#' that they allow to identify.
-#'
-#' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
-#' @param hc.method Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.
-#' @param split.method Method to cut the dendrogram, see \code{\link{revolver_infoclustering}}.
-#' @param min.group.size Minimum group size for \code{dynamicTreeCut} functions.
-#'
-#' @return The input \code{x} with a modified field \code{cluster} with results.
-#' @export
-#' @import crayon
-#'
-#' @examples
-#' data(CRC.cohort)
-#' fit = revolver_fit(CRC.cohort)
-#' fit = revolver_evo_distance(fit)
-#' fit = revolver_cluster(fit) # dumped also to disk
-revolver_cluster = function(
-  x,
-  hc.method = "ward",
-  split.method = "cutreeHybrid",
-  min.group.size = 2
-)
-{
-  obj_has_fit(x)
-  obj_has_evodistance(x)
-
-  args = pio:::nmfy(c('Hierarchical CLustering (HC) method', 'Dendrogram Splitting method', 'Minimum size of each cluster'),
-                    c(hc.method, split.method, min.group.size))
-  pio::pioHdr('REVOLVER Clustering', args, prefix = '\t')
-
-  #######
-
-  distance = x$cluster$distances
-  params = x$cluster$distances.params
-  dist.obj = x$cluster$dist.obj
-
-  # Compute HC and dendrogram
-  pio::pioTit('Computing Hierarchical clustering with agnes')
-  hc = cluster::agnes(dist.obj, method = hc.method)
-  dendrogram = stats::as.dendrogram(hc)
-  dendextend::labels_cex(dendrogram) = .5 # decrease cex if there are many elements
-
-  cat(cyan('\tmethod :'), hc.method, '\n')
-  cat(cyan('\t    AC :'), hc$ac)
-
-  x$cluster$hc = hc
-  x$cluster$dendrogram = dendrogram
-  x$cluster$hc.method = hc.method
-
-  ############### Optimal number of clusters with dynamicTreeCut
-  pio::pioTit('Cutting dendrogram with dendextend')
-
-  clusters = split_dendrogram(
-    dendrogram, hc, distance,
-    split.method, min.group = min.group.size, do.plot = FALSE)
-
-  x$cluster$clusters = clusters$clusters
-  x$cluster$k = clusters$k
-  x$cluster$split.method = split.method
-  x$cluster$labels.colors = clusters$labels.colors
-
-  cat(cyan('\tmethod :'), split.method, '-', ifelse(split.method != 'static', 'from dynamicTreeCut', 'via silhouette scoring'), '\n')
-  cat(cyan('\t   |g| :'), min.group.size, '\n')
-  cat(cyan('\t     k :'), clusters$k, '\n')
-
-  pio::pioTit('Clustering assignment and count')
-
-  cat('Groups:')
-  print(table(x$cluster$clusters))
-
-  cat('Assignments:')
-  pio::pioDisp(x$cluster$clusters)
-
-  return(x)
-}
-
 
 
 

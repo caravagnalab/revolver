@@ -192,12 +192,27 @@ Phylo = function(x, p, rank = NULL)
 #' @examples
 #' data(CRC.cohort)
 #' Phylo(CRC.cohort, 'adenoma_3')
-ITransfer = function(x, p, rank = 1, type = 'drivers')
+ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 {
-  tree = Phylo(x, p, rank)
+  if(data ==  'trees')
+  {
+    tree = Phylo(x, p, rank)
 
-  if(type == 'drivers') return(tree$transfer$drivers)
-  if(type == 'clones') return(tree$transfer$clones)
+    if(type == 'drivers') return(tree$transfer$drivers)
+    if(type == 'clones') return(tree$transfer$clones)
+  }
+  
+  if(data ==  'fit')
+  {
+    if(rank != 1) stop("If you ask for fit data rank must be 1, aborting.")
+  
+    tree = x$fit$phylogenies[[p]]
+    
+    if(type == 'drivers') return(tree$transfer$drivers)
+    if(type == 'clones') return(tree$transfer$clones)
+  }
+  
+  stop("Getter used in the wrong way, aborting.")
 }
 
 
@@ -425,7 +440,9 @@ has_fits = function(x, p = NULL)
   
   return(!is.null(x$fit$phylogenies[[p]]))
 }
-  
+has_fits = Vectorize(has_fits, vectorize.args = 'p', SIMPLIFY = TRUE)  
+
+
 
 
 # obj_has_trees = function(x)
