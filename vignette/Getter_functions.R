@@ -32,7 +32,10 @@ cohort = revolver_fit(cohort, initial.solution = NA, n = 3)
 # Getter functions for the data
 # =-=-=-=-=-=-=-=-=-=-=-=-=-
 
+# Data for this patient
 Data(cohort, 'CRUK0001')
+
+# 
 Drivers(cohort, 'CRUK0001')
 
 Samples(cohort, 'CRUK0001')

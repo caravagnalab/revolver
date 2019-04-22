@@ -279,6 +279,21 @@ Stats = function(x, patients = x$patients)  {
   st %>% as_tibble()
 }
 
+#' See \code{Stats} function.
+#'
+#' @description Just a wrapper to the \code{Stats} function.
+#'
+#' @param ... Parameters forwarded to the \code{Stats} function.
+#'
+#' @return A tibble with summary stastics.
+#'
+#' @export
+#'
+#' @examples
+#' data(CRC.cohort)
+#' Stats_cohort(CRC.cohort)
+Stats_cohort = function(...) { Stats(...) }
+
 #' Return summary stastics for the cohort's drivers
 #'
 #' @description Returns the number of clonal and subclonal occurrences

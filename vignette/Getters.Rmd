@@ -1,0 +1,34 @@
+---
+title: "Getter functions"
+author: "Giulio Caravagna"
+institute: "Institute for Cancer Research"
+date: "May 1, 2019"
+email: "giulio.caravagna@ed.ac.uk"
+output:
+  github_document:
+    toc: true
+    toc_depth: 2
+#output:
+#  prettydoc::html_pretty:
+#    theme: cayman
+#    highlight: github
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+options(crayon.enabled = FALSE)
+options(revolver.progressBar = FALSE)
+```
+
+```{r, echo = TRUE, warning=FALSE}
+# Load REVOLVER and disable crayon's coloured output that renders badly in HTML,
+# as well as REVOLVER's progress bars...
+# library(revolver)
+
+
+load("Cohort.RData") # Yates et al.
+cohort
+```
+

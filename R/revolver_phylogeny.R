@@ -245,6 +245,8 @@ print.rev_phylo <- function(x, ...)
 #' a plot for the associated information transfer for the driver events annotated. The colouring
 #' of the nodes of the trees will match the colouring of the drivers. Combinations of plots is
 #' done via \code{ggarrange} of package \code{ggpubr}.
+#' @param icon If `TRUE` the icon tree version of a tree is plot. This type of view does not show 
+#' a clone unless it has a driver annotated.
 #' @param ... Extra parameters
 #'
 #' @return The plot. If `add_information_transfer = TRUE` the object is a combined figure from
@@ -267,171 +269,142 @@ plot.rev_phylo = function(x,
                           node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
                           tree_layout = 'tree',
                           add_information_transfer = FALSE,
+                          icon = FALSE,
                           ...
                           )
 {
-  # Get the tidygraph
-  tree = x
-  tb_tree = tree$tb_adj_mat
-
-  # TODO Color edges as of information transfer
-  #  - get path
-  #  - modify edges etc.
-  # tree$transfer
-  #
-  # %>%
-  #   mutate(
-  #     cluster = .N()$cluster[from]
-  #   )
-
-  # Color the nodes by cluster id, using a topological sort
-  # to pick the colors in the order of appeareance in the tree
-  clones_orderings = igraph::topo_sort(
-    igraph::graph_from_adjacency_matrix(DataFrameToMatrix(tree$transfer$clones)),
-    mode = 'out'
-  )$name
-
-  nDrivers = length(clones_orderings) - 1 # avoid GL
-
-  drivers_colors = c('white', node_palette(nDrivers))
-  names(drivers_colors) = clones_orderings
-
-  # Add non-driver nodes, with the same colour
-  non_drivers = tb_tree %>%
-    activate(nodes) %>%
-    filter(!is.driver) %>%
-    pull(cluster) # GL is not selected because is NA for is.driver
-
-  non_drivers_colors = rep("gainsboro", length(non_drivers))
-  names(non_drivers_colors) = non_drivers
-
-  tb_node_colors = c(drivers_colors, non_drivers_colors)
-
-  # Plot call
-  layout <- create_layout(tb_tree, layout = tree_layout)
-
-  mainplot = ggraph(layout) +
-    geom_edge_link(
-      arrow = arrow(length = unit(2 * cex, 'mm')),
-      end_cap = circle(5 * cex, 'mm'),
-      start_cap  = circle(5 * cex, 'mm')
-    ) +
-    geom_label_repel(
-      aes(
-        label = driver,
-        x = x,
-        y = y,
-        colour = cluster
-      ),
-      na.rm = TRUE,
-      nudge_x = .3,
-      nudge_y = .3,
-      size = 2.5 * cex
-    ) +
-    geom_node_point(
-      aes(
-        colour = cluster,
-        size = nMuts
-        ),
-      na.rm = TRUE
-    ) +
-    geom_node_text(aes(label = cluster),
-                   colour = 'black',
-                   vjust = 0.4) +
-    coord_cartesian(clip = 'off') +
-    # theme_graph(base_size = 8 * cex, base_family = '') +
-    theme_void(base_size = 8 * cex) +
-    theme(legend.position = 'bottom',
-          legend.key.size = unit(3 * cex, "mm")) +
-    scale_color_manual(values = tb_node_colors) +
-    scale_size(range = c(3, 10) * cex) +
-    guides(color = FALSE,
-           size = guide_legend(nrow = 1)) +
-    labs(
-      title = paste(tree$patient),
-      subtitle = paste0(
-        'Scores ',
-        format(tree$score, scientific = T),
-        '.'
-      )
-    )
-
-  # Add information_transfer if required
-  if(add_information_transfer)
+  if(!icon)
   {
-    mainplot = ggarrange(
-      mainplot,
-      plot_information_transfer(x, cex = cex, node_palette = node_palette, tree_layout = tree_layout, ...),
-      nrow = 1,
-      ncol = 2
-    )
-  }
-
-  return(mainplot)
-}
-
-# This function plots the information transfer of a specific tree. This function is not exported
-# directly but can be accessed from
-plot_information_transfer = function(x,
-                          cex = 1,
-                          node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
-                          tree_layout = 'tree',
-                          ...
-)
-{
-  tree = x
-
-  # Get the tidygraphs that we use here
-  tb_tree = as_tbl_graph(tree$transfer$drivers) %>%
-    activate(nodes) %>%
-    rename(driver = name)
-  tb_tree_all_tree = tree$tb_adj_mat
-
-  # Color the nodes by cluster id, as in the plot of the tree
-  # use a topological sort to pick the colors in the same order
-  clones_orderings = igraph::topo_sort(
-    igraph::graph_from_adjacency_matrix(DataFrameToMatrix(tree$transfer$clones)),
-    mode = 'out'
-  )$name
-
-  nDrivers = length(clones_orderings) - 1 # avoid GL
-
-  drivers_colors = c('white', node_palette(nDrivers))
-  names(drivers_colors) = clones_orderings
-
-  tb_tree = tb_tree %>%
-    activate(nodes) %>%
-    left_join(tree$drivers %>% rename(driver = variantID), by = 'driver') %>%
-    mutate(cluster = ifelse(driver == "GL", 'GL', cluster))
-
-  # Plot call
-  layout <- create_layout(tb_tree, layout = tree_layout)
-
-  ggraph(layout) +
-    geom_edge_diagonal(
-      arrow = arrow(length = unit(2 * cex, 'mm')),
-      end_cap = circle(5 * cex, 'mm'),
-      start_cap  = circle(5 * cex, 'mm')
-    ) +
-    geom_node_point(
-      aes(colour = cluster, fill = cluster),
-      alpha = .5,
-      size = 6
-    ) +
-    geom_node_text(aes(label = driver), color = 'black', size = 3) +
-    coord_cartesian(clip = 'off') +
-    theme_void(base_size = 8 * cex) +
-    theme(
-      legend.position = 'bottom',
-      legend.key.size = unit(3 * cex, "mm")
-          ) +
-    scale_fill_manual(values = drivers_colors) +
-    scale_color_manual(
-      values = drivers_colors,
-      guide = guide_legend(override.aes = list(shape = 21, size = 3), alpha = 1)
+    # Get the tidygraph
+    tree = x
+    tb_tree = tree$tb_adj_mat
+    
+    # TODO Color edges as of information transfer
+    #  - get path
+    #  - modify edges etc.
+    # tree$transfer
+    
+    # Color the nodes by cluster id, using a topological sort
+    # to pick the colors in the order of appeareance in the tree
+    clones_orderings = igraph::topo_sort(igraph::graph_from_adjacency_matrix(DataFrameToMatrix(tree$transfer$clones)),
+                                         mode = 'out')$name
+    
+    nDrivers = length(clones_orderings) - 1 # avoid GL
+    
+    drivers_colors = c('white', node_palette(nDrivers))
+    names(drivers_colors) = clones_orderings
+    
+    # Add non-driver nodes, with the same colour
+    non_drivers = tb_tree %>%
+      activate(nodes) %>%
+      filter(!is.driver) %>%
+      pull(cluster) # GL is not selected because is NA for is.driver
+    
+    non_drivers_colors = rep("gainsboro", length(non_drivers))
+    names(non_drivers_colors) = non_drivers
+    
+    tb_node_colors = c(drivers_colors, non_drivers_colors)
+    
+    # Plot call
+    layout <- create_layout(tb_tree, layout = tree_layout)
+    
+    mainplot = ggraph(layout) +
+      geom_edge_link(
+        arrow = arrow(length = unit(2 * cex, 'mm')),
+        end_cap = circle(5 * cex, 'mm'),
+        start_cap  = circle(5 * cex, 'mm')
       ) +
-    labs(
-      title = paste(tree$patient),
-      subtitle = paste0('Information transfer')
-    )
+      geom_label_repel(
+        aes(
+          label = driver,
+          x = x,
+          y = y,
+          colour = cluster
+        ),
+        na.rm = TRUE,
+        nudge_x = .3,
+        nudge_y = .3,
+        size = 2.5 * cex
+      ) +
+      geom_node_point(aes(colour = cluster,
+                          size = nMuts),
+                      na.rm = TRUE) +
+      geom_node_text(aes(label = cluster),
+                     colour = 'black',
+                     vjust = 0.4) +
+      coord_cartesian(clip = 'off') +
+      # theme_graph(base_size = 8 * cex, base_family = '') +
+      theme_void(base_size = 8 * cex) +
+      theme(legend.position = 'bottom',
+            legend.key.size = unit(3 * cex, "mm")) +
+      scale_color_manual(values = tb_node_colors) +
+      scale_size(range = c(3, 10) * cex) +
+      guides(color = FALSE,
+             size = guide_legend(nrow = 1)) +
+      labs(title = paste(tree$patient),
+           subtitle = paste0('Scores ',
+                             format(tree$score, scientific = T),
+                             '.'))
+    
+    # Add information_transfer if required
+    if (add_information_transfer)
+    {
+      mainplot = ggarrange(
+        mainplot,
+        plot_information_transfer(
+          x,
+          cex = cex,
+          node_palette = node_palette,
+          tree_layout = tree_layout,
+          ...
+        ),
+        nrow = 1,
+        ncol = 2
+      )
+    }
+    
+    return(mainplot)
+  }
+  else
+  {
+    # Get the tidygraph
+    tree = x
+    tb_tree = tree$tb_adj_mat
+    
+    # Color the nodes by cluster id
+    tb_node_colors = tb_tree %>% filter(is.driver) %>% pull(cluster)
+    
+    tb_node_colors = node_palette(length(tb_node_colors))
+    tb_node_colors = c(tb_node_colors, `GL` = 'white')
+    names(tb_node_colors) = c(tb_tree %>% filter(is.driver) %>% pull(cluster), 'GL')
+    
+    # Graph from transfer
+    tb_icon = as_tbl_graph(tree$transfer$clones) %>%
+      rename(cluster = name) %>%
+      activate(edges) %>%
+      mutate(
+        cluster = .N()$cluster[from]
+      )
+    
+    # Plot call
+    layout <- create_layout(tb_icon, layout = tree.layout)
+    
+    ggraph(layout) +
+      geom_edge_link(
+        aes(colour = cluster)
+      ) +
+      geom_node_point(
+        aes(colour = cluster),
+        na.rm = TRUE,
+        size = 3
+      ) +
+      coord_cartesian(clip = 'off') +
+      theme_void(base_size = 8 * cex) +
+      theme(legend.position = 'none') +
+      scale_color_manual(values = tb_node_colors) +
+      scale_edge_color_manual(values = tb_node_colors) +
+      guides(color = FALSE,
+             size = guide_legend(nrow = 1)
+      )
+  }
 }
