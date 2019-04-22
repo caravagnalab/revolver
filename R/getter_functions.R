@@ -158,6 +158,7 @@ CCF_clusters = function(x, p)
 #'
 #' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
 #' @param p a patient
+#' @param data Either `trees` or `fit`.
 #'
 #' @return phylogenetic or mutation trees data for \code{p}
 #' @export
@@ -165,15 +166,21 @@ CCF_clusters = function(x, p)
 #' @examples
 #' data(CRC.cohort)
 #' Phylo(CRC.cohort, 'adenoma_3')
-Phylo = function(x, p, rank = NULL)
+Phylo = function(x, p, rank = NULL, data = 'data')
 {
   if(!has_patient_trees(x, p, rank))
     stop('The requested tree does not exist, aborting.')
 
-  if(is.null(rank)) x$phylogenies[[p]]
-  else {
-    x$phylogenies[[p]][[rank]]
+  if(data ==  'trees')
+  {
+    if(is.null(rank)) x$phylogenies[[p]]
+    else {
+      x$phylogenies[[p]][[rank]]
+    }
   }
+  
+  if(data == 'fits')
+    x$fit$phylogenies[[p]]
 }
 
 # Phylo = Vectorize(Phylo, vectorize.args = 'p', SIMPLIFY = FALSE)
@@ -185,6 +192,7 @@ Phylo = function(x, p, rank = NULL)
 #' @param p A patient
 #' @param rank The rank of the tree to extract
 #' @param type Either `clones` or `drivers`.
+#' @param data Either `trees` or `fit`.
 #'
 #' @return The information transfer for a patient's tree
 #' @export

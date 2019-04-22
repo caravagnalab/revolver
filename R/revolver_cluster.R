@@ -18,6 +18,7 @@
 #' 
 #' @import crayon
 #' @import cluster
+#' @import dendextend
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -107,13 +108,9 @@ revolver_cluster = function(
   
   # Agnes for HC computation
   hc = cluster::agnes(cluster$distances$dist_obj, method = hc.method)
-      
-  # pio::pioStr("\nHierarchical cluster(s) from agnes", val = '', suffix = '\n\n')
-  # print(hc)
-  
+    
   # Dendrogram
   dendrogram = as.dendrogram(hc)
-  # dendextend::labels_cex(dendrogram) = .5 # decrease cex if there are many elements
 
   # Store these fits
   cluster$fits =
@@ -138,31 +135,7 @@ revolver_cluster = function(
   )
   
   x$cluster = cluster
-  
-  ############### Optimal number of clusters with dynamicTreeCut
-  # pio::pioTit('Cutting dendrogram with dendextend')
-  # 
-  # clusters = split_dendrogram(
-  #   dendrogram, hc, distance,
-  #   split.method, min.group = min.group.size, do.plot = FALSE)
-  # 
-  # x$cluster$clusters = clusters$clusters
-  # x$cluster$k = clusters$k
-  # x$cluster$split.method = split.method
-  # x$cluster$labels.colors = clusters$labels.colors
-  # 
-  # cat(cyan('\tmethod :'), split.method, '-', ifelse(split.method != 'static', 'from dynamicTreeCut', 'via silhouette scoring'), '\n')
-  # cat(cyan('\t   |g| :'), min.group.size, '\n')
-  # cat(cyan('\t     k :'), clusters$k, '\n')
-  
-  # pio::pioTit('Clustering assignment and count')
-  # 
-  # cat('Groups:')
-  # print(table(x$cluster$clusters))
-  # 
-  # cat('Assignments:')
-  # pio::pioDisp(x$cluster$clusters)
-  
+
   return(x)
 }
 

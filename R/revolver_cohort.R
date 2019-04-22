@@ -449,3 +449,51 @@ print.rev_cohort <-
     revolver_check_cohort(x)
 
   }
+
+
+
+#' Cohort summary scatterplot.
+#' 
+#' @details Returns a scatterplot of the tumour mutational burden. at the
+#' clonal and subclonal level. Each dot is sized by the number of 
+#' clones with drivers, and coloured by the numnber of drivers.
+#'
+#' @param x A REVOLVER cohort.
+#' @param cex Cex of the plot.
+#'
+#' @return A \code{ggplot2} object of the plot.
+#' @export
+#'
+#' @examples
+#' data(Breast.fit)
+plot.rev_cohort = function(x, ...)
+{
+  ggplot(Stats(x),
+         aes(color = numDriverMutations,
+             size = numClonesWithDriver,
+             x = numTruncalMutations,
+             y = numSubclonalMutations)) +
+    stat_density_2d(size = .2 * cex, color = 'gray') +
+    geom_point(alpha = .8) +
+    geom_rug(size = .3 * cex) +
+    scale_color_distiller(palette = 'Spectral') +
+    theme_minimal(base_size = 10 * cex) +
+    theme(
+      legend.position = 'bottom',
+      legend.key.size = unit(3 * cex, 'mm')
+    ) +
+    scale_y_log10() +
+    scale_x_log10() +
+    coord_cartesian(clip = 'off') +
+    labs(
+      title = x$annotation,
+      subtitle = paste("Cohort summary"),
+      x = "Truncal mutations",
+      y = "Subclonal mutations"
+    ) +
+    guides(
+      color = guide_colorbar("Drivers", barwidth  = unit(3 * cex, 'cm')),
+      size = guide_legend("Clones with drivers", barwidth  = unit(3 * cex, 'cm'))
+    )  
+  
+}
