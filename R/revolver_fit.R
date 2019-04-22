@@ -1,5 +1,33 @@
 
-
+#' @title Fit a REVOLVER model.
+#'
+#' @details  The main fitting function for REVOLVER, implements the 2-steps algorithm described
+#' in the REVOLVER paper (Caravagna et al., Nature Methods volume 15, pages 707–714, 2018;
+#' https://www.nature.com/articles/s41592-018-0108-x). The output object contains a new field
+#' `$fit` which contains the fit results.
+#'
+#' @param x A REVOLVER cohort where trees per patient have been already computed.
+#' @param initial.solution Either a scalar to fix one initial condition 
+#' (rank id), or \code{NA} to sample it randomly across all possivle solutions.
+#' Notice that if the inital conditin is fixed the other parameter `n` should be 1.
+#' @param max.iterations Maximum number of EM steps before forcing stop.
+#' @param n Number of initial conditions sampled to compute optimal fit.
+#' @param ... Other paraemters, not used.
+#'
+#' @return A new object of class \code{"rev_cohort_fit"} which represents a
+#' REVOLVER cohort object with fits.
+#' 
+#' @export
+#' 
+#' @import parallel
+#' @import crayon
+#' @import doParallel
+#' @import foreach
+#'
+#'
+#' @examples
+#' data(CRC.cohort)
+#' fit = revolver_fit(CRC.cohort)
 revolver_fit = function(x,
                         initial.solution = 1,
                         max.iterations = 10,

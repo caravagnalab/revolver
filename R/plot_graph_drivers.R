@@ -1,8 +1,3 @@
-x = cohort
-library(tidygraph)
-library(ggraph)
-library(vegan)
-library(ggrepel)
 
 #' Plot summary statistics for the drivers on a graph.
 #' 

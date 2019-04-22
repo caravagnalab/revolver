@@ -243,6 +243,42 @@ Fit = function(x, p)
   x$fit$phylogenies[[p]]
 }
 
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Clusters
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+#' Get clustering information for patients.
+#' 
+#' @description For a set of `patients` - all by default - 
+#' extract the clustering information computed by REVOVLER.
+#'
+#' @param x A REVOLVEr cohort with fits and clusters.
+#' @param patients Patients to use, all by default.
+#'
+#' @return A tibble with the required clustering assignments
+#' 
+#' @export
+#'
+#' @examples
+#' TODO
+Cluster = function(x, patients = x$patients)
+{
+  if(!all(has_clusters(x, patients)))
+    stop("There is no cluster information for what you're looking for,  aborting.")
+  
+  data.frame(
+    patientID = patients,
+    cluster = x$cluster$fits$labels[patients], 
+    stringsAsFactors = FALSE) %>% 
+    as_tibble() 
+}
+
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Functions for summary statistics
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 #' Return summary stastics for the cohort's patients
 #'
 #' @description Returns the number of samples per patient, the number
@@ -442,7 +478,7 @@ Stats_fits = function(x, patients = x$patients) {
   }
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# These are non exported getters that help coding
+# To test if the object has some consistency internally
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 has_patient_trees = function(x, p = NULL, rank = NULL)
@@ -465,11 +501,10 @@ has_fits = function(x, p = NULL)
 }
 has_fits = Vectorize(has_fits, vectorize.args = 'p', SIMPLIFY = TRUE)  
 
-
-
-
-# obj_has_trees = function(x)
-# {
-#   if(is.null(x$phylogenies))
-#     stop('Cannot proceed without having computed the trees -- are you calling the right function?')
-# }
+has_clusters= function(x, p = NULL)
+{
+  if (is.null(p))
+    return(!is.null(x$cluster))
+  
+  return(p %in% names(x$cluster$fits$labels))
+}
