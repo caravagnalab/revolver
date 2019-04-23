@@ -283,13 +283,13 @@ print.rev_cohort <-
                 toPrint = NULL,
                 suffix = '\n')
     
-    pio::pioStr("Dataset",
+    pio::pioStr("Dataset :",
                 x$annotation,
                 suffix = '\n',
                 prefix = '\n')
     
     pio::pioStr(
-      "Cohort size",
+      "Cohort  :",
       paste0(
         x$n$patients,
         ' patients, ',
@@ -298,7 +298,7 @@ print.rev_cohort <-
         x$n$drivers,
         ' driver events.'
       ),
-      suffix = '\n'
+      suffix = '\n\n'
     )
     
     # pio::pioTit('Available computations')
@@ -331,7 +331,7 @@ print.rev_cohort <-
     
     pio::pioStr(
       "",
-      "\nFor summary statistics use the Stats_*(x) functions with * = {cohort, drivers, trees, fits, clusters, ...}",
+      "\nFor summary statistics see `?Stats_*(x)` with * = {cohort, drivers, trees, fits, clusters, ...}",
       suffix = '\n'
     )
     

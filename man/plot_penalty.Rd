@@ -42,3 +42,6 @@ comparison (marginal count of B-ended trajectories). The tests are carried
 out by function \code{revolver:::enrichment_test_incoming_edge}, which can
 be used to obtain a tidy representation of the tests' results.
 }
+\examples{
+TODO
+}

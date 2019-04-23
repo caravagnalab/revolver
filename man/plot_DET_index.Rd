@@ -21,3 +21,7 @@ using function \code{DET_index}. The plot is a barplot with colours reflecting
 the number of distinct incoming edges in each driver (species), and the height
 reflecting the actual DET index value.
 }
+\examples{
+data(Breast.fit)
+plot_DET_index(Breast.fit, min.occurrences = 5)
+}

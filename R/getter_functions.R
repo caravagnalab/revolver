@@ -166,21 +166,23 @@ CCF_clusters = function(x, p)
 #' @examples
 #' data(CRC.cohort)
 #' Phylo(CRC.cohort, 'adenoma_3')
-Phylo = function(x, p, rank = NULL, data = 'data')
+Phylo = function(x, p, rank = NULL, data = 'trees')
 {
   if(!has_patient_trees(x, p, rank))
     stop('The requested tree does not exist, aborting.')
 
   if(data ==  'trees')
   {
-    if(is.null(rank)) x$phylogenies[[p]]
+    if(is.null(rank)) return(x$phylogenies[[p]])
     else {
-      x$phylogenies[[p]][[rank]]
+      return(x$phylogenies[[p]][[rank]])
     }
   }
   
   if(data == 'fits')
-    x$fit$phylogenies[[p]]
+    return(x$fit$phylogenies[[p]])
+  
+  stop("Unrecognized parameters, aborting")
 }
 
 # Phylo = Vectorize(Phylo, vectorize.args = 'p', SIMPLIFY = FALSE)
@@ -210,7 +212,7 @@ ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
     if(type == 'clones') return(tree$transfer$clones)
   }
   
-  if(data ==  'fit')
+  if(data ==  'fits')
   {
     if(rank != 1) stop("If you ask for fit data rank must be 1, aborting.")
   
@@ -220,7 +222,7 @@ ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
     if(type == 'clones') return(tree$transfer$clones)
   }
   
-  stop("Getter used in the wrong way, aborting.")
+  stop("Unrecognized parameters, aborting")
 }
 
 

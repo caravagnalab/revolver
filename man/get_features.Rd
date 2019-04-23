@@ -2,25 +2,24 @@
 % Please edit documentation in R/get_features.R
 \name{get_features}
 \alias{get_features}
-\title{Return summary features for the cohort}
+\title{Return summary features for the cohort.}
 \usage{
 get_features(x, patients = x$patients)
 }
 \arguments{
-\item{x}{A REVOLVER cohort with fits}
+\item{x}{}
 
-\item{patients}{The group of patients to include in these matrices, by default
-all of them.}
+\item{patients}{}
 }
 \value{
 A set of matrices that report summary features of the models.
 }
 \description{
-Return summary features for the cohort
-}
-\details{
 Computes a set of matrix-like summary features for the cohort, in the
 form of a matrix. It will return the matrix of driver events with mean
 CCF, their occurrence across all patients, and at the clonal and subclonal
 level, and the occurrence of all evolutionary trajectories across patients
+}
+\examples{
+TODO
 }

@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{rev_phylo}(x, cex = 1,
   node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9,
-  "Set1")), tree_layout = "tree", add_information_transfer = FALSE,
+  "Set1")), tree_layout = "tree", information_transfer = FALSE,
   icon = FALSE, ...)
 }
 \arguments{
@@ -22,13 +22,13 @@ transfer, which is obtained from \code{igraph}.}
 \item{tree_layout}{A layout that can be used by \code{tidygraph}, which wraps \code{igraph}'s
 layouts. By default this is a `tree` layout.}
 
-\item{add_information_transfer}{If `TRUE`, it will combine the plot of the input tree with
-a plot for the associated information transfer for the driver events annotated. The colouring
-of the nodes of the trees will match the colouring of the drivers. Combinations of plots is
-done via \code{ggarrange} of package \code{ggpubr}.}
+\item{information_transfer}{If `TRUE`, the plot will show only the information
+transfer of the tree. The colouring of the nodes of the trees will match the colouring of
+the drivers.}
 
 \item{icon}{If `TRUE` the icon tree version of a tree is plot. This type of view does not show 
-a clone unless it has a driver annotated.}
+a clone unless it has a driver annotated. If this option is true together with \code{information_transfer}
+an erorr is generated.}
 
 \item{...}{Extra parameters}
 }

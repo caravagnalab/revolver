@@ -1,22 +1,35 @@
-#' Title
+#' Plot a barplot of the scored trees for a patient.
+#' 
+#' @description Returns a barplot where each tree is
+#' a bar, with height proportional to the tree score and
+#' colour to its particular combination of transfer. If
+#' the function is called on a vector of patient ids, the
+#' result is a list of plot.
 #'
-#' @param x 
-#' @param patients 
-#' @param transfer_palette 
-#' @param cex 
+#' @param x A REVOLVER cohort object
+#' @param patients The plots 
+#' @param transfer_palette A function that can be used to sample
+#' an arbitrary number of colours to identify the transfers.
+#' @param cex Cex of the plot.
+#' @param ... Extra parameters, unused.
 #'
-#' @return
+#' @return A \code{ggplot| plot.
 #' @export
 #'
 #' @examples
+#' TODO
 plot_trees_scores = function(x,
                              patients = x$patients,
                              transfer_palette = distinct_palette_few,
-                             cex = 1)
+                             cex = 1,
+                             ...)
 {
   # plot of a single patient
   single_plot = function(p)
   {
+    if(!has_patient_trees(x,p))
+      stop("Patient ", p, " does not have trees, aborting.")
+      
     n = length(x$phylogenies[[p]])
     
     scores = lapply(1:n,
@@ -24,7 +37,7 @@ plot_trees_scores = function(x,
                       data.frame(
                         patient = p,
                         rank = w,
-                        score = Phylo(x, p, w)$score,
+                        score = Phylo(x, p, w, data = 'trees')$score,
                         IT = paste(sort(DataFrameToEdges(
                           ITransfer(x, p, w, type = 'drivers')
                         )),

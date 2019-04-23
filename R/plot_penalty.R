@@ -29,6 +29,7 @@
 #' @export
 #'
 #' @examples
+#' TODO
 plot_penalty = function(x,
                         drivers = x$variantIDs.driver,
                         min.occurrences = 0,

@@ -1,20 +1,19 @@
-#' @title Return summary features for the cohort
+#' Return summary features for the cohort.
 #'
-#' @details
+#' @description 
 #' Computes a set of matrix-like summary features for the cohort, in the
 #' form of a matrix. It will return the matrix of driver events with mean
 #' CCF, their occurrence across all patients, and at the clonal and subclonal
 #' level, and the occurrence of all evolutionary trajectories across patients
-# 
-#' @param x A REVOLVER cohort with fits
-#' @param patients The group of patients to include in these matrices, by default
-#' all of them.
+#' 
+#' @param x 
+#' @param patients 
 #'
 #' @return A set of matrices that report summary features of the models.
-#' 
 #' @export
 #'
 #' @examples
+#' TODO
 get_features = function(x, patients = x$patients)
 {
   Np = length(patients)

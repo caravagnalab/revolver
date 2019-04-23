@@ -4,12 +4,15 @@
 \alias{plot_trees}
 \title{Plot REVOLVER trees for a patient}
 \usage{
-plot_trees(x, patient, rank = 1, data = "trees", ...)
+plot_trees(x, patient, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort object}
 
 \item{patient}{The patient for which the trees should be plot}
+
+\item{...}{Extra parameters which will be passed to all the 
+delegate plotting calls  other functions.}
 
 \item{rank}{A vector that specifies which tree should be plot for a
 patient. The trees are stored according to the rank, and this is an 
@@ -17,9 +20,6 @@ integer vector which will be used to access the trees. By default, only
 the top-rank tree is plot (\code{rank = 1}).}
 
 \item{data}{}
-
-\item{...}{Extra parameters which will be passed to all the 
-delegate plotting calls  other functions.}
 }
 \value{
 A list of plots.
@@ -36,4 +36,7 @@ one representation to the other is possible via a parameter
 \code{icon}. This function returns a list of trees (which can
 be assembled via \code{ggpubr} functions for instance); the number
 of trees that one wants to plot is controlled via parameter \code{rank}.
+}
+\examples{
+TODO
 }

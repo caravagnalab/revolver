@@ -39,32 +39,40 @@
 #' # Phylogeny: will attach a GL (germline) to the root
 #' # of the tree. In this case all nodes are roots.
 #' revolver_phylogeny(m, 'adenoma_1', dataset, samples, 52)
-revolver_phylogeny = function(
-  x,
-  patient,
-  M,
-  score,
-  annotation = paste0("A tree for patient ", patient))
+revolver_phylogeny = function(x,
+                              patient,
+                              M,
+                              score,
+                              annotation = paste0("A tree for patient ", patient))
 {
   # This function will create this output object
   obj <-
     structure(
       list(
-        adj_mat = NA,        # Adjacency matrix for the tree
-        tb_adj_mat = NA,     # Tidygraph object for this tree
-        score = NA,          # Tree score
-        patient = NA,        # Patient ID
-        samples = NA,        # Samples name
-        drivers = NA,        # Driver mapping to clusters
-        CCF = NA,            # CCF (aggregated per cluster)
-        annotation = NA,     # Some custom annotation
-        transfer = NA,       # Information transfer from this tree
+        adj_mat = NA,
+        # Adjacency matrix for the tree
+        tb_adj_mat = NA,
+        # Tidygraph object for this tree
+        score = NA,
+        # Tree score
+        patient = NA,
+        # Patient ID
+        samples = NA,
+        # Samples name
+        drivers = NA,
+        # Driver mapping to clusters
+        CCF = NA,
+        # CCF (aggregated per cluster)
+        annotation = NA,
+        # Some custom annotation
+        transfer = NA,
+        # Information transfer from this tree
         tree_type = NA       # Mutation tree or phylogeny
       ),
       class = "rev_phylo",
       call = match.call()
     )
-
+  
   # =-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-
   # The information that we need for each tree are
   # CCF clusters, data and driver events (mapped to clusters)
@@ -73,38 +81,45 @@ revolver_phylogeny = function(
   obj$samples = Samples(x, patient)
   obj$drivers = Drivers(x, patient) %>%
     select(variantID, cluster)
-
+  
   # =-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-
   # We begin to create a representation of the tree
   # =-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-
-
+  
   # Input can should be an adjacency matrix (which works also for monoclonal tumours)
-  if(class(M) != 'matrix') stop("Input `M` should be an adjacency matrix, aborting.")
-
+  if (class(M) != 'matrix')
+    stop("Input `M` should be an adjacency matrix, aborting.")
+  
   adj_mat =  M
   df_mat = MatrixToDataFrame(M)
-
+  
   # We chack for that to be a tree - empty is OK in this casem if monoclonal
-  if(!is_tree(adj_mat, allow.empty = nrow(obj$CCF) == 1)) stop("The input adjacency matrix is not a valid tree, aborting.")
-
+  if (!is_tree(adj_mat, allow.empty = nrow(obj$CCF) == 1))
+    stop("The input adjacency matrix is not a valid tree, aborting.")
+  
   # Add GL node, beware of the special case of empty adj_mat (might happen for a monoclonal tumour)
   M_root = ifelse(sum(adj_mat) == 0, rownames(adj_mat), root(adj_mat))
-  df_mat = rbind(df_mat, data.frame(from = 'GL', to = M_root, stringsAsFactors = FALSE))
-
+  df_mat = rbind(df_mat,
+                 data.frame(
+                   from = 'GL',
+                   to = M_root,
+                   stringsAsFactors = FALSE
+                 ))
+  
   # Update the adj matrix with GL, which can now go into obj
   obj$adj_mat = DataFrameToMatrix(df_mat)
-
+  
   # =-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-
   # Create a tidygraph object for this tree
   # =-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-
   tb_adj_mat = as_tbl_graph(df_mat) %>%
     activate(nodes) %>%
     rename(cluster = name)
-
+  
   # We can add information specific for this tree to the tidygraph
   tb_adj_mat = tb_adj_mat %>%
     left_join(obj$CCF, by = 'cluster')
-
+  
   # Sample attachment for input data
   attachment = obj$CCF %>%
     select(cluster, obj$samples) %>%
@@ -119,36 +134,35 @@ revolver_phylogeny = function(
     mutate(attachment = paste(attachment)) %>%
     group_by(cluster) %>%
     summarise(attachment = paste(attachment, collapse = ', '))
-
+  
   tb_adj_mat = tb_adj_mat %>%
     left_join(attachment, by = 'cluster')
-
+  
   # Drivers per node
   tb_adj_mat = tb_adj_mat %>%
-    left_join(
-      obj$drivers %>%
-        group_by(cluster) %>%
-        summarise(driver = paste(variantID, collapse = ', ')),
-      by = 'cluster')
-
+    left_join(obj$drivers %>%
+                group_by(cluster) %>%
+                summarise(driver = paste(variantID, collapse = ', ')),
+              by = 'cluster')
+  
   # Store it in obj
   obj$tb_adj_mat = tb_adj_mat
-
+  
   # Compute the information transfer
   obj$transfer = information_transfer(obj)
-
+  
   # Extras
   obj$score = score
   obj$patient = patient
-
+  
   obj$annotation = annotation
-
+  
   obj$tree_type = ifelse(
     all(obj$CCF %>% select(obj$samples) %in% c(0, 1)),
     "Mutation tree (binary data)",
     "Phylogenetic tree (CCF)"
   )
-
+  
   return(obj)
 }
 
@@ -171,10 +185,10 @@ revolver_phylogeny = function(
 print.rev_phylo <- function(x, ...)
 {
   stopifnot(inherits(x, "rev_phylo"))
-
+  
   M = x$adj_mat
   tb = x$tb_adj_mat
-
+  
   printPretty = function(node, indent, last)
   {
     cat(indent)
@@ -187,45 +201,53 @@ print.rev_phylo <- function(x, ...)
       indent = paste(indent, "| ", sep = '')
     }
     cat(node)
-
+    
     A = tb %>%
       activate(nodes) %>%
       filter(cluster == !!node) %>%
       pull(attachment)
-
+    
     if (!is.na(A))
       cat(paste(' [', A, ']', sep = ''))
-
+    
     D = tb %>%
       activate(nodes) %>%
       filter(cluster == !!node) %>%
       pull(driver)
-
+    
     if (!is.na(D))
       cat(sprintf(' :: %s', D))
-
+    
     cat('\n')
-
+    
     cl = children(M, node)
-
+    
     for (c in cl)
       printPretty(c, indent, c == cl[length(cl)])
   }
-
+  
   pio::pioHdr(paste0('REVOLVER tree - ', x$annotation), suffix = '\n')
-
+  
   cat('\n')
   print(x$CCF)
-
-  pio::pioStr("Tree shape (drivers annotated)", "", prefix = '\n', suffix = '\n\n')
-
-  printPretty(node = "GL", indent = "  ", last = TRUE)
-
-  pio::pioStr("Information transfer", "", prefix = '\n', suffix = '\n\n')
-
+  
+  pio::pioStr("Tree shape (drivers annotated)",
+              "",
+              prefix = '\n',
+              suffix = '\n\n')
+  
+  printPretty(node = "GL",
+              indent = "  ",
+              last = TRUE)
+  
+  pio::pioStr("Information transfer",
+              "",
+              prefix = '\n',
+              suffix = '\n\n')
+  
   apply(x$transfer$drivers, 1, function(w)
     cat('  ', w[1], '--->', w[2], '\n'))
-
+  
   pio::pioStr("Tree score", x$score, suffix = '\n', prefix = '\n')
 }
 
@@ -241,12 +263,12 @@ print.rev_phylo <- function(x, ...)
 #' transfer, which is obtained from \code{igraph}.
 #' @param tree_layout A layout that can be used by \code{tidygraph}, which wraps \code{igraph}'s
 #' layouts. By default this is a `tree` layout.
-#' @param add_information_transfer If `TRUE`, it will combine the plot of the input tree with
-#' a plot for the associated information transfer for the driver events annotated. The colouring
-#' of the nodes of the trees will match the colouring of the drivers. Combinations of plots is
-#' done via \code{ggarrange} of package \code{ggpubr}.
-#' @param icon If `TRUE` the icon tree version of a tree is plot. This type of view does not show 
-#' a clone unless it has a driver annotated.
+#' @param information_transfer If `TRUE`, the plot will show only the information
+#' transfer of the tree. The colouring of the nodes of the trees will match the colouring of
+#' the drivers.
+#' @param icon If `TRUE` the icon tree version of a tree is plot. This type of view does not show
+#' a clone unless it has a driver annotated. If this option is true together with \code{information_transfer}
+#' an erorr is generated.
 #' @param ... Extra parameters
 #'
 #' @return The plot. If `add_information_transfer = TRUE` the object is a combined figure from
@@ -268,12 +290,18 @@ plot.rev_phylo = function(x,
                           cex = 1,
                           node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
                           tree_layout = 'tree',
-                          add_information_transfer = FALSE,
+                          information_transfer = FALSE,
                           icon = FALSE,
-                          ...
-                          )
+                          ...)
 {
-  if(!icon)
+  if (icon & information_transfer)
+    stop("Both `icon` and `information_transfer` are TRUE. Only one can be, aborting.")
+  
+  # =-=-=-=-=-=-=-=-
+  # Plotting in non-icon format, which consists of a tree
+  # with the all nodes and drivers annotated
+  # =-=-=-=-=-=-=-=-
+  if (!icon & !information_transfer)
   {
     # Get the tidygraph
     tree = x
@@ -340,32 +368,37 @@ plot.rev_phylo = function(x,
       scale_color_manual(values = tb_node_colors) +
       scale_size(range = c(3, 10) * cex) +
       guides(color = FALSE,
-             size = guide_legend(nrow = 1)) +
+             size = guide_legend("Clone size", nrow = 1)) +
       labs(title = paste(tree$patient),
            subtitle = paste0('Scores ',
                              format(tree$score, scientific = T),
                              '.'))
     
-    # Add information_transfer if required
-    if (add_information_transfer)
-    {
-      mainplot = ggarrange(
-        mainplot,
-        plot_information_transfer(
-          x,
-          cex = cex,
-          node_palette = node_palette,
-          tree_layout = tree_layout,
-          ...
-        ),
-        nrow = 1,
-        ncol = 2
-      )
-    }
-    
     return(mainplot)
   }
-  else
+  
+  # =-=-=-=-=-=-=-=-
+  # Plotting in non-icon format, but only the information transfer
+  # =-=-=-=-=-=-=-=-
+  
+  if (!icon & information_transfer)
+  {
+    return(
+      plot_information_transfer(
+        x,
+        cex = cex,
+        node_palette = node_palette,
+        tree_layout = tree_layout,
+        ...
+      )
+    )
+  }
+  
+  # =-=-=-=-=-=-=-=-
+  # Plotting in icon format
+  # =-=-=-=-=-=-=-=-
+  
+  if (icon)
   {
     # Get the tidygraph
     tree = x
@@ -382,29 +415,22 @@ plot.rev_phylo = function(x,
     tb_icon = as_tbl_graph(tree$transfer$clones) %>%
       rename(cluster = name) %>%
       activate(edges) %>%
-      mutate(
-        cluster = .N()$cluster[from]
-      )
+      mutate(cluster = .N()$cluster[from])
     
     # Plot call
-    layout <- create_layout(tb_icon, layout = tree.layout)
+    layout <- create_layout(tb_icon, layout = tree_layout)
     
     ggraph(layout) +
-      geom_edge_link(
-        aes(colour = cluster)
-      ) +
-      geom_node_point(
-        aes(colour = cluster),
-        na.rm = TRUE,
-        size = 3
-      ) +
+      geom_edge_link(aes(colour = cluster),
+                     width = 1) +
+      geom_node_point(aes(colour = cluster),
+                      size = 2.5) +
       coord_cartesian(clip = 'off') +
       theme_void(base_size = 8 * cex) +
       theme(legend.position = 'none') +
       scale_color_manual(values = tb_node_colors) +
       scale_edge_color_manual(values = tb_node_colors) +
       guides(color = FALSE,
-             size = guide_legend(nrow = 1)
-      )
+             size = FALSE)
   }
 }

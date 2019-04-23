@@ -2,20 +2,30 @@
 % Please edit documentation in R/plot_trees_scores.R
 \name{plot_trees_scores}
 \alias{plot_trees_scores}
-\title{Title}
+\title{Plot a barplot of the scored trees for a patient.}
 \usage{
 plot_trees_scores(x, patients = x$patients,
-  transfer_palette = distinct_palette_few, cex = 1)
+  transfer_palette = distinct_palette_few, cex = 1, ...)
 }
 \arguments{
-\item{x}{}
+\item{x}{A REVOLVER cohort object}
 
-\item{patients}{}
+\item{patients}{The plots}
 
-\item{transfer_palette}{}
+\item{transfer_palette}{A function that can be used to sample
+an arbitrary number of colours to identify the transfers.}
 
-\item{cex}{}
+\item{cex}{Cex of the plot.}
+
+\item{...}{Extra parameters, unused.}
 }
 \description{
-Title
+Returns a barplot where each tree is
+a bar, with height proportional to the tree score and
+colour to its particular combination of transfer. If
+the function is called on a vector of patient ids, the
+result is a list of plot.
+}
+\examples{
+TODO
 }

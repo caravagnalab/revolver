@@ -2,7 +2,7 @@
 
 .onLoad <- function(libname, pkgname) {
   
-  options(pio.string_fg_colour = crayon::bgRed)
+  options(pio.string_fg_colour = crayon::bgYellow$black)
   
   pio::pioHdr('REVOLVER - Repeated Evolution in Cancer')
   pio::pioStr("Author : ", "Giulio Caravagna <gcaravagn@gmail.com>", suffix = '\n')

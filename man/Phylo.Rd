@@ -4,7 +4,7 @@
 \alias{Phylo}
 \title{Extract phylogenetic or mutation trees for a patient}
 \usage{
-Phylo(x, p, rank = NULL, data = "data")
+Phylo(x, p, rank = NULL, data = "trees")
 }
 \arguments{
 \item{x}{a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}

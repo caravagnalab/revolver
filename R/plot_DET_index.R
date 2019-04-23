@@ -14,7 +14,7 @@
 #' 
 #' @export
 #'
-#' @examplesw
+#' @examples
 #' data(Breast.fit)
 #' plot_DET_index(Breast.fit, min.occurrences = 5)
 plot_DET_index = function(x, ...)

@@ -54,9 +54,10 @@ plot_information_transfer = function(x,
   
   ggraph(layout) +
     geom_edge_diagonal(
-      arrow = arrow(length = unit(2 * cex, 'mm')),
-      end_cap = circle(5 * cex, 'mm'),
-      start_cap  = circle(5 * cex, 'mm')
+      arrow = arrow(length = unit(2.5 * cex, 'mm')),
+      end_cap = circle(2.5 * cex, 'mm'),
+      start_cap  = circle(2.5 * cex, 'mm'),
+      color = 'steelblue'
     ) +
     geom_node_point(
       aes(colour = cluster, fill = cluster),
@@ -78,5 +79,9 @@ plot_information_transfer = function(x,
     labs(
       title = paste(tree$patient),
       subtitle = paste0('Information transfer')
+    ) +
+    guides(
+      colour = guide_legend('Clone'),
+      size = FALSE
     )
 }

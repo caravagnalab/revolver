@@ -28,32 +28,6 @@ for(p in cohort$patients) cohort = revolver_compute_phylogenies(cohort, patient 
 cohort = revolver_fit(cohort, initial.solution = NA, n = 3)
 
 
-# =-=-=-=-=-=-=-=-=-=-=-=-=-
-# Getter functions for the data
-# =-=-=-=-=-=-=-=-=-=-=-=-=-
-
-# Data for this patient
-Data(cohort, 'CRUK0001')
-
-# 
-Drivers(cohort, 'CRUK0001')
-
-Samples(cohort, 'CRUK0001')
-
-Truncal(cohort, 'CRUK0001')
-Subclonal(cohort, 'CRUK0001')
-
-CCF(cohort, 'CRUK0001')
-CCF_clusters(cohort, 'CRUK0001')
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-
-# Plotting functions for the data
-# =-=-=-=-=-=-=-=-=-=-=-=-=-
-
-plot_data(cohort, 'CRUK0001')
-plot_data(cohort, 'CRUK0062')
-plot_data(cohort, 'CRUK0069')
-
 # Simple dump of all the cohort
 # all_cohort_plots = lapply(cohort$patients, plot_data, x = cohort)
 # pdf("Cohort.pdf", width = 10, height = 5)
