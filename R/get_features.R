@@ -102,7 +102,7 @@ get_features = function(x, patients = x$patients)
   # Get all data that we need for trajectories
   # =-=-=-=-=-=-=-=-
   All_trajectories = lapply(patients, function(p) {
-    ITransfer(x, p, rank = 1, type = 'drivers', data = 'fit') %>%
+    ITransfer(x, p, rank = 1, type = 'drivers', data = 'fits') %>%
       mutate(patientID = p)
   })
   

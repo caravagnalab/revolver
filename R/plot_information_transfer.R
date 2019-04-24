@@ -82,6 +82,6 @@ plot_information_transfer = function(x,
     ) +
     guides(
       colour = guide_legend('Clone'),
-      size = FALSE
+      fill = FALSE
     )
 }

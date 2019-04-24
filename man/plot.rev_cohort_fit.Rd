@@ -25,5 +25,5 @@ number of annotated drivers.
 }
 \examples{
 data(Breast.fit)
-revolver_plt_penalty_barplot(Breast.fit)
+plot.rev_cohort_fit(Breast.fit)
 }

@@ -381,28 +381,28 @@ revolver_deletePatients = function(x, list)
 #' @examples
 #' data(Breast.fit)
 #' plot.rev_cohort(Breast.fit, patients = Breast.fit$patients[1:10])
-plot.rev_cohort = function(x,
-                           patients = x$patients,
-                           max.phylogenies = 12,
-                           cex = 1)
-{
-  obj_has_trees(x)
-  plot.stat = TRUE
-
-  pio::pioHdr('REVOLVER Plot: Cohort (models)',
-              c(
-                `Patients`=paste(patients, collapse = ', '),
-                `Number of trees per patient`=max.phylogenies),
-              prefix = '\t -')
-
-  if(is.na(file)) stop('A file is required for this plot!')
-
-  for (patient in patients)
-  {
-    pio::pioTit(paste("Processing", patient))
-
-    revolver_report_patient(x, patient, cex = cex, max.phylogenies = max.phylogenies)
-  }
-}
+# plot.rev_cohort = function(x,
+#                            patients = x$patients,
+#                            max.phylogenies = 12,
+#                            cex = 1)
+# {
+#   obj_has_trees(x)
+#   plot.stat = TRUE
+# 
+#   pio::pioHdr('REVOLVER Plot: Cohort (models)',
+#               c(
+#                 `Patients`=paste(patients, collapse = ', '),
+#                 `Number of trees per patient` = max.phylogenies),
+#               prefix = '\t -')
+# 
+#   if(is.na(file)) stop('A file is required for this plot!')
+# 
+#   for (patient in patients)
+#   {
+#     pio::pioTit(paste("Processing", patient))
+# 
+#     revolver_report_patient(x, patient, cex = cex, max.phylogenies = max.phylogenies)
+#   }
+# }
 
 

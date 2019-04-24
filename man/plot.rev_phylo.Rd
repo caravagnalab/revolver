@@ -26,7 +26,7 @@ layouts. By default this is a `tree` layout.}
 transfer of the tree. The colouring of the nodes of the trees will match the colouring of
 the drivers.}
 
-\item{icon}{If `TRUE` the icon tree version of a tree is plot. This type of view does not show 
+\item{icon}{If `TRUE` the icon tree version of a tree is plot. This type of view does not show
 a clone unless it has a driver annotated. If this option is true together with \code{information_transfer}
 an erorr is generated.}
 

@@ -59,6 +59,8 @@ revolver_cluster = function(
   pb = txtProgressBar(min = 0, max = N * (N - 1) / 2, style = 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
   
+  E = x$fit$penalty
+  
   # O(n^2) comparisons
   for(p1 in 1:N) {
     for(p2 in p1:N) {
@@ -70,10 +72,10 @@ revolver_cluster = function(
       if(p1 == p2) next;
       
       # Both patient have a transfer that we take and augment with E
-      p1_IT = ITransfer(x, patients[p1], data = 'fit', type = 'drivers') %>%
+      p1_IT = ITransfer(x, patients[p1], data = 'fits', type = 'drivers') %>%
         left_join(E, by = c('from', 'to'))
       
-      p2_IT = ITransfer(x, patients[p2], data = 'fit', type = 'drivers') %>%
+      p2_IT = ITransfer(x, patients[p2], data = 'fits', type = 'drivers') %>%
         left_join(E, by = c('from', 'to'))
       
       # The distance is the absolute value of non-shared edges

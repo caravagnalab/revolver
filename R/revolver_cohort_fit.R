@@ -27,11 +27,12 @@ print.rev_cohort_fit = function(x, ...)
 #' @param cex Cex of the plot.
 #'
 #' @return A \code{ggplot2} object of the plot.
-#' @export
+#' 
+#' @export plot.rev_cohort_fit
 #'
 #' @examples
 #' data(Breast.fit)
-#' revolver_plt_penalty_barplot(Breast.fit)
+#' plot.rev_cohort_fit(Breast.fit)
 plot.rev_cohort_fit = function(x, cex = 1, ...)
 {
   obj_has_fit(x)

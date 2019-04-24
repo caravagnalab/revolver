@@ -167,17 +167,3 @@ Stats_trees(cohort)
 # Stats_fits(cohort)
 ```
 
-# Plotting functions
-
-```{r, echo = TRUE, warning=FALSE, fig.height = 6, fig.width = 4}
-plot(Phylo(cohort, 'CRUK0001', rank = 1))
-```
-
-```{r, echo = TRUE, warning=FALSE, fig.height = 4, fig.width = 4}
-plot(Phylo(cohort, 'CRUK0001', rank = 1), information_transfer = TRUE)
-```
-
-```{r, echo = TRUE, warning=FALSE, fig.height = 4, fig.width = 4}
-plot(Phylo(cohort, 'CRUK0001', rank = 1), icon = TRUE)
-```
-

@@ -478,7 +478,7 @@ print.rev_cohort <-
 #'
 #' @examples
 #' data(Breast.fit)
-plot.rev_cohort = function(x, ...)
+plot.rev_cohort = function(x, cex = 1, ...)
 {
   ggplot(
     Stats(x),
