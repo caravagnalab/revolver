@@ -4,17 +4,16 @@
 \alias{revolver_cohort}
 \title{Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).}
 \usage{
-revolver_cohort(dataset, CCF.parser = revolver:::CCF.parser,
+revolver_cohort(dataset, CCF_parser = revolver::CCF_parser,
   options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
   annotation = "My REVOLVER dataset")
 }
 \arguments{
 \item{dataset}{A dataframe in the specified format (see Online manual).}
 
-\item{CCF.parser}{A function to parse the format for the encoding of CCF
+\item{CCF_parser}{A function to parse the format for the encoding of CCF
 or binary values for each sequenced region. A possible function is available
-inside REVOLVER; since it is not exported but is available with
-\code{revolver:::CCF.parser} (the default of this parameter).}
+inside REVOLVER; \code{revolver::CCF_parser} (the default of this parameter).}
 
 \item{options}{A list of 2 parameters that should be a boolean value for
 \code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.}
@@ -31,5 +30,17 @@ Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 \examples{
 data(CRC)
 cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
+
+# Example cohort creation with the TRACERx data
+data(TRACERx_data)
+
+# To speed up the process we use only 2 patients
+TRACERx_data = TRACERx_data \%>\%
+   filter(patientID \%in\% c('CRUK0001', 'CRUK0002'))
+   
+cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
+ 
+# The print for this cohort
+print(cohort)
 
 }

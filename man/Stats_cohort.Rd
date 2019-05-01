@@ -16,6 +16,11 @@ A tibble with summary stastics.
 Just a wrapper to the \code{Stats} function.
 }
 \examples{
-data(CRC.cohort)
-Stats_cohort(CRC.cohort)
+data(TRACERx_cohort)
+
+# Get the stats for all patients
+Stats_cohort(TRACERx_cohort) 
+
+# And subset the patients
+Stats_cohort(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 }

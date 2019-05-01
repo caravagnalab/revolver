@@ -24,6 +24,15 @@ The information transfer for a patient's tree
 Extract the information transfer for a patient's tree
 }
 \examples{
-data(CRC.cohort)
-Phylo(CRC.cohort, 'adenoma_3')
+data(TRACERx_cohort)
+
+# Get the transfer among drivers, top-ranking tree
+Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers')
+
+# Get the transfer among clones, top-ranking tree
+Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones')
+
+# Get the transfer from the fit
+Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones', data = 'fits')
+Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
 }

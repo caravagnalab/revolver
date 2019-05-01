@@ -20,6 +20,12 @@ phylogenetic or mutation trees data for \code{p}
 Extract phylogenetic or mutation trees for a patient
 }
 \examples{
-data(CRC.cohort)
-Phylo(CRC.cohort, 'adenoma_3')
+data(TRACERx_cohort)
+
+# Get all the trees for a patient
+Phylo(TRACERx_cohort, 'CRUK0002')
+
+# Get a specific tree for a patient
+Phylo(TRACERx_cohort, 'CRUK0002', rank = 2)
+# Get the fit tree for a patient
 }

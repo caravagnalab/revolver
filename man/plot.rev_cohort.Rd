@@ -23,5 +23,7 @@ clonal and subclonal level. Each dot is sized by the number of
 clones with drivers, and coloured by the numnber of drivers.
 }
 \examples{
-data(Breast.fit)
+data(TRACERx_cohort)
+
+plot(TRACERx_cohort)
 }

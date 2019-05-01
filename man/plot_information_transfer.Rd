@@ -29,5 +29,13 @@ information transfer of a REVOLVER's model. The tree is coloured
 so that drivers in the same clone have the same colour.
 }
 \examples{
-TODO
+data(TRACERx_cohort)
+
+# Extract transfer
+tree = Phylo(TRACERx_cohort, 'CRUK0002', rank = 1)
+
+plot_information_transfer(tree)
+
+# Change layout -- use igraph's "kk" layout
+plot_information_transfer(tree, tree_layout = 'kk')
 }

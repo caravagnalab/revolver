@@ -24,7 +24,6 @@ Imports:
     dynamicTreeCut,
     vegan,
     igraph,
-    foreach,
     tidyverse,
     tidygraph,
     ggraph,
@@ -33,7 +32,9 @@ Imports:
     pio,
     RColorBrewer,
     pheatmap,
-Remotes: caravagn/pio
+Remotes: 
+    caravagn/pio,
+    caravagn/easypar
 RoxygenNote: 6.1.1
 Suggests: 
     knitr,

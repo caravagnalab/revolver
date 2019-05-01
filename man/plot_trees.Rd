@@ -27,5 +27,8 @@ that the score is not accounting for the actual transfer, but just
 for the tree structure).
 }
 \examples{
-TODO
+data(TRACERx_cohort)
+
+# This returns a figure assembled with ggpubr 
+plot_trees(TRACERx_cohort, patient = 'CRUK0002')
 }

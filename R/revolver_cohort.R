@@ -1,10 +1,9 @@
 #' Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
 #'
 #' @param dataset A dataframe in the specified format (see Online manual).
-#' @param CCF.parser A function to parse the format for the encoding of CCF
+#' @param CCF_parser A function to parse the format for the encoding of CCF
 #' or binary values for each sequenced region. A possible function is available
-#' inside REVOLVER; since it is not exported but is available with
-#' \code{revolver:::CCF.parser} (the default of this parameter).
+#' inside REVOLVER; \code{revolver::CCF_parser} (the default of this parameter).
 #' @param options A list of 2 parameters that should be a boolean value for
 #' \code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.
 #' @param annotation String for annotation of this cohort. This will be prompted
@@ -18,11 +17,35 @@
 #' data(CRC)
 #' cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
 #'
+#' @import tidyverse
+#' @import tidygraph
+#' @import pio
+#' @import easypar
+#' @import RColorBrewer
 #' @import crayon
+#' @import cluster
+#' @import dendextend
+#' @import dynamicTreeCut
+#' @import igraph
+#' @import ggpubr
+#' @import ggrepel
 #'
-#' @export
+#' @export revolver_cohort
+#' @examples
+#' # Example cohort creation with the TRACERx data
+#' data(TRACERx_data)
+#' 
+#' # To speed up the process we use only 2 patients
+#' TRACERx_data = TRACERx_data %>%
+#'    filter(patientID %in% c('CRUK0001', 'CRUK0002'))
+#'    
+#' cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
+#'  
+#' # The print for this cohort
+#' print(cohort)
+#' 
 revolver_cohort = function(dataset,
-                           CCF.parser = revolver:::CCF.parser,
+                           CCF_parser = revolver::CCF_parser,
                            options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
                            annotation = 'My REVOLVER dataset')
 {
@@ -32,11 +55,11 @@ revolver_cohort = function(dataset,
   
   pio::pioHdr(
     paste('REVOLVER Cohort constructor'),
-    c(
-      `Use only alterations annotated as driver` = options$ONLY.DRIVER,
-      `Filter: minimum number of alterations in a cluster` = options$MIN.CLUSTER.SIZE
+    toPrint = c(
+      ` Use only drivers` = as.logical(options$ONLY.DRIVER),
+      `Min. cluster size` = options$MIN.CLUSTER.SIZE
     ),
-    prefix = '\t'
+    prefix = paste0(clisymbols::symbol$radio_on, ' ')
   )
   
   # The output object will be this, of class rev_cohort
@@ -51,14 +74,14 @@ revolver_cohort = function(dataset,
         dataset = NULL,
         CCF = NULL,
         n = NULL,
-        CCF.parser = CCF.parser
+        CCF_parser = CCF_parser
       ),
       class = "rev_cohort",
       call = match.call()
     )
   
   # Check input and stop on error
-  dataset = check_input(dataset, CCF.parser)
+  dataset = check_input(dataset, CCF_parser)
   dataset$id = paste0('__mut_id_', 1:nrow(dataset))
   
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -126,7 +149,7 @@ revolver_cohort = function(dataset,
   # For each patient extract its explicit region CCF data
   foo = function(w)
   {
-    values = revolver:::CCF.parser(w)
+    values = CCF_parser(w)
     tv = as_tibble(as.numeric(values))
     tv$sample = names(values)
     
@@ -251,11 +274,10 @@ check_input = function(dataset, CCF.parser)
   if (any(dataset[, required.cols[-1]] == ''))
     stop("Entries empty string ('') in the dataset are allowed only in the `Misc` field.")
   
-  if (!is.function(CCF.parser))
+  if (!is.function(CCF_parser))
   {
-    print(revolver:::CCF.parser)
     stop(
-      'You need to provide a function to parse CCFs, see "CCF.parser" available in this package.'
+      'You need to provide a function to parse CCFs, see "CCF_parser" available in this package.'
     )
   }
   
@@ -264,7 +286,7 @@ check_input = function(dataset, CCF.parser)
 
 #' Print a \code{"rev_cohort"} object
 #'
-#' @param x obj of class \code{"rev_cohort"}
+#' @param x Object of class \code{"rev_cohort"}
 #' @param digits number of output digits
 #'
 #' @return nothing
@@ -272,16 +294,14 @@ check_input = function(dataset, CCF.parser)
 #' @import crayon
 #'
 #' @examples
-#' data(CRC.cohort)
-#' CRC.cohort
+#' data(TRACERx_cohort)
+#' print(TRACERx_cohort)
 print.rev_cohort <-
   function(x, ...)
   {
     stopifnot(inherits(x, "rev_cohort"))
     
-    pio::pioHdr('REVOLVER - Repeated Evolution in Cancer',
-                toPrint = NULL,
-                suffix = '\n')
+    pio::pioHdr('REVOLVER - Repeated Evolution in Cancer')
     
     pio::pioStr("Dataset :",
                 x$annotation,
@@ -477,7 +497,9 @@ print.rev_cohort <-
 #' @export
 #'
 #' @examples
-#' data(Breast.fit)
+#' data(TRACERx_cohort)
+#' 
+#' plot(TRACERx_cohort)
 plot.rev_cohort = function(x, cex = 1, ...)
 {
   ggplot(

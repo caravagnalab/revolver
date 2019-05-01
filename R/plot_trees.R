@@ -23,7 +23,10 @@
 #' @import ggraph
 #'
 #' @examples
-#' TODO
+#' data(TRACERx_cohort)
+#' 
+#' # This returns a figure assembled with ggpubr 
+#' plot_trees(TRACERx_cohort, patient = 'CRUK0002')
 plot_trees = function(x, patient, ...)
 {  
   require(ggpubr)

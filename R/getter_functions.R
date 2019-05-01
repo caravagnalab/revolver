@@ -125,14 +125,14 @@ CCF = function(x, p)
 #' @param p a patient
 #'
 #' @return CCF/binary data for \code{p}
-#' @export
+#' @export Samples
 #'
 #' @examples
-#' data(CRC.cohort)
-#' CCF(CRC.cohort, 'adenoma_3')
+#' data(TRACERx_cohort)
+#' Samples(TRACERx_cohort, 'CRUK0001')
 Samples = function(x, p)
 {
-  names(x$CCF.parser(Data(x,p) %>% filter(row_number() == 1) %>% pull(CCF)))
+  names(x$CCF_parser(Data(x,p) %>% filter(row_number() == 1) %>% pull(CCF)))
 }
 
 
@@ -145,8 +145,8 @@ Samples = function(x, p)
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' CCF(CRC.cohort, 'adenoma_3')
+#' data(TRACERx_cohort)
+#' CCF_clusters(TRACERx_cohort, 'CRUK0001')
 CCF_clusters = function(x, p)
 {
   x$CCF[[p]]
@@ -164,8 +164,16 @@ CCF_clusters = function(x, p)
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Phylo(CRC.cohort, 'adenoma_3')
+#' data(TRACERx_cohort)
+#' 
+#' # Get all the trees for a patient
+#' Phylo(TRACERx_cohort, 'CRUK0002')
+#' 
+#' # Get a specific tree for a patient
+#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 2)
+# 
+#' # Get the fit tree for a patient
+# Phylo(TRACERx_cohort, 'CRUK0002', data = 'fits')
 Phylo = function(x, p, rank = NULL, data = 'trees')
 {
   if(!has_patient_trees(x, p, rank))
@@ -200,8 +208,17 @@ Phylo = function(x, p, rank = NULL, data = 'trees')
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Phylo(CRC.cohort, 'adenoma_3')
+#' data(TRACERx_cohort)
+#' 
+#' # Get the transfer among drivers, top-ranking tree
+#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers')
+#' 
+#' # Get the transfer among clones, top-ranking tree
+#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones')
+#' 
+#' # Get the transfer from the fit
+#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones', data = 'fits')
+#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
 ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 {
   if(data ==  'trees')
@@ -238,12 +255,12 @@ ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 #' data(CRC.cohort)
 #'
 #' Fit(revolver_fit(CRC.cohort), 'adenoma_3')
-Fit = function(x, p)
-{
-  if(is.null(x$fit$phylogenies[[p]])) stop('There is no fit for ', p)
-
-  x$fit$phylogenies[[p]]
-}
+# Fit = function(x, p)
+# {
+#   if(is.null(x$fit$phylogenies[[p]])) stop('There is no fit for ', p)
+# 
+#   x$fit$phylogenies[[p]]
+# }
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Clusters
@@ -295,8 +312,13 @@ Cluster = function(x, patients = x$patients)
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Stats(CRC.cohort)
+#' data(TRACERx_cohort)
+#' 
+#' # Get the stats for all patients
+#' Stats(TRACERx_cohort) 
+#' 
+#' # And subset the patients
+#' Stats(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats = function(x, patients = x$patients)  {
 
   st = data.frame(
@@ -328,8 +350,13 @@ Stats = function(x, patients = x$patients)  {
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Stats_cohort(CRC.cohort)
+#' data(TRACERx_cohort)
+#' 
+#' # Get the stats for all patients
+#' Stats_cohort(TRACERx_cohort) 
+#' 
+#' # And subset the patients
+#' Stats_cohort(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_cohort = function(...) { Stats(...) }
 
 #' Return summary stastics for the cohort's drivers
@@ -346,8 +373,13 @@ Stats_cohort = function(...) { Stats(...) }
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Stats_drivers(CRC.cohort)
+#' data(TRACERx_cohort)
+#' 
+#' # Get the stats for all patients
+#' Stats_drivers(TRACERx_cohort) 
+#' 
+#' # And subset the patients
+#' Stats_drivers(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_drivers = function(x, drivers = x$variantIDs.driver) {
 
   st = data.frame(
@@ -392,7 +424,7 @@ Stats_drivers = function(x, drivers = x$variantIDs.driver) {
   st %>% as_tibble()
 }
 
-# ' Return summary stastics for the cohort's trees
+#' Return summary stastics for the cohort's trees
 #'
 #' @description Returns the number of clonal and subclonal occurrences
 #' of each driver in the cohort, and their percentage relative to the
@@ -406,8 +438,13 @@ Stats_drivers = function(x, drivers = x$variantIDs.driver) {
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Stats_drivers(CRC.cohort)
+#' data(TRACERx_cohort)
+#' 
+#' # Get the stats for all patients
+#' Stats_trees(TRACERx_cohort) 
+#' 
+#' # And subset the patients
+#' Stats_trees(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_trees = function(x, patients = x$patients) {
   
   if(
@@ -449,7 +486,7 @@ Stats_trees = function(x, patients = x$patients) {
 }
 
 
-# ' Return summary stastics for the cohort's fits
+#' Return summary stastics for the cohort's fits
 #'
 #' @description Returns a tibble that extends the result of 
 #' \code{Stats_trees} with information about the fit models.
@@ -464,8 +501,13 @@ Stats_trees = function(x, patients = x$patients) {
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Stats_fits(CRC.cohort)
+#' data(TRACERx_cohort)
+#' 
+#' # Get the stats for all patients
+#' Stats_fits(TRACERx_cohort) 
+#' 
+#' # And subset the patients
+#' Stats_fits(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_fits = function(x, patients = x$patients) {
   
   if(

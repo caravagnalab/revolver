@@ -13,11 +13,13 @@
 #' @param cex Cex of the plot.
 #' @param ... Extra parameters, unused.
 #'
-#' @return A \code{ggplot| plot.
+#' @return A \code{ggplot} plot.
 #' @export
 #'
 #' @examples
-#' TODO
+#' data(TRACERx_cohort)
+#' 
+#' plot_trees_scores(TRACERx_cohort, 'CRUK0002')
 plot_trees_scores = function(x,
                              patients = x$patients,
                              transfer_palette = distinct_palette_few,

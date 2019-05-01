@@ -1,9 +1,14 @@
 #' @title REVOLVER constructor for a tree
 #'
-#' @details
+#' @description 
 #'
 #' This constructor creates an object of type "rev_phylo", which represents a model
 #' for a patient. This is the same type of object regarldess data are CCF or binary values.
+#' 
+#' @note 
+#' 
+#' This function is meant to be called after a REVOLVER cohort object has been
+#' created, via the constructure \code{\link{revolver_cohort}}.
 #'
 #' @param x A REVOLVER cohort.
 #' @param patient The id of this patient in the cohort.
@@ -18,27 +23,25 @@
 #' @import tidygraph
 #'
 #' @examples
-#' # Take data from CRC, inspect sample and dataset
-#' data("CRC")
-#' dataset = CRC[CRC$patientID == 'adenoma_3', ]
-#' samples = paste('R', 1:5, sep = '')
-#'
-#' # Extract CCF values
-#' CCF = sapply(dataset$CCF, revolver:::CCF.parser)
-#' CCF = t(apply(CCF, 2, as.numeric))
-#' rownames(CCF) = rownames(dataset)
-#' colnames(CCF) = samples
-#'
-#' # Bind a dataset with explicit data
-#' dataset = cbind(dataset, CCF)
-#'
-#' # Create empty adj_mat
-#' m = matrix(0, ncol = 4, nrow = 4)
-#' colnames(m) = rownames(m) = 1:4
+#' 
+#' # We re-build the trees for one patient
+#' data(TRACERx_cohort)
+#' 
+#' # Because the function will return a new cohort, we can just
+#' M = ...
+#' 
+#' # Create a new tree, the score is made up
+#' new_tree = revolver_phylogeny(TRACERx_cohort, patient = "CRUK0002", M, score = 17)
+#' 
+#' # S3 functions for this object
+#' print(new_tree)
+#' plot(new_tree)
+revolver_phylogeny = function(x,
+                              patient,
+                              M,
+                              score,
+                              annotation = paste0("A tree for patient ", patient))
 
-#' # Phylogeny: will attach a GL (germline) to the root
-#' # of the tree. In this case all nodes are roots.
-#' revolver_phylogeny(m, 'adenoma_1', dataset, samples, 52)
 revolver_phylogeny = function(x,
                               patient,
                               M,

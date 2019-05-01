@@ -19,6 +19,9 @@ an arbitrary number of colours to identify the transfers.}
 
 \item{...}{Extra parameters, unused.}
 }
+\value{
+A \code{ggplot} plot.
+}
 \description{
 Returns a barplot where each tree is
 a bar, with height proportional to the tree score and
@@ -27,5 +30,7 @@ the function is called on a vector of patient ids, the
 result is a list of plot.
 }
 \examples{
-TODO
+data(TRACERx_cohort)
+
+plot_trees_scores(TRACERx_cohort, 'CRUK0002')
 }

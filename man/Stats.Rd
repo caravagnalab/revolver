@@ -20,6 +20,11 @@ of drivers, the number of clonal and subclonal mutations etc. The
 function can be run on a subset of patients.
 }
 \examples{
-data(CRC.cohort)
-Stats(CRC.cohort)
+data(TRACERx_cohort)
+
+# Get the stats for all patients
+Stats(TRACERx_cohort) 
+
+# And subset the patients
+Stats(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 }

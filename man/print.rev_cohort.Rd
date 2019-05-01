@@ -7,7 +7,7 @@
 \method{print}{rev_cohort}(x, ...)
 }
 \arguments{
-\item{x}{obj of class \code{"rev_cohort"}}
+\item{x}{Object of class \code{"rev_cohort"}}
 
 \item{digits}{number of output digits}
 }
@@ -18,6 +18,6 @@ nothing
 Print a \code{"rev_cohort"} object
 }
 \examples{
-data(CRC.cohort)
-CRC.cohort
+data(TRACERx_cohort)
+print(TRACERx_cohort)
 }

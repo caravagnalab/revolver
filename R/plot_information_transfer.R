@@ -16,7 +16,15 @@
 #' @export
 #'
 #' @examples
-#' TODO
+#' data(TRACERx_cohort)
+#' 
+#' # Extract transfer
+#' tree = Phylo(TRACERx_cohort, 'CRUK0002', rank = 1)
+#' 
+#' plot_information_transfer(tree)
+#' 
+#' # Change layout -- use igraph's "kk" layout
+#' plot_information_transfer(tree, tree_layout = 'kk')
 plot_information_transfer = function(x,
                                      cex = 1,
                                      node_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),

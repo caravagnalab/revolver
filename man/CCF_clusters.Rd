@@ -18,6 +18,6 @@ CCF/binary data for \code{p}
 Extract cluster-level CCF/binary data for a patient
 }
 \examples{
-data(CRC.cohort)
-CCF(CRC.cohort, 'adenoma_3')
+data(TRACERx_cohort)
+CCF_clusters(TRACERx_cohort, 'CRUK0001')
 }

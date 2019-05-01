@@ -20,6 +20,11 @@ of the drivers in the cohort, and their percentage relative to the
 cohort size. The function can be run on a subset of drivers.
 }
 \examples{
-data(CRC.cohort)
-Stats_drivers(CRC.cohort)
+data(TRACERx_cohort)
+
+# Get the stats for all patients
+Stats_drivers(TRACERx_cohort) 
+
+# And subset the patients
+Stats_drivers(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 }

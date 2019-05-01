@@ -18,6 +18,6 @@ CCF/binary data for \code{p}
 Extract samples name for a patient
 }
 \examples{
-data(CRC.cohort)
-CCF(CRC.cohort, 'adenoma_3')
+data(TRACERx_cohort)
+Samples(TRACERx_cohort, 'CRUK0001')
 }

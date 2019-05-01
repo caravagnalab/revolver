@@ -6,11 +6,13 @@
 #' a 3-dimensional named vector with names `R1`, `R2` and
 #' `R3`, and values `0.1`, `0.4` and `0.9`. This function
 #' can be used when parsing an input dataset in function
-#' \code{revolver_cohort}. This function will not convert
+#' \code{revolver_cohort}. 
+#' 
+#' @note This function will not convert
 #' the types of the parsed entries, and will therefore
 #' return strings.
 #' 
-#' @param x The string to parse.
+#' @param x The string to parse, the accepted format for this functio is something like "R1:0.1;R2:0.4;R3:0.9".
 #'
 #' @return A parsed named vector.
 #' 
