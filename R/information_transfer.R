@@ -93,7 +93,7 @@ combination_of_information_transfer = function(x, patient)
   keys = lapply(
     trees,
       function(w)
-        paste(sort(DataFrameToEdges(w$transfer$clones)), collapse = ' ')
+        paste(sort(revolver:::DataFrameToEdges(w$transfer$clones)), collapse = ' ')
     )
 
     keys = Reduce(rbind, keys)

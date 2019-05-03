@@ -1,67 +1,67 @@
-filter.clusters = function(d, cutoff.numMuts = 5)
-{
-  d = split(d, f = d$cluster)
-  counts = lapply(d, nrow)
-
-  # removed = d[counts <= cutoff.numMuts]
-  # #
-  # lapply(removed, function(w) print())
-
-  return(
-    list(
-      removed = Reduce(rbind, d[counts <= cutoff.numMuts]),
-      remained = Reduce(rbind, d[counts > cutoff.numMuts])
-    ))
-
-  # return(Reduce(rbind, d[counts > cutoff.numMuts]))
-}
-
-clusters.table = function(d, sample.groups)
-{
-  d = split(d, f = d$cluster)
-  clusters = names(d)
-
-  counts = lapply(d, nrow)
-
-  CCF.means = lapply(d, function(x) {
-    matrixStats::colMedians(as.matrix(x[, sample.groups, drop = F]))
-  })
-  CCF.means = Reduce(rbind, CCF.means)
-
-  if(!is.matrix(CCF.means)) CCF.means = matrix(CCF.means, nrow = 1)
-  colnames(CCF.means) = sample.groups
-
-  R = data.frame(
-    is.driver = unlist(lapply(d, function(x) any(x$is.driver))),
-    is.clonal = unlist(lapply(d, function(x) any(x$is.clonal))),
-    nMuts = unlist(counts),
-    CCF.means
-  )
-  rownames(R) = clusters
-
-  R = R[order(R$nMuts, decreasing = T), , drop = F]
-
-  return(R)
-}
-
-nclusters = function(d){return(length(unique(d$cluster)))}
-
-permuteClusterIds = function(d){
-  ids = 1:length(unique(d$cluster.tracerx))
-  names(ids) = unique(d$cluster.tracerx)
-  d$cluster = ids[as.character(d$cluster.tracerx)]
-
-  return(d[order(d$cluster), ])
-}
-
-panelToList = function(d)
-{
-  d = d[!d$excluded, ]
-  d = d[d$parent != -1, ]
-  d = d[, c('lab', 'parent')]
-  colnames(d) = c('to', 'from')
-  return(d)
-}
+# filter.clusters = function(d, cutoff.numMuts = 5)
+# {
+#   d = split(d, f = d$cluster)
+#   counts = lapply(d, nrow)
+# 
+#   # removed = d[counts <= cutoff.numMuts]
+#   # #
+#   # lapply(removed, function(w) print())
+# 
+#   return(
+#     list(
+#       removed = Reduce(rbind, d[counts <= cutoff.numMuts]),
+#       remained = Reduce(rbind, d[counts > cutoff.numMuts])
+#     ))
+# 
+#   # return(Reduce(rbind, d[counts > cutoff.numMuts]))
+# }
+# 
+# clusters.table = function(d, sample.groups)
+# {
+#   d = split(d, f = d$cluster)
+#   clusters = names(d)
+# 
+#   counts = lapply(d, nrow)
+# 
+#   CCF.means = lapply(d, function(x) {
+#     matrixStats::colMedians(as.matrix(x[, sample.groups, drop = F]))
+#   })
+#   CCF.means = Reduce(rbind, CCF.means)
+# 
+#   if(!is.matrix(CCF.means)) CCF.means = matrix(CCF.means, nrow = 1)
+#   colnames(CCF.means) = sample.groups
+# 
+#   R = data.frame(
+#     is.driver = unlist(lapply(d, function(x) any(x$is.driver))),
+#     is.clonal = unlist(lapply(d, function(x) any(x$is.clonal))),
+#     nMuts = unlist(counts),
+#     CCF.means
+#   )
+#   rownames(R) = clusters
+# 
+#   R = R[order(R$nMuts, decreasing = T), , drop = F]
+# 
+#   return(R)
+# }
+# 
+# nclusters = function(d){return(length(unique(d$cluster)))}
+# 
+# permuteClusterIds = function(d){
+#   ids = 1:length(unique(d$cluster.tracerx))
+#   names(ids) = unique(d$cluster.tracerx)
+#   d$cluster = ids[as.character(d$cluster.tracerx)]
+# 
+#   return(d[order(d$cluster), ])
+# }
+# 
+# panelToList = function(d)
+# {
+#   d = d[!d$excluded, ]
+#   d = d[d$parent != -1, ]
+#   d = d[, c('lab', 'parent')]
+#   colnames(d) = c('to', 'from')
+#   return(d)
+# }
 
 hashTrees = function(clonevol.obj, sample.groups)
 {
@@ -98,8 +98,11 @@ hashTrees = function(clonevol.obj, sample.groups)
 
   # cat('Total trees  :', nrow(trees), '\n')
   # cat('Unique trees : ', length(unique(trees$model)), '\n')
-  cat("Hashed", length(unique(trees$model)), 'trees\n')
-
+  pio::pioStr(
+    " Hashed trees", length(unique(trees$model)), 
+    prefix = crayon::green(clisymbols::symbol$tick),
+    suffix = '\n')
+  
   trees$model = as.factor(trees$model)
 
   map.trees = split(trees, f = trees$model)
@@ -110,44 +113,6 @@ hashTrees = function(clonevol.obj, sample.groups)
 }
 
 
-plotCCFTrees = function(map, my.data, binary.data, consensus, MI.table, distribution, distribution.scores, file, cex = 1, max.trees.in.plots = 50)
-{
-  ##### Plot the distribution
-  ndistribution = ND = length(distribution)
-  cat('* Plotting', ndistribution, 'trees for distribution\n')
-  if(ndistribution > max.trees.in.plots){
-    cat('\t Too many trees -- will plot only ', max.trees.in.plots, 'ranked by score..\n')
-
-    ndistribution = max.trees.in.plots
-    distribution = distribution[1:max.trees.in.plots]
-  }
-
-  toMerge = sapply(
-    1:ndistribution,
-    function(x){
-      f = paste(file, x, 'distribution.pdf', sep = '-')
-
-      plot(
-        distribution[[x]],
-        plot.stat = TRUE,
-        graph.cex = cex,
-        table.cex = cex,
-        edge.label = round(MI.table, 2),
-        file = f
-        )
-
-      return(f)
-      })
-  print(toMerge)
-
-  rows = round(length(distribution)/5)
-  cols = ceiling((length(distribution))/rows)
-  cmd = paste('pdfjam ',
-              paste(toMerge, collapse =' '),
-              ' --nup ',  2, 'x', 2,  ' --landscape --outfile ', PATIENT, '-distribution.pdf', sep = '')
-  print(cmd)
-  system(cmd)
-}
 
 consensusModel = function(clonevol.obj, sample.groups)
 {

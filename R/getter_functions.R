@@ -8,6 +8,7 @@
 # G. Caravagna. April 2019
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+
 #' Extract CCF/binary data for a patient
 #'
 #' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
@@ -21,10 +22,10 @@
 #' CCF(CRC.cohort, 'adenoma_3')
 Data = function(x, p)
 {
-  x$dataset[[p]]
-  # if(p %in% names(x$data)) return(x$data[[p]])
-  #
-  # stop('Input does not have data.frame entries for', p)
+  stop_not_revolver_object(x)
+  
+  if(p %in% names(x$dataset)) return(x$dataset[[p]])
+  stop(p, ' does does not have data in the REVOLVER cohort"', x$annotation, '"')
 }
 
 #' Extract CCF/binary driver data for a patient
@@ -38,15 +39,18 @@ Data = function(x, p)
 #' @examples
 #' data(CRC.cohort)
 #' Drivers(CRC.cohort, 'adenoma_3')
-Drivers = function(x, p){
+Drivers = function(x, p) 
+{
+  stop_not_revolver_object(x)
+  
   Data(x, p) %>% filter(is.driver)
 }
 # Drivers = Vectorize(Drivers, vectorize.args = 'p', SIMPLIFY = FALSE)
 
-#' Extract CCF/binary data for truncal mutations of a patient
+#' Extract truncal mutations in a patient
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
+#' @param x A REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
+#' @param p A patient
 #'
 #' @return CCF/binary data for \code{p}'s truncal mutations
 #' @export
@@ -54,7 +58,10 @@ Drivers = function(x, p){
 #' @examples
 #' data(CRC.cohort)
 #' Drivers(CRC.cohort, 'adenoma_3')
-Truncal = function(x, p){
+Truncal = function(x, p)
+{
+  stop_not_revolver_object(x)
+  
   Data(x, p) %>% filter(is.clonal)
 }
 
@@ -69,10 +76,12 @@ Truncal = function(x, p){
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Clonal_cluster(CRC.cohort, 'adenoma_3')
+#' data(TRACERx_cohort)
+#' Clonal_cluster(TRACERx_cohort, 'CRUK0002')
 Clonal_cluster = function(x, p)
 {
+  stop_not_revolver_object(x)
+  
   CCF_clusters(x, p) %>% filter(is.clonal) %>% pull(cluster)
 }
 
@@ -89,7 +98,10 @@ Clonal_cluster = function(x, p)
 #' @examples
 #' data(CRC.cohort)
 #' Subclonal(CRC.cohort, 'adenoma_3')
-Subclonal = function(x, p){
+Subclonal = function(x, p)
+{
+  stop_not_revolver_object(x)
+  
   Data(x, p) %>% filter(!is.clonal)
 }
 
@@ -106,6 +118,8 @@ Subclonal = function(x, p){
 #' CCF(CRC.cohort, 'adenoma_3')
 CCF = function(x, p)
 {
+  stop_not_revolver_object(x)
+  
   nbps = Samples(x,p)
 
   Data(x,p) %>%
@@ -132,6 +146,8 @@ CCF = function(x, p)
 #' Samples(TRACERx_cohort, 'CRUK0001')
 Samples = function(x, p)
 {
+  stop_not_revolver_object(x)
+  
   names(x$CCF_parser(Data(x,p) %>% filter(row_number() == 1) %>% pull(CCF)))
 }
 
@@ -149,6 +165,8 @@ Samples = function(x, p)
 #' CCF_clusters(TRACERx_cohort, 'CRUK0001')
 CCF_clusters = function(x, p)
 {
+  stop_not_revolver_object(x)
+  
   x$CCF[[p]]
 }
 
@@ -176,6 +194,8 @@ CCF_clusters = function(x, p)
 # Phylo(TRACERx_cohort, 'CRUK0002', data = 'fits')
 Phylo = function(x, p, rank = NULL, data = 'trees')
 {
+  stop_not_revolver_object(x)
+  
   if(!has_patient_trees(x, p, rank))
     stop('The requested tree does not exist, aborting.')
 
@@ -221,6 +241,8 @@ Phylo = function(x, p, rank = NULL, data = 'trees')
 #' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
 ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 {
+  stop_not_revolver_object(x)
+  
   if(data ==  'trees')
   {
     tree = Phylo(x, p, rank)
@@ -283,6 +305,8 @@ ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 #' TODO
 Cluster = function(x, patients = x$patients)
 {
+  stop_not_revolver_object(x)
+  
   if(!all(has_clusters(x, patients)))
     stop("There is no cluster information for what you're looking for,  aborting.")
   
@@ -321,6 +345,8 @@ Cluster = function(x, patients = x$patients)
 #' Stats(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats = function(x, patients = x$patients)  {
 
+  stop_not_revolver_object(x)
+  
   st = data.frame(
     patientID = patients,
     stringsAsFactors = FALSE
@@ -382,6 +408,8 @@ Stats_cohort = function(...) { Stats(...) }
 #' Stats_drivers(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_drivers = function(x, drivers = x$variantIDs.driver) {
 
+  stop_not_revolver_object(x)
+  
   st = data.frame(
     variantID = drivers,
     row.names = drivers,
@@ -447,6 +475,8 @@ Stats_drivers = function(x, drivers = x$variantIDs.driver) {
 #' Stats_trees(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_trees = function(x, patients = x$patients) {
   
+  stop_not_revolver_object(x)
+  
   if(
     !has_patient_trees(x) |
     !all(sapply(patients, has_patient_trees, x = x))
@@ -510,6 +540,8 @@ Stats_trees = function(x, patients = x$patients) {
 #' Stats_fits(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
 Stats_fits = function(x, patients = x$patients) {
   
+  stop_not_revolver_object(x)
+  
   if(
     !has_fits(x) |
     !all(sapply(patients, has_fits, x = x))
@@ -524,6 +556,12 @@ Stats_fits = function(x, patients = x$patients) {
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # To test if the object has some consistency internally
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+stop_not_revolver_object = function(x)
+{
+  if(!inherits(x, 'rev_cohort'))
+    stop("Input object is not a REVOLVER cohort, aborting.")
+}
 
 has_patient_trees = function(x, p = NULL, rank = NULL)
 {

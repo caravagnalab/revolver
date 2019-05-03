@@ -24,10 +24,20 @@
 #' @import crayon
 #'
 #' @examples
-#' \dontrun{
-#'  TODO
-#' }
-#'
+#' data(TRACERx_cohort)
+#' 
+#' # We use the standard parameters with overwrite = FALSE
+#' # otherwise the tool returns an error because the required tree
+#' # is already available
+#' TRACERx_cohort = revolver_compute_phylogenies(
+#'    TRACERx_cohort, 
+#'    "CRUK0002", 
+#'    options = list(
+#'       sspace.cutoff = 10000,
+#'       n.sampling = 5000,
+#'       overwrite = TRUE,
+#'       store.max = 100)
+#     )
 revolver_compute_phylogenies = function(
   x,
   patient,
@@ -232,15 +242,14 @@ revolver_compute_phylogenies = function(
 
     return(x)
   }
-
+  
   # Now we create them
-  x$phylogenies[[patient]] = create_trees_in_revolver_format(
-    options,
-    TREES,
-    SCORES,
-    patient,
-    x,
-    samples)
+  x$phylogenies[[patient]] = create_trees_in_revolver_format(options,
+                                                             TREES,
+                                                             SCORES,
+                                                             patient,
+                                                             x,
+                                                             samples)
 
   # Just show how many combinations we have
   comb = combination_of_information_transfer(x, patient)

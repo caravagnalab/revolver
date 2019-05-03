@@ -41,12 +41,6 @@ revolver_phylogeny = function(x,
                               M,
                               score,
                               annotation = paste0("A tree for patient ", patient))
-
-revolver_phylogeny = function(x,
-                              patient,
-                              M,
-                              score,
-                              annotation = paste0("A tree for patient ", patient))
 {
   # This function will create this output object
   obj <-

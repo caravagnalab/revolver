@@ -41,9 +41,9 @@
 #'    
 #' cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
 #'  
-#' # The print for this cohort
+#' # The S3 print/ plot for this cohort
 #' print(cohort)
-#' 
+#' plot(cohort)
 revolver_cohort = function(dataset,
                            CCF_parser = revolver::CCF_parser,
                            options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),

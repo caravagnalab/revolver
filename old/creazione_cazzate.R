@@ -13,4 +13,10 @@ TRACERx_cohort = revolver_cohort(
 
 usethis::use_data(TRACERx_cohort, overwrite = TRUE)
 
-TRACERx_cohort = revolver_compute_phylogenies(TRACERx_cohort, "CRUK0002")
+TRACERx_cohort = revolver_compute_phylogenies(TRACERx_cohort, "CRUK0002", 
+                                              options = list(sspace.cutoff = 10000,
+                                                                n.sampling = 5000,
+                                                                overwrite = TRUE,
+                                                                store.max = 100)
+                                              )
+TRACERx_cohort = revolver_compute_phylogenies(TRACERx_cohort, "CRUK0001")
