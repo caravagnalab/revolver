@@ -40,7 +40,7 @@ TRACERx_data = TRACERx_data \%>\%
    
 cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
  
-# The print for this cohort
+# The S3 print/ plot for this cohort
 print(cohort)
-
+plot(cohort)
 }

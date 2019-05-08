@@ -7,6 +7,7 @@
 #' reflecting the actual DET index value.
 #'
 #' @param x A REVOLVER cohort with fits.
+#' @param cex Cex of the plot.
 #' @param ... Parmeters passed to function \code{DET_index} in order to compute
 #' the index value.
 #'
@@ -17,7 +18,7 @@
 #' @examples
 #' data(Breast.fit)
 #' plot_DET_index(Breast.fit, min.occurrences = 5)
-plot_DET_index = function(x, ...)
+plot_DET_index = function(x, cex = 1, ...)
 {
   index = DET_index(x, ...)
   

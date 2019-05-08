@@ -559,7 +559,9 @@ Stats_fits = function(x, patients = x$patients) {
 
 stop_not_revolver_object = function(x)
 {
-  if(!inherits(x, 'rev_cohort'))
+  pass = any(sapply(c('rev_cohort', 'rev_cohort_fit'), inherits, x = x))
+  
+  if(!pass)
     stop("Input object is not a REVOLVER cohort, aborting.")
 }
 

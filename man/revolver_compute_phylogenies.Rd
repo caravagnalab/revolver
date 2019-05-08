@@ -40,8 +40,17 @@ Create or compute phylogenies for REVOLVER fit from CCF data. This method should
 has already pre-computed trees to use for fitting.
 }
 \examples{
-\dontrun{
- TODO
-}
+data(TRACERx_cohort)
 
+# We use the standard parameters with overwrite = FALSE
+# otherwise the tool returns an error because the required tree
+# is already available
+TRACERx_cohort = revolver_compute_phylogenies(
+   TRACERx_cohort, 
+   "CRUK0002", 
+   options = list(
+      sspace.cutoff = 10000,
+      n.sampling = 5000,
+      overwrite = TRUE,
+      store.max = 100)
 }

@@ -1,15 +1,31 @@
 
 
 
+#' Title
+#'
+#' @param x 
+#' @param cluster_palette 
+#' @param driver_palette 
+#' @param CCF_palette 
+#' @param cutoff_drivers 
+#' @param cutoff_trajectories 
+#' @param arrow.symbol 
+#' @param ... 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plot_clusters = function(x,
-                         cluster_palette = distinct_palette_few,
-                         driver_palette = distinct_palette_many,
+                         cluster_palette = revolver:::distinct_palette_few,
+                         driver_palette = revolver:::distinct_palette_many,
+                         CCF_palette = revolver:::gradient_palette,
                          cutoff_drivers = 10,
                          cutoff_trajectories = 10,
                          arrow.symbol = "-->",
                          ...)
 {
-  features = get_features(x, patients)
+  features = get_features(x, x$patients)
   
   # =-=-=-=-=-=-=-=-
   # We plot two features tibbles (in matrix format for pheatmap):
@@ -22,7 +38,7 @@ plot_clusters = function(x,
   rownames(Matrix_mean_CCF) = features$Matrix_mean_CCF %>% pull(patientID)
   
   # Clonal events, labeled as "x"
-  Matrix_clonal_drivers = data.frame(features$Matrix_clonal_drivers %>% select(-patientID),
+  Matrix_clonal_drivers = data.frame(features$Matrix_clonal_drivers %>% select(-patientID), check.names = F,
                                      stringsAsFactors = FALSE)
   rownames(Matrix_clonal_drivers) = features$Matrix_clonal_drivers %>% pull(patientID)
   
@@ -42,6 +58,7 @@ plot_clusters = function(x,
   
   Matrix_mean_CCF = Matrix_mean_CCF[, drivers_ordering]
   Matrix_clonal_drivers = Matrix_clonal_drivers[, drivers_ordering]
+  Matrix_clonal_drivers = Matrix_clonal_drivers[rownames(Matrix_mean_CCF), ]
   
   # =-=-=-=-=-=-=-=-
   # Annotations for clusters
@@ -136,7 +153,7 @@ plot_clusters = function(x,
   
   All_annotations = Reduce(cbind,
                            list(Clusters, Matrix_trajectories))
-  
+
   All_colors = append(list(`cluster` = Cluster_colors),
                       Trajectory_colors)
   
@@ -144,7 +161,7 @@ plot_clusters = function(x,
     Matrix_mean_CCF,
     display_numbers = Matrix_clonal_drivers,
     number_color = 'orange',
-    color = c("white", scols(1:9, "Blues")),
+    color = c("white", CCF_palette(9)),
     breaks = seq(0, 1.1, 0.1),
     cluster_cols = FALSE,
     cluster_rows = hc,
@@ -163,8 +180,6 @@ plot_clusters = function(x,
     annotation_colors = All_colors,
     main = paste0("REVOLVER clusters for ", x$annotation),
     silent = TRUE
-    
-    
   )
 }
 #

@@ -2,20 +2,20 @@
 % Please edit documentation in R/getter_functions.R
 \name{Truncal}
 \alias{Truncal}
-\title{Extract CCF/binary data for truncal mutations of a patient}
+\title{Extract truncal mutations in a patient}
 \usage{
 Truncal(x, p)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
+\item{x}{A REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
 
-\item{p}{a patient}
+\item{p}{A patient}
 }
 \value{
 CCF/binary data for \code{p}'s truncal mutations
 }
 \description{
-Extract CCF/binary data for truncal mutations of a patient
+Extract truncal mutations in a patient
 }
 \examples{
 data(CRC.cohort)

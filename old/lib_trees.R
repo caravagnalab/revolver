@@ -121,12 +121,6 @@ DFW2Matrix = function(df){
 
 
 
-# Compute the leaves of a model
-leaves = function(model){
-  s = rowSums(model)
-  model = t(model)
-  return(names(s[s==0]))
-}
 
 
 # Compute the frontier of "var" in a model. The frontier is the set of

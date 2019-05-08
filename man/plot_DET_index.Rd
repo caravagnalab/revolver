@@ -4,10 +4,12 @@
 \alias{plot_DET_index}
 \title{Plot the DET index.}
 \usage{
-plot_DET_index(x, ...)
+plot_DET_index(x, cex = 1, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort with fits.}
+
+\item{cex}{Cex of the plot.}
 
 \item{...}{Parmeters passed to function \code{DET_index} in order to compute
 the index value.}

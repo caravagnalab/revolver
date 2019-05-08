@@ -18,6 +18,6 @@ The id of the clonal cluster for \code{p}
 Return the id of the clonal cluster for this patient
 }
 \examples{
-data(CRC.cohort)
-Clonal_cluster(CRC.cohort, 'adenoma_3')
+data(TRACERx_cohort)
+Clonal_cluster(TRACERx_cohort, 'CRUK0002')
 }

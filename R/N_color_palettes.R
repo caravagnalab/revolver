@@ -11,3 +11,6 @@ distinct_palette_many = function(n) {
   colorRampPalette(unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))) (n)
 }
 
+
+# .....
+gradient_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "YlGnBu"))

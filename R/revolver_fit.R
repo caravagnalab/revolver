@@ -125,6 +125,8 @@ revolver_fit = function(x,
       run_score = median(results[[w]]$fit$fit_table$penalty)
 
       pio::pioStr(paste0("Solution #", w), run_score, suffix = '\n')
+      
+      run_score
       })
 
     best = which.max(scores)

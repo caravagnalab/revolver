@@ -168,3 +168,11 @@ pi = function(model, variable)
   else return(NULL)
   return(names(model))
 }
+
+# Compute the leaves of a model
+leaves = function(model){
+  s = rowSums(model)
+  model = t(model)
+  return(names(s[s==0]))
+}
+
