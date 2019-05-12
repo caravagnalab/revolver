@@ -152,21 +152,4 @@ DFW2Matrix = function(df){
 
 
 
-# Given a Data Frame representation of a model, compute the set of
-# nodes reachable from x
-reach = function(df, x)
-{
-  if(!any(df$from == x)) return(NULL)
-
-  dfB = df[ df$from == x, , drop = F]
-  r = dfB$to
-
-  # print(dfB)
-  for(i in 1:length(r))
-  {
-    r = c(r, reach(df, r[i]))
-  }
-
-  return(r)
-}
 

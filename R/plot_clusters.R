@@ -96,6 +96,10 @@ plot_clusters = function(x,
   
   Matrix_trajectories = Matrix_trajectories[, names(counts_trajectories)]
   
+  if(nrow(Matrix_clonal_drivers) == 0) stop(
+    "Cutoff for drivers", cutoff_drivers, "too stringent, decrease it."
+  )
+  
   # The colour of the trajectories depends on the destination drivers
   to = strsplit(colnames(Matrix_trajectories), split = ' --> ')
   to = sapply(to, function(w)
