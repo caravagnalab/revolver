@@ -1,0 +1,169 @@
+---
+title: "Getter functions"
+author: "Giulio Caravagna"
+institute: "Institute for Cancer Research"
+date: "May 1, 2019"
+email: "giulio.caravagna@ed.ac.uk"
+output:
+  github_document:
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# and disable crayon's coloured output that renders badly in HTML,
+# as well as REVOLVER's progress bars...
+
+options(crayon.enabled = FALSE)
+options(revolver.progressBar = FALSE)
+
+library(tidyverse)
+
+```
+
+```{r, echo = TRUE, warning=FALSE}
+# Load REVOLVER 
+library(revolver)
+```
+
+In this vignette we make use of one of the cohort objects released with the tool.
+```{r, echo = TRUE, warning=FALSE}
+# Data from the TRACERx cohort 
+load("Cohort.RData") 
+
+# We can use S3 object functions to retrieve simple information about the plot.
+# The `print` functions runs also the `revolver_check_cohort` function which 
+# tells us that some patient have only 1 clone with drivers, and therefore they
+# can just be expanded.
+cohort
+```
+
+# Access patient-level data
+
+**Note** Since the new release of REVOLVER, we have implemented the internal structure
+of the objects using the tidy data.frame representations from [tidyverse](https://www.tidyverse.org/). Most functions now return `tibble` data.frames that can be processed with the `dplyr` jargon.
+
+
+### Getters 
+
+We have made available several types of getters to perform queries on the data. 
+Getter functions for the data have a common parametrization; for instance 
+getter function`Drivers` takes as input
+
+* `x` a REVOLVER cohort object;
+* `patients` a list of patients IDs that will be used to subset the outputs (all by default);
+
+```{r, echo = TRUE, warning=FALSE}
+# Access all data for a patient
+Data(cohort, 'CRUK0001')
+
+# Access only the drivers for a patient
+Drivers(cohort, 'CRUK0001')
+
+# Access the names of the samples for a patient
+Samples(cohort, 'CRUK0001')
+
+# Get the list of truncal (i.e., clonal) mutations in a patient
+Truncal(cohort, 'CRUK0001')
+
+# Get the list of subclonal mutations in a patient
+Subclonal(cohort, 'CRUK0001')
+
+# Return the CCF entry for all the mutations of a patient,
+CCF(cohort, 'CRUK0001')
+
+# Return the CCF entry for all the clones of a patient, the overall CCF
+# values are obtained by REVOLVER from the average of CCF values across clones.
+CCF_clusters(cohort, 'CRUK0001')
+```
+
+### Summary statistics for patients' data
+
+You can get a broad set of summary statistics about the `cohort` for a custom set of patients. The statistcs that are available in summarised format are patient-level (mutatational burdern, drivers etc.), and driver-level (frequency, clonality etc.). 
+
+```{r, echo = TRUE, warning=FALSE}
+# This returns patient-level statistics like the number of biopsies, overall mutations, drivers,
+# clones with drivers, truncal and subclonal mutations.
+# 
+# This is also synonim to `Stats(cohort)`
+Stats_cohort(cohort)
+
+
+# This returns driver-level statistics like the number of times the driver is clonal,
+# subclonal, or found in general, and for quantity normalized by cohort size (i.e., the percentage)
+Stats_drivers(cohort)
+```
+
+The list of all patients in the cohort is accessible as `cohort$patients`, and these functions can be run on a smaller subset of patients.
+
+```{r, echo = TRUE, warning=FALSE}
+Stats_cohort(cohort, patients = cohort$patients[1:5])
+```
+
+
+# Access the trees in the cohort
+
+Trees have getters similar to the data, and getters distinguish from trees before and after the fit.
+
+**Note** The tree fits might be slightly different from the trees before the fit, because their Informatin Transfer is not expanded. Therefore keep this in mind when comparing trees.
+
+## Getters
+
+You can to extract the tree of a patient, before its fit. This can be one specific tree, or all of them at once. Trees before the fit are indexed by their rank, which is obtained from the ordering of the tree scores, which are obtained by the evaluated tree structure before the fit. 
+
+These getters, for instance `Phylo`, take as parameter
+
+* `x` the cohort object;
+* `p` the patient identifier;
+* `rank` the rank of the tree to extract;
+* `data` to decide whether one wants the trees before the fit (`trees`), or the actual fit tree `fits`.
+
+By logic, if you are asking for the fit trees (`data = 'fits'`), the `rank` parameter is not considered (because there is only 1 tree fit by REVOLVER). 
+
+```{r, echo = TRUE, warning=FALSE}
+# Access the top-rank tree for a patient
+Phylo(cohort, 'CRUK0001', rank = 1)
+
+# Access all trees for a patient. We use CRUK0002 because it has only 3 trees
+Phylo(cohort, 'CRUK0002', rank = NULL)
+```
+
+Notice that in the printing of a tree to screen you can immediately see  the Information Transfer (IT) for the driver genes. In general, you can access the IT of a tree with another getter, which takes as extra parameter `type` in order to return either the transfer across drivers, or across clones annotated in a tree.
+
+```{r, echo = TRUE, warning=FALSE}
+# Information Transfer for the drivers, top-ranking tree
+ITransfer(cohort, "CRUK0001", rank = 1, type = 'drivers')
+
+# Information Transfer for the clones, top-ranking tree
+ITransfer(cohort, "CRUK0001", rank = 1, type = 'clones')
+```
+
+Fit trees can be accessed using the `data` argument. Essentially this is like before, but does not require specifying a `rank` parameter.
+
+```{r, echo = TRUE, warning=FALSE}
+# Access the fit tree for a patient
+Phylo(cohort, 'CRUK0001', data = 'fits')
+
+# Information Transfer for the drivers, top-ranking tree. Notice that this is different
+# from the result of the above call, because the transfer after fitting is expanded
+ITransfer(cohort, "CRUK0001", rank = 1, type = 'drivers', data = 'fits')
+```
+
+### Summary statistics for trees and fits
+
+There are getters for summary statistics that work for trees and fits, with the same principles fo the getters for the data discussed above
+
+```{r, echo = TRUE, warning=FALSE}
+# This returns patient-level statistics for the trees available in a patient. The tibble reports
+# whether the patient has trees annotated, the total number of trees, their minimum and maximum
+# scores mutations and the total number of differnet combinations of Information Transfer for 
+# the available trees.
+Stats_trees(cohort)
+
+# This returns the same table of above, but with some extended information on the fits (like the fit rank, etc)
+# Stats_fits(cohort)
+```
+

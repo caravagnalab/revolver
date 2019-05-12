@@ -1,6 +1,6 @@
 Package: revolver
-Version: 0.2.1
-Date: 2018-12-7
+Version: 0.3.0
+Date: 2019-5-1
 Title: Repeated Evolution in Cancer (REVOLVER)
 Type: Package
 Author: Giulio Caravagna
@@ -18,37 +18,28 @@ Depends:
     R (>= 3.4),
 Imports: 
     crayon,
-    parallel,
-    doParallel,
+    easypar,
     cluster,
     dendextend,
     dynamicTreeCut,
     vegan,
     igraph,
-    foreach,
-    purrr,
+    tidyverse,
+    tidygraph,
+    ggraph,
+    ggpubr,
+    ggrepel,
     pio,
-    grDevices,
-    graphics,
-    stats,
-    qualvar,
-    writexl,
-    utils,
-    methods
-Remotes: caravagn/pio
-RoxygenNote: 6.1.0
+    RColorBrewer,
+    pheatmap,
+    foreach,
+    doParallel
+Remotes: 
+    caravagn/pio,
+    caravagn/easypar
+RoxygenNote: 6.1.1
 Suggests: 
     knitr,
     rmarkdown,
-    RColorBrewer,
-    R.utils,
-    entropy,
-    ggplot2,
-    gridExtra,
     matrixStats,
-    matrixcalc,
-    nem,
-    pheatmap,
-    tibble,
-    grid
 VignetteBuilder: knitr
