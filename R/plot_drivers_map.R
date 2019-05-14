@@ -1,24 +1,24 @@
-plot_drivers_map = function(x)
+plot_drivers_map = function(x, cex = 1)
 {
-  # Get drivers, mirrored 
+  # Get drivers, mirrored
   st = Stats_drivers(x) %>%
     arrange(desc(numClonal), desc(numSubclonal))
-  
-  order_drivers = st$variantID 
+
+  order_drivers = st$variantID
   st$numSubclonal = - st$numSubclonal
-  
+
   st = st %>%
-    select(variantID, numClonal, numSubclonal) %>% 
+    select(variantID, numClonal, numSubclonal) %>%
     rename(Clonal = numClonal, Subclonal = numSubclonal) %>%
-    reshape2::melt(id = 'variantID') 
-  
+    reshape2::melt(id = 'variantID')
+
   st$variantID = factor(st$variantID, levels = order_drivers)
-  
+
   # Percentages
   N = length(x$patients)
-  
+
   ggplot(st,
-         aes(x = variantID, 
+         aes(x = variantID,
              y = value,
              fill = variable)) +
     geom_bar(stat="identity", position="identity") +
@@ -37,5 +37,5 @@ plot_drivers_map = function(x)
     ) +
     guides(
       fill = guide_legend("")
-    ) 
+    )
 }
