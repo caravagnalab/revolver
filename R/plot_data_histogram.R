@@ -37,7 +37,8 @@ plot_data_histogram = function(x,
 
   ncluster = length(unique(Cluster_values$value))
 
-   ggplot(CCF_values, aes(value)) +
+   ggplot(CCF_values %>%
+            filter(value > 0), aes(value)) +
      geom_histogram(binwidth = 0.01) +
      facet_wrap(~variable) +
      theme_minimal(base_size = 10 * cex) +

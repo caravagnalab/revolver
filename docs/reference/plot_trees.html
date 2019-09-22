@@ -8,11 +8,13 @@
 
 <title>Plot REVOLVER trees for a patient — plot_trees • revolver</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,8 +32,8 @@
 
 
 
-<meta property="og:title" content="Plot REVOLVER trees for a patient — plot_trees" />
 
+<meta property="og:title" content="Plot REVOLVER trees for a patient — plot_trees" />
 <meta property="og:description" content="This function is like plot_data, as it uses base plotting
 functions to assemble a summary plot for a patient. This function
 assembled the plot via ggpubr. The first line of plots
@@ -41,6 +43,7 @@ as they are obtained from the standard tree-scoring (which means
 that the score is not accounting for the actual transfer, but just
 for the tree structure)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -86,7 +89,6 @@ for the tree structure)." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -107,7 +109,6 @@ for the tree structure)." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function is like <code>plot_data</code>, as it uses base plotting
 functions to assemble a summary plot for a patient. This function
 assembled the plot via <code>ggpubr</code>. The first line of plots
@@ -116,11 +117,10 @@ The strip below represents up to the top-10 trees for this patient,
 as they are obtained from the standard tree-scoring (which means
 that the score is not accounting for the actual transfer, but just
 for the tree structure).</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>plot_trees</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -137,22 +137,27 @@ for the tree structure).</p>
       <td><p>Extra parameters, not used.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A figure assembled with <code>ggpubr</code>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>TODO</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'TODO' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+
+<span class='co'># This returns a figure assembled with ggpubr </span>
+<span class='fu'>plot_trees</span>(<span class='no'>TRACERx_cohort</span>, <span class='kw'>patient</span> <span class='kw'>=</span> <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggpubr</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘magrittr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:purrr’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    set_names</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:tidyr’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    extract</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Duplicated aesthetics after name standardisation: na.rm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_trees-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
