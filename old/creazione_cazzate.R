@@ -23,6 +23,8 @@ TRACERx_cohort = revolver_compute_phylogenies(TRACERx_cohort, "CRUK0001")
 
 load('data_old/CRC.RData')
 
+library(revolver)
+
 CRC_cohort = revolver_cohort(
   CRC %>% as_tibble() %>% mutate(cluster = paste(cluster)),
   CCF_parser = revolver::CCF_parser,

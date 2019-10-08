@@ -2,12 +2,13 @@
 % Please edit documentation in R/CCF_parser.R
 \name{CCF_parser}
 \alias{CCF_parser}
-\title{Builtin CCF parser function.}
+\title{Builtin parser function for the `CCF` input field.}
 \usage{
 CCF_parser(x)
 }
 \arguments{
-\item{x}{The string to parse, the accepted format for this functio is something like "R1:0.1;R2:0.4;R3:0.9".}
+\item{x}{The string to parse, the accepted format for this function
+is something like "R1:0.1;R2:0.4;R3:0.9".}
 }
 \value{
 A parsed named vector.

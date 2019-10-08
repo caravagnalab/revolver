@@ -32,6 +32,7 @@ Imports:
     pio,
     RColorBrewer,
     pheatmap,
+    clisymbols
 Remotes: 
     caravagn/pio,
     caravagn/easypar

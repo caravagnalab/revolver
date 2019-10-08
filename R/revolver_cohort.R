@@ -4,14 +4,11 @@
 #' @param CCF_parser A function to parse the format for the encoding of CCF
 #' or binary values for each sequenced region. A possible function is available
 #' inside REVOLVER; \code{revolver::CCF_parser} (the default of this parameter).
-#' @param options A list of 2 parameters that should be a boolean value for
-#' \code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.
-#' @param annotation String for annotation of this cohort. This will be prompted
-#'                   in every print for this object.
+#' @param ONLY.DRIVER If true, uses only annotated driver events.
+#' @param MIN.CLUSTER.SIZE Discard clusters that have less than this number of entries.
+#' @param annotation Brief cohort description.
 #'
-#' @return An object of class \code{"rev_cohort"}
-#'
-#' @aliases revolver_cohort
+#' @return An object of class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
 #'
 #' @examples
 #' data(CRC)
@@ -29,6 +26,7 @@
 #' @import igraph
 #' @import ggpubr
 #' @import ggrepel
+#' @import clisymbols
 #'
 #' @export revolver_cohort
 #' @examples
@@ -46,18 +44,21 @@
 #' plot(cohort)
 revolver_cohort = function(dataset,
                            CCF_parser = revolver::CCF_parser,
-                           options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
+                           ONLY.DRIVER = FALSE, 
+                           MIN.CLUSTER.SIZE = 10,
                            annotation = 'My REVOLVER dataset')
 {
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   # Some header print and the output object are created, before checking for input consistency
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   
+  options = list(ONLY.DRIVER = ONLY.DRIVER, MIN.CLUSTER.SIZE = MIN.CLUSTER.SIZE)
+  
   pio::pioHdr(
     paste('REVOLVER Cohort constructor'),
     toPrint = c(
-      ` Use only drivers` = as.logical(options$ONLY.DRIVER),
-      `Min. cluster size` = options$MIN.CLUSTER.SIZE
+      ` Use only drivers` = ifelse(options$ONLY.DRIVER == 0, TRUE, FALSE),
+      `Reject clusters with size below` = options$MIN.CLUSTER.SIZE
     ),
     prefix = paste0(clisymbols::symbol$radio_on, ' ')
   )
@@ -88,8 +89,7 @@ revolver_cohort = function(dataset,
   # Input data is subset according to the options parameter
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   if (options$ONLY.DRIVER)
-    dataset = dataset %>%
-    filter(is.driver)
+    dataset = dataset %>% filter(is.driver)
   
   # by cluster size
   grp = dataset %>%

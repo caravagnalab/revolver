@@ -15,23 +15,23 @@
 #'
 #' @examples
 #' TODO
-plot_data = function(x, patient, ...)
+plot_patient_data = function(x, patient, ...)
 {
   require(ggpubr)
   
   # first panel
   first = ggarrange(
-    plot_data_clusters(x, patient, ...),
-    plot_data_clone_size(x, patient, ...),
-    plot_data_mutation_burden(x, patient, ...),
+    plot_CCF_clusters(Phylo(x, patient, rank = 1)),
+    plot_clone_size(Phylo(x, patient, rank = 1)),
+    plot_patient_mutation_burden(x, patient),
     nrow = 1,
     ncol = 3
   )
 
   # second panel
   second = ggarrange(
-    plot_data_oncoprint(x, patient, ...),
-    plot_data_histogram(x, patient, ...),
+    plot_patient_oncoprint(x, patient, ...),
+    plot_CCF_histogram(x, patient, ...),
     ncol = 2,
     nrow = 1,
     widths = c(1, .3)

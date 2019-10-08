@@ -1,17 +1,3 @@
-revolver_version = function()
-{
-  REVOLVER_VERSION_NUMBER = "1.0"
-  REVOLVER_VERSION_CODNAME = "\"Haggis and tatties\""
-
-  REVOLVER_VERSION = paste(REVOLVER_VERSION_NUMBER, REVOLVER_VERSION_CODNAME, sep = ' ~ ')
-
-  REVOLVER_AUTHOR = "\"Giulio Caravagna (ICR, UK) <giulio.caravagna@icr.ac.uk>\""
-
-  list(REVOLVER_VERSION = REVOLVER_VERSION, REVOLVER_AUTHOR = REVOLVER_AUTHOR, REVOLVER_VERSION_NUMBER = REVOLVER_VERSION_NUMBER, REVOLVER_VERSION_CODNAME = REVOLVER_VERSION_CODNAME)
-}
-
-
-
 
 ####### Functions to check if the objetc has what it should
 obj_has_clusters = function(x)

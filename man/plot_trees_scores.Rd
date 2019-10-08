@@ -4,13 +4,11 @@
 \alias{plot_trees_scores}
 \title{Plot a barplot of the scored trees for a patient.}
 \usage{
-plot_trees_scores(x, patients = x$patients,
-  transfer_palette = distinct_palette_few, cex = 1, ...)
+plot_trees_scores(x, patient, transfer_palette = distinct_palette_few,
+  cex = 1, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort object}
-
-\item{patients}{The plots}
 
 \item{transfer_palette}{A function that can be used to sample
 an arbitrary number of colours to identify the transfers.}
@@ -18,6 +16,8 @@ an arbitrary number of colours to identify the transfers.}
 \item{cex}{Cex of the plot.}
 
 \item{...}{Extra parameters, unused.}
+
+\item{patients}{The plots}
 }
 \value{
 A \code{ggplot} plot.

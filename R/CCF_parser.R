@@ -1,5 +1,5 @@
 
-#' Builtin CCF parser function.
+#' Builtin parser function for the `CCF` input field.
 #' 
 #' @description This function can parse a string
 #' in the format `R1:0.1;R2:0.4;R3:0.9` to extract
@@ -12,7 +12,8 @@
 #' the types of the parsed entries, and will therefore
 #' return strings.
 #' 
-#' @param x The string to parse, the accepted format for this functio is something like "R1:0.1;R2:0.4;R3:0.9".
+#' @param x The string to parse, the accepted format for this function
+#' is something like "R1:0.1;R2:0.4;R3:0.9".
 #'
 #' @return A parsed named vector.
 #' 

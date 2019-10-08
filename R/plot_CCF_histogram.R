@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' TODO
-plot_data_histogram = function(x,
+plot_CCF_histogram = function(x,
                                patient,
                                cex = 1,
                                ...)

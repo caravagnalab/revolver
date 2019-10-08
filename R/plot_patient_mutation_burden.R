@@ -16,10 +16,10 @@
 #'
 #' @examples
 #' TODO
-plot_data_mutation_burden = function(x, patient, cex = 1, ...)
+plot_patient_mutation_burden = function(x, patient, ...)
 {
   p = patient
-  
+  cex = 1
   st = Stats(x)
   
   # Clonal Subclonal
@@ -49,11 +49,6 @@ plot_data_mutation_burden = function(x, patient, cex = 1, ...)
     ) +
     coord_cartesian(clip = 'off') +
     scale_color_gradient(low = 'steelblue', high = 'darkred') +
-    theme_minimal(base_size = 10 * cex) +
-    theme(
-      legend.position = 'bottom',
-      legend.key.size = unit(3, 'mm')
-    ) +
     labs(
       title = paste("Mutational burden for ", patient),
       x = "Clonal burden",
@@ -68,5 +63,7 @@ plot_data_mutation_burden = function(x, patient, cex = 1, ...)
     guides(
       color = guide_colourbar("Drivers", barwidth = 6),
       shape = guide_legend("Clones with drivers")
-    )
+    ) +
+    my_ggplot_theme()
+    
 }

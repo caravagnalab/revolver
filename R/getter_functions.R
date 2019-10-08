@@ -5,7 +5,7 @@
 # introduced along with a new implementation of the internal REVOLVER
 # structure which is based on tibbles and the tidy paradigm.
 #
-# G. Caravagna. April 2019
+# G. Caravagna. October 2019
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
@@ -169,8 +169,6 @@ CCF_clusters = function(x, p)
   
   x$CCF[[p]]
 }
-
-
 
 #' Extract phylogenetic or mutation trees for a patient
 #'
@@ -564,6 +562,16 @@ stop_not_revolver_object = function(x)
   if(!pass)
     stop("Input object is not a REVOLVER cohort, aborting.")
 }
+
+stop_invalid_patient = function(x, p)
+{
+  pass = p %in% x$patients
+  
+  if(!pass)
+    stop("Patient", p, "does not exist in this REVOLVER cohort, aborting.")
+}
+
+
 
 has_patient_trees = function(x, p = NULL, rank = NULL)
 {

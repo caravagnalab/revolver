@@ -1,4 +1,4 @@
-#' Plot REVOLVER trees for a patient
+#' Plot REVOLVER trees for a patient.
 #'
 #' @description
 #'
@@ -32,18 +32,16 @@ plot_trees = function(x, patient, ...)
   require(ggpubr)
   
   if(!has_patient_trees(x, patient))
-    stop(patient, " does not have the patient trees.")
+    stop(patient, " does not have the patient trees, aborting.")
   
   # =-=-=-=-=-=-=-=-
   # Top panel: top-ranking tree and its information transfer
   # =-=-=-=-=-=-=-=-
-  
-  top_tree = plot(Phylo(x, patient, rank = 1))
-  top_tree_IT = plot(Phylo(x, patient, rank = 1), information_transfer = TRUE)
-  
+  top_tree = Phylo(x, patient, rank = 1)
+
   first = ggarrange(
-    top_tree,
-    top_tree_IT,
+    top_tree %>% plot,
+    top_tree %>% plot_information_transfer,
     ncol = 2, 
     nrow = 1
   )
@@ -59,10 +57,13 @@ plot_trees = function(x, patient, ...)
   
   # Strip plot
   strip = lapply(1:ntrees, Phylo, x = x, p = patient)
+  strip = lapply(strip, plot_icon)
+  
+  scores = plot_trees_scores(x, patient)
   
   strip = ggarrange(
-    plotlist = lapply(strip, plot, icon = TRUE), 
-    nrow = 1, ncol = 10)
+    plotlist = append(strip, list(scores)), 
+    nrow = 1, ncol = 11)
   
   second = annotate_figure(
     strip,

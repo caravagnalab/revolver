@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
 # and disable crayon's coloured output that renders badly in HTML,
 # as well as REVOLVER's progress bars...
 
-options(crayon.enabled = FALSE)
 options(revolver.progressBar = FALSE)
 
 library(tidyverse)

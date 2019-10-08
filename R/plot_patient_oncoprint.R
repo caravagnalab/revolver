@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' TODO
-plot_data_oncoprint = function(x,
+plot_patient_oncoprint = function(x,
                      patient,
                      clusters_palette = revolver:::distinct_palette_many,
                      ...)
