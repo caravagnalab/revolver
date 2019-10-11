@@ -44,7 +44,6 @@ Remotes:
     caravagn/easypar,
     caravagn/ctree,
     carvaagn/evoverse.datasets
-
 RoxygenNote: 6.1.1
 Suggests: 
     knitr,
