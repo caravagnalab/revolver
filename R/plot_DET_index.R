@@ -1,4 +1,4 @@
-#' Plot the DET index.
+#' Plot the index of Divergent Evolutionary Trajectories.
 #'
 #' @description
 #' Plot the index of Divergent Evolutionary Trajectories, for a set of drivers
@@ -11,28 +11,28 @@
 #' the index value.
 #'
 #' @return A `ggplot` object of the plot.
-#' 
+#'
 #' @family Plotting functions
-#' 
+#'
 #' @export
 #'
 #' @examples
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
-#' 
+#'
 #' plot_DET_index(TRACERx_NEJM_2017_REVOLVER)
-#' 
+#'
 #' # Passing parameters to DET_index
 #' plot_DET_index(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
 plot_DET_index = function(x,  ...)
 {
   index = DET_index(x, ...)
   cex = 1
-  
+
   print(index)
-  
+
   index$driver = factor(index$driver, levels = index$driver)
-  
+
   ggplot(index,
          aes(x = driver, y = DET_index, fill = N)
          )+

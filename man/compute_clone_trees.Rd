@@ -18,11 +18,11 @@ phylogeneis for the required \code{patients}.}
 }
 \description{
 Create clone tree phylogenies from the package
-\code{ctree}, fitting the input data given to \code{REVOLVER}. 
+\code{ctree}, fitting the input data given to \code{REVOLVER}.
 A set of patient ids can be given as input, by default all are
 used. A parmeter controls if you want to overwrite the trees
 of the patient, where they already computed. Please refer to the
-parameters of the \code{ctrees} constructor rom package \code{ctree} 
+parameters of the \code{ctrees} constructor rom package \code{ctree}
 for the input parameters that you can use to tune the construction.
 }
 \examples{
@@ -34,14 +34,15 @@ print(TRACERx_NEJM_2017_REVOLVER)
 # We use the standard parameters with overwrite = TRUE
 # otherwise the computation skips the patient
 TRACERx_NEJM_2017_REVOLVER = compute_clone_trees(
-   TRACERx_NEJM_2017_REVOLVER, 
+   TRACERx_NEJM_2017_REVOLVER,
    patients = "CRUK0002",
    overwrite = TRUE)
-    
+
 Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1)
 }
 \seealso{
 Other Cohort creation: \code{\link{CCF_parser}},
+  \code{\link{input_custom_trees}},
   \code{\link{revolver_cohort}}
 }
 \concept{Cohort creation}

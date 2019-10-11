@@ -26,7 +26,7 @@ and 4) \code{plot_patient_oncoprint}.
 \examples{
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
- 
+
 plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
 plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
@@ -34,13 +34,13 @@ plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 Other Plotting functions: \code{\link{distinct_palette_few}},
   \code{\link{distinct_palette_many}},
   \code{\link{gradient_palette}},
-  \code{\link{plot_CCF_histogram}},
   \code{\link{plot_DET_index}},
   \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_graph}},
   \code{\link{plot_drivers_occurrence}},
-  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_CCF_histogram}},
   \code{\link{plot_patient_mutation_burden}},
   \code{\link{plot_patient_oncoprint}},
-  \code{\link{plot_trees_scores}}
+  \code{\link{plot_patient_trees_scores}}
 }
 \concept{Plotting functions}

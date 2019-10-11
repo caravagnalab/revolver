@@ -21,17 +21,17 @@ Phylogenetic or mutation trees data for the patient.
 }
 \description{
 From a cohort object, this function extracts the tree
-objects that are available for a patient. Parameters 
+objects that are available for a patient. Parameters
 can be set to retrieve a particular tree, or the fit
 tree which is however availble only after fitting the
-cohort data. This function can either return a 
-phylogenetic clone tree (R object \code{ctree}), or mutation 
+cohort data. This function can either return a
+phylogenetic clone tree (R object \code{ctree}), or mutation
 trees  (R object \code{btree}).
 }
 \examples{
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
- 
+
 # Get all the trees for a patient
 Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 
@@ -44,6 +44,7 @@ Other Getters: \code{\link{CCF_clusters}},
   \code{\link{CCF}}, \code{\link{Clonal_cluster}},
   \code{\link{Data}}, \code{\link{Drivers}},
   \code{\link{ITransfer}}, \code{\link{Samples}},
-  \code{\link{Subclonal}}, \code{\link{Truncal}}
+  \code{\link{Subclonal}}, \code{\link{Truncal}},
+  \code{\link{get_features}}
 }
 \concept{Getters}

@@ -23,12 +23,12 @@ The information transfer for the tree of a patient
 }
 \description{
 From a cohort object, this function extracts the tree
-objects that are available for a patient. Parameters 
+objects that are available for a patient. Parameters
 can be set to retrieve a particular tree, or the fit
 tree which is however availble only after fitting the
-cohort data. This function can either return a 
-phylogenetic clone tree (R object \code{ctree}), or mutation 
-trees  (R object \code{btree}). Besides, it can return 
+cohort data. This function can either return a
+phylogenetic clone tree (R object \code{ctree}), or mutation
+trees  (R object \code{btree}). Besides, it can return
 the information transfer as the ordering of the annotated
 drivers, or in terms o the ordering of the clones these
 map to.
@@ -36,7 +36,7 @@ map to.
 \examples{
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
- 
+
 # Get the transfer among drivers, top-ranking tree
 ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers')
 
@@ -52,6 +52,7 @@ Other Getters: \code{\link{CCF_clusters}},
   \code{\link{CCF}}, \code{\link{Clonal_cluster}},
   \code{\link{Data}}, \code{\link{Drivers}},
   \code{\link{Phylo}}, \code{\link{Samples}},
-  \code{\link{Subclonal}}, \code{\link{Truncal}}
+  \code{\link{Subclonal}}, \code{\link{Truncal}},
+  \code{\link{get_features}}
 }
 \concept{Getters}

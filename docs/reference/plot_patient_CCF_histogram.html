@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Subset the drivers in the cohort to match the input list. — revolver_subsetDrivers • revolver</title>
+<title>Plot the data histogram for a patient. — plot_patient_CCF_histogram • revolver</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Subset the drivers in the cohort to match the input list. — revolver_subsetDrivers" />
-<meta property="og:description" content="Subset the drivers in the cohort to match the input list." />
+<meta property="og:title" content="Plot the data histogram for a patient. — plot_patient_CCF_histogram" />
+<meta property="og:description" content="If this cohort is working with CCF data, this function plots
+the CCF histogram of each one of the samples available for
+a patient, facetting the sample variable.
+Otherwise, this plot does not make much sense." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,44 +103,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Subset the drivers in the cohort to match the input list.</h1>
+    <h1>Plot the data histogram for a patient.</h1>
     
-    <div class="hidden name"><code>revolver_subsetDrivers.Rd</code></div>
+    <div class="hidden name"><code>plot_patient_CCF_histogram.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Subset the drivers in the cohort to match the input list.</p>
+    <p>If this cohort is working with CCF data, this function plots
+the CCF histogram of each one of the samples available for
+a patient, facetting the sample variable.</p>
+<p>Otherwise, this plot does not make much sense.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revolver_subsetDrivers</span>(<span class='no'>cohort</span>, <span class='no'>list</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_patient_CCF_histogram</span>(<span class='no'>x</span>, <span class='no'>patient</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cohort</th>
-      <td><p>An object of class <code>"rev_cohort"</code></p></td>
+      <th>x</th>
+      <td><p>A REVOLVER cohort object.</p></td>
     </tr>
     <tr>
-      <th>list</th>
-      <td><p>A vector of driver IDs to subset the data to.</p></td>
+      <th>patient</th>
+      <td><p>The id of a patient.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A REVOLVER cohort with only drivers in <code>list</code>.</p>
+    <p>A <code>ggplot</code> plot.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Plotting functions: <code><a href='distinct_palette_few.html'>distinct_palette_few</a></code>,
+  <code><a href='distinct_palette_many.html'>distinct_palette_many</a></code>,
+  <code><a href='gradient_palette.html'>gradient_palette</a></code>,
+  <code><a href='plot_DET_index.html'>plot_DET_index</a></code>,
+  <code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a></code>,
+  <code><a href='plot_drivers_graph.html'>plot_drivers_graph</a></code>,
+  <code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a></code>,
+  <code><a href='plot_patient_data.html'>plot_patient_data</a></code>,
+  <code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a></code>,
+  <code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a></code>,
+  <code><a href='plot_patient_trees_scores.html'>plot_patient_trees_scores</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>CRC.cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘CRC.cohort’ not found</span></div><div class='input'><span class='fu'>revolver_subsetDrivers</span>(<span class='no'>CRC.cohort</span>, <span class='st'>'APC'</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER subsetting drivers according to list ] 
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>	 -Drivers to keep</span><span> APC </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span></div><div class='output co'>#&gt; <span class='error'>Error in clonal.subclonal.table(cohort): could not find function "clonal.subclonal.table"</span></div></span></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>plot_patient_CCF_histogram</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0001'</span>)</div><div class='img'><img src='plot_patient_CCF_histogram-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot_patient_CCF_histogram</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='img'><img src='plot_patient_CCF_histogram-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -33,13 +33,13 @@ plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 Other Plotting functions: \code{\link{distinct_palette_few}},
   \code{\link{distinct_palette_many}},
   \code{\link{gradient_palette}},
-  \code{\link{plot_CCF_histogram}},
   \code{\link{plot_DET_index}},
   \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_graph}},
   \code{\link{plot_drivers_occurrence}},
-  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_CCF_histogram}},
   \code{\link{plot_patient_data}},
   \code{\link{plot_patient_mutation_burden}},
-  \code{\link{plot_trees_scores}}
+  \code{\link{plot_patient_trees_scores}}
 }
 \concept{Plotting functions}

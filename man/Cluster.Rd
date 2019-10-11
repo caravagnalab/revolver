@@ -2,7 +2,7 @@
 % Please edit documentation in R/getter_functions.R
 \name{Cluster}
 \alias{Cluster}
-\title{Get clustering information for patients.}
+\title{Get REVOLVER clusters information for this cohort}
 \usage{
 Cluster(x, patients = x$patients)
 }
@@ -15,9 +15,15 @@ Cluster(x, patients = x$patients)
 A tibble with the required clustering assignments
 }
 \description{
-For a set of `patients` - all by default - 
-extract the clustering information computed by REVOVLER.
+For a set of `patients` - all by default - extract the clustering information
+computed by REVOVLER. The result is just a tibble with a column representing
+the patient id, and a column with the cluster label.
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+Cluster(TRACERx_NEJM_2017_REVOLVER)
+
+#' Cluster(TRACERx_NEJM_2017_REVOLVER, patients = c("CRUK0001", "CRUK0002"))
 }

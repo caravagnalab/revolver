@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Subset the drivers in the cohort to match the input list. — revolver_subsetDrivers • revolver</title>
+<title>Plot the scores for a patient's trees. — plot_patient_trees_scores • revolver</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Subset the drivers in the cohort to match the input list. — revolver_subsetDrivers" />
-<meta property="og:description" content="Subset the drivers in the cohort to match the input list." />
+<meta property="og:title" content="Plot the scores for a patient's trees. — plot_patient_trees_scores" />
+<meta property="og:description" content="Plots a barplot where each tree is
+a bar, with height proportional to the tree score and
+colour to its particular combination of transfer." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,44 +102,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Subset the drivers in the cohort to match the input list.</h1>
+    <h1>Plot the scores for a patient's trees.</h1>
     
-    <div class="hidden name"><code>revolver_subsetDrivers.Rd</code></div>
+    <div class="hidden name"><code>plot_patient_trees_scores.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Subset the drivers in the cohort to match the input list.</p>
+    <p>Plots a barplot where each tree is
+a bar, with height proportional to the tree score and
+colour to its particular combination of transfer.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revolver_subsetDrivers</span>(<span class='no'>cohort</span>, <span class='no'>list</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_patient_trees_scores</span>(<span class='no'>x</span>, <span class='no'>patient</span>,
+  <span class='kw'>transfer_palette</span> <span class='kw'>=</span> <span class='no'>distinct_palette_few</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cohort</th>
-      <td><p>An object of class <code>"rev_cohort"</code></p></td>
+      <th>x</th>
+      <td><p>A REVOLVER object.</p></td>
     </tr>
     <tr>
-      <th>list</th>
-      <td><p>A vector of driver IDs to subset the data to.</p></td>
+      <th>patient</th>
+      <td><p>The id of a patient.</p></td>
+    </tr>
+    <tr>
+      <th>transfer_palette</th>
+      <td><p>A function that can be used to sample
+an arbitrary number of colours to identify the transfers.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A REVOLVER cohort with only drivers in <code>list</code>.</p>
+    <p>A <code>ggplot</code> plot.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Plotting functions: <code><a href='distinct_palette_few.html'>distinct_palette_few</a></code>,
+  <code><a href='distinct_palette_many.html'>distinct_palette_many</a></code>,
+  <code><a href='gradient_palette.html'>gradient_palette</a></code>,
+  <code><a href='plot_DET_index.html'>plot_DET_index</a></code>,
+  <code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a></code>,
+  <code><a href='plot_drivers_graph.html'>plot_drivers_graph</a></code>,
+  <code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a></code>,
+  <code><a href='plot_patient_CCF_histogram.html'>plot_patient_CCF_histogram</a></code>,
+  <code><a href='plot_patient_data.html'>plot_patient_data</a></code>,
+  <code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a></code>,
+  <code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>CRC.cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘CRC.cohort’ not found</span></div><div class='input'><span class='fu'>revolver_subsetDrivers</span>(<span class='no'>CRC.cohort</span>, <span class='st'>'APC'</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER subsetting drivers according to list ] 
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>	 -Drivers to keep</span><span> APC </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span></div><div class='output co'>#&gt; <span class='error'>Error in clonal.subclonal.table(cohort): could not find function "clonal.subclonal.table"</span></div></span></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>plot_patient_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0001'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .:::ctree: unused argument (DataFrameToEdges)</span></div><div class='input'><span class='fu'>plot_patient_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in .:::ctree: unused argument (DataFrameToEdges)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

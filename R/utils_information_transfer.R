@@ -11,7 +11,7 @@ combination_of_information_transfer = function(x, patient)
   keys = lapply(
     seq_along(x$phylogenies[[patient]]),
       function(w)
-        paste(sort(ITransfer(x, patient, type = 'clones', rank = w)  %>% DataFrameToEdges), collapse = ' ')
+        paste(sort(ctree:::DataFrameToEdges(ITransfer(x, patient, type = 'clones', rank = w))), collapse = ' ')
     )
 
     keys = Reduce(rbind, keys)

@@ -31,6 +31,7 @@ Other Getters: \code{\link{CCF_clusters}},
   \code{\link{CCF}}, \code{\link{Clonal_cluster}},
   \code{\link{Data}}, \code{\link{Drivers}},
   \code{\link{ITransfer}}, \code{\link{Phylo}},
-  \code{\link{Subclonal}}, \code{\link{Truncal}}
+  \code{\link{Subclonal}}, \code{\link{Truncal}},
+  \code{\link{get_features}}
 }
 \concept{Getters}

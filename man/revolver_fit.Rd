@@ -10,7 +10,7 @@ revolver_fit(x, initial.solution = 1, max.iterations = 10, n = 10,
 \arguments{
 \item{x}{A REVOLVER cohort where trees per patient have been already computed.}
 
-\item{initial.solution}{Either a scalar to fix one initial condition 
+\item{initial.solution}{Either a scalar to fix one initial condition
 (rank id), or \code{NA} to sample it randomly across all possivle solutions.
 Notice that if the inital conditin is fixed the other parameter `n` should be 1.}
 
@@ -34,6 +34,8 @@ https://www.nature.com/articles/s41592-018-0108-x). The output object contains a
 `$fit` which contains the fit results.
 }
 \examples{
-data(CRC.cohort)
-fit = revolver_fit(CRC.cohort)
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+new_fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Subset the drivers in the cohort to match the input list. — revolver_subsetDrivers • revolver</title>
+<title>Plot REVOLVER trees for a patient. — plot_patient_trees • revolver</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,15 @@
 
 
 
-<meta property="og:title" content="Subset the drivers in the cohort to match the input list. — revolver_subsetDrivers" />
-<meta property="og:description" content="Subset the drivers in the cohort to match the input list." />
+<meta property="og:title" content="Plot REVOLVER trees for a patient. — plot_patient_trees" />
+<meta property="og:description" content="This function is like plot_data, as it uses base plotting
+functions to assemble a summary plot for a patient. This function
+assembled the plot via ggpubr. The first line of plots
+represents the top tree for a patient, and its information transfer.
+The strip below represents up to the top-10 trees for this patient,
+as they are obtained from the standard tree-scoring (which means
+that the score is not accounting for the actual transfer, but just
+for the tree structure)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,38 +107,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Subset the drivers in the cohort to match the input list.</h1>
+    <h1>Plot REVOLVER trees for a patient.</h1>
     
-    <div class="hidden name"><code>revolver_subsetDrivers.Rd</code></div>
+    <div class="hidden name"><code>plot_patient_trees.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Subset the drivers in the cohort to match the input list.</p>
+    <p>This function is like <code>plot_data</code>, as it uses base plotting
+functions to assemble a summary plot for a patient. This function
+assembled the plot via <code>ggpubr</code>. The first line of plots
+represents the top tree for a patient, and its information transfer.
+The strip below represents up to the top-10 trees for this patient,
+as they are obtained from the standard tree-scoring (which means
+that the score is not accounting for the actual transfer, but just
+for the tree structure).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revolver_subsetDrivers</span>(<span class='no'>cohort</span>, <span class='no'>list</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_patient_trees</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cohort</th>
-      <td><p>An object of class <code>"rev_cohort"</code></p></td>
+      <th>x</th>
+      <td><p>A REVOLVER cohort object</p></td>
     </tr>
     <tr>
-      <th>list</th>
-      <td><p>A vector of driver IDs to subset the data to.</p></td>
+      <th>patient</th>
+      <td><p>The patient for which the trees should be plot</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Extra parameters, not used.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A REVOLVER cohort with only drivers in <code>list</code>.</p>
+    <p>A figure assembled with <code>ggpubr</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>CRC.cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘CRC.cohort’ not found</span></div><div class='input'><span class='fu'>revolver_subsetDrivers</span>(<span class='no'>CRC.cohort</span>, <span class='st'>'APC'</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER subsetting drivers according to list ] 
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>	 -Drivers to keep</span><span> APC </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span></div><div class='output co'>#&gt; <span class='error'>Error in clonal.subclonal.table(cohort): could not find function "clonal.subclonal.table"</span></div></span></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='co'># This returns a figure assembled with ggpubr</span>
+<span class='fu'>plot_patient_trees</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>patient</span> <span class='kw'>=</span> <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Duplicated aesthetics after name standardisation: na.rm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='output co'>#&gt; <span class='error'>Error in .:::ctree: unused argument (DataFrameToEdges)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

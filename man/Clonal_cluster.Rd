@@ -15,7 +15,7 @@ Clonal_cluster(x, p)
 The id of the clonal cluster for the patient.
 }
 \description{
-From a cohort object, this function return the 
+From a cohort object, this function return the
 id of the clonal cluster for a patient.
 }
 \examples{
@@ -31,6 +31,7 @@ Other Getters: \code{\link{CCF_clusters}},
   \code{\link{CCF}}, \code{\link{Data}},
   \code{\link{Drivers}}, \code{\link{ITransfer}},
   \code{\link{Phylo}}, \code{\link{Samples}},
-  \code{\link{Subclonal}}, \code{\link{Truncal}}
+  \code{\link{Subclonal}}, \code{\link{Truncal}},
+  \code{\link{get_features}}
 }
 \concept{Getters}

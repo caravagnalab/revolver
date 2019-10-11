@@ -9,18 +9,15 @@
 #'
 #' @return A cohort where a new jackknife field contains result from this analysis
 #' @export
-#' @import parallel
-#' @import crayon
-#' @import doParallel
-#' @import foreach
-#' 
+#' @import easypar
+#'
 #' @importFrom utils combn
 #'
 #' @examples
 #' \dontrun{
 #'  TODO
 #' }
-#' 
+#'
 revolver_jackknife = function(cohort,
                               resamples = 100,
                               leave.out = 0.1,

@@ -13,7 +13,7 @@ revolver_cohort(dataset, CCF_parser = revolver::CCF_parser,
 
 \item{CCF_parser}{A function to parse the format for the encoding of CCF
 or binary values for each sequenced region. A possible function is available
-inside REVOLVER; \code{revolver::CCF_parser} (the default of this parameter).}
+inside REVOLVER; \code{\link{CCF_parser}} (the default of this parameter).}
 
 \item{ONLY.DRIVER}{If true, uses only annotated driver events.}
 
@@ -37,15 +37,16 @@ data(TRACERx_data)
 # To speed up the process we use only 2 patients
 TRACERx_data = TRACERx_data \%>\%
    filter(patientID \%in\% c('CRUK0001', 'CRUK0002'))
-   
+
 cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
- 
+
 # The S3 print/ plot for this cohort
 print(cohort)
 plot(cohort)
 }
 \seealso{
 Other Cohort creation: \code{\link{CCF_parser}},
-  \code{\link{compute_clone_trees}}
+  \code{\link{compute_clone_trees}},
+  \code{\link{input_custom_trees}}
 }
 \concept{Cohort creation}

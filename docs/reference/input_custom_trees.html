@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a custom set of precomputed trees for a patient. — input_custom_trees • revolver</title>
+<title>Add a custom set of trees for a patient. — input_custom_trees • revolver</title>
 
 
 <!-- jquery -->
@@ -18,13 +18,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -33,9 +35,11 @@
 
 
 
-<meta property="og:title" content="Add a custom set of precomputed trees for a patient. — input_custom_trees" />
-<meta property="og:description" content="TODO" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:title" content="Add a custom set of trees for a patient. — input_custom_trees" />
+<meta property="og:description" content="For a patient it is possible to add a set of precomputed trees, which need
+to be stored as adjacency matrices, and must be scored and ranked by scoring.
+The trees must have as nodes all the clusters that are annotated in the data
+of the patient. If the patient has already some trees, these are overwritten." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -49,6 +53,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -75,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -92,18 +97,22 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a custom set of precomputed trees for a patient.</h1>
+    <h1>Add a custom set of trees for a patient.</h1>
     
     <div class="hidden name"><code>input_custom_trees.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>TODO</p>
+    <p>For a patient it is possible to add a set of precomputed trees, which need
+to be stored as adjacency matrices, and must be scored and ranked by scoring.
+The trees must have as nodes all the clusters that are annotated in the data
+of the patient. If the patient has already some trees, these are overwritten.</p>
     </div>
 
     <pre class="usage"><span class='fu'>input_custom_trees</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='no'>trees</span>, <span class='no'>scores</span>)</pre>
@@ -113,39 +122,90 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object of class <code>"rev_cohort"</code></p></td>
+      <td><p>A REVOLVER cohort object.</p></td>
     </tr>
     <tr>
       <th>patient</th>
-      <td><p>A patient in the cohort, for which phylogenies are created</p></td>
+      <td><p>A patient in the cohort, for which the trees are created.</p></td>
     </tr>
     <tr>
       <th>trees</th>
-      <td><p>A list a of precomputed adjacency matrix to describe the custom trees.</p></td>
+      <td><p>A list a of precomputed adjacency matrices to describe the input trees.</p></td>
     </tr>
     <tr>
       <th>scores</th>
-      <td><p>A list a of precomputed scores to describe the custom trees.</p></td>
+      <td><p>A vectore of scores for the input trees.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A modififed REVOLVER cohort with available phylogeneis for <code>patient</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Cohort creation: <code><a href='CCF_parser.html'>CCF_parser</a></code>,
+  <code><a href='compute_clone_trees.html'>compute_clone_trees</a></code>,
+  <code><a href='revolver_cohort.html'>revolver_cohort</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>TODO</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'TODO' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='co'># To make it simple we use some trees that are already available</span>
+<span class='no'>trees</span> <span class='kw'>=</span> <span class='fu'><a href='Phylo.html'>Phylo</a></span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='st'>"CRUK0001"</span>)
+
+<span class='co'># Get matrices from these objects, and remove the GL columns/ rows</span>
+<span class='no'>matrices</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>trees</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>$<span class='no'>adj_mat</span>[<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>x</span>$<span class='no'>adj_mat</span>) <span class='kw'>!=</span> <span class='st'>'GL'</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>x</span>$<span class='no'>adj_mat</span>) <span class='kw'>!=</span> <span class='st'>'GL'</span>])
+
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>matrices</span>)</div><div class='output co'>#&gt; $`1`
+#&gt;   1 3 5 2
+#&gt; 1 0 0 1 0
+#&gt; 3 1 0 0 1
+#&gt; 5 0 0 0 0
+#&gt; 2 0 0 0 0
+#&gt; 
+#&gt; $`2`
+#&gt;   2 3 5 1
+#&gt; 2 0 0 1 0
+#&gt; 3 1 0 0 1
+#&gt; 5 0 0 0 0
+#&gt; 1 0 0 0 0
+#&gt; 
+#&gt; $`3`
+#&gt;   1 5 3 2
+#&gt; 1 0 1 0 0
+#&gt; 5 0 0 0 1
+#&gt; 3 1 0 0 0
+#&gt; 2 0 0 0 0
+#&gt; </div><div class='input'>
+<span class='co'># Get scores for these matrices - vector format</span>
+<span class='no'>scores</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>trees</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>$<span class='no'>score</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>scores</span>)</div><div class='output co'>#&gt;         1         2         3 
+#&gt; 0.1111111 0.1111111 0.1111111 </div><div class='input'>
+<span class='co'># Add these trees - this function overwrites the original ones</span>
+<span class='no'>TRACERx_NEJM_2017_REVOLVER</span> <span class='kw'>=</span> <span class='fu'>input_custom_trees</span>(
+  <span class='no'>TRACERx_NEJM_2017_REVOLVER</span>,
+  <span class='kw'>patient</span> <span class='kw'>=</span> <span class='st'>"CRUK0001"</span>,
+  <span class='kw'>trees</span> <span class='kw'>=</span> <span class='no'>matrices</span>,
+  <span class='kw'>scores</span> <span class='kw'>=</span> <span class='no'>scores</span>
+)</div><div class='output co'>#&gt; 
+#&gt; <span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Using custom trees for  CRUK0001</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span></div><div class='output co'>#&gt; <span class='error'>Error in .:::ctree: unused argument (DataFrameToEdges)</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -153,13 +213,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

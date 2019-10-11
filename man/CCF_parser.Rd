@@ -31,6 +31,7 @@ CCF_parser("R1:0.1;R2:0.4;R3:0.9")
 }
 \seealso{
 Other Cohort creation: \code{\link{compute_clone_trees}},
+  \code{\link{input_custom_trees}},
   \code{\link{revolver_cohort}}
 }
 \concept{Cohort creation}

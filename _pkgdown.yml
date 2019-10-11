@@ -1,15 +1,13 @@
 reference:
 - title: Cohort functions
-  desc:  These functions can be used to create a REVOLVER cohort and its trees. 
+  desc:  These functions can be used to create a REVOLVER cohort and its trees.
   contents:
   - revolver_cohort
   - compute_clone_trees
+  - input_custom_trees
   - CCF_parser
-
 - title: Getters functions
-  desc:  These functions can be used to extract data from a REVOLVER cohort object. These
-  include the raw data used to create the cohort, driver information, clonal and subclonal
-  events and the trees that are associated to the patients.
+  desc:  These functions can be used to extract data from a REVOLVER cohort object. These include the raw data used to create the cohort, driver information, clonal and subclonal events and the trees that are associated to the patients.
   contents:
   - Data
   - Drivers
@@ -21,20 +19,22 @@ reference:
   - CCF_clusters
   - Phylo
   - ITransfer
-  
+  - Cluster
+  - get_features
 - title: Stats functions
-  desc:  These functions can be used to extract either cohort-level statistics data from 
-  a REVOLVER cohort object, and other statistics that regard the computations performed
-  on the cohort.
+  desc:  These functions can be used to extract either cohort-level statistics data from a REVOLVER cohort object, and other statistics that regard the computations performed on the cohort.
   contents:
   - starts_with("Stats")
   - DET_index
-  
 - title: Plotting functions
-  desc:  These functions can be used to plot data, fits and clusters from a REVOLVER cohort object. 
+  desc:  These functions can be used to plot data, fits and clusters from a REVOLVER cohort object.
   contents:
   - starts_with("plot_")
   - distinct_palette_few
   - distinct_palette_many
   - gradient_palette
-
+- title: S3 functions
+  desc:  The two S3 classes of REVOLVER objects implement the following S3 mehtods.
+  contents:
+  - starts_with("print.")
+  - starts_with("plot.")
