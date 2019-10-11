@@ -10,7 +10,8 @@ distinct_palette_few(n = NULL)
 \item{n}{The number of required colours. By default this is NULL.}
 }
 \value{
-A function that applied to a number returns the required colours.
+Either a function that applied to a number returns the required colours,
+or the actual sampling function.
 }
 \description{
 ColorRamp palette extrapolating \code{Set1} palette of \code{RColorBrewer} package. The original \code{Set1} palette is
@@ -20,3 +21,17 @@ as input parameter; if this does not happen a function is returned.
 \examples{
 distinct_palette_few(2)
 }
+\seealso{
+Other Plotting functions: \code{\link{distinct_palette_many}},
+  \code{\link{gradient_palette}},
+  \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

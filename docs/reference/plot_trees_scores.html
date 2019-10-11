@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot a barplot of the scored trees for a patient. — plot_trees_scores • revolver</title>
+<title>Plot the scores for a patient's trees. — plot_trees_scores • revolver</title>
 
 
 <!-- jquery -->
@@ -33,12 +33,10 @@
 
 
 
-<meta property="og:title" content="Plot a barplot of the scored trees for a patient. — plot_trees_scores" />
-<meta property="og:description" content="Returns a barplot where each tree is
+<meta property="og:title" content="Plot the scores for a patient's trees. — plot_trees_scores" />
+<meta property="og:description" content="Plots a barplot where each tree is
 a bar, with height proportional to the tree score and
-colour to its particular combination of transfer. If
-the function is called on a vector of patient ids, the
-result is a list of plot." />
+colour to its particular combination of transfer." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -101,63 +99,67 @@ result is a list of plot." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot a barplot of the scored trees for a patient.</h1>
+    <h1>Plot the scores for a patient's trees.</h1>
     
     <div class="hidden name"><code>plot_trees_scores.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a barplot where each tree is
+    <p>Plots a barplot where each tree is
 a bar, with height proportional to the tree score and
-colour to its particular combination of transfer. If
-the function is called on a vector of patient ids, the
-result is a list of plot.</p>
+colour to its particular combination of transfer.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_trees_scores</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='kw'>transfer_palette</span> <span class='kw'>=</span> <span class='no'>distinct_palette_few</span>,
-  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+  <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A REVOLVER cohort object</p></td>
+      <td><p>A REVOLVER object.</p></td>
+    </tr>
+    <tr>
+      <th>patient</th>
+      <td><p>The id of a patient.</p></td>
     </tr>
     <tr>
       <th>transfer_palette</th>
       <td><p>A function that can be used to sample
 an arbitrary number of colours to identify the transfers.</p></td>
     </tr>
-    <tr>
-      <th>cex</th>
-      <td><p>Cex of the plot.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Extra parameters, unused.</p></td>
-    </tr>
-    <tr>
-      <th>patients</th>
-      <td><p>The plots</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>ggplot</code> plot.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Plotting functions: <code><a href='distinct_palette_few.html'>distinct_palette_few</a></code>,
+  <code><a href='distinct_palette_many.html'>distinct_palette_many</a></code>,
+  <code><a href='gradient_palette.html'>gradient_palette</a></code>,
+  <code><a href='plot_CCF_histogram.html'>plot_CCF_histogram</a></code>,
+  <code><a href='plot_DET_index.html'>plot_DET_index</a></code>,
+  <code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a></code>,
+  <code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a></code>,
+  <code><a href='plot_graph_drivers.html'>plot_graph_drivers</a></code>,
+  <code><a href='plot_patient_data.html'>plot_patient_data</a></code>,
+  <code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a></code>,
+  <code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
-<span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0001'</span>)</div><div class='img'><img src='plot_trees_scores-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='img'><img src='plot_trees_scores-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0001'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in theme_grey(base_size = base_size, base_family = base_family,     base_line_size = base_line_size, base_rect_size = base_rect_size): object 'cex' not found</span></div><div class='input'><span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in theme_grey(base_size = base_size, base_family = base_family,     base_line_size = base_line_size, base_rect_size = base_rect_size): object 'cex' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

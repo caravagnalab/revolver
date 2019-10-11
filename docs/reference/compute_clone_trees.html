@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute CCF-based phylogenies for a <code>REVOLVER</code> cohort. — compute_clone_trees • revolver</title>
+<title>Compute CCF-based clone trees for a patient (phylogenies). — compute_clone_trees • revolver</title>
 
 
 <!-- jquery -->
@@ -33,7 +33,7 @@
 
 
 
-<meta property="og:title" content="Compute CCF-based phylogenies for a <code>REVOLVER</code> cohort. — compute_clone_trees" />
+<meta property="og:title" content="Compute CCF-based clone trees for a patient (phylogenies). — compute_clone_trees" />
 <meta property="og:description" content="Create clone tree phylogenies from the package
 ctree, fitting the input data given to REVOLVER. 
 A set of patient ids can be given as input, by default all are
@@ -103,7 +103,7 @@ for the input parameters that you can use to tune the construction." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute CCF-based phylogenies for a <code>REVOLVER</code> cohort.</h1>
+    <h1>Compute CCF-based clone trees for a patient (phylogenies).</h1>
     
     <div class="hidden name"><code>compute_clone_trees.Rd</code></div>
     </div>
@@ -133,12 +133,17 @@ for the input parameters that you can use to tune the construction.</p>
       <td><p>A set of patient ids in the cohort, for which the
 phylogenies are created.</p></td>
     </tr>
+    <tr>
+      <th>x</th>
+      <td><p>A <code>REVOLVER</code> cohort with now available
+phylogeneis for the required <code>patients</code>.</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>A modififed object of class <code>"rev_cohort"</code> with available
-phylogeneis for <code>patients</code>.</p>
+    <div class='dont-index'><p>Other Cohort creation: <code><a href='CCF_parser.html'>CCF_parser</a></code>,
+  <code><a href='revolver_cohort.html'>revolver_cohort</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
@@ -174,8 +179,7 @@ phylogeneis for <code>patients</code>.</p>
 #&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
 #&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='co'># We use the standard parameters with overwrite = TRUE</span>
-<span class='co'># otherwise the tool returns retuns the trees</span>
-<span class='co'># already available</span>
+<span class='co'># otherwise the computation skips the patient</span>
 <span class='no'>TRACERx_NEJM_2017_REVOLVER</span> <span class='kw'>=</span> <span class='fu'>compute_clone_trees</span>(
    <span class='no'>TRACERx_NEJM_2017_REVOLVER</span>,
    <span class='kw'>patients</span> <span class='kw'>=</span> <span class='st'>"CRUK0002"</span>,
@@ -246,7 +250,7 @@ phylogeneis for <code>patients</code>.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

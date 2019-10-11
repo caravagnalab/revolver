@@ -1,4 +1,4 @@
-#' Compute CCF-based phylogenies for a \code{REVOLVER} cohort.
+#' Compute CCF-based clone trees for a patient (phylogenies).
 #'
 #' @description Create clone tree phylogenies from the package
 #' \code{ctree}, fitting the input data given to \code{REVOLVER}. 
@@ -12,10 +12,11 @@
 #' @param patients A set of patient ids in the cohort, for which the
 #' phylogenies are created.
 #' 
-#' @family Tree functions
+#' @family Cohort creation
 #'
-#' @return A modififed object of class \code{"rev_cohort"} with available
-#' phylogeneis for \code{patients}.
+#' @param x A \code{REVOLVER} cohort with now available
+#' phylogeneis for the required \code{patients}.
+#' 
 #' @export
 #' 
 #' @import ctree
@@ -27,8 +28,7 @@
 #' print(TRACERx_NEJM_2017_REVOLVER)
 #' 
 #' # We use the standard parameters with overwrite = TRUE
-#' # otherwise the tool returns retuns the trees
-#' # already available
+#' # otherwise the computation skips the patient
 #' TRACERx_NEJM_2017_REVOLVER = compute_clone_trees(
 #'    TRACERx_NEJM_2017_REVOLVER, 
 #'    patients = "CRUK0002",

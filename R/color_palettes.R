@@ -5,8 +5,9 @@
 #' as input parameter; if this does not happen a function is returned.
 #' 
 #' @param n The number of required colours. By default this is NULL.
-#' 
-#' @return A function that applied to a number returns the required colours.
+#' @family Plotting functions
+#' @return Either a function that applied to a number returns the required colours,
+#' or the actual sampling function.
 #' @export
 #'
 #' @examples
@@ -27,7 +28,10 @@ distinct_palette_few = function(n = NULL)
 #' 
 #' @param n The number of required colours. By default this is NULL.
 #'
-#' @return A function that applied to a number returns the required colours.
+#' @family Plotting functions
+#' @return Either a function that applied to a number returns the required colours,
+#' or the actual sampling function.
+#' 
 #' @export
 #'
 #' @examples
@@ -53,7 +57,10 @@ distinct_palette_many = function(n = NULL) {
 #' 
 #' @param n The number of required colours. By default this is NULL.
 #'
-#' @return A function that applied to a number returns the required colours.
+#' @family Plotting functions
+#' @return Either a function that applied to a number returns the required colours,
+#' or the actual sampling function.
+#' 
 #' @export
 #'
 #' @examples
@@ -61,7 +68,6 @@ distinct_palette_many = function(n = NULL) {
 gradient_palette = function(n = NULL) {
   
   f = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "YlGnBu"))
-  
   
   if(is.null(n)) return(f)
   else return(f(n))

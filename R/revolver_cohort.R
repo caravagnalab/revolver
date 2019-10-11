@@ -29,7 +29,8 @@
 #' @import clisymbols
 #' @import REVOLVER.datasets
 #'
-#' @export revolver_cohort
+#' @family Cohort creation
+#' 
 #' @examples
 #' # Example cohort creation with the TRACERx data
 #' data(TRACERx_data)

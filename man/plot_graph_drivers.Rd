@@ -53,7 +53,10 @@ plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
 plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5, alpha_level = 0.01)
 }
 \seealso{
-Other Plotting functions: \code{\link{plot_CCF_histogram}},
+Other Plotting functions: \code{\link{distinct_palette_few}},
+  \code{\link{distinct_palette_many}},
+  \code{\link{gradient_palette}},
+  \code{\link{plot_CCF_histogram}},
   \code{\link{plot_DET_index}},
   \code{\link{plot_drivers_clonality}},
   \code{\link{plot_drivers_occurrence}},

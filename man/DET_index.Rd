@@ -2,45 +2,57 @@
 % Please edit documentation in R/DET_index.R
 \name{DET_index}
 \alias{DET_index}
-\title{Title}
+\title{Compute the index of Divergent Evolutionary Trajectories.}
 \usage{
 DET_index(x, drivers = x$variantIDs.driver, min.occurrences = 0)
 }
 \arguments{
-\item{x}{}
-
-\item{drivers}{}
-
-\item{min.occurrences}{Extract the information transfer available for a patient.}
-
-\item{x}{A \code{REVOLVER} cohort with fits.}
+\item{x}{A \code{REVOLVER} cohort object with fits available.}
 
 \item{drivers}{The list of drivers to compute the DET for.}
 
 \item{min.occurrences}{The minimum number of occurrences for
-a trajectory to be considered, zero by default. See also 
-function \code{\link{plot_penalty}}.}
+a trajectory to be considered, zero by default.}
 }
 \value{
-The information transfer for the tree of a patient
+The DET index for the input cohort.
 }
 \description{
-This function computes the index of Divergent Evolutionary 
-Trajectories for the fit of the input cohort.
+The index of Divergent Evolutionary Trajectories is a 
+measure derived from Shannon's entropy to determine,
+for any driver event \code{X}, how heterogeneous are
+the trajectories that lead to \code{X}.
+
+This is simply based on counting the number of edges
+\code{Y -> X}, for every \code{Y} in the data, and
+using the distribution of the observed frequencies to
+determine an entropy-derived measure (analog to 
+species heterogeneity). This means that for values 
+larger than 0, the model observers heterogeneous
+trajectories in the data.
+
+To compute the DET the cohort must have fits available.
 }
 \examples{
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
  
-# Get the transfer among drivers, top-ranking tree
+# Get the DET with all cohort
 DET_index(TRACERx_NEJM_2017_REVOLVER)
+
+# Look specifically for TP53 - the DET suggests
+# heterogeneous trajectories.
+DET_index(TRACERx_NEJM_2017_REVOLVER, drivers = 'TP53')
+
+# Look specifically for drivers in at least 5 patients
+DET_index(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
 }
 \seealso{
-Other Getters: \code{\link{CCF_clusters}},
-  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
-  \code{\link{Data}}, \code{\link{Drivers}},
-  \code{\link{ITransfer}}, \code{\link{Phylo}},
-  \code{\link{Samples}}, \code{\link{Subclonal}},
-  \code{\link{Truncal}}
+Function \code{\link{plot_penalty}} plots another
+measure derived from the same information used to compute the DET.
+
+Other Summary statistics: \code{\link{Stats_cohort}},
+  \code{\link{Stats_drivers}}, \code{\link{Stats_fits}},
+  \code{\link{Stats_trees}}, \code{\link{Stats}}
 }
-\concept{Getters}
+\concept{Summary statistics}

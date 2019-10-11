@@ -42,9 +42,8 @@ Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 2)
 \seealso{
 Other Getters: \code{\link{CCF_clusters}},
   \code{\link{CCF}}, \code{\link{Clonal_cluster}},
-  \code{\link{DET_index}}, \code{\link{Data}},
-  \code{\link{Drivers}}, \code{\link{ITransfer}},
-  \code{\link{Samples}}, \code{\link{Subclonal}},
-  \code{\link{Truncal}}
+  \code{\link{Data}}, \code{\link{Drivers}},
+  \code{\link{ITransfer}}, \code{\link{Samples}},
+  \code{\link{Subclonal}}, \code{\link{Truncal}}
 }
 \concept{Getters}

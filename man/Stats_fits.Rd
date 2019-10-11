@@ -31,8 +31,8 @@ Stats_fits(TRACERx_NEJM_2017_REVOLVER)
 Stats_fits(TRACERx_NEJM_2017_REVOLVER, patients = c('CRUK0001', 'CRUK0002')) 
 }
 \seealso{
-Other Summary statistics: \code{\link{Stats_cohort}},
-  \code{\link{Stats_drivers}}, \code{\link{Stats_trees}},
-  \code{\link{Stats}}
+Other Summary statistics: \code{\link{DET_index}},
+  \code{\link{Stats_cohort}}, \code{\link{Stats_drivers}},
+  \code{\link{Stats_trees}}, \code{\link{Stats}}
 }
 \concept{Summary statistics}

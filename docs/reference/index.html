@@ -110,6 +110,32 @@
     <tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-cohort-functions" class="hasAnchor"><a href="#section-cohort-functions" class="anchor"></a>Cohort functions</h2>
+          <p class="section-desc"><p>These functions can be used to create a REVOLVER cohort and its trees.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="revolver_cohort.html">revolver_cohort()</a></code> </p>
+        </td>
+        <td><p>Construct a REVOLVER cohort object (S3 class <code>"rev_cohort"</code>).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="compute_clone_trees.html">compute_clone_trees()</a></code> </p>
+        </td>
+        <td><p>Compute CCF-based clone trees for a patient (phylogenies).</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="CCF_parser.html">CCF_parser()</a></code> </p>
+        </td>
+        <td><p>Parser function for the  required <code>CCF</code> input field.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-getters-functions" class="hasAnchor"><a href="#section-getters-functions" class="anchor"></a>Getters functions</h2>
           <p class="section-desc"><p>These functions can be used to extract data from a REVOLVER cohort object.</p></p>
         </th>
@@ -212,6 +238,12 @@
           <p><code><a href="Stats_trees.html">Stats_trees()</a></code> </p>
         </td>
         <td><p>Summary statistics for the cohort's trees.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="DET_index.html">DET_index()</a></code> </p>
+        </td>
+        <td><p>Compute the index of Divergent Evolutionary Trajectories.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -291,7 +323,25 @@
         <td>
           <p><code><a href="plot_trees_scores.html">plot_trees_scores()</a></code> </p>
         </td>
-        <td><p>Plot a barplot of the scored trees for a patient.</p></td>
+        <td><p>Plot the scores for a patient's trees.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distinct_palette_few.html">distinct_palette_few()</a></code> </p>
+        </td>
+        <td><p>Palette of few distinct colours.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distinct_palette_many.html">distinct_palette_many()</a></code> </p>
+        </td>
+        <td><p>Palette of <code>n</code> distinct colours.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gradient_palette.html">gradient_palette()</a></code> </p>
+        </td>
+        <td><p>Gradient palette.</p></td>
       </tr>
     </tbody>
     </table>
@@ -300,6 +350,7 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#section-cohort-functions">Cohort functions</a></li>
       <li><a href="#section-getters-functions">Getters functions</a></li>
       <li><a href="#section-stats-functions">Stats functions</a></li>
       <li><a href="#section-plotting-functions">Plotting functions</a></li>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot the DET index. — plot_DET_index • revolver</title>
+<title>Compute the index of Divergent Evolutionary Trajectories. — DET_index • revolver</title>
 
 
 <!-- jquery -->
@@ -33,11 +33,19 @@
 
 
 
-<meta property="og:title" content="Plot the DET index. — plot_DET_index" />
-<meta property="og:description" content="Plot the index of Divergent Evolutionary Trajectories, for a set of drivers
-using function DET_index. The plot is a barplot with colours reflecting
-the number of distinct incoming edges in each driver (species), and the height
-reflecting the actual DET index value." />
+<meta property="og:title" content="Compute the index of Divergent Evolutionary Trajectories. — DET_index" />
+<meta property="og:description" content="The index of Divergent Evolutionary Trajectories is a 
+measure derived from Shannon's entropy to determine,
+for any driver event X, how heterogeneous are
+the trajectories that lead to X.
+This is simply based on counting the number of edges
+Y -&amp;gt; X, for every Y in the data, and
+using the distribution of the observed frequencies to
+determine an entropy-derived measure (analog to 
+species heterogeneity). This means that for values 
+larger than 0, the model observers heterogeneous
+trajectories in the data.
+To compute the DET the cohort must have fits available." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -100,56 +108,63 @@ reflecting the actual DET index value." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot the DET index.</h1>
+    <h1>Compute the index of Divergent Evolutionary Trajectories.</h1>
     
-    <div class="hidden name"><code>plot_DET_index.Rd</code></div>
+    <div class="hidden name"><code>DET_index.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plot the index of Divergent Evolutionary Trajectories, for a set of drivers
-using function <code>DET_index</code>. The plot is a barplot with colours reflecting
-the number of distinct incoming edges in each driver (species), and the height
-reflecting the actual DET index value.</p>
+    <p>The index of Divergent Evolutionary Trajectories is a 
+measure derived from Shannon's entropy to determine,
+for any driver event <code>X</code>, how heterogeneous are
+the trajectories that lead to <code>X</code>.</p>
+<p>This is simply based on counting the number of edges
+<code>Y -&gt; X</code>, for every <code>Y</code> in the data, and
+using the distribution of the observed frequencies to
+determine an entropy-derived measure (analog to 
+species heterogeneity). This means that for values 
+larger than 0, the model observers heterogeneous
+trajectories in the data.</p>
+<p>To compute the DET the cohort must have fits available.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_DET_index</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>DET_index</span>(<span class='no'>x</span>, <span class='kw'>drivers</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>variantIDs.driver</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>REVOLVER</code> object with fits.</p></td>
+      <td><p>A <code>REVOLVER</code> cohort object with fits available.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Parmeters passed to function <code>DET_index</code> in order to compute
-the index value.</p></td>
+      <th>drivers</th>
+      <td><p>The list of drivers to compute the DET for.</p></td>
+    </tr>
+    <tr>
+      <th>min.occurrences</th>
+      <td><p>The minimum number of occurrences for
+a trajectory to be considered, zero by default.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A `ggplot` object of the plot.</p>
+    <p>The DET index for the input cohort.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Plotting functions: <code><a href='distinct_palette_few.html'>distinct_palette_few</a></code>,
-  <code><a href='distinct_palette_many.html'>distinct_palette_many</a></code>,
-  <code><a href='gradient_palette.html'>gradient_palette</a></code>,
-  <code><a href='plot_CCF_histogram.html'>plot_CCF_histogram</a></code>,
-  <code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a></code>,
-  <code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a></code>,
-  <code><a href='plot_graph_drivers.html'>plot_graph_drivers</a></code>,
-  <code><a href='plot_patient_data.html'>plot_patient_data</a></code>,
-  <code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a></code>,
-  <code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a></code>,
-  <code><a href='plot_trees_scores.html'>plot_trees_scores</a></code></p></div>
+    <div class='dont-index'><p>Function <code><a href='plot_penalty.html'>plot_penalty</a></code> plots another
+measure derived from the same information used to compute the DET.</p>
+<p>Other Summary statistics: <code><a href='Stats_cohort.html'>Stats_cohort</a></code>,
+  <code><a href='Stats_drivers.html'>Stats_drivers</a></code>, <code><a href='Stats_fits.html'>Stats_fits</a></code>,
+  <code><a href='Stats_trees.html'>Stats_trees</a></code>, <code><a href='Stats.html'>Stats</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
-<span class='fu'>plot_DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 79 x 4</span><span>
+<span class='co'># Get the DET with all cohort</span>
+<span class='fu'>DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 79 x 4</span><span>
 #&gt;    driver diversity     N DET_index
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> APC            0     1         0
@@ -162,9 +177,15 @@ the index value.</p></td>
 #&gt; </span><span style='color: #555555;'> 8</span><span> CREBBP         0     1         0
 #&gt; </span><span style='color: #555555;'> 9</span><span> CUX1           0     1         0
 #&gt; </span><span style='color: #555555;'>10</span><span> DICER1         0     1         0
-#&gt; </span><span style='color: #555555;'># … with 69 more rows</span><span></div><div class='img'><img src='plot_DET_index-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Passing parameters to DET_index</span>
-<span class='fu'>plot_DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 17 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># … with 69 more rows</span><span></div><div class='input'>
+<span class='co'># Look specifically for TP53 - the DET suggests</span>
+<span class='co'># heterogeneous trajectories.</span>
+<span class='fu'>DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>drivers</span> <span class='kw'>=</span> <span class='st'>'TP53'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
+#&gt;   driver diversity     N DET_index
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> TP53        1.63     8     0.786</div><div class='input'>
+<span class='co'># Look specifically for drivers in at least 5 patients</span>
+<span class='fu'>DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 17 x 4</span><span>
 #&gt;    driver diversity     N DET_index
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> CDKN2A     0         1     0    
@@ -183,7 +204,7 @@ the index value.</p></td>
 #&gt; </span><span style='color: #555555;'>14</span><span> STK11      0         1     0    
 #&gt; </span><span style='color: #555555;'>15</span><span> TERT       0         1     0    
 #&gt; </span><span style='color: #555555;'>16</span><span> KRAS       0.598     2     0.863
-#&gt; </span><span style='color: #555555;'>17</span><span> TP53       1.42      5     0.880</div><div class='img'><img src='plot_DET_index-2.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #555555;'>17</span><span> TP53       1.42      5     0.880</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

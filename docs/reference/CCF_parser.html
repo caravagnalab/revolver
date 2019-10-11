@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Builtin parser function for the `CCF` input field. — CCF_parser • revolver</title>
+<title>Parser function for the  required <code>CCF</code> input field. — CCF_parser • revolver</title>
 
 
 <!-- jquery -->
@@ -33,13 +33,13 @@
 
 
 
-<meta property="og:title" content="Builtin parser function for the `CCF` input field. — CCF_parser" />
+<meta property="og:title" content="Parser function for the  required <code>CCF</code> input field. — CCF_parser" />
 <meta property="og:description" content="This function can parse a string
-in the format `R1:0.1;R2:0.4;R3:0.9` to extract
-a 3-dimensional named vector with names `R1`, `R2` and
-`R3`, and values `0.1`, `0.4` and `0.9`. This function
-can be used when parsing an input dataset in function
-revolver_cohort." />
+in the format R1:0.1;R2:0.4;R3:0.9 to extract
+a 3-dimensional named vector with names R1, R2 and
+R3, and values 0.1, 0.4 and 0.9.
+This function can be used when parsing an input dataset in 
+revolver_cohort, the function that creates a REVOLVER cohort." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -102,18 +102,18 @@ revolver_cohort." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Builtin parser function for the `CCF` input field.</h1>
+    <h1>Parser function for the  required <code>CCF</code> input field.</h1>
     
     <div class="hidden name"><code>CCF_parser.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function can parse a string
-in the format `R1:0.1;R2:0.4;R3:0.9` to extract
-a 3-dimensional named vector with names `R1`, `R2` and
-`R3`, and values `0.1`, `0.4` and `0.9`. This function
-can be used when parsing an input dataset in function
-<code>revolver_cohort</code>.</p>
+in the format <code>R1:0.1;R2:0.4;R3:0.9</code> to extract
+a 3-dimensional named vector with names <code>R1</code>, <code>R2</code> and
+<code>R3</code>, and values <code>0.1</code>, <code>0.4</code> and <code>0.9</code>.</p>
+<p>This function can be used when parsing an input dataset in 
+<code>revolver_cohort</code>, the function that creates a <code>REVOLVER</code> cohort.</p>
     </div>
 
     <pre class="usage"><span class='fu'>CCF_parser</span>(<span class='no'>x</span>)</pre>
@@ -124,7 +124,7 @@ can be used when parsing an input dataset in function
     <tr>
       <th>x</th>
       <td><p>The string to parse, the accepted format for this function
-is something like "R1:0.1;R2:0.4;R3:0.9".</p></td>
+is something like <code>R1:0.1;R2:0.4;R3:0.9</code>.</p></td>
     </tr>
     </table>
 
@@ -133,9 +133,11 @@ is something like "R1:0.1;R2:0.4;R3:0.9".</p></td>
     <p>A parsed named vector.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>This function will not convert
-the types of the parsed entries, and will therefore
-return strings.</p>
+    <p>This function will not convert the types of the parsed entries.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Cohort creation: <code><a href='compute_clone_trees.html'>compute_clone_trees</a></code>,
+  <code><a href='revolver_cohort.html'>revolver_cohort</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># The output is a string 3-dimensional vector  </span>
@@ -148,6 +150,7 @@ return strings.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#note">Note</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

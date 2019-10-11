@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_clone_trees.R
 \name{compute_clone_trees}
 \alias{compute_clone_trees}
-\title{Compute CCF-based phylogenies for a \code{REVOLVER} cohort.}
+\title{Compute CCF-based clone trees for a patient (phylogenies).}
 \usage{
 compute_clone_trees(x, patients = Stats_cohort(x) \%>\% pull(patientID),
   overwrite = FALSE, ...)
@@ -12,10 +12,9 @@ compute_clone_trees(x, patients = Stats_cohort(x) \%>\% pull(patientID),
 
 \item{patients}{A set of patient ids in the cohort, for which the
 phylogenies are created.}
-}
-\value{
-A modififed object of class \code{"rev_cohort"} with available
-phylogeneis for \code{patients}.
+
+\item{x}{A \code{REVOLVER} cohort with now available
+phylogeneis for the required \code{patients}.}
 }
 \description{
 Create clone tree phylogenies from the package
@@ -33,8 +32,7 @@ data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 print(TRACERx_NEJM_2017_REVOLVER)
 
 # We use the standard parameters with overwrite = TRUE
-# otherwise the tool returns retuns the trees
-# already available
+# otherwise the computation skips the patient
 TRACERx_NEJM_2017_REVOLVER = compute_clone_trees(
    TRACERx_NEJM_2017_REVOLVER, 
    patients = "CRUK0002",
@@ -42,4 +40,8 @@ TRACERx_NEJM_2017_REVOLVER = compute_clone_trees(
     
 Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1)
 }
-\concept{Tree functions}
+\seealso{
+Other Cohort creation: \code{\link{CCF_parser}},
+  \code{\link{revolver_cohort}}
+}
+\concept{Cohort creation}

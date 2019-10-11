@@ -30,7 +30,10 @@ plot_CCF_histogram(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
 plot_CCF_histogram(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
 \seealso{
-Other Plotting functions: \code{\link{plot_DET_index}},
+Other Plotting functions: \code{\link{distinct_palette_few}},
+  \code{\link{distinct_palette_many}},
+  \code{\link{gradient_palette}},
+  \code{\link{plot_DET_index}},
   \code{\link{plot_drivers_clonality}},
   \code{\link{plot_drivers_occurrence}},
   \code{\link{plot_graph_drivers}},

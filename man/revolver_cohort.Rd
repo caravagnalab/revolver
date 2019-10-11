@@ -44,3 +44,8 @@ cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
 print(cohort)
 plot(cohort)
 }
+\seealso{
+Other Cohort creation: \code{\link{CCF_parser}},
+  \code{\link{compute_clone_trees}}
+}
+\concept{Cohort creation}
