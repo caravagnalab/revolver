@@ -1,23 +1,30 @@
 #' Plot the oncoprint for a patient.
+#' 
+#' @description 
+#' 
+#' Canonical oncoprint
 #'
 #' @param x A REVOLVER cohort object.
 #' @param patient The id of a patient.
 #' @param clusters_palette A palette function that should return the colour of
 #' an arbitrary number of clusters.
-#' @param ... Extra parameters, not used.
 #'
 #' @return A figure assembled with \code{ggpubr} which combines multiple
 #' \code{ggplot} tile plots.
 #' 
+#' @family Plotting functions
+#' 
 #' @export
 #' 
-#'
 #' @examples
-#' TODO
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+#' plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 plot_patient_oncoprint = function(x,
                      patient,
-                     clusters_palette = revolver:::distinct_palette_many,
-                     ...)
+                     clusters_palette = distinct_palette_many)
 {
   # Samples and CCF are all we use to make this plot
   samples = Samples(x, patient)
@@ -66,18 +73,16 @@ plot_patient_oncoprint = function(x,
     scale_fill_distiller(palette = 'YlGnBu',
                          breaks = seq(0, 1, 0.2),
                          direction = 1) +
+    my_ggplot_theme() +
     theme(
       axis.text.x = element_blank(),
       axis.ticks.x = element_blank(),
-      axis.text.y = element_text(angle = 90, hjust = 0.5),
-      legend.position = 'bottom',
-      legend.key.size = unit(3, 'mm')
+      axis.text.y = element_text(angle = 90, hjust = 0.5)
     ) +
     guides(fill = guide_colorbar("CCF",  barwidth = unit(5, 'cm'))) +
     labs(
       x = 'Mutation',
-      y = 'Region') 
-    # geom_text_repel(
+      y = 'Region')     # geom_text_repel(
     #   data = driver_CCF,
     #   aes(label = variantID),
     #   nudge_x = 0.5
@@ -96,16 +101,15 @@ plot_patient_oncoprint = function(x,
                        aes(x = id, y = variable, fill = value)) +
     geom_tile(aes(height  = .9)) +
     scale_fill_manual(values = clusters_palette(ncluster)) +
+    my_ggplot_theme() +
     theme(
       axis.text.x = element_blank(),
       axis.ticks.x = element_blank(),
       axis.title.x = element_blank(),
       axis.text.y = element_text(angle = 90, hjust = 0.5),
-      legend.position = 'top',
-      legend.key.size = unit(3, 'mm')
     ) +
     guides(fill = guide_legend("Cluster", nrow = 1)) +
-    labs(y = '')
+    labs(y = '') 
   
   # Plot assembly
   require(ggpubr)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot REVOLVER trees for a patient — plot_trees • revolver</title>
+<title>Plot REVOLVER trees for a patient. — plot_trees • revolver</title>
 
 
 <!-- jquery -->
@@ -33,7 +33,7 @@
 
 
 
-<meta property="og:title" content="Plot REVOLVER trees for a patient — plot_trees" />
+<meta property="og:title" content="Plot REVOLVER trees for a patient. — plot_trees" />
 <meta property="og:description" content="This function is like plot_data, as it uses base plotting
 functions to assemble a summary plot for a patient. This function
 assembled the plot via ggpubr. The first line of plots
@@ -42,6 +42,7 @@ The strip below represents up to the top-10 trees for this patient,
 as they are obtained from the standard tree-scoring (which means
 that the score is not accounting for the actual transfer, but just
 for the tree structure)." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,7 +104,7 @@ for the tree structure)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot REVOLVER trees for a patient</h1>
+    <h1>Plot REVOLVER trees for a patient.</h1>
     
     <div class="hidden name"><code>plot_trees.Rd</code></div>
     </div>
@@ -146,12 +147,7 @@ for the tree structure).</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
 
 <span class='co'># This returns a figure assembled with ggpubr </span>
-<span class='fu'>plot_trees</span>(<span class='no'>TRACERx_cohort</span>, <span class='kw'>patient</span> <span class='kw'>=</span> <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggpubr</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘magrittr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:purrr’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    set_names</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:tidyr’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    extract</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Duplicated aesthetics after name standardisation: na.rm</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_trees-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot_trees</span>(<span class='no'>TRACERx_cohort</span>, <span class='kw'>patient</span> <span class='kw'>=</span> <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in xy.coords(x, y, xlabel, ylabel, log): 'x' is a list, but does not have components 'x' and 'y'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

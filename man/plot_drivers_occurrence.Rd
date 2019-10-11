@@ -2,13 +2,35 @@
 % Please edit documentation in R/plot_drivers_occurrence.R
 \name{plot_drivers_occurrence}
 \alias{plot_drivers_occurrence}
-\title{Title}
+\title{Plot the occurrence of drivers across the cohort.}
 \usage{
 plot_drivers_occurrence(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{A \code{REVOLVER} cohort.}
+}
+\value{
+A `ggplot` object of the plot.
 }
 \description{
-Title
+Plots a heatmap of the patients (x-axis) and driver events (y-axis),
+which helps visualizing in a simple fashion the mapping of drivers
+in the cohort.
 }
+\examples{
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_drivers_occurrence(TRACERx_NEJM_2017_REVOLVER)
+}
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

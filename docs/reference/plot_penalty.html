@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot the fit penalty — plot_penalty • revolver</title>
+<title>Plot the fit penalty. — plot_penalty • revolver</title>
 
 
 <!-- jquery -->
@@ -33,7 +33,7 @@
 
 
 
-<meta property="og:title" content="Plot the fit penalty — plot_penalty" />
+<meta property="og:title" content="Plot the fit penalty. — plot_penalty" />
 <meta property="og:description" content="Plot the fit penalty as a barplot, for each one of a set of desired
 driver events, where the bar represents the counts of each trajectory
 in the data. This function allows also to filter out entries that have
@@ -42,6 +42,7 @@ association A -&amp;gt; B via a one-sided Fisher 2x2 test adjusted for the numbe
 comparison (marginal count of B-ended trajectories). The tests are carried
 out by function revolver:::enrichment_test_incoming_edge, which can
 be used to obtain a tidy representation of the tests' results." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,7 +104,7 @@ be used to obtain a tidy representation of the tests' results." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot the fit penalty</h1>
+    <h1>Plot the fit penalty.</h1>
     
     <div class="hidden name"><code>plot_penalty.Rd</code></div>
     </div>
@@ -120,16 +121,14 @@ be used to obtain a tidy representation of the tests' results.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_penalty</span>(<span class='no'>x</span>, <span class='kw'>drivers</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>variantIDs.driver</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>drivers_palette</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colorRamp'>colorRampPalette</a></span>(<span class='kw pkg'>RColorBrewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer'>brewer.pal</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='st'>"Set1"</span>)), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>drivers_palette</span> <span class='kw'>=</span> <span class='no'>distinct_palette_many</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A REVOLVER cohort with fit models.</p></td>
+      <td><p>A REVOLVER object with fits.</p></td>
     </tr>
     <tr>
       <th>drivers</th>
@@ -152,14 +151,6 @@ least one event from <code>drivers</code>.</p></td>
       <td><p>A function that can return, for an input number,
 a number of colours.</p></td>
     </tr>
-    <tr>
-      <th>cex</th>
-      <td><p>The cex of the plot.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other unused parameters.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -167,7 +158,12 @@ a number of colours.</p></td>
     <p>A ggplot object for this plot.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>TODO</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'TODO' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>plot_penalty</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span class='error'>Error in if (!has_fits(x)) stop("The input object does not have fits, aborting."): argument is of length zero</span></div><div class='input'>
+<span class='fu'>plot_penalty</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='error'>Error in if (!has_fits(x)) stop("The input object does not have fits, aborting."): argument is of length zero</span></div><div class='input'>
+<span class='fu'>plot_penalty</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)</div><div class='output co'>#&gt; <span class='error'>Error in if (!has_fits(x)) stop("The input object does not have fits, aborting."): argument is of length zero</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

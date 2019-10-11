@@ -26,7 +26,10 @@
 "TRACERx_data"
 
 
-#' Analysis of the TRACERx cohort, with REVOLVER. The input object ofr the analysis is "TRACERx_data"
+#' Analysis of the TRACERx cohort, with REVOLVER. 
+#' 
+#' The input object for the analysis is available via the external package
+#' 
 #'
 #' @docType data
 #'

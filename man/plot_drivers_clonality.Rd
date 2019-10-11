@@ -2,15 +2,34 @@
 % Please edit documentation in R/plot_drivers_clonality.R
 \name{plot_drivers_clonality}
 \alias{plot_drivers_clonality}
-\title{Title}
+\title{Plot the clonality status of cohort driver events.}
 \usage{
-plot_drivers_clonality(x, cex = 1)
+plot_drivers_clonality(x)
 }
 \arguments{
-\item{x}{}
-
-\item{cex}{}
+\item{x}{A \code{REVOLVER} cohort.}
+}
+\value{
+A \code{ggplot} object of the plot.
 }
 \description{
-Title
+Driver events can be annotated in clonal or subclonal clusters.
+This function reports this information in a barplot.
 }
+\examples{
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_drivers_clonality(TRACERx_NEJM_2017_REVOLVER)
+}
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

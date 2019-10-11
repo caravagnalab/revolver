@@ -4,24 +4,39 @@
 \alias{plot_CCF_histogram}
 \title{Plot the data histogram for a patient.}
 \usage{
-plot_CCF_histogram(x, patient, cex = 1, ...)
+plot_CCF_histogram(x, patient)
 }
 \arguments{
 \item{x}{A REVOLVER cohort object.}
 
 \item{patient}{The id of a patient.}
-
-\item{cex}{Cex of the plot.}
-
-\item{...}{Extra parameters, not used.}
 }
 \value{
 A \code{ggplot} plot.
 }
 \description{
-Plot the CCF histogram of each one of the samples available for
-a patient, facetting the sample variable.
+If this cohort is working with CCF data, this function plots
+the CCF histogram of each one of the samples available for
+a patient, facetting the sample variable. 
+
+Otherwise, this plot does not make much sense.
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_CCF_histogram(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+plot_CCF_histogram(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
+\seealso{
+Other Plotting functions: \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

@@ -1,20 +1,28 @@
 #' Plot the data for a patient.
 #' 
-#' @description This function creates a complex plot for the
-#' data of a patient, assembling plots returned from thw following
-#' functions: \code{\link{plot_data_clusters}}, 
-#' \code{\link{plot_data_clone_size}}, \code{\link{plot_data_mutation_burden}}
-#' and \code{plot_patient_oncoprint}.
+#' @description 
+#' 
+#' This function creates a complex plot for the
+#' data of a patient, assembling plots returned from the following
+#' functions: 1) \code{\link{plot_data_clusters}},
+#' 2) \code{\link{plot_data_clone_size}}, 3) \code{\link{plot_data_mutation_burden}}
+#' and 4) \code{plot_patient_oncoprint}.
 #'
-#' @param x A REVOLVER cohort object.
+#' @param x A \code{REVOLVER} cohort.
 #' @param patient A patient id.
 #' @param ... Extra parameters passed to all the used plotting functions.
-#'
+#' 
+#' @family Plotting functions
+#' 
 #' @return A figure assembled with \code{ggpubr}.
 #' @export
 #'
 #' @examples
-#' TODO
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+#' plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 plot_patient_data = function(x, patient, ...)
 {
   require(ggpubr)

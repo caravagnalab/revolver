@@ -2,15 +2,13 @@
 % Please edit documentation in R/plot_penalty.R
 \name{plot_penalty}
 \alias{plot_penalty}
-\title{Plot the fit penalty}
+\title{Plot the fit penalty.}
 \usage{
 plot_penalty(x, drivers = x$variantIDs.driver, min.occurrences = 0,
-  alpha_level = 0.05,
-  drivers_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9,
-  "Set1")), cex = 1, ...)
+  alpha_level = 0.05, drivers_palette = distinct_palette_many)
 }
 \arguments{
-\item{x}{A REVOLVER cohort with fit models.}
+\item{x}{A REVOLVER object with fits.}
 
 \item{drivers}{The list of drivers to use; by default all of them. If the
 entry is a subset of the actual list of all drivers, all the entries in the
@@ -24,10 +22,6 @@ least one event from \code{drivers}.}
 
 \item{drivers_palette}{A function that can return, for an input number,
 a number of colours.}
-
-\item{cex}{The cex of the plot.}
-
-\item{...}{Other unused parameters.}
 }
 \value{
 A ggplot object for this plot.
@@ -43,5 +37,12 @@ out by function \code{revolver:::enrichment_test_incoming_edge}, which can
 be used to obtain a tidy representation of the tests' results.
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_penalty(TRACERx_NEJM_2017_REVOLVER)
+
+plot_penalty(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
+
+plot_penalty(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5, alpha_level = 0.001)
 }

@@ -4,9 +4,9 @@
 \alias{plot_clusters}
 \title{Title}
 \usage{
-plot_clusters(x, cluster_palette = revolver:::distinct_palette_few,
-  driver_palette = revolver:::distinct_palette_many,
-  CCF_palette = revolver:::gradient_palette, cutoff_drivers = 10,
+plot_clusters(x, cluster_palette = distinct_palette_few,
+  driver_palette = distinct_palette_many,
+  CCF_palette = gradient_palette, cutoff_drivers = 10,
   cutoff_trajectories = 10, arrow.symbol = "-->", ...)
 }
 \arguments{

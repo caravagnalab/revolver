@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot summary statistics for the drivers on a graph. — plot_graph_drivers • revolver</title>
+<title>Plot graph-alike summary statistics for the cohort drivers. — plot_graph_drivers • revolver</title>
 
 
 <!-- jquery -->
@@ -33,7 +33,7 @@
 
 
 
-<meta property="og:title" content="Plot summary statistics for the drivers on a graph. — plot_graph_drivers" />
+<meta property="og:title" content="Plot graph-alike summary statistics for the cohort drivers. — plot_graph_drivers" />
 <meta property="og:description" content="Plot a graph with driver genes and annotate with 
 different summary statistics for the trajectories that 
 involve the drivers. This visualisation shows the frequency
@@ -45,6 +45,7 @@ DET index (node coloring). This function has parameters
 to subset the computation to a list of predefined drivers,
 or drivers associated to trajectories with a minimum
 recurrence in the fits." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,7 +107,7 @@ recurrence in the fits." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot summary statistics for the drivers on a graph.</h1>
+    <h1>Plot graph-alike summary statistics for the cohort drivers.</h1>
     
     <div class="hidden name"><code>plot_graph_drivers.Rd</code></div>
     </div>
@@ -126,7 +127,7 @@ recurrence in the fits.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_graph_drivers</span>(<span class='no'>x</span>, <span class='kw'>drivers</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>variantIDs.driver</span>,
-  <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,21 +139,17 @@ recurrence in the fits.</p>
     <tr>
       <th>drivers</th>
       <td><p>The list of drivers to consider, all by default.
-See also function <code>plot_penalty</code>.</p></td>
+See also function <code><a href='plot_penalty.html'>plot_penalty</a></code>.</p></td>
     </tr>
     <tr>
       <th>min.occurrences</th>
       <td><p>The minimum number of occurrences for
 a trajectory to be considered, zero by default. See also 
-function <code>plot_penalty</code>.</p></td>
+function <code><a href='plot_penalty.html'>plot_penalty</a></code>.</p></td>
     </tr>
     <tr>
       <th>alpha_level</th>
       <td><p>The significance level for the enrichment Fisher test.</p></td>
-    </tr>
-    <tr>
-      <th>cex</th>
-      <td><p>Cex of the plot.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -164,16 +161,98 @@ by <code>ggraph</code>. For instance, passing <code>algorithm = 'kk'</code> and
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A `ggplot` object of the plot</p>
+    <p>A `ggplot` object of the plot.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Plotting functions: <code><a href='plot_CCF_histogram.html'>plot_CCF_histogram</a></code>,
+  <code><a href='plot_DET_index.html'>plot_DET_index</a></code>,
+  <code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a></code>,
+  <code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a></code>,
+  <code><a href='plot_patient_data.html'>plot_patient_data</a></code>,
+  <code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a></code>,
+  <code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>TODO</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'TODO' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='co'># Base plot, can be quite crowded</span>
+<span class='fu'>plot_graph_drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; 
+#&gt; <span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Enrichment test for incoming edges</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 49 x 15</span><span>
+#&gt;    estimate p.value conf.low conf.high method alternative from  to    POS_POS
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     23.0 1.82</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-9</span><span>     8.60       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     EGFR  TP53       13
+#&gt; </span><span style='color: #555555;'> 2</span><span>     25.4 1.36</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     4.81       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    PIK3…      20
+#&gt; </span><span style='color: #555555;'> 3</span><span>     10.5 6.27</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     4.19       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     CDKN… TP53       10
+#&gt; </span><span style='color: #555555;'> 4</span><span>     12.6 8.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     3.56       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    EGFR       20
+#&gt; </span><span style='color: #555555;'> 5</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   1.48</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     5.16       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    CDKN…      14
+#&gt; </span><span style='color: #555555;'> 6</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   1.48</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     5.16       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    SOX2       14
+#&gt; </span><span style='color: #555555;'> 7</span><span>     19.8 1.71</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     5.37       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  FAT1        7
+#&gt; </span><span style='color: #555555;'> 8</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   2.10</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.42       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     RASA1 TP53        5
+#&gt; </span><span style='color: #555555;'> 9</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   5.99</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>    14.5        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     BRAF  TERT        3
+#&gt; </span><span style='color: #555555;'>10</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   7.41</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     4.31       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    KEAP1      12
+#&gt; </span><span style='color: #555555;'># … with 39 more rows, and 6 more variables: POS_NEG </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NEG_POS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   NEG_NEG </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, alpha_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, N </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, psign </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `from` has different attributes on LHS and RHS of join</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `to` has different attributes on LHS and RHS of join</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_graph_drivers-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Reduce the number of nodes cutting off low-frequencies one</span>
+<span class='fu'>plot_graph_drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; 
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Enrichment test for incoming edges</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 15 x 15</span><span>
+#&gt;    estimate p.value conf.low conf.high method alternative from  to    POS_POS
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    3.10</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-8</span><span>    11.5        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     EGFR  TP53       13
+#&gt; </span><span style='color: #555555;'> 2</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    3.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-7</span><span>    15.0        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  FAT1        7
+#&gt; </span><span style='color: #555555;'> 3</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     8.13       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     CDKN… TP53       10
+#&gt; </span><span style='color: #555555;'> 4</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.95</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>    11.9        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  TERT        6
+#&gt; </span><span style='color: #555555;'> 5</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    7.88</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     7.08       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     KRAS  TP53        9
+#&gt; </span><span style='color: #555555;'> 6</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.67</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NFE2…       5
+#&gt; </span><span style='color: #555555;'> 7</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.67</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NOTC…       5
+#&gt; </span><span style='color: #555555;'> 8</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    9.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    EGFR       20
+#&gt; </span><span style='color: #555555;'> 9</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    9.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    PIK3…      20
+#&gt; </span><span style='color: #555555;'>10</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    1.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>     3.21       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     RASA1 TP53        5
+#&gt; </span><span style='color: #555555;'>11</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    8.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>     1.75       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    CDKN…      14
+#&gt; </span><span style='color: #555555;'>12</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    8.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>     1.75       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    SOX2       14
+#&gt; </span><span style='color: #555555;'>13</span><span>     3.26 1.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.31       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  KRAS        8
+#&gt; </span><span style='color: #555555;'>14</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    1.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.45       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    KEAP1      12
+#&gt; </span><span style='color: #555555;'>15</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    4.69</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.03       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    FGFR1       9
+#&gt; </span><span style='color: #555555;'># … with 6 more variables: POS_NEG </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NEG_POS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NEG_NEG </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   alpha_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, N </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, psign </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `from` has different attributes on LHS and RHS of join</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `to` has different attributes on LHS and RHS of join</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_graph_drivers-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># As above, but with a more stringent test</span>
+<span class='fu'>plot_graph_drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)</div><div class='output co'>#&gt; 
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Enrichment test for incoming edges</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 15 x 15</span><span>
+#&gt;    estimate p.value conf.low conf.high method alternative from  to    POS_POS
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    3.10</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-8</span><span>    11.5        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     EGFR  TP53       13
+#&gt; </span><span style='color: #555555;'> 2</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    3.16</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-7</span><span>    15.0        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  FAT1        7
+#&gt; </span><span style='color: #555555;'> 3</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     8.13       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     CDKN… TP53       10
+#&gt; </span><span style='color: #555555;'> 4</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.95</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>    11.9        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  TERT        6
+#&gt; </span><span style='color: #555555;'> 5</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    7.88</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-6</span><span>     7.08       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     KRAS  TP53        9
+#&gt; </span><span style='color: #555555;'> 6</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.67</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NFE2…       5
+#&gt; </span><span style='color: #555555;'> 7</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.67</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NOTC…       5
+#&gt; </span><span style='color: #555555;'> 8</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    9.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    EGFR       20
+#&gt; </span><span style='color: #555555;'> 9</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    9.14</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    PIK3…      20
+#&gt; </span><span style='color: #555555;'>10</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    1.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>     3.21       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     RASA1 TP53        5
+#&gt; </span><span style='color: #555555;'>11</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    8.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>     1.75       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    CDKN…      14
+#&gt; </span><span style='color: #555555;'>12</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    8.06</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>     1.75       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    SOX2       14
+#&gt; </span><span style='color: #555555;'>13</span><span>     3.26 1.52</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.31       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  KRAS        8
+#&gt; </span><span style='color: #555555;'>14</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    1.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.45       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    KEAP1      12
+#&gt; </span><span style='color: #555555;'>15</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    4.69</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.03       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    FGFR1       9
+#&gt; </span><span style='color: #555555;'># … with 6 more variables: POS_NEG </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NEG_POS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NEG_NEG </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   alpha_level </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, N </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, psign </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `from` has different attributes on LHS and RHS of join</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `to` has different attributes on LHS and RHS of join</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='img'><img src='plot_graph_drivers-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

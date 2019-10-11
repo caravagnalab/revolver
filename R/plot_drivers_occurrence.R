@@ -1,11 +1,24 @@
-#' Title
+#' Plot the occurrence of drivers across the cohort.
+#' 
+#' @description 
+#' 
+#' Plots a heatmap of the patients (x-axis) and driver events (y-axis),
+#' which helps visualizing in a simple fashion the mapping of drivers
+#' in the cohort.
 #'
-#' @param x 
+#' @param x A \code{REVOLVER} cohort.
 #'
-#' @return
+#' @return A `ggplot` object of the plot.
+#' 
+#' @family Plotting functions
+#' 
 #' @export
 #'
 #' @examples
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' plot_drivers_occurrence(TRACERx_NEJM_2017_REVOLVER)
 plot_drivers_occurrence = function(x)
 {
   occurrences = lapply(

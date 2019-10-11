@@ -4,7 +4,10 @@
 \alias{gradient_palette}
 \title{Gradient palette.}
 \usage{
-gradient_palette()
+gradient_palette(n = NULL)
+}
+\arguments{
+\item{n}{The number of required colours. By default this is NULL.}
 }
 \value{
 A function that applied to a number returns the required colours.

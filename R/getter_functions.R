@@ -9,36 +9,58 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-#' Extract CCF/binary data for a patient
+#' Extract all data for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tibble of
+#' all data available for a patient (either CCF or binary).
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
+#' 
+#' @family Getters
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
-#'
-#' @return CCF/binary data for \code{p}
+#' @return Drivers data for a custom patient.
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' CCF(CRC.cohort, 'adenoma_3')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' Data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' Data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 Data = function(x, p)
 {
   stop_not_revolver_object(x)
   
   if(p %in% names(x$dataset)) return(x$dataset[[p]])
-  stop(p, ' does does not have data in the REVOLVER cohort"', x$annotation, '"')
+  stop(p, ' does not have data in the REVOLVER cohort "', x$annotation, '"')
 }
 
-#' Extract CCF/binary driver data for a patient
+#' Extract driver data for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tibble of
+#' annotated driver events for a patient (either CCF or binary).
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
+#' 
+#' @family Getters
 #'
-#' @return CCF/binary drivers data for \code{p}
+#' @return Drivers data for a custom patient.
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Drivers(CRC.cohort, 'adenoma_3')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' Drivers(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' Drivers(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 Drivers = function(x, p) 
 {
   stop_not_revolver_object(x)
@@ -47,17 +69,28 @@ Drivers = function(x, p)
 }
 # Drivers = Vectorize(Drivers, vectorize.args = 'p', SIMPLIFY = FALSE)
 
-#' Extract truncal mutations in a patient
+#' Extract clonal (i.e., truncal) data for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tibble of
+#' truncal events for a patient (either CCF or binary).
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
 #'
-#' @param x A REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p A patient
-#'
-#' @return CCF/binary data for \code{p}'s truncal mutations
+#' @family Getters
+#' 
+#' @return Truncal data for a custom patient.
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Drivers(CRC.cohort, 'adenoma_3')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' Truncal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' Truncal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 Truncal = function(x, p)
 {
   stop_not_revolver_object(x)
@@ -65,19 +98,28 @@ Truncal = function(x, p)
   Data(x, p) %>% filter(is.clonal)
 }
 
-
-#' Return the id of the clonal cluster for this patient
+#' Extract the clonal cluster id for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function return the 
+#' id of the clonal cluster for a patient.
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
 #'
-#' @param x a REVOLVER object of class "rev_cohort"
-#' @param p a patient
-#'
-#' @return The id of the clonal cluster for \code{p}
-#'
+#' @family Getters
+#' 
+#' @return The id of the clonal cluster for the patient.
 #' @export
 #'
 #' @examples
-#' data(TRACERx_cohort)
-#' Clonal_cluster(TRACERx_cohort, 'CRUK0002')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' Clonal_cluster(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' Clonal_cluster(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 Clonal_cluster = function(x, p)
 {
   stop_not_revolver_object(x)
@@ -85,19 +127,28 @@ Clonal_cluster = function(x, p)
   CCF_clusters(x, p) %>% filter(is.clonal) %>% pull(cluster)
 }
 
-
-
-#' Extract CCF/binary data for subclonal mutations of a patient
+#' Extract subclonal data for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tibble of
+#' subclonal events for a patient (either CCF or binary).
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
-#'
-#' @return CCF/binary data for \code{p}'s subclonal mutations
+#' @family Getters
+#' 
+#' @return Subclonal data for a custom patient.
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' Subclonal(CRC.cohort, 'adenoma_3')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' Subclonal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' Subclonal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 Subclonal = function(x, p)
 {
   stop_not_revolver_object(x)
@@ -105,17 +156,29 @@ Subclonal = function(x, p)
   Data(x, p) %>% filter(!is.clonal)
 }
 
-#' Extract CCF/binary data for a patient
+#' Extract all CCF or binary data for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tibble of
+#' all CCF or binary data for a patient. This is just a faster
+#' way to subset a generic call to \code{\link{Data}}.
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
-#'
-#' @return CCF/binary data for \code{p}
+#' @family Getters
+#' 
+#' @return Data for a custom patient.
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' CCF(CRC.cohort, 'adenoma_3')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' CCF(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' CCF(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 CCF = function(x, p)
 {
   stop_not_revolver_object(x)
@@ -133,17 +196,28 @@ CCF = function(x, p)
     )
 }
 
-#' Extract samples name for a patient
+#' Extract all samples ids for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts a vector of
+#' the sample ids available for a patient.
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
-#'
-#' @return CCF/binary data for \code{p}
-#' @export Samples
+#' @family Getters
+#' 
+#' @return Sample names for a custom patient.
+#' @export
 #'
 #' @examples
-#' data(TRACERx_cohort)
-#' Samples(TRACERx_cohort, 'CRUK0001')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' Samples(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' Samples(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 Samples = function(x, p)
 {
   stop_not_revolver_object(x)
@@ -151,18 +225,28 @@ Samples = function(x, p)
   names(x$CCF_parser(Data(x,p) %>% filter(row_number() == 1) %>% pull(CCF)))
 }
 
-
-#' Extract cluster-level CCF/binary data for a patient
+#' Extract all clusters in the data of a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts a tibble of
+#' all clusters in the data of a patient. 
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
-#'
-#' @return CCF/binary data for \code{p}
+#' @family Getters
+#' 
+#' @return CCF or binary clusters data for a custom patient.
 #' @export
 #'
 #' @examples
-#' data(TRACERx_cohort)
-#' CCF_clusters(TRACERx_cohort, 'CRUK0001')
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' CCF_clusters(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+#' 
+#' CCF_clusters(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 CCF_clusters = function(x, p)
 {
   stop_not_revolver_object(x)
@@ -170,26 +254,42 @@ CCF_clusters = function(x, p)
   x$CCF[[p]]
 }
 
-#' Extract phylogenetic or mutation trees for a patient
+#' Extract the trees available for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tree
+#' objects that are available for a patient. Parameters 
+#' can be set to retrieve a particular tree, or the fit
+#' tree which is however availble only after fitting the
+#' cohort data. This function can either return a 
+#' phylogenetic clone tree (R object \code{ctree}), or mutation 
+#' trees  (R object \code{btree}).
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
+#' @param rank The rank of the tree to extract.
+#' @param data Either `trees` or `fit`, which requires to have
+#' already computed the fit of the input cohort.
 #'
-#' @param x a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"
-#' @param p a patient
-#' @param data Either `trees` or `fit`.
+#' @family Getters
 #'
-#' @return phylogenetic or mutation trees data for \code{p}
+#' @return Phylogenetic or mutation trees data for the patient.
+#' 
 #' @export
 #'
 #' @examples
-#' data(TRACERx_cohort)
-#' 
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
 #' # Get all the trees for a patient
-#' Phylo(TRACERx_cohort, 'CRUK0002')
+#' Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 #' 
 #' # Get a specific tree for a patient
-#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 2)
+#' Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 2)
 # 
 #' # Get the fit tree for a patient
-# Phylo(TRACERx_cohort, 'CRUK0002', data = 'fits')
+# Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', data = 'fits')
 Phylo = function(x, p, rank = NULL, data = 'trees')
 {
   stop_not_revolver_object(x)
@@ -214,29 +314,46 @@ Phylo = function(x, p, rank = NULL, data = 'trees')
 # Phylo = Vectorize(Phylo, vectorize.args = 'p', SIMPLIFY = FALSE)
 
 
-#' Extract the information transfer for a patient's tree
-#'
-#' @param x A REVOLVER cohort
-#' @param p A patient
-#' @param rank The rank of the tree to extract
-#' @param type Either `clones` or `drivers`.
-#' @param data Either `trees` or `fit`.
-#'
-#' @return The information transfer for a patient's tree
+#' Extract the information transfer available for a patient.
+#' 
+#' @description 
+#' 
+#' From a cohort object, this function extracts the tree
+#' objects that are available for a patient. Parameters 
+#' can be set to retrieve a particular tree, or the fit
+#' tree which is however availble only after fitting the
+#' cohort data. This function can either return a 
+#' phylogenetic clone tree (R object \code{ctree}), or mutation 
+#' trees  (R object \code{btree}). Besides, it can return 
+#' the information transfer as the ordering of the annotated
+#' drivers, or in terms o the ordering of the clones these
+#' map to.
+#' 
+#' @param x A \code{REVOLVER} cohort.
+#' @param p The id of a patient in the cohort.
+#' @param rank The rank of the tree to extract.
+#' @param data Either `trees` or `fit`, which requires to have
+#' already computed the fit of the input cohort.
+#' @param type Either `drivers` or `clones`.
+#' 
+#' @family Getters
+#' 
+#' @return The information transfer for the tree of a patient
 #' @export
 #'
 #' @examples
-#' data(TRACERx_cohort)
-#' 
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
 #' # Get the transfer among drivers, top-ranking tree
-#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers')
+#' ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers')
 #' 
 #' # Get the transfer among clones, top-ranking tree
-#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones')
+#' ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'clones')
 #' 
 #' # Get the transfer from the fit
-#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones', data = 'fits')
-#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
+#' ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'clones', data = 'fits')
+#' ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
 ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 {
   stop_not_revolver_object(x)
@@ -262,25 +379,6 @@ ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
   stop("Unrecognized parameters, aborting")
 }
 
-
-#' Extract fitted model for a patient
-#'
-#' @param x a REVOLVER object of class "rev_cohort_fit"
-#' @param p a patient
-#'
-#' @return fitted model for  \code{p}
-#' @export
-#'
-#' @examples
-#' data(CRC.cohort)
-#'
-#' Fit(revolver_fit(CRC.cohort), 'adenoma_3')
-# Fit = function(x, p)
-# {
-#   if(is.null(x$fit$phylogenies[[p]])) stop('There is no fit for ', p)
-# 
-#   x$fit$phylogenies[[p]]
-# }
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Clusters
@@ -315,241 +413,6 @@ Cluster = function(x, patients = x$patients)
     as_tibble() 
 }
 
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Functions for summary statistics
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-#' Return summary stastics for the cohort's patients
-#'
-#' @description Returns the number of samples per patient, the number
-#' of drivers, the number of clonal and subclonal mutations etc. The
-#' function can be run on a subset of patients.
-#'
-#' @param x A REVOLVER cohort.
-#' @param patients The patients for which the summaries are computed.
-#'
-#' @return A tibble with summary stastics.
-#'
-#' @export
-#'
-#' @examples
-#' data(TRACERx_cohort)
-#' 
-#' # Get the stats for all patients
-#' Stats(TRACERx_cohort) 
-#' 
-#' # And subset the patients
-#' Stats(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
-Stats = function(x, patients = x$patients)  {
-
-  stop_not_revolver_object(x)
-  
-  st = data.frame(
-    patientID = patients,
-    stringsAsFactors = FALSE
-  )
-
-  st$numBiopsies = sapply(st$patientID, function(w) length(Samples(x, w)))
-  st$numMutations = sapply(st$patientID, function(w) nrow(Data(x, w)))
-
-  st$numDriverMutations = sapply(st$patientID, function(w) nrow(Drivers(x, w)))
-  st$numClonesWithDriver = sapply(st$patientID, function(w) length(unique(Drivers(x, w) %>% pull(cluster))))
-
-  st$numTruncalMutations = sapply(st$patientID, function(w) nrow(Truncal(x, w)))
-  st$numSubclonalMutations = sapply(st$patientID, function(w) nrow(Subclonal(x, w)))
-
-
-  st %>% as_tibble()
-}
-
-#' See \code{Stats} function.
-#'
-#' @description Just a wrapper to the \code{Stats} function.
-#'
-#' @param ... Parameters forwarded to the \code{Stats} function.
-#'
-#' @return A tibble with summary stastics.
-#'
-#' @export
-#'
-#' @examples
-#' data(TRACERx_cohort)
-#' 
-#' # Get the stats for all patients
-#' Stats_cohort(TRACERx_cohort) 
-#' 
-#' # And subset the patients
-#' Stats_cohort(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
-Stats_cohort = function(...) { Stats(...) }
-
-#' Return summary stastics for the cohort's drivers
-#'
-#' @description Returns the number of clonal and subclonal occurrences
-#' of the drivers in the cohort, and their percentage relative to the
-#' cohort size. The function can be run on a subset of drivers.
-#'
-#' @param x a REVOLVER object of class "rev_cohort"
-#' @param drivers The drivers for which the summaries are computed.
-#'
-#' @return A tibble with the driver stastics.
-#'
-#' @export
-#'
-#' @examples
-#' data(TRACERx_cohort)
-#' 
-#' # Get the stats for all patients
-#' Stats_drivers(TRACERx_cohort) 
-#' 
-#' # And subset the patients
-#' Stats_drivers(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
-Stats_drivers = function(x, drivers = x$variantIDs.driver) {
-
-  stop_not_revolver_object(x)
-  
-  st = data.frame(
-    variantID = drivers,
-    row.names = drivers,
-    stringsAsFactors = FALSE
-  )
-
-  clonal = sapply(
-    x$patients,
-    function(p) { CCF(x, p) %>% filter(is.driver, is.clonal, variantID %in% drivers) %>% pull(variantID) }
-  )
-  clonal = table(unlist(clonal))
-
-  subclonal = sapply(
-    x$patients,
-    function(p) { CCF(x, p) %>% filter(is.driver, !is.clonal, variantID %in% drivers) %>% pull(variantID) }
-  )
-  subclonal = table(unlist(subclonal))
-
-  st$numClonal = st$numSubclonal = 0
-
-  st[names(clonal), 'numClonal'] = clonal
-  st[names(subclonal), 'numSubclonal'] = subclonal
-
-  st = st %>%
-    as_tibble() %>%
-    mutate(
-      p_clonal = numClonal/x$n$patients,
-      p_subclonal = numSubclonal/x$n$patients,
-      N_tot = numClonal + numSubclonal,
-      p_tot = N_tot / x$n$patient
-    ) %>%
-    select(
-      variantID,
-      numClonal, p_clonal,
-      numSubclonal, p_subclonal,
-      N_tot, p_tot
-    ) %>%
-    arrange (desc(numClonal), desc(numSubclonal))
-
-  st %>% as_tibble()
-}
-
-#' Return summary stastics for the cohort's trees
-#'
-#' @description Returns the number of clonal and subclonal occurrences
-#' of each driver in the cohort, and their percentage relative to the
-#' cohort size. The function can be run on a subset of patients.
-#'
-#' @param x a REVOLVER object of class "rev_cohort"
-#' @param patients The patients for which the summaries are computed.
-#'
-#' @return A tibble with the driver stastics.
-#'
-#' @export
-#'
-#' @examples
-#' data(TRACERx_cohort)
-#' 
-#' # Get the stats for all patients
-#' Stats_trees(TRACERx_cohort) 
-#' 
-#' # And subset the patients
-#' Stats_trees(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
-Stats_trees = function(x, patients = x$patients) {
-  
-  stop_not_revolver_object(x)
-  
-  if(
-    !has_patient_trees(x) |
-    !all(sapply(patients, has_patient_trees, x = x))
-  ) 
-    stop("There are no trees in this cohort object, or trees for some of the required patients are missing. 
-         Cannot compute this summary statistics, aborting.")
-
-  st = data.frame(
-    patientID = patients,
-    row.names = patients,
-    stringsAsFactors = FALSE
-  )
-
-  st$hasTrees = st$patientID %in% names(x$phylogenies)
-
-  st$numTrees = sapply(st$patientID, function(p) length(x$phylogenies[[p]]))
-
-  MSc = function(p) {
-    if(p %in% names(x$phylogenies))
-      return(max(sapply(seq_along(x$phylogenies[[p]]), function(t) x$phylogenies[[p]][[t]]$score)))
-    NA
-  }
-
-  st$maxScore = sapply(st$patientID, MSc)
-
-  mSc = function(p) {
-    if(p %in% names(x$phylogenies))
-      return(min(sapply(seq_along(x$phylogenies[[p]]), function(t) x$phylogenies[[p]][[t]]$score)))
-    NA
-  }
-
-  st$minScore = sapply(st$patientID, mSc)
-
-  st$combInfTransf = sapply(st$patientID, combination_of_information_transfer,  x = x)
-
-  st %>% as_tibble()
-}
-
-
-#' Return summary stastics for the cohort's fits
-#'
-#' @description Returns a tibble that extends the result of 
-#' \code{Stats_trees} with information about the fit models.
-#' Compared to summaries returns by other \code{Stats_*} functions,
-#' the information from this one is precomputed.
-#'
-#' @param x A REVOLVER cohort object with fits.
-#' @param patients The patients for which the summaries are required.
-#'
-#' @return A tibble with the fits stastics.
-#'
-#' @export
-#'
-#' @examples
-#' data(TRACERx_cohort)
-#' 
-#' # Get the stats for all patients
-#' Stats_fits(TRACERx_cohort) 
-#' 
-#' # And subset the patients
-#' Stats_fits(TRACERx_cohort, patients = c('CRUK0001', 'CRUK0002')) 
-Stats_fits = function(x, patients = x$patients) {
-  
-  stop_not_revolver_object(x)
-  
-  if(
-    !has_fits(x) |
-    !all(sapply(patients, has_fits, x = x))
-    ) 
-    stop("There are no fits in this cohort object, or fits for some of the required patients are missing. 
-         Cannot compute this summary statistics, aborting.")
-  
-  x$fit$fit_table %>%
-    filter(patientID %in% patients)
-  }
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # To test if the object has some consistency internally

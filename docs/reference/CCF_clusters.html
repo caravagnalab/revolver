@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract cluster-level CCF/binary data for a patient — CCF_clusters • revolver</title>
+<title>Extract all clusters in the data of a patient. — CCF_clusters • revolver</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,10 @@
 
 
 
-<meta property="og:title" content="Extract cluster-level CCF/binary data for a patient — CCF_clusters" />
-<meta property="og:description" content="Extract cluster-level CCF/binary data for a patient" />
+<meta property="og:title" content="Extract all clusters in the data of a patient. — CCF_clusters" />
+<meta property="og:description" content="From a cohort object, this function extracts a tibble of
+all clusters in the data of a patient." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -96,13 +98,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract cluster-level CCF/binary data for a patient</h1>
+    <h1>Extract all clusters in the data of a patient.</h1>
     
     <div class="hidden name"><code>CCF_clusters.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract cluster-level CCF/binary data for a patient</p>
+    <p>From a cohort object, this function extracts a tibble of
+all clusters in the data of a patient.</p>
     </div>
 
     <pre class="usage"><span class='fu'>CCF_clusters</span>(<span class='no'>x</span>, <span class='no'>p</span>)</pre>
@@ -112,40 +115,48 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"</p></td>
+      <td><p>A <code>REVOLVER</code> cohort.</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>a patient</p></td>
+      <td><p>The id of a patient in the cohort.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>CCF/binary data for <code>p</code></p>
+    <p>CCF or binary clusters data for a custom patient.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Getters: <code><a href='CCF.html'>CCF</a></code>,
+  <code><a href='Clonal_cluster.html'>Clonal_cluster</a></code>, <code><a href='Data.html'>Data</a></code>,
+  <code><a href='Drivers.html'>Drivers</a></code>, <code><a href='ITransfer.html'>ITransfer</a></code>,
+  <code><a href='Phylo.html'>Phylo</a></code>, <code><a href='Samples.html'>Samples</a></code>,
+  <code><a href='Subclonal.html'>Subclonal</a></code>, <code><a href='Truncal.html'>Truncal</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
-<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0001'</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 11 x 7</span><span>
-#&gt;    cluster nMuts is.driver is.clonal    R1    R2    R3
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1        </span><span style='text-decoration: underline;'>1</span><span>136 TRUE      FALSE     0.86  0      0   
-#&gt; </span><span style='color: #555555;'> 2</span><span> 3         208 TRUE      TRUE      0.99  0.99   1   
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2         199 TRUE      FALSE     0.22  0      0.95
-#&gt; </span><span style='color: #555555;'> 4</span><span> 4         178 FALSE     FALSE     0.89  0.13   0   
-#&gt; </span><span style='color: #555555;'> 5</span><span> 5         129 TRUE      FALSE     0.74  0      0.97
-#&gt; </span><span style='color: #555555;'> 6</span><span> 6         103 FALSE     FALSE     0     0      0.95
-#&gt; </span><span style='color: #555555;'> 7</span><span> 7          84 FALSE     FALSE     0     0.84   0   
-#&gt; </span><span style='color: #555555;'> 8</span><span> 8          22 FALSE     FALSE     0.9   0      0.14
-#&gt; </span><span style='color: #555555;'> 9</span><span> 9          15 FALSE     FALSE     0.3   0.14   0.95
-#&gt; </span><span style='color: #555555;'>10</span><span> 10         14 FALSE     FALSE     0.83  0.755  0   
-#&gt; </span><span style='color: #555555;'>11</span><span> 11         12 FALSE     FALSE     0.325 0.83   0.96</div></span></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 7</span><span>
+#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98</div><div class='input'>
+<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0008'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 6</span><span>
+#&gt;   cluster nMuts is.driver is.clonal    R1    R2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 2           5 TRUE      TRUE       0.99     1
+#&gt; </span><span style='color: #555555;'>2</span><span> 3           1 TRUE      FALSE      0.86     0</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

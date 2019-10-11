@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract phylogenetic or mutation trees for a patient — Phylo • revolver</title>
+<title>Extract the trees available for a patient. — Phylo • revolver</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,15 @@
 
 
 
-<meta property="og:title" content="Extract phylogenetic or mutation trees for a patient — Phylo" />
-<meta property="og:description" content="Extract phylogenetic or mutation trees for a patient" />
+<meta property="og:title" content="Extract the trees available for a patient. — Phylo" />
+<meta property="og:description" content="From a cohort object, this function extracts the tree
+objects that are available for a patient. Parameters 
+can be set to retrieve a particular tree, or the fit
+tree which is however availble only after fitting the
+cohort data. This function can either return a 
+phylogenetic clone tree (R object ctree), or mutation 
+trees  (R object btree)." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -96,13 +103,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract phylogenetic or mutation trees for a patient</h1>
+    <h1>Extract the trees available for a patient.</h1>
     
     <div class="hidden name"><code>Phylo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract phylogenetic or mutation trees for a patient</p>
+    <p>From a cohort object, this function extracts the tree
+objects that are available for a patient. Parameters 
+can be set to retrieve a particular tree, or the fit
+tree which is however availble only after fitting the
+cohort data. This function can either return a 
+phylogenetic clone tree (R object <code>ctree</code>), or mutation 
+trees  (R object <code>btree</code>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>Phylo</span>(<span class='no'>x</span>, <span class='no'>p</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='st'>"trees"</span>)</pre>
@@ -112,51 +125,57 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"</p></td>
+      <td><p>A <code>REVOLVER</code> cohort.</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>a patient</p></td>
+      <td><p>The id of a patient in the cohort.</p></td>
+    </tr>
+    <tr>
+      <th>rank</th>
+      <td><p>The rank of the tree to extract.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>Either `trees` or `fit`.</p></td>
+      <td><p>Either `trees` or `fit`, which requires to have
+already computed the fit of the input cohort.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>phylogenetic or mutation trees data for <code>p</code></p>
+    <p>Phylogenetic or mutation trees data for the patient.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Getters: <code><a href='CCF_clusters.html'>CCF_clusters</a></code>,
+  <code><a href='CCF.html'>CCF</a></code>, <code><a href='Clonal_cluster.html'>Clonal_cluster</a></code>,
+  <code><a href='Data.html'>Data</a></code>, <code><a href='Drivers.html'>Drivers</a></code>,
+  <code><a href='ITransfer.html'>ITransfer</a></code>, <code><a href='Samples.html'>Samples</a></code>,
+  <code><a href='Subclonal.html'>Subclonal</a></code>, <code><a href='Truncal.html'>Truncal</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
 <span class='co'># Get all the trees for a patient</span>
-<span class='fu'>Phylo</span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; [[1]]
-#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER tree - Ranked 1/3 
-#&gt;  ] 
+<span class='fu'>Phylo</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; $`1`
+#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree - ctree rank 1/2 for CRUK0002 ] 
 #&gt; </span><span>
-#&gt; </span><span style='color: #555555;'># A tibble: 7 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1          72 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #555555;'>2</span><span> 2          69 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #555555;'>3</span><span> 3          48 FALSE     FALSE      0     0     0.49
-#&gt; </span><span style='color: #555555;'>4</span><span> 4          29 FALSE     FALSE      0.01  0.01  0.93
-#&gt; </span><span style='color: #555555;'>5</span><span> 5          24 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #555555;'>6</span><span> 6          23 TRUE      FALSE      0.98  0.03  0.98
-#&gt; </span><span style='color: #555555;'>7</span><span> 7          15 FALSE     FALSE      0     0.41  0   
+#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Tree shape (drivers annotated)</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
 #&gt; </span><span>  \-GL
 #&gt;    \-2 :: MET, TERT
-#&gt;     |-1 :: RB1, IKZF1, KRAS
-#&gt;     | \-7
-#&gt;     \-6 :: EP300
-#&gt;      |-4
-#&gt;      | \-3
-#&gt;      \-5 :: NF1
+#&gt;     |-6 :: EP300
+#&gt;     | \-5 :: NF1
+#&gt;     \-1 :: RB1, IKZF1, KRAS
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Information transfer</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
@@ -172,33 +191,26 @@
 #&gt;    MET ---&gt; EP300 
 #&gt;    TERT ---&gt; EP300 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; Tree score</span><span> 0.6 </span><span style='color: #000000;background-color: #BBBB00;'>
+#&gt; Tree score</span><span> 0.75 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span>
-#&gt; [[2]]
-#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER tree - Ranked 2/3 
-#&gt;  ] 
+#&gt; $`2`
+#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree - ctree rank 2/2 for CRUK0002 ] 
 #&gt; </span><span>
-#&gt; </span><span style='color: #555555;'># A tibble: 7 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1          72 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #555555;'>2</span><span> 2          69 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #555555;'>3</span><span> 3          48 FALSE     FALSE      0     0     0.49
-#&gt; </span><span style='color: #555555;'>4</span><span> 4          29 FALSE     FALSE      0.01  0.01  0.93
-#&gt; </span><span style='color: #555555;'>5</span><span> 5          24 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #555555;'>6</span><span> 6          23 TRUE      FALSE      0.98  0.03  0.98
-#&gt; </span><span style='color: #555555;'>7</span><span> 7          15 FALSE     FALSE      0     0.41  0   
+#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Tree shape (drivers annotated)</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
 #&gt; </span><span>  \-GL
 #&gt;    \-2 :: MET, TERT
 #&gt;     \-1 :: RB1, IKZF1, KRAS
-#&gt;      \-7
-#&gt;       \-6 :: EP300
-#&gt;        |-4
-#&gt;        | \-3
-#&gt;        \-5 :: NF1
+#&gt;      \-6 :: EP300
+#&gt;       \-5 :: NF1
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Information transfer</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
@@ -215,76 +227,26 @@
 #&gt;    IKZF1 ---&gt; EP300 
 #&gt;    KRAS ---&gt; EP300 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; Tree score</span><span> 0.0666666666666667 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span>
-#&gt; [[3]]
-#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER tree - Ranked 3/3 
-#&gt;  ] 
-#&gt; </span><span>
-#&gt; </span><span style='color: #555555;'># A tibble: 7 x 7</span><span>
-#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1          72 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #555555;'>2</span><span> 2          69 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #555555;'>3</span><span> 3          48 FALSE     FALSE      0     0     0.49
-#&gt; </span><span style='color: #555555;'>4</span><span> 4          29 FALSE     FALSE      0.01  0.01  0.93
-#&gt; </span><span style='color: #555555;'>5</span><span> 5          24 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #555555;'>6</span><span> 6          23 TRUE      FALSE      0.98  0.03  0.98
-#&gt; </span><span style='color: #555555;'>7</span><span> 7          15 FALSE     FALSE      0     0.41  0   
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; Tree shape (drivers annotated)</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; 
-#&gt; </span><span>  \-GL
-#&gt;    \-2 :: MET, TERT
-#&gt;     \-1 :: RB1, IKZF1, KRAS
-#&gt;      |-6 :: EP300
-#&gt;      | |-4
-#&gt;      | | \-3
-#&gt;      | \-5 :: NF1
-#&gt;      \-7
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; Information transfer</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; 
-#&gt; </span><span>   MET ---&gt; RB1 
-#&gt;    MET ---&gt; IKZF1 
-#&gt;    MET ---&gt; KRAS 
-#&gt;    TERT ---&gt; RB1 
-#&gt;    TERT ---&gt; IKZF1 
-#&gt;    TERT ---&gt; KRAS 
-#&gt;    GL ---&gt; MET 
-#&gt;    GL ---&gt; TERT 
-#&gt;    EP300 ---&gt; NF1 
-#&gt;    RB1 ---&gt; EP300 
-#&gt;    IKZF1 ---&gt; EP300 
-#&gt;    KRAS ---&gt; EP300 
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; Tree score</span><span> 0.0666666666666667 </span><span style='color: #000000;background-color: #BBBB00;'>
+#&gt; Tree score</span><span> 0.0833333333333333 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span></div><div class='input'>
 <span class='co'># Get a specific tree for a patient</span>
-<span class='fu'>Phylo</span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER tree - Ranked 2/3 
-#&gt;  ] 
+<span class='fu'>Phylo</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree - ctree rank 2/2 for CRUK0002 ] 
 #&gt; </span><span>
-#&gt; </span><span style='color: #555555;'># A tibble: 7 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1          72 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #555555;'>2</span><span> 2          69 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #555555;'>3</span><span> 3          48 FALSE     FALSE      0     0     0.49
-#&gt; </span><span style='color: #555555;'>4</span><span> 4          29 FALSE     FALSE      0.01  0.01  0.93
-#&gt; </span><span style='color: #555555;'>5</span><span> 5          24 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #555555;'>6</span><span> 6          23 TRUE      FALSE      0.98  0.03  0.98
-#&gt; </span><span style='color: #555555;'>7</span><span> 7          15 FALSE     FALSE      0     0.41  0   
+#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Tree shape (drivers annotated)</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
 #&gt; </span><span>  \-GL
 #&gt;    \-2 :: MET, TERT
 #&gt;     \-1 :: RB1, IKZF1, KRAS
-#&gt;      \-7
-#&gt;       \-6 :: EP300
-#&gt;        |-4
-#&gt;        | \-3
-#&gt;        \-5 :: NF1
+#&gt;      \-6 :: EP300
+#&gt;       \-5 :: NF1
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Information transfer</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
@@ -301,7 +263,7 @@
 #&gt;    IKZF1 ---&gt; EP300 
 #&gt;    KRAS ---&gt; EP300 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; Tree score</span><span> 0.0666666666666667 </span><span style='color: #000000;background-color: #BBBB00;'>
+#&gt; Tree score</span><span> 0.0833333333333333 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span></div><div class='input'># Get the fit tree for a patient
 </div></span></pre>
   </div>
@@ -310,6 +272,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

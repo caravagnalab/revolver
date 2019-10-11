@@ -2,35 +2,42 @@
 % Please edit documentation in R/plot_trees_scores.R
 \name{plot_trees_scores}
 \alias{plot_trees_scores}
-\title{Plot a barplot of the scored trees for a patient.}
+\title{Plot the scores for a patient's trees.}
 \usage{
 plot_trees_scores(x, patient, transfer_palette = distinct_palette_few,
-  cex = 1, ...)
+  ...)
 }
 \arguments{
-\item{x}{A REVOLVER cohort object}
+\item{x}{A REVOLVER object.}
+
+\item{patient}{The id of a patient.}
 
 \item{transfer_palette}{A function that can be used to sample
 an arbitrary number of colours to identify the transfers.}
-
-\item{cex}{Cex of the plot.}
-
-\item{...}{Extra parameters, unused.}
-
-\item{patients}{The plots}
 }
 \value{
 A \code{ggplot} plot.
 }
 \description{
-Returns a barplot where each tree is
+Plots a barplot where each tree is
 a bar, with height proportional to the tree score and
-colour to its particular combination of transfer. If
-the function is called on a vector of patient ids, the
-result is a list of plot.
+colour to its particular combination of transfer.
 }
 \examples{
-data(TRACERx_cohort)
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
-plot_trees_scores(TRACERx_cohort, 'CRUK0002')
+plot_trees_scores(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+plot_trees_scores(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}}
+}
+\concept{Plotting functions}

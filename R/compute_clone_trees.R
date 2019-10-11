@@ -11,6 +11,8 @@
 #' @param x A \code{REVOLVER} cohort.
 #' @param patients A set of patient ids in the cohort, for which the
 #' phylogenies are created.
+#' 
+#' @family Tree functions
 #'
 #' @return A modififed object of class \code{"rev_cohort"} with available
 #' phylogeneis for \code{patients}.
@@ -19,20 +21,20 @@
 #' @import ctree
 #'
 #' @examples
-#' data(TRACERx_cohort)
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 #' 
-#' print(TRACERx_cohort)
+#' print(TRACERx_NEJM_2017_REVOLVER)
 #' 
 #' # We use the standard parameters with overwrite = TRUE
 #' # otherwise the tool returns retuns the trees
 #' # already available
-#' TRACERx_cohort = revolver_compute_phylogenies(
-#'    TRACERx_cohort, 
-#'    "CRUK0002",
-#'    overwrite = TRUE
-#'     )
+#' TRACERx_NEJM_2017_REVOLVER = compute_clone_trees(
+#'    TRACERx_NEJM_2017_REVOLVER, 
+#'    patients = "CRUK0002",
+#'    overwrite = TRUE)
 #'     
-#' Phylo(TRACERx_cohort, 'CRUK0002', rank = 1)
+#' Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1)
 compute_clone_trees = function(
   x,
   patients = Stats_cohort(x) %>% pull(patientID),

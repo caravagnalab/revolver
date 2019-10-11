@@ -2,10 +2,10 @@
 % Please edit documentation in R/plot_graph_drivers.R
 \name{plot_graph_drivers}
 \alias{plot_graph_drivers}
-\title{Plot summary statistics for the drivers on a graph.}
+\title{Plot graph-alike summary statistics for the cohort drivers.}
 \usage{
 plot_graph_drivers(x, drivers = x$variantIDs.driver,
-  min.occurrences = 0, alpha_level = 0.05, cex = 1, ...)
+  min.occurrences = 0, alpha_level = 0.05, ...)
 }
 \arguments{
 \item{x}{A REVOLVER object with fits.}
@@ -19,14 +19,12 @@ function \code{\link{plot_penalty}}.}
 
 \item{alpha_level}{The significance level for the enrichment Fisher test.}
 
-\item{cex}{Cex of the plot.}
-
 \item{...}{Extra parameters passed to the \code{create_layout} function
 by \code{ggraph}. For instance, passing \code{algorithm = 'kk'} and 
 \code{layout = 'igraph'} the `igraph` layout `kk` will be adopted.}
 }
 \value{
-A `ggplot` object of the plot
+A `ggplot` object of the plot.
 }
 \description{
 Plot a graph with driver genes and annotate with 
@@ -42,5 +40,26 @@ or drivers associated to trajectories with a minimum
 recurrence in the fits.
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+# Base plot, can be quite crowded
+plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER)
+
+# Reduce the number of nodes cutting off low-frequencies one
+plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
+
+# As above, but with a more stringent test
+plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5, alpha_level = 0.01)
 }
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

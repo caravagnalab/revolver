@@ -5,7 +5,7 @@
 \title{Plot the oncoprint for a patient.}
 \usage{
 plot_patient_oncoprint(x, patient,
-  clusters_palette = revolver:::distinct_palette_many, ...)
+  clusters_palette = distinct_palette_many)
 }
 \arguments{
 \item{x}{A REVOLVER cohort object.}
@@ -14,16 +14,29 @@ plot_patient_oncoprint(x, patient,
 
 \item{clusters_palette}{A palette function that should return the colour of
 an arbitrary number of clusters.}
-
-\item{...}{Extra parameters, not used.}
 }
 \value{
 A figure assembled with \code{ggpubr} which combines multiple
 \code{ggplot} tile plots.
 }
 \description{
-Plot the oncoprint for a patient.
+Canonical oncoprint
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

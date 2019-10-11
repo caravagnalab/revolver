@@ -24,3 +24,4 @@ x = revolver_fit(x)
 x = revolver_cluster(x)
 plot_clusters(x)
  
+Stats_fits(x)

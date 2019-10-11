@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return summary stastics for the cohort's drivers — Stats_drivers • revolver</title>
+<title>Summary statistics for the cohort's driver events. — Stats_drivers • revolver</title>
 
 
 <!-- jquery -->
@@ -33,10 +33,11 @@
 
 
 
-<meta property="og:title" content="Return summary stastics for the cohort's drivers — Stats_drivers" />
+<meta property="og:title" content="Summary statistics for the cohort's driver events. — Stats_drivers" />
 <meta property="og:description" content="Returns the number of clonal and subclonal occurrences
 of the drivers in the cohort, and their percentage relative to the
 cohort size. The function can be run on a subset of drivers." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,7 +99,7 @@ cohort size. The function can be run on a subset of drivers." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return summary stastics for the cohort's drivers</h1>
+    <h1>Summary statistics for the cohort's driver events.</h1>
     
     <div class="hidden name"><code>Stats_drivers.Rd</code></div>
     </div>
@@ -116,7 +117,7 @@ cohort size. The function can be run on a subset of drivers.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a REVOLVER object of class "rev_cohort"</p></td>
+      <td><p>A REVOLVER cohort.</p></td>
     </tr>
     <tr>
       <th>drivers</th>
@@ -127,12 +128,18 @@ cohort size. The function can be run on a subset of drivers.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A tibble with the driver stastics.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Summary statistics: <code><a href='Stats_cohort.html'>Stats_cohort</a></code>,
+  <code><a href='Stats_fits.html'>Stats_fits</a></code>, <code><a href='Stats_trees.html'>Stats_trees</a></code>,
+  <code><a href='Stats.html'>Stats</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
 <span class='co'># Get the stats for all patients</span>
-<span class='fu'>Stats_drivers</span>(<span class='no'>TRACERx_cohort</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 79 x 7</span><span>
+<span class='fu'>Stats_drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 79 x 7</span><span>
 #&gt;    variantID numClonal p_clonal numSubclonal p_subclonal N_tot  p_tot
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> TP53             53   0.535             3      0.030</span><span style='text-decoration: underline;'>3</span><span>    56 0.566 
@@ -147,13 +154,14 @@ cohort size. The function can be run on a subset of drivers.</p>
 #&gt; </span><span style='color: #555555;'>10</span><span> STK11             8   0.080</span><span style='text-decoration: underline;'>8</span><span>            0      0          8 0.080</span><span style='text-decoration: underline;'>8</span><span>
 #&gt; </span><span style='color: #555555;'># … with 69 more rows</span><span></div><div class='input'>
 <span class='co'># And subset the patients</span>
-<span class='fu'>Stats_drivers</span>(<span class='no'>TRACERx_cohort</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in Stats_drivers(TRACERx_cohort, patients = c("CRUK0001", "CRUK0002")): unused argument (patients = c("CRUK0001", "CRUK0002"))</span></div></span></pre>
+<span class='fu'>Stats_drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in Stats_drivers(TRACERx_NEJM_2017_REVOLVER, patients = c("CRUK0001",     "CRUK0002")): unused argument (patients = c("CRUK0001", "CRUK0002"))</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

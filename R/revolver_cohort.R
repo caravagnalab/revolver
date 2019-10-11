@@ -27,6 +27,7 @@
 #' @import ggpubr
 #' @import ggrepel
 #' @import clisymbols
+#' @import REVOLVER.datasets
 #'
 #' @export revolver_cohort
 #' @examples

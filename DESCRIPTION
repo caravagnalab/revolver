@@ -32,7 +32,8 @@ Imports:
     pio,
     RColorBrewer,
     pheatmap,
-    clisymbols
+    clisymbols,
+    REVOLVER.datasets
 Remotes: 
     caravagn/pio,
     caravagn/easypar

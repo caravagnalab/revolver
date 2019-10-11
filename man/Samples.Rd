@@ -2,22 +2,36 @@
 % Please edit documentation in R/getter_functions.R
 \name{Samples}
 \alias{Samples}
-\title{Extract samples name for a patient}
+\title{Extract all samples ids for a patient.}
 \usage{
 Samples(x, p)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{a patient}
+\item{p}{The id of a patient in the cohort.}
 }
 \value{
-CCF/binary data for \code{p}
+Sample names for a custom patient.
 }
 \description{
-Extract samples name for a patient
+From a cohort object, this function extracts a vector of
+the sample ids available for a patient.
 }
 \examples{
-data(TRACERx_cohort)
-Samples(TRACERx_cohort, 'CRUK0001')
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+Samples(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+
+Samples(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
+  \code{\link{DET_index}}, \code{\link{Data}},
+  \code{\link{Drivers}}, \code{\link{ITransfer}},
+  \code{\link{Phylo}}, \code{\link{Subclonal}},
+  \code{\link{Truncal}}
+}
+\concept{Getters}

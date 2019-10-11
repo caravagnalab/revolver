@@ -38,6 +38,7 @@
 using function DET_index. The plot is a barplot with colours reflecting
 the number of distinct incoming edges in each driver (species), and the height
 reflecting the actual DET index value." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,18 +112,14 @@ the number of distinct incoming edges in each driver (species), and the height
 reflecting the actual DET index value.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_DET_index</span>(<span class='no'>x</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_DET_index</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A REVOLVER cohort with fits.</p></td>
-    </tr>
-    <tr>
-      <th>cex</th>
-      <td><p>Cex of the plot.</p></td>
+      <td><p>A <code>REVOLVER</code> object with fits.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -133,16 +130,63 @@ the index value.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ggplot</code> object for the plot</p>
+    <p>A `ggplot` object of the plot.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Plotting functions: <code><a href='plot_CCF_histogram.html'>plot_CCF_histogram</a></code>,
+  <code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a></code>,
+  <code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a></code>,
+  <code><a href='plot_graph_drivers.html'>plot_graph_drivers</a></code>,
+  <code><a href='plot_patient_data.html'>plot_patient_data</a></code>,
+  <code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a></code>,
+  <code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>Breast.fit</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘Breast.fit’ not found</span></div><div class='input'><span class='fu'>plot_DET_index</span>(<span class='no'>Breast.fit</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'Breast.fit' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>plot_DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 79 x 4</span><span>
+#&gt;    driver diversity     N DET_index
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> APC            0     1         0
+#&gt; </span><span style='color: #555555;'> 2</span><span> BRAF           0     1         0
+#&gt; </span><span style='color: #555555;'> 3</span><span> CDKN2A         0     1         0
+#&gt; </span><span style='color: #555555;'> 4</span><span> CHEK2          0     1         0
+#&gt; </span><span style='color: #555555;'> 5</span><span> CIC            0     1         0
+#&gt; </span><span style='color: #555555;'> 6</span><span> CMTR2          0     1         0
+#&gt; </span><span style='color: #555555;'> 7</span><span> COL2A1         0     1         0
+#&gt; </span><span style='color: #555555;'> 8</span><span> CREBBP         0     1         0
+#&gt; </span><span style='color: #555555;'> 9</span><span> CUX1           0     1         0
+#&gt; </span><span style='color: #555555;'>10</span><span> DICER1         0     1         0
+#&gt; </span><span style='color: #555555;'># … with 69 more rows</span><span></div><div class='img'><img src='plot_DET_index-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Passing parameters to DET_index</span>
+<span class='fu'>plot_DET_index</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 17 x 4</span><span>
+#&gt;    driver diversity     N DET_index
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> CDKN2A     0         1     0    
+#&gt; </span><span style='color: #555555;'> 2</span><span> COL2A1     0         1     0    
+#&gt; </span><span style='color: #555555;'> 3</span><span> EGFR       0         1     0    
+#&gt; </span><span style='color: #555555;'> 4</span><span> FAT1       0         1     0    
+#&gt; </span><span style='color: #555555;'> 5</span><span> FGFR1      0         1     0    
+#&gt; </span><span style='color: #555555;'> 6</span><span> KEAP1      0         1     0    
+#&gt; </span><span style='color: #555555;'> 7</span><span> MYC        0         1     0    
+#&gt; </span><span style='color: #555555;'> 8</span><span> NFE2L2     0         1     0    
+#&gt; </span><span style='color: #555555;'> 9</span><span> NOTCH1     0         1     0    
+#&gt; </span><span style='color: #555555;'>10</span><span> PIK3CA     0         1     0    
+#&gt; </span><span style='color: #555555;'>11</span><span> PTEN       0         1     0    
+#&gt; </span><span style='color: #555555;'>12</span><span> RASA1      0         1     0    
+#&gt; </span><span style='color: #555555;'>13</span><span> SOX2       0         1     0    
+#&gt; </span><span style='color: #555555;'>14</span><span> STK11      0         1     0    
+#&gt; </span><span style='color: #555555;'>15</span><span> TERT       0         1     0    
+#&gt; </span><span style='color: #555555;'>16</span><span> KRAS       0.598     2     0.863
+#&gt; </span><span style='color: #555555;'>17</span><span> TP53       1.42      5     0.880</div><div class='img'><img src='plot_DET_index-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

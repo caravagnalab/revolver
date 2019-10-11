@@ -11,11 +11,18 @@
 #' @param cex Cex of the plot.
 #' @param ... Extra parameters, not used.
 #'
+#' @family Plotting functions
+#' 
 #' @return A \code{ggplot} plot.
+#' 
 #' @export
 #'
 #' @examples
-#' TODO
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' plot_patient_mutation_burden(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+#' plot_patient_mutation_burden(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 plot_patient_mutation_burden = function(x, patient, ...)
 {
   p = patient
@@ -37,13 +44,13 @@ plot_patient_mutation_burden = function(x, patient, ...)
                       x = numTruncalMutations,
                       y = numSubclonalMutations
                       ),
-                    color = 'black', inherit.aes = FALSE, ) +
+                    color = 'black', inherit.aes = FALSE) +
     geom_point(size = 2 * cex) +
     ggrepel::geom_label_repel(
       data = st %>% filter(patientID == !!p),
       aes(label = patientID),
-      nudge_x = .4,
-      nudge_y = .4, 
+      nudge_x = .1,
+      nudge_y = .1, 
       size = 3 * cex, 
       min.segment.length = 0
     ) +

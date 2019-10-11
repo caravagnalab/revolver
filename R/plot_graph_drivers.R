@@ -1,5 +1,4 @@
-
-#' Plot summary statistics for the drivers on a graph.
+#' Plot graph-alike summary statistics for the cohort drivers.
 #' 
 #' @description 
 #' Plot a graph with driver genes and annotate with 
@@ -21,27 +20,37 @@
 #' a trajectory to be considered, zero by default. See also 
 #' function \code{\link{plot_penalty}}.
 #' @param alpha_level The significance level for the enrichment Fisher test.
-#' @param cex Cex of the plot.
 #' @param ... Extra parameters passed to the \code{create_layout} function
 #' by \code{ggraph}. For instance, passing \code{algorithm = 'kk'} and 
 #' \code{layout = 'igraph'} the `igraph` layout `kk` will be adopted.
 #'
-#' @return A `ggplot` object of the plot
+#' @return A `ggplot` object of the plot.
+#' 
+#' @family Plotting functions
 #' 
 #' @export
 #'
 #' @examples
-#' TODO
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' # Base plot, can be quite crowded
+#' plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER)
+#' 
+#' # Reduce the number of nodes cutting off low-frequencies one
+#' plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
+#' 
+#' # As above, but with a more stringent test
+#' plot_graph_drivers(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5, alpha_level = 0.01)
 plot_graph_drivers = function(x,
                               drivers = x$variantIDs.driver,
                               min.occurrences = 0,
                               alpha_level = 0.05,
-                              cex = 1,
                               ...
                               )
 {
   lp = list(...)
-  print(lp)
+  # print(lp)
   
   # Subset E to make computations, and create a graph
   E = x$fit$penalty %>%
@@ -99,7 +108,7 @@ plot_graph_drivers = function(x,
           edge_colour = psign, 
           edge_width = penalty
         ), 
-      arrow = arrow(length = unit(2 * cex, 'mm')),
+      arrow = arrow(length = unit(2, 'mm')),
     ) +
     geom_node_point(
       aes(
@@ -111,19 +120,19 @@ plot_graph_drivers = function(x,
                    colour = 'black',
                    vjust = 0.4) +
     coord_cartesian(clip = 'off') +
-    theme_void(base_size = 8 * cex) +
+    my_ggplot_theme() + 
     theme(
-      legend.key.size = unit(2.5 * cex, "mm")
+      legend.key.size = unit(2.5, "mm")
       ) +
     scale_edge_color_manual(values = c(`TRUE` = 'darkorange', `FALSE` = 'gray')) + 
     scale_color_gradient(low = 'steelblue', high = 'darkred') +
-    scale_size(range = c(3, 10) * cex) +
+    scale_size(range = c(3, 10)) +
     scale_edge_width(range = c(.1, 1.1)) +
     guides(
-      color = guide_legend(title = "DET index: more heterogeneity for higher values", nrow = 1),
-      edge_width = guide_legend(title = "Penalty: lower for thicker edges", nrow = 1),
+      color = guide_legend(title = "DET index", nrow = 1),
+      edge_width = guide_legend(title = "Penalty", nrow = 1),
       edge_color = guide_legend(title = paste0("Significant enrichment at level ", alpha_level), nrow = 1),
-      size = guide_legend(title = "Driver counts in the cohort", nrow = 1)
+      size = guide_legend(title = "Driver counts", nrow = 1)
       ) +
     labs(
       title = paste('Driver to driver trajectories')

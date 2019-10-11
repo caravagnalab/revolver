@@ -6,21 +6,28 @@
 #' the number of distinct incoming edges in each driver (species), and the height
 #' reflecting the actual DET index value.
 #'
-#' @param x A REVOLVER cohort with fits.
-#' @param cex Cex of the plot.
+#' @param x A \code{REVOLVER} object with fits.
 #' @param ... Parmeters passed to function \code{DET_index} in order to compute
 #' the index value.
 #'
-#' @return A \code{ggplot} object for the plot
+#' @return A `ggplot` object of the plot.
+#' 
+#' @family Plotting functions
 #' 
 #' @export
 #'
 #' @examples
-#' data(Breast.fit)
-#' plot_DET_index(Breast.fit, min.occurrences = 5)
-plot_DET_index = function(x, cex = 1, ...)
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' plot_DET_index(TRACERx_NEJM_2017_REVOLVER)
+#' 
+#' # Passing parameters to DET_index
+#' plot_DET_index(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
+plot_DET_index = function(x,  ...)
 {
   index = DET_index(x, ...)
+  cex = 1
   
   print(index)
   
@@ -32,17 +39,14 @@ plot_DET_index = function(x, cex = 1, ...)
     geom_bar(stat = 'identity') +
     coord_flip() +
     scale_fill_distiller(palette = 'Spectral', direction = 1) +
-    theme_minimal(base_size = 10 * cex) +
     labs(
-      y = "DET index",
+      title = 'DET index',
+      y = "index",
       x = 'Driver',
-      title = x$annotation
+      subtitle = x$annotation
       ) +
     guides(
-      fill = guide_colorbar("Number of distinct incoming drivers", barwidth  = unit(3 * cex, 'cm'))
+      fill = guide_colorbar("Upstream drivers", barwidth  = unit(3 * cex, 'cm'))
     ) +
-    theme(
-      legend.position = 'bottom',
-      legend.key.size = unit(3 * cex, 'mm')
-    ) 
+    my_ggplot_theme()
 }

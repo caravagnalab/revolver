@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract CCF/binary data for a patient — CCF • revolver</title>
+<title>Extract all CCF or binary data for a patient. — CCF • revolver</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,11 @@
 
 
 
-<meta property="og:title" content="Extract CCF/binary data for a patient — CCF" />
-<meta property="og:description" content="Extract CCF/binary data for a patient" />
+<meta property="og:title" content="Extract all CCF or binary data for a patient. — CCF" />
+<meta property="og:description" content="From a cohort object, this function extracts the tibble of
+all CCF or binary data for a patient. This is just a faster
+way to subset a generic call to Data." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -96,13 +99,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract CCF/binary data for a patient</h1>
+    <h1>Extract all CCF or binary data for a patient.</h1>
     
     <div class="hidden name"><code>CCF.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract CCF/binary data for a patient</p>
+    <p>From a cohort object, this function extracts the tibble of
+all CCF or binary data for a patient. This is just a faster
+way to subset a generic call to <code><a href='Data.html'>Data</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>CCF</span>(<span class='no'>x</span>, <span class='no'>p</span>)</pre>
@@ -112,26 +117,55 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"</p></td>
+      <td><p>A <code>REVOLVER</code> cohort.</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>a patient</p></td>
+      <td><p>The id of a patient in the cohort.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>CCF/binary data for <code>p</code></p>
+    <p>Data for a custom patient.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Getters: <code><a href='CCF_clusters.html'>CCF_clusters</a></code>,
+  <code><a href='Clonal_cluster.html'>Clonal_cluster</a></code>, <code><a href='Data.html'>Data</a></code>,
+  <code><a href='Drivers.html'>Drivers</a></code>, <code><a href='ITransfer.html'>ITransfer</a></code>,
+  <code><a href='Phylo.html'>Phylo</a></code>, <code><a href='Samples.html'>Samples</a></code>,
+  <code><a href='Subclonal.html'>Subclonal</a></code>, <code><a href='Truncal.html'>Truncal</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>CRC.cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘CRC.cohort’ not found</span></div><div class='input'><span class='fu'>CCF</span>(<span class='no'>CRC.cohort</span>, <span class='st'>'adenoma_3'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in FUN(X[[i]], ...): object 'CRC.cohort' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>CCF</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 8</span><span>
+#&gt;   id            variantID is.driver is.clonal cluster    R1    R2    R3
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> __mut_id_2120 RB1       TRUE      FALSE     1        0     0.92  0   
+#&gt; </span><span style='color: #555555;'>2</span><span> __mut_id_2151 IKZF1     TRUE      FALSE     1        0     0.92  0   
+#&gt; </span><span style='color: #555555;'>3</span><span> __mut_id_2171 KRAS      TRUE      FALSE     1        0     0.93  0   
+#&gt; </span><span style='color: #555555;'>4</span><span> __mut_id_2173 MET       TRUE      TRUE      2        0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>5</span><span> __mut_id_2236 TERT      TRUE      TRUE      2        0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>6</span><span> __mut_id_2333 NF1       TRUE      FALSE     5        0.78  0     0   
+#&gt; </span><span style='color: #555555;'>7</span><span> __mut_id_2351 EP300     TRUE      FALSE     6        0.96  0.03  0.98</div><div class='input'>
+<span class='fu'>CCF</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0008'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 7</span><span>
+#&gt;   id            variantID is.driver is.clonal cluster    R1    R2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> __mut_id_6744 KEAP1     TRUE      TRUE      2        0.99     1
+#&gt; </span><span style='color: #555555;'>2</span><span> __mut_id_6746 STK11     TRUE      TRUE      2        0.99     1
+#&gt; </span><span style='color: #555555;'>3</span><span> __mut_id_6753 PRDM1     TRUE      TRUE      2        0.99     1
+#&gt; </span><span style='color: #555555;'>4</span><span> __mut_id_6861 U2AF1     TRUE      TRUE      2        0.99     1
+#&gt; </span><span style='color: #555555;'>5</span><span> __mut_id_6886 MYC       TRUE      TRUE      2        0.99     1
+#&gt; </span><span style='color: #555555;'>6</span><span> __mut_id_6916 ARID2     TRUE      FALSE     3        0.86     0</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

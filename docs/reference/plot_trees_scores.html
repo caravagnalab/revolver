@@ -39,6 +39,7 @@ a bar, with height proportional to the tree score and
 colour to its particular combination of transfer. If
 the function is called on a vector of patient ids, the
 result is a list of plot." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,8 +114,8 @@ the function is called on a vector of patient ids, the
 result is a list of plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_trees_scores</span>(<span class='no'>x</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>patients</span>,
-  <span class='kw'>transfer_palette</span> <span class='kw'>=</span> <span class='no'>distinct_palette_few</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_trees_scores</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='kw'>transfer_palette</span> <span class='kw'>=</span> <span class='no'>distinct_palette_few</span>,
+  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,10 +123,6 @@ result is a list of plot.</p>
     <tr>
       <th>x</th>
       <td><p>A REVOLVER cohort object</p></td>
-    </tr>
-    <tr>
-      <th>patients</th>
-      <td><p>The plots</p></td>
     </tr>
     <tr>
       <th>transfer_palette</th>
@@ -140,6 +137,10 @@ an arbitrary number of colours to identify the transfers.</p></td>
       <th>...</th>
       <td><p>Extra parameters, unused.</p></td>
     </tr>
+    <tr>
+      <th>patients</th>
+      <td><p>The plots</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -147,9 +148,10 @@ an arbitrary number of colours to identify the transfers.</p></td>
     <p>A <code>ggplot</code> plot.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
-<span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='plot_trees_scores-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
+<span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0001'</span>)</div><div class='img'><img src='plot_trees_scores-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_trees_scores</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='img'><img src='plot_trees_scores-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

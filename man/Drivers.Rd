@@ -2,22 +2,36 @@
 % Please edit documentation in R/getter_functions.R
 \name{Drivers}
 \alias{Drivers}
-\title{Extract CCF/binary driver data for a patient}
+\title{Extract driver data for a patient.}
 \usage{
 Drivers(x, p)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{a patient}
+\item{p}{The id of a patient in the cohort.}
 }
 \value{
-CCF/binary drivers data for \code{p}
+Drivers data for a custom patient.
 }
 \description{
-Extract CCF/binary driver data for a patient
+From a cohort object, this function extracts the tibble of
+annotated driver events for a patient (either CCF or binary).
 }
 \examples{
-data(CRC.cohort)
-Drivers(CRC.cohort, 'adenoma_3')
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+Drivers(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+
+Drivers(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
+  \code{\link{DET_index}}, \code{\link{Data}},
+  \code{\link{ITransfer}}, \code{\link{Phylo}},
+  \code{\link{Samples}}, \code{\link{Subclonal}},
+  \code{\link{Truncal}}
+}
+\concept{Getters}

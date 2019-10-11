@@ -7,7 +7,7 @@
 plot_patient_data(x, patient, ...)
 }
 \arguments{
-\item{x}{A REVOLVER cohort object.}
+\item{x}{A \code{REVOLVER} cohort.}
 
 \item{patient}{A patient id.}
 
@@ -18,11 +18,26 @@ A figure assembled with \code{ggpubr}.
 }
 \description{
 This function creates a complex plot for the
-data of a patient, assembling plots returned from thw following
-functions: \code{\link{plot_data_clusters}}, 
-\code{\link{plot_data_clone_size}}, \code{\link{plot_data_mutation_burden}}
-and \code{plot_patient_oncoprint}.
+data of a patient, assembling plots returned from the following
+functions: 1) \code{\link{plot_data_clusters}},
+2) \code{\link{plot_data_clone_size}}, 3) \code{\link{plot_data_mutation_burden}}
+and 4) \code{plot_patient_oncoprint}.
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+plot_patient_data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_mutation_burden}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

@@ -1,0 +1,22 @@
+reference:
+- title: Getters functions
+  desc:  These functions can be used to extract data from a REVOLVER cohort object.
+  contents:
+  - Data
+  - Drivers
+  - Truncal
+  - Subclonal
+  - Samples
+  - Clonal_cluster
+  - CCF
+  - CCF_clusters
+  - Phylo
+  - ITransfer
+- title: Stats functions
+  desc:  These functions can be used to extract cohort-level statistics data from a REVOLVER cohort object.
+  contents:
+  - starts_with("Stats")
+- title: Plotting functions
+  desc:  These functions can be used to plot data, fits and clusters from a REVOLVER cohort object. 
+  contents:
+  - starts_with("plot_")

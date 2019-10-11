@@ -2,22 +2,16 @@
 % Please edit documentation in R/getter_functions.R
 \name{Cluster}
 \alias{Cluster}
-\title{Extract fitted model for a patient}
+\title{Get clustering information for patients.}
 \usage{
 Cluster(x, patients = x$patients)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort_fit"}
+\item{x}{A REVOLVEr cohort with fits and clusters.}
 
 \item{patients}{Patients to use, all by default.}
-
-\item{p}{a patient}
-
-\item{x}{A REVOLVEr cohort with fits and clusters.}
 }
 \value{
-fitted model for  \code{p}
-
 A tibble with the required clustering assignments
 }
 \description{
@@ -25,10 +19,5 @@ For a set of `patients` - all by default -
 extract the clustering information computed by REVOVLER.
 }
 \examples{
-data(CRC.cohort)
-
-Fit(revolver_fit(CRC.cohort), 'adenoma_3')
-Get clustering information for patients.
-
 TODO
 }

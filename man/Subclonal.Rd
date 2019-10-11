@@ -2,22 +2,36 @@
 % Please edit documentation in R/getter_functions.R
 \name{Subclonal}
 \alias{Subclonal}
-\title{Extract CCF/binary data for subclonal mutations of a patient}
+\title{Extract subclonal data for a patient.}
 \usage{
 Subclonal(x, p)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{a patient}
+\item{p}{The id of a patient in the cohort.}
 }
 \value{
-CCF/binary data for \code{p}'s subclonal mutations
+Subclonal data for a custom patient.
 }
 \description{
-Extract CCF/binary data for subclonal mutations of a patient
+From a cohort object, this function extracts the tibble of
+subclonal events for a patient (either CCF or binary).
 }
 \examples{
-data(CRC.cohort)
-Subclonal(CRC.cohort, 'adenoma_3')
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+Subclonal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+
+Subclonal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
+  \code{\link{DET_index}}, \code{\link{Data}},
+  \code{\link{Drivers}}, \code{\link{ITransfer}},
+  \code{\link{Phylo}}, \code{\link{Samples}},
+  \code{\link{Truncal}}
+}
+\concept{Getters}

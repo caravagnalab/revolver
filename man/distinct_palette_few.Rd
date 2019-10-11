@@ -4,14 +4,18 @@
 \alias{distinct_palette_few}
 \title{Palette of few distinct colours.}
 \usage{
-distinct_palette_few()
+distinct_palette_few(n = NULL)
+}
+\arguments{
+\item{n}{The number of required colours. By default this is NULL.}
 }
 \value{
 A function that applied to a number returns the required colours.
 }
 \description{
 ColorRamp palette extrapolating \code{Set1} palette of \code{RColorBrewer} package. The original \code{Set1} palette is
-sampled for 9 colours.
+sampled for 9 colours. This function can have the number of required colours
+as input parameter; if this does not happen a function is returned.
 }
 \examples{
 distinct_palette_few(2)

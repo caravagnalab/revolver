@@ -2,30 +2,49 @@
 % Please edit documentation in R/getter_functions.R
 \name{Phylo}
 \alias{Phylo}
-\title{Extract phylogenetic or mutation trees for a patient}
+\title{Extract the trees available for a patient.}
 \usage{
 Phylo(x, p, rank = NULL, data = "trees")
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{a patient}
+\item{p}{The id of a patient in the cohort.}
 
-\item{data}{Either `trees` or `fit`.}
+\item{rank}{The rank of the tree to extract.}
+
+\item{data}{Either `trees` or `fit`, which requires to have
+already computed the fit of the input cohort.}
 }
 \value{
-phylogenetic or mutation trees data for \code{p}
+Phylogenetic or mutation trees data for the patient.
 }
 \description{
-Extract phylogenetic or mutation trees for a patient
+From a cohort object, this function extracts the tree
+objects that are available for a patient. Parameters 
+can be set to retrieve a particular tree, or the fit
+tree which is however availble only after fitting the
+cohort data. This function can either return a 
+phylogenetic clone tree (R object \code{ctree}), or mutation 
+trees  (R object \code{btree}).
 }
 \examples{
-data(TRACERx_cohort)
-
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
 # Get all the trees for a patient
-Phylo(TRACERx_cohort, 'CRUK0002')
+Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 
 # Get a specific tree for a patient
-Phylo(TRACERx_cohort, 'CRUK0002', rank = 2)
+Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 2)
 # Get the fit tree for a patient
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
+  \code{\link{DET_index}}, \code{\link{Data}},
+  \code{\link{Drivers}}, \code{\link{ITransfer}},
+  \code{\link{Samples}}, \code{\link{Subclonal}},
+  \code{\link{Truncal}}
+}
+\concept{Getters}

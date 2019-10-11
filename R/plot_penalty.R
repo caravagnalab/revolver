@@ -1,4 +1,4 @@
-#' Plot the fit penalty
+#' Plot the fit penalty.
 #' 
 #' @description 
 #' 
@@ -11,7 +11,7 @@
 #' out by function \code{revolver:::enrichment_test_incoming_edge}, which can
 #' be used to obtain a tidy representation of the tests' results.
 #'
-#' @param x A REVOLVER cohort with fit models.
+#' @param x A REVOLVER object with fits.
 #' @param drivers The list of drivers to use; by default all of them. If the
 #' entry is a subset of the actual list of all drivers, all the entries in the
 #' penalty data structure \code{x$fit$penalty} will be used if they involve at
@@ -21,25 +21,29 @@
 #' @param alpha_level The significance level for the enrichment Fisher test.
 #' @param drivers_palette A function that can return, for an input number,
 #' a number of colours.
-#' @param cex The cex of the plot.
-#' @param ... Other unused parameters.
 #'
 #' @return A ggplot object for this plot.
 #' 
 #' @export
 #'
 #' @examples
-#' TODO
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' plot_penalty(TRACERx_NEJM_2017_REVOLVER)
+#' 
+#' plot_penalty(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
+#' 
+#' plot_penalty(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5, alpha_level = 0.001)
 plot_penalty = function(x,
                         drivers = x$variantIDs.driver,
                         min.occurrences = 0,
                         alpha_level = 0.05,
-                        drivers_palette = colorRampPalette(RColorBrewer::brewer.pal(n = 9, "Set1")),
-                        cex = 1,
-                        ...
+                        drivers_palette = distinct_palette_many
                         )
 {
-  # TODO - check input x for fits
+  stop_not_revolver_object(x)
+  obj_has_fit(x)
 
   # Penalty for the required nodes
   E = x$fit$penalty %>%
@@ -77,13 +81,8 @@ plot_penalty = function(x,
   ggplot(E,
          aes(y = count, x = to)) +
     geom_bar(aes(fill = from), stat = 'identity') +
-    coord_flip() +
-    theme_minimal(base_size = 10 * cex) +
+    coord_flip(clip = 'off') +
     scale_fill_manual(values = drivers_colors) +
-    theme(
-      legend.position = 'bottom',
-      legend.key.size = unit(3, 'mm')
-    ) +
     labs(
       title = paste0("Counts for trajectories detected at least ", min.occurrences, " times"),
       subtitle =
@@ -96,9 +95,10 @@ plot_penalty = function(x,
       data = tests_labels,
       aes(label = label), 
       color = 'black', 
-      size = 2 * cex, 
+      size = 2, 
       hjust = 0
-      )
+      ) +
+    my_ggplot_theme()
 }
 
 
@@ -165,7 +165,7 @@ enrichment_test_incoming_edge = function(E, alpha_level = 0.05)
   N_by_gene_v = N_by_gene %>% pull(N)
   names(N_by_gene_v) = N_by_gene %>% pull(to)
   
-  # MHT
+  # MHT - adjustment for FWER
   tests = tests %>%
     mutate(
       alpha_level = !!alpha_level,
@@ -173,6 +173,10 @@ enrichment_test_incoming_edge = function(E, alpha_level = 0.05)
       psign = p.value < alpha_level/N
     ) %>%
     arrange(p.value)
+  
+  pioDisp(tests %>% filter(psign))
+  
+  return(tests)
 }
 
 # plot_enrichment_test = function(x, alpha_level = 0.05)

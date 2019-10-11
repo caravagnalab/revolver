@@ -4,18 +4,18 @@
 \alias{distinct_palette_many}
 \title{Palette of \code{n} distinct colours.}
 \usage{
-distinct_palette_many(n)
+distinct_palette_many(n = NULL)
 }
 \arguments{
-\item{n}{The number of required colours.}
+\item{n}{The number of required colours. By default this is NULL.}
 }
 \value{
 A function that applied to a number returns the required colours.
 }
 \description{
 ColorRamp palette extrapolating all qualitative (\code{qual}) palettes from
-the \code{RColorBrewer} package. This function requires the number of required colours
-as input parameter.
+the \code{RColorBrewer} package. This function can have the number of required colours
+as input parameter; if this does not happen a function is returned.
 }
 \examples{
 distinct_palette_many(2)

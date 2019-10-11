@@ -26,5 +26,20 @@ number of total drivers in the patient, and using
 as shape the number of clones with drivers.
 }
 \examples{
-TODO
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+ 
+plot_patient_mutation_burden(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+plot_patient_mutation_burden(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
+\seealso{
+Other Plotting functions: \code{\link{plot_CCF_histogram}},
+  \code{\link{plot_DET_index}},
+  \code{\link{plot_drivers_clonality}},
+  \code{\link{plot_drivers_occurrence}},
+  \code{\link{plot_graph_drivers}},
+  \code{\link{plot_patient_data}},
+  \code{\link{plot_patient_oncoprint}},
+  \code{\link{plot_trees_scores}}
+}
+\concept{Plotting functions}

@@ -3,13 +3,13 @@
 \docType{data}
 \name{TRACERx_cohort}
 \alias{TRACERx_cohort}
-\title{Analysis of the TRACERx cohort, with REVOLVER. The input object ofr the analysis is "TRACERx_data"}
+\title{Analysis of the TRACERx cohort, with REVOLVER.}
 \format{A REVOLVER cohort object with fits, etc.}
 \usage{
 data(TRACERx_cohort)
 }
 \description{
-Analysis of the TRACERx cohort, with REVOLVER. The input object ofr the analysis is "TRACERx_data"
+The input object for the analysis is available via the external package
 }
 \examples{
 data(TRACERx_cohort)

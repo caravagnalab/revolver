@@ -1,13 +1,24 @@
-#' Title
+#' Plot the clonality status of cohort driver events.
+#' 
+#' @description 
+#' 
+#' Driver events can be annotated in clonal or subclonal clusters.
+#' This function reports this information in a barplot.
 #'
-#' @param x 
-#' @param cex 
+#' @param x A \code{REVOLVER} cohort.
 #'
-#' @return
+#' @return A \code{ggplot} object of the plot.
+#' 
+#' @family Plotting functions
+#' 
 #' @export
 #'
 #' @examples
-plot_drivers_clonality = function(x, cex = 1)
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'  
+#' plot_drivers_clonality(TRACERx_NEJM_2017_REVOLVER)
+plot_drivers_clonality = function(x)
 {
   # Get drivers, mirrored
   st = Stats_drivers(x) %>%
