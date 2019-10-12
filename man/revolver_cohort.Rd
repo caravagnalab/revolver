@@ -47,6 +47,7 @@ plot(cohort)
 \seealso{
 Other Cohort creation: \code{\link{CCF_parser}},
   \code{\link{compute_clone_trees}},
+  \code{\link{compute_mutation_trees}},
   \code{\link{input_custom_trees}},
   \code{\link{revolver_check_cohort}}
 }

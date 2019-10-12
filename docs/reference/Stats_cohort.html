@@ -82,6 +82,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/Getters.html">Getter functions</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -139,29 +151,29 @@
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
 <span class='co'># Get the stats for all patients</span>
-<span class='fu'>Stats_cohort</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 99 x 7</span><span>
+<span class='fu'>Stats_cohort</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 99 x 7</span><span>
 #&gt;    patientID numBiopsies numMutations numDriverMutati… numClonesWithDr…
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> CRUK0001            3            7                7                4
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> CRUK0002            3            7                7                4
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> CRUK0003            5            4                4                2
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> CRUK0004            4            4                4                2
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> CRUK0005            4            6                6                2
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> CRUK0006            2            6                6                3
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CRUK0007            2            3                3                1
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CRUK0008            2            6                6                2
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CRUK0009            4            7                7                2
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> CRUK0010            2            3                3                1
-#&gt; </span><span style='color: #949494;'># … with 89 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> CRUK0001            3            7                7                4
+#&gt; </span><span style='color: #555555;'> 2</span><span> CRUK0002            3            7                7                4
+#&gt; </span><span style='color: #555555;'> 3</span><span> CRUK0003            5            4                4                2
+#&gt; </span><span style='color: #555555;'> 4</span><span> CRUK0004            4            4                4                2
+#&gt; </span><span style='color: #555555;'> 5</span><span> CRUK0005            4            6                6                2
+#&gt; </span><span style='color: #555555;'> 6</span><span> CRUK0006            2            6                6                3
+#&gt; </span><span style='color: #555555;'> 7</span><span> CRUK0007            2            3                3                1
+#&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0008            2            6                6                2
+#&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0009            4            7                7                2
+#&gt; </span><span style='color: #555555;'>10</span><span> CRUK0010            2            3                3                1
+#&gt; </span><span style='color: #555555;'># … with 89 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='co'># And subset the patients</span>
-<span class='fu'>Stats_cohort</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 7</span><span>
+<span class='fu'>Stats_cohort</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
 #&gt;   patientID numBiopsies numMutations numDriverMutati… numClonesWithDr…
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> CRUK0001            3            7                7                4
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> CRUK0002            3            7                7                4
-#&gt; </span><span style='color: #949494;'># … with 2 more variables: numTruncalMutations </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> CRUK0001            3            7                7                4
+#&gt; </span><span style='color: #555555;'>2</span><span> CRUK0002            3            7                7                4
+#&gt; </span><span style='color: #555555;'># … with 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

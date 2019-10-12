@@ -1,165 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>caravagn.github.io/REVOLVER/index.html</loc>
+    <loc>caravagn.github.io/revolver/index.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/CCF.html</loc>
+    <loc>caravagn.github.io/revolver/reference/CCF.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/CCF_clusters.html</loc>
+    <loc>caravagn.github.io/revolver/reference/CCF_clusters.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/CCF_parser.html</loc>
+    <loc>caravagn.github.io/revolver/reference/CCF_parser.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Clonal_cluster.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Clonal_cluster.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Cluster.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Cluster.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/DET_index.html</loc>
+    <loc>caravagn.github.io/revolver/reference/DET_index.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Data.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Data.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Drivers.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Drivers.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/ITransfer.html</loc>
+    <loc>caravagn.github.io/revolver/reference/ITransfer.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Phylo.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Phylo.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Samples.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Samples.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Stats.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Stats.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Stats_cohort.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Stats_cohort.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Stats_drivers.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Stats_drivers.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Stats_fits.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Stats_fits.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Stats_trees.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Stats_trees.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Subclonal.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Subclonal.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/Truncal.html</loc>
+    <loc>caravagn.github.io/revolver/reference/Truncal.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/compute_clone_trees.html</loc>
+    <loc>caravagn.github.io/revolver/reference/compute_clone_trees.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/distinct_palette_few.html</loc>
+    <loc>caravagn.github.io/revolver/reference/compute_mutation_trees.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/distinct_palette_many.html</loc>
+    <loc>caravagn.github.io/revolver/reference/distinct_palette_few.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/get_features.html</loc>
+    <loc>caravagn.github.io/revolver/reference/distinct_palette_many.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/gradient_palette.html</loc>
+    <loc>caravagn.github.io/revolver/reference/get_features.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/input_custom_trees.html</loc>
+    <loc>caravagn.github.io/revolver/reference/gradient_palette.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot.rev_cohort.html</loc>
+    <loc>caravagn.github.io/revolver/reference/input_custom_trees.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot.rev_cohort_fit.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot.rev_cohort.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_DET_index.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot.rev_cohort_fit.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_clusters.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_DET_index.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_drivers_clonality.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_clusters.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_drivers_graph.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_drivers_clonality.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_drivers_occurrence.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_drivers_graph.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_patient_CCF_histogram.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_drivers_occurrence.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_patient_data.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_patient_CCF_histogram.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_patient_mutation_burden.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_patient_data.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_patient_oncoprint.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_patient_mutation_burden.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_patient_trees.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_patient_oncoprint.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_patient_trees_scores.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_patient_trees.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/plot_penalty.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_patient_trees_scores.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/print.rev_cohort.html</loc>
+    <loc>caravagn.github.io/revolver/reference/plot_penalty.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/print.rev_cohort_fit.html</loc>
+    <loc>caravagn.github.io/revolver/reference/print.rev_cohort.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_check_cohort.html</loc>
+    <loc>caravagn.github.io/revolver/reference/print.rev_cohort_fit.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_cluster.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_check_cohort.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_cohort.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_cluster.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_compute_CLtrees.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_cohort.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_deletePatients.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_compute_CLtrees.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_fit.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_deletePatients.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_jackknife.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_fit.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_plt_jackknife_coclust.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_jackknife.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_plt_jackknife_coclust_bplot.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_plt_jackknife_coclust.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_plt_jackknife_edge_counts.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_plt_jackknife_coclust_bplot.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_plt_jackknife_edge_prb.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_plt_jackknife_edge_counts.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_removeDriver.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_plt_jackknife_edge_prb.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/REVOLVER/reference/revolver_subsetDrivers.html</loc>
+    <loc>caravagn.github.io/revolver/reference/revolver_removeDriver.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/revolver_subsetDrivers.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/articles/Getters.html</loc>
   </url>
 </urlset>

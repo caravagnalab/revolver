@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot jackknife statistics for the number of patients with an edge. — revolver_plt_jackknife_edge_counts • revolver</title>
+<title>Articles • revolver</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,7 @@
 
 
 
-<meta property="og:title" content="Plot jackknife statistics for the number of patients with an edge. — revolver_plt_jackknife_edge_counts" />
-<meta property="og:description" content="Plot jackknife statistics for the number of patients with an edge." />
+<meta property="og:title" content="Articles" />
 <meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -54,7 +53,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -117,58 +116,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot jackknife statistics for the number of patients with an edge.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/lib_plot_jackknife.R'><code>R/lib_plot_jackknife.R</code></a></small>
-    <div class="hidden name"><code>revolver_plt_jackknife_edge_counts.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Plot jackknife statistics for the number of patients with an edge.</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <ul>
+        <li><a href="Getters.html">Getter functions</a></li>
+      </ul>
     </div>
-
-    <pre class="usage"><span class='fu'>revolver_plt_jackknife_edge_counts</span>(<span class='no'>x</span>, <span class='kw'>cutoff.annotate.numEdges</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>An object obtained as output of <code><a href='revolver_jackknife.html'>revolver_jackknife</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>cutoff.annotate.numEdges</th>
-      <td><p>Minimum mean value to filter some low-freq edges.</p></td>
-    </tr>
-    <tr>
-      <th>cex</th>
-      <td><p>Cex graphics.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>Output file, because multiple plots are generated this should always be a file.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>None</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>It plots a boxplot with the result of the jackknife computations.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>Breast.fit</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘Breast.fit’ not found</span></div><div class='input'><span class='fu'>revolver_plt_jackknife_edge_counts</span>(<span class='no'>Breast.fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in obj_has_clusters(x): object 'Breast.fit' not found</span></div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
   </div>
 </div>
 

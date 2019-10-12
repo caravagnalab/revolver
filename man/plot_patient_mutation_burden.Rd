@@ -12,8 +12,6 @@ plot_patient_mutation_burden(x, patient, ...)
 \item{patient}{A patient id.}
 
 \item{...}{Extra parameters, not used.}
-
-\item{cex}{Cex of the plot.}
 }
 \value{
 A \code{ggplot} plot.

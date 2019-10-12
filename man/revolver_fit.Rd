@@ -46,3 +46,7 @@ print(new_fit)
 \references{
 Caravagna et al., Nature Methods volume 15, pages 707–714, 2018; https://www.nature.com/articles/s41592-018-0108-x
 }
+\seealso{
+Other Analysis functions: \code{\link{revolver_cluster}}
+}
+\concept{Analysis functions}

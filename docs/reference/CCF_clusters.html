@@ -83,6 +83,18 @@ all clusters in the data of a patient." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/Getters.html">Getter functions</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -147,18 +159,18 @@ all clusters in the data of a patient.</p>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
-<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 7</span><span>
+<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 7</span><span>
 #&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98</div><div class='input'>
-<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0008'</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 6</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98</div><div class='input'>
+<span class='fu'>CCF_clusters</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0008'</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 6</span><span>
 #&gt;   cluster nMuts is.driver is.clonal    R1    R2
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 2           5 TRUE      TRUE       0.99     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 3           1 TRUE      FALSE      0.86     0</div></span></pre>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 2           5 TRUE      TRUE       0.99     1
+#&gt; </span><span style='color: #555555;'>2</span><span> 3           1 TRUE      FALSE      0.86     0</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

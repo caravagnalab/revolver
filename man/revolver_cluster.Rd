@@ -2,7 +2,7 @@
 % Please edit documentation in R/revolver_cluster.R
 \name{revolver_cluster}
 \alias{revolver_cluster}
-\title{Compute hierarchical clustering for a REVOLVER cohort}
+\title{Compute hierarchical clustering for a REVOLVER cohort.}
 \usage{
 revolver_cluster(x, patients = x$patients, hc.method = "ward",
   split.method = "cutreeHybrid", min.group.size = 2)
@@ -10,24 +10,29 @@ revolver_cluster(x, patients = x$patients, hc.method = "ward",
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
 
-\item{hc.method}{Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.}
+\item{hc.method}{Method for hierarchial clustering, anything that can be
+passed to the \code{agnes} function of the \code{cluster} package.}
 
-\item{split.method}{Method to cut the dendrogram, see \code{\link{revolver_infoclustering}}.}
+\item{split.method}{Method to cut the dendrogram, anything of 
+\code{cutreeDynamic}, \code{cutreeDynamicTree} or \code{cutreeHybrid} which are
+available in the \code{dynamicTreeCut} package, or \code{static} to use the
+\code{find_k} function from the \code{dendextend} package.}
 
 \item{min.group.size}{Minimum group size for \code{dynamicTreeCut} functions.}
 }
 \value{
-The input \code{x} with a modified field \code{cluster} with results.
+The input \code{x} with a modified field \code{cluster} that
+stores all relevant clustering results.
 }
 \description{
-Compute hierarchical clustering for a REVOLVER cohort
-}
-\details{
 Compute hierarchical clustering for a REVOLVER cohort with fit models.
-You might want to see functions \code{\link{revolver_evo_distance}} and
-\code{\link{revolver_infoclustering}} to first compute REVOLVER's
-evolutionary distance, and inspect basic parameter values and the clusters
-that they allow to identify.
+To compute clusters first a pairwise distance is computed between
+the patients, then the \code{cluster} package is used to compute a 
+dendrogram of the patients, and is split using the heuristic dendrogram-cutting
+functions available in the \code{dynamicTreeCut} package. This function accepts
+parameters that are forwarded to the functions to carry out this task.
+
+Results are stored inside the field \code{cluster} of the returned object.
 }
 \examples{
 data(CRC.cohort)
@@ -35,3 +40,7 @@ fit = revolver_fit(CRC.cohort)
 fit = revolver_evo_distance(fit)
 fit = revolver_cluster(fit) # dumped also to disk
 }
+\seealso{
+Other Analysis functions: \code{\link{revolver_fit}}
+}
+\concept{Analysis functions}

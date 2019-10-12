@@ -1,24 +1,34 @@
 
-#' @title Compute hierarchical clustering for a REVOLVER cohort
+#' @title Compute hierarchical clustering for a REVOLVER cohort.
 #'
-#' @details
+#' @description 
 #' Compute hierarchical clustering for a REVOLVER cohort with fit models.
-#' You might want to see functions \code{\link{revolver_evo_distance}} and
-#' \code{\link{revolver_infoclustering}} to first compute REVOLVER's
-#' evolutionary distance, and inspect basic parameter values and the clusters
-#' that they allow to identify.
+#' To compute clusters first a pairwise distance is computed between
+#' the patients, then the \code{cluster} package is used to compute a 
+#' dendrogram of the patients, and is split using the heuristic dendrogram-cutting
+#' functions available in the \code{dynamicTreeCut} package. This function accepts
+#' parameters that are forwarded to the functions to carry out this task.
+#' 
+#' Results are stored inside the field \code{cluster} of the returned object.
 #'
 #' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
-#' @param hc.method Method for hierarchial clustering, see \code{\link{revolver_infoclustering}}.
-#' @param split.method Method to cut the dendrogram, see \code{\link{revolver_infoclustering}}.
+#' @param hc.method Method for hierarchial clustering, anything that can be
+#' passed to the \code{agnes} function of the \code{cluster} package.
+#' @param split.method Method to cut the dendrogram, anything of 
+#' \code{cutreeDynamic}, \code{cutreeDynamicTree} or \code{cutreeHybrid} which are
+#' available in the \code{dynamicTreeCut} package, or \code{static} to use the
+#' \code{find_k} function from the \code{dendextend} package.
 #' @param min.group.size Minimum group size for \code{dynamicTreeCut} functions.
 #'
-#' @return The input \code{x} with a modified field \code{cluster} with results.
+#' @return The input \code{x} with a modified field \code{cluster} that
+#' stores all relevant clustering results.
 #' @export
+#' @family Analysis functions
 #' 
 #' @import crayon
 #' @import cluster
 #' @import dendextend
+#' @import dynamicTreeCut
 #'
 #' @examples
 #' data(CRC.cohort)
@@ -82,7 +92,7 @@ revolver_cluster = function(
       distances[patients[p1], patients[p2]] = bind_rows(p1_IT, p2_IT) %>%
         distinct() %>%
         pull(count) %>%
-        sum()
+        sum
     }
   }
    
@@ -142,89 +152,5 @@ revolver_cluster = function(
 }
 
 
-
-# Function that splits a dendrogram wrapping calls via other packages
-# that are specialized in dendrogram-cutting heuristics
-split_dendrogram = function(
-  cluster,
-  method,
-  min.group
-  )
-{
-  # Clustering assignments
-  labels = NULL
-  
-  # Cutting methods from the external package
-  if (method == 'cutreeDynamic')
-  {
-    labels = dynamicTreeCut::cutreeDynamic(
-      as.hclust(cluster$fits$hc),
-      minClusterSize = min.group,
-      method = 'tree'
-      )
-    
-    labels = labels[order.dendrogram(cluster$fits$dendrogram)]
-    names(labels) = cluster$fits$hc$order.lab
-  }
-  
-  if (method == 'cutreeDynamicTree')
-  {
-    labels = dynamicTreeCut::cutreeDynamicTree(
-      as.hclust(cluster$fits$hc),
-      deepSplit = TRUE,
-      minModuleSize = min.group)
-    
-    labels = labels[order.dendrogram(cluster$fits$dendrogram)]
-    names(labels) = cluster$fits$hc$order.lab
-  }
-  
-  if (method == 'cutreeHybrid')
-  {
-    w = capture.output({
-      labels = dynamicTreeCut::cutreeHybrid(
-        as.hclust(cluster$fits$hc),
-        cluster$distances$matrix,
-        minClusterSize = min.group)$labels
-    })
-    
-    labels = labels[order.dendrogram(cluster$fits$dendrogram)]
-    names(labels) = cluster$fits$hc$order.lab
-  }
-  
-  if (method == 'static')
-  {
-    K = ceiling(
-      length(
-        as.hclust(cluster$fits$hc)$labels
-        ) / min.group
-      )
-    
-    dend_k = dendextend::find_k(
-      cluster$fits$dendrogram, 
-      krange = 1:K
-      )
-    
-    labels = dend_k$pamobject$clustering
-  }
-  
-  # Splits are complete, we format some output now
-  # checking for errors etc
-  if (is.null(labels)) stop('Unknown split method, aborting.')
-  
-  K = length(unique(labels))
-  if(K == 1) message(
-    "Clustering split returned only 1 cluster, does this make sense?"
-  )
-  
-  labels = pio:::nmfy(
-    names(labels),
-    paste('C', labels, sep = '')
-  ) 
-  
-  
-  return(
-    list(K = K, labels = labels)
-    )
-}
 
 

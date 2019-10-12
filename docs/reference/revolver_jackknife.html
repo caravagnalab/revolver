@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Computation of fit confidence with the jackknife. — revolver_jackknife • revolver</title>
+<title>Compute clusters stability via the jackknife. — revolver_jackknife • revolver</title>
 
 
 <!-- jquery -->
@@ -33,9 +33,20 @@
 
 
 
-<meta property="og:title" content="Computation of fit confidence with the jackknife. — revolver_jackknife" />
-<meta property="og:description" content="Computation of fit confidence with the jackknife." />
-<meta property="og:image" content="caravagn.github.io/REVOLVER/logo.png" />
+<meta property="og:title" content="Compute clusters stability via the jackknife. — revolver_jackknife" />
+<meta property="og:description" content="For a set of clusters computed via revolver_cluster, you can compute
+their stability via a jackknife. routine. This funcion runs a kind of bootstrap 
+routine where subset of patients - a desired number - is removed from the cohort and
+before re-computing the clusters. In this way, the co-clustering probability of each
+patient is computed, which leads to a mean clustering stability for each one of the
+original set of clusters and a frequency for the inference of a particular evolutionary
+trajectory.
+A number of functions are available to plot the results from this jackknife analysis.
+Note that in general if you require a large number of runs (i.e., resamples), this 
+computation can take some time. This implementation leverages on the easypar 
+package to run in parallel all the re-runs, therefore we suggest to run it on a 
+multi-core machine to appreciate a speed up in the computations." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -82,13 +93,25 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/Getters.html">Getter functions</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/caravagn/REVOLVER">
+  <a href="https://github.com/caravagn/revolver">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -105,13 +128,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Computation of fit confidence with the jackknife.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/caravagn/REVOLVER/blob/master/R/rev_jackknife.R'><code>R/rev_jackknife.R</code></a></small>
+    <h1>Compute clusters stability via the jackknife.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/revolver_jackknife.R'><code>R/revolver_jackknife.R</code></a></small>
     <div class="hidden name"><code>revolver_jackknife.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Computation of fit confidence with the jackknife.</p>
+    <p>For a set of clusters computed via <code><a href='revolver_cluster.html'>revolver_cluster</a></code>, you can compute
+their stability via a jackknife. routine. This funcion runs a kind of bootstrap 
+routine where subset of patients - a desired number - is removed from the cohort and
+before re-computing the clusters. In this way, the co-clustering probability of each
+patient is computed, which leads to a mean clustering stability for each one of the
+original set of clusters and a frequency for the inference of a particular evolutionary
+trajectory.</p>
+<p>A number of functions are available to plot the results from this jackknife analysis.
+Note that in general if you require a large number of runs (i.e., resamples), this 
+computation can take some time. This implementation leverages on the <code>easypar</code> 
+package to run in parallel all the re-runs, therefore we suggest to run it on a 
+multi-core machine to appreciate a speed up in the computations.</p>
     </div>
 
     <pre class="usage"><span class='fu'>revolver_jackknife</span>(<span class='no'>cohort</span>, <span class='kw'>resamples</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>leave.out</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
@@ -127,7 +161,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cohort</th>
-      <td><p>A cohort object where fit and clusters have been computed/</p></td>
+      <td><p>A cohort object where fit and clusters have been computed.</p></td>
     </tr>
     <tr>
       <th>resamples</th>

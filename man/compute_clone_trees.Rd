@@ -42,6 +42,7 @@ Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1)
 }
 \seealso{
 Other Cohort creation: \code{\link{CCF_parser}},
+  \code{\link{compute_mutation_trees}},
   \code{\link{input_custom_trees}},
   \code{\link{revolver_check_cohort}},
   \code{\link{revolver_cohort}}

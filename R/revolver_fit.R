@@ -27,7 +27,7 @@
 #' REVOLVER cohort object with fits available.
 #'
 #' @export
-#'
+#' @family Analysis functions
 #' @import easypar
 #' @import crayon
 #'

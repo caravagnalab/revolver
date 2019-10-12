@@ -52,6 +52,7 @@ TRACERx_NEJM_2017_REVOLVER = input_custom_trees(
 \seealso{
 Other Cohort creation: \code{\link{CCF_parser}},
   \code{\link{compute_clone_trees}},
+  \code{\link{compute_mutation_trees}},
   \code{\link{revolver_check_cohort}},
   \code{\link{revolver_cohort}}
 }

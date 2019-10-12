@@ -1,6 +1,22 @@
-#' Computation of fit confidence with the jackknife.
+#' Compute clusters stability via the jackknife.
+#' 
+#' @description 
+#' 
+#' For a set of clusters computed via \code{\link{revolver_cluster}}, you can compute
+#' their stability via a jackknife. routine. This funcion runs a kind of bootstrap 
+#' routine where subset of patients - a desired number - is removed from the cohort and
+#' before re-computing the clusters. In this way, the co-clustering probability of each
+#' patient is computed, which leads to a mean clustering stability for each one of the
+#' original set of clusters and a frequency for the inference of a particular evolutionary
+#' trajectory.
+#' 
+#' A number of functions are available to plot the results from this jackknife analysis.
+#' Note that in general if you require a large number of runs (i.e., resamples), this 
+#' computation can take some time. This implementation leverages on the \code{easypar} 
+#' package to run in parallel all the re-runs, therefore we suggest to run it on a 
+#' multi-core machine to appreciate a speed up in the computations.
 #'
-#' @param cohort A cohort object where fit and clusters have been computed/
+#' @param cohort A cohort object where fit and clusters have been computed.
 #' @param resamples Number of jackknife samples.
 #' @param removal A number in \code{[0,1]} for the percentage of samples to leave out in each jackknife iteration.
 #' @param cores.ratio Ratio of cores for parallel execution
@@ -32,6 +48,9 @@ revolver_jackknife = function(cohort,
   stopifnot(leave.out > 0 & leave.out < 1)
   stopifnot(resamples > 1)
 
+  warning("October 2019 - this is to be implemented with the new easypar.")
+  return(cohort)
+  
   patients = cohort$patients
   npatients = length(patients)
 
