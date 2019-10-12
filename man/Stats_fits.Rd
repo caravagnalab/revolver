@@ -15,7 +15,7 @@ Stats_fits(x, patients = x$patients)
 A tibble with the fits stastics.
 }
 \description{
-Returns a tibble that extends the result of 
+Returns a tibble that extends the result of
 \code{\link{Stats_trees}} with information about the fit models.
 Compared to summaries returns by other \code{Stats_*} functions,
 the information from this one is precomputed.
@@ -25,10 +25,10 @@ the information from this one is precomputed.
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
 # Get the stats for all patients
-Stats_fits(TRACERx_NEJM_2017_REVOLVER) 
+Stats_fits(TRACERx_NEJM_2017_REVOLVER)
 
 # And subset the patients
-Stats_fits(TRACERx_NEJM_2017_REVOLVER, patients = c('CRUK0001', 'CRUK0002')) 
+Stats_fits(TRACERx_NEJM_2017_REVOLVER, patients = c('CRUK0001', 'CRUK0002'))
 }
 \seealso{
 Other Summary statistics: \code{\link{DET_index}},

@@ -23,10 +23,10 @@ in the cohort. The function can be run on a subset of patients.
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
 # Get the stats for all patients
-Stats_trees(TRACERx_NEJM_2017_REVOLVER) 
+Stats_trees(TRACERx_NEJM_2017_REVOLVER)
 
 # And subset the patients
-Stats_trees(TRACERx_NEJM_2017_REVOLVER, patients = c('CRUK0001', 'CRUK0002')) 
+Stats_trees(TRACERx_NEJM_2017_REVOLVER, patients = c('CRUK0001', 'CRUK0002'))
 }
 \seealso{
 Other Summary statistics: \code{\link{DET_index}},
