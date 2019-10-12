@@ -2,30 +2,37 @@
 % Please edit documentation in R/CCF_parser.R
 \name{CCF_parser}
 \alias{CCF_parser}
-\title{Builtin CCF parser function.}
+\title{Parser function for the  required \code{CCF} input field.}
 \usage{
 CCF_parser(x)
 }
 \arguments{
-\item{x}{The string to parse, the accepted format for this functio is something like "R1:0.1;R2:0.4;R3:0.9".}
+\item{x}{The string to parse, the accepted format for this function
+is something like \code{R1:0.1;R2:0.4;R3:0.9}.}
 }
 \value{
 A parsed named vector.
 }
 \description{
 This function can parse a string
-in the format `R1:0.1;R2:0.4;R3:0.9` to extract
-a 3-dimensional named vector with names `R1`, `R2` and
-`R3`, and values `0.1`, `0.4` and `0.9`. This function
-can be used when parsing an input dataset in function
-\code{revolver_cohort}.
+in the format \code{R1:0.1;R2:0.4;R3:0.9} to extract
+a 3-dimensional named vector with names \code{R1}, \code{R2} and
+\code{R3}, and values \code{0.1}, \code{0.4} and \code{0.9}. 
+
+This function can be used when parsing an input dataset in 
+\code{revolver_cohort}, the function that creates a \code{REVOLVER} cohort.
 }
 \note{
-This function will not convert
-the types of the parsed entries, and will therefore
-return strings.
+This function will not convert the types of the parsed entries.
 }
 \examples{
 # The output is a string 3-dimensional vector  
 CCF_parser("R1:0.1;R2:0.4;R3:0.9")
 }
+\seealso{
+Other Cohort creation: \code{\link{compute_clone_trees}},
+  \code{\link{input_custom_trees}},
+  \code{\link{revolver_check_cohort}},
+  \code{\link{revolver_cohort}}
+}
+\concept{Cohort creation}

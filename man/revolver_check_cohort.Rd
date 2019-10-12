@@ -7,7 +7,7 @@
 revolver_check_cohort(x, stopOnError = FALSE)
 }
 \arguments{
-\item{x}{An object of class \code{"rev_cohort"}}
+\item{x}{A \code{REVOLVER} cohort.}
 
 \item{stopOnError}{Whether or not it should raise a stop on error.}
 }
@@ -16,16 +16,23 @@ Nothing, all relevant information are print to screen
 and the stop is raised only if \code{stopOnError = TRUE}.
 }
 \description{
-Check basic inconsistencies in a REVOLVER cohort.
-}
-\details{
 Perform some basic diagnostic of a cohort object.
 It will inform of patients without drivers and other
 information that can be used to reshape the data before
 fitting a model.
 }
 \examples{
-data(CRC.cohort)
-revolver_check_cohort(CRC.cohort)
-print(CRC.cohort) # calls this anyway
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+revolver_check_cohort(TRACERx_NEJM_2017_REVOLVER)
+
+print(TRACERx_NEJM_2017_REVOLVER) # calls this anyway
 }
+\seealso{
+Other Cohort creation: \code{\link{CCF_parser}},
+  \code{\link{compute_clone_trees}},
+  \code{\link{input_custom_trees}},
+  \code{\link{revolver_cohort}}
+}
+\concept{Cohort creation}

@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return summary stastics for the cohort's trees — Stats_trees • revolver</title>
+<title>Summary statistics for the cohort's trees. — Stats_trees • revolver</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,12 +32,13 @@
 
 
 
-<meta property="og:title" content="Return summary stastics for the cohort's trees — Stats_trees" />
 
-<meta property="og:description" content="Returns the number of clonal and subclonal occurrences
-of each driver in the cohort, and their percentage relative to the
-cohort size. The function can be run on a subset of patients." />
+<meta property="og:title" content="Summary statistics for the cohort's trees. — Stats_trees" />
+<meta property="og:description" content="Returns the statistics about the trees that are available
+in the cohort. The function can be run on a subset of patients." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -80,10 +83,17 @@ cohort size. The function can be run on a subset of patients." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -96,56 +106,72 @@ cohort size. The function can be run on a subset of patients." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return summary stastics for the cohort's trees</h1>
-    
+    <h1>Summary statistics for the cohort's trees.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/stats_functions.R'><code>R/stats_functions.R</code></a></small>
     <div class="hidden name"><code>Stats_trees.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Returns the number of clonal and subclonal occurrences
-of each driver in the cohort, and their percentage relative to the
-cohort size. The function can be run on a subset of patients.</p>
-    
+    <p>Returns the statistics about the trees that are available
+in the cohort. The function can be run on a subset of patients.</p>
     </div>
 
     <pre class="usage"><span class='fu'>Stats_trees</span>(<span class='no'>x</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>patients</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a REVOLVER object of class "rev_cohort"</p></td>
+      <td><p>A REVOLVER cohort.</p></td>
     </tr>
     <tr>
       <th>patients</th>
       <td><p>The patients for which the summaries are computed.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A tibble with the driver stastics.</p>
-    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Summary statistics: <code><a href='DET_index.html'>DET_index</a></code>,
+  <code><a href='Stats_cohort.html'>Stats_cohort</a></code>, <code><a href='Stats_drivers.html'>Stats_drivers</a></code>,
+  <code><a href='Stats_fits.html'>Stats_fits</a></code>, <code><a href='Stats.html'>Stats</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
 <span class='co'># Get the stats for all patients</span>
-<span class='fu'>Stats_trees</span>(<span class='no'>TRACERx_cohort</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Stats_trees(TRACERx_cohort): There are no trees in this cohort object, or trees for some of the required patients are missing. </span>
-#&gt; <span class='error'>         Cannot compute this summary statistics, aborting.</span></div><div class='input'>
+<span class='fu'>Stats_trees</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 99 x 6</span><span>
+#&gt;    patientID hasTrees numTrees maxScore minScore combInfTransf
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> CRUK0001  TRUE            3    0.111   0.111              3
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> CRUK0002  TRUE            2    0.75    0.083</span><span style='text-decoration: underline;'>3</span><span>             2
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> CRUK0003  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> CRUK0004  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> CRUK0005  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> CRUK0006  TRUE            2    0.667   0.167              2
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CRUK0007  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CRUK0008  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CRUK0009  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> CRUK0010  TRUE            1    1       1                  1
+#&gt; </span><span style='color: #949494;'># … with 89 more rows</span><span></div><div class='input'>
 <span class='co'># And subset the patients</span>
-<span class='fu'>Stats_trees</span>(<span class='no'>TRACERx_cohort</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in Stats_trees(TRACERx_cohort, patients = c("CRUK0001", "CRUK0002")): There are no trees in this cohort object, or trees for some of the required patients are missing. </span>
-#&gt; <span class='error'>         Cannot compute this summary statistics, aborting.</span></div></pre>
+<span class='fu'>Stats_trees</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 6</span><span>
+#&gt;   patientID hasTrees numTrees maxScore minScore combInfTransf
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> CRUK0001  TRUE            3    0.111   0.111              3
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> CRUK0002  TRUE            2    0.75    0.083</span><span style='text-decoration: underline;'>3</span><span>             2</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

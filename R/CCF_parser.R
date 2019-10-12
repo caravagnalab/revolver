@@ -1,18 +1,20 @@
 
-#' Builtin CCF parser function.
+#' Parser function for the  required \code{CCF} input field.
 #' 
 #' @description This function can parse a string
-#' in the format `R1:0.1;R2:0.4;R3:0.9` to extract
-#' a 3-dimensional named vector with names `R1`, `R2` and
-#' `R3`, and values `0.1`, `0.4` and `0.9`. This function
-#' can be used when parsing an input dataset in function
-#' \code{revolver_cohort}. 
+#' in the format \code{R1:0.1;R2:0.4;R3:0.9} to extract
+#' a 3-dimensional named vector with names \code{R1}, \code{R2} and
+#' \code{R3}, and values \code{0.1}, \code{0.4} and \code{0.9}. 
 #' 
-#' @note This function will not convert
-#' the types of the parsed entries, and will therefore
-#' return strings.
+#' This function can be used when parsing an input dataset in 
+#' \code{revolver_cohort}, the function that creates a \code{REVOLVER} cohort. 
 #' 
-#' @param x The string to parse, the accepted format for this functio is something like "R1:0.1;R2:0.4;R3:0.9".
+#' @note This function will not convert the types of the parsed entries.
+#' 
+#' @param x The string to parse, the accepted format for this function
+#' is something like \code{R1:0.1;R2:0.4;R3:0.9}.
+#'
+#' @family Cohort creation
 #'
 #' @return A parsed named vector.
 #' 

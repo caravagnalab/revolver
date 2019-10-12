@@ -8,11 +8,13 @@
 
 <title>Compute/ add CCF-based phylogenies to a REVOLVER cohort. — revolver_compute_phylogenies • revolver</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,11 @@
 
 
 
-<meta property="og:title" content="Compute/ add CCF-based phylogenies to a REVOLVER cohort. — revolver_compute_phylogenies" />
 
+<meta property="og:title" content="Compute/ add CCF-based phylogenies to a REVOLVER cohort. — revolver_compute_phylogenies" />
 <meta property="og:description" content="Compute/ add CCF-based phylogenies to a REVOLVER cohort." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -79,7 +82,6 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -100,16 +102,14 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Compute/ add CCF-based phylogenies to a REVOLVER cohort.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>revolver_compute_phylogenies</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='kw'>precomputed.trees</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>precomputed.scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>sspace.cutoff</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
   <span class='kw'>n.sampling</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>store.max</span> <span class='kw'>=</span> <span class='fl'>100</span>),
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -145,32 +145,40 @@ be stored, if there are more than <code>store.max</code> available (ranked).</p>
       <td><p>output type.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a modififed object of class <code>"rev_cohort"</code> with available phylogeneis for <code>patient</code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Create or compute phylogenies for REVOLVER fit from CCF data. This method should be used also if one
 has already pre-computed trees to use for fitting.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
- <span class='no'>TODO</span>
-<span class='co'># }</span><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'>data(TRACERx_cohort)
+
+# We use the standard parameters with overwrite = FALSE
+# otherwise the tool returns an error because the required tree
+# is already available
+TRACERx_cohort = revolver_compute_phylogenies(
+   TRACERx_cohort, 
+   "CRUK0002", 
+   options = list(
+      sspace.cutoff = 10000,
+      n.sampling = 5000,
+      overwrite = TRUE,
+      store.max = 100)
+</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:15:0: unexpected end of input</span>
+#&gt; <span class='error'>13:       store.max = 100)</span>
+#&gt; <span class='error'>14: </span>
+#&gt; <span class='error'>   ^</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

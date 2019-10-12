@@ -1,24 +1,25 @@
-#' @title Check basic inconsistencies in a REVOLVER cohort.
+#' Check basic inconsistencies in a REVOLVER cohort.
 #'
-#' @details Perform some basic diagnostic of a cohort object.
+#' @description  Perform some basic diagnostic of a cohort object.
 #' It will inform of patients without drivers and other
 #' information that can be used to reshape the data before
 #' fitting a model.
 #'
-#' @param x An object of class \code{"rev_cohort"}
+#' @param x A \code{REVOLVER} cohort.
 #' @param stopOnError Whether or not it should raise a stop on error.
 #'
 #' @return Nothing, all relevant information are print to screen
 #' and the stop is raised only if \code{stopOnError = TRUE}.
-#'
-#' @import crayon
-#'
+#' @family Cohort creation
 #' @export
 #'
 #' @examples
-#' data(CRC.cohort)
-#' revolver_check_cohort(CRC.cohort)
-#' print(CRC.cohort) # calls this anyway
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' 
+#' revolver_check_cohort(TRACERx_NEJM_2017_REVOLVER)
+#' 
+#' print(TRACERx_NEJM_2017_REVOLVER) # calls this anyway
 revolver_check_cohort = function(x, stopOnError = FALSE)
 {
   # Duplicate IDs

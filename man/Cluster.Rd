@@ -2,33 +2,28 @@
 % Please edit documentation in R/getter_functions.R
 \name{Cluster}
 \alias{Cluster}
-\title{Extract fitted model for a patient}
+\title{Get REVOLVER clusters information for this cohort}
 \usage{
 Cluster(x, patients = x$patients)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort_fit"}
+\item{x}{A REVOLVEr cohort with fits and clusters.}
 
 \item{patients}{Patients to use, all by default.}
-
-\item{p}{a patient}
-
-\item{x}{A REVOLVEr cohort with fits and clusters.}
 }
 \value{
-fitted model for  \code{p}
-
 A tibble with the required clustering assignments
 }
 \description{
-For a set of `patients` - all by default - 
-extract the clustering information computed by REVOVLER.
+For a set of `patients` - all by default - extract the clustering information
+computed by REVOVLER. The result is just a tibble with a column representing
+the patient id, and a column with the cluster label.
 }
 \examples{
-data(CRC.cohort)
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
-Fit(revolver_fit(CRC.cohort), 'adenoma_3')
-Get clustering information for patients.
+Cluster(TRACERx_NEJM_2017_REVOLVER)
 
-TODO
+#' Cluster(TRACERx_NEJM_2017_REVOLVER, patients = c("CRUK0001", "CRUK0002"))
 }

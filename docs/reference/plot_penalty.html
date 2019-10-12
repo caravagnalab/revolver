@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot the fit penalty — plot_penalty • revolver</title>
+<title>Plot the fit penalty. — plot_penalty • revolver</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,8 +32,8 @@
 
 
 
-<meta property="og:title" content="Plot the fit penalty — plot_penalty" />
 
+<meta property="og:title" content="Plot the fit penalty. — plot_penalty" />
 <meta property="og:description" content="Plot the fit penalty as a barplot, for each one of a set of desired
 driver events, where the bar represents the counts of each trajectory
 in the data. This function allows also to filter out entries that have
@@ -40,7 +42,9 @@ association A -&amp;gt; B via a one-sided Fisher 2x2 test adjusted for the numbe
 comparison (marginal count of B-ended trajectories). The tests are carried
 out by function revolver:::enrichment_test_incoming_edge, which can
 be used to obtain a tidy representation of the tests' results." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -85,10 +89,17 @@ be used to obtain a tidy representation of the tests' results." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -101,13 +112,12 @@ be used to obtain a tidy representation of the tests' results." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot the fit penalty</h1>
-    
+    <h1>Plot the fit penalty.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/plot_penalty.R'><code>R/plot_penalty.R</code></a></small>
     <div class="hidden name"><code>plot_penalty.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Plot the fit penalty as a barplot, for each one of a set of desired
 driver events, where the bar represents the counts of each trajectory
 in the data. This function allows also to filter out entries that have
@@ -116,20 +126,17 @@ association A -&gt; B via a one-sided Fisher 2x2 test adjusted for the number of
 comparison (marginal count of B-ended trajectories). The tests are carried
 out by function <code>revolver:::enrichment_test_incoming_edge</code>, which can
 be used to obtain a tidy representation of the tests' results.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>plot_penalty</span>(<span class='no'>x</span>, <span class='kw'>drivers</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>variantIDs.driver</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>drivers_palette</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colorRamp'>colorRampPalette</a></span>(<span class='kw pkg'>RColorBrewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer'>brewer.pal</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='st'>"Set1"</span>)), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
-    
+  <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>drivers_palette</span> <span class='kw'>=</span> <span class='no'>distinct_palette_many</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A REVOLVER cohort with fit models.</p></td>
+      <td><p>A REVOLVER object with fits.</p></td>
     </tr>
     <tr>
       <th>drivers</th>
@@ -152,31 +159,83 @@ least one event from <code>drivers</code>.</p></td>
       <td><p>A function that can return, for an input number,
 a number of colours.</p></td>
     </tr>
-    <tr>
-      <th>cex</th>
-      <td><p>The cex of the plot.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other unused parameters.</p></td>
-    </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A ggplot object for this plot.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>TODO</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'TODO' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>plot_penalty</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; 
+#&gt; <span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Enrichment test for incoming edges</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #949494;'># A tibble: 49 x 15</span><span>
+#&gt;    estimate p.value conf.low conf.high method alternative from  to    POS_POS
+#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     23.0 1.82</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>     8.60       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     EGFR  TP53       13
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     25.4 1.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     4.81       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    PIK3…      20
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     10.5 6.27</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     4.19       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     CDKN… TP53       10
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     12.6 8.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     3.56       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    EGFR       20
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   1.48</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     5.16       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    CDKN…      14
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   1.48</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     5.16       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    SOX2       14
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     19.8 1.71</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     5.37       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  FAT1        7
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   2.10</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.42       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     RASA1 TP53        5
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   5.99</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>    14.5        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     BRAF  TERT        3
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>   7.41</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     4.31       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    KEAP1      12
+#&gt; </span><span style='color: #949494;'># … with 39 more rows, and 6 more variables: POS_NEG </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, NEG_POS </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>,
+#&gt; #   NEG_NEG </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, alpha_level </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, N </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, psign </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='img'><img src='plot_penalty-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot_penalty</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; 
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Enrichment test for incoming edges</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #949494;'># A tibble: 15 x 15</span><span>
+#&gt;    estimate p.value conf.low conf.high method alternative from  to    POS_POS
+#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    3.10</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-8</span><span>    11.5        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     EGFR  TP53       13
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    3.16</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-7</span><span>    15.0        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  FAT1        7
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.01</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     8.13       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     CDKN… TP53       10
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.95</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>    11.9        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  TERT        6
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    7.88</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     7.08       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     KRAS  TP53        9
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NFE2…       5
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    2.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NOTC…       5
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    9.14</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    EGFR       20
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    9.14</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    PIK3…      20
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    1.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>     3.21       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     RASA1 TP53        5
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    8.06</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>     1.75       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    CDKN…      14
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    8.06</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>     1.75       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    SOX2       14
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span>     3.26 1.52</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.31       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  KRAS        8
+#&gt; </span><span style='color: #BCBCBC;'>14</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    1.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.45       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    KEAP1      12
+#&gt; </span><span style='color: #BCBCBC;'>15</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>    4.69</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>     1.03       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    FGFR1       9
+#&gt; </span><span style='color: #949494;'># … with 6 more variables: POS_NEG </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, NEG_POS </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, NEG_NEG </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>,
+#&gt; #   alpha_level </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, N </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, psign </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='img'><img src='plot_penalty-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot_penalty</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min.occurrences</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>alpha_level</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)</div><div class='output co'>#&gt; 
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #00BBBB;'> Enrichment test for incoming edges</span><span>
+#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
+#&gt; </span><span style='color: #949494;'># A tibble: 9 x 15</span><span>
+#&gt;   estimate p.value conf.low conf.high method alternative from  to    POS_POS
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 3.10</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-8</span><span>    11.5        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     EGFR  TP53       13
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 3.16</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-7</span><span>    15.0        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  FAT1        7
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 2.01</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     8.13       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     CDKN… TP53       10
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 2.95</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>    11.9        </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  TERT        6
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 7.88</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-6</span><span>     7.08       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     KRAS  TP53        9
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 2.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NFE2…       5
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 2.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>     9.10       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     TP53  NOTC…       5
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 9.14</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    EGFR       20
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span>      </span><span style='color: #BB0000;'>Inf</span><span> 9.14</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>     2.67       </span><span style='color: #BB0000;'>Inf</span><span> Fishe… greater     GL    PIK3…      20
+#&gt; </span><span style='color: #949494;'># … with 6 more variables: POS_NEG </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, NEG_POS </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, NEG_NEG </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>,
+#&gt; #   alpha_level </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, N </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, psign </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='img'><img src='plot_penalty-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

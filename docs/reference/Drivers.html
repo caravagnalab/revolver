@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract CCF/binary driver data for a patient — Drivers • revolver</title>
+<title>Extract driver data for a patient. — Drivers • revolver</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,13 @@
 
 
 
-<meta property="og:title" content="Extract CCF/binary driver data for a patient — Drivers" />
 
-<meta property="og:description" content="Extract CCF/binary driver data for a patient" />
+<meta property="og:title" content="Extract driver data for a patient. — Drivers" />
+<meta property="og:description" content="From a cohort object, this function extracts the tibble of
+annotated driver events for a patient (either CCF or binary)." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -78,10 +83,17 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -94,47 +106,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract CCF/binary driver data for a patient</h1>
-    
+    <h1>Extract driver data for a patient.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/getter_functions.R'><code>R/getter_functions.R</code></a></small>
     <div class="hidden name"><code>Drivers.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Extract CCF/binary driver data for a patient</p>
-    
+    <p>From a cohort object, this function extracts the tibble of
+annotated driver events for a patient (either CCF or binary).</p>
     </div>
 
     <pre class="usage"><span class='fu'>Drivers</span>(<span class='no'>x</span>, <span class='no'>p</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a REVOLVER object of class "rev_cohort" or "rev_cohort_fit"</p></td>
+      <td><p>A <code>REVOLVER</code> cohort.</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>a patient</p></td>
+      <td><p>The id of a patient in the cohort.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>CCF/binary drivers data for <code>p</code></p>
-    
+    <p>Drivers data for a custom patient.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Getters: <code><a href='CCF_clusters.html'>CCF_clusters</a></code>,
+  <code><a href='CCF.html'>CCF</a></code>, <code><a href='Clonal_cluster.html'>Clonal_cluster</a></code>,
+  <code><a href='Data.html'>Data</a></code>, <code><a href='ITransfer.html'>ITransfer</a></code>,
+  <code><a href='Phylo.html'>Phylo</a></code>, <code><a href='Samples.html'>Samples</a></code>,
+  <code><a href='Subclonal.html'>Subclonal</a></code>, <code><a href='Truncal.html'>Truncal</a></code>,
+  <code><a href='get_features.html'>get_features</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>CRC.cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘CRC.cohort’ not found</span></div><div class='input'><span class='fu'>Drivers</span>(<span class='no'>CRC.cohort</span>, <span class='st'>'adenoma_3'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Data(x, p): object 'CRC.cohort' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'>Drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 7 x 12</span><span>
+#&gt;   id    Misc  patientID variantID is.driver is.clonal cluster cluster_size CCF  
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> __mu… CRUK… CRUK0002  RB1       TRUE      FALSE     1                  3 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> __mu… CRUK… CRUK0002  IKZF1     TRUE      FALSE     1                  3 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> __mu… Anno… CRUK0002  KRAS      TRUE      FALSE     1                  3 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> __mu… CRUK… CRUK0002  MET       TRUE      TRUE      2                  2 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> __mu… Anno… CRUK0002  TERT      TRUE      TRUE      2                  2 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> __mu… CRUK… CRUK0002  NF1       TRUE      FALSE     5                  1 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> __mu… CRUK… CRUK0002  EP300     TRUE      FALSE     6                  1 R1:0…
+#&gt; </span><span style='color: #949494;'># … with 3 more variables: R1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, R2 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, R3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='fu'>Drivers</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0008'</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 11</span><span>
+#&gt;   id    Misc  patientID variantID is.driver is.clonal cluster cluster_size CCF  
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> __mu… CRUK… CRUK0008  KEAP1     TRUE      TRUE      2                  5 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> __mu… CRUK… CRUK0008  STK11     TRUE      TRUE      2                  5 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> __mu… CRUK… CRUK0008  PRDM1     TRUE      TRUE      2                  5 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> __mu… CRUK… CRUK0008  U2AF1     TRUE      TRUE      2                  5 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> __mu… Anno… CRUK0008  MYC       TRUE      TRUE      2                  5 R1:0…
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> __mu… CRUK… CRUK0008  ARID2     TRUE      FALSE     3                  1 R1:0…
+#&gt; </span><span style='color: #949494;'># … with 2 more variables: R1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, R2 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -5,7 +5,7 @@
 \title{Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).}
 \usage{
 revolver_cohort(dataset, CCF_parser = revolver::CCF_parser,
-  options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10),
+  ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10,
   annotation = "My REVOLVER dataset")
 }
 \arguments{
@@ -13,16 +13,16 @@ revolver_cohort(dataset, CCF_parser = revolver::CCF_parser,
 
 \item{CCF_parser}{A function to parse the format for the encoding of CCF
 or binary values for each sequenced region. A possible function is available
-inside REVOLVER; \code{revolver::CCF_parser} (the default of this parameter).}
+inside REVOLVER; \code{\link{CCF_parser}} (the default of this parameter).}
 
-\item{options}{A list of 2 parameters that should be a boolean value for
-\code{ONLY.DRIVER} (use only driver SNVs), and \code{MIN.CLUSTER.SIZE}, the minimum cluster size.}
+\item{ONLY.DRIVER}{If true, uses only annotated driver events.}
 
-\item{annotation}{String for annotation of this cohort. This will be prompted
-in every print for this object.}
+\item{MIN.CLUSTER.SIZE}{Discard clusters that have less than this number of entries.}
+
+\item{annotation}{Brief cohort description.}
 }
 \value{
-An object of class \code{"rev_cohort"}
+An object of class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
 }
 \description{
 Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
@@ -37,10 +37,17 @@ data(TRACERx_data)
 # To speed up the process we use only 2 patients
 TRACERx_data = TRACERx_data \%>\%
    filter(patientID \%in\% c('CRUK0001', 'CRUK0002'))
-   
+
 cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
- 
+
 # The S3 print/ plot for this cohort
 print(cohort)
 plot(cohort)
 }
+\seealso{
+Other Cohort creation: \code{\link{CCF_parser}},
+  \code{\link{compute_clone_trees}},
+  \code{\link{input_custom_trees}},
+  \code{\link{revolver_check_cohort}}
+}
+\concept{Cohort creation}

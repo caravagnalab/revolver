@@ -2,22 +2,36 @@
 % Please edit documentation in R/getter_functions.R
 \name{Truncal}
 \alias{Truncal}
-\title{Extract truncal mutations in a patient}
+\title{Extract clonal (i.e., truncal) data for a patient.}
 \usage{
 Truncal(x, p)
 }
 \arguments{
-\item{x}{A REVOLVER object of class "rev_cohort" or "rev_cohort_fit"}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{A patient}
+\item{p}{The id of a patient in the cohort.}
 }
 \value{
-CCF/binary data for \code{p}'s truncal mutations
+Truncal data for a custom patient.
 }
 \description{
-Extract truncal mutations in a patient
+From a cohort object, this function extracts the tibble of
+truncal events for a patient (either CCF or binary).
 }
 \examples{
-data(CRC.cohort)
-Drivers(CRC.cohort, 'adenoma_3')
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+Truncal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+
+Truncal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
+  \code{\link{Data}}, \code{\link{Drivers}},
+  \code{\link{ITransfer}}, \code{\link{Phylo}},
+  \code{\link{Samples}}, \code{\link{Subclonal}},
+  \code{\link{get_features}}
+}
+\concept{Getters}

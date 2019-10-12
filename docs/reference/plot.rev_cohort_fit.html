@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fits summary scatterplot. — plot.rev_cohort_fit • revolver</title>
+<title>Summary scatterplot of a cohort's fits. — plot.rev_cohort_fit • revolver</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,12 @@
 
 
 
-<meta property="og:title" content="Fits summary scatterplot. — plot.rev_cohort_fit" />
 
-<meta property="og:description" content="Fits summary scatterplot." />
+<meta property="og:title" content="Summary scatterplot of a cohort's fits. — plot.rev_cohort_fit" />
+<meta property="og:description" content="Summary scatterplot of a cohort's fits." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -78,10 +82,17 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -94,20 +105,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fits summary scatterplot.</h1>
-    
+    <h1>Summary scatterplot of a cohort's fits.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/S3_plot_functions.R'><code>R/S3_plot_functions.R</code></a></small>
     <div class="hidden name"><code>plot.rev_cohort_fit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Fits summary scatterplot.</p>
-    
+    <p>Summary scatterplot of a cohort's fits.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rev_cohort_fit</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -116,35 +125,39 @@
       <td><p>A REVOLVER cohort with fits.</p></td>
     </tr>
     <tr>
-      <th>cex</th>
-      <td><p>Cex of the plot.</p></td>
+      <th>...</th>
+      <td><p>Standard S3 signature.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ggplot2</code> object of the plot.</p>
-    
+    <p>A <code>ggplot</code> object of the plot.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Returns a scatterplot of the penalty of a patient's best fit,
-versus the tumour mutational burden. Each dot is sized by the number of 
+versus the tumour mutational burden. Each dot is sized by the number of
 combinations of Information Transfer for a patient, and coloured by the
 number of annotated drivers.</p>
-    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other S3 functions: <code><a href='plot.rev_cohort.html'>plot.rev_cohort</a></code>,
+  <code><a href='print.rev_cohort_fit.html'>print.rev_cohort_fit</a></code>,
+  <code><a href='print.rev_cohort.html'>print.rev_cohort</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>Breast.fit</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘Breast.fit’ not found</span></div><div class='input'><span class='fu'>plot.rev_cohort_fit</span>(<span class='no'>Breast.fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in obj_has_fit(x): object 'Breast.fit' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='img'><img src='plot.rev_cohort_fit-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

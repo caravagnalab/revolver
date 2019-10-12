@@ -1,13 +1,22 @@
 
 #' @title Fit a REVOLVER model.
 #'
-#' @details  The main fitting function for REVOLVER, implements the 2-steps algorithm described
+#' @description 
+#' 
+#' This function implements the main fitting function for REVOLVER, which is a 2-steps algorithm described
 #' in the REVOLVER paper (Caravagna et al., Nature Methods volume 15, pages 707–714, 2018;
-#' https://www.nature.com/articles/s41592-018-0108-x). The output object contains a new field
-#' `$fit` which contains the fit results.
+#' https://www.nature.com/articles/s41592-018-0108-x). 
+#' 
+#' To run the fit the cohort needs not to throw any error when function \code{\link{revolver_check_cohort}}
+#' is run with parameter \code{stopOnError = TRUE}. The trees of the patients need to be computed as well.
+#' 
+#' The output object contains a new field `$fit` which contains the fit results, and is of a new S3 class
+#' called `rev_cohort_fit` which has its own S3 methods.
+#' 
+#' @references Caravagna et al., Nature Methods volume 15, pages 707–714, 2018; https://www.nature.com/articles/s41592-018-0108-x
 #'
 #' @param x A REVOLVER cohort where trees per patient have been already computed.
-#' @param initial.solution Either a scalar to fix one initial condition 
+#' @param initial.solution Either a scalar to fix one initial condition
 #' (rank id), or \code{NA} to sample it randomly across all possivle solutions.
 #' Notice that if the inital conditin is fixed the other parameter `n` should be 1.
 #' @param max.iterations Maximum number of EM steps before forcing stop.
@@ -15,19 +24,20 @@
 #' @param ... Other paraemters, not used.
 #'
 #' @return A new object of class \code{"rev_cohort_fit"} which represents a
-#' REVOLVER cohort object with fits.
-#' 
-#' @export
-#' 
-#' @import parallel
-#' @import crayon
-#' @import doParallel
-#' @import foreach
+#' REVOLVER cohort object with fits available.
 #'
+#' @export
+#'
+#' @import easypar
+#' @import crayon
 #'
 #' @examples
-#' data(CRC.cohort)
-#' fit = revolver_fit(CRC.cohort)
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'
+#' new_fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
+#' 
+#' print(new_fit)
 revolver_fit = function(x,
                         initial.solution = 1,
                         max.iterations = 10,
@@ -125,7 +135,7 @@ revolver_fit = function(x,
       run_score = median(results[[w]]$fit$fit_table$penalty)
 
       pio::pioStr(paste0("Solution #", w), run_score, suffix = '\n')
-      
+
       run_score
       })
 
@@ -286,7 +296,7 @@ tl_revolver_fit = function(x,
 
     # The topological sort of the transfer to understand in which order they shall be traversed
     clones_orderings = igraph::topo_sort(
-      igraph::graph_from_adjacency_matrix(DataFrameToMatrix(clones)),
+      igraph::graph_from_adjacency_matrix(ctree:::DataFrameToMatrix(clones)),
       mode = 'out'
       )$name
 
@@ -314,12 +324,12 @@ tl_revolver_fit = function(x,
         next
 
       # Get the adjaceny matrix of what we are expanding, and the list of edges as well
-      clone_adjM = TidyGraphToMatrix(tb_graphs[[clone]])
-      clone_df = TidyGraphToDataFrame(tb_graphs[[clone]])
+      clone_adjM = ctree:::TidyGraphToMatrix(tb_graphs[[clone]])
+      clone_df = ctree:::TidyGraphToDataFrame(tb_graphs[[clone]])
 
       # First we compute the roots and leaves of this subgraph
-      nodes_roots = root(clone_adjM)
-      nodes_leaves = leaves(clone_adjM)
+      nodes_roots = ctree:::root(clone_adjM)
+      nodes_leaves = ctree:::leaves(clone_adjM)
 
       # Get loopy nodes that are tricky to handle, we treat them as both roots/leaves
       lnodes = loopy_nodes(M = clone_adjM)
@@ -327,9 +337,9 @@ tl_revolver_fit = function(x,
       nodes_leaves = c(nodes_leaves, lnodes)
 
       # Then we take what are currently expanding, and the parent and children in there
-      current_expansion_adjM = DataFrameToMatrix(current_expansion)
-      parent_current_expansion = pi(current_expansion_adjM, clone)
-      children_current_expansion = children(current_expansion_adjM, clone)
+      current_expansion_adjM = ctree:::DataFrameToMatrix(current_expansion)
+      parent_current_expansion = ctree:::pi(current_expansion_adjM, clone)
+      children_current_expansion = ctree:::children(current_expansion_adjM, clone)
 
       # We now make the modification, we can essentially
       # 1) take the current expansion and remove all edges that involve the current clone

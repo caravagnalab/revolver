@@ -8,11 +8,13 @@
 
 <title>Function reference • revolver</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,7 +32,11 @@
 
 
 
+
 <meta property="og:title" content="Function reference" />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -75,10 +81,17 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -105,238 +118,16 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-cohort-functions" class="hasAnchor"><a href="#section-cohort-functions" class="anchor"></a>Cohort functions</h2>
+          <p class="section-desc"><p>These functions can be used to create a REVOLVER cohort and its trees.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="CCF.html">CCF()</a></code> </p>
+          <p><code><a href="revolver_cohort.html">revolver_cohort()</a></code> </p>
         </td>
-        <td><p>Extract CCF/binary data for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="CCF_clusters.html">CCF_clusters()</a></code> </p>
-        </td>
-        <td><p>Extract cluster-level CCF/binary data for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="CCF_parser.html">CCF_parser()</a></code> </p>
-        </td>
-        <td><p>Builtin CCF parser function.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Clonal_cluster.html">Clonal_cluster()</a></code> </p>
-        </td>
-        <td><p>Return the id of the clonal cluster for this patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Cluster.html">Cluster()</a></code> </p>
-        </td>
-        <td><p>Extract fitted model for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Data.html">Data()</a></code> </p>
-        </td>
-        <td><p>Extract CCF/binary data for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Drivers.html">Drivers()</a></code> </p>
-        </td>
-        <td><p>Extract CCF/binary driver data for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ITransfer.html">ITransfer()</a></code> </p>
-        </td>
-        <td><p>Extract the information transfer for a patient's tree</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Phylo.html">Phylo()</a></code> </p>
-        </td>
-        <td><p>Extract phylogenetic or mutation trees for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Samples.html">Samples()</a></code> </p>
-        </td>
-        <td><p>Extract samples name for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Stats.html">Stats()</a></code> </p>
-        </td>
-        <td><p>Return summary stastics for the cohort's patients</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Stats_cohort.html">Stats_cohort()</a></code> </p>
-        </td>
-        <td><p>See <code>Stats</code> function.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Stats_drivers.html">Stats_drivers()</a></code> </p>
-        </td>
-        <td><p>Return summary stastics for the cohort's drivers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Stats_fits.html">Stats_fits()</a></code> </p>
-        </td>
-        <td><p>Return summary stastics for the cohort's fits</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Stats_trees.html">Stats_trees()</a></code> </p>
-        </td>
-        <td><p>Return summary stastics for the cohort's trees</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Subclonal.html">Subclonal()</a></code> </p>
-        </td>
-        <td><p>Extract CCF/binary data for subclonal mutations of a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="TRACERx_cohort.html">TRACERx_cohort</a></code> </p>
-        </td>
-        <td><p>Analysis of the TRACERx cohort, with REVOLVER. The input object ofr the analysis is "TRACERx_data"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="TRACERx_data.html">TRACERx_data</a></code> </p>
-        </td>
-        <td><p>TRACERx mutation and CNAs Data by Jamal-Hanjani et al., prepared for REVOLVER.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Truncal.html">Truncal()</a></code> </p>
-        </td>
-        <td><p>Extract CCF/binary data for truncal mutations of a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_features.html">get_features()</a></code> </p>
-        </td>
-        <td><p>Return summary features for the cohort.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.rev_cohort.html">plot(<i>&lt;rev_cohort&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Cohort summary scatterplot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.rev_cohort_fit.html">plot(<i>&lt;rev_cohort_fit&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Fits summary scatterplot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.rev_phylo.html">plot(<i>&lt;rev_phylo&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>S3 method that plots a REVOLVER tree.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_DET_index.html">plot_DET_index()</a></code> </p>
-        </td>
-        <td><p>Plot the DET index.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_data.html">plot_data()</a></code> </p>
-        </td>
-        <td><p>Plot the data for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_data_clone_size.html">plot_data_clone_size()</a></code> </p>
-        </td>
-        <td><p>Plot the clone size data for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_data_clusters.html">plot_data_clusters()</a></code> </p>
-        </td>
-        <td><p>Plot the clusters data for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_data_histogram.html">plot_data_histogram()</a></code> </p>
-        </td>
-        <td><p>Plot the data histogram for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_data_mutation_burden.html">plot_data_mutation_burden()</a></code> </p>
-        </td>
-        <td><p>Plot the mutation burden for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_data_oncoprint.html">plot_data_oncoprint()</a></code> </p>
-        </td>
-        <td><p>Plot the oncoprint for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_graph_drivers.html">plot_graph_drivers()</a></code> </p>
-        </td>
-        <td><p>Plot summary statistics for the drivers on a graph.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_information_transfer.html">plot_information_transfer()</a></code> </p>
-        </td>
-        <td><p>Plot the information transfer of a tree.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_penalty.html">plot_penalty()</a></code> </p>
-        </td>
-        <td><p>Plot the fit penalty</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_trees.html">plot_trees()</a></code> </p>
-        </td>
-        <td><p>Plot REVOLVER trees for a patient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_trees_scores.html">plot_trees_scores()</a></code> </p>
-        </td>
-        <td><p>Plot a barplot of the scored trees for a patient.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.rev_cohort.html">print(<i>&lt;rev_cohort&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a <code>"rev_cohort"</code> object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.rev_cohort_fit.html">print(<i>&lt;rev_cohort_fit&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a REVOLVER cohort object with fits.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.rev_phylo.html">print(<i>&lt;rev_phylo&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a <code>"rev_phylo"</code> object.</p></td>
+        <td><p>Construct a REVOLVER cohort object (S3 class <code>"rev_cohort"</code>).</p></td>
       </tr><tr>
         
         <td>
@@ -346,34 +137,30 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_cluster.html">revolver_cluster()</a></code> </p>
+          <p><code><a href="compute_clone_trees.html">compute_clone_trees()</a></code> </p>
         </td>
-        <td><p>Compute hierarchical clustering for a REVOLVER cohort</p></td>
+        <td><p>Compute CCF-based clone trees for a patient (phylogenies).</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_cohort.html">revolver_cohort()</a></code> </p>
+          <p><code><a href="input_custom_trees.html">input_custom_trees()</a></code> </p>
         </td>
-        <td><p>Construct a REVOLVER cohort object (S3 class <code>"rev_cohort"</code>).</p></td>
+        <td><p>Add a custom set of trees for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_compute_CLtrees.html">revolver_compute_CLtrees()</a></code> </p>
+          <p><code><a href="CCF_parser.html">CCF_parser()</a></code> </p>
         </td>
-        <td><p>Compute/ add mutation trees to a REVOLVER cohort.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="revolver_compute_phylogenies.html">revolver_compute_phylogenies()</a></code> </p>
-        </td>
-        <td><p>Compute/ add CCF-based phylogenies to a REVOLVER cohort.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="revolver_deletePatients.html">revolver_deletePatients()</a></code> </p>
-        </td>
-        <td><p>Subset the patients in the cohort to match the input list.</p></td>
-      </tr><tr>
+        <td><p>Parser function for the  required <code>CCF</code> input field.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-analysis-functions" class="hasAnchor"><a href="#section-analysis-functions" class="anchor"></a>Analysis functions</h2>
+          <p class="section-desc"><p>These functions can be used to analyse a REVOLVER cohort.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="revolver_fit.html">revolver_fit()</a></code> </p>
@@ -382,63 +169,263 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_jackknife.html">revolver_jackknife()</a></code> </p>
+          <p><code><a href="revolver_cluster.html">revolver_cluster()</a></code> </p>
         </td>
-        <td><p>Computation of fit confidence with the jackknife.</p></td>
+        <td><p>Compute hierarchical clustering for a REVOLVER cohort</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-getters-functions" class="hasAnchor"><a href="#section-getters-functions" class="anchor"></a>Getters functions</h2>
+          <p class="section-desc"><p>These functions can be used to extract data from a REVOLVER cohort object. These include the raw data used to create the cohort, driver information, clonal and subclonal events and the trees that are associated to the patients.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="Data.html">Data()</a></code> </p>
+        </td>
+        <td><p>Extract all data for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_phylogeny.html">revolver_phylogeny()</a></code> </p>
+          <p><code><a href="Drivers.html">Drivers()</a></code> </p>
         </td>
-        <td><p>REVOLVER constructor for a tree</p></td>
+        <td><p>Extract driver data for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_plt_jackknife_coclust.html">revolver_plt_jackknife_coclust()</a></code> </p>
+          <p><code><a href="Truncal.html">Truncal()</a></code> </p>
         </td>
-        <td><p>Plot jackknife statistics for co-clustering (heatmap).</p></td>
+        <td><p>Extract clonal (i.e., truncal) data for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_plt_jackknife_coclust_bplot.html">revolver_plt_jackknife_coclust_bplot()</a></code> </p>
+          <p><code><a href="Subclonal.html">Subclonal()</a></code> </p>
         </td>
-        <td><p>Plot jackknife statistics for co-clustering (boxplot).</p></td>
+        <td><p>Extract subclonal data for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_plt_jackknife_edge_counts.html">revolver_plt_jackknife_edge_counts()</a></code> </p>
+          <p><code><a href="Samples.html">Samples()</a></code> </p>
         </td>
-        <td><p>Plot jackknife statistics for the number of patients with an edge.</p></td>
+        <td><p>Extract all samples ids for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_plt_jackknife_edge_prb.html">revolver_plt_jackknife_edge_prb()</a></code> </p>
+          <p><code><a href="Clonal_cluster.html">Clonal_cluster()</a></code> </p>
         </td>
-        <td><p>Plot jackknife statistics for edge detection probability.</p></td>
+        <td><p>Extract the clonal cluster id for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_removeDriver.html">revolver_removeDriver()</a></code> </p>
+          <p><code><a href="CCF.html">CCF()</a></code> </p>
         </td>
-        <td><p>Remove a driver event from a cohort.</p></td>
+        <td><p>Extract all CCF or binary data for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="revolver_subsetDrivers.html">revolver_subsetDrivers()</a></code> </p>
+          <p><code><a href="CCF_clusters.html">CCF_clusters()</a></code> </p>
         </td>
-        <td><p>Subset the drivers in the cohort to match the input list.</p></td>
+        <td><p>Extract all clusters in the data of a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="stats.rev_phylo.html">stats.rev_phylo()</a></code> </p>
+          <p><code><a href="Phylo.html">Phylo()</a></code> </p>
         </td>
-        <td><p>Compute statistics for a <code>"rev_phylo"</code> tree.</p></td>
+        <td><p>Extract the trees available for a patient.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="summary.rev_phylo.html">summary(<i>&lt;rev_phylo&gt;</i>)</a></code> </p>
+          <p><code><a href="ITransfer.html">ITransfer()</a></code> </p>
         </td>
-        <td><p>Summary of a <code>"rev_phylo"</code> object.</p></td>
+        <td><p>Extract the information transfer available for a patient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Cluster.html">Cluster()</a></code> </p>
+        </td>
+        <td><p>Get REVOLVER clusters information for this cohort</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_features.html">get_features()</a></code> </p>
+        </td>
+        <td><p>Return summary features for the cohort.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-stats-functions" class="hasAnchor"><a href="#section-stats-functions" class="anchor"></a>Stats functions</h2>
+          <p class="section-desc"><p>These functions can be used to extract either cohort-level statistics data from a REVOLVER cohort object, and other statistics that regard the computations performed on the cohort.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="Stats.html">Stats()</a></code> </p>
+        </td>
+        <td><p>Summary statistics for the cohort's patients.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Stats_cohort.html">Stats_cohort()</a></code> </p>
+        </td>
+        <td><p>Synonim for function <code>Stats</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Stats_drivers.html">Stats_drivers()</a></code> </p>
+        </td>
+        <td><p>Summary statistics for the cohort's driver events.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Stats_fits.html">Stats_fits()</a></code> </p>
+        </td>
+        <td><p>Summary statistics for the cohort's fits.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Stats_trees.html">Stats_trees()</a></code> </p>
+        </td>
+        <td><p>Summary statistics for the cohort's trees.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="DET_index.html">DET_index()</a></code> </p>
+        </td>
+        <td><p>Compute the index of Divergent Evolutionary Trajectories.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-plotting-functions" class="hasAnchor"><a href="#section-plotting-functions" class="anchor"></a>Plotting functions</h2>
+          <p class="section-desc"><p>These functions can be used to plot data, fits and clusters from a REVOLVER cohort object.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="plot_DET_index.html">plot_DET_index()</a></code> </p>
+        </td>
+        <td><p>Plot the index of Divergent Evolutionary Trajectories.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_clusters.html">plot_clusters()</a></code> </p>
+        </td>
+        <td><p>Title</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_drivers_clonality.html">plot_drivers_clonality()</a></code> </p>
+        </td>
+        <td><p>Plot the clonality status of cohort driver events.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_drivers_graph.html">plot_drivers_graph()</a></code> </p>
+        </td>
+        <td><p>Plot graph-alike summary statistics for the cohort drivers.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_drivers_occurrence.html">plot_drivers_occurrence()</a></code> </p>
+        </td>
+        <td><p>Plot the occurrence of drivers across the cohort.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_patient_CCF_histogram.html">plot_patient_CCF_histogram()</a></code> </p>
+        </td>
+        <td><p>Plot the data histogram for a patient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_patient_data.html">plot_patient_data()</a></code> </p>
+        </td>
+        <td><p>Plot the data for a patient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_patient_mutation_burden.html">plot_patient_mutation_burden()</a></code> </p>
+        </td>
+        <td><p>Plot the mutation burden for a patient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_patient_oncoprint.html">plot_patient_oncoprint()</a></code> </p>
+        </td>
+        <td><p>Plot the oncoprint for a patient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_patient_trees.html">plot_patient_trees()</a></code> </p>
+        </td>
+        <td><p>Plot REVOLVER trees for a patient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_patient_trees_scores.html">plot_patient_trees_scores()</a></code> </p>
+        </td>
+        <td><p>Plot the scores for a patient's trees.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_penalty.html">plot_penalty()</a></code> </p>
+        </td>
+        <td><p>Plot the fit penalty.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distinct_palette_few.html">distinct_palette_few()</a></code> </p>
+        </td>
+        <td><p>Palette of few distinct colours.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distinct_palette_many.html">distinct_palette_many()</a></code> </p>
+        </td>
+        <td><p>Palette of <code>n</code> distinct colours.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gradient_palette.html">gradient_palette()</a></code> </p>
+        </td>
+        <td><p>Gradient palette.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-s-functions" class="hasAnchor"><a href="#section-s-functions" class="anchor"></a>S3 functions</h2>
+          <p class="section-desc"><p>The two S3 classes of REVOLVER objects implement the following S3 mehtods. Class <code>rev_cohort</code> represents a basic cohort object before the fits, class <code>rev_cohort_fit</code> is a cohort object where fits are now available.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="print.rev_cohort.html">print(<i>&lt;rev_cohort&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Summary print of a cohort.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.rev_cohort_fit.html">print(<i>&lt;rev_cohort_fit&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Summary print of a cohort with fits.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot.rev_cohort.html">plot(<i>&lt;rev_cohort&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Summary scatterplot of a cohort.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot.rev_cohort_fit.html">plot(<i>&lt;rev_cohort_fit&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Summary scatterplot of a cohort's fits.</p></td>
       </tr>
     </tbody>
     </table>
@@ -447,7 +434,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-cohort-functions">Cohort functions</a></li>
+      <li><a href="#section-analysis-functions">Analysis functions</a></li>
+      <li><a href="#section-getters-functions">Getters functions</a></li>
+      <li><a href="#section-stats-functions">Stats functions</a></li>
+      <li><a href="#section-plotting-functions">Plotting functions</a></li>
+      <li><a href="#section-s-functions">S3 functions</a></li>
     </ul>
   </div>
 </div>

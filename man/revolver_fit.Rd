@@ -10,7 +10,7 @@ revolver_fit(x, initial.solution = 1, max.iterations = 10, n = 10,
 \arguments{
 \item{x}{A REVOLVER cohort where trees per patient have been already computed.}
 
-\item{initial.solution}{Either a scalar to fix one initial condition 
+\item{initial.solution}{Either a scalar to fix one initial condition
 (rank id), or \code{NA} to sample it randomly across all possivle solutions.
 Notice that if the inital conditin is fixed the other parameter `n` should be 1.}
 
@@ -22,18 +22,27 @@ Notice that if the inital conditin is fixed the other parameter `n` should be 1.
 }
 \value{
 A new object of class \code{"rev_cohort_fit"} which represents a
-REVOLVER cohort object with fits.
+REVOLVER cohort object with fits available.
 }
 \description{
-Fit a REVOLVER model.
-}
-\details{
-The main fitting function for REVOLVER, implements the 2-steps algorithm described
+This function implements the main fitting function for REVOLVER, which is a 2-steps algorithm described
 in the REVOLVER paper (Caravagna et al., Nature Methods volume 15, pages 707–714, 2018;
-https://www.nature.com/articles/s41592-018-0108-x). The output object contains a new field
-`$fit` which contains the fit results.
+https://www.nature.com/articles/s41592-018-0108-x). 
+
+To run the fit the cohort needs not to throw any error when function \code{\link{revolver_check_cohort}}
+is run with parameter \code{stopOnError = TRUE}. The trees of the patients need to be computed as well.
+
+The output object contains a new field `$fit` which contains the fit results, and is of a new S3 class
+called `rev_cohort_fit` which has its own S3 methods.
 }
 \examples{
-data(CRC.cohort)
-fit = revolver_fit(CRC.cohort)
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+new_fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
+
+print(new_fit)
+}
+\references{
+Caravagna et al., Nature Methods volume 15, pages 707–714, 2018; https://www.nature.com/articles/s41592-018-0108-x
 }

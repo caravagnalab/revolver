@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract the information transfer for a patient's tree — ITransfer • revolver</title>
+<title>Extract the information transfer available for a patient. — ITransfer • revolver</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,21 @@
 
 
 
-<meta property="og:title" content="Extract the information transfer for a patient's tree — ITransfer" />
 
-<meta property="og:description" content="Extract the information transfer for a patient's tree" />
+<meta property="og:title" content="Extract the information transfer available for a patient. — ITransfer" />
+<meta property="og:description" content="From a cohort object, this function extracts the tree
+objects that are available for a patient. Parameters
+can be set to retrieve a particular tree, or the fit
+tree which is however availble only after fitting the
+cohort data. This function can either return a
+phylogenetic clone tree (R object ctree), or mutation
+trees  (R object btree). Besides, it can return
+the information transfer as the ordering of the annotated
+drivers, or in terms o the ordering of the clones these
+map to." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -78,10 +91,17 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -94,66 +114,115 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract the information transfer for a patient's tree</h1>
-    
+    <h1>Extract the information transfer available for a patient.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/getter_functions.R'><code>R/getter_functions.R</code></a></small>
     <div class="hidden name"><code>ITransfer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Extract the information transfer for a patient's tree</p>
-    
+    <p>From a cohort object, this function extracts the tree
+objects that are available for a patient. Parameters
+can be set to retrieve a particular tree, or the fit
+tree which is however availble only after fitting the
+cohort data. This function can either return a
+phylogenetic clone tree (R object <code>ctree</code>), or mutation
+trees  (R object <code>btree</code>). Besides, it can return
+the information transfer as the ordering of the annotated
+drivers, or in terms o the ordering of the clones these
+map to.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ITransfer</span>(<span class='no'>x</span>, <span class='no'>p</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"drivers"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='st'>"trees"</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A REVOLVER cohort</p></td>
+      <td><p>A <code>REVOLVER</code> cohort.</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>A patient</p></td>
+      <td><p>The id of a patient in the cohort.</p></td>
     </tr>
     <tr>
       <th>rank</th>
-      <td><p>The rank of the tree to extract</p></td>
+      <td><p>The rank of the tree to extract.</p></td>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>Either `clones` or `drivers`.</p></td>
+      <td><p>Either `drivers` or `clones`.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>Either `trees` or `fit`.</p></td>
+      <td><p>Either `trees` or `fit`, which requires to have
+already computed the fit of the input cohort.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The information transfer for a patient's tree</p>
-    
+    <p>The information transfer for the tree of a patient</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Getters: <code><a href='CCF_clusters.html'>CCF_clusters</a></code>,
+  <code><a href='CCF.html'>CCF</a></code>, <code><a href='Clonal_cluster.html'>Clonal_cluster</a></code>,
+  <code><a href='Data.html'>Data</a></code>, <code><a href='Drivers.html'>Drivers</a></code>,
+  <code><a href='Phylo.html'>Phylo</a></code>, <code><a href='Samples.html'>Samples</a></code>,
+  <code><a href='Subclonal.html'>Subclonal</a></code>, <code><a href='Truncal.html'>Truncal</a></code>,
+  <code><a href='get_features.html'>get_features</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
 <span class='co'># Get the transfer among drivers, top-ranking tree</span>
-<span class='fu'><a href='Phylo.html'>Phylo</a></span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'drivers'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Phylo(TRACERx_cohort, "CRUK0002", rank = 1, type = "drivers"): unused argument (type = "drivers")</span></div><div class='input'>
+<span class='fu'>ITransfer</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'drivers'</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 x 2</span><span>
+#&gt;    from  to   
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> MET   RB1  
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> MET   IKZF1
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> MET   KRAS 
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> TERT  RB1  
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> TERT  IKZF1
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> TERT  KRAS 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> GL    MET  
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> GL    TERT 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> EP300 NF1  
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> MET   EP300
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> TERT  EP300</div><div class='input'>
 <span class='co'># Get the transfer among clones, top-ranking tree</span>
-<span class='fu'><a href='Phylo.html'>Phylo</a></span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'clones'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Phylo(TRACERx_cohort, "CRUK0002", rank = 1, type = "clones"): unused argument (type = "clones")</span></div><div class='input'>
+<span class='fu'>ITransfer</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'clones'</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
+#&gt;   from  to   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 2     1    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> GL    2    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 6     5    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 2     6    </div><div class='input'>
 <span class='co'># Get the transfer from the fit</span>
-<span class='fu'><a href='Phylo.html'>Phylo</a></span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'clones'</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='st'>'fits'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Phylo(TRACERx_cohort, "CRUK0002", rank = 1, type = "clones",     data = "fits"): unused argument (type = "clones")</span></div><div class='input'><span class='fu'><a href='Phylo.html'>Phylo</a></span>(<span class='no'>TRACERx_cohort</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'drivers'</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='st'>'fits'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Phylo(TRACERx_cohort, "CRUK0002", rank = 1, type = "drivers",     data = "fits"): unused argument (type = "drivers")</span></div></pre>
+<span class='fu'>ITransfer</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'clones'</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='st'>'fits'</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
+#&gt;   from  to   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 2     1    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> GL    2    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 6     5    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 2     6    </div><div class='input'><span class='fu'>ITransfer</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>'drivers'</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='st'>'fits'</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 2</span><span>
+#&gt;   from  to   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> GL    MET  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> MET   TERT 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> TERT  EP300
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> TERT  RB1  
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> TERT  IKZF1
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> TERT  KRAS 
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> EP300 NF1  </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

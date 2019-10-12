@@ -2,37 +2,57 @@
 % Please edit documentation in R/getter_functions.R
 \name{ITransfer}
 \alias{ITransfer}
-\title{Extract the information transfer for a patient's tree}
+\title{Extract the information transfer available for a patient.}
 \usage{
 ITransfer(x, p, rank = 1, type = "drivers", data = "trees")
 }
 \arguments{
-\item{x}{A REVOLVER cohort}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{A patient}
+\item{p}{The id of a patient in the cohort.}
 
-\item{rank}{The rank of the tree to extract}
+\item{rank}{The rank of the tree to extract.}
 
-\item{type}{Either `clones` or `drivers`.}
+\item{type}{Either `drivers` or `clones`.}
 
-\item{data}{Either `trees` or `fit`.}
+\item{data}{Either `trees` or `fit`, which requires to have
+already computed the fit of the input cohort.}
 }
 \value{
-The information transfer for a patient's tree
+The information transfer for the tree of a patient
 }
 \description{
-Extract the information transfer for a patient's tree
+From a cohort object, this function extracts the tree
+objects that are available for a patient. Parameters
+can be set to retrieve a particular tree, or the fit
+tree which is however availble only after fitting the
+cohort data. This function can either return a
+phylogenetic clone tree (R object \code{ctree}), or mutation
+trees  (R object \code{btree}). Besides, it can return
+the information transfer as the ordering of the annotated
+drivers, or in terms o the ordering of the clones these
+map to.
 }
 \examples{
-data(TRACERx_cohort)
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
 # Get the transfer among drivers, top-ranking tree
-Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers')
+ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers')
 
 # Get the transfer among clones, top-ranking tree
-Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones')
+ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'clones')
 
 # Get the transfer from the fit
-Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'clones', data = 'fits')
-Phylo(TRACERx_cohort, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
+ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'clones', data = 'fits')
+ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
+  \code{\link{Data}}, \code{\link{Drivers}},
+  \code{\link{Phylo}}, \code{\link{Samples}},
+  \code{\link{Subclonal}}, \code{\link{Truncal}},
+  \code{\link{get_features}}
+}
+\concept{Getters}

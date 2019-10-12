@@ -2,22 +2,36 @@
 % Please edit documentation in R/getter_functions.R
 \name{Clonal_cluster}
 \alias{Clonal_cluster}
-\title{Return the id of the clonal cluster for this patient}
+\title{Extract the clonal cluster id for a patient.}
 \usage{
 Clonal_cluster(x, p)
 }
 \arguments{
-\item{x}{a REVOLVER object of class "rev_cohort"}
+\item{x}{A \code{REVOLVER} cohort.}
 
-\item{p}{a patient}
+\item{p}{The id of a patient in the cohort.}
 }
 \value{
-The id of the clonal cluster for \code{p}
+The id of the clonal cluster for the patient.
 }
 \description{
-Return the id of the clonal cluster for this patient
+From a cohort object, this function return the
+id of the clonal cluster for a patient.
 }
 \examples{
-data(TRACERx_cohort)
-Clonal_cluster(TRACERx_cohort, 'CRUK0002')
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+Clonal_cluster(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
+
+Clonal_cluster(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 }
+\seealso{
+Other Getters: \code{\link{CCF_clusters}},
+  \code{\link{CCF}}, \code{\link{Data}},
+  \code{\link{Drivers}}, \code{\link{ITransfer}},
+  \code{\link{Phylo}}, \code{\link{Samples}},
+  \code{\link{Subclonal}}, \code{\link{Truncal}},
+  \code{\link{get_features}}
+}
+\concept{Getters}

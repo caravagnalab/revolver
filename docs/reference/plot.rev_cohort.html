@@ -6,13 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cohort summary scatterplot. — plot.rev_cohort • revolver</title>
+<title>Summary scatterplot of a cohort. — plot.rev_cohort • revolver</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,12 @@
 
 
 
-<meta property="og:title" content="Cohort summary scatterplot. — plot.rev_cohort" />
 
-<meta property="og:description" content="Cohort summary scatterplot." />
+<meta property="og:title" content="Summary scatterplot of a cohort. — plot.rev_cohort" />
+<meta property="og:description" content="Summary scatterplot of a cohort." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -78,10 +82,17 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -94,20 +105,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Cohort summary scatterplot.</h1>
-    
+    <h1>Summary scatterplot of a cohort.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/S3_plot_functions.R'><code>R/S3_plot_functions.R</code></a></small>
     <div class="hidden name"><code>plot.rev_cohort.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Cohort summary scatterplot.</p>
-    
+    <p>Summary scatterplot of a cohort.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for rev_cohort</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -116,36 +125,41 @@
       <td><p>A REVOLVER cohort.</p></td>
     </tr>
     <tr>
-      <th>cex</th>
-      <td><p>Cex of the plot.</p></td>
+      <th>...</th>
+      <td><p>Standard S3 signature.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ggplot2</code> object of the plot.</p>
-    
+    <p>A <code>ggplot</code> object of the plot.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Returns a scatterplot of the tumour mutational burden. at the
+    <p>Returns a scatterplot of the tumour mutational burden,  at the
 clonal and subclonal level. Each dot is sized by the number of
 clones with drivers, and coloured by the numnber of drivers.</p>
-    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other S3 functions: <code><a href='plot.rev_cohort_fit.html'>plot.rev_cohort_fit</a></code>,
+  <code><a href='print.rev_cohort_fit.html'>print.rev_cohort_fit</a></code>,
+  <code><a href='print.rev_cohort.html'>print.rev_cohort</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>TRACERx_cohort</span>)
+    <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>TRACERx_cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Transformation introduced infinite values in continuous y-axis</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Transformation introduced infinite values in continuous y-axis</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Transformation introduced infinite values in continuous y-axis</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 17 rows containing non-finite values (stat_density2d).</span></div><div class='img'><img src='plot.rev_cohort-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'># Cancel the fits</span>
+<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>$<span class='no'>fit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span class='error'>Error in obj_has_fit(x): Cannot proceed without having computed fit models -- are you calling the right function?</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

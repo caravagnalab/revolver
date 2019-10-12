@@ -8,11 +8,13 @@
 
 <title>Compute/ add mutation trees to a REVOLVER cohort. — revolver_compute_CLtrees • revolver</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,10 +32,12 @@
 
 
 
-<meta property="og:title" content="Compute/ add mutation trees to a REVOLVER cohort. — revolver_compute_CLtrees" />
 
+<meta property="og:title" content="Compute/ add mutation trees to a REVOLVER cohort. — revolver_compute_CLtrees" />
 <meta property="og:description" content="Compute/ add mutation trees to a REVOLVER cohort." />
+<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -78,10 +82,17 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/caravagn/revolver">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -95,21 +106,19 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute/ add mutation trees to a REVOLVER cohort.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/TODO.R'><code>R/TODO.R</code></a></small>
     <div class="hidden name"><code>revolver_compute_CLtrees.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Compute/ add mutation trees to a REVOLVER cohort.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>revolver_compute_CLtrees</span>(<span class='no'>x</span>, <span class='no'>patient</span>, <span class='kw'>precomputed.trees</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>precomputed.scores</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>sspace.cutoff</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
   <span class='kw'>n.sampling</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>store.max</span> <span class='kw'>=</span> <span class='fl'>100</span>),
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -123,33 +132,31 @@
     </tr>
     <tr>
       <th>precomputed.trees</th>
-      <td><p>See <code><a href='revolver_compute_phylogenies.html'>revolver_compute_phylogenies</a></code></p></td>
+      <td><p>See <code>revolver_compute_phylogenies</code></p></td>
     </tr>
     <tr>
       <th>precomputed.scores</th>
-      <td><p>See <code><a href='revolver_compute_phylogenies.html'>revolver_compute_phylogenies</a></code></p></td>
+      <td><p>See <code>revolver_compute_phylogenies</code></p></td>
     </tr>
     <tr>
       <th>options</th>
-      <td><p>See <code><a href='revolver_compute_phylogenies.html'>revolver_compute_phylogenies</a></code>.</p></td>
+      <td><p>See <code>revolver_compute_phylogenies</code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
       <td><p>output type.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a modififed object of class <code>"rev_cohort"</code> with available
 mutation trees for <code>patient</code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This is the analogous of <code><a href='revolver_compute_phylogenies.html'>revolver_compute_phylogenies</a></code>, but for binary data and
+    <p>This is the analogous of <code>revolver_compute_phylogenies</code>, but for binary data and
 hence it computes Chow-Liu trees using also Suppes' conditions. Parameters have exactly
-the same meaning of the ones described in <code><a href='revolver_compute_phylogenies.html'>revolver_compute_phylogenies</a></code>.</p>
-    
+the same meaning of the ones described in <code>revolver_compute_phylogenies</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>CRC.cohort</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘CRC.cohort’ not found</span></div><div class='input'><span class='no'>new.cohort</span> <span class='kw'>=</span> <span class='fu'>revolver_compute_CLtrees</span>(<span class='no'>CRC.cohort</span>, <span class='kw'>patient</span> <span class='kw'>=</span> <span class='st'>'adenoma_1'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in revolver_compute_CLtrees(CRC.cohort, patient = "adenoma_1"): object 'CRC.cohort' not found</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>new.cohort</span>$<span class='no'>phylogenies</span>$<span class='no'>adenoma_1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in print(new.cohort$phylogenies$adenoma_1): object 'new.cohort' not found</span></div></pre>
@@ -158,11 +165,8 @@ the same meaning of the ones described in <code><a href='revolver_compute_phylog
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
