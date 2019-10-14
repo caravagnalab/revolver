@@ -4,17 +4,14 @@
 \alias{revolver_jackknife}
 \title{Compute clusters stability via the jackknife.}
 \usage{
-revolver_jackknife(cohort, resamples = 100, leave.out = 0.1,
+revolver_jackknife(x, resamples = 100, leave.out = 0.1,
   cores.ratio = 0.9, options.fit = list(initial.solution = NA,
   transitive.orderings = FALSE, restarts = 0),
   options.clustering = list(use.GL = TRUE, transitive.closure = FALSE,
   min.group.size = 3, hc.method = "ward", cutoff.features_annotation = 3,
-  split.method = "cutreeHybrid"), dump.partial = FALSE,
-  overwrite = FALSE)
+  split.method = "cutreeHybrid"))
 }
 \arguments{
-\item{cohort}{A cohort object where fit and clusters have been computed.}
-
 \item{resamples}{Number of jackknife samples.}
 
 \item{cores.ratio}{Ratio of cores for parallel execution}
@@ -23,6 +20,8 @@ revolver_jackknife(cohort, resamples = 100, leave.out = 0.1,
 
 \item{options.clustering}{List of parameters for clustering with the germline node GL. See \code{\link{revolver_cluster}}.}
 
+\item{cohort}{A cohort object where fit and clusters have been computed.}
+
 \item{removal}{A number in \code{[0,1]} for the percentage of samples to leave out in each jackknife iteration.}
 }
 \value{
@@ -30,7 +29,7 @@ A cohort where a new jackknife field contains result from this analysis
 }
 \description{
 For a set of clusters computed via \code{\link{revolver_cluster}}, you can compute
-their stability via a jackknife. routine. This funcion runs a kind of bootstrap 
+their stability via a jackknife. routine. This funcion runs a kind of bootstrap
 routine where subset of patients - a desired number - is removed from the cohort and
 before re-computing the clusters. In this way, the co-clustering probability of each
 patient is computed, which leads to a mean clustering stability for each one of the
@@ -38,9 +37,9 @@ original set of clusters and a frequency for the inference of a particular evolu
 trajectory.
 
 A number of functions are available to plot the results from this jackknife analysis.
-Note that in general if you require a large number of runs (i.e., resamples), this 
-computation can take some time. This implementation leverages on the \code{easypar} 
-package to run in parallel all the re-runs, therefore we suggest to run it on a 
+Note that in general if you require a large number of runs (i.e., resamples), this
+computation can take some time. This implementation leverages on the \code{easypar}
+package to run in parallel all the re-runs, therefore we suggest to run it on a
 multi-core machine to appreciate a speed up in the computations.
 }
 \examples{

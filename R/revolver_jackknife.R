@@ -1,19 +1,19 @@
 #' Compute clusters stability via the jackknife.
-#' 
-#' @description 
-#' 
+#'
+#' @description
+#'
 #' For a set of clusters computed via \code{\link{revolver_cluster}}, you can compute
-#' their stability via a jackknife. routine. This funcion runs a kind of bootstrap 
+#' their stability via a jackknife. routine. This funcion runs a kind of bootstrap
 #' routine where subset of patients - a desired number - is removed from the cohort and
 #' before re-computing the clusters. In this way, the co-clustering probability of each
 #' patient is computed, which leads to a mean clustering stability for each one of the
 #' original set of clusters and a frequency for the inference of a particular evolutionary
 #' trajectory.
-#' 
+#'
 #' A number of functions are available to plot the results from this jackknife analysis.
-#' Note that in general if you require a large number of runs (i.e., resamples), this 
-#' computation can take some time. This implementation leverages on the \code{easypar} 
-#' package to run in parallel all the re-runs, therefore we suggest to run it on a 
+#' Note that in general if you require a large number of runs (i.e., resamples), this
+#' computation can take some time. This implementation leverages on the \code{easypar}
+#' package to run in parallel all the re-runs, therefore we suggest to run it on a
 #' multi-core machine to appreciate a speed up in the computations.
 #'
 #' @param cohort A cohort object where fit and clusters have been computed.
@@ -34,39 +34,77 @@
 #'  TODO
 #' }
 #'
-revolver_jackknife = function(cohort,
+revolver_jackknife = function(x,
                               resamples = 100,
                               leave.out = 0.1,
                               cores.ratio = 0.9,
-                              options.fit = list(initial.solution = NA, transitive.orderings = FALSE, restarts = 0),
-                              options.clustering = list(use.GL = TRUE, transitive.closure = FALSE, min.group.size = 3, hc.method = 'ward', cutoff.features_annotation = 3, split.method = 'cutreeHybrid'),
-                              dump.partial = FALSE,
-                              overwrite = FALSE
+                              options.fit = list(initial.solution = NA, max.iterations = 10, n = 10),
+                              options.clustering = list(min.group.size = 3, hc.method = 'ward', split.method = 'cutreeHybrid'),
+                              ...
 )
 {
-  if(is.null(cohort$cluster)) stop('You want to first compute clusters?')
+  cohort = x
+
+  obj_has_fit(x)
+  obj_has_clusters(x)
+
   stopifnot(leave.out > 0 & leave.out < 1)
   stopifnot(resamples > 1)
 
-  warning("October 2019 - this is to be implemented with the new easypar.")
-  return(cohort)
-  
-  patients = cohort$patients
+  # warning("October 2019 - this is to be implemented with the new easypar.")
+  # return(cohort)
+
+  patients = x$patients
   npatients = length(patients)
 
-  hasField = !all(is.null(cohort$jackknife))
-  toCompute = (overwrite == TRUE && hasField) || !hasField
+  pio::pioHdr('REVOLVER Jackknife')
 
-  if(toCompute)
-    pio::pioHdr('REVOLVER Jackknife',
-                toPrint = c(
-                  `Resamples` = resamples,
-                  `Leave out` = leave.out),
-                prefix = '\t -')
-  else {
-    pio::pioHdr('REVOLVER Jackknife')
-    cat(red('\tUsing cached computation\n'))
+  # Inputs samples lists
+  jf_cohorts = lapply(1:resamples, function(w) {
+    n = npatients * (1 - leave.out)
+    sample(patients, n)
+    })
+
+  # Fitting function
+  fitting_function = function(i) {
+    y = x
+
+    # patients to remove - this also remove non recurring driver events
+    patients_to_remove = setdiff(x$patients, jf_cohorts[[i]])
+
+    for(p in patients_to_remove) y = remove_patient(y, p)
+
+    # fitting with the required parameters
+    y_fit = revolver_fit(y,
+                         initial.solution = options.fit$initial.solution,
+                         max.iterations = options.fit$max.iterations,
+                         n = options.fit$n)
+
+    # fitting with the required parameters
+    y_fit_clustering = revolver_cluster(y,
+                                        hc.method = options.fit$hc.method,
+                                        split.method = options.fit$split.method,
+                                        min.group.size = options.fit$min.group.size)
+
+    return(y_fit_clustering)
   }
+
+  # jackknife resamples
+  jackknife_resamples = easypar::run(
+    FUN = fitting_function,
+    PARAMS = lapply(1:resamples, list),
+    export = ls(globalenv(), all.names = TRUE),
+    ...
+  )
+
+  # Polish errors if any
+  nerrs = easypar::numErrors(jackknife_resamples)
+  if(nerrs > 0) warning("Errors in the jackknife procedure, returning less results than required...")
+
+  jackknife_resamples = easypar::filterErrors(jackknife_resamples)
+
+
+
 
 
   r = NULL

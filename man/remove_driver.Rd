@@ -9,21 +9,28 @@ remove_driver(x, variantID)
 \arguments{
 \item{x}{A REVOLVER cohort.}
 
-\item{variantID}{ID of the driver event to remove.}
+\item{variantID}{Id of the driver event to remove.}
 }
 \value{
 A modified cohort where the required event is no longer a driver.
 }
 \description{
-Each event is identied through its ID (variantID); 
+Each event is identied through its id (\code{variantID});
 with this function, you can remove a driver events, which consists
-in flagging it as FALSE in the \code{is.Driver} column of the data, and updating
-the information transfer. If you have fit the models, however, you should 
-re-run the fit after this modification because this modification does not propagate.
+in flagging it as \code{FALSE} in the \code{is.Driver} column of the data, and updating
+the information transfer. If you have fit the models or clustered the cohort,
+you should re-run the analyses after this modification; for this reason,
+any previous result from those analyses is cancelled from the returned object.
+
+Notice also that some patients might be removed by this function, because if
+they have only one driver then they cannot be fit after driver removal.
 }
 \examples{
-data(CRC.cohort)
-head(CRC.cohort$dataset) # Info to use to remove
-new.data = revolver_removeDriver(CRC.cohort, "adenoma_1", "APC", "NOTHING", "1")
-head(new.data$dataset)
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+
+print(TRACERx_NEJM_2017_REVOLVER)
+
+new_cohort = remove_driver(TRACERx_NEJM_2017_REVOLVER, "MET")
+print(new_cohort)
 }

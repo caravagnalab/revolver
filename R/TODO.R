@@ -263,39 +263,6 @@ revolver_subsetDrivers = function(cohort, list)
 
 
 
-#' Subset the patients in the cohort to match the input list.
-#'
-#' @param cohort An object of class \code{"rev_cohort"}
-#' @param list A vector of patient IDs to subset the data to.
-#'
-#' @return A REVOLVER cohort with only patients in the \code{list}.
-#' @export
-#'
-#' @examples
-#' data(CRC.cohort)
-#' CRC.cohort
-#' revolver_deletePatients(CRC.cohort, "adenoma_2")
-revolver_deletePatients = function(x, list)
-{
-  pio::pioHdr('REVOLVER subsetting patients according to list',
-              toPrint = c(
-                `Patients to keep` = paste(list, collapse = ', ')
-              ),
-              prefix = '\t -')
-
-  new.patients = setdiff(x$patients, list)
-  x$dataset = x$dataset[x$dataset$patientID %in% new.patients, , drop = FALSE]
-  x$patients = new.patients
-
-  if(!is.null(x$phylogenies))
-    x$phylogenies = x$phylogenies[intersect(new.patients, names(x$phylogenies))]
-
-  cat(cyan('\nChecking cohort.\n'))
-  revolver_check_cohort(x)
-
-
-  return(x)
-}
 
 
 #' @title Plot data and trees for a REVOLVER cohort.
@@ -323,19 +290,19 @@ revolver_deletePatients = function(x, list)
 # {
 #   obj_has_trees(x)
 #   plot.stat = TRUE
-# 
+#
 #   pio::pioHdr('REVOLVER Plot: Cohort (models)',
 #               c(
 #                 `Patients`=paste(patients, collapse = ', '),
 #                 `Number of trees per patient` = max.phylogenies),
 #               prefix = '\t -')
-# 
+#
 #   if(is.na(file)) stop('A file is required for this plot!')
-# 
+#
 #   for (patient in patients)
 #   {
 #     pio::pioTit(paste("Processing", patient))
-# 
+#
 #     revolver_report_patient(x, patient, cex = cex, max.phylogenies = max.phylogenies)
 #   }
 # }

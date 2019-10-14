@@ -461,7 +461,7 @@ has_fits = function(x, p = NULL)
 
   return(!is.null(x$fit$phylogenies[[p]]))
 }
-has_fits = Vectorize(has_fits, vectorize.args = 'p', SIMPLIFY = TRUE)
+# has_fits = Vectorize(has_fits, vectorize.args = 'p', SIMPLIFY = TRUE)
 
 has_clusters= function(x, p = NULL)
 {
