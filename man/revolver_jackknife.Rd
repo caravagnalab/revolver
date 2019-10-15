@@ -4,7 +4,7 @@
 \alias{revolver_jackknife}
 \title{Compute clusters stability via the jackknife.}
 \usage{
-revolver_jackknife(x, resamples = 100, leave.out = 0.5,
+revolver_jackknife(x, resamples = 100, leave.out = 0.1,
   options.fit = list(initial.solution = NA, max.iterations = 10, n = 10),
   options.clustering = list(min.group.size = 3, hc.method = "ward",
   split.method = "cutreeHybrid"), ...)

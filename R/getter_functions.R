@@ -393,7 +393,7 @@ ITransfer = function(x, p, rank = 1, type = 'drivers', data = 'trees')
 #' computed by REVOVLER. The result is just a tibble with a column representing
 #' the patient id, and a column with the cluster label.
 #'
-#' @param x A REVOLVEr cohort with fits and clusters.
+#' @param x A REVOLVER cohort with fits and clusters.
 #' @param patients Patients to use, all by default.
 #'
 #' @return A tibble with the required clustering assignments
@@ -420,55 +420,96 @@ Cluster = function(x, patients = x$patients)
     as_tibble()
 }
 
-
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# To test if the object has some consistency internally
+# Jackknife
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-stop_not_revolver_object = function(x)
-{
-  pass = any(sapply(c('rev_cohort', 'rev_cohort_fit'), inherits, x = x))
 
-  if(!pass)
-    stop("Input object is not a REVOLVER cohort, aborting.")
+#' Get jackknifed patient co-clustering probability.
+#'
+#' @description
+#'
+#' After jackknife computations via \code{\link{revolver_jackknife}},
+#' this function extracts a matrix reporting the co-clustering
+#' probability for the input patients.
+#'
+#' @param x A REVOLVER cohort with fits, clusters and jackknife results.
+#' @family Jackknife statistics
+#' @return A matrix of co-clustering probability.
+#'
+#' @export
+#'
+#' @examples
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'
+#' Jackknife_patient_coclustering(TRACERx_NEJM_2017_REVOLVER)
+Jackknife_patient_coclustering = function(x)
+{
+  stop_not_revolver_object(x)
+  obj_has_fit(x)
+  obj_has_clusters(x)
+  obj_has_jackknife(x)
+
+  x$jackknife$co_clustering
 }
 
-stop_invalid_patient = function(x, p)
+#' Get jackknifed cluster stability.
+#'
+#' @description
+#'
+#' After jackknife computations via \code{\link{revolver_jackknife}},
+#' this function extracts a cluster-specific stability obtained as the median
+#' co-clustering probability of the patients in the cluster.
+#'
+#' @param x A REVOLVER cohort with fits, clusters and jackknife results.
+#' @family Jackknife statistics
+#'
+#' @return A named vector.
+#'
+#' @export
+#'
+#' @examples
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'
+#' Jackknife_coclustering(TRACERx_NEJM_2017_REVOLVER)
+Jackknife_cluster_stability = function(x)
 {
-  pass = p %in% x$patients
+  stop_not_revolver_object(x)
+  obj_has_fit(x)
+  obj_has_clusters(x)
+  obj_has_jackknife(x)
 
-  if(!pass)
-    stop("Patient", p, "does not exist in this REVOLVER cohort, aborting.")
+  x$jackknife$co_clustering_medians
 }
 
-
-
-has_patient_trees = function(x, p = NULL, rank = NULL)
+#' Get jackknifed trajectories stability.
+#'
+#' @description
+#'
+#' After jackknife computations via \code{\link{revolver_jackknife}},
+#' this function extracts the trajectories stability obtained as the number of times
+#' (normalized and non) a trajectory is inferred across resamples.
+#'
+#' @param x A REVOLVER cohort with fits, clusters and jackknife results.
+#' @family Jackknife statistics
+#'
+#' @return A tibble.
+#'
+#' @export
+#'
+#' @examples
+#' # Data released in the 'evoverse.datasets'
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#'
+#' Jackknife_trajectories_stability(TRACERx_NEJM_2017_REVOLVER)
+Jackknife_trajectories_stability = function(x)
 {
-  if (is.null(p))
-    return(!is.null(x$phylogenies))
+  stop_not_revolver_object(x)
+  obj_has_fit(x)
+  obj_has_clusters(x)
+  obj_has_jackknife(x)
 
-  if (is.null(rank))
-    return(p %in% names(x$phylogenies))
-  else
-    return(rank <= length(x$phylogenies[[p]]))
-}
-
-has_fits = function(x, p = NULL)
-{
-  if (is.null(p))
-    return(!is.null(x$fit))
-
-  models = x$fit$phylogenies[p]
-  
-  return(!all(sapply(models, is.null)))
-}
-# has_fits = Vectorize(has_fits, vectorize.args = 'p', SIMPLIFY = TRUE)
-
-has_clusters= function(x, p = NULL)
-{
-  if (is.null(p))
-    return(!is.null(x$cluster))
-
-  return(p %in% names(x$cluster$fits$labels))
+  x$jackknife$trajectories
 }

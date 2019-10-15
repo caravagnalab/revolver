@@ -18,7 +18,8 @@ Notice that if the inital conditin is fixed the other parameter `n` should be 1.
 
 \item{n}{Number of initial conditions sampled to compute optimal fit.}
 
-\item{...}{Other paraemters, not used.}
+\item{...}{Parameters forwarded to a \code{run} call of package \code{easypar}, which
+can be customised for parallel fit, caching or other parameters.}
 }
 \value{
 A new object of class \code{"rev_cohort_fit"} which represents a
