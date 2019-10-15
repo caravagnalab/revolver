@@ -7,7 +7,7 @@
 Cluster(x, patients = x$patients)
 }
 \arguments{
-\item{x}{A REVOLVEr cohort with fits and clusters.}
+\item{x}{A REVOLVER cohort with fits and clusters.}
 
 \item{patients}{Patients to use, all by default.}
 }

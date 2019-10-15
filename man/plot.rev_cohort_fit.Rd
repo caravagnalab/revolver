@@ -4,7 +4,7 @@
 \alias{plot.rev_cohort_fit}
 \title{Summary scatterplot of a cohort's fits.}
 \usage{
-plot.rev_cohort_fit(x, ...)
+\method{plot}{rev_cohort_fit}(x, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort with fits.}

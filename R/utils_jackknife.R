@@ -68,7 +68,7 @@ analyse_jackknife = function(x)
   ##################### EDGE ESTIMATORS
   pio::pioTit('Edge frequency across resamples')
   
-  # From every resample
+  # From every resample, probability of one trajectory
   trajectories = lapply(x$jackknife$results,
                         function(w) {
                           # trajectories in this resample
@@ -88,9 +88,44 @@ analyse_jackknife = function(x)
   
   trajectories = Reduce(bind_rows, trajectories) %>%
     group_by(from, to) %>%
-    summarise(n = n(), p = n()/resamples) %>%
+    summarise(prob_resamp = n()/resamples) %>%
     ungroup() %>%
-    arrange(desc(n))
+    arrange(desc(prob_resamp))
+  
+  # From every resample, number of patients with the trajectory
+  trajectories_counts = lapply(seq_along(x$jackknife$results),
+                        function(w) {
+                          this_resample = x$jackknife$results[[w]]
+                          
+                          # trajectories in this resample
+                          # from the IT, top rankings
+                          this_patient = lapply(
+                            this_resample$patients,
+                            ITransfer,
+                            x = x,
+                            rank = 1,
+                            type = 'drivers',
+                            data = 'trees'
+                          )
+                          
+                          # Pooled and made unique
+                          Reduce(bind_rows, this_patient) %>% 
+                            group_by(from, to) %>%
+                            summarise(n = n()/this_resample$n$patients) %>%
+                            arrange(desc(n)) %>%
+                            mutate(resample = w) %>%
+                            ungroup()
+                        })
+  
+  trajectories_counts = Reduce(bind_rows, trajectories_counts) %>%
+    group_by(from, to) %>%
+    summarise(num_patients = median(n)) %>%
+    arrange(desc(num_patients))  %>%
+    ungroup()
+    
+  # Bond tibble
+  trajectories = trajectories %>%
+    full_join(trajectories_counts, by = c('from', 'to'))
   
   trajectories %>% pioDisp
   

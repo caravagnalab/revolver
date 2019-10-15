@@ -4,7 +4,7 @@
 \alias{plot.rev_cohort}
 \title{Summary scatterplot of a cohort.}
 \usage{
-plot.rev_cohort(x, ...)
+\method{plot}{rev_cohort}(x, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort.}

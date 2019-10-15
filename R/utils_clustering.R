@@ -80,3 +80,14 @@ split_dendrogram = function(
     list(K = K, labels = labels)
   )
 }
+
+# Generate colors for clustering
+get_cluster_colors = function(x, cluster_palette = distinct_palette_few) {
+  clusters_labels =  Cluster(x) %>%  pull(cluster) %>% unique %>% sort
+  nclusters = clusters_labels %>% length
+  
+  clusters_colors =  cluster_palette(nclusters)
+  names(clusters_colors) = clusters_labels
+  
+  clusters_colors
+}
