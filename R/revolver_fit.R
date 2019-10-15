@@ -21,7 +21,8 @@
 #' Notice that if the inital conditin is fixed the other parameter `n` should be 1.
 #' @param max.iterations Maximum number of EM steps before forcing stop.
 #' @param n Number of initial conditions sampled to compute optimal fit.
-#' @param ... Other paraemters, not used.
+#' @param ... Parameters forwarded to a \code{run} call of package \code{easypar}, which
+#' can be customised for parallel fit, caching or other parameters.  
 #'
 #' @return A new object of class \code{"rev_cohort_fit"} which represents a
 #' REVOLVER cohort object with fits available.
@@ -44,7 +45,7 @@ revolver_fit = function(x,
                         n = 10,
                         ...)
 {
-  pio::pioHdr(paste0("REVOLVER Transfer Learning fit- ", x$annotation))
+  pio::pioHdr(paste0("REVOLVER Transfer Learning fit ~ ", x$annotation))
   stopifnot(n > 0)
 
   # What we can actually fit
@@ -109,7 +110,8 @@ revolver_fit = function(x,
     },
     PARAMS = lapply(1:n, list),
     packages = c("crayon", "revolver", "tidygraph", "tidyverse", "igraph"),
-    export = ls(globalenv(), all.names = TRUE)
+    export = ls(globalenv(), all.names = TRUE),
+    ...
   )
 
   if(easypar::numErrors(results))
@@ -143,6 +145,9 @@ revolver_fit = function(x,
 
     cat(cyan('\t Best solution is #'), bgGreen(best), '\n')
   }
+  
+  pio::pioStr("REVOLVER Transfer Learning fit ", "COMPLETED", suffix = '\n')
+  
 
   return(results[[best]])
 }

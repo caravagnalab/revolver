@@ -46,7 +46,7 @@ revolver_jackknife = function(x,
   obj_has_clusters(x)
 
   stopifnot(leave.out > 0 & leave.out < 1)
-  stopifnot(resamples > 1)
+  stopifnot(resamples >= 1)
 
   # warning("October 2019 - this is to be implemented with the new easypar.")
   # return(cohort)
@@ -73,14 +73,16 @@ revolver_jackknife = function(x,
     # patients to remove - this also remove non recurring driver events
     y = remove_patients(y, setdiff(x$patients, jf_cohorts[[i]]))
 
-    # fitting with the required parameters
+    # fitting with the required parameters, without parallel and progress bar
     y_fit = revolver_fit(y,
                          initial.solution = options_fit$initial.solution,
                          max.iterations = options_fit$max.iterations,
-                         n = options_fit$n)
+                         n = options_fit$n,
+                         parallel = FALSE, 
+                         progress_bar = FALSE)
 
     # fitting with the required parameters
-    y_fit_clustering = revolver_cluster(y,
+    y_fit_clustering = revolver_cluster(y_fit,
                                         hc.method = options_clustering$hc.method,
                                         split.method = options_clustering$split.method,
                                         min.group.size = options_clustering$min.group.size)
@@ -88,18 +90,13 @@ revolver_jackknife = function(x,
     return(y_fit_clustering)
   }
 
-  # ellipsis parameters
-  options_easypar = unpack(..., 
-                           params = c('packages', 'cores.ratio', 'parallel', 'silent', 'cache', 'progress_bar'), 
-                           fun = easypar::run)
-  
   # jackknife resamples
   jackknife_resamples = easypar::run(
     FUN = fitting_function,
     PARAMS = lapply(1:resamples, list),
     export = ls(globalenv(), all.names = TRUE),
-    packages = 
-    ...
+    packages = 'revolver',
+    parallel = TRUE
   )
 
   # Polish errors if any

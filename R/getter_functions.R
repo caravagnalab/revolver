@@ -459,7 +459,9 @@ has_fits = function(x, p = NULL)
   if (is.null(p))
     return(!is.null(x$fit))
 
-  return(!is.null(x$fit$phylogenies[[p]]))
+  models = x$fit$phylogenies[p]
+  
+  return(!all(sapply(models, is.null)))
 }
 # has_fits = Vectorize(has_fits, vectorize.args = 'p', SIMPLIFY = TRUE)
 

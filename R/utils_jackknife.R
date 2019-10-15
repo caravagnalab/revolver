@@ -40,7 +40,7 @@ analyse_jackknife = function(x)
   for(p in 1:length(results)) {
     pb$tick()$print()
     
-    co.clustering = cumulative_co_occurrences(results, co.clustering)
+    co.clustering = cumulative_co_occurrences(results[[p]], co.clustering)
   }
   
   co.clustering %>% pioDisp
@@ -57,7 +57,7 @@ analyse_jackknife = function(x)
   
   for(cluster in clusters) 
   {
-    members = Cluster(x) %>% filter(cluster == !!cluster) %>% pull(cluster)
+    members = Cluster(x) %>% filter(cluster == !!cluster) %>% pull(patientID)
     median_stats[cluster] = median(unlist(x$jackknife$co_clustering[members, members]))
   }
   
@@ -76,6 +76,7 @@ analyse_jackknife = function(x)
                           this_patient = lapply(
                             w$patients,
                             ITransfer,
+                            x = x,
                             rank = 1,
                             type = 'drivers',
                             data = 'trees'
@@ -87,7 +88,7 @@ analyse_jackknife = function(x)
   
   trajectories = Reduce(bind_rows, trajectories) %>%
     group_by(from, to) %>%
-    sumamrise(n = n()/resamples) %>%
+    summarise(n = n(), p = n()/resamples) %>%
     ungroup() %>%
     arrange(desc(n))
   
