@@ -4,17 +4,13 @@
 \alias{revolver_jackknife}
 \title{Compute clusters stability via the jackknife.}
 \usage{
-revolver_jackknife(x, resamples = 100, leave.out = 0.1,
-  cores.ratio = 0.9, options.fit = list(initial.solution = NA,
-  transitive.orderings = FALSE, restarts = 0),
-  options.clustering = list(use.GL = TRUE, transitive.closure = FALSE,
-  min.group.size = 3, hc.method = "ward", cutoff.features_annotation = 3,
-  split.method = "cutreeHybrid"))
+revolver_jackknife(x, resamples = 100, leave.out = 0.5,
+  options.fit = list(initial.solution = NA, max.iterations = 10, n = 10),
+  options.clustering = list(min.group.size = 3, hc.method = "ward",
+  split.method = "cutreeHybrid"), ...)
 }
 \arguments{
 \item{resamples}{Number of jackknife samples.}
-
-\item{cores.ratio}{Ratio of cores for parallel execution}
 
 \item{options.fit}{List of parameters for fitting models. See  \code{\link{revolver_fit}}.}
 
@@ -23,6 +19,8 @@ revolver_jackknife(x, resamples = 100, leave.out = 0.1,
 \item{cohort}{A cohort object where fit and clusters have been computed.}
 
 \item{removal}{A number in \code{[0,1]} for the percentage of samples to leave out in each jackknife iteration.}
+
+\item{cores.ratio}{Ratio of cores for parallel execution}
 }
 \value{
 A cohort where a new jackknife field contains result from this analysis

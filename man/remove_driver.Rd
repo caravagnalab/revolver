@@ -4,7 +4,7 @@
 \alias{remove_driver}
 \title{Remove a driver event from the cohort.}
 \usage{
-remove_driver(x, variantID)
+remove_driver(x, variantID, check = TRUE)
 }
 \arguments{
 \item{x}{A REVOLVER cohort.}

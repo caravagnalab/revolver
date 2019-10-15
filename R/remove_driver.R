@@ -26,13 +26,14 @@
 #' print(new_cohort)
 remove_driver = function(
   x,
-  variantID
+  variantID,
+  check = TRUE
   )
 {
-  if(!(variantID %in% x$variantIDs.driver))
+  if(!all(variantID %in% x$variantIDs.driver))
     stop(variantID, "is not a driver in the cohort, aborting.")
 
-  pioStr('Removing driver event', variantID, suffix = '\n')
+  pioStr('Removing driver events', paste(variantID, collapse = ', '), suffix = '\n')
   Stats_drivers(x, drivers = variantID) %>% pioDisp
 
   N = length(x$patients)
@@ -52,8 +53,9 @@ remove_driver = function(
     # Check  if the patient has other drivers, because if it has not then the
     # patient needs to be removed. There cannot be a patient without drivers in REVOLVER
     # (also the tree-based packages would throw an error)
-    if(length(drv) == 1 && drv == variantID) {
-      warning(patient, " has only one driver (", variantID, ") and therefore will be removed.\n")
+    if(all(drv %in% variantID)) 
+    {
+      warning(patient, " will have no drivers, and therefore will be removed.\n")
 
       next;
     }
@@ -62,31 +64,48 @@ remove_driver = function(
     new_patients = c(new_patients, patient)
 
     # If the patient has not this driver, we skip it
-    if(!(variantID %in% drv)) next;
+    if(!any(variantID %in% drv)) next;
 
     # Remove from the data of the patient
     new_data = Data(x, patient) %>%
-      mutate(is.driver = ifelse(variantID == !!variantID, FALSE, is.driver))
+      mutate(is.driver = ifelse(variantID %in% !!variantID, FALSE, is.driver))
 
-    new_CCF_clusters = CCF_clusters(x, patient)
+    CCFclone_headers = new_data %>%
+      group_by(cluster) %>%
+      summarise(
+        nMuts = n(),
+        is.driver = any(is.driver),
+        is.clonal = all(is.clonal)
+      ) %>%
+      arrange(desc(nMuts))
+    
+    CCFclone_values = new_data %>%
+      select(cluster, Samples(x, patient)) %>%
+      reshape2::melt(id = 'cluster') %>%
+      group_by(cluster, variable) %>%
+      summarise(CCF = median(as.numeric(value))) %>%
+      spread(variable, CCF) %>%
+      ungroup()
+    
+    new_CCF_clusters = CCFclone_headers %>% full_join(CCFclone_values, by = 'cluster')
 
     # Clones with still a driver
-    clones_driver_profile = new_data %>%
-      group_by(cluster) %>%
-      summarise(is.driver = any(is.driver)) %>%
-      filter(is.driver) %>%
-      pull(cluster)
-
-    # Where the driver maps to
-    clones_assignment = new_data %>%
-      filter(variantID == !!variantID) %>%
-      pull(cluster)
-
-    # In this case, removing this driver we have no longer
-    # a driver clone, need to update the CCF data
-    if(!(clones_assignment %in% clones_driver_profile))
-      new_CCF_clusters = new_CCF_clusters %>%
-        mutate(is.driver = ifelse(cluster == clones_assignment, FALSE, is.driver))
+    # clones_driver_profile = new_data %>%
+    #   group_by(cluster) %>%
+    #   summarise(is.driver = any(is.driver)) %>%
+    #   filter(is.driver) %>%
+    #   pull(cluster)
+    # 
+    # # Where the driver maps to
+    # clones_assignment = new_data %>%
+    #   filter(variantID %in% !!variantID) %>%
+    #   pull(cluster)
+    # 
+    # # In this case, removing this driver we have no longer
+    # # a driver clone, need to update the CCF data
+    # if(!(clones_assignment %in% clones_driver_profile))
+    #   new_CCF_clusters = new_CCF_clusters %>%
+    #     mutate(is.driver = ifelse(cluster == clones_assignment, FALSE, is.driver))
 
     # Store the new data and CCF clusters
     x$dataset[[patient]] = new_data
@@ -128,7 +147,7 @@ remove_driver = function(
   }
 
   # Retianed patients
-  pioStr("Retained patients", paste(new_patients, collapse = ', '), suffix = '\n')
+  pioStr("Retained patients", length(new_patients), suffix = '\n')
 
   # if has fits, force to recompute
   if(has_fits(x)) {
@@ -155,7 +174,7 @@ remove_driver = function(
   x$phylogenies = x$phylogenies[new_patients]
 
   # Check the cohort
-  revolver_check_cohort(x)
+  if(check) revolver_check_cohort(x)
 
   return(x)
 }
