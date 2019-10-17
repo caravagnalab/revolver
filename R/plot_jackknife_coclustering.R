@@ -27,19 +27,15 @@ plot_jackknife_coclustering = function(x,
   obj_has_clusters(x)
   obj_has_jackknife(x)
 
-  stopifnot(palette %in% rownames(RColorBrewer::brewer.pal.info))
-
   co_clustering = Jackknife_patient_coclustering(x)
 
   # Prepare factors for the clusters ordering and colours
   factors_level = Cluster(x) %>% arrange(cluster) %>% pull(patientID)
 
-  clusters_labels =  Cluster(x) %>%  pull(cluster) %>% unique %>% sort
-  nclusters = clusters_labels %>% length
+  nclusters = Cluster(x) %>% pull(cluster) %>% unique %>% length
 
-  clusters_colors =  distinct_palette_few(nclusters)
-  names(clusters_colors) = clusters_labels
-
+  clusters_colors = get_cluster_colors(x, cluster_palette)
+  
   factors_colors =  Cluster(x) %>%
     arrange(cluster) %>%
     mutate(color = clusters_colors[cluster])

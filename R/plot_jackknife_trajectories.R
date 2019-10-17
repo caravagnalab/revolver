@@ -21,7 +21,7 @@
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 #'
-#' plot_jackknife_coclustering(TRACERx_NEJM_2017_REVOLVER)
+#' plot_jackknife_trajectories_stability(TRACERx_NEJM_2017_REVOLVER)
 plot_jackknife_trajectories_stability = function(x,
                                                  annotate_probability = .90,
                                                  annotate_percentage = .2
@@ -31,6 +31,7 @@ plot_jackknife_trajectories_stability = function(x,
   obj_has_jackknife(x)
   
   trajectories = Jackknife_trajectories_stability(x)
+  nclusters = Cluster(x) %>% pull(cluster) %>% unique %>% length
   
   relevant = trajectories %>%
     filter(prob_resamp > annotate_probability, num_patients > annotate_percentage)

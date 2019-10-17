@@ -31,6 +31,15 @@
     <loc>caravagn.github.io/revolver/reference/ITransfer.html</loc>
   </url>
   <url>
+    <loc>caravagn.github.io/revolver/reference/Jackknife_cluster_stability.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/Jackknife_patient_coclustering.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/Jackknife_trajectories_stability.html</loc>
+  </url>
+  <url>
     <loc>caravagn.github.io/revolver/reference/Phylo.html</loc>
   </url>
   <url>
@@ -91,6 +100,9 @@
     <loc>caravagn.github.io/revolver/reference/plot_clusters.html</loc>
   </url>
   <url>
+    <loc>caravagn.github.io/revolver/reference/plot_dendrogram.html</loc>
+  </url>
+  <url>
     <loc>caravagn.github.io/revolver/reference/plot_drivers_clonality.html</loc>
   </url>
   <url>
@@ -98,6 +110,15 @@
   </url>
   <url>
     <loc>caravagn.github.io/revolver/reference/plot_drivers_occurrence.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/plot_jackknife_cluster_stability.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/plot_jackknife_coclustering.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/plot_jackknife_trajectories_stability.html</loc>
   </url>
   <url>
     <loc>caravagn.github.io/revolver/reference/plot_patient_CCF_histogram.html</loc>
@@ -127,6 +148,12 @@
     <loc>caravagn.github.io/revolver/reference/print.rev_cohort_fit.html</loc>
   </url>
   <url>
+    <loc>caravagn.github.io/revolver/reference/remove_drivers.html</loc>
+  </url>
+  <url>
+    <loc>caravagn.github.io/revolver/reference/remove_patients.html</loc>
+  </url>
+  <url>
     <loc>caravagn.github.io/revolver/reference/revolver_check_cohort.html</loc>
   </url>
   <url>
@@ -137,9 +164,6 @@
   </url>
   <url>
     <loc>caravagn.github.io/revolver/reference/revolver_compute_CLtrees.html</loc>
-  </url>
-  <url>
-    <loc>caravagn.github.io/revolver/reference/revolver_deletePatients.html</loc>
   </url>
   <url>
     <loc>caravagn.github.io/revolver/reference/revolver_fit.html</loc>
@@ -160,12 +184,6 @@
     <loc>caravagn.github.io/revolver/reference/revolver_plt_jackknife_edge_prb.html</loc>
   </url>
   <url>
-    <loc>caravagn.github.io/revolver/reference/revolver_removeDriver.html</loc>
-  </url>
-  <url>
     <loc>caravagn.github.io/revolver/reference/revolver_subsetDrivers.html</loc>
-  </url>
-  <url>
-    <loc>caravagn.github.io/revolver/articles/Getters.html</loc>
   </url>
 </urlset>

@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Getter functions • revolver</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Getter functions">
 <meta property="og:description" content="">
 <meta property="og:image" content="caravagn.github.io/revolver/logo.png">
@@ -39,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -65,7 +72,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/caravagn/revolver">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -78,6 +85,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -94,7 +102,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Load REVOLVER </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(revolver)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(revolver)</a></code></pre></div>
 <pre><code>##  [ ctree - Clone Trees in cancer ] 
 ## Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; 
 ## GitHub :  caravagn/ctree 
@@ -106,15 +114,20 @@
 ##  [ REVOLVER - Repeated Evolution in Cancer ] 
 ## Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; 
 ## GitHub :  caravagn/revolver</code></pre>
+<pre><code>## 
+## Attaching package: 'revolver'</code></pre>
+<pre><code>## The following object is masked from 'package:igraph':
+## 
+##     plot_dendrogram</code></pre>
 <p>In this vignette we make use of one of the cohort objects released with the tool.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Data released in the 'evoverse.datasets'</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">'TRACERx_NEJM_2017_REVOLVER'</span>, <span class="dt">package =</span> <span class="st">'evoverse.datasets'</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># We can use S3 object functions to retrieve simple information about the plot.</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># The `print` functions runs also the `revolver_check_cohort` function which </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co"># tells us that some patient have only 1 clone with drivers, and therefore they</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># can just be expanded.</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Data released in the 'evoverse.datasets'</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">'TRACERx_NEJM_2017_REVOLVER'</span>, <span class="dt">package =</span> <span class="st">'evoverse.datasets'</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># We can use S3 object functions to retrieve simple information about the plot.</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co"># The `print` functions runs also the `revolver_check_cohort` function which </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># tells us that some patient have only 1 clone with drivers, and therefore they</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># can just be expanded.</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
 <pre><code>##  [ REVOLVER - Repeated Evolution in Cancer ] 
 ## 
 ## Dataset : TRACERx NEJM 2017 
@@ -123,7 +136,7 @@
 ## Trees per patient    : YES 
 ## Fit via TL           : YES 
 ## REVOLVER clustering  : YES 
-## Jackknife statistics : NO 
+## Jackknife statistics : YES 
 ##  
 ## For summary statistics see `?Stats_*(x)` with * = {cohort, drivers, trees, fits, clusters, ...} 
 ## 
@@ -158,8 +171,8 @@
 <li>
 <code>patients</code> a list of patients IDs that will be used to subset the outputs (all by default);</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Access all data for a patient</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/Data.html">Data</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Access all data for a patient</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../reference/Data.html">Data</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 7 x 12
 ##   id    Misc  patientID variantID is.driver is.clonal cluster cluster_size
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;          &lt;int&gt;
@@ -171,8 +184,8 @@
 ## 6 __mu… Anno… CRUK0001  EGFR      TRUE      TRUE      3                  4
 ## 7 __mu… CRUK… CRUK0001  PASK      TRUE      FALSE     5                  1
 ## # … with 4 more variables: CCF &lt;chr&gt;, R1 &lt;dbl&gt;, R2 &lt;dbl&gt;, R3 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Access only the drivers for a patient</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="../reference/Drivers.html">Drivers</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Access only the drivers for a patient</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="../reference/Drivers.html">Drivers</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 7 x 12
 ##   id    Misc  patientID variantID is.driver is.clonal cluster cluster_size
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;          &lt;int&gt;
@@ -184,11 +197,11 @@
 ## 6 __mu… Anno… CRUK0001  EGFR      TRUE      TRUE      3                  4
 ## 7 __mu… CRUK… CRUK0001  PASK      TRUE      FALSE     5                  1
 ## # … with 4 more variables: CCF &lt;chr&gt;, R1 &lt;dbl&gt;, R2 &lt;dbl&gt;, R3 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Access the names of the samples for a patient</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="../reference/Samples.html">Samples</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Access the names of the samples for a patient</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="../reference/Samples.html">Samples</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## [1] "R1" "R2" "R3"</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Get the list of truncal (i.e., clonal) mutations in a patient</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="../reference/Truncal.html">Truncal</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Get the list of truncal (i.e., clonal) mutations in a patient</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="../reference/Truncal.html">Truncal</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 12
 ##   id    Misc  patientID variantID is.driver is.clonal cluster cluster_size
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;          &lt;int&gt;
@@ -197,8 +210,8 @@
 ## 3 __mu… CRUK… CRUK0001  WRN       TRUE      TRUE      3                  4
 ## 4 __mu… Anno… CRUK0001  EGFR      TRUE      TRUE      3                  4
 ## # … with 4 more variables: CCF &lt;chr&gt;, R1 &lt;dbl&gt;, R2 &lt;dbl&gt;, R3 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Get the list of subclonal mutations in a patient</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="../reference/Subclonal.html">Subclonal</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Get the list of subclonal mutations in a patient</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="../reference/Subclonal.html">Subclonal</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 12
 ##   id    Misc  patientID variantID is.driver is.clonal cluster cluster_size
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;          &lt;int&gt;
@@ -206,8 +219,8 @@
 ## 2 __mu… CRUK… CRUK0001  ARHGAP35  TRUE      FALSE     2                  1
 ## 3 __mu… CRUK… CRUK0001  PASK      TRUE      FALSE     5                  1
 ## # … with 4 more variables: CCF &lt;chr&gt;, R1 &lt;dbl&gt;, R2 &lt;dbl&gt;, R3 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Return the CCF entry for all the mutations of a patient,</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="../reference/CCF.html">CCF</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Return the CCF entry for all the mutations of a patient,</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/CCF.html">CCF</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 7 x 8
 ##   id            variantID is.driver is.clonal cluster    R1    R2    R3
 ##   &lt;chr&gt;         &lt;chr&gt;     &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -218,9 +231,9 @@
 ## 5 __mut_id_1519 WRN       TRUE      TRUE      3        0.97  0.98  0.99
 ## 6 __mut_id_1540 EGFR      TRUE      TRUE      3        0.99  0.99  1   
 ## 7 __mut_id_1796 PASK      TRUE      FALSE     5        0.82  0     0.71</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Return the CCF entry for all the clones of a patient, the overall CCF</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co"># values are obtained by REVOLVER from the average of CCF values across clones.</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw"><a href="../reference/CCF_clusters.html">CCF_clusters</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Return the CCF entry for all the clones of a patient, the overall CCF</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co"># values are obtained by REVOLVER from the average of CCF values across clones.</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw"><a href="../reference/CCF_clusters.html">CCF_clusters</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 7
 ##   cluster nMuts is.driver is.clonal    R1    R2    R3
 ##   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -233,11 +246,11 @@
 <h3 class="hasAnchor">
 <a href="#summary-statistics-for-patients-data" class="anchor"></a>Summary statistics for patients’ data</h3>
 <p>You can get a broad set of summary statistics about the <code>TRACERx_NEJM_2017_REVOLVER</code> cohort for a custom set of patients. The statistics that are available in summarised format are patient-level (mutatational burdern, drivers etc.), and driver-level (frequency, clonality etc.).</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># This returns patient-level statistics like the number of biopsies, overall mutations, drivers,</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co"># clones with drivers, truncal and subclonal mutations.</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co"># </span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co"># This is also synonim to `Stats(TRACERx_NEJM_2017_REVOLVER)`</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="kw"><a href="../reference/Stats_cohort.html">Stats_cohort</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># This returns patient-level statistics like the number of biopsies, overall mutations, drivers,</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co"># clones with drivers, truncal and subclonal mutations.</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co"># </span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co"># This is also synonim to `Stats(TRACERx_NEJM_2017_REVOLVER)`</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw"><a href="../reference/Stats_cohort.html">Stats_cohort</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
 <pre><code>## # A tibble: 99 x 7
 ##    patientID numBiopsies numMutations numDriverMutati… numClonesWithDr…
 ##    &lt;chr&gt;           &lt;int&gt;        &lt;int&gt;            &lt;int&gt;            &lt;int&gt;
@@ -253,9 +266,9 @@
 ## 10 CRUK0010            2            3                3                1
 ## # … with 89 more rows, and 2 more variables: numTruncalMutations &lt;int&gt;,
 ## #   numSubclonalMutations &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># This returns driver-level statistics like the number of times the driver is clonal,</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co"># subclonal, or found in general, and for quantity normalized by cohort size (i.e., the percentage)</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw"><a href="../reference/Stats_drivers.html">Stats_drivers</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># This returns driver-level statistics like the number of times the driver is clonal,</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co"># subclonal, or found in general, and for quantity normalized by cohort size (i.e., the percentage)</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="kw"><a href="../reference/Stats_drivers.html">Stats_drivers</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
 <pre><code>## # A tibble: 79 x 7
 ##    variantID numClonal p_clonal numSubclonal p_subclonal N_tot  p_tot
 ##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -271,7 +284,7 @@
 ## 10 STK11             8   0.0808            0      0          8 0.0808
 ## # … with 69 more rows</code></pre>
 <p>The list of all patients in the cohort is accessible as <code>TRACERx_NEJM_2017_REVOLVER$patients</code>, and these functions can be run on a smaller subset of patients.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="../reference/Stats_cohort.html">Stats_cohort</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="dt">patients =</span> TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER<span class="op">$</span>patients[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="../reference/Stats_cohort.html">Stats_cohort</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="dt">patients =</span> TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER<span class="op">$</span>patients[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 7
 ##   patientID numBiopsies numMutations numDriverMutati… numClonesWithDr…
 ##   &lt;chr&gt;           &lt;int&gt;        &lt;int&gt;            &lt;int&gt;            &lt;int&gt;
@@ -305,8 +318,8 @@
 <code>data</code> to decide whether one wants the trees before the fit (<code>trees</code>), or the actual fit tree <code>fits</code>.</li>
 </ul>
 <p>By logic, if you are asking for the fit trees (<code>data = 'fits'</code>), the <code>rank</code> parameter is not considered (because there is only 1 tree fit by REVOLVER).</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># Access the top-rank tree for a patient</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw"><a href="../reference/Phylo.html">Phylo</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>, <span class="dt">rank =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># Access the top-rank tree for a patient</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="../reference/Phylo.html">Phylo</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>, <span class="dt">rank =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##  [ ctree - ctree rank 1/3 for CRUK0001 ] 
 ## 
 ## # A tibble: 4 x 7
@@ -342,8 +355,8 @@
 ##    NF1 ---&gt; PASK 
 ## 
 ## Tree score 0.111111111111111</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># Access all trees for a patient. We use CRUK0002 because it has only 3 trees</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="../reference/Phylo.html">Phylo</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0002'</span>, <span class="dt">rank =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># Access all trees for a patient. We use CRUK0002 because it has only 3 trees</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw"><a href="../reference/Phylo.html">Phylo</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0002'</span>, <span class="dt">rank =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <pre><code>## $`1`
 ##  [ ctree - ctree rank 1/2 for CRUK0002 ] 
 ## 
@@ -415,8 +428,8 @@
 ## 
 ## Tree score 0.0833333333333333</code></pre>
 <p>Notice that in the printing of a tree to screen you can immediately see the Information Transfer (IT) for the driver genes. In general, you can access the IT of a tree with another getter, which takes as extra parameter <code>type</code> in order to return either the transfer across drivers, or across clones annotated in a tree.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># Information Transfer for the drivers, top-ranking tree</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw"><a href="../reference/ITransfer.html">ITransfer</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">"CRUK0001"</span>, <span class="dt">rank =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">'drivers'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># Information Transfer for the drivers, top-ranking tree</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw"><a href="../reference/ITransfer.html">ITransfer</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">"CRUK0001"</span>, <span class="dt">rank =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">'drivers'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 13 x 2
 ##    from  to      
 ##    &lt;chr&gt; &lt;chr&gt;   
@@ -433,8 +446,8 @@
 ## 11 WRN   ARHGAP35
 ## 12 EGFR  ARHGAP35
 ## 13 NF1   PASK</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># Information Transfer for the clones, top-ranking tree</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw"><a href="../reference/ITransfer.html">ITransfer</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">"CRUK0001"</span>, <span class="dt">rank =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">'clones'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># Information Transfer for the clones, top-ranking tree</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw"><a href="../reference/ITransfer.html">ITransfer</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">"CRUK0001"</span>, <span class="dt">rank =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">'clones'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   from  to   
 ##   &lt;chr&gt; &lt;chr&gt;
@@ -443,8 +456,8 @@
 ## 3 3     2    
 ## 4 1     5</code></pre>
 <p>Fit trees can be accessed using the <code>data</code> argument. Essentially this is like before, but does not require specifying a <code>rank</code> parameter.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># Access the fit tree for a patient</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw"><a href="../reference/Phylo.html">Phylo</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>, <span class="dt">data =</span> <span class="st">'fits'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># Access the fit tree for a patient</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw"><a href="../reference/Phylo.html">Phylo</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">'CRUK0001'</span>, <span class="dt">data =</span> <span class="st">'fits'</span>)</a></code></pre></div>
 <pre><code>##  [ ctree - ctree rank 1/3 for CRUK0001 - Information Transfer expanded via Transfer Learning ] 
 ## 
 ## # A tibble: 4 x 7
@@ -477,9 +490,9 @@
 ##    NF1 ---&gt; PASK 
 ## 
 ## Tree score 0.111111111111111</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># Information Transfer for the drivers, top-ranking tree. Notice that this is different</span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co"># from the result of the above call, because the transfer after fitting is expanded</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="kw"><a href="../reference/ITransfer.html">ITransfer</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">"CRUK0001"</span>, <span class="dt">rank =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">'drivers'</span>, <span class="dt">data =</span> <span class="st">'fits'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># Information Transfer for the drivers, top-ranking tree. Notice that this is different</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co"># from the result of the above call, because the transfer after fitting is expanded</span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="kw"><a href="../reference/ITransfer.html">ITransfer</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER, <span class="st">"CRUK0001"</span>, <span class="dt">rank =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">'drivers'</span>, <span class="dt">data =</span> <span class="st">'fits'</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
 ##    from  to      
 ##    &lt;chr&gt; &lt;chr&gt;   
@@ -497,11 +510,11 @@
 <h3 class="hasAnchor">
 <a href="#summary-statistics-for-trees-and-fits" class="anchor"></a>Summary statistics for trees and fits</h3>
 <p>There are getters for summary statistics that work for trees and fits, with the same principles fo the getters for the data discussed above</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># This returns patient-level statistics for the trees available in a patient. The tibble reports</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co"># whether the patient has trees annotated, the total number of trees, their minimum and maximum</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="co"># scores mutations and the total number of differnet combinations of Information Transfer for </span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="co"># the available trees.</span></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="kw"><a href="../reference/Stats_trees.html">Stats_trees</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># This returns patient-level statistics for the trees available in a patient. The tibble reports</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="co"># whether the patient has trees annotated, the total number of trees, their minimum and maximum</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="co"># scores mutations and the total number of differnet combinations of Information Transfer for </span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="co"># the available trees.</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="kw"><a href="../reference/Stats_trees.html">Stats_trees</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
 <pre><code>## # A tibble: 99 x 6
 ##    patientID hasTrees numTrees maxScore minScore combInfTransf
 ##    &lt;chr&gt;     &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;
@@ -516,8 +529,8 @@
 ##  9 CRUK0009  TRUE            1    1       1                  1
 ## 10 CRUK0010  TRUE            1    1       1                  1
 ## # … with 89 more rows</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># This returns the same table of above, but with some extended information on the fits (like the fit rank, etc)</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw"><a href="../reference/Stats_fits.html">Stats_fits</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># This returns the same table of above, but with some extended information on the fits (like the fit rank, etc)</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw"><a href="../reference/Stats_fits.html">Stats_fits</a></span>(TRACERx_NEJM_<span class="dv">2017</span>_REVOLVER)</a></code></pre></div>
 <pre><code>## # A tibble: 99 x 9
 ##    patientID hasTrees numTrees maxScore minScore combInfTransf Solution
 ##    &lt;chr&gt;     &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;
@@ -557,17 +570,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Giulio Caravagna.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

@@ -34,6 +34,8 @@ plot_DET_index(TRACERx_NEJM_2017_REVOLVER, min.occurrences = 5)
 Other Plotting functions: \code{\link{distinct_palette_few}},
   \code{\link{distinct_palette_many}},
   \code{\link{gradient_palette}},
+  \code{\link{plot_clusters}},
+  \code{\link{plot_dendrogram}},
   \code{\link{plot_drivers_clonality}},
   \code{\link{plot_drivers_graph}},
   \code{\link{plot_drivers_occurrence}},

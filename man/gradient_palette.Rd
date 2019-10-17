@@ -25,6 +25,8 @@ gradient_palette(2)
 Other Plotting functions: \code{\link{distinct_palette_few}},
   \code{\link{distinct_palette_many}},
   \code{\link{plot_DET_index}},
+  \code{\link{plot_clusters}},
+  \code{\link{plot_dendrogram}},
   \code{\link{plot_drivers_clonality}},
   \code{\link{plot_drivers_graph}},
   \code{\link{plot_drivers_occurrence}},

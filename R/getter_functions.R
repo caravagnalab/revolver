@@ -473,7 +473,7 @@ Jackknife_patient_coclustering = function(x)
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 #'
-#' Jackknife_coclustering(TRACERx_NEJM_2017_REVOLVER)
+#' Jackknife_cluster_stability(TRACERx_NEJM_2017_REVOLVER)
 Jackknife_cluster_stability = function(x)
 {
   stop_not_revolver_object(x)

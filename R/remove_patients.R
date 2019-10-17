@@ -20,10 +20,10 @@
 #'
 #' print(TRACERx_NEJM_2017_REVOLVER)
 #'
-#' new_cohort = remove_patient(TRACERx_NEJM_2017_REVOLVER, "CRUK0001")
+#' new_cohort = remove_patients(TRACERx_NEJM_2017_REVOLVER, "CRUK0001")
 #' print(new_cohort)
 #' 
-#' new_cohort = remove_patient(TRACERx_NEJM_2017_REVOLVER, c("CRUK0002", "CRUK00024"))
+#' new_cohort = remove_patients(TRACERx_NEJM_2017_REVOLVER, c("CRUK0002", "CRUK00024"))
 #' print(new_cohort)
 remove_patients = function(x, 
                            patientID,
@@ -48,7 +48,7 @@ remove_patients = function(x,
     message(paste(drv_to_cancel, collapse = ', '), ": driver events that now are found in only one patient, will be now removed ...")
   }
 
-   x = remove_driver(x, drv_to_cancel, check = FALSE)
+   x = remove_drivers(x, drv_to_cancel, check = FALSE)
 
   # if has clusters, force to recompute
   if(has_clusters(x)) {

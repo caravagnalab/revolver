@@ -1,19 +1,19 @@
-#' Remove a driver event from the cohort.
+#' Remove a list of driver events from the cohort.
 #'
-#' @description Each event is identied through its id (\code{variantID});
-#' with this function, you can remove a driver events, which consists
-#' in flagging it as \code{FALSE} in the \code{is.Driver} column of the data, and updating
+#' @description Each event is identified through its id (\code{variantID});
+#' with this function, you can remove a list of driver events, which consists
+#' in flagging them as \code{FALSE} in the \code{is.Driver} column of the data, and updating
 #' the information transfer. If you have fit the models or clustered the cohort,
 #' you should re-run the analyses after this modification; for this reason,
 #' any previous result from those analyses is cancelled from the returned object.
 #'
 #' Notice also that some patients might be removed by this function, because if
-#' they have only one driver then they cannot be fit after driver removal.
+#' they have no longer drivers then they cannot be fit afterwards.
 #'
 #' @param x A REVOLVER cohort.
 #' @param variantID Id of the driver event to remove.
 #'
-#' @return A modified cohort where the required event is no longer a driver.
+#' @return A modified cohort where the required events are no longer annotated as drivers.
 #' @export
 #'
 #' @examples
@@ -22,9 +22,9 @@
 #'
 #' print(TRACERx_NEJM_2017_REVOLVER)
 #'
-#' new_cohort = remove_driver(TRACERx_NEJM_2017_REVOLVER, "MET")
+#' new_cohort = remove_drivers(TRACERx_NEJM_2017_REVOLVER, "MET")
 #' print(new_cohort)
-remove_driver = function(
+remove_drivers = function(
   x,
   variantID,
   check = TRUE

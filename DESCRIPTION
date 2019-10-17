@@ -40,7 +40,8 @@ Imports:
     pheatmap,
     clisymbols,
     ctree,
-    evoverse.datasets
+    evoverse.datasets,
+    ggdendro
 Remotes: 
     caravagn/pio,
     caravagn/easypar,

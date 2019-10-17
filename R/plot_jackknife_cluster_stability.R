@@ -26,8 +26,6 @@ plot_jackknife_cluster_stability = function(x,
   obj_has_clusters(x)
   obj_has_jackknife(x)
   
-  stopifnot(palette %in% rownames(RColorBrewer::brewer.pal.info))
-  
   data_barplot = Jackknife_cluster_stability(x) %>% 
     enframe(name = 'cluster') %>%
     rename(stability = value) %>%
@@ -36,6 +34,7 @@ plot_jackknife_cluster_stability = function(x,
   # Prepare factors for the clusters ordering and colours
   factors_level = Cluster(x) %>% arrange(cluster) %>% pull(patientID)
   
+  nclusters = Cluster(x) %>% pull(cluster) %>% unique %>% length
   clusters_colors = get_cluster_colors(x, cluster_palette)
   
   data_barplot$cluster = factor(data_barplot$cluster, levels = data_barplot$cluster)
