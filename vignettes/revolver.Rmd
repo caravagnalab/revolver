@@ -16,84 +16,27 @@ knitr::opts_chunk$set(
 
 The `REVOLVER` package implements the statistical model described in [Caravagna et al; PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine trajectories of repeated evolution from multi-region sequencing data of human cancers. 
 
-With `REVOLVER` you can:
+With `REVOLVER` you can follow a 4-steps pipeline:
 
 1. generate phylogenetic trees for each patient in the cohort;
 
 2. fit the best tree to a patient's data, accounting for its correlation with the other patients' trees;
 
-3. cluster the cohort into groups of patients whose tumours are shaped by similar evolutionary pressures;
+3. cluster the cohort into groups of patients whose tumours are shaped by similar evolutionary pressures, and determine the confidence of these assessments using  jackknife statistics;
 
 4. plot data, models, clusters, confidence etc.;
 
 The correlation across trees is measured extracting evolutionary trajectories from the *phylogenetic ordering* of driver alterations annotated in the cohort These driver events shall occur across multiple patients; for this reason, `REVOLVER` is a method to determine evolutionary trajectories that *repeate* across patients, and that can be used to stratify yout cohort.
 
-The details of the statistical method are described in the [Caravagna et al; PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232).
+### Vignettes
 
-# Vignettes
+The following vignettes are available:
 
+1. [Introduction:](https://caravagn.github.io/revolver/articles/Input_formats.html) which discusses input formats, and the creation of  a `REVOLVER` cohort from input sequencing data;
 
-# Frequently Asked Questions
+2. [Getter functions:](https://caravagn.github.io/revolver/articles/Getters.html) which discusses different getter functions to extract information from a `REVOLVER` cohort;
 
-The following are questions that have been frequently asked.
-
-### - What kind of data can I use?
-
-REVOLVER can process both Cancer Cell Fractions (CCF) and binary data, but only one type of data at a time (you should not use CCF for some patients with, and binary data for others). 
-
-### - I do I prepare the input data for the tool?
-
-<p align="center">
-<a href="https://ibb.co/hQyRZy"><img src="https://preview.ibb.co/h9XW1d/pipeline.png" alt="pipeline" border="0" width="55%" height="55%"></a>
-</p>
-
-The image above summarises the two options (CCF and binary data), after  you have called somatic mutations and copy number across all your cohort.
-
-* **CCF** These are computed from mutations and copy number calls and report the proportion of cancer cells where they occur; for instance, mutations with CCF ~= 1.0 are clonal. You need to compute CCFs for you patients before REVOLVER; you can do that by using tools for sub-clonal deconvolution that estimate the subpopulations admixture in your bulk samples. This is a common step for a phylogenetic analysis from bulk sequencing, you can use several tools like pyClone, sciClone etc. Feel free to drop as a line if you have questions.
-
-* If you use binary data, you can immediately use REVOLVER. This type of data has lower-resolution compared to CCF.
-
-### - Does REVOLVER compute the phylogenetic trees, or should I compute them outside the tool?
-
-Yes, the tool computes phylogenetic trees from CCFs, or mutation trees from binary data. If however you prefer to compute the trees with any other tool you can [import them in the tool.](https://github.com/caravagn/REVOLVER/wiki/5.-Using-custom-trees).
-
-### - In which format should input my data to the tool?
-
-[See here.](https://github.com/caravagn/revolver/wiki/2.-Input-Format)
-
-## What type of sequencing should I use?
-
-There are no hard constraint, but rather suggestions that apply to any "Cancer Evolution" analysis. For instance, to use CCFs and phylogenetic reconstruction, _whole-genome sequencing_ is the best data to deconvolve cancer subpopulations. However, you can carry out a CCF-based analysis from _whole-exome sequencing_, as shown in the [TRACERx study](http://www.nejm.org/doi/full/10.1056/NEJMoa1616288) that we analysed with REVOLVER. To use just binary data and mutation trees, you can also use a simpler _targeted panel_. 
-
-## Is there any minimum sequencing coverage and purity that I should use?
-
-It is hard to give minimum values for these parameter, as they change with each tumour type and tissue. In general, both impact on the quality of the analysis; if you want to detect small sub-clones, or low-frequency mutations in a CCF-based analysis, you want to sequence at high coverage samples with "good" purity. The [TRACERx study](http://www.nejm.org/doi/full/10.1056/NEJMoa1616288), for instance, reached ~430x median coverage on exome regions. 
-
-## How many samples per patient should I have?
-
-This depends on the level of spatial heterogeneity of the tumour under scrutiny. The framework supports any number of samples and, in principle, with CCFs, you can also use single-samples datasets. With binary data, you need multi-region sampling. So, you can run REVOLVER on large-scale studies like TCGA only with CCF. However, the extent to which a single-biopsy can capture the phylogenetic structure of a complex tumour is debatable.
-
-## How many patients should I sequence?
-
-Because you want to look for repeated evolutionary trajectories, you want a large number of patients to detect reliable statistical signals from the input data. The best cohorts that we analyzed so far, which are the largest available to date, have either 50 or 100 patients each.
-
-## Can I run REVOLVER on single-cell sequencing data?
-
-We did not focus the manuscript on this topic because there are not yet many multi-patient single-cell datasets available in the community. The statistical framework, however, and the implementation support this type of data.  This is because once we have built the trees for each patient, then the inference is independent of the "type of data" that defines the trees. Thus, since single-cell data is binary, you will use REVOLVER's mutation trees that employ an [infinite site assumption](https://en.wikipedia.org/wiki/Infinite_sites_model), or your own tree-generation method. 
-
-If you have any other question or you need support, [drop us a line](mailto:giulio.caravagna@icr.ac.uk).
+3. [Plotting functions:](https://caravagn.github.io/revolver/articles/Plotting_functions.html) which discusses different plotting functions to visualize cohorts, data, fits etc.; 
 
 
-## How do I model parallel evolution? 
-
-Imagine that we detect, in our patient ``PATIENT``, two or more [driver mutations](https://github.com/caravagn/revolver/wiki/2.-Input-Format) in different positions/ nucleotides of a gene ``GENE``: in a phylogenetic analysis, these driver mutations would appear in (possibly) different positions of the output tree. It is possible to handle these events also in REVOLVER, but this requires some considerations. The method computes **correlated evolutionary trajectories among recurrent drivers**. To extract and correlate them, REVOLVER uses [an ID-based identification system](https://github.com/caravagn/revolver/wiki/2.-Input-Format): in many cases this could be just the gene name ``GENE``. The ID is important, as it is used as a key to "identify" the driver and to see in which patients it occurs: thus the ID has to be unique. In the above case, calling all the drivers ``GENE`` is bad choice because the ID is not unique: we would have multiple entries in  ``PATIENT`` with ID ``GENE``, and this will break the computation. We can circumvent this by using a finer-grained resolution in the preparation of our data: we can add to the ID the nucleotide position of the mutation, for instance: i.e., something like ``GENE_XXX`` and ``GENE_YYY``, where ``XXX`` and ``YYY`` are positions/ domains would work. Doing so the driver events would be correlated independently, and everything would work fine. A drawback could be, however, that those drivers might not be any more "recurrent" across the cohort: because ``GENE_XXX`` and ``GENE_YYY`` are different "events", they would be recurrent only if we have other patients with the same driver mutations (i.e., annotated in the same gene loci). This can create a problem if we do not have a large cohorts, of course. It is always possible, of course, to keep in the data only one of the driver mutations on the gene, and annotate it with ID ``GENE``. This comes at the expense of neglecting these parallel evolution events. As far as we could measure in large cohorts, however, these events are not so frequent to become a hurdle to our analysis.
-
-## In the input data, what is the column "cluster"?
-
-REVOLVER's input requires also a ["group" assignment for each one of the annotated mutations](https://github.com/caravagn/revolver/wiki/2.-Input-Format). The definition of groups depends on the data used:
-  - **CCF data.** we perform sub-clonal deconvolution to assign mutations to the clones in our tumour, prior to tree reconstruction. This is done by *clustering* read counts from input data. In this case, we can use clone assignments to define the groups.
-  - **Binary data.** With mutation trees from binary data, we do not carry out sub-clonal deconvolution. In this case, a groups is just defined by the set of mutations that occur in the same set of samples. In this case, each group is not a proper "clone", as if we were using CCF data.
-
-## What are phylogenetic and mutation trees? 
-
-A phylogenetic tree is a tree built from CCFs, real values that provide the estimate of cancer cells harbouring a certain SNV/ Copy Number/ etc. A mutation tree is built from binary data, which is a simple 0/1 format to represent the absence/ presence of a certain SNV/ Copy Number/ etc. in a sample. In both cases, the tree is build over the groups annotated in the data.
+You might also want to the see a list of [Frequently Asked Questions](https://caravagn.github.io/revolver/articles/FAQ.html)

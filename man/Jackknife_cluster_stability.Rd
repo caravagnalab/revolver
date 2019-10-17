@@ -21,7 +21,7 @@ co-clustering probability of the patients in the cluster.
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
-Jackknife_coclustering(TRACERx_NEJM_2017_REVOLVER)
+Jackknife_cluster_stability(TRACERx_NEJM_2017_REVOLVER)
 }
 \seealso{
 Other Jackknife statistics: \code{\link{Jackknife_patient_coclustering}},

@@ -1,0 +1,112 @@
+---
+title: "Plotting functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plotting functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(revolver)
+```
+
+Since the new release of `REVOLVER` (>= 0.3), we have implemented [all plotting functions](https://caravagn.github.io/revolver/reference/index.html)  using  [ggplot2](https://ggplot2.tidyverse.org/).
+
+All functions now return either a `ggplot` object, or a more complext figure obtained by assembling `ggplot` objects either via `ggarrange` (package [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html)) or `plot_grid` (package [cowplot](https://cran.r-project.org/web/packages/cowplot/)) `cowplot`. Notice that some functions might be only applicable after fits or clusters have been computed (the package will raise errors if you try to call a function on an object that does not have the required information to create the plot). 
+
+
+
+In this vignette, we show the functions plotting  one of the cohort objects released in the `evoverse.datasets` [R package](https://github.com/caravagn/evoverse.datasets).
+```{r, echo = TRUE, warning=FALSE}
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+```
+
+# Plotting cohort-level data
+
+You can plot various information about the drivers in the cohort, and the trajectories detected in the cohort. See the manual of each one of these functions to understand non-trivial plots, and how to customize the input parameters.
+
+```{r, echo = TRUE, warning=FALSE, fig.width=12, fig.height=9}
+# Plot the occurrence of drivers across the cohort.
+plot_drivers_occurrence(TRACERx_NEJM_2017_REVOLVER)
+```
+
+
+```{r, echo = TRUE, warning=FALSE, fig.width=6, fig.height=10}
+# Plot the barplot of drivers' occurrences (clonal vs subclonal)
+plot_drivers_clonality(TRACERx_NEJM_2017_REVOLVER) 
+```
+
+```{r, echo = TRUE, warning=FALSE, fig.width=13, fig.height=10}
+# Plot the  graph-alike summary statistics for the cohort drivers.
+plot_drivers_graph(TRACERx_NEJM_2017_REVOLVER)
+```
+
+This graph plot can be simplified reduce the entries used to generate the edges - try for instance using `min.occurrences = 5`.
+
+You can also plot the penalty of the fit, and the DET index derived from that
+
+```{r, echo = TRUE, warning=FALSE, fig.width=12, fig.height=10}
+# Plot the index of Divergent Evolutionary Trajectories
+plot_penalty(TRACERx_NEJM_2017_REVOLVER)
+```
+
+
+```{r, echo = TRUE, warning=FALSE, fig.width=12, fig.height=10}
+# Plot the index of Divergent Evolutionary Trajectories
+plot_DET_index(TRACERx_NEJM_2017_REVOLVER)
+```
+
+
+# Plotting patient's data
+
+You can plot the data of a patient
+
+
+# Plotting REVOLVER clusters and jackknife statistics
+
+The results of using `REVOLVER` to cluster your cohort can be visualised with two functions
+
+```{r, echo = TRUE, warning=FALSE, fig.width=10, fig.height=10}
+# Plot the heatmaps of REVOLVER"s clusters, as tiles.
+plot_clusters(TRACERx_NEJM_2017_REVOLVER)
+```
+
+The top tile is patients vs trajectories, and bottom is patients vs drivers. For drivers colours reflect mean CCF/ binary values of a driver in every patient, and clonality status. For trajectories colours reflect if they are initiating or progressing, depending on the present of GL in the trajectory (GL stands for germline). 
+
+The dendrogram of the clusters can be visualised - notice the colours and patients' ordering that are matched in these two functions.
+```{r, echo = TRUE, warning=FALSE, fig.width=10, fig.height=4}
+# Plot the dendrogram of REVOLVER"s clusters
+plot_dendrogram(TRACERx_NEJM_2017_REVOLVER)
+```
+
+After jackknife, you can also plot the co-clustering probability of the patients, the clustering stability and other statistics about the trajectories.
+
+```{r, echo = TRUE, warning=FALSE, fig.width=12, fig.height=12}
+# Plot the patients' jackknife co-clustering probability
+plot_jackknife_coclustering(TRACERx_NEJM_2017_REVOLVER)
+```
+
+```{r, echo = TRUE, warning=FALSE, fig.width=8, fig.height=4}
+# Plot the patients' jackknife cluster staability
+plot_jackknife_cluster_stability(TRACERx_NEJM_2017_REVOLVER)
+```
+
+```{r, echo = TRUE, warning=FALSE, fig.width=8, fig.height=4}
+# Plot the patients' jackknife trajectory frequencies.
+plot_jackknife_trajectories_stability(TRACERx_NEJM_2017_REVOLVER)
+```
+
+ 
+
+
+# S3 plotting functions

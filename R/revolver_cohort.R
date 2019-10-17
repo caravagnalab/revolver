@@ -1,6 +1,6 @@
-#' Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
+#' Construct a REVOLVER cohort.
 #'
-#' @param dataset A dataframe in the specified format (see Online manual).
+#' @param dataset A dataframe in the specified format (see the package vignettes).
 #' @param CCF_parser A function to parse the format for the encoding of CCF
 #' or binary values for each sequenced region. A possible function is available
 #' inside REVOLVER; \code{\link{CCF_parser}} (the default of this parameter).
@@ -8,11 +8,7 @@
 #' @param MIN.CLUSTER.SIZE Discard clusters that have less than this number of entries.
 #' @param annotation Brief cohort description.
 #'
-#' @return An object of class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
-#'
-#' @examples
-#' data(CRC)
-#' cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
+#' @return An object of the S3 class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
 #'
 #' @import tidyverse
 #' @import tidygraph
@@ -29,6 +25,7 @@
 #' @import clisymbols
 #' @import evoverse.datasets
 #'
+#' @export
 #' @family Cohort creation
 #'
 #' @examples

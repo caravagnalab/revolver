@@ -2,14 +2,14 @@
 % Please edit documentation in R/revolver_cohort.R
 \name{revolver_cohort}
 \alias{revolver_cohort}
-\title{Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).}
+\title{Construct a REVOLVER cohort.}
 \usage{
 revolver_cohort(dataset, CCF_parser = revolver::CCF_parser,
   ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10,
   annotation = "My REVOLVER dataset")
 }
 \arguments{
-\item{dataset}{A dataframe in the specified format (see Online manual).}
+\item{dataset}{A dataframe in the specified format (see the package vignettes).}
 
 \item{CCF_parser}{A function to parse the format for the encoding of CCF
 or binary values for each sequenced region. A possible function is available
@@ -22,15 +22,12 @@ inside REVOLVER; \code{\link{CCF_parser}} (the default of this parameter).}
 \item{annotation}{Brief cohort description.}
 }
 \value{
-An object of class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
+An object of the S3 class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
 }
 \description{
-Construct a REVOLVER cohort object (S3 class \code{"rev_cohort"}).
+Construct a REVOLVER cohort.
 }
 \examples{
-data(CRC)
-cohort = revolver_cohort(CRC, options = list(ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 0))
-
 # Example cohort creation with the TRACERx data
 data(TRACERx_data)
 

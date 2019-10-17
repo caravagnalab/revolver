@@ -27,7 +27,7 @@ This function plots a raster of the patients' jackknife co-clustering probabilit
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
-plot_jackknife_coclustering(TRACERx_NEJM_2017_REVOLVER)
+plot_jackknife_trajectories_stability(TRACERx_NEJM_2017_REVOLVER)
 }
 \seealso{
 Other Plotting functions: \code{\link{distinct_palette_few}},

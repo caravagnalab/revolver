@@ -29,9 +29,9 @@ data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
 print(TRACERx_NEJM_2017_REVOLVER)
 
-new_cohort = remove_patient(TRACERx_NEJM_2017_REVOLVER, "CRUK0001")
+new_cohort = remove_patients(TRACERx_NEJM_2017_REVOLVER, "CRUK0001")
 print(new_cohort)
 
-new_cohort = remove_patient(TRACERx_NEJM_2017_REVOLVER, c("CRUK0002", "CRUK00024"))
+new_cohort = remove_patients(TRACERx_NEJM_2017_REVOLVER, c("CRUK0002", "CRUK00024"))
 print(new_cohort)
 }

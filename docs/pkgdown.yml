@@ -1,7 +1,12 @@
-pandoc: 2.3.1
-pkgdown: 1.4.1
+pandoc: 2.1.1
+pkgdown: 1.4.0
 pkgdown_sha: ~
-articles: []
+articles:
+  FAQ: FAQ.html
+  Getters: Getters.html
+  Input_formats: Input_formats.html
+  Plotting_functions: Plotting_functions.html
+  revolver: revolver.html
 urls:
   reference: caravagn.github.io/revolver/reference
   article: caravagn.github.io/revolver/articles
