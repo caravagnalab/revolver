@@ -30,7 +30,7 @@ plot_patient_data = function(x, patient, ...)
 {
   # first panel
   first = ggarrange(
-    plot_patient_CCF_clusters(Phylo(x, patient, rank = 1)),
+    plot_CCF_clusters(Phylo(x, patient, rank = 1)),
     plot_clone_size(Phylo(x, patient, rank = 1)),
     plot_patient_mutation_burden(x, patient),
     nrow = 1,

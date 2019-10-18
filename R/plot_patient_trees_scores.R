@@ -61,10 +61,8 @@ plot_patient_trees_scores = function(x,
       geom_bar(stat = 'identity') +
       guides(color = FALSE,
              fill = guide_legend(title = "Information Transfer", label = FALSE)) +
-      theme_minimal(base_size = 10 * cex) +
       scale_fill_manual(values = transfer_palette(nc)) +
-      theme(legend.position = 'bottom',
-            legend.key.size = unit(3, 'mm')) +
+      my_ggplot_theme() +
       labs(
         title = p,
         x = "Tree rank",

@@ -17,7 +17,7 @@ plot_clusters(x, cluster_palette = distinct_palette_few,
 
 \item{arrow.symbol}{UNICODE code to display arrows. Saving to PDF outputs with standard
 methods (ggsave, cairo, etc), often can lead to errors with UNICODE chars; therefore either print to PNG or change
-this variable to, e.g.,  \code{" --> '} to render arrows properly.}
+this variable to, e.g.,  \code{" --> "} to render arrows properly.}
 
 \item{clusters_palette}{A palette function that should return the colour of
 an arbitrary number of clusters.}
@@ -29,7 +29,7 @@ A \code{ggplot} plot.
 Plot the heatmaps of REVOLVER"s clusters, as tiles.
 
 The top tile is patients vs trajectories, and bottom is patients vs drivers.
-For drivers colours reflect mean CCF/ binary values of a driver in every patient, and 
+For drivers colours reflect mean CCF/ binary values of a driver in every patient, and
 clonality status. For trajectories colours reflect if they are initiating or progressing,
 depending on the present of GL in the trajectory.
 

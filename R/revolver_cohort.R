@@ -141,6 +141,7 @@ revolver_cohort = function(dataset,
   obj$dataset = obj$dataset %>%
     group_by(patientID) %>%
     nest() %>%
+    ungroup() %>%
     select(data) %>%
     unlist(recursive = F)
   names(obj$dataset) = obj$patients

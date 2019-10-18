@@ -18,7 +18,7 @@
 #' @param cutoff_trajectories Plot only trajectories that occur in at least \code{cutoff_trajectories} patients.
 #' @param arrow.symbol UNICODE code to display arrows. Saving to PDF outputs with standard
 #' methods (ggsave, cairo, etc), often can lead to errors with UNICODE chars; therefore either print to PNG or change
-#' this variable to, e.g.,  \code{" --> '} to render arrows properly.
+#' this variable to, e.g.,  \code{" --> "} to render arrows properly.
 #'
 #' @family Plotting functions
 #'

@@ -14,19 +14,25 @@ knitr::opts_chunk$set(
 )
 ```
 
-The `REVOLVER` package implements the statistical model described in [Caravagna et al; PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine trajectories of repeated evolution from multi-region sequencing data of human cancers. 
+The `REVOLVER` package implements the statistical model described in [Caravagna et al; PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine trajectories of repeated evolution in a cohort of multi-region sequencing datasets. 
 
-With `REVOLVER` you can follow a 4-steps pipeline:
+The repeatability of evolution is measured with a new method that extracts evolutionary trajectories within a single patient (intra-tumour), and correlates them against the cohort (inter-patient).
 
-1. generate phylogenetic trees for each patient in the cohort;
+The correlation across patients is measured extracting evolutionary trajectories from the *phylogenetic ordering* of driver alterations detected from the patients' trees. Drivers must be annotated in the input genome sequencing data, and shall occur across multiple patients.
 
-2. fit the best tree to a patient's data, accounting for its correlation with the other patients' trees;
+A `REVOLVER` analysis follows the following steps (the main function to implement the step is reported):
 
-3. cluster the cohort into groups of patients whose tumours are shaped by similar evolutionary pressures, and determine the confidence of these assessments using  jackknife statistics;
+1. create a `REVOLVER` cohort (`revolver_cohort`);
+  
+2. generate phylogenetic trees for each patient in the cohort (`compute_clone_trees`, `compute_mutation_trees`, etc.);
 
-4. plot data, models, clusters, confidence etc.;
+3. fit the best tree to a patient's data, correlating the fit with the other patients' trees (`revolver_fit`);
 
-The correlation across trees is measured extracting evolutionary trajectories from the *phylogenetic ordering* of driver alterations annotated in the cohort These driver events shall occur across multiple patients; for this reason, `REVOLVER` is a method to determine evolutionary trajectories that *repeate* across patients, and that can be used to stratify yout cohort.
+4. cluster the cohort into groups of patients whose tumours follow similar patterns of repeated evolution (`revolver_cluster`);
+
+5. evaluate different measures confidence for the clusters using jackknife statistics (`revolver_jackknife`);;
+
+At the end of each one of these steps, you can use a number of `REVOLVER` functions to inspect or plot the results of the analysis.
 
 ### Vignettes
 

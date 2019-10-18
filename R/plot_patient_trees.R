@@ -33,6 +33,8 @@ plot_patient_trees = function(x, patient, ...)
   if(!has_patient_trees(x, patient))
     stop(patient, " does not have the patient trees, aborting.")
 
+  cex = 1
+  
   # =-=-=-=-=-=-=-=-
   # Top panel: top-ranking tree and its information transfer
   # =-=-=-=-=-=-=-=-
@@ -58,7 +60,7 @@ plot_patient_trees = function(x, patient, ...)
   strip = lapply(1:ntrees, Phylo, x = x, p = patient)
   strip = lapply(strip, plot_icon)
 
-  scores = plot_trees_scores(x, patient)
+  scores = plot_patient_trees_scores(x, patient)
 
   strip = ggarrange(
     plotlist = append(strip, list(scores)),
