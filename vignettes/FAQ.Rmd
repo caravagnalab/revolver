@@ -1,6 +1,9 @@
 ---
 title: "Frequently Asked Questions"
 output: rmarkdown::html_vignette
+author: "Giulio Caravagna"
+institute: "Institute for Cancer Research"
+email: "giulio.caravagna@ed.ac.uk"
 vignette: >
   %\VignetteIndexEntry{Frequently Asked Questions}
   %\VignetteEngine{knitr::rmarkdown}

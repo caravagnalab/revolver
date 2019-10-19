@@ -1,13 +1,13 @@
 ---
 title: "Getter functions"
+output: rmarkdown::html_vignette
 author: "Giulio Caravagna"
 institute: "Institute for Cancer Research"
-date: "May 1, 2019"
 email: "giulio.caravagna@ed.ac.uk"
-output:
-  github_document:
-    toc: true
-    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Getter functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 
