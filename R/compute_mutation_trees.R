@@ -21,7 +21,7 @@
 #'
 #' @export
 #'
-#' @import ctree
+#' @import mtree
 #'
 #' @examples
 #' print('TODO')
@@ -41,43 +41,41 @@ compute_mutation_trees = function(
   pioStr("Input patients.", suffix = '\n')
   cat(paste0(patients, collapse = ', '), '\n')
   
-  warning("October 2019 - Function not yet implemented")
+  # Looping over all patients
+  filos = easypar::run(
+    FUN = function(patient)
+    {
+      if(has_patient_trees(x, patient) & !overwrite)
+      {
+        message('Trees already available for ', patient, ', use overwrite = FALSE to force overwriting.')
 
-  # # Looping over all patients
-  # filos = easypar::run(
-  #   FUN = function(patient)
-  #   {
-  #     if(has_patient_trees(x, patient) & !overwrite)
-  #     {
-  #       message('Trees already available for ', patient, ', use overwrite = FALSE to force overwriting.')
-  # 
-  #       return(x$phylogenies[[patient]])
-  #     }
-  # 
-  #     # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  #     # Run ctree constructor
-  #     # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  #     obj = ctree::ctrees(
-  #       CCF_clusters(x, patient),
-  #       Drivers(x, patient),
-  #       Samples(x, patient),
-  #       patient = patient,
-  #       ...
-  #     )
-  # 
-  #     # Just show how many combinations we have
-  #     comb = combination_of_information_transfer(x, patient)
-  #     pio::pioStr('\n Combinations of Information Transfer : ', comb, suffix = '\n')
-  # 
-  #     return(obj)
-  #   },
-  #   PARAMS = lapply(patients, list),
-  #   parallel = FALSE,
-  #   progress_bar = FALSE
-  # )
-  # names(filos) = patients
-  # 
-  # x$phylogenies = filos
+        return(x$phylogenies[[patient]])
+      }
+
+      # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      # Run ctree constructor
+      # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      obj = mtree::mtrees(
+        CCF_clusters(x, patient),
+        Drivers(x, patient),
+        Samples(x, patient),
+        patient = patient,
+        ...
+      )
+
+      # Just show how many combinations we have
+      comb = combination_of_information_transfer(x, patient)
+      pio::pioStr('\n Combinations of Information Transfer : ', comb, suffix = '\n')
+
+      return(obj)
+    },
+    PARAMS = lapply(patients, list),
+    parallel = FALSE,
+    progress_bar = FALSE
+  )
+  names(filos) = patients
+
+  x$phylogenies = filos
 
   return(x)
 }

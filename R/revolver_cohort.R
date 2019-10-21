@@ -54,7 +54,7 @@ revolver_cohort = function(dataset,
   options = list(ONLY.DRIVER = ONLY.DRIVER, MIN.CLUSTER.SIZE = MIN.CLUSTER.SIZE)
 
   pio::pioHdr(
-    paste('REVOLVER Cohort constructor'),
+    paste('REVOLVER ~ Cohort constructor'),
     toPrint = c(
       ` Use only drivers` = ifelse(options$ONLY.DRIVER == 0, TRUE, FALSE),
       `Reject clusters with size below` = options$MIN.CLUSTER.SIZE

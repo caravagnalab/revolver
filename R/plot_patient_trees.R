@@ -21,6 +21,8 @@
 #' @export
 #'
 #' @import ggpubr
+#' @import ctree
+#' @import mtree
 #'
 #' @examples
 #' # Data released in the 'evoverse.datasets'

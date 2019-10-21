@@ -62,18 +62,18 @@ plot_jackknife_coclustering = function(x,
     my_ggplot_theme() +
     guides(fill = guide_colourbar("Probability", barwidth = unit(3, 'cm'))) +
     theme(
-      axis.text.x = element_text(angle = 90,
+      axis.text.x = element_text(angle = 90, hjust = 1,
                                  color = factors_colors$color),
       axis.text.y = element_text(color = factors_colors$color)
     ) +
     geom_vline(
-      xintercept = factors_colors %>% group_by(cluster) %>% summarise(n = n()) %>% pull(n) %>% cumsum + 1,
+      xintercept = factors_colors %>% group_by(cluster) %>% summarise(n = n()) %>% pull(n) %>% cumsum + .5,
       size = .3,
       color = 'gray',
       linetype = 'dashed'
     ) +
     geom_hline(
-      yintercept = factors_colors %>% group_by(cluster) %>% summarise(n = n()) %>% pull(n) %>% cumsum + 1,
+      yintercept = factors_colors %>% group_by(cluster) %>% summarise(n = n()) %>% pull(n) %>% cumsum + .5,
       size = .3,
       color = 'gray',
       linetype = 'dashed'

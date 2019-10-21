@@ -21,6 +21,10 @@ analyse_jackknife = function(x)
         filter(cluster == !!cluster) %>%
         pull(patientID)
       
+      print(membership)
+      print(Cluster(x) %>%
+              filter(cluster == !!cluster))
+      
       pairs = combn(membership, 2, simplify = F)
       
       for(p in 1:length(pairs)) {
