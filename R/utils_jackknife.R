@@ -21,9 +21,12 @@ analyse_jackknife = function(x)
         filter(cluster == !!cluster) %>%
         pull(patientID)
       
-      print(membership)
-      print(Cluster(x) %>%
-              filter(cluster == !!cluster))
+      # print(membership)
+      # print(Cluster(x) %>%
+      #         filter(cluster == !!cluster))
+      
+      # Skip singletons
+      if(length(membership) == 1) next;
       
       pairs = combn(membership, 2, simplify = F)
       

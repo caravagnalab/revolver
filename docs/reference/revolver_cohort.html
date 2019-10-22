@@ -103,6 +103,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
+    </li>
+    <li>
       <a href="../articles/FAQ.html">Frequently Asked Questions</a>
     </li>
     <li>
@@ -197,7 +200,7 @@ inside REVOLVER; <code><a href='CCF_parser.html'>CCF_parser</a></code> (the defa
 <span class='co'># To speed up the process we use only 2 patients</span>
 <span class='no'>TRACERx_data</span> <span class='kw'>=</span> <span class='no'>TRACERx_data</span> <span class='kw'>%&gt;%</span>
    <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>patientID</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'TRACERx_data' not found</span></div><div class='input'>
-<span class='no'>cohort</span> <span class='kw'>=</span> <span class='fu'>revolver_cohort</span>(<span class='no'>TRACERx_data</span>, <span class='kw'>annotation</span> <span class='kw'>=</span> <span class='st'>'A toy REVOLVER dataset'</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER Cohort constructor ] 
+<span class='no'>cohort</span> <span class='kw'>=</span> <span class='fu'>revolver_cohort</span>(<span class='no'>TRACERx_data</span>, <span class='kw'>annotation</span> <span class='kw'>=</span> <span class='st'>'A toy REVOLVER dataset'</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER ~ Cohort constructor ] 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>◉  Use only drivers</span><span> 1 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; ◉ Reject clusters with size below</span><span> 10 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(X = X, FUN = FUN, ...): object 'TRACERx_data' not found</span></div><div class='input'>

@@ -64,6 +64,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
+    </li>
+    <li>
       <a href="../articles/FAQ.html">Frequently Asked Questions</a>
     </li>
     <li>
@@ -102,6 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Getting started with REVOLVER</h1>
+                        <h4 class="author">Giulio Caravagna</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/master/vignettes/revolver.Rmd"><code>vignettes/revolver.Rmd</code></a></small>
@@ -111,15 +115,18 @@
 
     
     
-<p>The <code>REVOLVER</code> package implements the statistical model described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30171232">Caravagna et al; PMID: 30171232</a> to determine trajectories of repeated evolution from multi-region sequencing data of human cancers.</p>
-<p>With <code>REVOLVER</code> you can follow a 4-steps pipeline:</p>
+<p>The <code>REVOLVER</code> package implements the statistical model described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30171232">Caravagna et al; PMID: 30171232</a> to determine trajectories of repeated evolution in a cohort of multi-region sequencing datasets.</p>
+<p>The repeatability of evolution is measured with a new method that extracts evolutionary trajectories within a single patient (intra-tumour), and correlates them against the cohort (inter-patient).</p>
+<p>The correlation across patients is measured extracting evolutionary trajectories from the <em>phylogenetic ordering</em> of driver alterations detected from the patients’ trees. Drivers must be annotated in the input genome sequencing data, and shall occur across multiple patients.</p>
+<p>A <code>REVOLVER</code> analysis follows the following steps (the main function to implement the step is reported):</p>
 <ol style="list-style-type: decimal">
-<li><p>generate phylogenetic trees for each patient in the cohort;</p></li>
-<li><p>fit the best tree to a patient’s data, accounting for its correlation with the other patients’ trees;</p></li>
-<li><p>cluster the cohort into groups of patients whose tumours are shaped by similar evolutionary pressures, and determine the confidence of these assessments using jackknife statistics;</p></li>
-<li><p>plot data, models, clusters, confidence etc.;</p></li>
+<li><p>create a <code>REVOLVER</code> cohort (<code>revolver_cohort</code>);</p></li>
+<li><p>generate phylogenetic trees for each patient in the cohort (<code>compute_clone_trees</code>, <code>compute_mutation_trees</code>, etc.);</p></li>
+<li><p>fit the best tree to a patient’s data, correlating the fit with the other patients’ trees (<code>revolver_fit</code>);</p></li>
+<li><p>cluster the cohort into groups of patients whose tumours follow similar patterns of repeated evolution (<code>revolver_cluster</code>);</p></li>
+<li><p>evaluate different measures confidence for the clusters using jackknife statistics (<code>revolver_jackknife</code>);;</p></li>
 </ol>
-<p>The correlation across trees is measured extracting evolutionary trajectories from the <em>phylogenetic ordering</em> of driver alterations annotated in the cohort These driver events shall occur across multiple patients; for this reason, <code>REVOLVER</code> is a method to determine evolutionary trajectories that <em>repeate</em> across patients, and that can be used to stratify yout cohort.</p>
+<p>At the end of each one of these steps, you can use a number of <code>REVOLVER</code> functions to inspect or plot the results of the analysis.</p>
 <div id="vignettes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vignettes" class="anchor"></a>Vignettes</h3>

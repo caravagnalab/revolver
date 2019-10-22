@@ -2,6 +2,7 @@ pandoc: 2.3.1
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  Cross_CRC_MSeq: Cross_CRC_MSeq.html
   FAQ: FAQ.html
   Getters: Getters.html
   Input_formats: Input_formats.html

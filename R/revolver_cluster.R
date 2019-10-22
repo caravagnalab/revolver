@@ -66,7 +66,7 @@ revolver_cluster = function(
   
   # External progress bar
   i = 0
-  pb = txtProgressBar(min = 0, max = N * (N - 1) / 2, style = 3)
+  pb = dplyr::progress_estimated(n = N * (N - 1) / 2, 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
   
   E = x$fit$penalty
@@ -75,11 +75,12 @@ revolver_cluster = function(
   for(p1 in 1:N) {
     for(p2 in p1:N) {
       
-      # update progress bar
-      if(pb.status) setTxtProgressBar(pb, i)
       i = i + 1
       
       if(p1 == p2) next;
+      
+      # update progress bar - N (N-1)/2 ticks
+      if (pb.status) pb$tick()$print()
       
       # Both patient have a transfer that we take and augment with E
       p1_IT = ITransfer(x, patients[p1], data = 'fits', type = 'drivers') %>%

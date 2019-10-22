@@ -512,7 +512,7 @@ tl_revolver_fit = function(x,
   fit$clones_expansions = fit$clones_to_expand = NULL
 
   # We track this with a progress bar
-  pb = txtProgressBar(min = 0, max = length(fit$phylogenies), style = 3)
+  pb = dplyr::progress_estimated(n = length(fit$phylogenies), 3)
   pb.status = getOption('revolver.progressBar', default = TRUE)
 
   # For every patient we obtain the ML expansions for each patient, and then we
@@ -522,7 +522,7 @@ tl_revolver_fit = function(x,
   for (patient in seq_along(fitPatients))
   {
     # update progress bar
-    if(pb.status) setTxtProgressBar(pb, patient)
+    if (pb.status) pb$tick()$print()
 
     patient = fitPatients[patient]
 
