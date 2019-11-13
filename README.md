@@ -1,6 +1,8 @@
 # revolver
 REVOLVER - Repeated Evolution in Cancer.
 
+[![Github All Releases](https://img.shields.io/github/downloads/caravagn/revolver/total.svg)]()
+
 An R package that implements the algorithm discussed in: 
 
 * G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A. Graham, G. Sanguinetti, A. Sottoriva. *Detecting repeated cancer evolution from multi-region tumor sequencing data.* Nature Methods 15, 707–714 (2018).
