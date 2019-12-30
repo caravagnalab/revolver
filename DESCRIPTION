@@ -10,13 +10,7 @@ Authors@R: c(
     person("Ylenia", "Giarratano", email = "ylenia.giarratano@gmail.com", role = "ctb"),
     person("Daniele", "Ramazzotti", email = "daniele.ramazzotti@yahoo.com", role = "ctb"),
     person("Luca", "De Sano", email = "luca.desano@gmail.com", role = "ctb"))
-Description: REVOLVER is a package that implements a statistical model to determine trajectories of
-  repeated evolution from multi-region sequencing data of human cancers. The package implements functions
-  to process data from large cohorts, and determine different types of phylogenetic trees from the input
-  data of each sequenced patients. The package provides also several functions to plot the data, and
-  determine clusters of tumours that share repeated trajectories; this provides a method to
-  stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both
-  between and within patients.
+Description: The revolver package  implements a statistical model to determine repeated evolutionary trajectories of cancer progressio from multi-region sequencing data of human cancers. The package implements functions to load, maninpulate ad plot data from large cohorts, computing different types of phylogenetic trees. The methods can be used to determine clusters of tumours that share repeated trajectories, providing a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
