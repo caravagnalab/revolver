@@ -36,7 +36,7 @@ Imports:
     ctree,
     evoverse.datasets,
     ggdendro,
-    mtree
+    R6
 Remotes: 
     caravagn/pio,
     caravagn/easypar,
