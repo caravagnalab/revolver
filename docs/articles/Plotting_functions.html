@@ -123,17 +123,21 @@
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; Available datasets ~ use data('xxx', package='REVOLVER_datasets') to load dataset 'xxx'</span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; ◉ TRACERx_NEJM_2017 Mutations from TRACERx lung (NEJM2017, PMID: 28445112). n = 99 patients, multi-region WES. </span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; ◉ TRACERx_NEJM_2017 Mutations from TRACERx lung (PMID: 28445112). n = 99 patients, multi-region WES, CCF. </span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; ◉ TRACERx_NEJM_2017_REVOLVER REVOLVER analysis of TRACERx_NEJM_2017. </span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;  [ Mtree - Mutation Trees in cancer ] </span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; GitHub :  caravagn/mtree </span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt;  [ REVOLVER - Repeated Evolution in Cancer ] </span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; GitHub :  caravagn/revolver </span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt;    WWW :  https://caravagn.github.io/revolver/ </span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt;  &gt; REVOLVER is part of the "evoverse" [https://bit.ly/2orn94e] - a collection of packages to implement Cancer Evolution analyses from cancer sequencing data.</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; ◉ YATES_BREAST_NATMED_2015 Mutations from breast cancers (PMID: 26099045). n = 50 patients, multi-region WES, binary. </span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; ◉ CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018 Mutations from colorectal adenocarcinomas (PMID: 30177804). n = 19 patients, multi-region WES, binary. </span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; ◉ MSEQ_CRC_ADENOCARCINOMA_SET6 Mutations, copy number and purity from the Set6 multi-region colorectal adenocarcinoma sample (doi:10.1101/586560). n = 1 patient, multi-region WGS </span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; ◉ MSEQ_CRC_ADENOCARCINOMA_SET7 Mutations, copy number and purity from the Set7 multi-region colorectal adenocarcinoma sample (doi:10.1101/586560). n = 1 patient, multi-region WGS </span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt;  [ Mtree - Mutation Trees in cancer ] </span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; GitHub :  caravagn/mtree </span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt;  [ REVOLVER - Repeated Evolution in Cancer ] </span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; GitHub :  caravagn/revolver </span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt;    WWW :  https://caravagn.github.io/revolver/ </span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt;  &gt; REVOLVER is part of the "evoverse" [https://bit.ly/2orn94e] - a collection of packages to implement Cancer Evolution analyses from cancer sequencing data.</span></a></code></pre></div>
 <p>Since the new release of <code>REVOLVER</code> (&gt;= 0.3), we have implemented <a href="https://caravagn.github.io/revolver/reference/index.html">all plotting functions</a> using <a href="https://ggplot2.tidyverse.org/">ggplot2</a>.</p>
 <p>All functions now return either a <code>ggplot</code> object, or a more complext figure obtained by assembling <code>ggplot</code> objects either via <code>ggarrange</code> (package <a href="https://cran.r-project.org/web/packages/ggpubr/index.html">ggpubr</a>) or <code>plot_grid</code> (package <a href="https://cran.r-project.org/web/packages/cowplot/">cowplot</a>) <code>cowplot</code>. Notice that some functions might be only applicable after fits or clusters have been computed (the package will raise errors if you try to call a function on an object that does not have the required information to create the plot).</p>
 <p>In this vignette, we apply the plotting functions to one of the cohort objects released in the <code>evoverse.datasets</code> <a href="https://github.com/caravagn/evoverse.datasets">R package</a>.</p>

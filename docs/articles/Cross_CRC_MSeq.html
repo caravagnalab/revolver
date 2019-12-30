@@ -105,6 +105,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Analysis of colorectal adenocarcinomas</h1>
+                        <h4 class="author">Giulio Caravagna</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/master/vignettes/Cross_CRC_MSeq.Rmd"><code>vignettes/Cross_CRC_MSeq.Rmd</code></a></small>
@@ -121,18 +122,22 @@
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; Available datasets ~ use data('xxx', package='REVOLVER_datasets') to load dataset 'xxx'</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; ◉ TRACERx_NEJM_2017 Mutations from TRACERx lung (NEJM2017, PMID: 28445112). n = 99 patients, multi-region WES. </span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; ◉ TRACERx_NEJM_2017 Mutations from TRACERx lung (PMID: 28445112). n = 99 patients, multi-region WES, CCF. </span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; ◉ TRACERx_NEJM_2017_REVOLVER REVOLVER analysis of TRACERx_NEJM_2017. </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;  [ Mtree - Mutation Trees in cancer ] </span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; GitHub :  caravagn/mtree </span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt;  [ REVOLVER - Repeated Evolution in Cancer ] </span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; GitHub :  caravagn/revolver </span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt;    WWW :  https://caravagn.github.io/revolver/ </span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt;  &gt; REVOLVER is part of the "evoverse" [https://bit.ly/2orn94e] - a collection of packages to implement Cancer Evolution analyses from cancer sequencing data.</span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(tidyverse)</a></code></pre></div>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; ◉ YATES_BREAST_NATMED_2015 Mutations from breast cancers (PMID: 26099045). n = 50 patients, multi-region WES, binary. </span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; ◉ CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018 Mutations from colorectal adenocarcinomas (PMID: 30177804). n = 19 patients, multi-region WES, binary. </span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; ◉ MSEQ_CRC_ADENOCARCINOMA_SET6 Mutations, copy number and purity from the Set6 multi-region colorectal adenocarcinoma sample (doi:10.1101/586560). n = 1 patient, multi-region WGS </span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; ◉ MSEQ_CRC_ADENOCARCINOMA_SET7 Mutations, copy number and purity from the Set7 multi-region colorectal adenocarcinoma sample (doi:10.1101/586560). n = 1 patient, multi-region WGS </span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt;  [ Mtree - Mutation Trees in cancer ] </span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; GitHub :  caravagn/mtree </span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt;  [ REVOLVER - Repeated Evolution in Cancer ] </span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; Author :  Giulio Caravagna &lt;gcaravagn@gmail.com&gt; </span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; GitHub :  caravagn/revolver </span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt;    WWW :  https://caravagn.github.io/revolver/ </span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt;  &gt; REVOLVER is part of the "evoverse" [https://bit.ly/2orn94e] - a collection of packages to implement Cancer Evolution analyses from cancer sequencing data.</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(tidyverse)</a></code></pre></div>
 <div id="data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h3>
@@ -357,225 +362,244 @@
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; adenoma_1, adenoma_2, adenoma_3, adenoma_4, adenoma_5, adenoma_6, adenoma_7, adenoma_8, adenoma_9, carcinoma_1, carcinoma_10, carcinoma_2, carcinoma_3, carcinoma_5, carcinoma_6, carcinoma_7, carcinoma_8, carcinoma_9_distal, carcinoma_9_proximal </span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_1 ] </span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; # A tibble: 1 x 10</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_2 ] </span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; # A tibble: 3 x 8</span></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; 1 2           2 TRUE      FALSE         0     0     0     1</span></a>
-<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; 2 1           1 TRUE      TRUE          1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; 3 3           1 TRUE      FALSE         1     1     1     0</span></a>
-<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; There are no alternatives!</span></a>
-<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_3 ] </span></a>
-<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt; # A tibble: 4 x 9</span></a>
-<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
-<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; 1 2           5 TRUE      TRUE          1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt; 2 1           1 TRUE      FALSE         0     0     0     1     1</span></a>
-<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt; 3 3           1 FALSE     FALSE         0     0     1     0     0</span></a>
-<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt; 4 4           1 FALSE     FALSE         0     1     0     0     0</span></a>
-<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="co">#&gt; There are no alternatives!</span></a>
-<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; # A tibble: 1 x 10</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_2 ] </span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; # A tibble: 3 x 8</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; 1 2           2 TRUE      FALSE         0     0     0     1</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt; 2 1           1 TRUE      TRUE          1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; 3 3           1 TRUE      FALSE         1     1     1     0</span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; There are no alternatives!</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_3 ] </span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; # A tibble: 4 x 9</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt; 1 2           5 TRUE      TRUE          1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co">#&gt; 2 1           1 TRUE      FALSE         0     0     0     1     1</span></a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="co">#&gt; 3 3           1 FALSE     FALSE         0     0     1     0     0</span></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">#&gt; 4 4           1 FALSE     FALSE         0     1     0     0     0</span></a>
 <a class="sourceLine" id="cb4-45" data-line-number="45"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-46" data-line-number="46"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_4 ] </span></a>
-<a class="sourceLine" id="cb4-48" data-line-number="48"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-49" data-line-number="49"><span class="co">#&gt; # A tibble: 3 x 8</span></a>
-<a class="sourceLine" id="cb4-50" data-line-number="50"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
-<a class="sourceLine" id="cb4-51" data-line-number="51"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-52" data-line-number="52"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-53" data-line-number="53"><span class="co">#&gt; 2 2           1 TRUE      FALSE         0     0     1     0</span></a>
-<a class="sourceLine" id="cb4-54" data-line-number="54"><span class="co">#&gt; 3 3           1 FALSE     FALSE         0     0     0     1</span></a>
-<a class="sourceLine" id="cb4-55" data-line-number="55"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-56" data-line-number="56"><span class="co">#&gt; There are no alternatives!</span></a>
-<a class="sourceLine" id="cb4-57" data-line-number="57"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-58" data-line-number="58"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-59" data-line-number="59"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-60" data-line-number="60"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_5 ] </span></a>
-<a class="sourceLine" id="cb4-61" data-line-number="61"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-62" data-line-number="62"><span class="co">#&gt; # A tibble: 1 x 8</span></a>
-<a class="sourceLine" id="cb4-63" data-line-number="63"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
-<a class="sourceLine" id="cb4-64" data-line-number="64"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-65" data-line-number="65"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-66" data-line-number="66"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-67" data-line-number="67"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-68" data-line-number="68"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-69" data-line-number="69"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-70" data-line-number="70"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-71" data-line-number="71"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_6 ] </span></a>
-<a class="sourceLine" id="cb4-72" data-line-number="72"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-73" data-line-number="73"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
-<a class="sourceLine" id="cb4-74" data-line-number="74"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
-<a class="sourceLine" id="cb4-75" data-line-number="75"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-76" data-line-number="76"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1</span></a>
-<a class="sourceLine" id="cb4-77" data-line-number="77"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-78" data-line-number="78"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-79" data-line-number="79"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-80" data-line-number="80"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-81" data-line-number="81"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-82" data-line-number="82"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_7 ] </span></a>
-<a class="sourceLine" id="cb4-83" data-line-number="83"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-84" data-line-number="84"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
-<a class="sourceLine" id="cb4-85" data-line-number="85"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
-<a class="sourceLine" id="cb4-86" data-line-number="86"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-87" data-line-number="87"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1</span></a>
-<a class="sourceLine" id="cb4-88" data-line-number="88"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-89" data-line-number="89"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-90" data-line-number="90"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-91" data-line-number="91"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-92" data-line-number="92"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-93" data-line-number="93"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_8 ] </span></a>
-<a class="sourceLine" id="cb4-94" data-line-number="94"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-95" data-line-number="95"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
-<a class="sourceLine" id="cb4-96" data-line-number="96"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
-<a class="sourceLine" id="cb4-97" data-line-number="97"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-98" data-line-number="98"><span class="co">#&gt; 1 1           4 TRUE      TRUE          1     1</span></a>
-<a class="sourceLine" id="cb4-99" data-line-number="99"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-100" data-line-number="100"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-101" data-line-number="101"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-102" data-line-number="102"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-103" data-line-number="103"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-104" data-line-number="104"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_9 ] </span></a>
-<a class="sourceLine" id="cb4-105" data-line-number="105"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-106" data-line-number="106"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
-<a class="sourceLine" id="cb4-107" data-line-number="107"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
-<a class="sourceLine" id="cb4-108" data-line-number="108"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-109" data-line-number="109"><span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1</span></a>
+<a class="sourceLine" id="cb4-46" data-line-number="46"><span class="co">#&gt; There are no alternatives!</span></a>
+<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-48" data-line-number="48"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-49" data-line-number="49"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-50" data-line-number="50"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_4 ] </span></a>
+<a class="sourceLine" id="cb4-51" data-line-number="51"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-52" data-line-number="52"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-53" data-line-number="53"><span class="co">#&gt; # A tibble: 3 x 8</span></a>
+<a class="sourceLine" id="cb4-54" data-line-number="54"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
+<a class="sourceLine" id="cb4-55" data-line-number="55"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-56" data-line-number="56"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-57" data-line-number="57"><span class="co">#&gt; 2 2           1 TRUE      FALSE         0     0     1     0</span></a>
+<a class="sourceLine" id="cb4-58" data-line-number="58"><span class="co">#&gt; 3 3           1 FALSE     FALSE         0     0     0     1</span></a>
+<a class="sourceLine" id="cb4-59" data-line-number="59"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-60" data-line-number="60"><span class="co">#&gt; There are no alternatives!</span></a>
+<a class="sourceLine" id="cb4-61" data-line-number="61"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-62" data-line-number="62"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-63" data-line-number="63"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-64" data-line-number="64"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_5 ] </span></a>
+<a class="sourceLine" id="cb4-65" data-line-number="65"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-66" data-line-number="66"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-67" data-line-number="67"><span class="co">#&gt; # A tibble: 1 x 8</span></a>
+<a class="sourceLine" id="cb4-68" data-line-number="68"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
+<a class="sourceLine" id="cb4-69" data-line-number="69"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-70" data-line-number="70"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-71" data-line-number="71"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-72" data-line-number="72"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-73" data-line-number="73"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-74" data-line-number="74"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-75" data-line-number="75"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-76" data-line-number="76"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_6 ] </span></a>
+<a class="sourceLine" id="cb4-77" data-line-number="77"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-78" data-line-number="78"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-79" data-line-number="79"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
+<a class="sourceLine" id="cb4-80" data-line-number="80"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
+<a class="sourceLine" id="cb4-81" data-line-number="81"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-82" data-line-number="82"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1</span></a>
+<a class="sourceLine" id="cb4-83" data-line-number="83"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-84" data-line-number="84"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-85" data-line-number="85"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-86" data-line-number="86"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-87" data-line-number="87"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-88" data-line-number="88"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_7 ] </span></a>
+<a class="sourceLine" id="cb4-89" data-line-number="89"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-90" data-line-number="90"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-91" data-line-number="91"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
+<a class="sourceLine" id="cb4-92" data-line-number="92"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
+<a class="sourceLine" id="cb4-93" data-line-number="93"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-94" data-line-number="94"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1</span></a>
+<a class="sourceLine" id="cb4-95" data-line-number="95"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-96" data-line-number="96"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-97" data-line-number="97"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-98" data-line-number="98"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-99" data-line-number="99"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-100" data-line-number="100"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_8 ] </span></a>
+<a class="sourceLine" id="cb4-101" data-line-number="101"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-102" data-line-number="102"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-103" data-line-number="103"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
+<a class="sourceLine" id="cb4-104" data-line-number="104"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
+<a class="sourceLine" id="cb4-105" data-line-number="105"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-106" data-line-number="106"><span class="co">#&gt; 1 1           4 TRUE      TRUE          1     1</span></a>
+<a class="sourceLine" id="cb4-107" data-line-number="107"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-108" data-line-number="108"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-109" data-line-number="109"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
 <a class="sourceLine" id="cb4-110" data-line-number="110"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-111" data-line-number="111"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-112" data-line-number="112"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-113" data-line-number="113"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-114" data-line-number="114"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-115" data-line-number="115"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_1 ] </span></a>
-<a class="sourceLine" id="cb4-116" data-line-number="116"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-117" data-line-number="117"><span class="co">#&gt; # A tibble: 2 x 8</span></a>
-<a class="sourceLine" id="cb4-118" data-line-number="118"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
-<a class="sourceLine" id="cb4-119" data-line-number="119"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-120" data-line-number="120"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-121" data-line-number="121"><span class="co">#&gt; 2 2           1 FALSE     FALSE         1     0     0     0</span></a>
+<a class="sourceLine" id="cb4-111" data-line-number="111"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-112" data-line-number="112"><span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_9 ] </span></a>
+<a class="sourceLine" id="cb4-113" data-line-number="113"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-114" data-line-number="114"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-115" data-line-number="115"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
+<a class="sourceLine" id="cb4-116" data-line-number="116"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span></a>
+<a class="sourceLine" id="cb4-117" data-line-number="117"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-118" data-line-number="118"><span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1</span></a>
+<a class="sourceLine" id="cb4-119" data-line-number="119"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-120" data-line-number="120"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-121" data-line-number="121"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
 <a class="sourceLine" id="cb4-122" data-line-number="122"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-123" data-line-number="123"><span class="co">#&gt; There are no alternatives!</span></a>
-<a class="sourceLine" id="cb4-124" data-line-number="124"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-125" data-line-number="125"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-126" data-line-number="126"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-127" data-line-number="127"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_10 ] </span></a>
-<a class="sourceLine" id="cb4-128" data-line-number="128"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-129" data-line-number="129"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
-<a class="sourceLine" id="cb4-130" data-line-number="130"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
-<a class="sourceLine" id="cb4-131" data-line-number="131"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-132" data-line-number="132"><span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-133" data-line-number="133"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-134" data-line-number="134"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-135" data-line-number="135"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-136" data-line-number="136"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-137" data-line-number="137"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-138" data-line-number="138"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_2 ] </span></a>
-<a class="sourceLine" id="cb4-139" data-line-number="139"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-140" data-line-number="140"><span class="co">#&gt; # A tibble: 1 x 11</span></a>
-<a class="sourceLine" id="cb4-141" data-line-number="141"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
-<a class="sourceLine" id="cb4-142" data-line-number="142"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-143" data-line-number="143"><span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-144" data-line-number="144"><span class="co">#&gt; # … with 1 more variable: R7 &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-145" data-line-number="145"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-146" data-line-number="146"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-147" data-line-number="147"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-148" data-line-number="148"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-149" data-line-number="149"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-150" data-line-number="150"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_3 ] </span></a>
-<a class="sourceLine" id="cb4-151" data-line-number="151"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-152" data-line-number="152"><span class="co">#&gt; # A tibble: 1 x 10</span></a>
+<a class="sourceLine" id="cb4-123" data-line-number="123"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-124" data-line-number="124"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_1 ] </span></a>
+<a class="sourceLine" id="cb4-125" data-line-number="125"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-126" data-line-number="126"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-127" data-line-number="127"><span class="co">#&gt; # A tibble: 2 x 8</span></a>
+<a class="sourceLine" id="cb4-128" data-line-number="128"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span></a>
+<a class="sourceLine" id="cb4-129" data-line-number="129"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-130" data-line-number="130"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-131" data-line-number="131"><span class="co">#&gt; 2 2           1 FALSE     FALSE         1     0     0     0</span></a>
+<a class="sourceLine" id="cb4-132" data-line-number="132"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-133" data-line-number="133"><span class="co">#&gt; There are no alternatives!</span></a>
+<a class="sourceLine" id="cb4-134" data-line-number="134"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-135" data-line-number="135"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-136" data-line-number="136"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-137" data-line-number="137"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_10 ] </span></a>
+<a class="sourceLine" id="cb4-138" data-line-number="138"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-139" data-line-number="139"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-140" data-line-number="140"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
+<a class="sourceLine" id="cb4-141" data-line-number="141"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
+<a class="sourceLine" id="cb4-142" data-line-number="142"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-143" data-line-number="143"><span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-144" data-line-number="144"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-145" data-line-number="145"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-146" data-line-number="146"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-147" data-line-number="147"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-148" data-line-number="148"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-149" data-line-number="149"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_2 ] </span></a>
+<a class="sourceLine" id="cb4-150" data-line-number="150"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-151" data-line-number="151"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-152" data-line-number="152"><span class="co">#&gt; # A tibble: 1 x 11</span></a>
 <a class="sourceLine" id="cb4-153" data-line-number="153"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
 <a class="sourceLine" id="cb4-154" data-line-number="154"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-155" data-line-number="155"><span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-156" data-line-number="156"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-157" data-line-number="157"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-158" data-line-number="158"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-159" data-line-number="159"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-160" data-line-number="160"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-161" data-line-number="161"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_5 ] </span></a>
-<a class="sourceLine" id="cb4-162" data-line-number="162"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-163" data-line-number="163"><span class="co">#&gt; # A tibble: 1 x 10</span></a>
-<a class="sourceLine" id="cb4-164" data-line-number="164"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
-<a class="sourceLine" id="cb4-165" data-line-number="165"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-166" data-line-number="166"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-167" data-line-number="167"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-168" data-line-number="168"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-169" data-line-number="169"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-170" data-line-number="170"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-171" data-line-number="171"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-172" data-line-number="172"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_6 ] </span></a>
-<a class="sourceLine" id="cb4-173" data-line-number="173"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-174" data-line-number="174"><span class="co">#&gt; # A tibble: 1 x 17</span></a>
-<a class="sourceLine" id="cb4-175" data-line-number="175"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1   R10   R11   R12   R13    R2</span></a>
-<a class="sourceLine" id="cb4-176" data-line-number="176"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-177" data-line-number="177"><span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-178" data-line-number="178"><span class="co">#&gt; # … with 7 more variables: R3 &lt;dbl&gt;, R4 &lt;dbl&gt;, R5 &lt;dbl&gt;, R6 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-179" data-line-number="179"><span class="co">#&gt; #   R7 &lt;dbl&gt;, R8 &lt;dbl&gt;, R9 &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-180" data-line-number="180"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-181" data-line-number="181"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-182" data-line-number="182"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-183" data-line-number="183"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-184" data-line-number="184"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-185" data-line-number="185"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_7 ] </span></a>
-<a class="sourceLine" id="cb4-186" data-line-number="186"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-187" data-line-number="187"><span class="co">#&gt; # A tibble: 1 x 12</span></a>
-<a class="sourceLine" id="cb4-188" data-line-number="188"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
-<a class="sourceLine" id="cb4-189" data-line-number="189"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-190" data-line-number="190"><span class="co">#&gt; 1 1           4 TRUE      TRUE          1     1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-191" data-line-number="191"><span class="co">#&gt; # … with 2 more variables: R7 &lt;dbl&gt;, R8 &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-192" data-line-number="192"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-193" data-line-number="193"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-194" data-line-number="194"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-155" data-line-number="155"><span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-156" data-line-number="156"><span class="co">#&gt; # … with 1 more variable: R7 &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-157" data-line-number="157"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-158" data-line-number="158"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-159" data-line-number="159"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-160" data-line-number="160"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-161" data-line-number="161"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-162" data-line-number="162"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_3 ] </span></a>
+<a class="sourceLine" id="cb4-163" data-line-number="163"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-164" data-line-number="164"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-165" data-line-number="165"><span class="co">#&gt; # A tibble: 1 x 10</span></a>
+<a class="sourceLine" id="cb4-166" data-line-number="166"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
+<a class="sourceLine" id="cb4-167" data-line-number="167"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-168" data-line-number="168"><span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-169" data-line-number="169"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-170" data-line-number="170"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-171" data-line-number="171"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-172" data-line-number="172"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-173" data-line-number="173"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-174" data-line-number="174"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_5 ] </span></a>
+<a class="sourceLine" id="cb4-175" data-line-number="175"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-176" data-line-number="176"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-177" data-line-number="177"><span class="co">#&gt; # A tibble: 1 x 10</span></a>
+<a class="sourceLine" id="cb4-178" data-line-number="178"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
+<a class="sourceLine" id="cb4-179" data-line-number="179"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-180" data-line-number="180"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-181" data-line-number="181"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-182" data-line-number="182"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-183" data-line-number="183"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-184" data-line-number="184"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-185" data-line-number="185"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-186" data-line-number="186"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_6 ] </span></a>
+<a class="sourceLine" id="cb4-187" data-line-number="187"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-188" data-line-number="188"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-189" data-line-number="189"><span class="co">#&gt; # A tibble: 1 x 17</span></a>
+<a class="sourceLine" id="cb4-190" data-line-number="190"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1   R10   R11   R12   R13    R2</span></a>
+<a class="sourceLine" id="cb4-191" data-line-number="191"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-192" data-line-number="192"><span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-193" data-line-number="193"><span class="co">#&gt; # … with 7 more variables: R3 &lt;dbl&gt;, R4 &lt;dbl&gt;, R5 &lt;dbl&gt;, R6 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb4-194" data-line-number="194"><span class="co">#&gt; #   R7 &lt;dbl&gt;, R8 &lt;dbl&gt;, R9 &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb4-195" data-line-number="195"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-196" data-line-number="196"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-197" data-line-number="197"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_8 ] </span></a>
-<a class="sourceLine" id="cb4-198" data-line-number="198"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-199" data-line-number="199"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
-<a class="sourceLine" id="cb4-200" data-line-number="200"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
-<a class="sourceLine" id="cb4-201" data-line-number="201"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-202" data-line-number="202"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-203" data-line-number="203"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-204" data-line-number="204"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-205" data-line-number="205"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-206" data-line-number="206"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-207" data-line-number="207"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-208" data-line-number="208"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_9_distal ] </span></a>
-<a class="sourceLine" id="cb4-209" data-line-number="209"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-210" data-line-number="210"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
-<a class="sourceLine" id="cb4-211" data-line-number="211"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
-<a class="sourceLine" id="cb4-212" data-line-number="212"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-213" data-line-number="213"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-214" data-line-number="214"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-215" data-line-number="215"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-216" data-line-number="216"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-217" data-line-number="217"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-218" data-line-number="218"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
-<a class="sourceLine" id="cb4-219" data-line-number="219"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_9_proximal ] </span></a>
-<a class="sourceLine" id="cb4-220" data-line-number="220"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
-<a class="sourceLine" id="cb4-221" data-line-number="221"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
-<a class="sourceLine" id="cb4-222" data-line-number="222"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
-<a class="sourceLine" id="cb4-223" data-line-number="223"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-224" data-line-number="224"><span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1</span></a>
-<a class="sourceLine" id="cb4-225" data-line-number="225"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-226" data-line-number="226"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
-<a class="sourceLine" id="cb4-227" data-line-number="227"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
-<a class="sourceLine" id="cb4-228" data-line-number="228"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-229" data-line-number="229"><span class="co">#&gt;  Combinations of Information Transfer :  0</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-196" data-line-number="196"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-197" data-line-number="197"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-198" data-line-number="198"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-199" data-line-number="199"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-200" data-line-number="200"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_7 ] </span></a>
+<a class="sourceLine" id="cb4-201" data-line-number="201"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-202" data-line-number="202"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-203" data-line-number="203"><span class="co">#&gt; # A tibble: 1 x 12</span></a>
+<a class="sourceLine" id="cb4-204" data-line-number="204"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span></a>
+<a class="sourceLine" id="cb4-205" data-line-number="205"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-206" data-line-number="206"><span class="co">#&gt; 1 1           4 TRUE      TRUE          1     1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-207" data-line-number="207"><span class="co">#&gt; # … with 2 more variables: R7 &lt;dbl&gt;, R8 &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-208" data-line-number="208"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-209" data-line-number="209"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-210" data-line-number="210"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-211" data-line-number="211"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-212" data-line-number="212"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-213" data-line-number="213"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_8 ] </span></a>
+<a class="sourceLine" id="cb4-214" data-line-number="214"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-215" data-line-number="215"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-216" data-line-number="216"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
+<a class="sourceLine" id="cb4-217" data-line-number="217"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
+<a class="sourceLine" id="cb4-218" data-line-number="218"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-219" data-line-number="219"><span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-220" data-line-number="220"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-221" data-line-number="221"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-222" data-line-number="222"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-223" data-line-number="223"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-224" data-line-number="224"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-225" data-line-number="225"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_9_distal ] </span></a>
+<a class="sourceLine" id="cb4-226" data-line-number="226"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-227" data-line-number="227"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-228" data-line-number="228"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
+<a class="sourceLine" id="cb4-229" data-line-number="229"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
+<a class="sourceLine" id="cb4-230" data-line-number="230"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-231" data-line-number="231"><span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-232" data-line-number="232"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-233" data-line-number="233"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-234" data-line-number="234"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-235" data-line-number="235"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-236" data-line-number="236"><span class="co">#&gt;  Combinations of Information Transfer :  0 </span></a>
+<a class="sourceLine" id="cb4-237" data-line-number="237"><span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_9_proximal ] </span></a>
+<a class="sourceLine" id="cb4-238" data-line-number="238"><span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span></a>
+<a class="sourceLine" id="cb4-239" data-line-number="239"><span class="co">#&gt; Suppes' conditions :  &gt;= </span></a>
+<a class="sourceLine" id="cb4-240" data-line-number="240"><span class="co">#&gt; # A tibble: 1 x 9</span></a>
+<a class="sourceLine" id="cb4-241" data-line-number="241"><span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span></a>
+<a class="sourceLine" id="cb4-242" data-line-number="242"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-243" data-line-number="243"><span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1</span></a>
+<a class="sourceLine" id="cb4-244" data-line-number="244"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-245" data-line-number="245"><span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span></a>
+<a class="sourceLine" id="cb4-246" data-line-number="246"><span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span></a>
+<a class="sourceLine" id="cb4-247" data-line-number="247"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-248" data-line-number="248"><span class="co">#&gt;  Combinations of Information Transfer :  0</span></a></code></pre></div>
 </div>
 <div id="fitting-models-with-revolver" class="section level3">
 <h3 class="hasAnchor">
@@ -688,211 +712,91 @@
 <a class="sourceLine" id="cb5-96" data-line-number="96"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
 <a class="sourceLine" id="cb5-97" data-line-number="97"><span class="co">#&gt;  2] Transfering orderings across patients</span></a>
 <a class="sourceLine" id="cb5-98" data-line-number="98"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-99" data-line-number="99"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-100" data-line-number="100">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-101" data-line-number="101"><span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%</a>
-<a class="sourceLine" id="cb5-102" data-line-number="102">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-103" data-line-number="103"><span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">5</span>%</a>
-<a class="sourceLine" id="cb5-104" data-line-number="104">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-105" data-line-number="105"><span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">11</span>%</a>
-<a class="sourceLine" id="cb5-106" data-line-number="106">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-107" data-line-number="107"><span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%</a>
-<a class="sourceLine" id="cb5-108" data-line-number="108">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-109" data-line-number="109"><span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">21</span>%</a>
-<a class="sourceLine" id="cb5-110" data-line-number="110">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-111" data-line-number="111"><span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">26</span>%</a>
-<a class="sourceLine" id="cb5-112" data-line-number="112">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-113" data-line-number="113"><span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">32</span>%</a>
-<a class="sourceLine" id="cb5-114" data-line-number="114">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-115" data-line-number="115"><span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">37</span>%</a>
-<a class="sourceLine" id="cb5-116" data-line-number="116">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-117" data-line-number="117"><span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">42</span>%</a>
-<a class="sourceLine" id="cb5-118" data-line-number="118">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-119" data-line-number="119"><span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%</a>
-<a class="sourceLine" id="cb5-120" data-line-number="120">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-121" data-line-number="121"><span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%</a>
-<a class="sourceLine" id="cb5-122" data-line-number="122">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-123" data-line-number="123"><span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">58</span>%</a>
-<a class="sourceLine" id="cb5-124" data-line-number="124">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-125" data-line-number="125"><span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">63</span>%</a>
-<a class="sourceLine" id="cb5-126" data-line-number="126">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-127" data-line-number="127"><span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">68</span>%</a>
-<a class="sourceLine" id="cb5-128" data-line-number="128">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-129" data-line-number="129"><span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">74</span>%</a>
-<a class="sourceLine" id="cb5-130" data-line-number="130">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-131" data-line-number="131"><span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">79</span>%</a>
-<a class="sourceLine" id="cb5-132" data-line-number="132">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-133" data-line-number="133"><span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%</a>
-<a class="sourceLine" id="cb5-134" data-line-number="134">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-135" data-line-number="135"><span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">89</span>%</a>
-<a class="sourceLine" id="cb5-136" data-line-number="136">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-137" data-line-number="137"><span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">95</span>%</a>
-<a class="sourceLine" id="cb5-138" data-line-number="138">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-139" data-line-number="139"><span class="st">  </span><span class="er">|=================================================================|</span><span class="st"> </span><span class="dv">100</span>%[<span class="dv">1</span>] <span class="st">"w"</span></a>
-<a class="sourceLine" id="cb5-140" data-line-number="140"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-99" data-line-number="99"><span class="co">#&gt; [1] "w"</span></a>
+<a class="sourceLine" id="cb5-100" data-line-number="100"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-101" data-line-number="101"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-102" data-line-number="102"><span class="co">#&gt;  1] Expectation Maximization</span></a>
+<a class="sourceLine" id="cb5-103" data-line-number="103"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-104" data-line-number="104"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-105" data-line-number="105"><span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></a>
+<a class="sourceLine" id="cb5-106" data-line-number="106"><span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
+<a class="sourceLine" id="cb5-107" data-line-number="107"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-108" data-line-number="108"><span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
+<a class="sourceLine" id="cb5-109" data-line-number="109"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-110" data-line-number="110"><span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span></a>
+<a class="sourceLine" id="cb5-111" data-line-number="111"><span class="co">#&gt;    patientID hasTrees numTrees maxScore minScore combInfTransf Solution</span></a>
+<a class="sourceLine" id="cb5-112" data-line-number="112"><span class="co">#&gt;    &lt;chr&gt;     &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb5-113" data-line-number="113"><span class="co">#&gt;  1 adenoma_1 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-114" data-line-number="114"><span class="co">#&gt;  2 adenoma_2 TRUE            1  1.13e-2  1.13e-2             1        1</span></a>
+<a class="sourceLine" id="cb5-115" data-line-number="115"><span class="co">#&gt;  3 adenoma_3 TRUE            1  8.52e-5  8.52e-5             1        1</span></a>
+<a class="sourceLine" id="cb5-116" data-line-number="116"><span class="co">#&gt;  4 adenoma_4 TRUE            1  2.55e-3  2.55e-3             1        1</span></a>
+<a class="sourceLine" id="cb5-117" data-line-number="117"><span class="co">#&gt;  5 adenoma_5 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-118" data-line-number="118"><span class="co">#&gt;  6 adenoma_6 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-119" data-line-number="119"><span class="co">#&gt;  7 adenoma_7 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-120" data-line-number="120"><span class="co">#&gt;  8 adenoma_8 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-121" data-line-number="121"><span class="co">#&gt;  9 adenoma_9 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-122" data-line-number="122"><span class="co">#&gt; 10 carcinom… TRUE            1  5.05e-2  5.05e-2             1        1</span></a>
+<a class="sourceLine" id="cb5-123" data-line-number="123"><span class="co">#&gt; 11 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-124" data-line-number="124"><span class="co">#&gt; 12 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-125" data-line-number="125"><span class="co">#&gt; 13 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-126" data-line-number="126"><span class="co">#&gt; 14 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-127" data-line-number="127"><span class="co">#&gt; 15 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-128" data-line-number="128"><span class="co">#&gt; 16 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-129" data-line-number="129"><span class="co">#&gt; 17 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-130" data-line-number="130"><span class="co">#&gt; 18 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-131" data-line-number="131"><span class="co">#&gt; 19 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-132" data-line-number="132"><span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-133" data-line-number="133"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-134" data-line-number="134"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-135" data-line-number="135"><span class="co">#&gt;  2] Transfering orderings across patients</span></a>
+<a class="sourceLine" id="cb5-136" data-line-number="136"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-137" data-line-number="137"><span class="co">#&gt; [1] "w"</span></a>
+<a class="sourceLine" id="cb5-138" data-line-number="138"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-139" data-line-number="139"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-140" data-line-number="140"><span class="co">#&gt;  1] Expectation Maximization</span></a>
 <a class="sourceLine" id="cb5-141" data-line-number="141"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-142" data-line-number="142"><span class="co">#&gt;  1] Expectation Maximization</span></a>
-<a class="sourceLine" id="cb5-143" data-line-number="143"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-144" data-line-number="144"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-145" data-line-number="145"><span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></a>
-<a class="sourceLine" id="cb5-146" data-line-number="146"><span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
+<a class="sourceLine" id="cb5-142" data-line-number="142"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-143" data-line-number="143"><span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></a>
+<a class="sourceLine" id="cb5-144" data-line-number="144"><span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
+<a class="sourceLine" id="cb5-145" data-line-number="145"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-146" data-line-number="146"><span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
 <a class="sourceLine" id="cb5-147" data-line-number="147"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-148" data-line-number="148"><span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
-<a class="sourceLine" id="cb5-149" data-line-number="149"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-150" data-line-number="150"><span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span></a>
-<a class="sourceLine" id="cb5-151" data-line-number="151"><span class="co">#&gt;    patientID hasTrees numTrees maxScore minScore combInfTransf Solution</span></a>
-<a class="sourceLine" id="cb5-152" data-line-number="152"><span class="co">#&gt;    &lt;chr&gt;     &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb5-153" data-line-number="153"><span class="co">#&gt;  1 adenoma_1 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-154" data-line-number="154"><span class="co">#&gt;  2 adenoma_2 TRUE            1  1.13e-2  1.13e-2             1        1</span></a>
-<a class="sourceLine" id="cb5-155" data-line-number="155"><span class="co">#&gt;  3 adenoma_3 TRUE            1  8.52e-5  8.52e-5             1        1</span></a>
-<a class="sourceLine" id="cb5-156" data-line-number="156"><span class="co">#&gt;  4 adenoma_4 TRUE            1  2.55e-3  2.55e-3             1        1</span></a>
-<a class="sourceLine" id="cb5-157" data-line-number="157"><span class="co">#&gt;  5 adenoma_5 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-158" data-line-number="158"><span class="co">#&gt;  6 adenoma_6 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-159" data-line-number="159"><span class="co">#&gt;  7 adenoma_7 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-160" data-line-number="160"><span class="co">#&gt;  8 adenoma_8 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-161" data-line-number="161"><span class="co">#&gt;  9 adenoma_9 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-162" data-line-number="162"><span class="co">#&gt; 10 carcinom… TRUE            1  5.05e-2  5.05e-2             1        1</span></a>
-<a class="sourceLine" id="cb5-163" data-line-number="163"><span class="co">#&gt; 11 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-164" data-line-number="164"><span class="co">#&gt; 12 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-165" data-line-number="165"><span class="co">#&gt; 13 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-166" data-line-number="166"><span class="co">#&gt; 14 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-167" data-line-number="167"><span class="co">#&gt; 15 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-168" data-line-number="168"><span class="co">#&gt; 16 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-169" data-line-number="169"><span class="co">#&gt; 17 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-170" data-line-number="170"><span class="co">#&gt; 18 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-171" data-line-number="171"><span class="co">#&gt; 19 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-172" data-line-number="172"><span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-173" data-line-number="173"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-148" data-line-number="148"><span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span></a>
+<a class="sourceLine" id="cb5-149" data-line-number="149"><span class="co">#&gt;    patientID hasTrees numTrees maxScore minScore combInfTransf Solution</span></a>
+<a class="sourceLine" id="cb5-150" data-line-number="150"><span class="co">#&gt;    &lt;chr&gt;     &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb5-151" data-line-number="151"><span class="co">#&gt;  1 adenoma_1 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-152" data-line-number="152"><span class="co">#&gt;  2 adenoma_2 TRUE            1  1.13e-2  1.13e-2             1        1</span></a>
+<a class="sourceLine" id="cb5-153" data-line-number="153"><span class="co">#&gt;  3 adenoma_3 TRUE            1  8.52e-5  8.52e-5             1        1</span></a>
+<a class="sourceLine" id="cb5-154" data-line-number="154"><span class="co">#&gt;  4 adenoma_4 TRUE            1  2.55e-3  2.55e-3             1        1</span></a>
+<a class="sourceLine" id="cb5-155" data-line-number="155"><span class="co">#&gt;  5 adenoma_5 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-156" data-line-number="156"><span class="co">#&gt;  6 adenoma_6 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-157" data-line-number="157"><span class="co">#&gt;  7 adenoma_7 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-158" data-line-number="158"><span class="co">#&gt;  8 adenoma_8 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-159" data-line-number="159"><span class="co">#&gt;  9 adenoma_9 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-160" data-line-number="160"><span class="co">#&gt; 10 carcinom… TRUE            1  5.05e-2  5.05e-2             1        1</span></a>
+<a class="sourceLine" id="cb5-161" data-line-number="161"><span class="co">#&gt; 11 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-162" data-line-number="162"><span class="co">#&gt; 12 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-163" data-line-number="163"><span class="co">#&gt; 13 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-164" data-line-number="164"><span class="co">#&gt; 14 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-165" data-line-number="165"><span class="co">#&gt; 15 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-166" data-line-number="166"><span class="co">#&gt; 16 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-167" data-line-number="167"><span class="co">#&gt; 17 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-168" data-line-number="168"><span class="co">#&gt; 18 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-169" data-line-number="169"><span class="co">#&gt; 19 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
+<a class="sourceLine" id="cb5-170" data-line-number="170"><span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-171" data-line-number="171"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-172" data-line-number="172"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-173" data-line-number="173"><span class="co">#&gt;  2] Transfering orderings across patients</span></a>
 <a class="sourceLine" id="cb5-174" data-line-number="174"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-175" data-line-number="175"><span class="co">#&gt;  2] Transfering orderings across patients</span></a>
-<a class="sourceLine" id="cb5-176" data-line-number="176"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-177" data-line-number="177"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-178" data-line-number="178">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-179" data-line-number="179"><span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%</a>
-<a class="sourceLine" id="cb5-180" data-line-number="180">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-181" data-line-number="181"><span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">5</span>%</a>
-<a class="sourceLine" id="cb5-182" data-line-number="182">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-183" data-line-number="183"><span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">11</span>%</a>
-<a class="sourceLine" id="cb5-184" data-line-number="184">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-185" data-line-number="185"><span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%</a>
-<a class="sourceLine" id="cb5-186" data-line-number="186">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-187" data-line-number="187"><span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">21</span>%</a>
-<a class="sourceLine" id="cb5-188" data-line-number="188">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-189" data-line-number="189"><span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">26</span>%</a>
-<a class="sourceLine" id="cb5-190" data-line-number="190">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-191" data-line-number="191"><span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">32</span>%</a>
-<a class="sourceLine" id="cb5-192" data-line-number="192">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-193" data-line-number="193"><span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">37</span>%</a>
-<a class="sourceLine" id="cb5-194" data-line-number="194">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-195" data-line-number="195"><span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">42</span>%</a>
-<a class="sourceLine" id="cb5-196" data-line-number="196">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-197" data-line-number="197"><span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%</a>
-<a class="sourceLine" id="cb5-198" data-line-number="198">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-199" data-line-number="199"><span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%</a>
-<a class="sourceLine" id="cb5-200" data-line-number="200">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-201" data-line-number="201"><span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">58</span>%</a>
-<a class="sourceLine" id="cb5-202" data-line-number="202">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-203" data-line-number="203"><span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">63</span>%</a>
-<a class="sourceLine" id="cb5-204" data-line-number="204">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-205" data-line-number="205"><span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">68</span>%</a>
-<a class="sourceLine" id="cb5-206" data-line-number="206">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-207" data-line-number="207"><span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">74</span>%</a>
-<a class="sourceLine" id="cb5-208" data-line-number="208">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-209" data-line-number="209"><span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">79</span>%</a>
-<a class="sourceLine" id="cb5-210" data-line-number="210">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-211" data-line-number="211"><span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%</a>
-<a class="sourceLine" id="cb5-212" data-line-number="212">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-213" data-line-number="213"><span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">89</span>%</a>
-<a class="sourceLine" id="cb5-214" data-line-number="214">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-215" data-line-number="215"><span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">95</span>%</a>
-<a class="sourceLine" id="cb5-216" data-line-number="216">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-217" data-line-number="217"><span class="st">  </span><span class="er">|=================================================================|</span><span class="st"> </span><span class="dv">100</span>%[<span class="dv">1</span>] <span class="st">"w"</span></a>
-<a class="sourceLine" id="cb5-218" data-line-number="218"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-219" data-line-number="219"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-220" data-line-number="220"><span class="co">#&gt;  1] Expectation Maximization</span></a>
-<a class="sourceLine" id="cb5-221" data-line-number="221"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-222" data-line-number="222"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-223" data-line-number="223"><span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span></a>
-<a class="sourceLine" id="cb5-224" data-line-number="224"><span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
-<a class="sourceLine" id="cb5-225" data-line-number="225"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-226" data-line-number="226"><span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></a>
-<a class="sourceLine" id="cb5-227" data-line-number="227"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-228" data-line-number="228"><span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span></a>
-<a class="sourceLine" id="cb5-229" data-line-number="229"><span class="co">#&gt;    patientID hasTrees numTrees maxScore minScore combInfTransf Solution</span></a>
-<a class="sourceLine" id="cb5-230" data-line-number="230"><span class="co">#&gt;    &lt;chr&gt;     &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb5-231" data-line-number="231"><span class="co">#&gt;  1 adenoma_1 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-232" data-line-number="232"><span class="co">#&gt;  2 adenoma_2 TRUE            1  1.13e-2  1.13e-2             1        1</span></a>
-<a class="sourceLine" id="cb5-233" data-line-number="233"><span class="co">#&gt;  3 adenoma_3 TRUE            1  8.52e-5  8.52e-5             1        1</span></a>
-<a class="sourceLine" id="cb5-234" data-line-number="234"><span class="co">#&gt;  4 adenoma_4 TRUE            1  2.55e-3  2.55e-3             1        1</span></a>
-<a class="sourceLine" id="cb5-235" data-line-number="235"><span class="co">#&gt;  5 adenoma_5 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-236" data-line-number="236"><span class="co">#&gt;  6 adenoma_6 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-237" data-line-number="237"><span class="co">#&gt;  7 adenoma_7 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-238" data-line-number="238"><span class="co">#&gt;  8 adenoma_8 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-239" data-line-number="239"><span class="co">#&gt;  9 adenoma_9 TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-240" data-line-number="240"><span class="co">#&gt; 10 carcinom… TRUE            1  5.05e-2  5.05e-2             1        1</span></a>
-<a class="sourceLine" id="cb5-241" data-line-number="241"><span class="co">#&gt; 11 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-242" data-line-number="242"><span class="co">#&gt; 12 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-243" data-line-number="243"><span class="co">#&gt; 13 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-244" data-line-number="244"><span class="co">#&gt; 14 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-245" data-line-number="245"><span class="co">#&gt; 15 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-246" data-line-number="246"><span class="co">#&gt; 16 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-247" data-line-number="247"><span class="co">#&gt; 17 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-248" data-line-number="248"><span class="co">#&gt; 18 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-249" data-line-number="249"><span class="co">#&gt; 19 carcinom… TRUE            1  1.00e+0  1.00e+0             1        1</span></a>
-<a class="sourceLine" id="cb5-250" data-line-number="250"><span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-251" data-line-number="251"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-252" data-line-number="252"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-253" data-line-number="253"><span class="co">#&gt;  2] Transfering orderings across patients</span></a>
-<a class="sourceLine" id="cb5-254" data-line-number="254"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-255" data-line-number="255"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-256" data-line-number="256">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-257" data-line-number="257"><span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%</a>
-<a class="sourceLine" id="cb5-258" data-line-number="258">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-259" data-line-number="259"><span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">5</span>%</a>
-<a class="sourceLine" id="cb5-260" data-line-number="260">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-261" data-line-number="261"><span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">11</span>%</a>
-<a class="sourceLine" id="cb5-262" data-line-number="262">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-263" data-line-number="263"><span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%</a>
-<a class="sourceLine" id="cb5-264" data-line-number="264">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-265" data-line-number="265"><span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">21</span>%</a>
-<a class="sourceLine" id="cb5-266" data-line-number="266">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-267" data-line-number="267"><span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">26</span>%</a>
-<a class="sourceLine" id="cb5-268" data-line-number="268">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-269" data-line-number="269"><span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">32</span>%</a>
-<a class="sourceLine" id="cb5-270" data-line-number="270">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-271" data-line-number="271"><span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">37</span>%</a>
-<a class="sourceLine" id="cb5-272" data-line-number="272">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-273" data-line-number="273"><span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">42</span>%</a>
-<a class="sourceLine" id="cb5-274" data-line-number="274">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-275" data-line-number="275"><span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%</a>
-<a class="sourceLine" id="cb5-276" data-line-number="276">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-277" data-line-number="277"><span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%</a>
-<a class="sourceLine" id="cb5-278" data-line-number="278">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-279" data-line-number="279"><span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">58</span>%</a>
-<a class="sourceLine" id="cb5-280" data-line-number="280">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-281" data-line-number="281"><span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">63</span>%</a>
-<a class="sourceLine" id="cb5-282" data-line-number="282">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-283" data-line-number="283"><span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">68</span>%</a>
-<a class="sourceLine" id="cb5-284" data-line-number="284">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-285" data-line-number="285"><span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">74</span>%</a>
-<a class="sourceLine" id="cb5-286" data-line-number="286">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-287" data-line-number="287"><span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">79</span>%</a>
-<a class="sourceLine" id="cb5-288" data-line-number="288">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-289" data-line-number="289"><span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%</a>
-<a class="sourceLine" id="cb5-290" data-line-number="290">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-291" data-line-number="291"><span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">89</span>%</a>
-<a class="sourceLine" id="cb5-292" data-line-number="292">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-293" data-line-number="293"><span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">95</span>%</a>
-<a class="sourceLine" id="cb5-294" data-line-number="294">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb5-295" data-line-number="295"><span class="st">  </span><span class="er">|=================================================================|</span><span class="st"> </span><span class="dv">100</span>%</a>
-<a class="sourceLine" id="cb5-296" data-line-number="296"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-297" data-line-number="297"><span class="co">#&gt;  Selecting solution with minimal median penalty</span></a>
-<a class="sourceLine" id="cb5-298" data-line-number="298"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb5-299" data-line-number="299"><span class="co">#&gt; Solution #1 0.857142857142857 </span></a>
-<a class="sourceLine" id="cb5-300" data-line-number="300"><span class="co">#&gt; Solution #2 0.857142857142857 </span></a>
-<a class="sourceLine" id="cb5-301" data-line-number="301"><span class="co">#&gt; Solution #3 0.857142857142857 </span></a>
-<a class="sourceLine" id="cb5-302" data-line-number="302"><span class="co">#&gt;   Best solution is # 1 </span></a>
-<a class="sourceLine" id="cb5-303" data-line-number="303"><span class="co">#&gt; REVOLVER Transfer Learning fit  COMPLETED</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-175" data-line-number="175"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-176" data-line-number="176"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-177" data-line-number="177"><span class="co">#&gt;  Selecting solution with minimal median penalty</span></a>
+<a class="sourceLine" id="cb5-178" data-line-number="178"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb5-179" data-line-number="179"><span class="co">#&gt; Solution #1 0.857142857142857 </span></a>
+<a class="sourceLine" id="cb5-180" data-line-number="180"><span class="co">#&gt; Solution #2 0.857142857142857 </span></a>
+<a class="sourceLine" id="cb5-181" data-line-number="181"><span class="co">#&gt; Solution #3 0.857142857142857 </span></a>
+<a class="sourceLine" id="cb5-182" data-line-number="182"><span class="co">#&gt;   Best solution is # 1 </span></a>
+<a class="sourceLine" id="cb5-183" data-line-number="183"><span class="co">#&gt; REVOLVER Transfer Learning fit  COMPLETED</span></a></code></pre></div>
 </div>
 <div id="computing-revolver-hierarchical-clusters" class="section level3">
 <h3 class="hasAnchor">
@@ -910,279 +814,23 @@
 <a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; Patients : N = 19 (171 comparisons) </span></a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%</a>
-<a class="sourceLine" id="cb6-16" data-line-number="16">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">1</span>%</a>
-<a class="sourceLine" id="cb6-18" data-line-number="18">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="st">  </span><span class="er">|=</span><span class="st">                                                                </span><span class="er">|</span><span class="st">   </span><span class="dv">1</span>%</a>
-<a class="sourceLine" id="cb6-20" data-line-number="20">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="st">  </span><span class="er">|=</span><span class="st">                                                                </span><span class="er">|</span><span class="st">   </span><span class="dv">2</span>%</a>
-<a class="sourceLine" id="cb6-22" data-line-number="22">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">2</span>%</a>
-<a class="sourceLine" id="cb6-24" data-line-number="24">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">3</span>%</a>
-<a class="sourceLine" id="cb6-26" data-line-number="26">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">4</span>%</a>
-<a class="sourceLine" id="cb6-28" data-line-number="28">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">4</span>%</a>
-<a class="sourceLine" id="cb6-30" data-line-number="30">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">5</span>%</a>
-<a class="sourceLine" id="cb6-32" data-line-number="32">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-33" data-line-number="33"><span class="st">  </span><span class="er">|====</span><span class="st">                                                             </span><span class="er">|</span><span class="st">   </span><span class="dv">6</span>%</a>
-<a class="sourceLine" id="cb6-34" data-line-number="34">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-35" data-line-number="35"><span class="st">  </span><span class="er">|=====</span><span class="st">                                                            </span><span class="er">|</span><span class="st">   </span><span class="dv">7</span>%</a>
-<a class="sourceLine" id="cb6-36" data-line-number="36">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-37" data-line-number="37"><span class="st">  </span><span class="er">|=====</span><span class="st">                                                            </span><span class="er">|</span><span class="st">   </span><span class="dv">8</span>%</a>
-<a class="sourceLine" id="cb6-38" data-line-number="38">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-39" data-line-number="39"><span class="st">  </span><span class="er">|======</span><span class="st">                                                           </span><span class="er">|</span><span class="st">   </span><span class="dv">9</span>%</a>
-<a class="sourceLine" id="cb6-40" data-line-number="40">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-41" data-line-number="41"><span class="st">  </span><span class="er">|======</span><span class="st">                                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">10</span>%</a>
-<a class="sourceLine" id="cb6-42" data-line-number="42">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-43" data-line-number="43"><span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">11</span>%</a>
-<a class="sourceLine" id="cb6-44" data-line-number="44">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-45" data-line-number="45"><span class="st">  </span><span class="er">|========</span><span class="st">                                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">12</span>%</a>
-<a class="sourceLine" id="cb6-46" data-line-number="46">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-47" data-line-number="47"><span class="st">  </span><span class="er">|========</span><span class="st">                                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">13</span>%</a>
-<a class="sourceLine" id="cb6-48" data-line-number="48">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-49" data-line-number="49"><span class="st">  </span><span class="er">|=========</span><span class="st">                                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">13</span>%</a>
-<a class="sourceLine" id="cb6-50" data-line-number="50">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-51" data-line-number="51"><span class="st">  </span><span class="er">|=========</span><span class="st">                                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">14</span>%</a>
-<a class="sourceLine" id="cb6-52" data-line-number="52">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-53" data-line-number="53"><span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">15</span>%</a>
-<a class="sourceLine" id="cb6-54" data-line-number="54">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-55" data-line-number="55"><span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%</a>
-<a class="sourceLine" id="cb6-56" data-line-number="56">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-57" data-line-number="57"><span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%</a>
-<a class="sourceLine" id="cb6-58" data-line-number="58">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-59" data-line-number="59"><span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">17</span>%</a>
-<a class="sourceLine" id="cb6-60" data-line-number="60">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-61" data-line-number="61"><span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">18</span>%</a>
-<a class="sourceLine" id="cb6-62" data-line-number="62">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-63" data-line-number="63"><span class="st">  </span><span class="er">|============</span><span class="st">                                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">18</span>%</a>
-<a class="sourceLine" id="cb6-64" data-line-number="64">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-65" data-line-number="65"><span class="st">  </span><span class="er">|============</span><span class="st">                                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">19</span>%</a>
-<a class="sourceLine" id="cb6-66" data-line-number="66">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-67" data-line-number="67"><span class="st">  </span><span class="er">|=============</span><span class="st">                                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">19</span>%</a>
-<a class="sourceLine" id="cb6-68" data-line-number="68">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-69" data-line-number="69"><span class="st">  </span><span class="er">|=============</span><span class="st">                                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">20</span>%</a>
-<a class="sourceLine" id="cb6-70" data-line-number="70">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-71" data-line-number="71"><span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">21</span>%</a>
-<a class="sourceLine" id="cb6-72" data-line-number="72">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-73" data-line-number="73"><span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">22</span>%</a>
-<a class="sourceLine" id="cb6-74" data-line-number="74">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-75" data-line-number="75"><span class="st">  </span><span class="er">|===============</span><span class="st">                                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">23</span>%</a>
-<a class="sourceLine" id="cb6-76" data-line-number="76">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-77" data-line-number="77"><span class="st">  </span><span class="er">|================</span><span class="st">                                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">24</span>%</a>
-<a class="sourceLine" id="cb6-78" data-line-number="78">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-79" data-line-number="79"><span class="st">  </span><span class="er">|================</span><span class="st">                                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">25</span>%</a>
-<a class="sourceLine" id="cb6-80" data-line-number="80">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-81" data-line-number="81"><span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">26</span>%</a>
-<a class="sourceLine" id="cb6-82" data-line-number="82">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-83" data-line-number="83"><span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">27</span>%</a>
-<a class="sourceLine" id="cb6-84" data-line-number="84">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-85" data-line-number="85"><span class="st">  </span><span class="er">|==================</span><span class="st">                                               </span><span class="er">|</span><span class="st">  </span><span class="dv">27</span>%</a>
-<a class="sourceLine" id="cb6-86" data-line-number="86">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-87" data-line-number="87"><span class="st">  </span><span class="er">|==================</span><span class="st">                                               </span><span class="er">|</span><span class="st">  </span><span class="dv">28</span>%</a>
-<a class="sourceLine" id="cb6-88" data-line-number="88">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-89" data-line-number="89"><span class="st">  </span><span class="er">|===================</span><span class="st">                                              </span><span class="er">|</span><span class="st">  </span><span class="dv">29</span>%</a>
-<a class="sourceLine" id="cb6-90" data-line-number="90">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-91" data-line-number="91"><span class="st">  </span><span class="er">|===================</span><span class="st">                                              </span><span class="er">|</span><span class="st">  </span><span class="dv">30</span>%</a>
-<a class="sourceLine" id="cb6-92" data-line-number="92">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-93" data-line-number="93"><span class="st">  </span><span class="er">|====================</span><span class="st">                                             </span><span class="er">|</span><span class="st">  </span><span class="dv">30</span>%</a>
-<a class="sourceLine" id="cb6-94" data-line-number="94">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-95" data-line-number="95"><span class="st">  </span><span class="er">|====================</span><span class="st">                                             </span><span class="er">|</span><span class="st">  </span><span class="dv">31</span>%</a>
-<a class="sourceLine" id="cb6-96" data-line-number="96">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-97" data-line-number="97"><span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">32</span>%</a>
-<a class="sourceLine" id="cb6-98" data-line-number="98">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-99" data-line-number="99"><span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">33</span>%</a>
-<a class="sourceLine" id="cb6-100" data-line-number="100">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-101" data-line-number="101"><span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">33</span>%</a>
-<a class="sourceLine" id="cb6-102" data-line-number="102">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-103" data-line-number="103"><span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">34</span>%</a>
-<a class="sourceLine" id="cb6-104" data-line-number="104">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-105" data-line-number="105"><span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">35</span>%</a>
-<a class="sourceLine" id="cb6-106" data-line-number="106">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-107" data-line-number="107"><span class="st">  </span><span class="er">|=======================</span><span class="st">                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">35</span>%</a>
-<a class="sourceLine" id="cb6-108" data-line-number="108">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-109" data-line-number="109"><span class="st">  </span><span class="er">|=======================</span><span class="st">                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">36</span>%</a>
-<a class="sourceLine" id="cb6-110" data-line-number="110">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-111" data-line-number="111"><span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">36</span>%</a>
-<a class="sourceLine" id="cb6-112" data-line-number="112">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-113" data-line-number="113"><span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">37</span>%</a>
-<a class="sourceLine" id="cb6-114" data-line-number="114">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-115" data-line-number="115"><span class="st">  </span><span class="er">|=========================</span><span class="st">                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">38</span>%</a>
-<a class="sourceLine" id="cb6-116" data-line-number="116">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-117" data-line-number="117"><span class="st">  </span><span class="er">|=========================</span><span class="st">                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">39</span>%</a>
-<a class="sourceLine" id="cb6-118" data-line-number="118">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-119" data-line-number="119"><span class="st">  </span><span class="er">|==========================</span><span class="st">                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">40</span>%</a>
-<a class="sourceLine" id="cb6-120" data-line-number="120">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-121" data-line-number="121"><span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">41</span>%</a>
-<a class="sourceLine" id="cb6-122" data-line-number="122">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-123" data-line-number="123"><span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">42</span>%</a>
-<a class="sourceLine" id="cb6-124" data-line-number="124">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-125" data-line-number="125"><span class="st">  </span><span class="er">|============================</span><span class="st">                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">43</span>%</a>
-<a class="sourceLine" id="cb6-126" data-line-number="126">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-127" data-line-number="127"><span class="st">  </span><span class="er">|=============================</span><span class="st">                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">44</span>%</a>
-<a class="sourceLine" id="cb6-128" data-line-number="128">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-129" data-line-number="129"><span class="st">  </span><span class="er">|=============================</span><span class="st">                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">45</span>%</a>
-<a class="sourceLine" id="cb6-130" data-line-number="130">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-131" data-line-number="131"><span class="st">  </span><span class="er">|==============================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">46</span>%</a>
-<a class="sourceLine" id="cb6-132" data-line-number="132">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-133" data-line-number="133"><span class="st">  </span><span class="er">|==============================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%</a>
-<a class="sourceLine" id="cb6-134" data-line-number="134">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-135" data-line-number="135"><span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%</a>
-<a class="sourceLine" id="cb6-136" data-line-number="136">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-137" data-line-number="137"><span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">48</span>%</a>
-<a class="sourceLine" id="cb6-138" data-line-number="138">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-139" data-line-number="139"><span class="st">  </span><span class="er">|================================</span><span class="st">                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">49</span>%</a>
-<a class="sourceLine" id="cb6-140" data-line-number="140">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-141" data-line-number="141"><span class="st">  </span><span class="er">|================================</span><span class="st">                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%</a>
-<a class="sourceLine" id="cb6-142" data-line-number="142">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-143" data-line-number="143"><span class="st">  </span><span class="er">|=================================</span><span class="st">                                </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%</a>
-<a class="sourceLine" id="cb6-144" data-line-number="144">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-145" data-line-number="145"><span class="st">  </span><span class="er">|=================================</span><span class="st">                                </span><span class="er">|</span><span class="st">  </span><span class="dv">51</span>%</a>
-<a class="sourceLine" id="cb6-146" data-line-number="146">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-147" data-line-number="147"><span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">52</span>%</a>
-<a class="sourceLine" id="cb6-148" data-line-number="148">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-149" data-line-number="149"><span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%</a>
-<a class="sourceLine" id="cb6-150" data-line-number="150">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-151" data-line-number="151"><span class="st">  </span><span class="er">|===================================</span><span class="st">                              </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%</a>
-<a class="sourceLine" id="cb6-152" data-line-number="152">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-153" data-line-number="153"><span class="st">  </span><span class="er">|===================================</span><span class="st">                              </span><span class="er">|</span><span class="st">  </span><span class="dv">54</span>%</a>
-<a class="sourceLine" id="cb6-154" data-line-number="154">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-155" data-line-number="155"><span class="st">  </span><span class="er">|====================================</span><span class="st">                             </span><span class="er">|</span><span class="st">  </span><span class="dv">55</span>%</a>
-<a class="sourceLine" id="cb6-156" data-line-number="156">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-157" data-line-number="157"><span class="st">  </span><span class="er">|====================================</span><span class="st">                             </span><span class="er">|</span><span class="st">  </span><span class="dv">56</span>%</a>
-<a class="sourceLine" id="cb6-158" data-line-number="158">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-159" data-line-number="159"><span class="st">  </span><span class="er">|=====================================</span><span class="st">                            </span><span class="er">|</span><span class="st">  </span><span class="dv">57</span>%</a>
-<a class="sourceLine" id="cb6-160" data-line-number="160">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-161" data-line-number="161"><span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">58</span>%</a>
-<a class="sourceLine" id="cb6-162" data-line-number="162">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-163" data-line-number="163"><span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">59</span>%</a>
-<a class="sourceLine" id="cb6-164" data-line-number="164">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-165" data-line-number="165"><span class="st">  </span><span class="er">|=======================================</span><span class="st">                          </span><span class="er">|</span><span class="st">  </span><span class="dv">60</span>%</a>
-<a class="sourceLine" id="cb6-166" data-line-number="166">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-167" data-line-number="167"><span class="st">  </span><span class="er">|========================================</span><span class="st">                         </span><span class="er">|</span><span class="st">  </span><span class="dv">61</span>%</a>
-<a class="sourceLine" id="cb6-168" data-line-number="168">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-169" data-line-number="169"><span class="st">  </span><span class="er">|========================================</span><span class="st">                         </span><span class="er">|</span><span class="st">  </span><span class="dv">62</span>%</a>
-<a class="sourceLine" id="cb6-170" data-line-number="170">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-171" data-line-number="171"><span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">63</span>%</a>
-<a class="sourceLine" id="cb6-172" data-line-number="172">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-173" data-line-number="173"><span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">64</span>%</a>
-<a class="sourceLine" id="cb6-174" data-line-number="174">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-175" data-line-number="175"><span class="st">  </span><span class="er">|==========================================</span><span class="st">                       </span><span class="er">|</span><span class="st">  </span><span class="dv">64</span>%</a>
-<a class="sourceLine" id="cb6-176" data-line-number="176">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-177" data-line-number="177"><span class="st">  </span><span class="er">|==========================================</span><span class="st">                       </span><span class="er">|</span><span class="st">  </span><span class="dv">65</span>%</a>
-<a class="sourceLine" id="cb6-178" data-line-number="178">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-179" data-line-number="179"><span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">65</span>%</a>
-<a class="sourceLine" id="cb6-180" data-line-number="180">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-181" data-line-number="181"><span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">66</span>%</a>
-<a class="sourceLine" id="cb6-182" data-line-number="182">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-183" data-line-number="183"><span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">67</span>%</a>
-<a class="sourceLine" id="cb6-184" data-line-number="184">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-185" data-line-number="185"><span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">67</span>%</a>
-<a class="sourceLine" id="cb6-186" data-line-number="186">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-187" data-line-number="187"><span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">68</span>%</a>
-<a class="sourceLine" id="cb6-188" data-line-number="188">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-189" data-line-number="189"><span class="st">  </span><span class="er">|=============================================</span><span class="st">                    </span><span class="er">|</span><span class="st">  </span><span class="dv">69</span>%</a>
-<a class="sourceLine" id="cb6-190" data-line-number="190">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-191" data-line-number="191"><span class="st">  </span><span class="er">|=============================================</span><span class="st">                    </span><span class="er">|</span><span class="st">  </span><span class="dv">70</span>%</a>
-<a class="sourceLine" id="cb6-192" data-line-number="192">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-193" data-line-number="193"><span class="st">  </span><span class="er">|==============================================</span><span class="st">                   </span><span class="er">|</span><span class="st">  </span><span class="dv">70</span>%</a>
-<a class="sourceLine" id="cb6-194" data-line-number="194">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-195" data-line-number="195"><span class="st">  </span><span class="er">|==============================================</span><span class="st">                   </span><span class="er">|</span><span class="st">  </span><span class="dv">71</span>%</a>
-<a class="sourceLine" id="cb6-196" data-line-number="196">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-197" data-line-number="197"><span class="st">  </span><span class="er">|===============================================</span><span class="st">                  </span><span class="er">|</span><span class="st">  </span><span class="dv">72</span>%</a>
-<a class="sourceLine" id="cb6-198" data-line-number="198">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-199" data-line-number="199"><span class="st">  </span><span class="er">|===============================================</span><span class="st">                  </span><span class="er">|</span><span class="st">  </span><span class="dv">73</span>%</a>
-<a class="sourceLine" id="cb6-200" data-line-number="200">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-201" data-line-number="201"><span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">73</span>%</a>
-<a class="sourceLine" id="cb6-202" data-line-number="202">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-203" data-line-number="203"><span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">74</span>%</a>
-<a class="sourceLine" id="cb6-204" data-line-number="204">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-205" data-line-number="205"><span class="st">  </span><span class="er">|=================================================</span><span class="st">                </span><span class="er">|</span><span class="st">  </span><span class="dv">75</span>%</a>
-<a class="sourceLine" id="cb6-206" data-line-number="206">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-207" data-line-number="207"><span class="st">  </span><span class="er">|=================================================</span><span class="st">                </span><span class="er">|</span><span class="st">  </span><span class="dv">76</span>%</a>
-<a class="sourceLine" id="cb6-208" data-line-number="208">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-209" data-line-number="209"><span class="st">  </span><span class="er">|==================================================</span><span class="st">               </span><span class="er">|</span><span class="st">  </span><span class="dv">77</span>%</a>
-<a class="sourceLine" id="cb6-210" data-line-number="210">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-211" data-line-number="211"><span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">78</span>%</a>
-<a class="sourceLine" id="cb6-212" data-line-number="212">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-213" data-line-number="213"><span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">79</span>%</a>
-<a class="sourceLine" id="cb6-214" data-line-number="214">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-215" data-line-number="215"><span class="st">  </span><span class="er">|====================================================</span><span class="st">             </span><span class="er">|</span><span class="st">  </span><span class="dv">80</span>%</a>
-<a class="sourceLine" id="cb6-216" data-line-number="216">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-217" data-line-number="217"><span class="st">  </span><span class="er">|====================================================</span><span class="st">             </span><span class="er">|</span><span class="st">  </span><span class="dv">81</span>%</a>
-<a class="sourceLine" id="cb6-218" data-line-number="218">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-219" data-line-number="219"><span class="st">  </span><span class="er">|=====================================================</span><span class="st">            </span><span class="er">|</span><span class="st">  </span><span class="dv">81</span>%</a>
-<a class="sourceLine" id="cb6-220" data-line-number="220">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-221" data-line-number="221"><span class="st">  </span><span class="er">|=====================================================</span><span class="st">            </span><span class="er">|</span><span class="st">  </span><span class="dv">82</span>%</a>
-<a class="sourceLine" id="cb6-222" data-line-number="222">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-223" data-line-number="223"><span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">82</span>%</a>
-<a class="sourceLine" id="cb6-224" data-line-number="224">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-225" data-line-number="225"><span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">83</span>%</a>
-<a class="sourceLine" id="cb6-226" data-line-number="226">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-227" data-line-number="227"><span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%</a>
-<a class="sourceLine" id="cb6-228" data-line-number="228">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-229" data-line-number="229"><span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%</a>
-<a class="sourceLine" id="cb6-230" data-line-number="230">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-231" data-line-number="231"><span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">85</span>%</a>
-<a class="sourceLine" id="cb6-232" data-line-number="232">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-233" data-line-number="233"><span class="st">  </span><span class="er">|========================================================</span><span class="st">         </span><span class="er">|</span><span class="st">  </span><span class="dv">86</span>%</a>
-<a class="sourceLine" id="cb6-234" data-line-number="234">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-235" data-line-number="235"><span class="st">  </span><span class="er">|========================================================</span><span class="st">         </span><span class="er">|</span><span class="st">  </span><span class="dv">87</span>%</a>
-<a class="sourceLine" id="cb6-236" data-line-number="236">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-237" data-line-number="237"><span class="st">  </span><span class="er">|=========================================================</span><span class="st">        </span><span class="er">|</span><span class="st">  </span><span class="dv">87</span>%</a>
-<a class="sourceLine" id="cb6-238" data-line-number="238">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-239" data-line-number="239"><span class="st">  </span><span class="er">|=========================================================</span><span class="st">        </span><span class="er">|</span><span class="st">  </span><span class="dv">88</span>%</a>
-<a class="sourceLine" id="cb6-240" data-line-number="240">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-241" data-line-number="241"><span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">89</span>%</a>
-<a class="sourceLine" id="cb6-242" data-line-number="242">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-243" data-line-number="243"><span class="st">  </span><span class="er">|===========================================================</span><span class="st">      </span><span class="er">|</span><span class="st">  </span><span class="dv">90</span>%</a>
-<a class="sourceLine" id="cb6-244" data-line-number="244">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-245" data-line-number="245"><span class="st">  </span><span class="er">|===========================================================</span><span class="st">      </span><span class="er">|</span><span class="st">  </span><span class="dv">91</span>%</a>
-<a class="sourceLine" id="cb6-246" data-line-number="246">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-247" data-line-number="247"><span class="st">  </span><span class="er">|============================================================</span><span class="st">     </span><span class="er">|</span><span class="st">  </span><span class="dv">92</span>%</a>
-<a class="sourceLine" id="cb6-248" data-line-number="248">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-249" data-line-number="249"><span class="st">  </span><span class="er">|============================================================</span><span class="st">     </span><span class="er">|</span><span class="st">  </span><span class="dv">93</span>%</a>
-<a class="sourceLine" id="cb6-250" data-line-number="250">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-251" data-line-number="251"><span class="st">  </span><span class="er">|=============================================================</span><span class="st">    </span><span class="er">|</span><span class="st">  </span><span class="dv">94</span>%</a>
-<a class="sourceLine" id="cb6-252" data-line-number="252">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-253" data-line-number="253"><span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">95</span>%</a>
-<a class="sourceLine" id="cb6-254" data-line-number="254">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-255" data-line-number="255"><span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">96</span>%</a>
-<a class="sourceLine" id="cb6-256" data-line-number="256">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-257" data-line-number="257"><span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">96</span>%</a>
-<a class="sourceLine" id="cb6-258" data-line-number="258">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-259" data-line-number="259"><span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">97</span>%</a>
-<a class="sourceLine" id="cb6-260" data-line-number="260">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-261" data-line-number="261"><span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">98</span>%</a>
-<a class="sourceLine" id="cb6-262" data-line-number="262">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-263" data-line-number="263"><span class="st">  </span><span class="er">|================================================================</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">98</span>%</a>
-<a class="sourceLine" id="cb6-264" data-line-number="264">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-265" data-line-number="265"><span class="st">  </span><span class="er">|================================================================</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">99</span>%</a>
-<a class="sourceLine" id="cb6-266" data-line-number="266">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-267" data-line-number="267"><span class="st">  </span><span class="er">|=================================================================|</span><span class="st">  </span><span class="dv">99</span>%</a>
-<a class="sourceLine" id="cb6-268" data-line-number="268">  <span class="op">|</span><span class="st">                                                                       </span></a>
-<a class="sourceLine" id="cb6-269" data-line-number="269"><span class="st">  </span><span class="er">|=================================================================|</span><span class="st"> </span><span class="dv">100</span>%</a>
-<a class="sourceLine" id="cb6-270" data-line-number="270"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb6-271" data-line-number="271"><span class="co">#&gt;  Computing Hierarchical Clustering from the distance</span></a>
-<a class="sourceLine" id="cb6-272" data-line-number="272"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
-<a class="sourceLine" id="cb6-273" data-line-number="273"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-274" data-line-number="274"><span class="co">#&gt;   Clustering method ward </span></a>
-<a class="sourceLine" id="cb6-275" data-line-number="275"><span class="co">#&gt;       Split method cutreeHybrid </span></a>
-<a class="sourceLine" id="cb6-276" data-line-number="276"><span class="co">#&gt; Minimum group size 3 </span></a>
-<a class="sourceLine" id="cb6-277" data-line-number="277"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-278" data-line-number="278"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-279" data-line-number="279"><span class="co">#&gt; Clusters : K = 3 </span></a>
-<a class="sourceLine" id="cb6-280" data-line-number="280"><span class="co">#&gt; Cluster size (n)  </span></a>
-<a class="sourceLine" id="cb6-281" data-line-number="281"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
-<a class="sourceLine" id="cb6-282" data-line-number="282"><span class="co">#&gt;   cluster     n</span></a>
-<a class="sourceLine" id="cb6-283" data-line-number="283"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb6-284" data-line-number="284"><span class="co">#&gt; 1 C1          8</span></a>
-<a class="sourceLine" id="cb6-285" data-line-number="285"><span class="co">#&gt; 2 C2          7</span></a>
-<a class="sourceLine" id="cb6-286" data-line-number="286"><span class="co">#&gt; 3 C3          4</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt;  Computing Hierarchical Clustering from the distance</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt;   Clustering method ward </span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt;       Split method cutreeHybrid </span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; Minimum group size 3 </span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; Clusters : K = 3 </span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; Cluster size (n)  </span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt;   cluster     n</span></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="co">#&gt; 1 C1          8</span></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="co">#&gt; 2 C2          7</span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="co">#&gt; 3 C3          4</span></a></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/plot_clusters.html">plot_clusters</a></span>(CROSS_CRC_ADENOCARCINOMA_REVOLVER, <span class="dt">cutoff_trajectories =</span> <span class="dv">1</span>, <span class="dt">cutoff_drivers =</span> <span class="dv">0</span>)</a></code></pre></div>
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-7-1.png" width="864"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/plot_drivers_graph.html">plot_drivers_graph</a></span>(CROSS_CRC_ADENOCARCINOMA_REVOLVER)</a>

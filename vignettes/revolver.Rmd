@@ -23,6 +23,9 @@ The repeatability of evolution is measured with a new method that extracts evolu
 
 The correlation across patients is measured extracting evolutionary trajectories from the *phylogenetic ordering* of driver alterations detected from the patients' trees. Drivers must be annotated in the input genome sequencing data, and shall occur across multiple patients.
 
+### Analysis pipeline
+
+
 A `REVOLVER` analysis follows the following steps (the main function to implement the step is reported):
 
 1. create a `REVOLVER` cohort (`revolver_cohort`);
