@@ -34,13 +34,13 @@ Nat Ecol Evol. 2018 2(10). [PMID 30177804](https://www.ncbi.nlm.nih.gov/pubmed/3
 ### Building the cohort
 
 ```{r, echo = TRUE, warning=FALSE}
-load(file = "~/Downloads/CROSS_CRC_ADENOCARCINOMA.RData")
+data(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018, package = evoverse.datasets)
 
-print(CROSS_CRC_ADENOCARCINOMA)
+print(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018)
 
 # Constructor
 CROSS_CRC_ADENOCARCINOMA_REVOLVER = revolver_cohort(
-  CROSS_CRC_ADENOCARCINOMA, 
+  CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018, 
   MIN.CLUSTER.SIZE = 0, 
   annotation = "Colorectal adenocarcinomas (Cross et al, PMID 30177804)")
 ```
