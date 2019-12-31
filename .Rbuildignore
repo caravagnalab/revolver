@@ -3,6 +3,8 @@
 ^.gitignore$
 ^.travis.yml$
 ^.git/.*$
+^old/.*$
+^data_old/.*$
 
 # Vignette
 inst/doc
@@ -12,3 +14,5 @@ inst/doc
 /cfg.R
 ^.*\.Rproj$
 ^\.Rproj\.user$
+..Rcheck
+

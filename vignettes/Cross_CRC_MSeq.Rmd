@@ -1,0 +1,214 @@
+---
+title: "Analysis of colorectal adenocarcinomas"
+author: "Giulio Caravagna"
+institute: "Institute for Cancer Research"
+email: "giulio.caravagna@ed.ac.uk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analysis of colorectal adenocarcinomas}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, warning=F}
+library(revolver)
+library(evoverse.datasets)
+require(tidyverse)
+```
+### Data
+
+Cross et al. *The evolutionary landscape of colorectal tumorigenesis.*
+Nat Ecol Evol. 2018 2(10). [PMID 30177804](https://www.ncbi.nlm.nih.gov/pubmed/30177804).
+
+* `n=19` adenomas (unmatched);
+* multi-region sequencing with binary data;
+* annotated driver events from Cross et al.;
+
+
+### Building the cohort
+
+```{r, echo = TRUE, warning=FALSE}
+data(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018)
+
+print(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018)
+
+# Constructor
+CROSS_CRC_ADENOCARCINOMA_REVOLVER = revolver_cohort(
+  CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018, 
+  MIN.CLUSTER.SIZE = 0, 
+  annotation = "Colorectal adenocarcinomas (Cross et al, PMID 30177804)")
+```
+
+We can check the cohort, and flag put drivers that are not recurrent.
+
+```{r, echo = T}
+# Diagnostic
+revolver_check_cohort(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+
+# Driver events that occur in 1 patient
+non_recurrent = Stats_drivers(CROSS_CRC_ADENOCARCINOMA_REVOLVER) %>% 
+  filter(N_tot == 1) %>% 
+  pull(variantID)
+
+# Remove drivers
+CROSS_CRC_ADENOCARCINOMA_REVOLVER = remove_drivers(CROSS_CRC_ADENOCARCINOMA_REVOLVER, non_recurrent)
+
+```
+
+### Constructing mutation trees
+
+`revolver` uses the [mtree](https://caravagn.github.io/ctree/) package to implement *mutation trees* from binary data.
+
+
+```{r, message=FALSE, echo=T}
+# Compute the trees
+CROSS_CRC_ADENOCARCINOMA_REVOLVER = compute_mutation_trees(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+
+### Fitting models with REVOLVER
+
+Function `revolver_fit` implements the 2-steps REVOLVER algorithm to fit the data.
+
+We use the following parameters:
+
+* ``initial.solution = NA``, to sample random initial solutions for every run of EM;
+* ``n = 3``, to repeat the fit 3 times, and retain the one with lower median goodness-of-fit penalty.
+* ``parallel = FALSE``, to run serially the fits;
+
+
+```{r, message=FALSE}
+CROSS_CRC_ADENOCARCINOMA_REVOLVER = revolver_fit(
+  CROSS_CRC_ADENOCARCINOMA_REVOLVER, 
+  parallel = F, 
+  n = 3, 
+  initial.solution = NA)
+```
+
+### Computing REVOLVER hierarchical clusters
+
+```{r, message=FALSE}
+CROSS_CRC_ADENOCARCINOMA_REVOLVER = revolver_cluster(
+  CROSS_CRC_ADENOCARCINOMA_REVOLVER, 
+  split.method = 'cutreeHybrid',
+  min.group.size = 3)
+```
+
+```{r, message=FALSE, fig.height=11, fig.width=9}
+plot_clusters(CROSS_CRC_ADENOCARCINOMA_REVOLVER, cutoff_trajectories = 1, cutoff_drivers = 0)
+```
+
+```{r, message=FALSE, fig.height=9, fig.width=9}
+plot_drivers_graph(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+
+```{r, message=FALSE, fig.height=3, fig.width=6}
+plot_dendrogram(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+```{r, message=FALSE, fig.height=3, fig.width=3}
+plot_DET_index(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+
+```{r, message=FALSE, fig.height=3, fig.width=4}
+plot(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+
+```{r, message=FALSE, fig.height=4, fig.width=3}
+plot_drivers_clonality(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+
+```{r, message=FALSE, fig.height=5, fig.width=10}
+plot_drivers_occurrence(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+```
+
+```{r, message=FALSE, fig.height=6, fig.width=11}
+plot_patient_trees(CROSS_CRC_ADENOCARCINOMA_REVOLVER, CROSS_CRC_ADENOCARCINOMA_REVOLVER$patients[3])
+```
+<!-- and we can plot the outputs in a nice heatmap format with annotated features. In this case we want all features to be annotated, and thus we set `cutoff.features_annotation` to 1. -->
+
+
+<!-- ```{r, eval= TRUE, message = FALSE, warning = FALSE, fig.height=8, fig.width=8} -->
+<!-- revolver_plt_rclusters(fit,  -->
+<!--                        cutoff.features_annotation = 1) -->
+<!-- ``` -->
+
+
+<!-- ## A One-step analysis -->
+
+<!-- The breakdown of the above analysis is quite clear. So, we make available to the user a unique function ``revolver_analyzer`` that wraps all the above steps, and produce some further output not discussed in this notebook. The function carries out clustering also without the germline node, as we found that usefull in exploratory data analysis. -->
+
+<!-- The function ``revolver_analyzer`` contains parameters that will be forwarded to the appropriate function calls. It should be evident at this point of the notebook what those parameters stand for. -->
+
+<!-- ```{r, eval= FALSE} -->
+<!-- revolver_analyzer( -->
+<!--   cohort,  -->
+<!--   type = 'binary', # type of data   -->
+<!--   cohort.name = 'CRC-Cross', -->
+<!--   folder.output = 'Drivers_all_standard_parameters',  -->
+<!--   do.plots = TRUE, -->
+<!--   options.trees = list( -->
+<!--     sspace.cutoff = 10000,  -->
+<!--     n.sampling = 5000,  -->
+<!--     store.max = 200,  -->
+<!--     overwrite = FALSE), -->
+<!--   options.fit = list( -->
+<!--     initial.solution = NA,  -->
+<!--     transitive.orderings = FALSE,  -->
+<!--     restarts = 10), -->
+<!--   options.clustering.withGL = list( -->
+<!--     transitive.closure = FALSE,  -->
+<!--     min.group.size = 3,  -->
+<!--     hc.method = 'ward',  -->
+<!--     cutoff.features_annotation = 1,  -->
+<!--     split.method = 'cutreeHybrid'), -->
+<!--   options.clustering.withoutGL = list( -->
+<!--     transitive.closure = FALSE,  -->
+<!--     min.group.size = 3,  -->
+<!--     hc.method = 'ward',  -->
+<!--     cutoff.features_annotation = 1,  -->
+<!--     split.method = 'cutreeDynamic') -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- ## Assessing model confidence -->
+
+<!-- The confidence of the models can be assessed with a resampling method that exploits the jackknife. The procedure is parallle, and performs ``N`` resampling steps where, at each iteration, it discards a randomly chosen subset of patients (e.g., some % of ``n``, the cohort size), and compute: -->
+
+<!-- * the probability that two patients are clustered together; -->
+<!-- * the probability that an edge is detected; -->
+<!-- * the number of models that have an edge. -->
+
+<!-- To compute these statistics the fit and clustering are re-computed for each resample; this should be done with  the same parameters used in the analysis of the full cohort. Here for example we show a computation with ``N = 50`` resamples and a leave out factor ``p=0.1`` (which means 2 patients per iteration). -->
+
+
+<!-- ```{r, eval = TRUE} -->
+<!-- fit =  revolver_jackknife(fit, resamples = 50, leave.out = 0.1) -->
+<!-- ``` -->
+
+
+<!-- Then, we can plot the jackknife statistics; we begin with the co-clustering probability (stability measure). -->
+<!-- ```{r, eval = TRUE, fig.height=8, fig.width=8} -->
+<!-- revolver_plt_jackknife_coclust(fit, cutoff.annotate.numbers = .6) -->
+<!-- ``` -->
+
+<!-- As well as the overall boxplot that gives us a visual information on the median stability -->
+<!-- ```{r, eval = TRUE} -->
+<!-- revolver_plt_jackknife_coclust_bplot(fit) -->
+<!-- ``` -->
+
+<!-- Then we look into the edges that constitute the evolutionary trajectories, and plot the edge-detection probability across resamples. -->
+<!-- ```{r, eval = TRUE, fig.height=8, fig.width=8} -->
+<!-- revolver_plt_jackknife_edge_prb(fit) -->
+<!-- ``` -->
+
+<!-- And we conclude with the average number of patients harbouring an edge -->
+
+<!-- ```{r, eval = TRUE} -->
+<!-- revolver_plt_jackknife_edge_counts(fit) -->
+<!-- ``` -->
