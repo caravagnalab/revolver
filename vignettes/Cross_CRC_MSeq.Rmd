@@ -35,7 +35,7 @@ Nat Ecol Evol. 2018 2(10). [PMID 30177804](https://www.ncbi.nlm.nih.gov/pubmed/3
 ### Building the cohort
 
 ```{r, echo = TRUE, warning=FALSE}
-data(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018)
+data(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018, packages = 'evoverse.datasets')
 
 print(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018)
 
