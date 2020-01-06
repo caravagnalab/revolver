@@ -251,15 +251,15 @@ R1:0;R2:1;R3:1</code></pre>
 <p>In this case, to make it faster we only use 3 patients from the released cohort.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(tidyverse)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Loading required package: tidyverse</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; ── Attaching packages ────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; ✔ ggplot2 3.2.1     ✔ purrr   0.3.3</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; ✔ tibble  2.1.3     ✔ dplyr   0.8.3</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; ✔ tidyr   1.0.0     ✔ stringr 1.4.0</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; ✔ readr   1.3.1     ✔ forcats 0.4.0</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; ── Conflicts ───────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; ✖ ggplot2::%+%()  masks crayon::%+%()</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; ── Attaching packages ─────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; ✓ ggplot2 3.2.1     ✓ purrr   0.3.3</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; ✓ tibble  2.1.3     ✓ dplyr   0.8.3</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; ✓ tidyr   1.0.0     ✓ stringr 1.4.0</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; ✓ readr   1.3.1     ✓ forcats 0.4.0</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; ── Conflicts ────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; x ggplot2::%+%()  masks crayon::%+%()</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; x dplyr::filter() masks stats::filter()</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span></a>
 <a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(revolver)</a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; Loading required package: revolver</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; Warning: replacing previous import 'igraph::%s%' by 'matrixcalc::%s%' when</span></a>

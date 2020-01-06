@@ -137,7 +137,8 @@
 <a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt;    WWW :  https://caravagn.github.io/revolver/ </span></a>
 <a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt;  &gt; REVOLVER is part of the "evoverse" [https://bit.ly/2orn94e] - a collection of packages to implement Cancer Evolution analyses from cancer sequencing data.</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(tidyverse)</a></code></pre></div>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(evoverse.datasets)</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(tidyverse)</a></code></pre></div>
 <div id="data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h3>
@@ -152,9 +153,9 @@
 <div id="building-the-cohort" class="section level3">
 <h3 class="hasAnchor">
 <a href="#building-the-cohort" class="anchor"></a>Building the cohort</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="dt">file =</span> <span class="st">"~/Downloads/CROSS_CRC_ADENOCARCINOMA.RData"</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_<span class="dv">2018</span>, <span class="dt">packages =</span> <span class="st">'evoverse.datasets'</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(CROSS_CRC_ADENOCARCINOMA)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(CROSS_CRC_ADENOCARCINOMA_NATECOEVO_<span class="dv">2018</span>)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; # A tibble: 63 x 7</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;    patientID variantID CCF               is.clonal is.driver Misc   cluster</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;             &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;  &lt;chr&gt;  </span></a>
@@ -172,7 +173,7 @@
 <a class="sourceLine" id="cb2-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co"># Constructor</span></a>
 <a class="sourceLine" id="cb2-20" data-line-number="20">CROSS_CRC_ADENOCARCINOMA_REVOLVER =<span class="st"> </span><span class="kw"><a href="../reference/revolver_cohort.html">revolver_cohort</a></span>(</a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">  CROSS_CRC_ADENOCARCINOMA, </a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">  CROSS_CRC_ADENOCARCINOMA_NATECOEVO_<span class="dv">2018</span>, </a>
 <a class="sourceLine" id="cb2-22" data-line-number="22">  <span class="dt">MIN.CLUSTER.SIZE =</span> <span class="dv">0</span>, </a>
 <a class="sourceLine" id="cb2-23" data-line-number="23">  <span class="dt">annotation =</span> <span class="st">"Colorectal adenocarcinomas (Cross et al, PMID 30177804)"</span>)</a>
 <a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt;  [ REVOLVER ~ Cohort constructor ] </span></a>

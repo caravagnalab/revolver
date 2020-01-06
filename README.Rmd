@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![](https://img.shields.io/badge/Part%20of-evoverse-blue.svg)](https://caravagn.github.io/evoverse)
 <!-- badges: end -->
 
-# revolver <a href='caravagn.github.io/REVOLVER'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# revolver <a href='caravagn.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 The `revolver` package implements the statistical model described in [Caravagna et al; PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine trajectories of repeated evolution from multi-region sequencing data of human cancers. 
 

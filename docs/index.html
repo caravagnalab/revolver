@@ -17,13 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="REVOLVER - Repeated Evolution in Cancer">
-<meta property="og:description" content="REVOLVER is a package that implements a statistical model to determine trajectories of
-  repeated evolution from multi-region sequencing data of human cancers. The package implements functions
-  to process data from large cohorts, and determine different types of phylogenetic trees from the input
-  data of each sequenced patients. The package provides also several functions to plot the data, and
-  determine clusters of tumours that share repeated trajectories; this provides a method to
-  stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both
-  between and within patients.">
+<meta property="og:description" content="The revolver package  implements a statistical model to determine repeated evolutionary trajectories of cancer progressio from multi-region sequencing data of human cancers. The package implements functions to load, maninpulate ad plot data from large cohorts, computing different types of phylogenetic trees. The methods can be used to determine clusters of tumours that share repeated trajectories, providing a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.">
 <meta property="og:image" content="caravagn.github.io/revolver/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -113,15 +107,16 @@
 
 <div id="revolver" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#revolver" class="anchor"></a>revolver <a href="caravagn.github.io/REVOLVER"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a href="#revolver" class="anchor"></a>revolver <a href="caravagn.github.io/revolver"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
-<p>Thee <code>REVOLVER</code> package implements the statistical model described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30171232">Caravagna et al; PMID: 30171232</a> to determine trajectories of repeated evolution from multi-region sequencing data of human cancers.</p>
+<p>The <code>revolver</code> package implements the statistical model described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30171232">Caravagna et al; PMID: 30171232</a> to determine trajectories of repeated evolution from multi-region sequencing data of human cancers.</p>
 <p>The package implements functions to process data from large cohorts, and determine different types of phylogenetic trees from the input data of each sequenced patients. The package provides also several functions to plot the data, and determine clusters of tumours that share repeated trajectories; this provides a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.</p>
-<p><code>REVOLVER</code> is part of the <code>evoverse</code>, a package that gathers multiple R packages to implement Cancer Evolution analyses; see more <a href="https://caravagn.github.io/evoverse">about evoverse</a>.</p>
+<p><code>revolver</code> is part of the <code>evoverse</code>, a package that gathers multiple R packages to implement Cancer Evolution analyses; see more <a href="https://caravagn.github.io/evoverse">about evoverse</a>.</p>
 <div id="citation" class="section level4">
 <h4 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h4>
-<p>If you use <code>REVOLVER</code>, please cite:</p>
+<p><a href="https://doi.org/10.1038/s41592-018-0108-x"><img src="https://img.shields.io/badge/doi-10.1038/s41592--018--0108--x-red.svg"></a></p>
+<p>If you use <code>revolver</code>, please cite:</p>
 <ul>
 <li>G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A. Graham, G. Sanguinetti, A. Sottoriva. <em>Detecting repeated cancer evolution from multi-region tumor sequencing data.</em> Nature Methods 15, 707–714 (2018).</li>
 </ul>
@@ -129,32 +124,22 @@
 <div id="help-and-support" class="section level4">
 <h4 class="hasAnchor">
 <a href="#help-and-support" class="anchor"></a>Help and support</h4>
-<p><code>REVOLVER</code> has its own webpage at <a href="https://caravagn.github.io/revolver/">GitHub pages</a>.</p>
+<p><a href="https://caravagn.github.io/revolver"><img src="https://img.shields.io/badge/GitHub%20Pages-https://caravagn.github.io/revolver/-yellow.svg"></a></p>
 <hr>
 </div>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<p>You can install the released version of <code>REVOLVER</code> from <a href="https://github.com/">GitHub</a> with:</p>
+<p>You can install the released version of <code>revolver</code> from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"caravagn/revolver"</span>)</a></code></pre></div>
-<p><strong>Important news.</strong> Since October 2019 this master branch represents a de-novo implementation of the <code>REVOLVER</code> method. The new software follows the <a href="https://www.tidyverse.org/">tidy paradigm</a>, and provides a much more clear interface to manipulate your data, plot it and analyse it. A number of <a href="https://caravagn.github.io/revolver/reference/index.html">new functions</a> are now documented and many old functions have been removed. The previous package version is mirrored in the <a href="https://github.com/caravagn/revolver/tree/pre_tibbles">pre_tibbles branch</a> branch, which you can still install.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"caravagn/revolver"</span>,  <span class="dt">repo =</span> <span class="st">'pre_tibbles'</span>)</a></code></pre></div>
+<p><strong>New version.</strong> v0.3 is a fresh <a href="https://caravagn.github.io/revolver/reference/index.html">implementation</a> of <code>revolver</code> that follows the <a href="https://www.tidyverse.org/">tidy paradigm</a>. The new implementation provides a clean interface to query and plot data; the previous package version is <a href="https://github.com/caravagn/revolver/tree/pre_tibbles">mirrored, but no longer maintained.</a></p>
 <hr>
 <div id="copyright-and-contacts" class="section level4">
 <h4 class="hasAnchor">
 <a href="#copyright-and-contacts" class="anchor"></a>Copyright and contacts</h4>
 <p>Giulio Caravagna, PhD. <em>Institute of Cancer Research, London, UK</em>.</p>
-<ul>
-<li>Personal webpage: <a href="https://sites.google.com/site/giuliocaravagna/">https://bit.ly/2kc9E6Y</a>,</li>
-<li>Email address: <a href="mailto:giulio.caravagna@icr.ac.uk" class="email">giulio.caravagna@icr.ac.uk</a> and <a href="mailto:gcaravagn@gmail.com" class="email">gcaravagn@gmail.com</a>
-</li>
-<li>Twitter feed: <a href="https://twitter.com/gcaravagna">@gcaravagna</a>
-</li>
-<li>GitHub space: <a href="https://github.com/caravagn">caravagn</a>
-</li>
-</ul>
+<p><a href="mailto:gcaravagn@gmail.com"><img src="https://img.shields.io/badge/Email-gcaravagn@gmail.com-seagreen.svg"></a> <a href="https://github.com/caravagn"><img src="https://img.shields.io/badge/Github-caravagn-seagreen.svg"></a> <a href="https://twitter.com/gcaravagna"><img src="https://img.shields.io/badge/Twitter-@gcaravagna-steelblue.svg"></a> <a href="https://sites.google.com/site/giuliocaravagna/"><img src="https://img.shields.io/badge/Personal%20webpage-https://bit.ly/2kc9E6Y-red.svg"></a></p>
 </div>
 </div>
 </div>
@@ -191,6 +176,7 @@
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/caravagn/revolver"><img src="https://travis-ci.org/caravagn/revolver.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://caravagn.github.io/evoverse"><img src="https://img.shields.io/badge/Part%20of-evoverse-blue.svg"></a></li>
 </ul>
 </div>
 </div>

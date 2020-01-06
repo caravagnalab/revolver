@@ -1,8 +1,6 @@
 
 <!-- badges: start -->
 
-
-
 [![Travis build
 status](https://travis-ci.org/caravagn/revolver.svg?branch=master)](https://travis-ci.org/caravagn/revolver)
 [![Lifecycle:
@@ -10,7 +8,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 [![](https://img.shields.io/badge/Part%20of-evoverse-blue.svg)](https://caravagn.github.io/evoverse)
 <!-- badges: end -->
 
-# revolver <a href='caravagn.github.io/REVOLVER'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# revolver <a href='caravagn.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 The `revolver` package implements the statistical model described in
 [Caravagna et al;
@@ -65,11 +63,6 @@ paradigm](https://www.tidyverse.org/). The new implementation provides a
 clean interface to query and plot data; the previous package version is
 [mirrored, but no longer
 maintained.](https://github.com/caravagn/revolver/tree/pre_tibbles)
-
-``` r
-# install.packages("devtools")
-devtools::install_github("caravagn/revolver",  repo = 'master')
-```
 
 -----
 
