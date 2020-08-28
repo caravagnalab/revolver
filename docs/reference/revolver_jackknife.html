@@ -174,10 +174,15 @@ package to run in parallel all the re-runs, therefore we suggest to run it on a
 multi-core machine to appreciate a speed up in the computations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revolver_jackknife</span>(<span class='no'>x</span>, <span class='kw'>resamples</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>leave.out</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+    <pre class="usage"><span class='fu'>revolver_jackknife</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>resamples</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+  <span class='kw'>leave.out</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>options.fit</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>initial.solution</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>max.iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>),
-  <span class='kw'>options.clustering</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>min.group.size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>hc.method</span> <span class='kw'>=</span> <span class='st'>"ward"</span>,
-  <span class='kw'>split.method</span> <span class='kw'>=</span> <span class='st'>"cutreeHybrid"</span>), <span class='no'>...</span>)</pre>
+  <span class='kw'>options.clustering</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>min.group.size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>hc.method</span> <span class='kw'>=</span> <span class='st'>"ward"</span>, <span class='kw'>split.method</span> <span class='kw'>=</span>
+    <span class='st'>"cutreeHybrid"</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -212,8 +212,8 @@ any previous result from those analyses is cancelled from the returned object.</
 #&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0026            2            4                4                1
 #&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0028            2            2                2                1
 #&gt; </span><span style='color: #555555;'>10</span><span> CRUK0029            6            4                4                1
-#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='no'>new_cohort</span> <span class='kw'>=</span> <span class='fu'>remove_patients</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>"CRUK0001"</span>)</div><div class='output co'>#&gt; <span class='message'>PASK: driver events that now are found in only one patient, will be now removed ...</span></div><div class='output co'>#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>Removing driver events</span><span> PASK </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   variantID numClonal p_clonal numSubclonal p_subclonal N_tot  p_tot
@@ -235,8 +235,8 @@ any previous result from those analyses is cancelled from the returned object.</
 #&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0026            2            4                4                1
 #&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0028            2            2                2                1
 #&gt; </span><span style='color: #555555;'>10</span><span> CRUK0029            6            4                4                1
-#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>new_cohort</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER - Repeated Evolution in Cancer ] 
+#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>new_cohort</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER - Repeated Evolution in Cancer ] 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Dataset :</span><span> TRACERx NEJM 2017 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Cohort  :</span><span> 98 patients, 449 variants and 78 driver events. </span><span style='color: #000000;background-color: #BBBB00;'>
@@ -263,8 +263,8 @@ any previous result from those analyses is cancelled from the returned object.</
 #&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0026            2            4                4                1
 #&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0028            2            2                2                1
 #&gt; </span><span style='color: #555555;'>10</span><span> CRUK0029            6            4                4                1
-#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='no'>new_cohort</span> <span class='kw'>=</span> <span class='fu'>remove_patients</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"CRUK0002"</span>, <span class='st'>"CRUK00024"</span>))</div><div class='output co'>#&gt; <span class='message'>IKZF1: driver events that now are found in only one patient, will be now removed ...</span></div><div class='output co'>#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>Removing driver events</span><span> IKZF1 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   variantID numClonal p_clonal numSubclonal p_subclonal N_tot  p_tot
@@ -286,8 +286,8 @@ any previous result from those analyses is cancelled from the returned object.</
 #&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0026            2            4                4                1
 #&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0028            2            2                2                1
 #&gt; </span><span style='color: #555555;'>10</span><span> CRUK0029            6            4                4                1
-#&gt; </span><span style='color: #555555;'># … with 45 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>new_cohort</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER - Repeated Evolution in Cancer ] 
+#&gt; </span><span style='color: #555555;'># … with 45 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>new_cohort</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER - Repeated Evolution in Cancer ] 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Dataset :</span><span> TRACERx NEJM 2017 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Cohort  :</span><span> 98 patients, 449 variants and 78 driver events. </span><span style='color: #000000;background-color: #BBBB00;'>
@@ -314,8 +314,8 @@ any previous result from those analyses is cancelled from the returned object.</
 #&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0026            2            4                4                1
 #&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0028            2            2                2                1
 #&gt; </span><span style='color: #555555;'>10</span><span> CRUK0029            6            4                4                1
-#&gt; </span><span style='color: #555555;'># … with 45 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 45 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -164,25 +164,25 @@ parameters of the <code>btree</code> constructor from package <code>btree</code>
 for the input parameters that you can use to tune the construction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_mutation_trees</span>(<span class='no'>x</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='Stats_cohort.html'>Stats_cohort</a></span>(<span class='no'>x</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>pull</span>(<span class='no'>patientID</span>), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>compute_mutation_trees</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='Stats_cohort.html'>Stats_cohort</a></span>(<span class='no'>x</span>) <span class='kw'>%&gt;%</span> <span class='fu'>pull</span>(<span class='no'>patientID</span>),
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>REVOLVER</code> cohort.</p></td>
+      <td><p>A <code>REVOLVER</code> cohort with now available
+phylogeneis for the required <code>patients</code>.</p></td>
     </tr>
     <tr>
       <th>patients</th>
       <td><p>A set of patient ids in the cohort, for which the
 phylogenies are created.</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>A <code>REVOLVER</code> cohort with now available
-phylogeneis for the required <code>patients</code>.</p></td>
     </tr>
     </table>
 
@@ -191,11 +191,12 @@ phylogeneis for the required <code>patients</code>.</p></td>
     <p>This function is not yet implemented</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Cohort creation: <code><a href='CCF_parser.html'>CCF_parser</a></code>,
-  <code><a href='compute_clone_trees.html'>compute_clone_trees</a></code>,
-  <code><a href='input_custom_trees.html'>input_custom_trees</a></code>,
-  <code><a href='revolver_check_cohort.html'>revolver_check_cohort</a></code>,
-  <code><a href='revolver_cohort.html'>revolver_cohort</a></code></p></div>
+    <div class='dont-index'><p>Other Cohort creation: 
+<code><a href='CCF_parser.html'>CCF_parser</a>()</code>,
+<code><a href='compute_clone_trees.html'>compute_clone_trees</a>()</code>,
+<code><a href='input_custom_trees.html'>input_custom_trees</a>()</code>,
+<code><a href='revolver_check_cohort.html'>revolver_check_cohort</a>()</code>,
+<code><a href='revolver_cohort.html'>revolver_cohort</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='st'>'TODO'</span>)</div><div class='output co'>#&gt; [1] "TODO"</div></pre>

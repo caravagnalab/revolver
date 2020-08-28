@@ -176,9 +176,12 @@ function can be run on a subset of patients.</p>
     <p>A tibble with summary stastics.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Summary statistics: <code><a href='DET_index.html'>DET_index</a></code>,
-  <code><a href='Stats_cohort.html'>Stats_cohort</a></code>, <code><a href='Stats_drivers.html'>Stats_drivers</a></code>,
-  <code><a href='Stats_fits.html'>Stats_fits</a></code>, <code><a href='Stats_trees.html'>Stats_trees</a></code></p></div>
+    <div class='dont-index'><p>Other Summary statistics: 
+<code><a href='DET_index.html'>DET_index</a>()</code>,
+<code><a href='Stats_cohort.html'>Stats_cohort</a>()</code>,
+<code><a href='Stats_drivers.html'>Stats_drivers</a>()</code>,
+<code><a href='Stats_fits.html'>Stats_fits</a>()</code>,
+<code><a href='Stats_trees.html'>Stats_trees</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
@@ -198,16 +201,16 @@ function can be run on a subset of patients.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0008            2            6                6                2
 #&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0009            4            7                7                2
 #&gt; </span><span style='color: #555555;'>10</span><span> CRUK0010            2            3                3                1
-#&gt; </span><span style='color: #555555;'># … with 89 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 89 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 <span class='co'># And subset the patients</span>
 <span class='fu'>Stats</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
 #&gt;   patientID numBiopsies numMutations numDriverMutati… numClonesWithDr…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> CRUK0001            3            7                7                4
 #&gt; </span><span style='color: #555555;'>2</span><span> CRUK0002            3            7                7                4
-#&gt; </span><span style='color: #555555;'># … with 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

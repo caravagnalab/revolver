@@ -26,6 +26,7 @@ reference:
   - revolver_cohort
   - revolver_check_cohort
   - compute_clone_trees
+  - compute_mutation_trees
   - input_custom_trees
   - CCF_parser
   - remove_drivers

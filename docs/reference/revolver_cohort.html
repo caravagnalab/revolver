@@ -152,9 +152,13 @@
     <p>Construct a REVOLVER cohort.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revolver_cohort</span>(<span class='no'>dataset</span>, <span class='kw'>CCF_parser</span> <span class='kw'>=</span> <span class='kw pkg'>revolver</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/revolver/man/CCF_parser.html'>CCF_parser</a></span>,
-  <span class='kw'>ONLY.DRIVER</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>MIN.CLUSTER.SIZE</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>annotation</span> <span class='kw'>=</span> <span class='st'>"My REVOLVER dataset"</span>)</pre>
+    <pre class="usage"><span class='fu'>revolver_cohort</span>(
+  <span class='no'>dataset</span>,
+  <span class='kw'>CCF_parser</span> <span class='kw'>=</span> <span class='kw pkg'>revolver</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/revolver/man/CCF_parser.html'>CCF_parser</a></span>,
+  <span class='kw'>ONLY.DRIVER</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>MIN.CLUSTER.SIZE</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>annotation</span> <span class='kw'>=</span> <span class='st'>"My REVOLVER dataset"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,11 +192,12 @@ inside REVOLVER; <code><a href='CCF_parser.html'>CCF_parser</a></code> (the defa
     <p>An object of the S3 class <code>"rev_cohort"</code> that represents a <code>REVOLVER</code> cohort.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Cohort creation: <code><a href='CCF_parser.html'>CCF_parser</a></code>,
-  <code><a href='compute_clone_trees.html'>compute_clone_trees</a></code>,
-  <code><a href='compute_mutation_trees.html'>compute_mutation_trees</a></code>,
-  <code><a href='input_custom_trees.html'>input_custom_trees</a></code>,
-  <code><a href='revolver_check_cohort.html'>revolver_check_cohort</a></code></p></div>
+    <div class='dont-index'><p>Other Cohort creation: 
+<code><a href='CCF_parser.html'>CCF_parser</a>()</code>,
+<code><a href='compute_clone_trees.html'>compute_clone_trees</a>()</code>,
+<code><a href='compute_mutation_trees.html'>compute_mutation_trees</a>()</code>,
+<code><a href='input_custom_trees.html'>input_custom_trees</a>()</code>,
+<code><a href='revolver_check_cohort.html'>revolver_check_cohort</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Example cohort creation with the TRACERx data</span>

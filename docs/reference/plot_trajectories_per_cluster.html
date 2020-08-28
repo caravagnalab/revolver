@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot the data histogram for a patient. — plot_patient_CCF_histogram • revolver</title>
+<title>Plot the number of observed trajectories in each cluster. — plot_trajectories_per_cluster • revolver</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,11 +42,10 @@
 
 
 
-<meta property="og:title" content="Plot the data histogram for a patient. — plot_patient_CCF_histogram" />
-<meta property="og:description" content="If this cohort is working with CCF data, this function plots
-the CCF histogram of each one of the samples available for
-a patient, facetting the sample variable.
-Otherwise, this plot does not make much sense." />
+<meta property="og:title" content="Plot the number of observed trajectories in each cluster. — plot_trajectories_per_cluster" />
+<meta property="og:description" content="Assemble a figure that plots a graph (or tree) per
+cluster where each driver is connected to its trajectories. This
+allows to determine the most frequent trajectories in a cluster." />
 <meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -146,69 +145,53 @@ Otherwise, this plot does not make much sense." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot the data histogram for a patient.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/plot_CCF_histogram.R'><code>R/plot_CCF_histogram.R</code></a></small>
-    <div class="hidden name"><code>plot_patient_CCF_histogram.Rd</code></div>
+    <h1>Plot the number of observed trajectories in each cluster.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/caravagn/revolver/blob/master/R/plot_trajectories_per_clusters.R'><code>R/plot_trajectories_per_clusters.R</code></a></small>
+    <div class="hidden name"><code>plot_trajectories_per_cluster.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>If this cohort is working with CCF data, this function plots
-the CCF histogram of each one of the samples available for
-a patient, facetting the sample variable.</p>
-<p>Otherwise, this plot does not make much sense.</p>
+    <p>Assemble a figure that plots a graph (or tree) per
+cluster where each driver is connected to its trajectories. This
+allows to determine the most frequent trajectories in a cluster.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_patient_CCF_histogram</span>(<span class='no'>x</span>, <span class='no'>patient</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_trajectories_per_cluster</span>(<span class='no'>x</span>, <span class='kw'>min_counts</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A REVOLVER cohort object.</p></td>
+      <td><p>A revolver object with clusters computed.</p></td>
     </tr>
     <tr>
-      <th>patient</th>
-      <td><p>The id of a patient.</p></td>
+      <th>min_counts</th>
+      <td><p>A scalare &gt;= 1 to subset only trajectories observed
+in <code>min_counts</code> patients. If the value is in (0,1), the cut is
+interpreted as a percentage and used to determine its actual value from
+the cluster size (e.g., <code>n * min_counts</code>).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ggplot</code> plot.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other Plotting functions: 
-<code><a href='distinct_palette_few.html'>distinct_palette_few</a>()</code>,
-<code><a href='distinct_palette_many.html'>distinct_palette_many</a>()</code>,
-<code><a href='gradient_palette.html'>gradient_palette</a>()</code>,
-<code><a href='plot_DET_index.html'>plot_DET_index</a>()</code>,
-<code><a href='plot_clusters.html'>plot_clusters</a>()</code>,
-<code><a href='plot_dendrogram.html'>plot_dendrogram</a>()</code>,
-<code><a href='plot_drivers_clonality.html'>plot_drivers_clonality</a>()</code>,
-<code><a href='plot_drivers_graph.html'>plot_drivers_graph</a>()</code>,
-<code><a href='plot_drivers_occurrence.html'>plot_drivers_occurrence</a>()</code>,
-<code><a href='plot_jackknife_cluster_stability.html'>plot_jackknife_cluster_stability</a>()</code>,
-<code><a href='plot_jackknife_coclustering.html'>plot_jackknife_coclustering</a>()</code>,
-<code><a href='plot_jackknife_trajectories_stability.html'>plot_jackknife_trajectories_stability</a>()</code>,
-<code><a href='plot_patient_data.html'>plot_patient_data</a>()</code>,
-<code><a href='plot_patient_mutation_burden.html'>plot_patient_mutation_burden</a>()</code>,
-<code><a href='plot_patient_oncoprint.html'>plot_patient_oncoprint</a>()</code>,
-<code><a href='plot_patient_trees_scores.html'>plot_patient_trees_scores</a>()</code></p></div>
+    <p>A figure with multiple plots.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
 
-<span class='fu'>plot_patient_CCF_histogram</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0001'</span>)</div><div class='img'><img src='plot_patient_CCF_histogram-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>plot_patient_CCF_histogram</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>)</div><div class='img'><img src='plot_patient_CCF_histogram-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'># In at least 5 cases</span>
+<span class='fu'>plot_trajectories_per_cluster</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min_counts</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: At structural_properties.c:3346 :graph contains a cycle, partial result is returned</span></div><div class='img'><img src='plot_trajectories_per_cluster-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># In 50% of the cluster's cases</span>
+<span class='fu'>plot_trajectories_per_cluster</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='kw'>min_counts</span> <span class='kw'>=</span> <span class='fl'>.5</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: At structural_properties.c:3346 :graph contains a cycle, partial result is returned</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: At structural_properties.c:3346 :graph contains a cycle, partial result is returned</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>!</span><span> min_counts in [0,1], interpreting that as a proportion.</span></div><div class='img'><img src='plot_trajectories_per_cluster-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
