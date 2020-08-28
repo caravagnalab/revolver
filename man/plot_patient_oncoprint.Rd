@@ -4,8 +4,7 @@
 \alias{plot_patient_oncoprint}
 \title{Plot the oncoprint for a patient.}
 \usage{
-plot_patient_oncoprint(x, patient,
-  clusters_palette = distinct_palette_many)
+plot_patient_oncoprint(x, patient, clusters_palette = distinct_palette_many)
 }
 \arguments{
 \item{x}{A REVOLVER cohort object.}
@@ -30,21 +29,22 @@ plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
 plot_patient_oncoprint(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 }
 \seealso{
-Other Plotting functions: \code{\link{distinct_palette_few}},
-  \code{\link{distinct_palette_many}},
-  \code{\link{gradient_palette}},
-  \code{\link{plot_DET_index}},
-  \code{\link{plot_clusters}},
-  \code{\link{plot_dendrogram}},
-  \code{\link{plot_drivers_clonality}},
-  \code{\link{plot_drivers_graph}},
-  \code{\link{plot_drivers_occurrence}},
-  \code{\link{plot_jackknife_cluster_stability}},
-  \code{\link{plot_jackknife_coclustering}},
-  \code{\link{plot_jackknife_trajectories_stability}},
-  \code{\link{plot_patient_CCF_histogram}},
-  \code{\link{plot_patient_data}},
-  \code{\link{plot_patient_mutation_burden}},
-  \code{\link{plot_patient_trees_scores}}
+Other Plotting functions: 
+\code{\link{distinct_palette_few}()},
+\code{\link{distinct_palette_many}()},
+\code{\link{gradient_palette}()},
+\code{\link{plot_DET_index}()},
+\code{\link{plot_clusters}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{plot_drivers_clonality}()},
+\code{\link{plot_drivers_graph}()},
+\code{\link{plot_drivers_occurrence}()},
+\code{\link{plot_jackknife_cluster_stability}()},
+\code{\link{plot_jackknife_coclustering}()},
+\code{\link{plot_jackknife_trajectories_stability}()},
+\code{\link{plot_patient_CCF_histogram}()},
+\code{\link{plot_patient_data}()},
+\code{\link{plot_patient_mutation_burden}()},
+\code{\link{plot_patient_trees_scores}()}
 }
 \concept{Plotting functions}

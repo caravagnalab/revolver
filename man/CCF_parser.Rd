@@ -30,10 +30,11 @@ This function will not convert the types of the parsed entries.
 CCF_parser("R1:0.1;R2:0.4;R3:0.9")
 }
 \seealso{
-Other Cohort creation: \code{\link{compute_clone_trees}},
-  \code{\link{compute_mutation_trees}},
-  \code{\link{input_custom_trees}},
-  \code{\link{revolver_check_cohort}},
-  \code{\link{revolver_cohort}}
+Other Cohort creation: 
+\code{\link{compute_clone_trees}()},
+\code{\link{compute_mutation_trees}()},
+\code{\link{input_custom_trees}()},
+\code{\link{revolver_check_cohort}()},
+\code{\link{revolver_cohort}()}
 }
 \concept{Cohort creation}

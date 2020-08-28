@@ -4,9 +4,13 @@
 \alias{revolver_cohort}
 \title{Construct a REVOLVER cohort.}
 \usage{
-revolver_cohort(dataset, CCF_parser = revolver::CCF_parser,
-  ONLY.DRIVER = FALSE, MIN.CLUSTER.SIZE = 10,
-  annotation = "My REVOLVER dataset")
+revolver_cohort(
+  dataset,
+  CCF_parser = revolver::CCF_parser,
+  ONLY.DRIVER = FALSE,
+  MIN.CLUSTER.SIZE = 10,
+  annotation = "My REVOLVER dataset"
+)
 }
 \arguments{
 \item{dataset}{A dataframe in the specified format (see the package vignettes).}
@@ -42,10 +46,11 @@ print(cohort)
 plot(cohort)
 }
 \seealso{
-Other Cohort creation: \code{\link{CCF_parser}},
-  \code{\link{compute_clone_trees}},
-  \code{\link{compute_mutation_trees}},
-  \code{\link{input_custom_trees}},
-  \code{\link{revolver_check_cohort}}
+Other Cohort creation: 
+\code{\link{CCF_parser}()},
+\code{\link{compute_clone_trees}()},
+\code{\link{compute_mutation_trees}()},
+\code{\link{input_custom_trees}()},
+\code{\link{revolver_check_cohort}()}
 }
 \concept{Cohort creation}

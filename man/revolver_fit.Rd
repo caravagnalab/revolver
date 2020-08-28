@@ -4,8 +4,7 @@
 \alias{revolver_fit}
 \title{Fit a REVOLVER model.}
 \usage{
-revolver_fit(x, initial.solution = 1, max.iterations = 10, n = 10,
-  ...)
+revolver_fit(x, initial.solution = 1, max.iterations = 10, n = 10, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort where trees per patient have been already computed.}
@@ -48,6 +47,7 @@ print(new_fit)
 Caravagna et al., Nature Methods volume 15, pages 707–714, 2018; https://www.nature.com/articles/s41592-018-0108-x
 }
 \seealso{
-Other Analysis functions: \code{\link{revolver_cluster}}
+Other Analysis functions: 
+\code{\link{revolver_cluster}()}
 }
 \concept{Analysis functions}

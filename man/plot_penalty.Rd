@@ -4,8 +4,13 @@
 \alias{plot_penalty}
 \title{Plot the fit penalty.}
 \usage{
-plot_penalty(x, drivers = x$variantIDs.driver, min.occurrences = 0,
-  alpha_level = 0.05, drivers_palette = distinct_palette_many)
+plot_penalty(
+  x,
+  drivers = x$variantIDs.driver,
+  min.occurrences = 0,
+  alpha_level = 0.05,
+  drivers_palette = distinct_palette_many
+)
 }
 \arguments{
 \item{x}{A REVOLVER object with fits.}

@@ -48,11 +48,16 @@ ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'clones', dat
 ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers', data = 'fits')
 }
 \seealso{
-Other Getters: \code{\link{CCF_clusters}},
-  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
-  \code{\link{Data}}, \code{\link{Drivers}},
-  \code{\link{Phylo}}, \code{\link{Samples}},
-  \code{\link{Subclonal}}, \code{\link{Truncal}},
-  \code{\link{get_features}}
+Other Getters: 
+\code{\link{CCF_clusters}()},
+\code{\link{CCF}()},
+\code{\link{Clonal_cluster}()},
+\code{\link{Data}()},
+\code{\link{Drivers}()},
+\code{\link{Phylo}()},
+\code{\link{Samples}()},
+\code{\link{Subclonal}()},
+\code{\link{Truncal}()},
+\code{\link{get_features}()}
 }
 \concept{Getters}

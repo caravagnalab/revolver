@@ -124,6 +124,15 @@ The dendrogram of the clusters can be visualised - notice the colours and patien
 plot_dendrogram(TRACERx_NEJM_2017_REVOLVER)
 ```
 
+You can also compute the number of trajectories per cluster, and their frequency.
+```{r, echo = TRUE, warning=FALSE, fig.width=12, fig.height=12}
+# Plot the trajectories detected in at least 10 patients per cluster
+plot_trajectories_per_cluster(TRACERx_NEJM_2017_REVOLVER, min_counts = 10)
+
+# Plot the trajectories detected in at least 30% patients per cluster
+plot_trajectories_per_cluster(TRACERx_NEJM_2017_REVOLVER, min_counts = .3) 
+```
+
 After jackknife, you can also plot the co-clustering probability of the patients, the clustering stability and other statistics about the trajectories.
 
 ```{r, echo = TRUE, warning=FALSE, fig.width=12, fig.height=12}

@@ -4,17 +4,19 @@
 \alias{compute_mutation_trees}
 \title{Compute binary mutation trees for a patient (phylogenies).}
 \usage{
-compute_mutation_trees(x, patients = Stats_cohort(x) \%>\%
-  pull(patientID), overwrite = FALSE, ...)
+compute_mutation_trees(
+  x,
+  patients = Stats_cohort(x) \%>\% pull(patientID),
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
-\item{x}{A \code{REVOLVER} cohort.}
+\item{x}{A \code{REVOLVER} cohort with now available
+phylogeneis for the required \code{patients}.}
 
 \item{patients}{A set of patient ids in the cohort, for which the
 phylogenies are created.}
-
-\item{x}{A \code{REVOLVER} cohort with now available
-phylogeneis for the required \code{patients}.}
 }
 \description{
 Create mutation tree phylogenies from the package
@@ -32,10 +34,11 @@ This function is not yet implemented
 print('TODO')
 }
 \seealso{
-Other Cohort creation: \code{\link{CCF_parser}},
-  \code{\link{compute_clone_trees}},
-  \code{\link{input_custom_trees}},
-  \code{\link{revolver_check_cohort}},
-  \code{\link{revolver_cohort}}
+Other Cohort creation: 
+\code{\link{CCF_parser}()},
+\code{\link{compute_clone_trees}()},
+\code{\link{input_custom_trees}()},
+\code{\link{revolver_check_cohort}()},
+\code{\link{revolver_cohort}()}
 }
 \concept{Cohort creation}

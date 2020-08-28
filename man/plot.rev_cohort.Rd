@@ -4,7 +4,7 @@
 \alias{plot.rev_cohort}
 \title{Summary scatterplot of a cohort.}
 \usage{
-plot.rev_cohort(x, ...)
+\method{plot}{rev_cohort}(x, ...)
 }
 \arguments{
 \item{x}{A REVOLVER cohort.}
@@ -32,8 +32,9 @@ TRACERx_NEJM_2017_REVOLVER$fit = NULL
 plot(TRACERx_NEJM_2017_REVOLVER)
 }
 \seealso{
-Other S3 functions: \code{\link{plot.rev_cohort_fit}},
-  \code{\link{print.rev_cohort_fit}},
-  \code{\link{print.rev_cohort}}
+Other S3 functions: 
+\code{\link{plot.rev_cohort_fit}()},
+\code{\link{print.rev_cohort_fit}()},
+\code{\link{print.rev_cohort}()}
 }
 \concept{S3 functions}

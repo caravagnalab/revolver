@@ -4,9 +4,13 @@
 \alias{plot_clusters}
 \title{Plot the heatmaps of REVOLVER"s clusters.}
 \usage{
-plot_clusters(x, cluster_palette = distinct_palette_few,
-  cutoff_drivers = 5, cutoff_trajectories = 4,
-  arrow.symbol = " → ")
+plot_clusters(
+  x,
+  cluster_palette = distinct_palette_few,
+  cutoff_drivers = 5,
+  cutoff_trajectories = 4,
+  arrow.symbol = " → "
+)
 }
 \arguments{
 \item{x}{A \code{REVOLVER} object with fits and clusters.}
@@ -44,21 +48,22 @@ plot_clusters(TRACERx_NEJM_2017_REVOLVER)
 plot_clusters(TRACERx_NEJM_2017_REVOLVER, cutoff_drivers = 10, cutoff_trajectories = 3)
 }
 \seealso{
-Other Plotting functions: \code{\link{distinct_palette_few}},
-  \code{\link{distinct_palette_many}},
-  \code{\link{gradient_palette}},
-  \code{\link{plot_DET_index}},
-  \code{\link{plot_dendrogram}},
-  \code{\link{plot_drivers_clonality}},
-  \code{\link{plot_drivers_graph}},
-  \code{\link{plot_drivers_occurrence}},
-  \code{\link{plot_jackknife_cluster_stability}},
-  \code{\link{plot_jackknife_coclustering}},
-  \code{\link{plot_jackknife_trajectories_stability}},
-  \code{\link{plot_patient_CCF_histogram}},
-  \code{\link{plot_patient_data}},
-  \code{\link{plot_patient_mutation_burden}},
-  \code{\link{plot_patient_oncoprint}},
-  \code{\link{plot_patient_trees_scores}}
+Other Plotting functions: 
+\code{\link{distinct_palette_few}()},
+\code{\link{distinct_palette_many}()},
+\code{\link{gradient_palette}()},
+\code{\link{plot_DET_index}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{plot_drivers_clonality}()},
+\code{\link{plot_drivers_graph}()},
+\code{\link{plot_drivers_occurrence}()},
+\code{\link{plot_jackknife_cluster_stability}()},
+\code{\link{plot_jackknife_coclustering}()},
+\code{\link{plot_jackknife_trajectories_stability}()},
+\code{\link{plot_patient_CCF_histogram}()},
+\code{\link{plot_patient_data}()},
+\code{\link{plot_patient_mutation_burden}()},
+\code{\link{plot_patient_oncoprint}()},
+\code{\link{plot_patient_trees_scores}()}
 }
 \concept{Plotting functions}

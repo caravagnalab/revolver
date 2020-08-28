@@ -30,10 +30,11 @@ revolver_check_cohort(TRACERx_NEJM_2017_REVOLVER)
 print(TRACERx_NEJM_2017_REVOLVER) # calls this anyway
 }
 \seealso{
-Other Cohort creation: \code{\link{CCF_parser}},
-  \code{\link{compute_clone_trees}},
-  \code{\link{compute_mutation_trees}},
-  \code{\link{input_custom_trees}},
-  \code{\link{revolver_cohort}}
+Other Cohort creation: 
+\code{\link{CCF_parser}()},
+\code{\link{compute_clone_trees}()},
+\code{\link{compute_mutation_trees}()},
+\code{\link{input_custom_trees}()},
+\code{\link{revolver_cohort}()}
 }
 \concept{Cohort creation}

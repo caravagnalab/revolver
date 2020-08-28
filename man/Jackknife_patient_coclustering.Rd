@@ -24,7 +24,8 @@ data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 Jackknife_patient_coclustering(TRACERx_NEJM_2017_REVOLVER)
 }
 \seealso{
-Other Jackknife statistics: \code{\link{Jackknife_cluster_stability}},
-  \code{\link{Jackknife_trajectories_stability}}
+Other Jackknife statistics: 
+\code{\link{Jackknife_cluster_stability}()},
+\code{\link{Jackknife_trajectories_stability}()}
 }
 \concept{Jackknife statistics}

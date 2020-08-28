@@ -4,8 +4,13 @@
 \alias{revolver_cluster}
 \title{Compute hierarchical clustering for a REVOLVER cohort.}
 \usage{
-revolver_cluster(x, patients = x$patients, hc.method = "ward",
-  split.method = "cutreeHybrid", min.group.size = 2)
+revolver_cluster(
+  x,
+  patients = x$patients,
+  hc.method = "ward",
+  split.method = "cutreeHybrid",
+  min.group.size = 2
+)
 }
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
@@ -41,6 +46,7 @@ fit = revolver_evo_distance(fit)
 fit = revolver_cluster(fit) # dumped also to disk
 }
 \seealso{
-Other Analysis functions: \code{\link{revolver_fit}}
+Other Analysis functions: 
+\code{\link{revolver_fit}()}
 }
 \concept{Analysis functions}

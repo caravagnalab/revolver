@@ -25,8 +25,9 @@ data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 print(TRACERx_NEJM_2017_REVOLVER)
 }
 \seealso{
-Other S3 functions: \code{\link{plot.rev_cohort_fit}},
-  \code{\link{plot.rev_cohort}},
-  \code{\link{print.rev_cohort}}
+Other S3 functions: 
+\code{\link{plot.rev_cohort_fit}()},
+\code{\link{plot.rev_cohort}()},
+\code{\link{print.rev_cohort}()}
 }
 \concept{S3 functions}

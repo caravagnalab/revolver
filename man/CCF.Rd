@@ -28,11 +28,16 @@ CCF(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002')
 CCF(TRACERx_NEJM_2017_REVOLVER, 'CRUK0008')
 }
 \seealso{
-Other Getters: \code{\link{CCF_clusters}},
-  \code{\link{Clonal_cluster}}, \code{\link{Data}},
-  \code{\link{Drivers}}, \code{\link{ITransfer}},
-  \code{\link{Phylo}}, \code{\link{Samples}},
-  \code{\link{Subclonal}}, \code{\link{Truncal}},
-  \code{\link{get_features}}
+Other Getters: 
+\code{\link{CCF_clusters}()},
+\code{\link{Clonal_cluster}()},
+\code{\link{Data}()},
+\code{\link{Drivers}()},
+\code{\link{ITransfer}()},
+\code{\link{Phylo}()},
+\code{\link{Samples}()},
+\code{\link{Subclonal}()},
+\code{\link{Truncal}()},
+\code{\link{get_features}()}
 }
 \concept{Getters}

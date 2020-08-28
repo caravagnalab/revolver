@@ -41,11 +41,16 @@ print(names(features))
 print(features)
 }
 \seealso{
-Other Getters: \code{\link{CCF_clusters}},
-  \code{\link{CCF}}, \code{\link{Clonal_cluster}},
-  \code{\link{Data}}, \code{\link{Drivers}},
-  \code{\link{ITransfer}}, \code{\link{Phylo}},
-  \code{\link{Samples}}, \code{\link{Subclonal}},
-  \code{\link{Truncal}}
+Other Getters: 
+\code{\link{CCF_clusters}()},
+\code{\link{CCF}()},
+\code{\link{Clonal_cluster}()},
+\code{\link{Data}()},
+\code{\link{Drivers}()},
+\code{\link{ITransfer}()},
+\code{\link{Phylo}()},
+\code{\link{Samples}()},
+\code{\link{Subclonal}()},
+\code{\link{Truncal}()}
 }
 \concept{Getters}
