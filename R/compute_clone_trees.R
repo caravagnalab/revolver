@@ -47,15 +47,18 @@ compute_clone_trees = function(
 
   if(!has_patient_trees(x)) x$phylogenies = NULL
 
-  pioTit("Constructing Clone Tree objects via ctree - https://caravagn.github.io/ctree/")
-  pioStr("Input patients.", suffix = '\n')
-  cat(paste0(patients, collapse = ', '), '\n')
+  cli::cli_h1("Constructing Clone Trees [ctree - https://caravagn.github.io/ctree/]")
+  # pioTit("Constructing Clone Tree objects via ctree - https://caravagn.github.io/ctree/")
+  
+  # pioStr("Input patients.", suffix = '\n')
+  # cat(paste0(patients, collapse = ', '), '\n')
 
   # Looping over all patients
   filos = easypar::run(
     FUN = function(patient)
     {
-      cli::cli_h1(patient)
+      cli::cli_h1("PatientID: {.field {patient}}")
+      cat("\n")
       
       if(has_patient_trees(x, patient) & !overwrite)
       {
@@ -77,7 +80,9 @@ compute_clone_trees = function(
 
       # Just show how many combinations we have
       comb = combination_of_information_transfer(x, patient)
-      pio::pioStr('\n Combinations of Information Transfer : ', comb, suffix = '\n')
+      
+      # pio::pioStr('\n Combinations of Information Transfer : ', comb, suffix = '\n')
+      # cli::cl
 
       return(obj)
     },

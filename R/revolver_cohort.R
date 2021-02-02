@@ -53,15 +53,26 @@ revolver_cohort = function(dataset,
 
   options = list(ONLY.DRIVER = ONLY.DRIVER, MIN.CLUSTER.SIZE = MIN.CLUSTER.SIZE)
 
-  pio::pioHdr(
-    paste('REVOLVER ~ Cohort constructor'),
-    toPrint = c(
-      ` Use only drivers` = ifelse(options$ONLY.DRIVER == 0, TRUE, FALSE),
-      `Reject clusters with size below` = options$MIN.CLUSTER.SIZE
+  pio::pioHdr(paste('REVOLVER ~ Cohort constructor'))
+  cat("\n")
+  
+  cli::cli_alert_info(paste(
+    "Using",
+    ifelse(
+      options$ONLY.DRIVER == 0,
+      'only driver' %>% crayon::bold(),
+      'all annotated' %>% crayon::bold()
     ),
-    prefix = paste0(clisymbols::symbol$radio_on, ' ')
-  )
+    'mutations. '
+  ))
 
+  cli::cli_alert_info(paste(
+    "Rejecting clusters with less than",
+    options$MIN.CLUSTER.SIZE %>% crayon::bold(),
+    'mutations. '
+  ))
+  
+  
   # The output object will be this, of class rev_cohort
   obj <-
     structure(
@@ -100,24 +111,24 @@ revolver_cohort = function(dataset,
 
   if (options$MIN.CLUSTER.SIZE > 0)
   {
-    pio::pioTit('Checking size of each patient\'s cluster -- removing those below cutoff.')
+    cli::cli_h1('Filtering small clusters (starting with {.field {nrow(dataset)}} entries)')
 
-    cat('Rows before filtering:', nrow(dataset), '\n\n')
-
-    cat('Removed\n\n')
+    cat('Removing\n\n')
     print(dataset %>%
             filter(cluster_size < options$MIN.CLUSTER.SIZE))
 
     dataset = dataset %>%
       filter(cluster_size >= options$MIN.CLUSTER.SIZE)
-
-    cat('\nRows after filtering:', nrow(dataset), '\n')
+    
+    cli::cli_alert_success('\nAfter filtering: {.field {nrow(dataset)}} entries\n')
+    
   }
 
   if (nrow(dataset) == 0)
     stop("Your dataset is empty, aborting.")
 
-  pio::pioTit('REVOLVER input data')
+  cli::cli_h1('\nREVOLVER input data')
+  cat('\n')
   pio::pioDisp(dataset)
 
   obj$patients = unique(dataset$patientID)
@@ -136,8 +147,11 @@ revolver_cohort = function(dataset,
   # Data of each patient needs to be unwrapped and stored
   # This takes some times
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  pio::pioTit('Extracting dataset for each patient (this may take some time)')
-
+  
+  cli::cli_h3('\nPreprocessing data (this may take some time)')
+  # cli::cli_process_start("Extracting patient data ...")
+  cat('\n')
+  
   obj$dataset = obj$dataset %>%
     group_by(patientID) %>%
     nest() %>%
@@ -172,10 +186,13 @@ revolver_cohort = function(dataset,
                                   cluster_size,
                                   CCF)
 
-                         pio::pioStr(d$patientID[1],
-                                     paste0(nrow(d), ' entries'),
-                                     suffix =  '\n',
-                                     prefix = '\n')
+                         # pio::pioStr(d$patientID[1],
+                         #             paste0(nrow(d), ' entries'),
+                         #             suffix =  '\n',
+                         #             prefix = '\n')
+                         
+                         # cli::cli_alert('{.field {d$patientID[1]}} : {.count {nrow(d)}} entries.')
+                         cat('.')
 
                          CCF_values = d %>%
                            group_by(id) %>%
@@ -187,7 +204,12 @@ revolver_cohort = function(dataset,
                        })
   names(obj$dataset) = obj$patients
 
-  pio::pioTit('Extracting clones\' table for each patient')
+  cat('\n')
+  # cli::cli_process_done()
+  
+  cli::cli_h1('\nExtracting clones table')
+  cat('\n')
+  # pio::pioTit('Extracting clones\' table for each patient')
 
   # Then we also create a table with the clones for each patient
   obj$CCF = lapply(names(obj$dataset),
@@ -195,9 +217,10 @@ revolver_cohort = function(dataset,
                    {
                      d = obj$dataset[[pat]]
 
-                     pio::pioStr(pat, paste0(nrow(d), ' entries'), suffix =  '')
-
-                     d = d %>%
+                     # pio::pioStr(pat, paste0(nrow(d), ' entries'), suffix =  '')
+                     # cli::cli_alert('{.field {pat}} : {.count {nrow(d)}} entries.')
+                    
+                      d = d %>%
                        select(-Misc, -variantID, -CCF, -id, -patientID, -cluster_size)
 
                      CCFclone_headers = d %>%
@@ -217,7 +240,8 @@ revolver_cohort = function(dataset,
                        spread(variable, CCF) %>%
                        ungroup()
 
-                     pio::pioStr(' --> ', paste0(nrow(CCFclone_headers), ' clones'), suffix =  '\n')
+                     cli::cli_alert('{.field {pat}} : {.count {nrow(d)}} entries, {.count {nrow(CCFclone_headers)}} clone(s).')
+                     # pio::pioStr(' --> ', paste0(nrow(CCFclone_headers), ' clones'), suffix =  '\n')
 
                      CCFclone_headers %>% full_join(CCFclone_values, by = 'cluster')
                    })

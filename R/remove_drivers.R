@@ -33,7 +33,9 @@ remove_drivers = function(
   if(!all(variantID %in% x$variantIDs.driver))
     stop(variantID, "is not a driver in the cohort, aborting.")
 
-  pioStr('Removing driver events', paste(variantID, collapse = ', '), suffix = '\n')
+  cli::cli_rule('Removing driver events', right = paste(variantID, collapse = ', '))
+  cat("\n")
+
   Stats_drivers(x, drivers = variantID) %>% pioDisp
 
   N = length(x$patients)
@@ -147,7 +149,7 @@ remove_drivers = function(
   }
 
   # Retianed patients
-  pioStr("Retained patients", length(new_patients), suffix = '\n')
+  cli::cli_alert_info("Retained {.field {length(new_patients)}} patients after driver removal..\n")
 
   # if has fits, force to recompute
   if(has_fits(x)) {

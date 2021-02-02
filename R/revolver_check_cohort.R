@@ -24,11 +24,18 @@ revolver_check_cohort = function(x, stopOnError = FALSE)
 {
   # Duplicate IDs
   duplicate_varIDs = get_duplicates(x)
-
+  
+  
   if(nrow(duplicate_varIDs) > 0)
   {
-    cat(bgRed('\n ERROR '),
-        red("Duplicated driver variantIDs in the cohort that should be removed. \n\n\tYou can use `revolver:::get_duplicates(x)` to retrieve them."), '\n')
+    cli::boxx("ERROR - Duplicated driver variantIDs in the cohort should be removed!", 
+              padding = 1, 
+              background_col = "brown", 
+              col = 'white', 
+              float = 'center') %>% 
+      cat()
+    
+    cat("\n")
     print(duplicate_varIDs)
 
     if(stopOnError) stop("Aborting.")
@@ -40,8 +47,17 @@ revolver_check_cohort = function(x, stopOnError = FALSE)
 
   if(nrow(uncorr) > 0)
   {
-    cat(bgRed('\n ERROR '),
-        red("Some driver variantIDs occur only once and should therefore be removed. \n\n\tYou can use `revolver::Stats_drivers(x)` to retrieve them."), '\n')
+    cli::boxx("WARNING - Driver variantIDs occuring only once could be removed.", 
+              padding = 1, 
+              background_col = "orange", 
+              col = 'black', 
+              float = 'center') %>% 
+      cat()
+    
+    cat("\n")
+    
+    # cat(crayon::bgYellow('\n WARNING '),
+    #     red("Some driver variantIDs occur only once and should therefore be removed. \n\n\tYou can use `revolver::Stats_drivers(x)` to retrieve them."), '\n')
     print(uncorr)
 
     if(stopOnError) stop("Aborting.")
@@ -53,9 +69,18 @@ revolver_check_cohort = function(x, stopOnError = FALSE)
 
   if(nrow(noDrv) > 0)
   {
-    cat(bgRed('\n ERROR '),
-        red("Some patients have no drivers and should therefore be removed. \n\n\tYou can use `revolver::Stats(x)` to retrieve them."), '\n')
-    print(noDrv)
+    cli::boxx("WARNING - Patients without drivers could be removed.", 
+              padding = 1, 
+              background_col = "orange", 
+              col = 'black', 
+              float = 'center') %>% 
+      cat()
+    
+    cat("\n")
+    
+    # cat(crayon::bgYellow('\n WARNING '),
+    #     red("Some patients have no drivers and should therefore be removed. \n\n\tYou can use `revolver::Stats(x)` to retrieve them."), '\n')
+    # print(noDrv)
 
     if(stopOnError) stop("Aborting.")
   }
@@ -66,8 +91,17 @@ revolver_check_cohort = function(x, stopOnError = FALSE)
 
   if(nrow(oneClDrv) > 0)
   {
-    cat(bgRed('\n WARNING '),
-        red("Some patients have only one clone with drivers, and therefore they will just be expanded."), '\n')
+    cli::boxx("WARNING - Some patients have only one clone with drivers; they will just be expanded.", 
+              padding = 1, 
+              background_col = "orange", 
+              col = 'black', 
+              float = 'center') %>% 
+      cat()
+    
+    cat("\n")
+    
+    # cat(crayon::bgYellow('\n WARNING '),
+    #     red("Some patients have only one clone with drivers, and therefore they will just be expanded."), '\n')
     print(oneClDrv)
   }
 
