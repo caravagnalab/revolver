@@ -73,6 +73,15 @@ compute_mutation_trees = function(
     parallel = FALSE,
     progress_bar = FALSE
   )
+  
+  # Check errors and notify if any of the cohort cannot be built
+  if(length(filos) != length(patients)){
+    cli::cli_alert_danger(
+      "Errors computing trees. \\
+    Check outputs and fix those, or remove the patients that raise it!")
+    stop("Aborting.")
+  }
+  
   names(filos) = patients
 
   x$phylogenies = filos

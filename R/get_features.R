@@ -96,29 +96,32 @@ get_features = function(x, patients = x$patients)
     # missing patients and driver genes
     miss_Pat = setdiff(M$patientID, N$patientID)
     miss_drv = setdiff(colnames(M), colnames(N))
-
+    
+    for(p in miss_Pat) N = rbind(N, c(p, rep(0, ncol(M) - 1)))
+    for(d in miss_drv) { N = cbind(N, 0); colnames(N)[ncol(N)] = d }
+    
     # Add template 0-ed matrices with the right rows/ columns
-    if(length(miss_Pat) > 0)
-    {
-      empty = M %>% filter(patientID %in% !!miss_Pat)
-      empty[, 2:ncol(empty)] = 0
+    # if(length(miss_Pat) > 0)
+    # {
+    #   empty = M %>% filter(patientID %in% !!miss_Pat)
+    #   empty[, 2:ncol(empty)] = 0
+    # 
+    #   N = bind_rows(N, empty)
+    # }
+    # 
+    # if(length(miss_drv) > 0)
+    #   N = bind_cols(N,
+    #                 M %>%
+    #                   select(!!miss_drv) %>%
+    #                   replace(TRUE, 0)
+    #   )
 
-      N = bind_rows(N, empty)
-    }
-
-    if(length(miss_drv) > 0)
-      N = bind_cols(N,
-                    M %>%
-                      select(!!miss_drv) %>%
-                      replace(TRUE, 0)
-      )
-
-    N[, colnames(M)]
+    N[, colnames(M)] %>% as_tibble()
   }
 
   Matrix_clonal_drivers = complement(Matrix_drivers, Matrix_clonal_drivers) %>%
     replace(is.na(.), 0)
-  Matrix_subclonal_drivers = complement(Matrix_drivers, Matrix_subclonal_drivers) %>%
+  Matrix_subclonal_drivers = complement(Matrix_drivers, N = Matrix_subclonal_drivers) %>%
     replace(is.na(.), 0)
 
   # =-=-=-=-=-=-=-=-

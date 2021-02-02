@@ -55,6 +55,8 @@ compute_clone_trees = function(
   filos = easypar::run(
     FUN = function(patient)
     {
+      cli::cli_h1(patient)
+      
       if(has_patient_trees(x, patient) & !overwrite)
       {
         message('Trees already available for ', patient, ', use overwrite = FALSE to force overwriting.')
@@ -83,6 +85,15 @@ compute_clone_trees = function(
     parallel = FALSE,
     progress_bar = FALSE
   )
+  
+  # Check errors and notify if any of the cohort cannot be built
+  if(length(filos) != length(patients)){
+    cli::cli_alert_danger(
+    "Errors computing trees. \\
+    Check outputs and fix those, or remove the patients that raise it!")
+    stop("Aborting.")
+  }
+  
   names(filos) = patients
 
   x$phylogenies = filos

@@ -81,7 +81,7 @@ revolver_cohort = function(dataset,
     )
 
   # Check input and stop on error
-  dataset = check_input(dataset, CCF_parser)
+  dataset = revolver:::check_input(dataset, CCF_parser)
   dataset$id = paste0('__mut_id_', 1:nrow(dataset))
 
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -93,7 +93,7 @@ revolver_cohort = function(dataset,
   # by cluster size
   grp = dataset %>%
     group_by(patientID, cluster) %>%
-    summarize(cluster_size = n()) %>%
+    summarize(cluster_size = n(), .groups = 'keep') %>%
     ungroup()
 
   dataset = left_join(dataset, grp, by = c('patientID', 'cluster'))
