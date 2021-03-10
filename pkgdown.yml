@@ -1,0 +1,15 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  Cross_CRC_MSeq: Cross_CRC_MSeq.html
+  FAQ: FAQ.html
+  Getters: Getters.html
+  Input_formats: Input_formats.html
+  Plotting_functions: Plotting_functions.html
+  revolver: revolver.html
+last_built: 2021-03-10T00:38Z
+urls:
+  reference: caravagn.github.io/revolver/reference
+  article: caravagn.github.io/revolver/articles
+
