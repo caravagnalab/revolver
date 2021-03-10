@@ -6,15 +6,16 @@ status](https://travis-ci.org/caravagn/revolver.svg?branch=master)](https://trav
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![](https://img.shields.io/badge/Part%20of-evoverse-blue.svg)](https://caravagn.github.io/evoverse)
+[![R-CMD-check](https://github.com/caravagn/revolver/workflows/R-CMD-check/badge.svg)](https://github.com/caravagn/revolver/actions)
 <!-- badges: end -->
 
 # revolver <a href='caravagn.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 The `revolver` package implements the statistical model described in
-[Caravagna et al;
-PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to
-determine trajectories of repeated evolution from multi-region
-sequencing data of human cancers.
+[Caravagna et al; PMID:
+30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine
+trajectories of repeated evolution from multi-region sequencing data of
+human cancers.
 
 The package implements functions to process data from large cohorts, and
 determine different types of phylogenetic trees from the input data of
@@ -34,17 +35,16 @@ evoverse](https://caravagn.github.io/evoverse).
 
 If you use `revolver`, please cite:
 
-  - G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A.
+-   G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A.
     Graham, G. Sanguinetti, A. Sottoriva. *Detecting repeated cancer
     evolution from multi-region tumor sequencing data.* Nature Methods
-    15, 707–714
-(2018).
+    15, 707–714 (2018).
 
 #### Help and support
 
 [![](https://img.shields.io/badge/GitHub%20Pages-https://caravagn.github.io/revolver/-yellow.svg)](https://caravagn.github.io/revolver)
 
------
+------------------------------------------------------------------------
 
 ### Installation
 
@@ -64,12 +64,11 @@ clean interface to query and plot data; the previous package version is
 [mirrored, but no longer
 maintained.](https://github.com/caravagn/revolver/tree/pre_tibbles)
 
------
+------------------------------------------------------------------------
 
 #### Copyright and contacts
 
-Giulio Caravagna, PhD. *Institute of Cancer Research, London,
-UK*.
+Giulio Caravagna, PhD. *Institute of Cancer Research, London, UK*.
 
 [![](https://img.shields.io/badge/Email-gcaravagn@gmail.com-seagreen.svg)](mailto:gcaravagn@gmail.com)
 [![](https://img.shields.io/badge/Github-caravagn-seagreen.svg)](https://github.com/caravagn)

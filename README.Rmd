@@ -13,10 +13,11 @@ knitr::opts_chunk$set(
 ```
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/caravagn/revolver.svg?branch=master)](https://travis-ci.org/caravagn/revolver)
+[![R-CMD-check](https://github.com/caravagnalab/revolver/workflows/R-CMD-check/badge.svg)](https://github.com/caravagnalab/revolver/actions)
+[![pkgdown](https://github.com/caravagnalab/CNAqc/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/caravagnalab/CNAqc/actions/workflows/pkgdown.yaml)
+
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![](https://img.shields.io/badge/Part%20of-evoverse-blue.svg)](https://caravagn.github.io/evoverse)
-[![R-CMD-check](https://github.com/caravagn/revolver/workflows/R-CMD-check/badge.svg)](https://github.com/caravagn/revolver/actions)
+
 <!-- badges: end -->
 
 # revolver <a href='caravagn.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
@@ -25,8 +26,7 @@ The `revolver` package implements the statistical model described in [Caravagna 
 
 The package implements functions to process data from large cohorts, and determine different types of phylogenetic trees from the input data of each sequenced patients. The package provides also several functions to plot the data, and determine clusters of tumours that share repeated trajectories; this provides a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.
   
-`revolver` is part of the `evoverse`, a package that gathers multiple R packages to implement Cancer Evolution analyses; see more [about evoverse](https://caravagn.github.io/evoverse).
-
+  
 #### Citation
 
 [![](https://img.shields.io/badge/doi-10.1038/s41592--018--0108--x-red.svg)](https://doi.org/10.1038/s41592-018-0108-x)
