@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/caravagn/revolver.svg?branch=master)](https://travis-ci.org/caravagn/revolver)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![](https://img.shields.io/badge/Part%20of-evoverse-blue.svg)](https://caravagn.github.io/evoverse)
+[![R-CMD-check](https://github.com/caravagn/revolver/workflows/R-CMD-check/badge.svg)](https://github.com/caravagn/revolver/actions)
 <!-- badges: end -->
 
 # revolver <a href='caravagn.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
