@@ -3,7 +3,7 @@ template:
     part_of: evoverse
     footer: Test of my footer
 url:
-  caravagn.github.io/revolver
+  caravagnalab.github.io/revolver
   
 articles:
 - title: R Markdown
@@ -17,7 +17,7 @@ articles:
   
 authors:
   Giulio Caravagna:
-    href: https://sites.google.com/site/giuliocaravagna/
+    href: https://www.caravagnalab.org/
 
 reference:
 - title: Cohort functions
