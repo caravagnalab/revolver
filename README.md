@@ -25,8 +25,6 @@ and within patients.
 
 #### Citation
 
-[![](https://img.shields.io/badge/doi-10.1038/s41592--018--0108--x-red.svg)](https://doi.org/10.1038/s41592-018-0108-x)
-
 If you use `revolver`, please cite:
 
 -   G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A.
@@ -34,9 +32,11 @@ If you use `revolver`, please cite:
     evolution from multi-region tumor sequencing data.* Nature Methods
     15, 707–714 (2018).
 
+[![](https://img.shields.io/badge/doi-10.1038/s41592--018--0108--x-red.svg)](https://doi.org/10.1038/s41592-018-0108-x)
+
 #### Help and support
 
-[![](https://img.shields.io/badge/GitHub%20Pages-https://caravagn.github.io/revolver/-yellow.svg)](https://caravagn.github.io/revolver)
+[![](https://img.shields.io/badge/GitHub%20Pages-https://caravagnalab.github.io/revolver/-yellow.svg)](https://caravagnalab.github.io/revolver)
 
 ------------------------------------------------------------------------
 
@@ -47,16 +47,8 @@ You can install the released version of `revolver` from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("caravagn/revolver")
+devtools::install_github("caravagnalab.github.io/revolver")
 ```
-
-**New version.** v0.3 is a fresh
-[implementation](https://caravagn.github.io/revolver/reference/index.html)
-of `revolver` that follows the [tidy
-paradigm](https://www.tidyverse.org/). The new implementation provides a
-clean interface to query and plot data; the previous package version is
-[mirrored, but no longer
-maintained.](https://github.com/caravagn/revolver/tree/pre_tibbles)
 
 ------------------------------------------------------------------------
 
