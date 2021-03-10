@@ -1,0 +1,223 @@
+---
+title: "Getter functions"
+output: rmarkdown::html_vignette
+author: "Giulio Caravagna"
+institute: "Institute for Cancer Research"
+email: "giulio.caravagna@ed.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Getter functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r setup, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(revolver)
+```
+
+
+Since the new release of `REVOLVER` (>= 0.3), we have implemented the internal structure of the package objects using the tidy [approach](https://www.tidyverse.org/), and created a different types of [getters](https://caravagn.github.io/revolver/reference/index.html)  which can be used to access:
+
+* the data used to build the cohort;
+
+* the trees available for each patient;
+
+* the clusters computed by `REVOLVER`;
+
+* the results from the jackknife computations used by `REVOLVER` to determine the stability of the results;
+
+* other summary features (statistics, in broad sense).
+
+In this vignette, we show the getters using one of the cohort objects released in the `evoverse.datasets` [R package](https://github.com/caravagn/evoverse.datasets).
+```{r, echo = TRUE, warning=FALSE}
+# Data released in the 'evoverse.datasets'
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+```
+
+# Access patient-level data
+
+Several types of getters can be used to perform queries on the data. All functions follow a common parametrization pattern, as they require
+
+* `x` a `REVOLVER` cohort object;
+* `patients` a list of patients IDs that will be used to subset the outputs (all by default);
+
+```{r, echo = TRUE, warning=FALSE}
+# Access all data for a patient
+Data(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Access only the drivers for a patient
+Drivers(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Access the name of the clonal cluster for this patient
+Clonal_cluster(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Get the list of truncal (i.e., clonal) mutations in a patient
+Truncal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Get the list of subclonal mutations in a patient
+Subclonal(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Access the names of the samples for a patient
+Samples(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Return the CCF entry for all the mutations of a patient,
+CCF(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+
+# Return the CCF entry for all the clones of a patient, the overall CCF
+# values are obtained by REVOLVER from the average of CCF values across clones.
+CCF_clusters(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001')
+```
+
+# Access the trees in the cohort
+
+Trees have getters similar to the data, and getters distinguish from trees before and after the fit. 
+
+**Note** The tree fits might be slightly different from the trees before the fit, because their Informatin Transfer is not expanded. Therefore keep this in mind when comparing trees.
+
+You can extract the tree of a patient, before its fit. This can be one specific tree (in terms of its rank), or all of them at once. Trees before the fit are indexed by their rank, which is obtained from the ordering of the tree scores, which are obtained by the evaluated tree structure before the fit. 
+
+These getters, for instance `Phylo`, take as parameter
+
+* `x` the cohort object;
+* `p` the patient identifier;
+* `rank` the rank of the tree to extract;
+* `data` to decide whether one wants the trees before the fit (`trees`), or the actual fit tree `fits`.
+
+By logic, if you are asking for the fit trees (`data = 'fits'`), the `rank` parameter is not considered (because there is only one top-scoring tree fit by `REVOLVER`). 
+
+```{r, echo = TRUE, warning=FALSE}
+# Access the top-rank tree for a patient
+Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001', rank = 1)
+
+# Access all trees for a patient. We use CRUK0002 because it has only 3 trees
+Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = NULL)
+```
+
+Notice that in the printing of a tree to screen you can immediately see  the Information Transfer (IT) for the driver genes. In general, you can access the IT of a tree with another getter, which takes as extra parameter `type` in order to return either the transfer across drivers, or across clones annotated in a tree.
+
+```{r, echo = TRUE, warning=FALSE}
+# Information Transfer for the drivers, top-ranking tree
+ITransfer(TRACERx_NEJM_2017_REVOLVER, "CRUK0001", rank = 1, type = 'drivers')
+
+# Information Transfer for the clones, top-ranking tree
+ITransfer(TRACERx_NEJM_2017_REVOLVER, "CRUK0001", rank = 1, type = 'clones')
+```
+
+Fit trees can be accessed using the `data` argument. Essentially this is like before, but does not require specifying a `rank` parameter.
+
+```{r, echo = TRUE, warning=FALSE}
+# Access the fit tree for a patient
+Phylo(TRACERx_NEJM_2017_REVOLVER, 'CRUK0001', data = 'fits')
+
+# Information Transfer for the drivers, top-ranking tree. Notice that this is different
+# from the result of the above call, because the transfer after fitting is expanded
+ITransfer(TRACERx_NEJM_2017_REVOLVER, "CRUK0001", rank = 1, type = 'drivers', data = 'fits')
+```
+
+
+# Access clusters and jackknife statistics
+
+Once `REVOLVER` clusters have been computed, a tibble is available that maps each patient to a cluster.  
+
+```{r, echo = TRUE, warning=FALSE}
+# Hard clustering assignments
+Cluster(TRACERx_NEJM_2017_REVOLVER)
+
+# Specify a patient
+Cluster(TRACERx_NEJM_2017_REVOLVER, "CRUK0001")
+```
+
+If after the cluster jackknife statistics have been computed, they can be extracted from the cohort object.
+```{r, echo = TRUE, warning=FALSE}
+# A matrix that reports the probability that every pair of patients is assigned to 
+# the same cluster across the jackknife resamples
+Jackknife_patient_coclustering(TRACERx_NEJM_2017_REVOLVER) %>% head
+
+# A vector with the median stability per cluster
+Jackknife_cluster_stability(TRACERx_NEJM_2017_REVOLVER)
+
+# A tibble reporting the probability of detecting (at least in one patient) a trajectory 
+# across the jackknife resamples, and the average number of patients where the trajectory
+# is found across all resamples.
+Jackknife_trajectories_stability(TRACERx_NEJM_2017_REVOLVER)
+```
+
+
+# Summary statistics 
+
+A number of different types of [Stats_* functions](https://caravagn.github.io/revolver/reference/index.html)  can be used to access cohort-level statistics.
+
+
+
+### Summaries for patients' data
+
+You can get a broad set of summary statistics for a custom set of patients. The statistics that are available in summarised format are patient-level (mutatational burdern, drivers etc.), and driver-level (frequency, clonality etc.). 
+
+```{r, echo = TRUE, warning=FALSE}
+# This returns patient-level statistics like the number of biopsies, overall mutations, drivers,
+# clones with drivers, truncal and subclonal mutations.
+# 
+# This is also synonim to `Stats(TRACERx_NEJM_2017_REVOLVER)`
+Stats_cohort(TRACERx_NEJM_2017_REVOLVER)
+
+
+# This returns driver-level statistics like the number of times the driver is clonal,
+# subclonal, or found in general, and for quantity normalized by cohort size (i.e., the percentage)
+Stats_drivers(TRACERx_NEJM_2017_REVOLVER)
+```
+
+The list of all patients in the cohort is accessible as `TRACERx_NEJM_2017_REVOLVER$patients`, and these functions can be run on a smaller subset of patients.
+
+```{r, echo = TRUE, warning=FALSE}
+Stats_cohort(TRACERx_NEJM_2017_REVOLVER, patients = TRACERx_NEJM_2017_REVOLVER$patients[1:5])
+```
+
+
+### Summaries for trees and fits
+
+There are getters for summary statistics that work for trees and fits, with the same principles fo the getters for the data discussed above
+
+```{r, echo = TRUE, warning=FALSE}
+# This returns patient-level statistics for the trees available in a patient. The tibble reports
+# whether the patient has trees annotated, the total number of trees, their minimum and maximum
+# scores mutations and the total number of differnet combinations of Information Transfer for 
+# the available trees.
+Stats_trees(TRACERx_NEJM_2017_REVOLVER)
+
+# This returns the same table of above, but with some extended information on the fits (like the fit rank, etc)
+Stats_fits(TRACERx_NEJM_2017_REVOLVER)
+```
+
+### Summaries for trees and fits
+
+The index of Divergent Evolutionary Trajectories is a 
+measure derived from Shannon's entropy to determine,
+for any driver event `X`, how heterogeneous are the trajectories that lead to `X`.
+
+```{r, echo = TRUE, warning=FALSE}
+DET_index(TRACERx_NEJM_2017_REVOLVER)
+```
+
+# Other features
+
+A number of different features in matrix format can be extracted using the `get_features` function.
+
+```{r, echo = TRUE, warning=FALSE}
+features = get_features(TRACERx_NEJM_2017_REVOLVER)
+
+# Matrix of the mean CCF/ binary value for a driver across all patient's biopsies
+features$Matrix_mean_CCF %>% print
+
+# Matrix of the occurrence of drivers across all patients
+features$Matrix_drivers %>% print
+
+# Matrix of the occurrence of clonal drivers across all patients
+features$Matrix_clonal_drivers %>% print
+
+# Matrix of the occurrence of subclonal drivers across all patients
+features$Matrix_subclonal_drivers %>% print
+
+# Matrix of the occurrence of the inferred trajectories across all patients
+features$Matrix_trajectories %>% print
+```

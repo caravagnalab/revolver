@@ -55,7 +55,7 @@ plot_trajectories_per_cluster = function(x, min_counts = 5)
     
     # Adapt min_counts
     if (min_counts > 0 & min_counts < 1) {
-      cli::cli_alert_warning("min_counts in [0,1], interpreting that as a proportion.")
+      cli::cli_alert("min_counts in [0,1], interpreting that as a proportion.")
       min_counts = length(patients) * min_counts
     }
     

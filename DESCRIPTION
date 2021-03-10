@@ -44,7 +44,7 @@ Remotes:
     caravagn/ctree,
     caravagn/mtree,
     caravagn/evoverse.datasets
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     knitr,
     rmarkdown,

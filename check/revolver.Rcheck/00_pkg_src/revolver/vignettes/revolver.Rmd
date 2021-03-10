@@ -1,0 +1,54 @@
+---
+title: "Getting started with REVOLVER"
+output: rmarkdown::html_vignette
+author: "Giulio Caravagna"
+institute: "Institute for Cancer Research"
+email: "giulio.caravagna@ed.ac.uk"
+vignette: >
+  %\VignetteIndexEntry{Getting started with REVOLVER}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `REVOLVER` package implements the statistical model described in [Caravagna et al; PMID: 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine trajectories of repeated evolution in a cohort of multi-region sequencing datasets. 
+
+The repeatability of evolution is measured with a new method that extracts evolutionary trajectories within a single patient (intra-tumour), and correlates them against the cohort (inter-patient).
+
+The correlation across patients is measured extracting evolutionary trajectories from the *phylogenetic ordering* of driver alterations detected from the patients' trees. Drivers must be annotated in the input genome sequencing data, and shall occur across multiple patients.
+
+### Analysis pipeline
+
+
+A `REVOLVER` analysis follows the following steps (the main function to implement the step is reported):
+
+1. create a `REVOLVER` cohort (`revolver_cohort`);
+  
+2. generate phylogenetic trees for each patient in the cohort (`compute_clone_trees`, `compute_mutation_trees`, etc.);
+
+3. fit the best tree to a patient's data, correlating the fit with the other patients' trees (`revolver_fit`);
+
+4. cluster the cohort into groups of patients whose tumours follow similar patterns of repeated evolution (`revolver_cluster`);
+
+5. evaluate different measures confidence for the clusters using jackknife statistics (`revolver_jackknife`);;
+
+At the end of each one of these steps, you can use a number of `REVOLVER` functions to inspect or plot the results of the analysis.
+
+### Vignettes
+
+The following vignettes are available:
+
+1. [Introduction:](https://caravagn.github.io/revolver/articles/Input_formats.html) which discusses input formats, and the creation of  a `REVOLVER` cohort from input sequencing data;
+
+2. [Getter functions:](https://caravagn.github.io/revolver/articles/Getters.html) which discusses different getter functions to extract information from a `REVOLVER` cohort;
+
+3. [Plotting functions:](https://caravagn.github.io/revolver/articles/Plotting_functions.html) which discusses different plotting functions to visualize cohorts, data, fits etc.; 
+
+
+You might also want to the see a list of [Frequently Asked Questions](https://caravagn.github.io/revolver/articles/FAQ.html)
