@@ -27,4 +27,4 @@ VignetteBuilder: knitr
 URL: https://github.com/caravagn/revolver
 BugReports: https://github.com/caravagn/revolver/issues
 NeedsCompilation: no
-Packaged: 2021-03-11 00:10:06 UTC; gcaravagna
+Packaged: 2021-03-11 09:49:48 UTC; gcaravagna

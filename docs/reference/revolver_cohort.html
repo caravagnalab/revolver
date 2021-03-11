@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,8 +48,7 @@
 
 <meta property="og:title" content="Construct a REVOLVER cohort. — revolver_cohort" />
 <meta property="og:description" content="Construct a REVOLVER cohort." />
-<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="caravagnalab.github.io/revolver/logo.png" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -85,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,29 +98,8 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
-    </li>
-    <li>
-      <a href="../articles/FAQ.html">Frequently Asked Questions</a>
-    </li>
-    <li>
-      <a href="../articles/Getters.html">Getter functions</a>
-    </li>
-    <li>
-      <a href="../articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
-    </li>
-    <li>
-      <a href="../articles/Plotting_functions.html">Plotting functions</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -125,8 +107,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/caravagn/revolver">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/caravagn/revolver/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -152,13 +134,13 @@
     <p>Construct a REVOLVER cohort.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revolver_cohort</span>(
-  <span class='no'>dataset</span>,
-  <span class='kw'>CCF_parser</span> <span class='kw'>=</span> <span class='kw pkg'>revolver</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/revolver/man/CCF_parser.html'>CCF_parser</a></span>,
-  <span class='kw'>ONLY.DRIVER</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>MIN.CLUSTER.SIZE</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>annotation</span> <span class='kw'>=</span> <span class='st'>"My REVOLVER dataset"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>revolver_cohort</span><span class='op'>(</span>
+  <span class='va'>dataset</span>,
+  CCF_parser <span class='op'>=</span> <span class='fu'>revolver</span><span class='fu'>::</span><span class='va'><a href='CCF_parser.html'>CCF_parser</a></span>,
+  ONLY.DRIVER <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  MIN.CLUSTER.SIZE <span class='op'>=</span> <span class='fl'>10</span>,
+  annotation <span class='op'>=</span> <span class='st'>"My REVOLVER dataset"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,37 +183,35 @@ inside REVOLVER; <code><a href='CCF_parser.html'>CCF_parser</a></code> (the defa
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Example cohort creation with the TRACERx data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>TRACERx_data</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘TRACERx_data’ not found</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>TRACERx_data</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘TRACERx_data’ not found</span></div><div class='input'>
 <span class='co'># To speed up the process we use only 2 patients</span>
-<span class='no'>TRACERx_data</span> <span class='kw'>=</span> <span class='no'>TRACERx_data</span> <span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>patientID</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'TRACERx_data' not found</span></div><div class='input'>
-<span class='no'>cohort</span> <span class='kw'>=</span> <span class='fu'>revolver_cohort</span>(<span class='no'>TRACERx_data</span>, <span class='kw'>annotation</span> <span class='kw'>=</span> <span class='st'>'A toy REVOLVER dataset'</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER ~ Cohort constructor ] 
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>◉  Use only drivers</span><span> 1 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; ◉ Reject clusters with size below</span><span> 10 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(X = X, FUN = FUN, ...): object 'TRACERx_data' not found</span></div><div class='input'>
+<span class='va'>TRACERx_data</span> <span class='op'>=</span> <span class='va'>TRACERx_data</span> <span class='op'>%&gt;%</span>
+   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>patientID</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'CRUK0001'</span>, <span class='st'>'CRUK0002'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in filter(., patientID %in% c("CRUK0001", "CRUK0002")): object 'TRACERx_data' not found</span></div><div class='input'>
+<span class='va'>cohort</span> <span class='op'>=</span> <span class='fu'>revolver_cohort</span><span class='op'>(</span><span class='va'>TRACERx_data</span>, annotation <span class='op'>=</span> <span class='st'>'A toy REVOLVER dataset'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER ~ Cohort constructor ] 
+#&gt; </span><span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Using </span><span style='font-weight: bold;'>only driver</span><span> mutations. </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Rejecting clusters with less than </span><span style='font-weight: bold;'>10</span><span> mutations. </span></div><div class='output co'>#&gt; <span class='error'>Error in lapply(X = X, FUN = FUN, ...): object 'TRACERx_data' not found</span></div><div class='input'>
 <span class='co'># The S3 print/ plot for this cohort</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>cohort</span>)</div><div class='output co'>#&gt; <span class='error'>Error in print(cohort): object 'cohort' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>cohort</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(cohort): object 'cohort' not found</span></div></span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>cohort</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in print(cohort): object 'cohort' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>cohort</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(cohort): object 'cohort' not found</span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://sites.google.com/site/giuliocaravagna/'>Giulio Caravagna</a>.</p>
+  <p>Developed by <a href='https://www.caravagnalab.org/'>Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

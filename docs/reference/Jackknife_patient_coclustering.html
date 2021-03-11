@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -46,8 +50,7 @@
 <meta property="og:description" content="After jackknife computations via revolver_jackknife,
 this function extracts a matrix reporting the co-clustering
 probability for the input patients." />
-<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="caravagnalab.github.io/revolver/logo.png" />
 
 
 
@@ -65,7 +68,7 @@ probability for the input patients." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -87,7 +90,7 @@ probability for the input patients." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,29 +100,8 @@ probability for the input patients." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
-    </li>
-    <li>
-      <a href="../articles/FAQ.html">Frequently Asked Questions</a>
-    </li>
-    <li>
-      <a href="../articles/Getters.html">Getter functions</a>
-    </li>
-    <li>
-      <a href="../articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
-    </li>
-    <li>
-      <a href="../articles/Plotting_functions.html">Plotting functions</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -127,8 +109,8 @@ probability for the input patients." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/caravagn/revolver">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/caravagn/revolver/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -156,7 +138,7 @@ this function extracts a matrix reporting the co-clustering
 probability for the input patients.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Jackknife_patient_coclustering</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>Jackknife_patient_coclustering</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,9 +160,10 @@ probability for the input patients.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, package <span class='op'>=</span> <span class='st'>'evoverse.datasets'</span><span class='op'>)</span>
 
-<span class='fu'>Jackknife_patient_coclustering</span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt;          CRUK0001 CRUK0002 CRUK0003 CRUK0004 CRUK0005 CRUK0006 CRUK0007
+<span class='fu'>Jackknife_patient_coclustering</span><span class='op'>(</span><span class='va'>TRACERx_NEJM_2017_REVOLVER</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          CRUK0001 CRUK0002 CRUK0003 CRUK0004 CRUK0005 CRUK0006 CRUK0007
 #&gt; CRUK0001     0.00     0.00     0.55     0.75     0.00     0.00     0.65
 #&gt; CRUK0002     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0003     0.55     0.00     0.00     0.45     0.00     0.00     0.70
@@ -191,6 +174,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.85     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.90     0.75     0.00
 #&gt; CRUK0010     0.75     0.00     0.75     0.60     0.00     0.00     0.80
+#&gt; CRUK0011     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0012     0.75     0.00     0.75     0.60     0.00     0.00     0.80
+#&gt; CRUK0013     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0015     0.90     0.00     0.60     0.75     0.00     0.00     0.70
+#&gt; CRUK0016     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.70     0.90     0.00
+#&gt; CRUK0018     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0019     0.75     0.00     0.65     0.55     0.00     0.00     0.75
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0021     0.80     0.00     0.55     0.70     0.00     0.00     0.65
+#&gt; CRUK0022     0.95     0.00     0.60     0.80     0.00     0.00     0.70
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.05     0.70     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0026     0.90     0.00     0.55     0.75     0.00     0.00     0.65
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0028     0.65     0.00     0.65     0.55     0.00     0.00     0.70
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.90     0.75     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0031     0.00     0.60     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0032     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0033     0.00     0.80     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0034     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.90     0.75     0.00
+#&gt; CRUK0036     0.00     0.35     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0037     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.75     0.00     0.70     0.60     0.00     0.00     0.80
+#&gt; CRUK0042     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0044     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0046     0.00     0.80     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0047     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0048     0.85     0.00     0.50     0.70     0.00     0.00     0.60
+#&gt; CRUK0049     0.10     0.00     0.05     0.10     0.00     0.00     0.05
+#&gt; CRUK0050     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0051     0.05     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0054     0.65     0.00     0.60     0.55     0.00     0.00     0.75
+#&gt; CRUK0055     0.00     0.80     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0056     0.00     0.80     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0057     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0058     0.95     0.00     0.60     0.80     0.00     0.00     0.70
+#&gt; CRUK0059     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.70     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0061     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.80     0.65     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.00     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.85     0.75     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.65     0.50     0.00
+#&gt; CRUK0071     0.00     0.05     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0072     0.75     0.00     0.50     0.60     0.00     0.00     0.60
+#&gt; CRUK0073     0.00     0.60     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.70     0.85     0.00
+#&gt; CRUK0078     0.00     0.05     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.80     0.00     0.50     0.65     0.00     0.00     0.60
+#&gt; CRUK0081     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0084     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0085     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.85     0.70     0.00
+#&gt; CRUK0087     0.00     0.00     0.00     0.00     0.25     0.15     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.75     0.60     0.00
+#&gt; CRUK0089     0.00     0.15     0.05     0.00     0.00     0.00     0.05
+#&gt; CRUK0090     0.00     0.15     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0091     0.00     0.05     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0092     0.00     0.25     0.05     0.00     0.05     0.05     0.05
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0095     0.00     0.70     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0096     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.75     0.60     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.90     0.75     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.65     0.85     0.00
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0008 CRUK0009 CRUK0010 CRUK0011 CRUK0012 CRUK0013 CRUK0014
 #&gt; CRUK0001     0.00     0.00     0.75     0.00     0.75     0.00     0.00
 #&gt; CRUK0002     0.85     0.00     0.00     0.05     0.00     0.75     0.00
@@ -202,6 +274,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.00     0.00     0.05     0.00     0.90     0.00
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.00     0.00     0.10
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.90     0.00     0.00
+#&gt; CRUK0011     0.05     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0012     0.00     0.00     0.90     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.90     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0014     0.00     0.10     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0015     0.00     0.00     0.80     0.00     0.80     0.00     0.00
+#&gt; CRUK0016     0.05     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0017     0.00     0.75     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0018     0.05     0.00     0.00     0.90     0.00     0.05     0.00
+#&gt; CRUK0019     0.00     0.00     0.85     0.00     0.85     0.00     0.00
+#&gt; CRUK0020     0.00     0.05     0.00     0.00     0.00     0.00     0.55
+#&gt; CRUK0021     0.00     0.00     0.65     0.00     0.65     0.00     0.00
+#&gt; CRUK0022     0.00     0.00     0.80     0.00     0.80     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0024     0.80     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0025     0.00     0.10     0.00     0.00     0.00     0.00     0.85
+#&gt; CRUK0026     0.00     0.00     0.75     0.00     0.75     0.00     0.00
+#&gt; CRUK0027     0.00     0.10     0.00     0.00     0.00     0.00     0.75
+#&gt; CRUK0028     0.00     0.00     0.85     0.00     0.80     0.00     0.00
+#&gt; CRUK0029     0.00     1.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0030     0.00     0.05     0.00     0.00     0.00     0.00     0.75
+#&gt; CRUK0031     0.75     0.00     0.00     0.05     0.00     0.70     0.00
+#&gt; CRUK0032     0.85     0.00     0.00     0.05     0.00     0.80     0.00
+#&gt; CRUK0033     0.95     0.00     0.00     0.05     0.00     0.85     0.00
+#&gt; CRUK0034     0.05     0.00     0.00     0.80     0.00     0.05     0.00
+#&gt; CRUK0035     0.00     1.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0036     0.35     0.00     0.00     0.00     0.00     0.25     0.00
+#&gt; CRUK0037     0.05     0.00     0.00     0.90     0.00     0.05     0.00
+#&gt; CRUK0038     0.05     0.00     0.00     0.85     0.00     0.05     0.00
+#&gt; CRUK0039     0.05     0.00     0.00     0.95     0.00     0.05     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0041     0.00     0.00     0.90     0.00     0.90     0.00     0.00
+#&gt; CRUK0042     0.05     0.00     0.00     0.80     0.00     0.05     0.00
+#&gt; CRUK0043     0.90     0.00     0.00     0.05     0.00     0.80     0.00
+#&gt; CRUK0044     0.05     0.00     0.00     0.90     0.00     0.05     0.00
+#&gt; CRUK0045     1.00     0.00     0.00     0.05     0.00     0.90     0.00
+#&gt; CRUK0046     0.95     0.00     0.00     0.05     0.00     0.85     0.00
+#&gt; CRUK0047     0.75     0.00     0.00     0.05     0.00     0.70     0.00
+#&gt; CRUK0048     0.00     0.00     0.70     0.00     0.70     0.00     0.00
+#&gt; CRUK0049     0.00     0.00     0.05     0.00     0.05     0.00     0.10
+#&gt; CRUK0050     1.00     0.00     0.00     0.05     0.00     0.90     0.00
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.05     0.00     0.00     0.00     0.00     0.65
+#&gt; CRUK0054     0.00     0.00     0.80     0.00     0.80     0.00     0.00
+#&gt; CRUK0055     0.95     0.00     0.00     0.05     0.00     0.85     0.00
+#&gt; CRUK0056     0.95     0.00     0.00     0.05     0.00     0.85     0.00
+#&gt; CRUK0057     0.65     0.00     0.00     0.15     0.00     0.55     0.00
+#&gt; CRUK0058     0.00     0.00     0.80     0.00     0.80     0.00     0.00
+#&gt; CRUK0059     0.05     0.00     0.00     0.90     0.00     0.05     0.00
+#&gt; CRUK0060     0.85     0.00     0.00     0.05     0.00     0.75     0.00
+#&gt; CRUK0061     0.85     0.00     0.00     0.05     0.00     0.75     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.90     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.05     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.95     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0070     0.00     0.75     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0071     0.05     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0072     0.00     0.00     0.65     0.00     0.70     0.00     0.00
+#&gt; CRUK0073     0.75     0.00     0.00     0.05     0.00     0.70     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.10     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.75     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0078     0.10     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.65     0.00     0.65     0.00     0.00
+#&gt; CRUK0081     0.05     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.90     0.00     0.00     0.05     0.00     0.80     0.00
+#&gt; CRUK0085     0.75     0.00     0.00     0.05     0.00     0.65     0.00
+#&gt; CRUK0086     0.00     0.95     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0087     0.00     0.25     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.85     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0089     0.20     0.00     0.00     0.00     0.00     0.15     0.00
+#&gt; CRUK0090     0.20     0.00     0.00     0.05     0.00     0.20     0.00
+#&gt; CRUK0091     0.05     0.10     0.00     0.00     0.00     0.05     0.10
+#&gt; CRUK0092     0.30     0.05     0.00     0.00     0.00     0.20     0.00
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.90     0.00     0.00     0.05     0.00     0.85     0.00
+#&gt; CRUK0095     0.85     0.05     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0096     0.05     0.00     0.00     0.95     0.00     0.05     0.00
+#&gt; CRUK0097     0.00     0.85     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0098     0.00     1.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0099     0.00     0.70     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0015 CRUK0016 CRUK0017 CRUK0018 CRUK0019 CRUK0020 CRUK0021
 #&gt; CRUK0001     0.90     0.00     0.00     0.00     0.75     0.00     0.80
 #&gt; CRUK0002     0.00     0.05     0.00     0.05     0.00     0.00     0.00
@@ -213,6 +374,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.05     0.00     0.05     0.00     0.00     0.00
 #&gt; CRUK0009     0.00     0.00     0.75     0.00     0.00     0.05     0.00
 #&gt; CRUK0010     0.80     0.00     0.00     0.00     0.85     0.00     0.65
+#&gt; CRUK0011     0.00     0.00     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0012     0.80     0.00     0.00     0.00     0.85     0.00     0.65
+#&gt; CRUK0013     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0014     0.00     0.00     0.10     0.00     0.00     0.55     0.00
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.75     0.00     0.80
+#&gt; CRUK0016     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0018     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0019     0.75     0.00     0.00     0.00     0.00     0.00     0.60
+#&gt; CRUK0020     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0021     0.80     0.00     0.00     0.00     0.60     0.00     0.00
+#&gt; CRUK0022     0.95     0.00     0.00     0.00     0.75     0.00     0.85
+#&gt; CRUK0023     0.00     0.00     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0024     0.05     0.05     0.00     0.05     0.05     0.00     0.05
+#&gt; CRUK0025     0.00     0.00     0.10     0.00     0.00     0.55     0.00
+#&gt; CRUK0026     0.90     0.00     0.00     0.00     0.70     0.00     0.80
+#&gt; CRUK0027     0.00     0.00     0.10     0.00     0.00     0.50     0.00
+#&gt; CRUK0028     0.70     0.00     0.00     0.00     0.75     0.00     0.55
+#&gt; CRUK0029     0.00     0.00     0.75     0.00     0.00     0.05     0.00
+#&gt; CRUK0030     0.00     0.00     0.05     0.00     0.00     0.45     0.00
+#&gt; CRUK0031     0.00     0.15     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0032     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0033     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0034     0.00     0.00     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.75     0.00     0.00     0.05     0.00
+#&gt; CRUK0036     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0037     0.00     0.00     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.00     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.00     0.00     0.95     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0041     0.80     0.00     0.00     0.00     0.85     0.00     0.65
+#&gt; CRUK0042     0.00     0.00     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0044     0.00     0.00     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0046     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0047     0.00     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0048     0.85     0.00     0.00     0.00     0.65     0.00     0.75
+#&gt; CRUK0049     0.05     0.00     0.00     0.00     0.05     0.10     0.10
+#&gt; CRUK0050     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0052     0.00     0.00     0.05     0.00     0.00     0.75     0.00
+#&gt; CRUK0054     0.70     0.00     0.00     0.00     0.75     0.00     0.55
+#&gt; CRUK0055     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0056     0.00     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0057     0.00     0.05     0.00     0.15     0.00     0.00     0.00
+#&gt; CRUK0058     0.95     0.00     0.00     0.00     0.75     0.00     0.85
+#&gt; CRUK0059     0.00     0.00     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0061     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.65     0.00     0.00     0.05     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.15     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.70     0.00     0.00     0.05     0.00
+#&gt; CRUK0070     0.00     0.00     0.50     0.00     0.00     0.05     0.00
+#&gt; CRUK0071     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0072     0.80     0.00     0.00     0.00     0.60     0.00     0.70
+#&gt; CRUK0073     0.00     0.20     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.85     0.00     0.00     0.05     0.00
+#&gt; CRUK0078     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.80     0.00     0.00     0.00     0.60     0.00     0.70
+#&gt; CRUK0081     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0085     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0086     0.00     0.00     0.70     0.00     0.00     0.05     0.00
+#&gt; CRUK0087     0.00     0.00     0.20     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.00     0.60     0.00     0.00     0.05     0.00
+#&gt; CRUK0089     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0090     0.00     0.55     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0091     0.00     0.70     0.10     0.00     0.00     0.05     0.00
+#&gt; CRUK0092     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0093     0.00     0.70     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.05     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0095     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0096     0.00     0.00     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.65     0.00     0.00     0.00     0.00
+#&gt; CRUK0098     0.00     0.00     0.75     0.00     0.00     0.05     0.00
+#&gt; CRUK0099     0.00     0.00     0.85     0.00     0.00     0.05     0.00
+#&gt; CRUK0100     0.00     0.75     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0022 CRUK0023 CRUK0024 CRUK0025 CRUK0026 CRUK0027 CRUK0028
 #&gt; CRUK0001     0.95     0.00     0.05     0.00     0.90     0.00     0.65
 #&gt; CRUK0002     0.00     0.00     0.70     0.00     0.00     0.00     0.00
@@ -224,6 +474,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.00     0.80     0.00     0.00     0.00     0.00
 #&gt; CRUK0009     0.00     0.00     0.00     0.10     0.00     0.10     0.00
 #&gt; CRUK0010     0.80     0.00     0.05     0.00     0.75     0.00     0.85
+#&gt; CRUK0011     0.00     0.85     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0012     0.80     0.00     0.05     0.00     0.75     0.00     0.80
+#&gt; CRUK0013     0.00     0.00     0.80     0.00     0.00     0.00     0.00
+#&gt; CRUK0014     0.00     0.00     0.00     0.85     0.00     0.75     0.00
+#&gt; CRUK0015     0.95     0.00     0.05     0.00     0.90     0.00     0.70
+#&gt; CRUK0016     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0018     0.00     0.85     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0019     0.75     0.00     0.05     0.00     0.70     0.00     0.75
+#&gt; CRUK0020     0.00     0.00     0.00     0.55     0.00     0.50     0.00
+#&gt; CRUK0021     0.85     0.00     0.05     0.00     0.80     0.00     0.55
+#&gt; CRUK0022     0.00     0.00     0.05     0.00     0.95     0.00     0.70
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.05     0.00     0.00     0.00     0.05     0.00     0.05
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.00     0.80     0.00
+#&gt; CRUK0026     0.95     0.00     0.05     0.00     0.00     0.00     0.65
+#&gt; CRUK0027     0.00     0.00     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0028     0.70     0.00     0.05     0.00     0.65     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.75     0.00     0.70     0.00
+#&gt; CRUK0031     0.00     0.00     0.60     0.00     0.00     0.00     0.00
+#&gt; CRUK0032     0.00     0.00     0.70     0.00     0.00     0.00     0.00
+#&gt; CRUK0033     0.00     0.00     0.75     0.00     0.00     0.00     0.00
+#&gt; CRUK0034     0.00     0.75     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0036     0.00     0.00     0.20     0.00     0.00     0.00     0.00
+#&gt; CRUK0037     0.00     0.85     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.80     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.90     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.80     0.00     0.05     0.00     0.75     0.00     0.85
+#&gt; CRUK0042     0.00     0.75     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.00     0.70     0.00     0.00     0.00     0.00
+#&gt; CRUK0044     0.00     0.85     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.00     0.80     0.00     0.00     0.00     0.00
+#&gt; CRUK0046     0.00     0.00     0.75     0.00     0.00     0.00     0.00
+#&gt; CRUK0047     0.00     0.00     0.65     0.00     0.00     0.00     0.00
+#&gt; CRUK0048     0.90     0.00     0.00     0.00     0.85     0.00     0.65
+#&gt; CRUK0049     0.10     0.00     0.00     0.10     0.10     0.10     0.05
+#&gt; CRUK0050     0.00     0.00     0.80     0.00     0.00     0.00     0.00
+#&gt; CRUK0051     0.05     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.60     0.00     0.60     0.00
+#&gt; CRUK0054     0.70     0.00     0.05     0.00     0.65     0.00     0.70
+#&gt; CRUK0055     0.00     0.00     0.75     0.00     0.00     0.00     0.00
+#&gt; CRUK0056     0.00     0.00     0.75     0.00     0.00     0.00     0.00
+#&gt; CRUK0057     0.00     0.10     0.55     0.00     0.00     0.00     0.00
+#&gt; CRUK0058     1.00     0.00     0.05     0.00     0.95     0.00     0.70
+#&gt; CRUK0059     0.00     0.85     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.00     0.70     0.00     0.00     0.00     0.00
+#&gt; CRUK0061     0.00     0.00     0.70     0.00     0.00     0.00     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0071     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0072     0.80     0.00     0.05     0.00     0.75     0.00     0.55
+#&gt; CRUK0073     0.00     0.00     0.60     0.00     0.00     0.00     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0078     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.85     0.00     0.05     0.00     0.80     0.00     0.55
+#&gt; CRUK0081     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.00     0.00     0.70     0.00     0.00     0.00     0.00
+#&gt; CRUK0085     0.00     0.00     0.60     0.00     0.00     0.00     0.00
+#&gt; CRUK0086     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0087     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0089     0.00     0.00     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0090     0.00     0.00     0.15     0.00     0.00     0.00     0.00
+#&gt; CRUK0091     0.00     0.00     0.05     0.10     0.00     0.10     0.00
+#&gt; CRUK0092     0.00     0.00     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.00     0.75     0.00     0.00     0.00     0.00
+#&gt; CRUK0095     0.00     0.00     0.65     0.00     0.00     0.00     0.00
+#&gt; CRUK0096     0.00     0.85     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.00     0.05     0.00     0.05     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.10     0.00     0.10     0.00
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0029 CRUK0030 CRUK0031 CRUK0032 CRUK0033 CRUK0034 CRUK0035
 #&gt; CRUK0001     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.00     0.60     0.75     0.80     0.05     0.00
@@ -235,6 +574,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.00     0.75     0.85     0.95     0.05     0.00
 #&gt; CRUK0009     1.00     0.05     0.00     0.00     0.00     0.00     1.00
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0012     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.00     0.70     0.80     0.85     0.05     0.00
+#&gt; CRUK0014     0.10     0.75     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.00     0.00     0.15     0.05     0.05     0.00     0.00
+#&gt; CRUK0017     0.75     0.05     0.00     0.00     0.00     0.00     0.75
+#&gt; CRUK0018     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0019     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.05     0.45     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0021     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0024     0.00     0.00     0.60     0.70     0.75     0.05     0.00
+#&gt; CRUK0025     0.10     0.75     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0026     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.10     0.70     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0028     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.05     0.00     0.00     0.00     0.00     1.00
+#&gt; CRUK0030     0.05     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0031     0.00     0.00     0.00     0.60     0.75     0.05     0.00
+#&gt; CRUK0032     0.00     0.00     0.60     0.00     0.80     0.05     0.00
+#&gt; CRUK0033     0.00     0.00     0.75     0.80     0.00     0.05     0.00
+#&gt; CRUK0034     0.00     0.00     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0035     1.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0036     0.00     0.00     0.30     0.30     0.35     0.00     0.00
+#&gt; CRUK0037     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0038     0.00     0.00     0.05     0.05     0.05     0.75     0.00
+#&gt; CRUK0039     0.00     0.00     0.05     0.05     0.05     0.85     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0041     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0043     0.00     0.00     0.65     0.75     0.85     0.05     0.00
+#&gt; CRUK0044     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0045     0.00     0.00     0.75     0.85     0.95     0.05     0.00
+#&gt; CRUK0046     0.00     0.00     0.70     0.80     0.90     0.05     0.00
+#&gt; CRUK0047     0.00     0.00     0.55     0.70     0.70     0.05     0.00
+#&gt; CRUK0048     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.00     0.75     0.85     0.95     0.05     0.00
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.05     0.55     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.00     0.70     0.80     0.90     0.05     0.00
+#&gt; CRUK0056     0.00     0.00     0.70     0.80     0.90     0.05     0.00
+#&gt; CRUK0057     0.00     0.00     0.45     0.55     0.65     0.10     0.00
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0060     0.00     0.00     0.60     0.70     0.80     0.05     0.00
+#&gt; CRUK0061     0.00     0.00     0.65     0.70     0.80     0.05     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.90     0.05     0.00     0.00     0.00     0.00     0.90
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.10     0.05     0.05     0.00     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.95     0.05     0.00     0.00     0.00     0.00     0.95
+#&gt; CRUK0070     0.75     0.05     0.00     0.00     0.00     0.00     0.75
+#&gt; CRUK0071     0.00     0.00     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0073     0.00     0.00     0.85     0.60     0.75     0.05     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.00     0.10     0.05     0.10     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.75     0.05     0.00     0.00     0.00     0.00     0.75
+#&gt; CRUK0078     0.00     0.00     0.10     0.05     0.10     0.00     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.00     0.00     0.20     0.05     0.05     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.00     0.00     0.70     0.75     0.85     0.05     0.00
+#&gt; CRUK0085     0.00     0.00     0.55     0.65     0.70     0.05     0.00
+#&gt; CRUK0086     0.95     0.05     0.00     0.00     0.00     0.00     0.95
+#&gt; CRUK0087     0.25     0.00     0.00     0.00     0.00     0.00     0.25
+#&gt; CRUK0088     0.85     0.05     0.00     0.00     0.00     0.00     0.85
+#&gt; CRUK0089     0.00     0.00     0.20     0.15     0.20     0.00     0.00
+#&gt; CRUK0090     0.00     0.00     0.35     0.20     0.20     0.05     0.00
+#&gt; CRUK0091     0.10     0.05     0.20     0.05     0.05     0.00     0.10
+#&gt; CRUK0092     0.05     0.00     0.25     0.25     0.30     0.00     0.05
+#&gt; CRUK0093     0.00     0.00     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.00     0.70     0.75     0.85     0.05     0.00
+#&gt; CRUK0095     0.05     0.00     0.60     0.70     0.80     0.00     0.05
+#&gt; CRUK0096     0.00     0.00     0.05     0.05     0.05     0.80     0.00
+#&gt; CRUK0097     0.85     0.05     0.00     0.00     0.00     0.00     0.85
+#&gt; CRUK0098     1.00     0.05     0.00     0.00     0.00     0.00     1.00
+#&gt; CRUK0099     0.70     0.05     0.00     0.00     0.00     0.00     0.70
+#&gt; CRUK0100     0.00     0.00     0.15     0.00     0.00     0.00     0.00
 #&gt;          CRUK0036 CRUK0037 CRUK0038 CRUK0039 CRUK0040 CRUK0041 CRUK0042
 #&gt; CRUK0001     0.00     0.00     0.00     0.00     0.00     0.75     0.00
 #&gt; CRUK0002     0.35     0.05     0.05     0.05     0.00     0.00     0.05
@@ -246,6 +674,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.35     0.05     0.05     0.05     0.00     0.00     0.05
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.00     0.90     0.00
+#&gt; CRUK0011     0.00     0.90     0.85     0.95     0.85     0.00     0.80
+#&gt; CRUK0012     0.00     0.00     0.00     0.00     0.00     0.90     0.00
+#&gt; CRUK0013     0.25     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.00     0.80     0.00
+#&gt; CRUK0016     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0018     0.00     0.90     0.85     0.95     0.90     0.00     0.80
+#&gt; CRUK0019     0.00     0.00     0.00     0.00     0.00     0.85     0.00
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0021     0.00     0.00     0.00     0.00     0.00     0.65     0.00
+#&gt; CRUK0022     0.00     0.00     0.00     0.00     0.00     0.80     0.00
+#&gt; CRUK0023     0.00     0.85     0.80     0.90     0.85     0.00     0.75
+#&gt; CRUK0024     0.20     0.05     0.05     0.05     0.00     0.05     0.05
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0026     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0028     0.00     0.00     0.00     0.00     0.00     0.85     0.00
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0031     0.30     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0032     0.30     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0033     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0034     0.00     0.80     0.75     0.85     0.75     0.00     0.80
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0036     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0037     0.00     0.00     0.85     0.95     0.85     0.00     0.80
+#&gt; CRUK0038     0.00     0.85     0.00     0.90     0.80     0.00     0.80
+#&gt; CRUK0039     0.00     0.95     0.90     0.00     0.90     0.00     0.85
+#&gt; CRUK0040     0.00     0.85     0.80     0.90     0.00     0.00     0.75
+#&gt; CRUK0041     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.80     0.80     0.85     0.75     0.00     0.00
+#&gt; CRUK0043     0.30     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0044     0.00     0.90     0.85     0.95     0.85     0.00     0.80
+#&gt; CRUK0045     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0046     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0047     0.25     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0048     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0049     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0050     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.80     0.00
+#&gt; CRUK0055     0.30     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0056     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0057     0.25     0.15     0.15     0.15     0.15     0.00     0.10
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.80     0.00
+#&gt; CRUK0059     0.00     0.90     0.90     0.95     0.85     0.00     0.85
+#&gt; CRUK0060     0.25     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0061     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.10     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.15     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0071     0.60     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.00     0.65     0.00
+#&gt; CRUK0073     0.25     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.45     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0078     0.55     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.65     0.00
+#&gt; CRUK0081     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.45     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.35     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0085     0.30     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0087     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0089     0.60     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0090     0.05     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0091     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0092     0.65     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.30     0.05     0.05     0.05     0.00     0.00     0.05
+#&gt; CRUK0095     0.30     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0096     0.00     0.90     0.85     0.95     0.85     0.00     0.80
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0043 CRUK0044 CRUK0045 CRUK0046 CRUK0047 CRUK0048 CRUK0049
 #&gt; CRUK0001     0.00     0.00     0.00     0.00     0.00     0.85     0.10
 #&gt; CRUK0002     0.75     0.05     0.85     0.80     0.65     0.00     0.00
@@ -257,6 +774,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.90     0.05     1.00     0.95     0.75     0.00     0.00
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.00     0.70     0.05
+#&gt; CRUK0011     0.05     0.90     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0012     0.00     0.00     0.00     0.00     0.00     0.70     0.05
+#&gt; CRUK0013     0.80     0.05     0.90     0.85     0.70     0.00     0.00
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.00     0.85     0.05
+#&gt; CRUK0016     0.05     0.00     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0018     0.05     0.90     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0019     0.00     0.00     0.00     0.00     0.00     0.65     0.05
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0021     0.00     0.00     0.00     0.00     0.00     0.75     0.10
+#&gt; CRUK0022     0.00     0.00     0.00     0.00     0.00     0.90     0.10
+#&gt; CRUK0023     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.70     0.05     0.80     0.75     0.65     0.00     0.00
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0026     0.00     0.00     0.00     0.00     0.00     0.85     0.10
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0028     0.00     0.00     0.00     0.00     0.00     0.65     0.05
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0031     0.65     0.05     0.75     0.70     0.55     0.00     0.00
+#&gt; CRUK0032     0.75     0.05     0.85     0.80     0.70     0.00     0.00
+#&gt; CRUK0033     0.85     0.05     0.95     0.90     0.70     0.00     0.00
+#&gt; CRUK0034     0.05     0.80     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0036     0.30     0.00     0.35     0.35     0.25     0.00     0.00
+#&gt; CRUK0037     0.05     0.90     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0038     0.05     0.85     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0039     0.05     0.95     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0040     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.00     0.00     0.00     0.00     0.00     0.75     0.05
+#&gt; CRUK0042     0.05     0.80     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0043     0.00     0.05     0.90     0.85     0.65     0.00     0.00
+#&gt; CRUK0044     0.05     0.00     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0045     0.90     0.05     0.00     0.95     0.75     0.00     0.00
+#&gt; CRUK0046     0.85     0.05     0.95     0.00     0.70     0.00     0.00
+#&gt; CRUK0047     0.65     0.05     0.75     0.70     0.00     0.00     0.00
+#&gt; CRUK0048     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0049     0.00     0.00     0.00     0.00     0.00     0.10     0.00
+#&gt; CRUK0050     0.90     0.05     1.00     0.95     0.75     0.00     0.00
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.05     0.85
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.60     0.00
+#&gt; CRUK0055     0.85     0.05     0.95     0.90     0.70     0.00     0.00
+#&gt; CRUK0056     0.85     0.05     0.95     0.90     0.75     0.00     0.00
+#&gt; CRUK0057     0.55     0.15     0.65     0.60     0.50     0.00     0.00
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.90     0.10
+#&gt; CRUK0059     0.05     0.90     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0060     0.75     0.05     0.85     0.80     0.70     0.00     0.00
+#&gt; CRUK0061     0.80     0.05     0.85     0.80     0.60     0.00     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.05     0.00     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0071     0.00     0.00     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.00     0.70     0.05
+#&gt; CRUK0073     0.70     0.05     0.75     0.70     0.55     0.00     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.10     0.00     0.10     0.10     0.10     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0078     0.10     0.00     0.10     0.10     0.10     0.00     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.75     0.10
+#&gt; CRUK0081     0.05     0.00     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.85     0.05     0.90     0.85     0.65     0.00     0.00
+#&gt; CRUK0085     0.70     0.05     0.75     0.70     0.55     0.00     0.00
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0087     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0089     0.15     0.00     0.20     0.20     0.20     0.00     0.00
+#&gt; CRUK0090     0.20     0.05     0.20     0.20     0.15     0.00     0.00
+#&gt; CRUK0091     0.05     0.00     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0092     0.30     0.00     0.30     0.30     0.20     0.00     0.00
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.85     0.05     0.90     0.85     0.70     0.00     0.00
+#&gt; CRUK0095     0.75     0.00     0.85     0.80     0.65     0.00     0.00
+#&gt; CRUK0096     0.05     0.90     0.05     0.05     0.05     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0050 CRUK0051 CRUK0052 CRUK0054 CRUK0055 CRUK0056 CRUK0057
 #&gt; CRUK0001     0.00     0.05     0.00     0.65     0.00     0.00     0.00
 #&gt; CRUK0002     0.85     0.00     0.00     0.00     0.80     0.80     0.65
@@ -268,6 +874,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     1.00     0.00     0.00     0.00     0.95     0.95     0.65
 #&gt; CRUK0009     0.00     0.00     0.05     0.00     0.00     0.00     0.00
 #&gt; CRUK0010     0.00     0.00     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0011     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0012     0.00     0.00     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0013     0.90     0.00     0.00     0.00     0.85     0.85     0.55
+#&gt; CRUK0014     0.00     0.00     0.65     0.00     0.00     0.00     0.00
+#&gt; CRUK0015     0.00     0.00     0.00     0.70     0.00     0.00     0.00
+#&gt; CRUK0016     0.05     0.00     0.00     0.00     0.05     0.00     0.05
+#&gt; CRUK0017     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0018     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0019     0.00     0.00     0.00     0.75     0.00     0.00     0.00
+#&gt; CRUK0020     0.00     0.00     0.75     0.00     0.00     0.00     0.00
+#&gt; CRUK0021     0.00     0.05     0.00     0.55     0.00     0.00     0.00
+#&gt; CRUK0022     0.00     0.05     0.00     0.70     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0024     0.80     0.00     0.00     0.05     0.75     0.75     0.55
+#&gt; CRUK0025     0.00     0.00     0.60     0.00     0.00     0.00     0.00
+#&gt; CRUK0026     0.00     0.05     0.00     0.65     0.00     0.00     0.00
+#&gt; CRUK0027     0.00     0.00     0.60     0.00     0.00     0.00     0.00
+#&gt; CRUK0028     0.00     0.00     0.00     0.70     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0030     0.00     0.00     0.55     0.00     0.00     0.00     0.00
+#&gt; CRUK0031     0.75     0.00     0.00     0.00     0.70     0.70     0.45
+#&gt; CRUK0032     0.85     0.00     0.00     0.00     0.80     0.80     0.55
+#&gt; CRUK0033     0.95     0.00     0.00     0.00     0.90     0.90     0.65
+#&gt; CRUK0034     0.05     0.00     0.00     0.00     0.05     0.05     0.10
+#&gt; CRUK0035     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0036     0.35     0.00     0.00     0.00     0.30     0.35     0.25
+#&gt; CRUK0037     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0038     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0039     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.00     0.15
+#&gt; CRUK0041     0.00     0.00     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0042     0.05     0.00     0.00     0.00     0.05     0.05     0.10
+#&gt; CRUK0043     0.90     0.00     0.00     0.00     0.85     0.85     0.55
+#&gt; CRUK0044     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0045     1.00     0.00     0.00     0.00     0.95     0.95     0.65
+#&gt; CRUK0046     0.95     0.00     0.00     0.00     0.90     0.90     0.60
+#&gt; CRUK0047     0.75     0.00     0.00     0.00     0.70     0.75     0.50
+#&gt; CRUK0048     0.00     0.05     0.00     0.60     0.00     0.00     0.00
+#&gt; CRUK0049     0.00     0.85     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.00     0.00     0.00     0.95     0.95     0.65
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.95     0.00     0.00     0.00     0.00     0.90     0.65
+#&gt; CRUK0056     0.95     0.00     0.00     0.00     0.90     0.00     0.60
+#&gt; CRUK0057     0.65     0.00     0.00     0.00     0.65     0.60     0.00
+#&gt; CRUK0058     0.00     0.05     0.00     0.70     0.00     0.00     0.00
+#&gt; CRUK0059     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0060     0.85     0.00     0.00     0.00     0.80     0.85     0.55
+#&gt; CRUK0061     0.85     0.00     0.00     0.00     0.80     0.80     0.55
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.05     0.00     0.00     0.00     0.05     0.00     0.05
+#&gt; CRUK0067     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0070     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0071     0.05     0.00     0.00     0.00     0.05     0.05     0.05
+#&gt; CRUK0072     0.00     0.00     0.00     0.55     0.00     0.00     0.00
+#&gt; CRUK0073     0.75     0.00     0.00     0.00     0.70     0.70     0.45
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.10     0.00     0.00     0.00     0.10     0.10     0.05
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0078     0.10     0.00     0.00     0.00     0.10     0.10     0.05
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.05     0.00     0.60     0.00     0.00     0.00
+#&gt; CRUK0081     0.05     0.00     0.00     0.00     0.05     0.00     0.05
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.90     0.00     0.00     0.00     0.85     0.85     0.55
+#&gt; CRUK0085     0.75     0.00     0.00     0.00     0.70     0.70     0.45
+#&gt; CRUK0086     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0087     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0089     0.20     0.00     0.00     0.00     0.20     0.20     0.15
+#&gt; CRUK0090     0.20     0.00     0.00     0.00     0.20     0.15     0.10
+#&gt; CRUK0091     0.05     0.00     0.05     0.00     0.05     0.00     0.05
+#&gt; CRUK0092     0.30     0.00     0.00     0.00     0.25     0.30     0.15
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.90     0.00     0.00     0.00     0.85     0.85     0.55
+#&gt; CRUK0095     0.85     0.00     0.00     0.00     0.85     0.85     0.60
+#&gt; CRUK0096     0.05     0.00     0.00     0.00     0.05     0.05     0.15
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0098     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0099     0.00     0.00     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0058 CRUK0059 CRUK0060 CRUK0061 CRUK0062 CRUK0063 CRUK0064
 #&gt; CRUK0001     0.95     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.05     0.70     0.75     0.00     0.00     0.00
@@ -279,6 +974,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.05     0.85     0.85     0.00     0.00     0.00
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.00     0.00     0.90
 #&gt; CRUK0010     0.80     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.90     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0012     0.80     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.05     0.75     0.75     0.00     0.00     0.00
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0015     0.95     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.00     0.00     0.00     0.05     0.00     0.05     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.00     0.00     0.65
+#&gt; CRUK0018     0.00     0.90     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0019     0.75     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0021     0.85     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     1.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.05     0.05     0.70     0.70     0.00     0.00     0.00
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0026     0.95     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.00     0.00     0.10
+#&gt; CRUK0028     0.70     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.00     0.00     0.90
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0031     0.00     0.05     0.60     0.65     0.00     0.00     0.00
+#&gt; CRUK0032     0.00     0.05     0.70     0.70     0.00     0.00     0.00
+#&gt; CRUK0033     0.00     0.05     0.80     0.80     0.00     0.00     0.00
+#&gt; CRUK0034     0.00     0.80     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.00     0.00     0.90
+#&gt; CRUK0036     0.00     0.00     0.25     0.35     0.00     0.10     0.00
+#&gt; CRUK0037     0.00     0.90     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.90     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.95     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.80     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.85     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.05     0.75     0.80     0.00     0.00     0.00
+#&gt; CRUK0044     0.00     0.90     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.05     0.85     0.85     0.00     0.00     0.00
+#&gt; CRUK0046     0.00     0.05     0.80     0.80     0.00     0.00     0.00
+#&gt; CRUK0047     0.00     0.05     0.70     0.60     0.00     0.00     0.00
+#&gt; CRUK0048     0.90     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.10     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.05     0.85     0.85     0.00     0.00     0.00
+#&gt; CRUK0051     0.05     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0054     0.70     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.05     0.80     0.80     0.00     0.00     0.00
+#&gt; CRUK0056     0.00     0.05     0.85     0.80     0.00     0.00     0.00
+#&gt; CRUK0057     0.00     0.15     0.55     0.55     0.00     0.00     0.00
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.00     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.05     0.00     0.70     0.00     0.00     0.00
+#&gt; CRUK0061     0.00     0.05     0.70     0.00     0.00     0.00     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.85     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.55     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.00     0.00     0.85
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.00     0.00     0.70
+#&gt; CRUK0071     0.00     0.00     0.05     0.05     0.00     0.15     0.00
+#&gt; CRUK0072     0.80     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0073     0.00     0.05     0.60     0.65     0.00     0.00     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.80     0.00     0.00
+#&gt; CRUK0075     0.00     0.00     0.10     0.05     0.00     0.10     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.00     0.00     0.65
+#&gt; CRUK0078     0.00     0.00     0.10     0.05     0.00     0.15     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.10     0.05     0.00
+#&gt; CRUK0080     0.85     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.00     0.00     0.00     0.05     0.00     0.05     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.10     0.00
+#&gt; CRUK0084     0.00     0.05     0.75     0.80     0.00     0.00     0.00
+#&gt; CRUK0085     0.00     0.05     0.60     0.75     0.00     0.00     0.00
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.00     0.00     0.85
+#&gt; CRUK0087     0.00     0.00     0.00     0.00     0.70     0.00     0.25
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.00     0.00     0.80
+#&gt; CRUK0089     0.00     0.00     0.20     0.15     0.00     0.10     0.00
+#&gt; CRUK0090     0.00     0.05     0.15     0.15     0.00     0.00     0.00
+#&gt; CRUK0091     0.00     0.00     0.00     0.05     0.00     0.05     0.10
+#&gt; CRUK0092     0.00     0.00     0.25     0.25     0.00     0.05     0.05
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0094     0.00     0.05     0.75     0.80     0.00     0.00     0.00
+#&gt; CRUK0095     0.00     0.00     0.75     0.70     0.00     0.00     0.05
+#&gt; CRUK0096     0.00     0.90     0.05     0.05     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.00     0.00     0.75
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.00     0.00     0.90
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.00     0.00     0.65
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0065 CRUK0066 CRUK0067 CRUK0068 CRUK0069 CRUK0070 CRUK0071
 #&gt; CRUK0001     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.05     0.00     0.00     0.00     0.00     0.05
@@ -290,6 +1074,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.05     0.00     0.00     0.00     0.00     0.05
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.95     0.75     0.00
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0012     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.00     0.75     0.15     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.70     0.50     0.00
+#&gt; CRUK0018     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0019     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0021     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0026     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.10     0.10     0.00
+#&gt; CRUK0028     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.95     0.75     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0031     0.00     0.10     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0032     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0033     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0034     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.95     0.75     0.00
+#&gt; CRUK0036     0.00     0.00     0.15     0.00     0.00     0.00     0.60
+#&gt; CRUK0037     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0044     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0046     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0047     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0048     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.05     0.05     0.00
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0056     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0057     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.00     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0061     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0062     0.85     0.00     0.00     0.55     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.75     0.00     0.00     0.00     0.15
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.85     0.70     0.00
+#&gt; CRUK0065     0.00     0.00     0.00     0.50     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.10     0.00     0.00     0.00     0.00     0.20
+#&gt; CRUK0068     0.50     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.00     0.70     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.70     0.00     0.00
+#&gt; CRUK0071     0.00     0.00     0.20     0.00     0.00     0.00     0.00
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0073     0.00     0.15     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0074     0.85     0.00     0.00     0.50     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.00     0.10     0.00     0.00     0.00     0.65
+#&gt; CRUK0076     0.00     0.00     0.00     0.25     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.70     0.50     0.00
+#&gt; CRUK0078     0.00     0.00     0.20     0.00     0.00     0.00     0.75
+#&gt; CRUK0079     0.05     0.00     0.00     0.25     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.00     0.85     0.15     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.05     0.00     0.00     0.25     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.10     0.00     0.00     0.00     0.70
+#&gt; CRUK0084     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0085     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.90     0.70     0.00
+#&gt; CRUK0087     0.70     0.00     0.00     0.45     0.20     0.20     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.80     0.70     0.00
+#&gt; CRUK0089     0.00     0.00     0.15     0.00     0.00     0.00     0.55
+#&gt; CRUK0090     0.00     0.60     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0091     0.00     0.70     0.15     0.00     0.10     0.10     0.00
+#&gt; CRUK0092     0.00     0.00     0.05     0.00     0.05     0.05     0.50
+#&gt; CRUK0093     0.00     0.70     0.15     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.05     0.00     0.00     0.00     0.00     0.05
+#&gt; CRUK0095     0.00     0.00     0.00     0.00     0.05     0.05     0.05
+#&gt; CRUK0096     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.80     0.60     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.95     0.75     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.65     0.45     0.00
+#&gt; CRUK0100     0.00     0.80     0.10     0.00     0.00     0.00     0.00
 #&gt;          CRUK0072 CRUK0073 CRUK0074 CRUK0075 CRUK0076 CRUK0077 CRUK0078
 #&gt; CRUK0001     0.75     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.60     0.00     0.05     0.00     0.00     0.05
@@ -301,6 +1174,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.75     0.00     0.10     0.00     0.00     0.10
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.00     0.75     0.00
 #&gt; CRUK0010     0.65     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0012     0.70     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.70     0.00     0.05     0.00     0.00     0.05
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.00     0.10     0.00
+#&gt; CRUK0015     0.80     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.00     0.20     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.00     0.85     0.00
+#&gt; CRUK0018     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0019     0.60     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0021     0.70     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     0.80     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.05     0.60     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.00     0.10     0.00
+#&gt; CRUK0026     0.75     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.00     0.10     0.00
+#&gt; CRUK0028     0.55     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0031     0.00     0.85     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0032     0.00     0.60     0.00     0.05     0.00     0.00     0.05
+#&gt; CRUK0033     0.00     0.75     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0034     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0036     0.00     0.25     0.00     0.45     0.00     0.00     0.55
+#&gt; CRUK0037     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.65     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.70     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0044     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.75     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0046     0.00     0.70     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0047     0.00     0.55     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0048     0.70     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.05     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.75     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.05     0.00
+#&gt; CRUK0054     0.55     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.70     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0056     0.00     0.70     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0057     0.00     0.45     0.00     0.05     0.00     0.00     0.05
+#&gt; CRUK0058     0.80     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.60     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0061     0.00     0.65     0.00     0.05     0.00     0.00     0.05
+#&gt; CRUK0062     0.00     0.00     0.80     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.05     0.00     0.00     0.10     0.05     0.00     0.15
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.00     0.65     0.00
+#&gt; CRUK0065     0.00     0.00     0.85     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.15     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.10     0.00     0.00     0.20
+#&gt; CRUK0068     0.00     0.00     0.50     0.00     0.25     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.00     0.70     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.00     0.50     0.00
+#&gt; CRUK0071     0.00     0.00     0.00     0.65     0.00     0.00     0.75
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0073     0.00     0.00     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.10     0.00     0.00     0.05     0.00     0.75
+#&gt; CRUK0076     0.05     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0078     0.00     0.10     0.00     0.75     0.00     0.00     0.00
+#&gt; CRUK0079     0.05     0.00     0.05     0.05     0.60     0.00     0.00
+#&gt; CRUK0080     0.70     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.00     0.25     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.05     0.00     0.05     0.05     0.85     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.75     0.05     0.00     0.70
+#&gt; CRUK0084     0.00     0.70     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0085     0.00     0.55     0.00     0.05     0.00     0.00     0.05
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.00     0.70     0.00
+#&gt; CRUK0087     0.00     0.00     0.65     0.00     0.00     0.20     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.00     0.60     0.00
+#&gt; CRUK0089     0.00     0.15     0.00     0.45     0.00     0.00     0.55
+#&gt; CRUK0090     0.00     0.40     0.00     0.05     0.00     0.00     0.05
+#&gt; CRUK0091     0.00     0.25     0.00     0.00     0.00     0.10     0.00
+#&gt; CRUK0092     0.00     0.25     0.00     0.50     0.00     0.05     0.55
+#&gt; CRUK0093     0.00     0.15     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.70     0.00     0.10     0.00     0.00     0.10
+#&gt; CRUK0095     0.00     0.60     0.00     0.10     0.00     0.05     0.10
+#&gt; CRUK0096     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.00     0.60     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.00     0.75     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.00     0.80     0.00
+#&gt; CRUK0100     0.00     0.20     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0079 CRUK0080 CRUK0081 CRUK0082 CRUK0083 CRUK0084 CRUK0085
 #&gt; CRUK0001     0.00     0.80     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.00     0.05     0.00     0.00     0.75     0.65
@@ -312,6 +1274,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.00     0.05     0.00     0.00     0.90     0.75
 #&gt; CRUK0009     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0010     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0012     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.00     0.05     0.00     0.00     0.80     0.65
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0015     0.00     0.80     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.00     0.00     0.85     0.00     0.00     0.05     0.05
+#&gt; CRUK0017     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0018     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0019     0.00     0.60     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0021     0.00     0.70     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.00     0.05     0.05     0.00     0.00     0.70     0.60
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0026     0.00     0.80     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0028     0.00     0.55     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0031     0.00     0.00     0.20     0.00     0.00     0.70     0.55
+#&gt; CRUK0032     0.00     0.00     0.05     0.00     0.00     0.75     0.65
+#&gt; CRUK0033     0.00     0.00     0.05     0.00     0.00     0.85     0.70
+#&gt; CRUK0034     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0035     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0036     0.00     0.00     0.00     0.00     0.45     0.35     0.30
+#&gt; CRUK0037     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0038     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0039     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0043     0.00     0.00     0.05     0.00     0.00     0.85     0.70
+#&gt; CRUK0044     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0045     0.00     0.00     0.05     0.00     0.00     0.90     0.75
+#&gt; CRUK0046     0.00     0.00     0.05     0.00     0.00     0.85     0.70
+#&gt; CRUK0047     0.00     0.00     0.00     0.00     0.00     0.65     0.55
+#&gt; CRUK0048     0.00     0.75     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.00     0.10     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.00     0.05     0.00     0.00     0.90     0.75
+#&gt; CRUK0051     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0054     0.00     0.60     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.00     0.05     0.00     0.00     0.85     0.70
+#&gt; CRUK0056     0.00     0.00     0.00     0.00     0.00     0.85     0.70
+#&gt; CRUK0057     0.00     0.00     0.05     0.00     0.00     0.55     0.45
+#&gt; CRUK0058     0.00     0.85     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0060     0.00     0.00     0.00     0.00     0.00     0.75     0.60
+#&gt; CRUK0061     0.00     0.00     0.05     0.00     0.00     0.80     0.75
+#&gt; CRUK0062     0.10     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0063     0.05     0.00     0.05     0.05     0.10     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0065     0.05     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.85     0.00     0.00     0.05     0.05
+#&gt; CRUK0067     0.00     0.00     0.15     0.00     0.10     0.00     0.00
+#&gt; CRUK0068     0.25     0.00     0.00     0.25     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0070     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0071     0.00     0.00     0.00     0.00     0.70     0.05     0.05
+#&gt; CRUK0072     0.05     0.70     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0073     0.00     0.00     0.25     0.00     0.00     0.70     0.55
+#&gt; CRUK0074     0.05     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0075     0.05     0.00     0.00     0.05     0.75     0.10     0.05
+#&gt; CRUK0076     0.60     0.00     0.00     0.85     0.05     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0078     0.00     0.00     0.00     0.00     0.70     0.10     0.05
+#&gt; CRUK0079     0.00     0.00     0.00     0.60     0.05     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0082     0.60     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0083     0.05     0.00     0.00     0.05     0.00     0.00     0.00
+#&gt; CRUK0084     0.00     0.00     0.05     0.00     0.00     0.00     0.70
+#&gt; CRUK0085     0.00     0.00     0.05     0.00     0.00     0.70     0.00
+#&gt; CRUK0086     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0087     0.10     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0088     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0089     0.00     0.00     0.00     0.00     0.40     0.20     0.10
+#&gt; CRUK0090     0.00     0.00     0.70     0.00     0.00     0.20     0.10
+#&gt; CRUK0091     0.00     0.00     0.85     0.00     0.00     0.05     0.05
+#&gt; CRUK0092     0.00     0.00     0.00     0.00     0.50     0.30     0.25
+#&gt; CRUK0093     0.00     0.00     0.85     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.00     0.05     0.00     0.00     0.85     0.70
+#&gt; CRUK0095     0.00     0.00     0.00     0.00     0.00     0.75     0.60
+#&gt; CRUK0096     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0097     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0098     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0099     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0100     0.00     0.00     0.90     0.00     0.00     0.00     0.00
 #&gt;          CRUK0086 CRUK0087 CRUK0088 CRUK0089 CRUK0090 CRUK0091 CRUK0092
 #&gt; CRUK0001     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.00     0.00     0.15     0.15     0.05     0.25
@@ -323,6 +1374,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.00     0.00     0.20     0.20     0.05     0.30
 #&gt; CRUK0009     0.95     0.25     0.85     0.00     0.00     0.10     0.05
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0012     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.00     0.00     0.15     0.20     0.05     0.20
+#&gt; CRUK0014     0.10     0.00     0.10     0.00     0.00     0.10     0.00
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.00     0.00     0.00     0.00     0.55     0.70     0.00
+#&gt; CRUK0017     0.70     0.20     0.60     0.00     0.00     0.10     0.05
+#&gt; CRUK0018     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0019     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.05     0.00     0.05     0.00     0.00     0.05     0.00
+#&gt; CRUK0021     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0024     0.00     0.00     0.00     0.10     0.15     0.05     0.10
+#&gt; CRUK0025     0.10     0.00     0.10     0.00     0.00     0.10     0.00
+#&gt; CRUK0026     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.10     0.00     0.10     0.00     0.00     0.10     0.00
+#&gt; CRUK0028     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.95     0.25     0.85     0.00     0.00     0.10     0.05
+#&gt; CRUK0030     0.05     0.00     0.05     0.00     0.00     0.05     0.00
+#&gt; CRUK0031     0.00     0.00     0.00     0.20     0.35     0.20     0.25
+#&gt; CRUK0032     0.00     0.00     0.00     0.15     0.20     0.05     0.25
+#&gt; CRUK0033     0.00     0.00     0.00     0.20     0.20     0.05     0.30
+#&gt; CRUK0034     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0035     0.95     0.25     0.85     0.00     0.00     0.10     0.05
+#&gt; CRUK0036     0.00     0.00     0.00     0.60     0.05     0.00     0.65
+#&gt; CRUK0037     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0038     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0039     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0041     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0043     0.00     0.00     0.00     0.15     0.20     0.05     0.30
+#&gt; CRUK0044     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0045     0.00     0.00     0.00     0.20     0.20     0.05     0.30
+#&gt; CRUK0046     0.00     0.00     0.00     0.20     0.20     0.05     0.30
+#&gt; CRUK0047     0.00     0.00     0.00     0.20     0.15     0.00     0.20
+#&gt; CRUK0048     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.00     0.00     0.20     0.20     0.05     0.30
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.05     0.00     0.05     0.00     0.00     0.05     0.00
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.00     0.00     0.20     0.20     0.05     0.25
+#&gt; CRUK0056     0.00     0.00     0.00     0.20     0.15     0.00     0.30
+#&gt; CRUK0057     0.00     0.00     0.00     0.15     0.10     0.05     0.15
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0060     0.00     0.00     0.00     0.20     0.15     0.00     0.25
+#&gt; CRUK0061     0.00     0.00     0.00     0.15     0.15     0.05     0.25
+#&gt; CRUK0062     0.00     0.70     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.00     0.00     0.00     0.10     0.00     0.05     0.05
+#&gt; CRUK0064     0.85     0.25     0.80     0.00     0.00     0.10     0.05
+#&gt; CRUK0065     0.00     0.70     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.00     0.00     0.00     0.00     0.60     0.70     0.00
+#&gt; CRUK0067     0.00     0.00     0.00     0.15     0.05     0.15     0.05
+#&gt; CRUK0068     0.00     0.45     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.90     0.20     0.80     0.00     0.00     0.10     0.05
+#&gt; CRUK0070     0.70     0.20     0.70     0.00     0.00     0.10     0.05
+#&gt; CRUK0071     0.00     0.00     0.00     0.55     0.00     0.00     0.50
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0073     0.00     0.00     0.00     0.15     0.40     0.25     0.25
+#&gt; CRUK0074     0.00     0.65     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.00     0.00     0.45     0.05     0.00     0.50
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.70     0.20     0.60     0.00     0.00     0.10     0.05
+#&gt; CRUK0078     0.00     0.00     0.00     0.55     0.05     0.00     0.55
+#&gt; CRUK0079     0.00     0.10     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.00     0.00     0.00     0.00     0.70     0.85     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.40     0.00     0.00     0.50
+#&gt; CRUK0084     0.00     0.00     0.00     0.20     0.20     0.05     0.30
+#&gt; CRUK0085     0.00     0.00     0.00     0.10     0.10     0.05     0.25
+#&gt; CRUK0086     0.00     0.25     0.80     0.00     0.00     0.10     0.05
+#&gt; CRUK0087     0.25     0.00     0.25     0.00     0.00     0.00     0.05
+#&gt; CRUK0088     0.80     0.25     0.00     0.00     0.00     0.10     0.05
+#&gt; CRUK0089     0.00     0.00     0.00     0.00     0.10     0.00     0.50
+#&gt; CRUK0090     0.00     0.00     0.00     0.10     0.00     0.70     0.05
+#&gt; CRUK0091     0.10     0.00     0.10     0.00     0.70     0.00     0.00
+#&gt; CRUK0092     0.05     0.05     0.05     0.50     0.05     0.00     0.00
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.55     0.70     0.00
+#&gt; CRUK0094     0.00     0.00     0.00     0.20     0.20     0.05     0.25
+#&gt; CRUK0095     0.05     0.05     0.05     0.20     0.10     0.00     0.30
+#&gt; CRUK0096     0.00     0.00     0.00     0.00     0.05     0.00     0.00
+#&gt; CRUK0097     0.85     0.25     0.70     0.00     0.00     0.05     0.05
+#&gt; CRUK0098     0.95     0.25     0.85     0.00     0.00     0.10     0.05
+#&gt; CRUK0099     0.70     0.20     0.60     0.00     0.00     0.10     0.05
+#&gt; CRUK0100     0.00     0.00     0.00     0.00     0.65     0.75     0.00
 #&gt;          CRUK0093 CRUK0094 CRUK0095 CRUK0096 CRUK0097 CRUK0098 CRUK0099
 #&gt; CRUK0001     0.00     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt; CRUK0002     0.00     0.75     0.70     0.05     0.00     0.00     0.00
@@ -334,6 +1474,95 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00     0.90     0.85     0.05     0.00     0.00     0.00
 #&gt; CRUK0009     0.00     0.00     0.05     0.00     0.85     1.00     0.70
 #&gt; CRUK0010     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0011     0.00     0.05     0.00     0.95     0.00     0.00     0.00
+#&gt; CRUK0012     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0013     0.00     0.85     0.75     0.05     0.00     0.00     0.00
+#&gt; CRUK0014     0.00     0.00     0.00     0.00     0.05     0.10     0.10
+#&gt; CRUK0015     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0016     0.70     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0017     0.00     0.00     0.05     0.00     0.65     0.75     0.85
+#&gt; CRUK0018     0.00     0.05     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0019     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0020     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0021     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0022     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0023     0.00     0.00     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0024     0.00     0.75     0.65     0.05     0.00     0.00     0.00
+#&gt; CRUK0025     0.00     0.00     0.00     0.00     0.05     0.10     0.10
+#&gt; CRUK0026     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0027     0.00     0.00     0.00     0.00     0.05     0.10     0.10
+#&gt; CRUK0028     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0029     0.00     0.00     0.05     0.00     0.85     1.00     0.70
+#&gt; CRUK0030     0.00     0.00     0.00     0.00     0.05     0.05     0.05
+#&gt; CRUK0031     0.10     0.70     0.60     0.05     0.00     0.00     0.00
+#&gt; CRUK0032     0.00     0.75     0.70     0.05     0.00     0.00     0.00
+#&gt; CRUK0033     0.00     0.85     0.80     0.05     0.00     0.00     0.00
+#&gt; CRUK0034     0.00     0.05     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0035     0.00     0.00     0.05     0.00     0.85     1.00     0.70
+#&gt; CRUK0036     0.00     0.30     0.30     0.00     0.00     0.00     0.00
+#&gt; CRUK0037     0.00     0.05     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0038     0.00     0.05     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0039     0.00     0.05     0.00     0.95     0.00     0.00     0.00
+#&gt; CRUK0040     0.00     0.00     0.00     0.85     0.00     0.00     0.00
+#&gt; CRUK0041     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0042     0.00     0.05     0.00     0.80     0.00     0.00     0.00
+#&gt; CRUK0043     0.00     0.85     0.75     0.05     0.00     0.00     0.00
+#&gt; CRUK0044     0.00     0.05     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0045     0.00     0.90     0.85     0.05     0.00     0.00     0.00
+#&gt; CRUK0046     0.00     0.85     0.80     0.05     0.00     0.00     0.00
+#&gt; CRUK0047     0.00     0.70     0.65     0.05     0.00     0.00     0.00
+#&gt; CRUK0048     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0049     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0050     0.00     0.90     0.85     0.05     0.00     0.00     0.00
+#&gt; CRUK0051     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0052     0.00     0.00     0.00     0.00     0.00     0.05     0.05
+#&gt; CRUK0054     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0055     0.00     0.85     0.85     0.05     0.00     0.00     0.00
+#&gt; CRUK0056     0.00     0.85     0.85     0.05     0.00     0.00     0.00
+#&gt; CRUK0057     0.00     0.55     0.60     0.15     0.00     0.00     0.00
+#&gt; CRUK0058     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0059     0.00     0.05     0.00     0.90     0.00     0.00     0.00
+#&gt; CRUK0060     0.00     0.75     0.75     0.05     0.00     0.00     0.00
+#&gt; CRUK0061     0.00     0.80     0.70     0.05     0.00     0.00     0.00
+#&gt; CRUK0062     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0063     0.05     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0064     0.00     0.00     0.05     0.00     0.75     0.90     0.65
+#&gt; CRUK0065     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0066     0.70     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0067     0.15     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0068     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0069     0.00     0.00     0.05     0.00     0.80     0.95     0.65
+#&gt; CRUK0070     0.00     0.00     0.05     0.00     0.60     0.75     0.45
+#&gt; CRUK0071     0.00     0.05     0.05     0.00     0.00     0.00     0.00
+#&gt; CRUK0072     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0073     0.15     0.70     0.60     0.05     0.00     0.00     0.00
+#&gt; CRUK0074     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0075     0.00     0.10     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0076     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0077     0.00     0.00     0.05     0.00     0.60     0.75     0.80
+#&gt; CRUK0078     0.00     0.10     0.10     0.00     0.00     0.00     0.00
+#&gt; CRUK0079     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0080     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0081     0.85     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0082     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0083     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0084     0.00     0.85     0.75     0.05     0.00     0.00     0.00
+#&gt; CRUK0085     0.00     0.70     0.60     0.05     0.00     0.00     0.00
+#&gt; CRUK0086     0.00     0.00     0.05     0.00     0.85     0.95     0.70
+#&gt; CRUK0087     0.00     0.00     0.05     0.00     0.25     0.25     0.20
+#&gt; CRUK0088     0.00     0.00     0.05     0.00     0.70     0.85     0.60
+#&gt; CRUK0089     0.00     0.20     0.20     0.00     0.00     0.00     0.00
+#&gt; CRUK0090     0.55     0.20     0.10     0.05     0.00     0.00     0.00
+#&gt; CRUK0091     0.70     0.05     0.00     0.00     0.05     0.10     0.10
+#&gt; CRUK0092     0.00     0.25     0.30     0.00     0.05     0.05     0.05
+#&gt; CRUK0093     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0094     0.00     0.00     0.75     0.05     0.00     0.00     0.00
+#&gt; CRUK0095     0.00     0.75     0.00     0.00     0.05     0.05     0.05
+#&gt; CRUK0096     0.00     0.05     0.00     0.00     0.00     0.00     0.00
+#&gt; CRUK0097     0.00     0.00     0.05     0.00     0.00     0.85     0.60
+#&gt; CRUK0098     0.00     0.00     0.05     0.00     0.85     0.00     0.70
+#&gt; CRUK0099     0.00     0.00     0.05     0.00     0.60     0.70     0.00
+#&gt; CRUK0100     0.80     0.00     0.00     0.00     0.00     0.00     0.00
 #&gt;          CRUK0100
 #&gt; CRUK0001     0.00
 #&gt; CRUK0002     0.00
@@ -345,28 +1574,111 @@ probability for the input patients.</p>
 #&gt; CRUK0008     0.00
 #&gt; CRUK0009     0.00
 #&gt; CRUK0010     0.00
-#&gt;  [ reached getOption("max.print") -- omitted 89 rows ]</div></pre>
+#&gt; CRUK0011     0.00
+#&gt; CRUK0012     0.00
+#&gt; CRUK0013     0.00
+#&gt; CRUK0014     0.00
+#&gt; CRUK0015     0.00
+#&gt; CRUK0016     0.75
+#&gt; CRUK0017     0.00
+#&gt; CRUK0018     0.00
+#&gt; CRUK0019     0.00
+#&gt; CRUK0020     0.00
+#&gt; CRUK0021     0.00
+#&gt; CRUK0022     0.00
+#&gt; CRUK0023     0.00
+#&gt; CRUK0024     0.00
+#&gt; CRUK0025     0.00
+#&gt; CRUK0026     0.00
+#&gt; CRUK0027     0.00
+#&gt; CRUK0028     0.00
+#&gt; CRUK0029     0.00
+#&gt; CRUK0030     0.00
+#&gt; CRUK0031     0.15
+#&gt; CRUK0032     0.00
+#&gt; CRUK0033     0.00
+#&gt; CRUK0034     0.00
+#&gt; CRUK0035     0.00
+#&gt; CRUK0036     0.00
+#&gt; CRUK0037     0.00
+#&gt; CRUK0038     0.00
+#&gt; CRUK0039     0.00
+#&gt; CRUK0040     0.00
+#&gt; CRUK0041     0.00
+#&gt; CRUK0042     0.00
+#&gt; CRUK0043     0.00
+#&gt; CRUK0044     0.00
+#&gt; CRUK0045     0.00
+#&gt; CRUK0046     0.00
+#&gt; CRUK0047     0.00
+#&gt; CRUK0048     0.00
+#&gt; CRUK0049     0.00
+#&gt; CRUK0050     0.00
+#&gt; CRUK0051     0.00
+#&gt; CRUK0052     0.00
+#&gt; CRUK0054     0.00
+#&gt; CRUK0055     0.00
+#&gt; CRUK0056     0.00
+#&gt; CRUK0057     0.00
+#&gt; CRUK0058     0.00
+#&gt; CRUK0059     0.00
+#&gt; CRUK0060     0.00
+#&gt; CRUK0061     0.00
+#&gt; CRUK0062     0.00
+#&gt; CRUK0063     0.00
+#&gt; CRUK0064     0.00
+#&gt; CRUK0065     0.00
+#&gt; CRUK0066     0.80
+#&gt; CRUK0067     0.10
+#&gt; CRUK0068     0.00
+#&gt; CRUK0069     0.00
+#&gt; CRUK0070     0.00
+#&gt; CRUK0071     0.00
+#&gt; CRUK0072     0.00
+#&gt; CRUK0073     0.20
+#&gt; CRUK0074     0.00
+#&gt; CRUK0075     0.00
+#&gt; CRUK0076     0.00
+#&gt; CRUK0077     0.00
+#&gt; CRUK0078     0.00
+#&gt; CRUK0079     0.00
+#&gt; CRUK0080     0.00
+#&gt; CRUK0081     0.90
+#&gt; CRUK0082     0.00
+#&gt; CRUK0083     0.00
+#&gt; CRUK0084     0.00
+#&gt; CRUK0085     0.00
+#&gt; CRUK0086     0.00
+#&gt; CRUK0087     0.00
+#&gt; CRUK0088     0.00
+#&gt; CRUK0089     0.00
+#&gt; CRUK0090     0.65
+#&gt; CRUK0091     0.75
+#&gt; CRUK0092     0.00
+#&gt; CRUK0093     0.80
+#&gt; CRUK0094     0.00
+#&gt; CRUK0095     0.00
+#&gt; CRUK0096     0.00
+#&gt; CRUK0097     0.00
+#&gt; CRUK0098     0.00
+#&gt; CRUK0099     0.00
+#&gt; CRUK0100     0.00</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://sites.google.com/site/giuliocaravagna/'>Giulio Caravagna</a>.</p>
+  <p>Developed by <a href='https://www.caravagnalab.org/'>Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

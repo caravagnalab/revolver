@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -50,8 +54,7 @@ used. A parmeter controls if you want to overwrite the trees
 of the patient, where they already computed. Please refer to the
 parameters of the ctrees constructor rom package ctree
 for the input parameters that you can use to tune the construction." />
-<meta property="og:image" content="caravagn.github.io/revolver/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="caravagnalab.github.io/revolver/logo.png" />
 
 
 
@@ -69,7 +72,7 @@ for the input parameters that you can use to tune the construction." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -91,7 +94,7 @@ for the input parameters that you can use to tune the construction." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -101,29 +104,8 @@ for the input parameters that you can use to tune the construction." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
-    </li>
-    <li>
-      <a href="../articles/FAQ.html">Frequently Asked Questions</a>
-    </li>
-    <li>
-      <a href="../articles/Getters.html">Getter functions</a>
-    </li>
-    <li>
-      <a href="../articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
-    </li>
-    <li>
-      <a href="../articles/Plotting_functions.html">Plotting functions</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -131,8 +113,8 @@ for the input parameters that you can use to tune the construction." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/caravagn/revolver">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/caravagn/revolver/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -164,12 +146,12 @@ parameters of the <code>ctrees</code> constructor rom package <code>ctree</code>
 for the input parameters that you can use to tune the construction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_clone_trees</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>patients</span> <span class='kw'>=</span> <span class='fu'><a href='Stats_cohort.html'>Stats_cohort</a></span>(<span class='no'>x</span>) <span class='kw'>%&gt;%</span> <span class='fu'>pull</span>(<span class='no'>patientID</span>),
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>compute_clone_trees</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  patients <span class='op'>=</span> <span class='fu'><a href='Stats_cohort.html'>Stats_cohort</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>pull</span><span class='op'>(</span><span class='va'>patientID</span><span class='op'>)</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,9 +179,10 @@ phylogenies are created.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data released in the 'evoverse.datasets'</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'evoverse.datasets'</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>'TRACERx_NEJM_2017_REVOLVER'</span>, package <span class='op'>=</span> <span class='st'>'evoverse.datasets'</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>)</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER - Repeated Evolution in Cancer ] 
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>TRACERx_NEJM_2017_REVOLVER</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #BBBBBB;background-color: #0000BB;'> [ REVOLVER - Repeated Evolution in Cancer ] 
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Dataset :</span><span> TRACERx NEJM 2017 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Cohort  :</span><span> 99 patients, 450 variants and 79 driver events. </span><span style='color: #000000;background-color: #BBBB00;'>
@@ -211,65 +194,53 @@ phylogenies are created.</p></td>
 #&gt; </span><span> 
 #&gt; For summary statistics see `?Stats_*(x)` with * = {cohort, drivers, trees, fits, clusters, ...} </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span>
-#&gt; </span><span style='background-color: #BB0000;'>
-#&gt;  WARNING </span><span> </span><span style='color: #BB0000;'>Some patients have only one clone with drivers, and therefore they will just be expanded.</span><span> 
-#&gt; </span><span style='color: #555555;'># A tibble: 54 x 7</span><span>
-#&gt;    patientID numBiopsies numMutations numDriverMutati… numClonesWithDr…
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> CRUK0007            2            3                3                1
-#&gt; </span><span style='color: #555555;'> 2</span><span> CRUK0010            2            3                3                1
-#&gt; </span><span style='color: #555555;'> 3</span><span> CRUK0012            2            1                1                1
-#&gt; </span><span style='color: #555555;'> 4</span><span> CRUK0018            4            4                4                1
-#&gt; </span><span style='color: #555555;'> 5</span><span> CRUK0019            2            1                1                1
-#&gt; </span><span style='color: #555555;'> 6</span><span> CRUK0021            2            4                4                1
-#&gt; </span><span style='color: #555555;'> 7</span><span> CRUK0025            3            3                3                1
-#&gt; </span><span style='color: #555555;'> 8</span><span> CRUK0026            2            4                4                1
-#&gt; </span><span style='color: #555555;'> 9</span><span> CRUK0028            2            2                2                1
-#&gt; </span><span style='color: #555555;'>10</span><span> CRUK0029            6            4                4                1
-#&gt; </span><span style='color: #555555;'># … with 44 more rows, and 2 more variables: numTruncalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   numSubclonalMutations </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #000000;'>┌───────────────────────────────────────────────────────────────────────────────────────────┐</span><span>
+#&gt; </span><span style='color: #000000;'>│</span><span style='background-color: #FFAF00;'>                                                                                           </span><span style='color: #000000;'>│</span><span>
+#&gt; </span><span style='color: #000000;'>│</span><span style='background-color: #FFAF00;'>   </span><span style='color: #000000;background-color: #FFAF00;'>WARNING - Some patients have only one clone with drivers; they will just be expanded.</span><span style='background-color: #FFAF00;'>   </span><span style='color: #000000;'>│</span><span>
+#&gt; </span><span style='color: #000000;'>│</span><span style='background-color: #FFAF00;'>                                                                                           </span><span style='color: #000000;'>│</span><span>
+#&gt; </span><span style='color: #000000;'>└───────────────────────────────────────────────────────────────────────────────────────────┘</span><span>
+#&gt; </span><span style='color: #949494;'># A tibble: 54 x 7</span><span>
+#&gt;    patientID numBiopsies numMutations numDriverMutations numClonesWithDriver
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> CRUK0007            2            3                  3                   1
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> CRUK0010            2            3                  3                   1
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> CRUK0012            2            1                  1                   1
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> CRUK0018            4            4                  4                   1
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> CRUK0019            2            1                  1                   1
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> CRUK0021            2            4                  4                   1
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CRUK0025            3            3                  3                   1
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CRUK0026            2            4                  4                   1
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CRUK0028            2            2                  2                   1
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> CRUK0029            6            4                  4                   1
+#&gt; </span><span style='color: #949494;'># … with 44 more rows, and 2 more variables: numTruncalMutations &lt;int&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   numSubclonalMutations &lt;int&gt;</span><span></div><div class='input'>
 <span class='co'># We use the standard parameters with overwrite = TRUE</span>
 <span class='co'># otherwise the computation skips the patient</span>
-<span class='no'>TRACERx_NEJM_2017_REVOLVER</span> <span class='kw'>=</span> <span class='fu'>compute_clone_trees</span>(
-   <span class='no'>TRACERx_NEJM_2017_REVOLVER</span>,
-   <span class='kw'>patients</span> <span class='kw'>=</span> <span class='st'>"CRUK0002"</span>,
-   <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 
-#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
-#&gt; </span><span style='color: #00BBBB;'> Constructing Clone Tree objects via ctree - https://caravagn.github.io/ctree/</span><span>
-#&gt; </span><span style='color: #00BBBB;'>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span><span>
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>Input patients.</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span>CRUK0002 
-#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree ~ generate clone trees for CRUK0002 ] 
-#&gt; </span><span style='color: #000000;background-color: #BBBB00;'>Sampler : </span><span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
-#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
-#&gt; 
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Region</span><span> R1  ~  #CCF clusters &gt; 1%:  3 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Region</span><span> R2  ~  #CCF clusters &gt; 1%:  3 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Region</span><span> R3  ~  #CCF clusters &gt; 1%:  2 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Trees per region</span><span> 1, 2, 1 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Hashed trees</span><span> 4 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Structures</span><span> 2 - search is exahustive </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Pigeonhole Principle</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Ranking trees</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span style='color: #00BB00;background-color: #BBBB00;'>✔</span><span style='color: #000000;background-color: #BBBB00;'> Trees with non-zero sscore</span><span> 2 storing 2 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; 
-#&gt;  Combinations of Information Transfer : </span><span> 2 </span><span style='color: #000000;background-color: #BBBB00;'>
-#&gt; </span><span></div><div class='input'>
-<span class='fu'><a href='Phylo.html'>Phylo</a></span>(<span class='no'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree - ctree rank 1/2 for CRUK0002 ] 
+<span class='va'>TRACERx_NEJM_2017_REVOLVER</span> <span class='op'>=</span> <span class='fu'>compute_clone_trees</span><span class='op'>(</span>
+   <span class='va'>TRACERx_NEJM_2017_REVOLVER</span>,
+   patients <span class='op'>=</span> <span class='st'>"CRUK0002"</span>,
+   overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Constructing Clone Trees [ctree - https://caravagn.github.io/ctree/]</span><span> </span><span style='color: #00BBBB;'>────────</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>PatientID: </span><span style='color: #00BB00;font-weight: bold;'>CRUK0002</span><span> </span><span style='color: #00BBBB;'>─────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; 
+#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree ~ clone trees generator for CRUK0002 ] 
 #&gt; </span><span>
-#&gt; </span><span style='color: #555555;'># A tibble: 4 x 7</span><span>
+#&gt; </span><span style='color: #949494;'># A tibble: 4 x 7</span><span>
 #&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
-#&gt; </span><span style='color: #555555;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
-#&gt; </span><span style='color: #555555;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
-#&gt; </span><span style='color: #555555;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
+#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> Trees per region </span><span style='color: #00BB00;'>1, 2, 1</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Total </span><span style='color: #00BB00;'>2</span><span> tree structures - search is </span><span style='font-weight: bold;'>exahustive</span><span></span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>── Ranking trees </span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✓</span><span> </span><span style='color: #00BB00;'>2</span><span>  trees with non-zero score, storing </span><span style='font-weight: bold;'>2</span><span></span></div><div class='input'>
+<span class='fu'><a href='Phylo.html'>Phylo</a></span><span class='op'>(</span><span class='va'>TRACERx_NEJM_2017_REVOLVER</span>, <span class='st'>'CRUK0002'</span>, rank <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #BBBBBB;background-color: #0000BB;'> [ ctree - ctree rank 1/2 for CRUK0002 ] 
+#&gt; </span><span>
+#&gt; </span><span style='color: #949494;'># A tibble: 4 x 7</span><span>
+#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1           3 TRUE      FALSE      0     0.92  0   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2           2 TRUE      TRUE       0.99  0.98  0.99
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 5           1 TRUE      FALSE      0.78  0     0   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 6           1 TRUE      FALSE      0.96  0.03  0.98
 #&gt; </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; Tree shape (drivers annotated)</span><span>  </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; 
@@ -296,25 +267,21 @@ phylogenies are created.</p></td>
 #&gt; Tree score</span><span> 0.75 </span><span style='color: #000000;background-color: #BBBB00;'>
 #&gt; </span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://sites.google.com/site/giuliocaravagna/'>Giulio Caravagna</a>.</p>
+  <p>Developed by <a href='https://www.caravagnalab.org/'>Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

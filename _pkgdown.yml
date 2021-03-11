@@ -5,14 +5,14 @@ template:
 url:
   caravagnalab.github.io/revolver
   
-articles:
-- title: R Markdown
-  contents:
-  - starts_with("authoring")
-- title: Websites
-  contents:
-  - rmarkdown_websites
-  - rmarkdown_site_generators
+# articles:
+# - title: R Markdown
+#   contents:
+#   - starts_with("authoring")
+# - title: Websites
+#   contents:
+#   - rmarkdown_websites
+#   - rmarkdown_site_generators
 
   
 authors:
