@@ -1,0 +1,30 @@
+Package: revolver
+Version: 0.3.0
+Date: 2019-11-10
+Title: REVOLVER - Repeated Evolution in Cancer
+Type: Package
+Author: Giulio Caravagna
+Maintainer: Giulio Caravagna <gcaravagn@gmail.com>
+Authors@R: c(
+    person("Giulio", "Caravagna", email = "gcaravagn@gmail.com", role = c("aut", "cre")),
+    person("Ylenia", "Giarratano", email = "ylenia.giarratano@gmail.com", role = "ctb"),
+    person("Daniele", "Ramazzotti", email = "daniele.ramazzotti@yahoo.com", role = "ctb"),
+    person("Luca", "De Sano", email = "luca.desano@gmail.com", role = "ctb"))
+Description: The revolver package  implements a statistical model to determine repeated evolutionary trajectories of cancer progressio from multi-region sequencing data of human cancers. The package implements functions to load, maninpulate ad plot data from large cohorts, computing different types of phylogenetic trees. The methods can be used to determine clusters of tumours that share repeated trajectories, providing a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.4),
+Imports: crayon, easypar, cluster, dendextend, dynamicTreeCut, vegan,
+        igraph, tidyverse, tidygraph, ggraph, ggpubr, ggrepel, pio,
+        RColorBrewer, pheatmap, clisymbols, ctree, mtree,
+        evoverse.datasets, ggdendro, R6
+Remotes: caravagn/pio, caravagn/easypar, caravagn/ctree,
+        caravagn/mtree, caravagn/evoverse.datasets
+RoxygenNote: 7.1.1
+Suggests: knitr, rmarkdown, matrixStats,
+VignetteBuilder: knitr
+URL: https://github.com/caravagn/revolver
+BugReports: https://github.com/caravagn/revolver/issues
+NeedsCompilation: no
+Packaged: 2021-03-10 23:56:21 UTC; gcaravagna

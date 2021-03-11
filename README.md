@@ -13,15 +13,13 @@ The `revolver` package implements the statistical model described in
 [Caravagna et al; PMID:
 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine
 trajectories of repeated evolution from multi-region sequencing data of
-human cancers.
-
-The package implements functions to process data from large cohorts, and
-determine different types of phylogenetic trees from the input data of
-each sequenced patients. The package provides also several functions to
-plot the data, and determine clusters of tumours that share repeated
-trajectories; this provides a method to stratify cancer patients for the
-way their tumour evolve, reconciling tumour heterogeneity both between
-and within patients.
+human cancers.The package implements functions to process data from
+large cohorts, and determine different types of phylogenetic trees from
+the input data of each input patients. The package provides also several
+functions to plot the data and determine clusters of patients that share
+repeated evolutionary trajectories; this provides a method to stratify
+cancer patients for the way their tumour evolve, reconciling tumour
+heterogeneity both between and within patients.
 
 #### Citation
 
