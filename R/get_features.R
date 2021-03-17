@@ -119,10 +119,13 @@ get_features = function(x, patients = x$patients)
     N[, colnames(M)] %>% as_tibble()
   }
 
-  Matrix_clonal_drivers = complement(Matrix_drivers, Matrix_clonal_drivers) %>%
-    replace(is.na(.), 0)
-  Matrix_subclonal_drivers = complement(Matrix_drivers, N = Matrix_subclonal_drivers) %>%
-    replace(is.na(.), 0)
+  if(nrow(Matrix_clonal_drivers) > 0)
+    Matrix_clonal_drivers = complement(Matrix_drivers, Matrix_clonal_drivers) %>%
+      replace(is.na(.), 0)
+  
+  if(nrow(Matrix_subclonal_drivers) > 0)
+    Matrix_subclonal_drivers = complement(Matrix_drivers, N = Matrix_subclonal_drivers) %>%
+      replace(is.na(.), 0)
 
   # =-=-=-=-=-=-=-=-
   # Get all data that we need for trajectories

@@ -34,7 +34,7 @@ plot_trajectories_per_cluster = function(x, min_counts = 5)
       dplyr::filter(cluster == cl) %>%
       dplyr::pull(patientID)
     
-    revolver:::get_features(x, patients)
+    # revolver:::get_features(x, patients)
     
     # Get all trajectories
     All_trajectories = lapply(patients, function(p) {

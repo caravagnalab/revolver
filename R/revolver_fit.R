@@ -36,9 +36,7 @@
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 #'
-#' new_fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
-#' 
-#' print(new_fit)
+#' revolver_fit(TRACERx_NEJM_2017_REVOLVER)
 revolver_fit = function(x,
                         initial.solution = 1,
                         max.iterations = 10,
