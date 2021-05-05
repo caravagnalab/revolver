@@ -62,7 +62,7 @@ plot_drivers_graph = function(x,
     rename(driver = variantID)
 
   # Get tests for enrichment via Fisher
-  tests = enrichment_test_incoming_edge(E, alpha_level = 0.05)
+  tests = enrichment_test_incoming_edge(E, alpha_level = alpha_level)
 
   # Get the DET index
   index = DET_index(x,
