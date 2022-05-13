@@ -52,8 +52,7 @@ devtools::install_github("caravagnalab.github.io/revolver")
 
 #### Copyright and contacts
 
-Giulio Caravagna. Cancer Data Science (CDS) Laboratory.
+Cancer Data Science (CDS) Laboratory. University of Trieste, Italy.
 
-[![](https://img.shields.io/badge/Email-gcaravagn@gmail.com-steelblue.svg)](mailto:gcaravagn@gmail.com)
 [![](https://img.shields.io/badge/CDS%20Lab%20Github-caravagnalab-seagreen.svg)](https://github.com/caravagnalab)
 [![](https://img.shields.io/badge/CDS%20Lab%20webpage-https://www.caravagnalab.org/-red.svg)](https://www.caravagnalab.org/)

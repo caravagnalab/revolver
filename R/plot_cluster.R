@@ -50,28 +50,28 @@ plot_clusters = function(x,
   # Drivers occurring in at least cutoff_drivers patients
   occurrence_drivers = reshape2::melt(features$Matrix_drivers, id = 'patientID') %>%
     as_tibble %>%
-    rename(driverID = variable, n = value) %>%
-    group_by(driverID) %>%
-    summarise(n = sum(n)) %>%
-    arrange(desc(n)) %>%
-    filter(n > cutoff_drivers) %>%
-    pull(driverID) %>%
+    dplyr::rename(driverID = variable, n = value) %>%
+    dplyr::group_by(driverID) %>%
+    dplyr::summarise(n = sum(n)) %>%
+    dplyr::arrange(desc(n)) %>%
+    dplyr::filter(n > cutoff_drivers) %>%
+    dplyr::pull(driverID) %>%
     as.character
 
   # Mean CCF for occurrence_drivers, augmented with clonality status for the driver event
   mean_CCF = reshape2::melt(features$Matrix_mean_CCF, id = 'patientID') %>%
     as_tibble %>%
-    rename(driverID = variable, mean_CCF = value) %>%
-    filter(driverID %in% occurrence_drivers) %>%
-    filter(mean_CCF > 0)
+    dplyr::rename(driverID = variable, mean_CCF = value) %>%
+    dplyr::filter(driverID %in% occurrence_drivers) %>%
+    dplyr::filter(mean_CCF > 0)
 
   clonal_events = reshape2::melt(features$Matrix_clonal_drivers, id = 'patientID') %>%
     as_tibble %>%
-    rename(driverID = variable, clonal = value)
+    dplyr::rename(driverID = variable, clonal = value)
 
   mean_CCF = mean_CCF %>%
-    full_join(clonal_events, by = c('patientID', 'driverID')) %>%
-    mutate(
+    dplyr::full_join(clonal_events, by = c('patientID', 'driverID')) %>%
+    dplyr::mutate(
       clonal = ifelse(clonal == 1, "clonal", 'subclonal'),
       driverID = paste(driverID)
     )
@@ -79,32 +79,32 @@ plot_clusters = function(x,
   # Trajectories in at least cutoff_trajectories
   occurrence_trajectories = reshape2::melt(features$Matrix_trajectories, id = 'patientID') %>%
     as_tibble %>%
-    rename(trajectory = variable, n = value) %>%
-    group_by(trajectory) %>%
-    summarise(n = sum(n)) %>%
-    arrange(desc(n)) %>%
-    filter(n > cutoff_trajectories) %>%
-    pull(trajectory) %>%
+    dplyr::rename(trajectory = variable, n = value) %>%
+    dplyr::group_by(trajectory) %>%
+    dplyr::summarise(n = sum(n)) %>%
+    dplyr::arrange(desc(n)) %>%
+    dplyr::filter(n > cutoff_trajectories) %>%
+    dplyr::pull(trajectory) %>%
     as.character
 
   # Map of the required trajectories as of occurrence_trajectories
   map_occurrence_trajectories = reshape2::melt(features$Matrix_trajectories, id = 'patientID') %>%
     as_tibble %>%
-    rename(trajectory = variable, n = value) %>%
-    filter(trajectory %in% occurrence_trajectories) %>%
-    filter(n > 0) %>%
-    separate(
+    dplyr::rename(trajectory = variable, n = value) %>%
+    dplyr::filter(trajectory %in% occurrence_trajectories) %>%
+    dplyr::filter(n > 0) %>%
+    tidyr::separate(
       col = trajectory,
       into = c('from', 'to'),
       sep = ' --> ',
       remove = FALSE
     ) %>%
-    mutate(trajectory = paste(trajectory))
+    dplyr::mutate(trajectory = paste(trajectory))
 
   # Add also clusters to trajectories
   map_occurrence_trajectories = map_occurrence_trajectories %>%
-    mutate(trajectory = paste(trajectory)) %>%
-    left_join(Cluster(x),
+    dplyr::mutate(trajectory = paste(trajectory)) %>%
+    dplyr::left_join(Cluster(x),
               by = 'patientID')
 
   # =-=-=-=-=-=-=-=-
@@ -117,6 +117,16 @@ plot_clusters = function(x,
 
   # Patient ordering - from the dedrogram, thi defines the levels of the factors used
   factors_patient_level = hc$order.lab
+  
+  cl_ordering = Cluster(x) %>% 
+    arrange(cluster) %>% 
+    pull(patientID)
+  
+  # if(any(cl_ordering != factors_patient_level))
+  # {
+  #   warning("Dendrogram ordering does not reflect clustering - strange behaviour of the cutting algorithms?")
+  #   # factors_patient_level = cl_ordering
+  # }
 
   # Get colors for the clusters
   clusters_colors = get_cluster_colors(x, cluster_palette)
@@ -124,7 +134,7 @@ plot_clusters = function(x,
   # Assign the colors following factors_patient_level
   patients_factors_colors = sapply(factors_patient_level,
                                    function(y)
-                                     clusters_colors[Cluster(x, y) %>% pull(cluster)])
+                                     clusters_colors[Cluster(x, y) %>% dplyr::pull(cluster)])
   names(patients_factors_colors) = factors_patient_level
 
   bars_separation = Cluster(x, factors_patient_level)
@@ -133,10 +143,10 @@ plot_clusters = function(x,
 
   # Trajectories ordering - by overall frequency
   factors_trajectory_level = map_occurrence_trajectories %>%
-    group_by(trajectory) %>%
-    summarise(n = n()) %>%
-    arrange(desc(n)) %>%
-    pull(trajectory) %>%
+    dplyr::group_by(trajectory) %>%
+    dplyr::summarise(n = n()) %>%
+    dplyr::arrange(desc(n)) %>%
+    dplyr::pull(trajectory) %>%
     rev
 
   # Drivers ordering - by overall frequency
@@ -154,7 +164,6 @@ plot_clusters = function(x,
 
   # Number of clusters
   nclusters = Cluster(x) %>% pull(cluster) %>% unique %>% length
-
 
   # Ggplot trajectories
   trajectories_plot = ggplot(
@@ -189,6 +198,8 @@ plot_clusters = function(x,
     scale_y_discrete(limits = factors_trajectory_level)
 
   # Ggplot drivers
+  # pt_ord = mean_CCF %>% filter(mean_CCF > 0) %>% pull(patientID)
+  
   driver_plot =
     ggplot(
       mean_CCF %>% filter(mean_CCF > 0),
@@ -208,8 +219,8 @@ plot_clusters = function(x,
     my_ggplot_theme() +
     theme(axis.text.x = element_text(
       angle = 90,
-      size = 5,
-      color = patients_factors_colors
+      size = 5
+      # color = patients_factors_colors[pt_ord]
     )) +
     guides(
       fill = guide_colorbar("Mean across biopsies  ", barwidth = unit(3, 'cm')),
@@ -229,12 +240,29 @@ plot_clusters = function(x,
       linetype = 'dashed'
     )
 
+  clbar = Cluster(x) %>%
+    ggplot(aes(x = patientID, y = 1)) +
+    geom_tile(aes(fill = cluster)) +
+    my_ggplot_theme() +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.x = element_blank(),
+      axis.text.x  = element_blank(),
+      axis.title.x = element_blank()
+      # axis.text.x = element_text(angle = 90, size = 5)
+    ) +
+    labs(y = '', x = NULL) +
+    scale_fill_manual(values = clusters_colors) +
+    guides(fill = 'none') +
+    scale_x_discrete(limits = factors_patient_level) 
+    
   cowplot::plot_grid(
     trajectories_plot,
+    clbar,
     driver_plot,
-    nrow = 2,
+    nrow = 3,
     ncol = 1,
-    rel_heights = c(1, 1),
+    rel_heights = c(1, .1, 1),
     align = 'v'
   )
 }

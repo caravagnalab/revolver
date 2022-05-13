@@ -92,7 +92,7 @@ revolver_cohort = function(dataset,
     )
 
   # Check input and stop on error
-  dataset = revolver:::check_input(dataset, CCF_parser)
+  dataset = check_input(dataset, CCF_parser)
   dataset$id = paste0('__mut_id_', 1:nrow(dataset))
 
   # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

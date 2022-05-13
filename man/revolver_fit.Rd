@@ -39,9 +39,7 @@ called `rev_cohort_fit` which has its own S3 methods.
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
-new_fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
-
-print(new_fit)
+revolver_fit(TRACERx_NEJM_2017_REVOLVER)
 }
 \references{
 Caravagna et al., Nature Methods volume 15, pages 707–714, 2018; https://www.nature.com/articles/s41592-018-0108-x
