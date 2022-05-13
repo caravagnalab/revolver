@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,26 +40,41 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revolver</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/revolver.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../articles/index.html">Articles</a>
+      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
+    </li>
+    <li>
+      <a href="../articles/FAQ.html">Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Getters.html">Getter functions</a>
+    </li>
+    <li>
+      <a href="../articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
+    </li>
+    <li>
+      <a href="../articles/Plotting_functions.html">Plotting functions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -65,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/caravagn/revolver/">
+  <a href="https://github.com/caravagn/revolver/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,14 +97,14 @@
 
       
 
-      </header><script src="Plotting_functions_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Plotting functions</h1>
-                        <h4 class="author">Giulio Caravagna</h4>
+                        <h4 data-toc-skip class="author">Giulio Caravagna</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/master/vignettes/Plotting_functions.Rmd"><code>vignettes/Plotting_functions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/HEAD/vignettes/Plotting_functions.Rmd" class="external-link"><code>vignettes/Plotting_functions.Rmd</code></a></small>
       <div class="hidden name"><code>Plotting_functions.Rmd</code></div>
 
     </div>
@@ -95,17 +112,17 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/caravagn/revolver">revolver</a></span><span class="op">)</span></code></pre></div>
-<p>Since the new release of <code>REVOLVER</code> (&gt;= 0.3), we have implemented <a href="https://caravagn.github.io/revolver/reference/index.html">all plotting functions</a> using <a href="https://ggplot2.tidyverse.org/">ggplot2</a>.</p>
-<p>All functions now return either a <code>ggplot</code> object, or a more complext figure obtained by assembling <code>ggplot</code> objects either via <code>ggarrange</code> (package <a href="https://cran.r-project.org/web/packages/ggpubr/index.html">ggpubr</a>) or <code>plot_grid</code> (package <a href="https://cran.r-project.org/web/packages/cowplot/">cowplot</a>) <code>cowplot</code>. Notice that some functions might be only applicable after fits or clusters have been computed (the package will raise errors if you try to call a function on an object that does not have the required information to create the plot).</p>
-<p>In this vignette, we apply the plotting functions to one of the cohort objects released in the <code>evoverse.datasets</code> <a href="https://github.com/caravagn/evoverse.datasets">R package</a>.</p>
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/caravagn/revolver" class="external-link">revolver</a></span><span class="op">)</span></code></pre></div>
+<p>Since the new release of <code>REVOLVER</code> (&gt;= 0.3), we have implemented <a href="https://caravagn.github.io/revolver/reference/index.html" class="external-link">all plotting functions</a> using <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a>.</p>
+<p>All functions now return either a <code>ggplot</code> object, or a more complext figure obtained by assembling <code>ggplot</code> objects either via <code>ggarrange</code> (package <a href="https://cran.r-project.org/web/packages/ggpubr/index.html" class="external-link">ggpubr</a>) or <code>plot_grid</code> (package <a href="https://cran.r-project.org/web/packages/cowplot/" class="external-link">cowplot</a>) <code>cowplot</code>. Notice that some functions might be only applicable after fits or clusters have been computed (the package will raise errors if you try to call a function on an object that does not have the required information to create the plot).</p>
+<p>In this vignette, we apply the plotting functions to one of the cohort objects released in the <code>evoverse.datasets</code> <a href="https://github.com/caravagn/evoverse.datasets" class="external-link">R package</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Data released in the 'evoverse.datasets'</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">'TRACERx_NEJM_2017_REVOLVER'</span>, package <span class="op">=</span> <span class="st">'evoverse.datasets'</span><span class="op">)</span></code></pre></div>
-<div id="plotting-cohort-level-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#plotting-cohort-level-data" class="anchor"></a>Plotting cohort-level data</h1>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'TRACERx_NEJM_2017_REVOLVER'</span>, package <span class="op">=</span> <span class="st">'evoverse.datasets'</span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="plotting-cohort-level-data">Plotting cohort-level data<a class="anchor" aria-label="anchor" href="#plotting-cohort-level-data"></a>
+</h2>
 <p>You can plot various information about the drivers in the cohort, and the trajectories detected in the cohort. See the manual of each one of these functions to understand non-trivial plots, and how to customize the input parameters.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the occurrence of drivers across the cohort.</span>
@@ -119,24 +136,24 @@
 <code class="sourceCode R"><span class="co"># Plot the  graph-alike summary statistics for the cohort drivers.</span>
 <span class="fu"><a href="../reference/plot_drivers_graph.html">plot_drivers_graph</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Enrichment test for incoming edges</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; # A tibble: 49 x 15</span>
-<span class="co">#&gt;    estimate  p.value conf.low conf.high method   alternative from  to    POS_POS</span>
-<span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt;  1     23.0  1.82e-9     8.60       Inf Fisher'… greater     EGFR  TP53       13</span>
-<span class="co">#&gt;  2     25.4  1.36e-6     4.81       Inf Fisher'… greater     GL    PIK3…      20</span>
-<span class="co">#&gt;  3     10.5  6.27e-6     4.19       Inf Fisher'… greater     CDKN… TP53       10</span>
-<span class="co">#&gt;  4     12.6  8.68e-6     3.56       Inf Fisher'… greater     GL    EGFR       20</span>
-<span class="co">#&gt;  5    Inf    1.48e-5     5.16       Inf Fisher'… greater     GL    CDKN…      14</span>
-<span class="co">#&gt;  6    Inf    1.48e-5     5.16       Inf Fisher'… greater     GL    SOX2       14</span>
-<span class="co">#&gt;  7     19.8  1.71e-5     5.37       Inf Fisher'… greater     TP53  FAT1        7</span>
-<span class="co">#&gt;  8    Inf    2.10e-5     9.42       Inf Fisher'… greater     RASA1 TP53        5</span>
-<span class="co">#&gt;  9    Inf    5.99e-5    14.5        Inf Fisher'… greater     BRAF  TERT        3</span>
-<span class="co">#&gt; 10    Inf    7.41e-5     4.31       Inf Fisher'… greater     GL    KEAP1      12</span>
-<span class="co">#&gt; # … with 39 more rows, and 6 more variables: POS_NEG &lt;int&gt;, NEG_POS &lt;int&gt;,</span>
-<span class="co">#&gt; #   NEG_NEG &lt;int&gt;, alpha_level &lt;dbl&gt;, N &lt;int&gt;, psign &lt;lgl&gt;</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Enrichment test for incoming edges</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 49 × 15</span></span>
+<span class="co">#&gt;    estimate    p.value conf.low conf.high method alternative from  to    POS_POS</span>
+<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     23.0    1.82<span style="color: #949494;">e</span><span style="color: #BB0000;">-9</span>     8.60       <span style="color: #BB0000;">Inf</span> Fishe… greater     EGFR  TP53       13</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     25.4    1.36<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>     4.81       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    PIK3…      20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     10.5    6.27<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>     4.19       <span style="color: #BB0000;">Inf</span> Fishe… greater     CDKN… TP53       10</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     12.6    8.68<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>     3.56       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    EGFR       20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    <span style="color: #BB0000;">Inf</span>      1.48<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     5.16       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    CDKN…      14</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    <span style="color: #BB0000;">Inf</span>      1.48<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     5.16       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    SOX2       14</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     19.8    1.71<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     5.37       <span style="color: #BB0000;">Inf</span> Fishe… greater     TP53  FAT1        7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    <span style="color: #BB0000;">Inf</span>      2.10<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     9.42       <span style="color: #BB0000;">Inf</span> Fishe… greater     RASA1 TP53        5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    <span style="color: #BB0000;">Inf</span>      5.99<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    14.5        <span style="color: #BB0000;">Inf</span> Fishe… greater     BRAF  TERT        3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    <span style="color: #BB0000;">Inf</span>      7.41<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     4.31       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    KEAP1      12</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 39 more rows, and 6 more variables: POS_NEG &lt;int&gt;, NEG_POS &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   NEG_NEG &lt;int&gt;, alpha_level &lt;dbl&gt;, N &lt;int&gt;, psign &lt;lgl&gt;</span></span>
 <span class="co">#&gt; Registered S3 method overwritten by 'vegan':</span>
 <span class="co">#&gt;   method     from      </span>
 <span class="co">#&gt;   rev.hclust dendextend</span></code></pre></div>
@@ -147,47 +164,47 @@
 <code class="sourceCode R"><span class="co"># Plot the index of Divergent Evolutionary Trajectories</span>
 <span class="fu"><a href="../reference/plot_penalty.html">plot_penalty</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Enrichment test for incoming edges</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; # A tibble: 49 x 15</span>
-<span class="co">#&gt;    estimate  p.value conf.low conf.high method   alternative from  to    POS_POS</span>
-<span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt;  1     23.0  1.82e-9     8.60       Inf Fisher'… greater     EGFR  TP53       13</span>
-<span class="co">#&gt;  2     25.4  1.36e-6     4.81       Inf Fisher'… greater     GL    PIK3…      20</span>
-<span class="co">#&gt;  3     10.5  6.27e-6     4.19       Inf Fisher'… greater     CDKN… TP53       10</span>
-<span class="co">#&gt;  4     12.6  8.68e-6     3.56       Inf Fisher'… greater     GL    EGFR       20</span>
-<span class="co">#&gt;  5    Inf    1.48e-5     5.16       Inf Fisher'… greater     GL    CDKN…      14</span>
-<span class="co">#&gt;  6    Inf    1.48e-5     5.16       Inf Fisher'… greater     GL    SOX2       14</span>
-<span class="co">#&gt;  7     19.8  1.71e-5     5.37       Inf Fisher'… greater     TP53  FAT1        7</span>
-<span class="co">#&gt;  8    Inf    2.10e-5     9.42       Inf Fisher'… greater     RASA1 TP53        5</span>
-<span class="co">#&gt;  9    Inf    5.99e-5    14.5        Inf Fisher'… greater     BRAF  TERT        3</span>
-<span class="co">#&gt; 10    Inf    7.41e-5     4.31       Inf Fisher'… greater     GL    KEAP1      12</span>
-<span class="co">#&gt; # … with 39 more rows, and 6 more variables: POS_NEG &lt;int&gt;, NEG_POS &lt;int&gt;,</span>
-<span class="co">#&gt; #   NEG_NEG &lt;int&gt;, alpha_level &lt;dbl&gt;, N &lt;int&gt;, psign &lt;lgl&gt;</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Enrichment test for incoming edges</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 49 × 15</span></span>
+<span class="co">#&gt;    estimate    p.value conf.low conf.high method alternative from  to    POS_POS</span>
+<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     23.0    1.82<span style="color: #949494;">e</span><span style="color: #BB0000;">-9</span>     8.60       <span style="color: #BB0000;">Inf</span> Fishe… greater     EGFR  TP53       13</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     25.4    1.36<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>     4.81       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    PIK3…      20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     10.5    6.27<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>     4.19       <span style="color: #BB0000;">Inf</span> Fishe… greater     CDKN… TP53       10</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     12.6    8.68<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>     3.56       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    EGFR       20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    <span style="color: #BB0000;">Inf</span>      1.48<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     5.16       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    CDKN…      14</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    <span style="color: #BB0000;">Inf</span>      1.48<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     5.16       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    SOX2       14</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     19.8    1.71<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     5.37       <span style="color: #BB0000;">Inf</span> Fishe… greater     TP53  FAT1        7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    <span style="color: #BB0000;">Inf</span>      2.10<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     9.42       <span style="color: #BB0000;">Inf</span> Fishe… greater     RASA1 TP53        5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    <span style="color: #BB0000;">Inf</span>      5.99<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    14.5        <span style="color: #BB0000;">Inf</span> Fishe… greater     BRAF  TERT        3</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    <span style="color: #BB0000;">Inf</span>      7.41<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>     4.31       <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    KEAP1      12</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 39 more rows, and 6 more variables: POS_NEG &lt;int&gt;, NEG_POS &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   NEG_NEG &lt;int&gt;, alpha_level &lt;dbl&gt;, N &lt;int&gt;, psign &lt;lgl&gt;</span></span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-6-1.png" width="1152"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the index of Divergent Evolutionary Trajectories</span>
 <span class="fu"><a href="../reference/plot_DET_index.html">plot_DET_index</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 79 x 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 79 × 4</span></span>
 <span class="co">#&gt;    driver diversity     N DET_index</span>
-<span class="co">#&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 APC            0     1         0</span>
-<span class="co">#&gt;  2 BRAF           0     1         0</span>
-<span class="co">#&gt;  3 CDKN2A         0     1         0</span>
-<span class="co">#&gt;  4 CHEK2          0     1         0</span>
-<span class="co">#&gt;  5 CIC            0     1         0</span>
-<span class="co">#&gt;  6 CMTR2          0     1         0</span>
-<span class="co">#&gt;  7 COL2A1         0     1         0</span>
-<span class="co">#&gt;  8 CREBBP         0     1         0</span>
-<span class="co">#&gt;  9 CUX1           0     1         0</span>
-<span class="co">#&gt; 10 DICER1         0     1         0</span>
-<span class="co">#&gt; # … with 69 more rows</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> APC            0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> BRAF           0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> CDKN2A         0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CHEK2          0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CIC            0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> CMTR2          0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> COL2A1         0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CREBBP         0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> CUX1           0     1         0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> DICER1         0     1         0</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 69 more rows</span></span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-7-1.png" width="1152"></p>
 </div>
-<div id="plotting-patients-data-and-trees" class="section level1">
-<h1 class="hasAnchor">
-<a href="#plotting-patients-data-and-trees" class="anchor"></a>Plotting patient’s data and trees</h1>
+<div class="section level2">
+<h2 id="plotting-patients-data-and-trees">Plotting patient’s data and trees<a class="anchor" aria-label="anchor" href="#plotting-patients-data-and-trees"></a>
+</h2>
 <p>You can plot the data and the trees of a patient.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the data histogram for a patient.</span>
@@ -202,12 +219,12 @@
 <span class="fu"><a href="../reference/plot_patient_oncoprint.html">plot_patient_oncoprint</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span>, <span class="st">'CRUK0002'</span><span class="op">)</span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-10-1.png" width="960"></p>
 <p>A full profile of the data available for a patient can be print using <code>plot_patient_data</code>. This function uses the above functions in combination with functions that are specific to the packages that implements the trees of the current cohort, in order to create other visualization of the data.</p>
-<p>In the case of this cohort, since the patients have CCF-based clone trees, the reference plotting functions are from the <a href="https://caravagn.github.io/ctree/">ctree</a> package</p>
+<p>In the case of this cohort, since the patients have CCF-based clone trees, the reference plotting functions are from the <a href="https://caravagn.github.io/ctree/" class="external-link">ctree</a> package</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot a number of different measurements for the patient</span>
 <span class="fu"><a href="../reference/plot_patient_data.html">plot_patient_data</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span>, <span class="st">'CRUK0002'</span><span class="op">)</span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-11-1.png" width="1152"></p>
-<p>In a similar way, trees are plot using functions from the <a href="https://caravagn.github.io/ctree/">ctree</a> package, called by <code>REVOLVER</code>.</p>
+<p>In a similar way, trees are plot using functions from the <a href="https://caravagn.github.io/ctree/" class="external-link">ctree</a> package, called by <code>REVOLVER</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot REVOLVER trees for a patient.</span>
 <span class="fu"><a href="../reference/plot_patient_trees.html">plot_patient_trees</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span>, <span class="st">'CRUK0002'</span><span class="op">)</span></code></pre></div>
@@ -218,9 +235,9 @@
 <span class="fu"><a href="../reference/plot_patient_trees_scores.html">plot_patient_trees_scores</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span>, <span class="st">'CRUK0002'</span><span class="op">)</span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-13-1.png" width="288"></p>
 </div>
-<div id="plotting-revolver-clusters-and-jackknife-statistics" class="section level1">
-<h1 class="hasAnchor">
-<a href="#plotting-revolver-clusters-and-jackknife-statistics" class="anchor"></a>Plotting REVOLVER clusters and jackknife statistics</h1>
+<div class="section level2">
+<h2 id="plotting-revolver-clusters-and-jackknife-statistics">Plotting REVOLVER clusters and jackknife statistics<a class="anchor" aria-label="anchor" href="#plotting-revolver-clusters-and-jackknife-statistics"></a>
+</h2>
 <p>The results of using <code>REVOLVER</code> to cluster your cohort can be visualised with two functions</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot the heatmaps of REVOLVER"s clusters, as tiles.</span>
@@ -267,12 +284,12 @@
 <span class="fu"><a href="../reference/plot_jackknife_trajectories_stability.html">plot_jackknife_trajectories_stability</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span><span class="op">)</span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-19-1.png" width="480"></p>
 </div>
-<div id="s3-plotting-functions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#s3-plotting-functions" class="anchor"></a>S3 plotting functions</h1>
+<div class="section level2">
+<h2 id="s3-plotting-functions">S3 plotting functions<a class="anchor" aria-label="anchor" href="#s3-plotting-functions"></a>
+</h2>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot a summary</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">TRACERx_NEJM_2017_REVOLVER</span><span class="op">)</span></code></pre></div>
 <p><img src="Plotting_functions_files/figure-html/unnamed-chunk-20-1.png" width="480"></p>
 </div>
   </div>
@@ -288,11 +305,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.caravagnalab.org/">Giulio Caravagna</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.caravagnalab.org/" class="external-link">Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -300,6 +319,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,26 +40,41 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revolver</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/revolver.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../articles/index.html">Articles</a>
+      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
+    </li>
+    <li>
+      <a href="../articles/FAQ.html">Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Getters.html">Getter functions</a>
+    </li>
+    <li>
+      <a href="../articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
+    </li>
+    <li>
+      <a href="../articles/Plotting_functions.html">Plotting functions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -65,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/caravagn/revolver/">
+  <a href="https://github.com/caravagn/revolver/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,14 +97,14 @@
 
       
 
-      </header><script src="revolver_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with REVOLVER</h1>
-                        <h4 class="author">Giulio Caravagna</h4>
+                        <h4 data-toc-skip class="author">Giulio Caravagna</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/master/vignettes/revolver.Rmd"><code>vignettes/revolver.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/HEAD/vignettes/revolver.Rmd" class="external-link"><code>vignettes/revolver.Rmd</code></a></small>
       <div class="hidden name"><code>revolver.Rmd</code></div>
 
     </div>
@@ -97,9 +114,9 @@
 <p>The <code>REVOLVER</code> package implements a statistical model to determine trajectories of repeated evolution in a cohort of multi-region sequencing datasets.</p>
 <p>The repeatability of evolution is measured with a new method that extracts evolutionary trajectories within a single patient (intra-tumour), and correlates them against the cohort (inter-patient).</p>
 <p>The correlation across patients is measured extracting evolutionary trajectories from the <em>phylogenetic ordering</em> of driver alterations detected from the patients’ trees. Drivers must be annotated in the input genome sequencing data, and shall occur across multiple patients.</p>
-<div id="analysis-pipeline" class="section level3">
-<h3 class="hasAnchor">
-<a href="#analysis-pipeline" class="anchor"></a>Analysis pipeline</h3>
+<div class="section level3">
+<h3 id="analysis-pipeline">Analysis pipeline<a class="anchor" aria-label="anchor" href="#analysis-pipeline"></a>
+</h3>
 <p>A <code>REVOLVER</code> analysis follows the following steps (the main function to implement the step is reported):</p>
 <ol style="list-style-type: decimal">
 <li><p>create a <code>REVOLVER</code> cohort (<code>revolver_cohort</code>);</p></li>
@@ -110,9 +127,9 @@
 </ol>
 <p>At the end of each one of these steps, you can use a number of <code>REVOLVER</code> functions to inspect or plot the results of the analysis.</p>
 </div>
-<div id="vignettes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vignettes" class="anchor"></a>Vignettes</h3>
+<div class="section level3">
+<h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h3>
 <p>The following vignettes are available:</p>
 <ol style="list-style-type: decimal">
 <li><p><a href="https://caravagnalab.github.io/revolver/articles/Input_formats.html">Introduction:</a> which discusses input formats, and the creation of a <code>REVOLVER</code> cohort from input sequencing data;</p></li>
@@ -132,11 +149,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.caravagnalab.org/">Giulio Caravagna</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.caravagnalab.org/" class="external-link">Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -144,6 +163,8 @@
 
   
 
+
+  
 
   </body>
 </html>

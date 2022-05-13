@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,26 +40,41 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">revolver</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="articles/revolver.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="articles/index.html">Articles</a>
+      <a href="articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
+    </li>
+    <li>
+      <a href="articles/FAQ.html">Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="articles/Getters.html">Getter functions</a>
+    </li>
+    <li>
+      <a href="articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
+    </li>
+    <li>
+      <a href="articles/Plotting_functions.html">Plotting functions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -65,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/caravagn/revolver/">
+  <a href="https://github.com/caravagn/revolver/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -84,39 +101,39 @@
   <div class="contents col-md-9">
 
 
-<div id="revolver-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#revolver-" class="anchor"></a>revolver <a href="caravagn.github.io/revolver"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="revolver-">revolver <a href="caravagn.github.io/revolver"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a class="anchor" aria-label="anchor" href="#revolver-"></a>
 </h1></div>
-<p>The <code>revolver</code> package implements the statistical model described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30171232">Caravagna et al; PMID: 30171232</a> to determine trajectories of repeated evolution from multi-region sequencing data of human cancers.The package implements functions to process data from large cohorts, and determine different types of phylogenetic trees from the input data of each input patients. The package provides also several functions to plot the data and determine clusters of patients that share repeated evolutionary trajectories; this provides a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.</p>
-<div id="citation" class="section level4">
-<h4 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h4>
+<p>The <code>revolver</code> package implements the statistical model described in <a href="https://www.ncbi.nlm.nih.gov/pubmed/30171232" class="external-link">Caravagna et al; PMID: 30171232</a> to determine trajectories of repeated evolution from multi-region sequencing data of human cancers.The package implements functions to process data from large cohorts, and determine different types of phylogenetic trees from the input data of each input patients. The package provides also several functions to plot the data and determine clusters of patients that share repeated evolutionary trajectories; this provides a method to stratify cancer patients for the way their tumour evolve, reconciling tumour heterogeneity both between and within patients.</p>
+<div class="section level4">
+<h4 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h4>
 <p>If you use <code>revolver</code>, please cite:</p>
 <ul>
 <li>G. Caravagna, Y. Giarratano, D. Ramazzoti, I. Tomlinson, T.A. Graham, G. Sanguinetti, A. Sottoriva. <em>Detecting repeated cancer evolution from multi-region tumor sequencing data.</em> Nature Methods 15, 707–714 (2018).</li>
 </ul>
-<p><a href="https://doi.org/10.1038/s41592-018-0108-x"><img src="https://img.shields.io/badge/doi-10.1038/s41592--018--0108--x-red.svg"></a></p>
+<p><a href="https://doi.org/10.1038/s41592-018-0108-x" class="external-link"><img src="https://img.shields.io/badge/doi-10.1038/s41592--018--0108--x-red.svg"></a></p>
 </div>
-<div id="help-and-support" class="section level4">
-<h4 class="hasAnchor">
-<a href="#help-and-support" class="anchor"></a>Help and support</h4>
+<div class="section level4">
+<h4 id="help-and-support">Help and support<a class="anchor" aria-label="anchor" href="#help-and-support"></a>
+</h4>
 <p><a href="https://caravagnalab.github.io/revolver"><img src="https://img.shields.io/badge/GitHub%20Pages-https://caravagnalab.github.io/revolver/-yellow.svg"></a></p>
 <hr>
 </div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<p>You can install the released version of <code>revolver</code> from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
+<p>You can install the released version of <code>revolver</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"caravagnalab.github.io/revolver"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"caravagnalab.github.io/revolver"</span><span class="op">)</span></code></pre></div>
 <hr>
-<div id="copyright-and-contacts" class="section level4">
-<h4 class="hasAnchor">
-<a href="#copyright-and-contacts" class="anchor"></a>Copyright and contacts</h4>
-<p>Giulio Caravagna. Cancer Data Science (CDS) Laboratory.</p>
-<p><a href="mailto:gcaravagn@gmail.com"><img src="https://img.shields.io/badge/Email-gcaravagn@gmail.com-steelblue.svg"></a> <a href="https://github.com/caravagnalab"><img src="https://img.shields.io/badge/CDS%20Lab%20Github-caravagnalab-seagreen.svg"></a> <a href="https://www.caravagnalab.org/"><img src="https://img.shields.io/badge/CDS%20Lab%20webpage-https://www.caravagnalab.org/-red.svg"></a></p>
+<div class="section level4">
+<h4 id="copyright-and-contacts">Copyright and contacts<a class="anchor" aria-label="anchor" href="#copyright-and-contacts"></a>
+</h4>
+<p>Cancer Data Science (CDS) Laboratory. University of Trieste, Italy.</p>
+<p><a href="https://github.com/caravagnalab" class="external-link"><img src="https://img.shields.io/badge/CDS%20Lab%20Github-caravagnalab-seagreen.svg"></a> <a href="https://www.caravagnalab.org/" class="external-link"><img src="https://img.shields.io/badge/CDS%20Lab%20webpage-https://www.caravagnalab.org/-red.svg"></a></p>
 </div>
 </div>
 </div>
@@ -125,47 +142,58 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/caravagn/revolver/">https://​github.com/​caravagn/​revolver/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/caravagn/revolver/issues">https://​github.com/​caravagn/​revolver/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://www.caravagnalab.org/">Giulio Caravagna</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://github.com/caravagn/revolver/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/caravagn/revolver/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/caravagnalab/revolver/actions"><img src="https://github.com/caravagnalab/revolver/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml"><img src="https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml/badge.svg" alt="pkgdown"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing revolver</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="https://www.caravagnalab.org/" class="external-link">Giulio Caravagna</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/caravagnalab/revolver/actions" class="external-link"><img src="https://github.com/caravagnalab/revolver/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml/badge.svg" alt="pkgdown"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Lifecycle: stable"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.caravagnalab.org/">Giulio Caravagna</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.caravagnalab.org/" class="external-link">Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -173,6 +201,8 @@
 
   
 
+
+  
 
   </body>
 </html>
