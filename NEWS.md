@@ -1,3 +1,5 @@
+# revolver 1.0.0
+
 ## revolver 0.3.0 
 
 * Re-coding of all the internal structure of the cohorts using tibbles and in general the tidy data paradigm;
