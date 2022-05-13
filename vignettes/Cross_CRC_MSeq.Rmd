@@ -1,8 +1,6 @@
 ---
 title: "Analysis of colorectal adenocarcinomas"
 author: "Giulio Caravagna"
-institute: "Institute for Cancer Research"
-email: "giulio.caravagna@ed.ac.uk"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Analysis of colorectal adenocarcinomas}

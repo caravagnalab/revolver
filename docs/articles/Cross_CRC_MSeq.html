@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,26 +40,41 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">revolver</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/revolver.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../articles/index.html">Articles</a>
+      <a href="../articles/Cross_CRC_MSeq.html">Analysis of colorectal adenocarcinomas</a>
+    </li>
+    <li>
+      <a href="../articles/FAQ.html">Frequently Asked Questions</a>
+    </li>
+    <li>
+      <a href="../articles/Getters.html">Getter functions</a>
+    </li>
+    <li>
+      <a href="../articles/Input_formats.html">Input formats and creation of a REVOLVER cohort</a>
+    </li>
+    <li>
+      <a href="../articles/Plotting_functions.html">Plotting functions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -65,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/caravagn/revolver/">
+  <a href="https://github.com/caravagn/revolver/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,14 +97,14 @@
 
       
 
-      </header><script src="Cross_CRC_MSeq_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Analysis of colorectal adenocarcinomas</h1>
-                        <h4 class="author">Giulio Caravagna</h4>
+                        <h4 data-toc-skip class="author">Giulio Caravagna</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/master/vignettes/Cross_CRC_MSeq.Rmd"><code>vignettes/Cross_CRC_MSeq.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/caravagn/revolver/blob/HEAD/vignettes/Cross_CRC_MSeq.Rmd" class="external-link"><code>vignettes/Cross_CRC_MSeq.Rmd</code></a></small>
       <div class="hidden name"><code>Cross_CRC_MSeq.Rmd</code></div>
 
     </div>
@@ -95,13 +112,13 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/caravagn/revolver">revolver</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/caravagn/evoverse.datasets">evoverse.datasets</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<div id="data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data" class="anchor"></a>Data</h3>
-<p>Cross et al. <em>The evolutionary landscape of colorectal tumorigenesis.</em> Nat Ecol Evol. 2018 2(10). <a href="https://www.ncbi.nlm.nih.gov/pubmed/30177804">PMID 30177804</a>.</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/caravagn/revolver" class="external-link">revolver</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/caravagn/evoverse.datasets" class="external-link">evoverse.datasets</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h3>
+<p>Cross et al. <em>The evolutionary landscape of colorectal tumorigenesis.</em> Nat Ecol Evol. 2018 2(10). <a href="https://www.ncbi.nlm.nih.gov/pubmed/30177804" class="external-link">PMID 30177804</a>.</p>
 <ul>
 <li>
 <code>n=19</code> adenomas (unmatched);</li>
@@ -109,430 +126,432 @@
 <li>annotated driver events from Cross et al.;</li>
 </ul>
 </div>
-<div id="building-the-cohort" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-the-cohort" class="anchor"></a>Building the cohort</h3>
+<div class="section level3">
+<h3 id="building-the-cohort">Building the cohort<a class="anchor" aria-label="anchor" href="#building-the-cohort"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018</span>, packages <span class="op">=</span> <span class="st">'evoverse.datasets'</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018</span>, packages <span class="op">=</span> <span class="st">'evoverse.datasets'</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 63 x 7</span>
-<span class="co">#&gt;    patientID variantID CCF                    is.clonal is.driver Misc   cluster</span>
-<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                  &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;  &lt;chr&gt;  </span>
-<span class="co">#&gt;  1 adenoma_1 ACVR2A    R1:1;R2:1;R3:1;R4:1;R… TRUE      TRUE      NOTHI… 1      </span>
-<span class="co">#&gt;  2 adenoma_1 APC       R1:1;R2:1;R3:1;R4:1;R… TRUE      TRUE      NOTHI… 1      </span>
-<span class="co">#&gt;  3 adenoma_2 APC       R1:1;R2:1;R3:1;R4:1    TRUE      TRUE      NOTHI… 1      </span>
-<span class="co">#&gt;  4 adenoma_2 KRAS      R1:0;R2:0;R3:0;R4:1    FALSE     TRUE      NOTHI… 2      </span>
-<span class="co">#&gt;  5 adenoma_2 ARID2     R1:0;R2:0;R3:0;R4:1    FALSE     TRUE      NOTHI… 2      </span>
-<span class="co">#&gt;  6 adenoma_2 TP53      R1:1;R2:1;R3:1;R4:0    FALSE     TRUE      NOTHI… 3      </span>
-<span class="co">#&gt;  7 adenoma_3 PIK3CA    R1:0;R2:0;R3:0;R4:1;R… FALSE     TRUE      NOTHI… 1      </span>
-<span class="co">#&gt;  8 adenoma_3 FBXW7     R1:1;R2:1;R3:1;R4:1;R… TRUE      TRUE      NOTHI… 2      </span>
-<span class="co">#&gt;  9 adenoma_3 APC       R1:1;R2:1;R3:1;R4:1;R… TRUE      TRUE      NOTHI… 2      </span>
-<span class="co">#&gt; 10 adenoma_3 AKAP9     R1:0;R2:0;R3:1;R4:0;R… FALSE     TRUE      NOTHI… 3      </span>
-<span class="co">#&gt; # … with 53 more rows</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 7</span></span>
+<span class="co">#&gt;    patientID variantID CCF                     is.clonal is.driver Misc  cluster</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1 ACVR2A    R1:1;R2:1;R3:1;R4:1;R5… TRUE      TRUE      NOTH… 1      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_1 APC       R1:1;R2:1;R3:1;R4:1;R5… TRUE      TRUE      NOTH… 1      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_2 APC       R1:1;R2:1;R3:1;R4:1     TRUE      TRUE      NOTH… 1      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_2 KRAS      R1:0;R2:0;R3:0;R4:1     FALSE     TRUE      NOTH… 2      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_2 ARID2     R1:0;R2:0;R3:0;R4:1     FALSE     TRUE      NOTH… 2      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_2 TP53      R1:1;R2:1;R3:1;R4:0     FALSE     TRUE      NOTH… 3      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> adenoma_3 PIK3CA    R1:0;R2:0;R3:0;R4:1;R5… FALSE     TRUE      NOTH… 1      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> adenoma_3 FBXW7     R1:1;R2:1;R3:1;R4:1;R5… TRUE      TRUE      NOTH… 2      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> adenoma_3 APC       R1:1;R2:1;R3:1;R4:1;R5… TRUE      TRUE      NOTH… 2      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> adenoma_3 AKAP9     R1:0;R2:0;R3:1;R4:0;R5… FALSE     TRUE      NOTH… 3      </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 53 more rows</span></span>
 
 <span class="co"># Constructor</span>
 <span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span> <span class="op">=</span> <span class="fu"><a href="../reference/revolver_cohort.html">revolver_cohort</a></span><span class="op">(</span>
   <span class="va">CROSS_CRC_ADENOCARCINOMA_NATECOEVO_2018</span>, 
   MIN.CLUSTER.SIZE <span class="op">=</span> <span class="fl">0</span>, 
   annotation <span class="op">=</span> <span class="st">"Colorectal adenocarcinomas (Cross et al, PMID 30177804)"</span><span class="op">)</span>
-<span class="co">#&gt;  [ REVOLVER ~ Cohort constructor ]</span>
-<span class="co">#&gt; ℹ Using only driver mutations.</span>
-<span class="co">#&gt; ℹ Rejecting clusters with less than 0 mutations.</span>
+<span class="co">#&gt; <span style="color: #BBBBBB; background-color: #0000BB;"> [ REVOLVER ~ Cohort constructor ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Using <span style="font-weight: bold;">only driver</span> mutations.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Rejecting clusters with less than <span style="font-weight: bold;">0</span> mutations.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── REVOLVER input data ─────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">REVOLVER input data</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 63 x 9</span>
-<span class="co">#&gt;    Misc   patientID variantID cluster is.driver is.clonal CCF            id     </span>
-<span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;lgl&gt;     &lt;lgl&gt;     &lt;chr&gt;          &lt;chr&gt;  </span>
-<span class="co">#&gt;  1 NOTHI… adenoma_1 ACVR2A    1       TRUE      TRUE      R1:1;R2:1;R3:… __mut_…</span>
-<span class="co">#&gt;  2 NOTHI… adenoma_1 APC       1       TRUE      TRUE      R1:1;R2:1;R3:… __mut_…</span>
-<span class="co">#&gt;  3 NOTHI… adenoma_2 APC       1       TRUE      TRUE      R1:1;R2:1;R3:… __mut_…</span>
-<span class="co">#&gt;  4 NOTHI… adenoma_2 KRAS      2       TRUE      FALSE     R1:0;R2:0;R3:… __mut_…</span>
-<span class="co">#&gt;  5 NOTHI… adenoma_2 ARID2     2       TRUE      FALSE     R1:0;R2:0;R3:… __mut_…</span>
-<span class="co">#&gt;  6 NOTHI… adenoma_2 TP53      3       TRUE      FALSE     R1:1;R2:1;R3:… __mut_…</span>
-<span class="co">#&gt;  7 NOTHI… adenoma_3 PIK3CA    1       TRUE      FALSE     R1:0;R2:0;R3:… __mut_…</span>
-<span class="co">#&gt;  8 NOTHI… adenoma_3 FBXW7     2       TRUE      TRUE      R1:1;R2:1;R3:… __mut_…</span>
-<span class="co">#&gt;  9 NOTHI… adenoma_3 APC       2       TRUE      TRUE      R1:1;R2:1;R3:… __mut_…</span>
-<span class="co">#&gt; 10 NOTHI… adenoma_3 AKAP9     3       TRUE      FALSE     R1:0;R2:0;R3:… __mut_…</span>
-<span class="co">#&gt; # … with 53 more rows, and 1 more variable: cluster_size &lt;int&gt;</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 9</span></span>
+<span class="co">#&gt;    Misc    patientID variantID cluster is.driver is.clonal CCF             id   </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NOTHING adenoma_1 ACVR2A    1       TRUE      TRUE      R1:1;R2:1;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> NOTHING adenoma_1 APC       1       TRUE      TRUE      R1:1;R2:1;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> NOTHING adenoma_2 APC       1       TRUE      TRUE      R1:1;R2:1;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> NOTHING adenoma_2 KRAS      2       TRUE      FALSE     R1:0;R2:0;R3:0… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> NOTHING adenoma_2 ARID2     2       TRUE      FALSE     R1:0;R2:0;R3:0… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> NOTHING adenoma_2 TP53      3       TRUE      FALSE     R1:1;R2:1;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NOTHING adenoma_3 PIK3CA    1       TRUE      FALSE     R1:0;R2:0;R3:0… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> NOTHING adenoma_3 FBXW7     2       TRUE      TRUE      R1:1;R2:1;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> NOTHING adenoma_3 APC       2       TRUE      TRUE      R1:1;R2:1;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NOTHING adenoma_3 AKAP9     3       TRUE      FALSE     R1:0;R2:0;R3:1… __mu…</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 53 more rows, and 1 more variable: cluster_size &lt;int&gt;</span></span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Preprocessing data (this may take some time)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ...................</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Extracting clones table ─────────────────────────────────────────────────────</span>
-<span class="co">#&gt; → adenoma_1 : 2 entries, 1 clone(s).</span>
-<span class="co">#&gt; → adenoma_2 : 4 entries, 3 clone(s).</span>
-<span class="co">#&gt; → adenoma_3 : 8 entries, 4 clone(s).</span>
-<span class="co">#&gt; → adenoma_4 : 5 entries, 3 clone(s).</span>
-<span class="co">#&gt; → adenoma_5 : 3 entries, 1 clone(s).</span>
-<span class="co">#&gt; → adenoma_6 : 2 entries, 1 clone(s).</span>
-<span class="co">#&gt; → adenoma_7 : 3 entries, 1 clone(s).</span>
-<span class="co">#&gt; → adenoma_8 : 4 entries, 1 clone(s).</span>
-<span class="co">#&gt; → adenoma_9 : 1 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_1 : 3 entries, 2 clone(s).</span>
-<span class="co">#&gt; → carcinoma_10 : 1 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_2 : 5 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_3 : 1 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_5 : 2 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_6 : 5 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_7 : 4 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_8 : 2 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_9_distal : 3 entries, 1 clone(s).</span>
-<span class="co">#&gt; → carcinoma_9_proximal : 5 entries, 1 clone(s).</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Extracting clones table</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_1</span> : 2 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_2</span> : 4 entries, 3 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_3</span> : 8 entries, 4 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_4</span> : 5 entries, 3 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_5</span> : 3 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_6</span> : 2 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_7</span> : 3 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_8</span> : 4 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">adenoma_9</span> : 1 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_1</span> : 3 entries, 2 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_10</span> : 1 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_2</span> : 5 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_3</span> : 1 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_5</span> : 2 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_6</span> : 5 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_7</span> : 4 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_8</span> : 2 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_9_distal</span> : 3 entries, 1 clone(s).</span>
+<span class="co">#&gt; → <span style="color: #00BB00;">carcinoma_9_proximal</span> : 5 entries, 1 clone(s).</span></code></pre></div>
 <p>We can check the cohort, and flag put drivers that are not recurrent.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Diagnostic</span>
 <span class="fu"><a href="../reference/revolver_check_cohort.html">revolver_check_cohort</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span>
-<span class="co">#&gt;      ┌──────────────────────────────────────────────────────────────────────┐</span>
-<span class="co">#&gt;      │                                                                      │</span>
-<span class="co">#&gt;      │   WARNING - Driver variantIDs occuring only once could be removed.   │</span>
-<span class="co">#&gt;      │                                                                      │</span>
-<span class="co">#&gt;      └──────────────────────────────────────────────────────────────────────┘</span>
-<span class="co">#&gt; # A tibble: 9 x 7</span>
+<span class="co">#&gt; <span style="color: #000000;">     ┌──────────────────────────────────────────────────────────────────────┐</span></span>
+<span class="co">#&gt;      <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                      </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt;      <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000; background-color: #FFAF00;">WARNING - Driver variantIDs occuring only once could be removed.</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt;      <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                      </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">     └──────────────────────────────────────────────────────────────────────┘</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 7</span></span>
 <span class="co">#&gt;   variantID numClonal p_clonal numSubclonal p_subclonal N_tot  p_tot</span>
-<span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 ACVR2A            1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 2 TGIF1             1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 3 SMAD3             1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 4 SOX9              1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 5 ARID2             0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 6 AKAP9             0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 7 GNAS              0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 8 SMAD4             0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 9 CHD4              0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; ┌───────────────────────────────────────────────────────────────────────────────────────────┐</span>
-<span class="co">#&gt; │                                                                                           │</span>
-<span class="co">#&gt; │   WARNING - Some patients have only one clone with drivers; they will just be expanded.   │</span>
-<span class="co">#&gt; │                                                                                           │</span>
-<span class="co">#&gt; └───────────────────────────────────────────────────────────────────────────────────────────┘</span>
-<span class="co">#&gt; # A tibble: 15 x 7</span>
-<span class="co">#&gt;    patientID        numBiopsies numMutations numDriverMutatio… numClonesWithDri…</span>
-<span class="co">#&gt;    &lt;chr&gt;                  &lt;int&gt;        &lt;int&gt;             &lt;int&gt;             &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1                  6            2                 2                 1</span>
-<span class="co">#&gt;  2 adenoma_5                  4            3                 3                 1</span>
-<span class="co">#&gt;  3 adenoma_6                  2            2                 2                 1</span>
-<span class="co">#&gt;  4 adenoma_7                  2            3                 3                 1</span>
-<span class="co">#&gt;  5 adenoma_8                  2            4                 4                 1</span>
-<span class="co">#&gt;  6 adenoma_9                  2            1                 1                 1</span>
-<span class="co">#&gt;  7 carcinoma_10               5            1                 1                 1</span>
-<span class="co">#&gt;  8 carcinoma_2                7            5                 5                 1</span>
-<span class="co">#&gt;  9 carcinoma_3                6            1                 1                 1</span>
-<span class="co">#&gt; 10 carcinoma_5                6            2                 2                 1</span>
-<span class="co">#&gt; 11 carcinoma_6               13            5                 5                 1</span>
-<span class="co">#&gt; 12 carcinoma_7                8            4                 4                 1</span>
-<span class="co">#&gt; 13 carcinoma_8                5            2                 2                 1</span>
-<span class="co">#&gt; 14 carcinoma_9_dis…           5            3                 3                 1</span>
-<span class="co">#&gt; 15 carcinoma_9_pro…           5            5                 5                 1</span>
-<span class="co">#&gt; # … with 2 more variables: numTruncalMutations &lt;int&gt;,</span>
-<span class="co">#&gt; #   numSubclonalMutations &lt;int&gt;</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ACVR2A            1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> TGIF1             1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> SMAD3             1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> SOX9              1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ARID2             0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> AKAP9             0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> GNAS              0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> SMAD4             0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> CHD4              0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #000000;">┌───────────────────────────────────────────────────────────────────────────────────────────┐</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                                           </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000; background-color: #FFAF00;">WARNING - Some patients have only one clone with drivers; they will just be expanded.</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                                           </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">└───────────────────────────────────────────────────────────────────────────────────────────┘</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 7</span></span>
+<span class="co">#&gt;    patientID          numBiopsies numMutations numDriverMutati… numClonesWithDr…</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1                    6            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_5                    4            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_6                    2            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_7                    2            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_8                    2            4                4                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_9                    2            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> carcinoma_10                 5            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> carcinoma_2                  7            5                5                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> carcinoma_3                  6            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_5                  6            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_6                 13            5                5                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_7                  8            4                4                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_8                  5            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_9_distal           5            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_9_proxi…           5            5                5                1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: numTruncalMutations &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   numSubclonalMutations &lt;int&gt;</span></span>
 
 <span class="co"># Driver events that occur in 1 patient</span>
-<span class="va">non_recurrent</span> <span class="op">=</span> <span class="fu"><a href="../reference/Stats_drivers.html">Stats_drivers</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">N_tot</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">pull</span><span class="op">(</span><span class="va">variantID</span><span class="op">)</span>
+<span class="va">non_recurrent</span> <span class="op">=</span> <span class="fu"><a href="../reference/Stats_drivers.html">Stats_drivers</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">N_tot</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">variantID</span><span class="op">)</span>
 
 <span class="co"># Remove drivers</span>
 <span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span> <span class="op">=</span> <span class="fu"><a href="../reference/remove_drivers.html">remove_drivers</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span>, <span class="va">non_recurrent</span><span class="op">)</span>
 <span class="co">#&gt; ── Removing driver events ──────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 9 x 7</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 7</span></span>
 <span class="co">#&gt;   variantID numClonal p_clonal numSubclonal p_subclonal N_tot  p_tot</span>
-<span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 ACVR2A            1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 2 TGIF1             1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 3 SMAD3             1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 4 SOX9              1   0.0526            0      0          1 0.0526</span>
-<span class="co">#&gt; 5 ARID2             0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 6 AKAP9             0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 7 GNAS              0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 8 SMAD4             0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; 9 CHD4              0   0                 1      0.0526     1 0.0526</span>
-<span class="co">#&gt; ℹ Retained 19 patients after driver removal..</span>
-<span class="co">#&gt; ┌───────────────────────────────────────────────────────────────────────────────────────────┐</span>
-<span class="co">#&gt; │                                                                                           │</span>
-<span class="co">#&gt; │   WARNING - Some patients have only one clone with drivers; they will just be expanded.   │</span>
-<span class="co">#&gt; │                                                                                           │</span>
-<span class="co">#&gt; └───────────────────────────────────────────────────────────────────────────────────────────┘</span>
-<span class="co">#&gt; # A tibble: 16 x 7</span>
-<span class="co">#&gt;    patientID        numBiopsies numMutations numDriverMutatio… numClonesWithDri…</span>
-<span class="co">#&gt;    &lt;chr&gt;                  &lt;int&gt;        &lt;int&gt;             &lt;int&gt;             &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1                  6            2                 1                 1</span>
-<span class="co">#&gt;  2 adenoma_5                  4            3                 3                 1</span>
-<span class="co">#&gt;  3 adenoma_6                  2            2                 2                 1</span>
-<span class="co">#&gt;  4 adenoma_7                  2            3                 3                 1</span>
-<span class="co">#&gt;  5 adenoma_8                  2            4                 4                 1</span>
-<span class="co">#&gt;  6 adenoma_9                  2            1                 1                 1</span>
-<span class="co">#&gt;  7 carcinoma_1                4            3                 2                 1</span>
-<span class="co">#&gt;  8 carcinoma_10               5            1                 1                 1</span>
-<span class="co">#&gt;  9 carcinoma_2                7            5                 4                 1</span>
-<span class="co">#&gt; 10 carcinoma_3                6            1                 1                 1</span>
-<span class="co">#&gt; 11 carcinoma_5                6            2                 2                 1</span>
-<span class="co">#&gt; 12 carcinoma_6               13            5                 5                 1</span>
-<span class="co">#&gt; 13 carcinoma_7                8            4                 3                 1</span>
-<span class="co">#&gt; 14 carcinoma_8                5            2                 2                 1</span>
-<span class="co">#&gt; 15 carcinoma_9_dis…           5            3                 3                 1</span>
-<span class="co">#&gt; 16 carcinoma_9_pro…           5            5                 4                 1</span>
-<span class="co">#&gt; # … with 2 more variables: numTruncalMutations &lt;int&gt;,</span>
-<span class="co">#&gt; #   numSubclonalMutations &lt;int&gt;</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ACVR2A            1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> TGIF1             1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> SMAD3             1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> SOX9              1   0.052<span style="text-decoration: underline;">6</span>            0      0          1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ARID2             0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> AKAP9             0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> GNAS              0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> SMAD4             0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> CHD4              0   0                 1      0.052<span style="text-decoration: underline;">6</span>     1 0.052<span style="text-decoration: underline;">6</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Retained <span style="color: #00BB00;">19</span> patients after driver removal..</span>
+<span class="co">#&gt; <span style="color: #000000;">┌───────────────────────────────────────────────────────────────────────────────────────────┐</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                                           </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000; background-color: #FFAF00;">WARNING - Some patients have only one clone with drivers; they will just be expanded.</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                                           </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">└───────────────────────────────────────────────────────────────────────────────────────────┘</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 7</span></span>
+<span class="co">#&gt;    patientID          numBiopsies numMutations numDriverMutati… numClonesWithDr…</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1                    6            2                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_5                    4            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_6                    2            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_7                    2            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_8                    2            4                4                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_9                    2            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> carcinoma_1                  4            3                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> carcinoma_10                 5            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> carcinoma_2                  7            5                4                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_3                  6            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_5                  6            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_6                 13            5                5                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_7                  8            4                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_8                  5            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_9_distal           5            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> carcinoma_9_proxi…           5            5                4                1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: numTruncalMutations &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   numSubclonalMutations &lt;int&gt;</span></span></code></pre></div>
 </div>
-<div id="constructing-mutation-trees" class="section level3">
-<h3 class="hasAnchor">
-<a href="#constructing-mutation-trees" class="anchor"></a>Constructing mutation trees</h3>
-<p><code>revolver</code> uses the <a href="https://caravagn.github.io/ctree/">mtree</a> package to implement <em>mutation trees</em> from binary data.</p>
+<div class="section level3">
+<h3 id="constructing-mutation-trees">Constructing mutation trees<a class="anchor" aria-label="anchor" href="#constructing-mutation-trees"></a>
+</h3>
+<p><code>revolver</code> uses the <a href="https://caravagn.github.io/ctree/" class="external-link">mtree</a> package to implement <em>mutation trees</em> from binary data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Compute the trees</span>
 <span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span> <span class="op">=</span> <span class="fu"><a href="../reference/compute_mutation_trees.html">compute_mutation_trees</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Constructing Mutations Tree objects via mtree - https://caravagn.github.io/mtree/</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; Input patients.  </span>
-<span class="co">#&gt; adenoma_1, adenoma_2, adenoma_3, adenoma_4, adenoma_5, adenoma_6, adenoma_7, adenoma_8, adenoma_9, carcinoma_1, carcinoma_10, carcinoma_2, carcinoma_3, carcinoma_5, carcinoma_6, carcinoma_7, carcinoma_8, carcinoma_9_distal, carcinoma_9_proximal </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_1 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 10</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Constructing Mutations Tree objects via mtree - https://caravagn.github.io/mtree/</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #000000; background-color: #BBBB00;">Input patients.</span>  </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span>adenoma_1, adenoma_2, adenoma_3, adenoma_4, adenoma_5, adenoma_6, adenoma_7, adenoma_8, adenoma_9, carcinoma_1, carcinoma_10, carcinoma_2, carcinoma_3, carcinoma_5, carcinoma_6, carcinoma_7, carcinoma_8, carcinoma_9_distal, carcinoma_9_proximal </span>
+<span class="co">#&gt; <span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_1 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           2 TRUE      TRUE          1     1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_2 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 3 x 8</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_2 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 2           2 TRUE      FALSE         0     0     0     1</span>
-<span class="co">#&gt; 2 1           1 TRUE      TRUE          1     1     1     1</span>
-<span class="co">#&gt; 3 3           1 TRUE      FALSE         1     1     1     0</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2           2 TRUE      FALSE         0     0     0     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1           1 TRUE      TRUE          1     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3           1 TRUE      FALSE         1     1     1     0</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; There are no alternatives!</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_3 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 4 x 9</span>
+<span class="co">#&gt; <span style="color: #BB0000;">There are no alternatives!</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_3 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 4 × 9</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 2           5 TRUE      TRUE          1     1     1     1     1</span>
-<span class="co">#&gt; 2 1           1 TRUE      FALSE         0     0     0     1     1</span>
-<span class="co">#&gt; 3 3           1 FALSE     FALSE         0     0     1     0     0</span>
-<span class="co">#&gt; 4 4           1 FALSE     FALSE         0     1     0     0     0</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2           5 TRUE      TRUE          1     1     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1           1 TRUE      FALSE         0     0     0     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3           1 FALSE     FALSE         0     0     1     0     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4           1 FALSE     FALSE         0     1     0     0     0</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; There are no alternatives!</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_4 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 3 x 8</span>
+<span class="co">#&gt; <span style="color: #BB0000;">There are no alternatives!</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_4 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1</span>
-<span class="co">#&gt; 2 2           1 TRUE      FALSE         0     0     1     0</span>
-<span class="co">#&gt; 3 3           1 FALSE     FALSE         0     0     0     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           3 TRUE      TRUE          1     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2           1 TRUE      FALSE         0     0     1     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3           1 FALSE     FALSE         0     0     0     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; There are no alternatives!</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_5 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 8</span>
+<span class="co">#&gt; <span style="color: #BB0000;">There are no alternatives!</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_5 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 8</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           3 TRUE      TRUE          1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_6 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 6</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_6 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           2 TRUE      TRUE          1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_7 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 6</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_7 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           3 TRUE      TRUE          1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_8 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 6</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_8 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           4 TRUE      TRUE          1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           4 TRUE      TRUE          1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for adenoma_9 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 6</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for adenoma_9 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           1 TRUE      TRUE          1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_1 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 2 x 8</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_1 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 2 × 8</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1</span>
-<span class="co">#&gt; 2 2           1 FALSE     FALSE         1     0     0     0</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           2 TRUE      TRUE          1     1     1     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2           1 FALSE     FALSE         1     0     0     0</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; There are no alternatives!</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_10 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 9</span>
+<span class="co">#&gt; <span style="color: #BB0000;">There are no alternatives!</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_10 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           1 TRUE      TRUE          1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_2 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 11</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_2 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6    R7</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           5 TRUE      TRUE          1     1     1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_3 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 10</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_3 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           1 TRUE      TRUE          1     1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           1 TRUE      TRUE          1     1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_5 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 10</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_5 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           2 TRUE      TRUE          1     1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_6 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 17</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_6 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 17</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1   R10   R11   R12   R13    R2    R3</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1     1     1</span>
-<span class="co">#&gt; # … with 6 more variables: R4 &lt;dbl&gt;, R5 &lt;dbl&gt;, R6 &lt;dbl&gt;, R7 &lt;dbl&gt;, R8 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   R9 &lt;dbl&gt;</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           5 TRUE      TRUE          1     1     1     1     1     1     1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: R4 &lt;dbl&gt;, R5 &lt;dbl&gt;, R6 &lt;dbl&gt;, R7 &lt;dbl&gt;, R8 &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   R9 &lt;dbl&gt;</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_7 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 12</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_7 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 12</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5    R6    R7</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           4 TRUE      TRUE          1     1     1     1     1     1     1</span>
-<span class="co">#&gt; # … with 1 more variable: R8 &lt;dbl&gt;</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           4 TRUE      TRUE          1     1     1     1     1     1     1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: R8 &lt;dbl&gt;</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_8 ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 9</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_8 ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           2 TRUE      TRUE          1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           2 TRUE      TRUE          1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_9_distal ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 9</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_9_distal ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           3 TRUE      TRUE          1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           3 TRUE      TRUE          1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0 </span>
-<span class="co">#&gt;  [ mtree ~ generate mutation trees for carcinoma_9_proximal ] </span>
-<span class="co">#&gt; Sampler :  10000 (cutoff),  5000 (sampling),  100 (max store) </span>
-<span class="co">#&gt; Suppes' conditions :  &gt;= </span>
-<span class="co">#&gt; # A tibble: 1 x 9</span>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #BBBBBB; background-color: #0000BB;"> [ mtree ~ generate mutation trees for carcinoma_9_proximal ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000; background-color: #BBBB00;">Sampler : </span> 10000 (cutoff),  5000 (sampling),  100 (max store) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Suppes' conditions : </span> &gt;= </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="co">#&gt;   cluster nMuts is.driver is.clonal    R1    R2    R3    R4    R5</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt; &lt;lgl&gt;     &lt;lgl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1           5 TRUE      TRUE          1     1     1     1     1</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1           5 TRUE      TRUE          1     1     1     1     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampler: this model has 1 node, it has trivial models.</span>
-<span class="co">#&gt; ✔ Trees with non-zero sscore 1 storing 1 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Combinations of Information Transfer :  0</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BB0000;">Sampler: this model has 1 node, it has trivial models.</span></span>
+<span class="co"><span style="color: #BB0000;">#&gt; </span><span style="color: #00BB00; background-color: #BBBB00;">✔</span><span style="color: #000000; background-color: #BBBB00;"> Trees with non-zero sscore</span> 1 storing 1 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;  Combinations of Information Transfer : </span> 0 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span></code></pre></div>
 </div>
-<div id="fitting-models-with-revolver" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fitting-models-with-revolver" class="anchor"></a>Fitting models with REVOLVER</h3>
+<div class="section level3">
+<h3 id="fitting-models-with-revolver">Fitting models with REVOLVER<a class="anchor" aria-label="anchor" href="#fitting-models-with-revolver"></a>
+</h3>
 <p>Function <code>revolver_fit</code> implements the 2-steps REVOLVER algorithm to fit the data.</p>
 <p>We use the following parameters:</p>
 <ul>
@@ -549,241 +568,240 @@
   parallel <span class="op">=</span> <span class="cn">F</span>, 
   n <span class="op">=</span> <span class="fl">3</span>, 
   initial.solution <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
-<span class="co">#&gt;  [ REVOLVER Transfer Learning fit ~ Colorectal adenocarcinomas (Cross et al, PMID 30177804) ] </span>
-<span class="co">#&gt; ┌───────────────────────────────────────────────────────────────────────────────────────────┐</span>
-<span class="co">#&gt; │                                                                                           │</span>
-<span class="co">#&gt; │   WARNING - Some patients have only one clone with drivers; they will just be expanded.   │</span>
-<span class="co">#&gt; │                                                                                           │</span>
-<span class="co">#&gt; └───────────────────────────────────────────────────────────────────────────────────────────┘</span>
-<span class="co">#&gt; # A tibble: 16 x 7</span>
-<span class="co">#&gt;    patientID        numBiopsies numMutations numDriverMutatio… numClonesWithDri…</span>
-<span class="co">#&gt;    &lt;chr&gt;                  &lt;int&gt;        &lt;int&gt;             &lt;int&gt;             &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1                  6            2                 1                 1</span>
-<span class="co">#&gt;  2 adenoma_5                  4            3                 3                 1</span>
-<span class="co">#&gt;  3 adenoma_6                  2            2                 2                 1</span>
-<span class="co">#&gt;  4 adenoma_7                  2            3                 3                 1</span>
-<span class="co">#&gt;  5 adenoma_8                  2            4                 4                 1</span>
-<span class="co">#&gt;  6 adenoma_9                  2            1                 1                 1</span>
-<span class="co">#&gt;  7 carcinoma_1                4            3                 2                 1</span>
-<span class="co">#&gt;  8 carcinoma_10               5            1                 1                 1</span>
-<span class="co">#&gt;  9 carcinoma_2                7            5                 4                 1</span>
-<span class="co">#&gt; 10 carcinoma_3                6            1                 1                 1</span>
-<span class="co">#&gt; 11 carcinoma_5                6            2                 2                 1</span>
-<span class="co">#&gt; 12 carcinoma_6               13            5                 5                 1</span>
-<span class="co">#&gt; 13 carcinoma_7                8            4                 3                 1</span>
-<span class="co">#&gt; 14 carcinoma_8                5            2                 2                 1</span>
-<span class="co">#&gt; 15 carcinoma_9_dis…           5            3                 3                 1</span>
-<span class="co">#&gt; 16 carcinoma_9_pro…           5            5                 4                 1</span>
-<span class="co">#&gt; # … with 2 more variables: numTruncalMutations &lt;int&gt;,</span>
-<span class="co">#&gt; #   numSubclonalMutations &lt;int&gt;</span>
+<span class="co">#&gt; <span style="color: #BBBBBB; background-color: #0000BB;"> [ REVOLVER Transfer Learning fit ~ Colorectal adenocarcinomas (Cross et al, PMID 30177804) ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span><span style="color: #000000;">┌───────────────────────────────────────────────────────────────────────────────────────────┐</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                                           </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000; background-color: #FFAF00;">WARNING - Some patients have only one clone with drivers; they will just be expanded.</span><span style="background-color: #FFAF00;">   </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">│</span><span style="background-color: #FFAF00;">                                                                                           </span><span style="color: #000000;">│</span></span>
+<span class="co">#&gt; <span style="color: #000000;">└───────────────────────────────────────────────────────────────────────────────────────────┘</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 7</span></span>
+<span class="co">#&gt;    patientID          numBiopsies numMutations numDriverMutati… numClonesWithDr…</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1                    6            2                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_5                    4            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_6                    2            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_7                    2            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_8                    2            4                4                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_9                    2            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> carcinoma_1                  4            3                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> carcinoma_10                 5            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> carcinoma_2                  7            5                4                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_3                  6            1                1                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_5                  6            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_6                 13            5                5                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_7                  8            4                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_8                  5            2                2                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_9_distal           5            3                3                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> carcinoma_9_proxi…           5            5                4                1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: numTruncalMutations &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   numSubclonalMutations &lt;int&gt;</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fitting  N = 19 patients </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # A tibble: 19 x 6</span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Fitting </span> N = 19 patients </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 19 × 6</span></span>
 <span class="co">#&gt;    patientID            hasTrees numTrees  maxScore  minScore combInfTransf</span>
-<span class="co">#&gt;    &lt;chr&gt;                &lt;lgl&gt;       &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1            TRUE            1 1         1                     1</span>
-<span class="co">#&gt;  2 adenoma_2            TRUE            1 0.0113    0.0113                1</span>
-<span class="co">#&gt;  3 adenoma_3            TRUE            1 0.0000852 0.0000852             1</span>
-<span class="co">#&gt;  4 adenoma_4            TRUE            1 0.00255   0.00255               1</span>
-<span class="co">#&gt;  5 adenoma_5            TRUE            1 1         1                     1</span>
-<span class="co">#&gt;  6 adenoma_6            TRUE            1 1         1                     1</span>
-<span class="co">#&gt;  7 adenoma_7            TRUE            1 1         1                     1</span>
-<span class="co">#&gt;  8 adenoma_8            TRUE            1 1         1                     1</span>
-<span class="co">#&gt;  9 adenoma_9            TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 10 carcinoma_1          TRUE            1 0.0505    0.0505                1</span>
-<span class="co">#&gt; 11 carcinoma_10         TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 12 carcinoma_2          TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 13 carcinoma_3          TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 14 carcinoma_5          TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 15 carcinoma_6          TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 16 carcinoma_7          TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 17 carcinoma_8          TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 18 carcinoma_9_distal   TRUE            1 1         1                     1</span>
-<span class="co">#&gt; 19 carcinoma_9_proximal TRUE            1 1         1                     1</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1            TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_2            TRUE            1 0.011<span style="text-decoration: underline;">3</span>    0.011<span style="text-decoration: underline;">3</span>                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_3            TRUE            1 0.000<span style="text-decoration: underline;">085</span>2 0.000<span style="text-decoration: underline;">085</span>2             1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_4            TRUE            1 0.002<span style="text-decoration: underline;">55</span>   0.002<span style="text-decoration: underline;">55</span>               1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_5            TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_6            TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> adenoma_7            TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> adenoma_8            TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> adenoma_9            TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_1          TRUE            1 0.050<span style="text-decoration: underline;">5</span>    0.050<span style="text-decoration: underline;">5</span>                1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_10         TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_2          TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_3          TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_5          TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_6          TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> carcinoma_7          TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> carcinoma_8          TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> carcinoma_9_distal   TRUE            1 1         1                     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> carcinoma_9_proximal TRUE            1 1         1                     1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Initial solution : Randomized (uniform probability) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Initial solution :</span> Randomized (uniform probability) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Sampled solutions: </span> n = 3 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Parallel exectuion (via 'easypar') :</span> <span style="color: #00BB00;">TRUE</span> </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span>[1] "w"</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Sampled solutions:  n = 3 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Parallel exectuion (via 'easypar') : TRUE </span>
-<span class="co">#&gt; [1] "w"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  1] Expectation Maximization</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span>
-<span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span>
-<span class="co">#&gt;    patientID         hasTrees numTrees  maxScore minScore combInfTransf Solution</span>
-<span class="co">#&gt;    &lt;chr&gt;             &lt;lgl&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  2 adenoma_2         TRUE            1 0.0113     1.13e-2             1        1</span>
-<span class="co">#&gt;  3 adenoma_3         TRUE            1 0.0000852  8.52e-5             1        1</span>
-<span class="co">#&gt;  4 adenoma_4         TRUE            1 0.00255    2.55e-3             1        1</span>
-<span class="co">#&gt;  5 adenoma_5         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  6 adenoma_6         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  7 adenoma_7         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  8 adenoma_8         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  9 adenoma_9         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 10 carcinoma_1       TRUE            1 0.0505     5.05e-2             1        1</span>
-<span class="co">#&gt; 11 carcinoma_10      TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 12 carcinoma_2       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 13 carcinoma_3       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 14 carcinoma_5       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 15 carcinoma_6       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 16 carcinoma_7       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 17 carcinoma_8       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 18 carcinoma_9_dist… TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 19 carcinoma_9_prox… TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  2] Transfering orderings across patients</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; [1] "w"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  1] Expectation Maximization</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> 1] Expectation Maximization</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span>
 <span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
+<span class="co">#&gt;              Initialization<span style="color: #00BB00;">   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span>
-<span class="co">#&gt;    patientID         hasTrees numTrees  maxScore minScore combInfTransf Solution</span>
-<span class="co">#&gt;    &lt;chr&gt;             &lt;lgl&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  2 adenoma_2         TRUE            1 0.0113     1.13e-2             1        1</span>
-<span class="co">#&gt;  3 adenoma_3         TRUE            1 0.0000852  8.52e-5             1        1</span>
-<span class="co">#&gt;  4 adenoma_4         TRUE            1 0.00255    2.55e-3             1        1</span>
-<span class="co">#&gt;  5 adenoma_5         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  6 adenoma_6         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  7 adenoma_7         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  8 adenoma_8         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  9 adenoma_9         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 10 carcinoma_1       TRUE            1 0.0505     5.05e-2             1        1</span>
-<span class="co">#&gt; 11 carcinoma_10      TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 12 carcinoma_2       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 13 carcinoma_3       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 14 carcinoma_5       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 15 carcinoma_6       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 16 carcinoma_7       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 17 carcinoma_8       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 18 carcinoma_9_dist… TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 19 carcinoma_9_prox… TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span>
+<span class="co"><span style="background-color: #0000BB;">#&gt; # 1    : </span><span style="color: #00BBBB;">  E: </span><span style="color: #00BB00;">OK</span> <span style="color: #00BBBB;">  M: </span><span style="color: #00BB00;">   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span><span style="color: #949494;"># A tibble: 19 × 9</span></span>
+<span class="co">#&gt;    patientID          hasTrees numTrees maxScore minScore combInfTransf Solution</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_2          TRUE            1  1.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>  1.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_3          TRUE            1  8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>  8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_4          TRUE            1  2.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>  2.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_5          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_6          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> adenoma_7          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> adenoma_8          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> adenoma_9          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_1        TRUE            1  5.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>  5.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_10       TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_2        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_3        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_5        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_6        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> carcinoma_7        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> carcinoma_8        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> carcinoma_9_distal TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> carcinoma_9_proxi… TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  2] Transfering orderings across patients</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> 2] Transfering orderings across patients</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
 <span class="co">#&gt; [1] "w"</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  1] Expectation Maximization</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> 1] Expectation Maximization</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span>
 <span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;              Initialization   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
+<span class="co">#&gt;              Initialization<span style="color: #00BB00;">   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; # 1    :     E: OK   M:    1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |# A tibble: 19 x 9</span>
-<span class="co">#&gt;    patientID         hasTrees numTrees  maxScore minScore combInfTransf Solution</span>
-<span class="co">#&gt;    &lt;chr&gt;             &lt;lgl&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;         &lt;int&gt;    &lt;int&gt;</span>
-<span class="co">#&gt;  1 adenoma_1         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  2 adenoma_2         TRUE            1 0.0113     1.13e-2             1        1</span>
-<span class="co">#&gt;  3 adenoma_3         TRUE            1 0.0000852  8.52e-5             1        1</span>
-<span class="co">#&gt;  4 adenoma_4         TRUE            1 0.00255    2.55e-3             1        1</span>
-<span class="co">#&gt;  5 adenoma_5         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  6 adenoma_6         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  7 adenoma_7         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  8 adenoma_8         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt;  9 adenoma_9         TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 10 carcinoma_1       TRUE            1 0.0505     5.05e-2             1        1</span>
-<span class="co">#&gt; 11 carcinoma_10      TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 12 carcinoma_2       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 13 carcinoma_3       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 14 carcinoma_5       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 15 carcinoma_6       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 16 carcinoma_7       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 17 carcinoma_8       TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 18 carcinoma_9_dist… TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; 19 carcinoma_9_prox… TRUE            1 1          1.00e+0             1        1</span>
-<span class="co">#&gt; # … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span>
+<span class="co"><span style="background-color: #0000BB;">#&gt; # 1    : </span><span style="color: #00BBBB;">  E: </span><span style="color: #00BB00;">OK</span> <span style="color: #00BBBB;">  M: </span><span style="color: #00BB00;">   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span><span style="color: #949494;"># A tibble: 19 × 9</span></span>
+<span class="co">#&gt;    patientID          hasTrees numTrees maxScore minScore combInfTransf Solution</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_2          TRUE            1  1.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>  1.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_3          TRUE            1  8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>  8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_4          TRUE            1  2.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>  2.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_5          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_6          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> adenoma_7          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> adenoma_8          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> adenoma_9          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_1        TRUE            1  5.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>  5.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_10       TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_2        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_3        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_5        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_6        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> carcinoma_7        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> carcinoma_8        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> carcinoma_9_distal TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> carcinoma_9_proxi… TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  2] Transfering orderings across patients</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> 2] Transfering orderings across patients</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; [1] "w"</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Selecting solution with minimal median penalty</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; Solution #1 0.857142857142857 </span>
-<span class="co">#&gt; Solution #2 0.857142857142857 </span>
-<span class="co">#&gt; Solution #3 0.857142857142857 </span>
-<span class="co">#&gt;   Best solution is # 1 </span>
-<span class="co">#&gt; REVOLVER Transfer Learning fit  COMPLETED</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> 1] Expectation Maximization</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;         Number of Solutions   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1</span>
+<span class="co">#&gt;    Combinations of Transfer   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;              Initialization<span style="color: #00BB00;">   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span></span>
+<span class="co">#&gt; </span>
+<span class="co"><span style="background-color: #0000BB;">#&gt; # 1    : </span><span style="color: #00BBBB;">  E: </span><span style="color: #00BB00;">OK</span> <span style="color: #00BBBB;">  M: </span><span style="color: #00BB00;">   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |   1 |</span><span style="color: #949494;"># A tibble: 19 × 9</span></span>
+<span class="co">#&gt;    patientID          hasTrees numTrees maxScore minScore combInfTransf Solution</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> adenoma_1          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adenoma_2          TRUE            1  1.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>  1.13<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adenoma_3          TRUE            1  8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>  8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adenoma_4          TRUE            1  2.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>  2.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adenoma_5          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> adenoma_6          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> adenoma_7          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> adenoma_8          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> adenoma_9          TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> carcinoma_1        TRUE            1  5.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>  5.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> carcinoma_10       TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> carcinoma_2        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> carcinoma_3        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> carcinoma_5        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> carcinoma_6        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> carcinoma_7        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> carcinoma_8        TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> carcinoma_9_distal TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> carcinoma_9_proxi… TRUE            1  1   <span style="color: #949494;">e</span>+0  1   <span style="color: #949494;">e</span>+0             1        1</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: converged &lt;lgl&gt;, penalty &lt;dbl&gt;</span></span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> 2] Transfering orderings across patients</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Selecting solution with minimal median penalty</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #000000; background-color: #BBBB00;">Solution #1</span> 0.857142857142857 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Solution #2</span> 0.857142857142857 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Solution #3</span> 0.857142857142857 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #00BBBB;">  Best solution is #</span> <span style="background-color: #00BB00;">1</span> </span>
+<span class="co">#&gt; <span style="color: #000000; background-color: #BBBB00;">REVOLVER Transfer Learning fit </span> COMPLETED </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span></code></pre></div>
 </div>
-<div id="computing-revolver-hierarchical-clusters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#computing-revolver-hierarchical-clusters" class="anchor"></a>Computing REVOLVER hierarchical clusters</h3>
+<div class="section level3">
+<h3 id="computing-revolver-hierarchical-clusters">Computing REVOLVER hierarchical clusters<a class="anchor" aria-label="anchor" href="#computing-revolver-hierarchical-clusters"></a>
+</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span> <span class="op">=</span> <span class="fu"><a href="../reference/revolver_cluster.html">revolver_cluster</a></span><span class="op">(</span>
   <span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span>, 
   split.method <span class="op">=</span> <span class="st">'cutreeHybrid'</span>,
   min.group.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt;  [ REVOLVER Clustering - Colorectal adenocarcinomas (Cross et al, PMID 30177804) ] </span>
+<span class="co">#&gt; <span style="color: #BBBBBB; background-color: #0000BB;"> [ REVOLVER Clustering - Colorectal adenocarcinomas (Cross et al, PMID 30177804) ] </span></span>
+<span class="co"><span style="color: #BBBBBB; background-color: #0000BB;">#&gt; </span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Computing REVOLVER's evolutionary distance from the Information Transfer</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Computing REVOLVER's evolutionary distance from the Information Transfer</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Patients :</span> N = 19 (171 comparisons) </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Computing Hierarchical Clustering from the distance</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Patients : N = 19 (171 comparisons) </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Computing Hierarchical Clustering from the distance</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   Clustering method ward </span>
-<span class="co">#&gt;       Split method cutreeHybrid </span>
-<span class="co">#&gt; Minimum group size 3 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Clusters : K = 3 </span>
-<span class="co">#&gt; Cluster size (n)  </span>
-<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;   Clustering method</span> ward </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt;       Split method</span> cutreeHybrid </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Minimum group size</span> 3 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span></span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Clusters :</span> K = 3 </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; Cluster size (n)</span>  </span>
+<span class="co"><span style="color: #000000; background-color: #BBBB00;">#&gt; </span><span style="color: #949494;"># A tibble: 3 × 2</span></span>
 <span class="co">#&gt;   cluster     n</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1 C1          8</span>
-<span class="co">#&gt; 2 C2          7</span>
-<span class="co">#&gt; 3 C3          4</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> C1          8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> C2          7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> C3          4</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_clusters.html">plot_clusters</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span>, cutoff_trajectories <span class="op">=</span> <span class="fl">1</span>, cutoff_drivers <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Vectorized input to `element_text()` is not officially supported.</span>
-<span class="co">#&gt; Results may be unexpected or may change in future versions of ggplot2.</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_clusters.html">plot_clusters</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span>, cutoff_trajectories <span class="op">=</span> <span class="fl">1</span>, cutoff_drivers <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-7-1.png" width="864"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_drivers_graph.html">plot_drivers_graph</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt;  Enrichment test for incoming edges</span>
-<span class="co">#&gt; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span>
-<span class="co">#&gt; # A tibble: 3 x 15</span>
-<span class="co">#&gt;   estimate  p.value conf.low conf.high method    alternative from  to    POS_POS</span>
-<span class="co">#&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1      Inf  1.91e-7    10.1        Inf Fisher's… greater     GL    APC        19</span>
-<span class="co">#&gt; 2      Inf  1.02e-4     5.63       Inf Fisher's… greater     APC   KRAS        7</span>
-<span class="co">#&gt; 3      Inf  1.02e-4     5.63       Inf Fisher's… greater     APC   TP53        7</span>
-<span class="co">#&gt; # … with 6 more variables: POS_NEG &lt;int&gt;, NEG_POS &lt;int&gt;, NEG_NEG &lt;int&gt;,</span>
-<span class="co">#&gt; #   alpha_level &lt;dbl&gt;, N &lt;int&gt;, psign &lt;lgl&gt;</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;"> Enrichment test for incoming edges</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 15</span></span>
+<span class="co">#&gt;   estimate     p.value conf.low conf.high method alternative from  to    POS_POS</span>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      <span style="color: #BB0000;">Inf</span> 0.000<span style="text-decoration: underline;">000</span>191    10.1        <span style="color: #BB0000;">Inf</span> Fishe… greater     GL    APC        19</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      <span style="color: #BB0000;">Inf</span> 0.000<span style="text-decoration: underline;">102</span>        5.63       <span style="color: #BB0000;">Inf</span> Fishe… greater     APC   KRAS        7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>      <span style="color: #BB0000;">Inf</span> 0.000<span style="text-decoration: underline;">102</span>        5.63       <span style="color: #BB0000;">Inf</span> Fishe… greater     APC   TP53        7</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: POS_NEG &lt;int&gt;, NEG_POS &lt;int&gt;, NEG_NEG &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   alpha_level &lt;dbl&gt;, N &lt;int&gt;, psign &lt;lgl&gt;</span></span>
 <span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-8-1.png" width="864"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -797,23 +815,23 @@
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_DET_index.html">plot_DET_index</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 11 x 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 4</span></span>
 <span class="co">#&gt;    driver diversity     N DET_index</span>
-<span class="co">#&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 AMER1       0        1     0    </span>
-<span class="co">#&gt;  2 APC         0        1     0    </span>
-<span class="co">#&gt;  3 ARID1A      0        1     0    </span>
-<span class="co">#&gt;  4 BRAF        0        1     0    </span>
-<span class="co">#&gt;  5 FBXW7       0        1     0    </span>
-<span class="co">#&gt;  6 KRAS        0        1     0    </span>
-<span class="co">#&gt;  7 NRAS        0        1     0    </span>
-<span class="co">#&gt;  8 TCF7L2      0        1     0    </span>
-<span class="co">#&gt;  9 TP53        0        1     0    </span>
-<span class="co">#&gt; 10 PIK3CA      1.52     5     0.946</span>
-<span class="co">#&gt; 11 KMT2C       1.10     3     1.00</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> AMER1       0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> APC         0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ARID1A      0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> BRAF        0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> FBXW7       0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> KRAS        0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NRAS        0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TCF7L2      0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> TP53        0        1     0    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> PIK3CA      1.52     5     0.946</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> KMT2C       1.10     3     1</span></code></pre></div>
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-10-1.png" width="288"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span></code></pre></div>
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-11-1.png" width="384"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_drivers_clonality.html">plot_drivers_clonality</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">)</span></code></pre></div>
@@ -824,7 +842,11 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_patient_trees.html">plot_patient_trees</a></span><span class="op">(</span><span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span>, <span class="va">CROSS_CRC_ADENOCARCINOMA_REVOLVER</span><span class="op">$</span><span class="va">patients</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Duplicated aesthetics after name standardisation: na.rm</span>
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></code></pre></div>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span>
+<span class="co">#&gt; `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span>
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span>
+<span class="co">#&gt; `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span></code></pre></div>
 <p><img src="Cross_CRC_MSeq_files/figure-html/unnamed-chunk-14-1.png" width="1056"><!-- and we can plot the outputs in a nice heatmap format with annotated features. In this case we want all features to be annotated, and thus we set `cutoff.features_annotation` to 1. --></p>
 <!-- ```{r, eval= TRUE, message = FALSE, warning = FALSE, fig.height=8, fig.width=8} -->
 <!-- revolver_plt_rclusters(fit,  -->
@@ -900,11 +922,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.caravagnalab.org/">Giulio Caravagna</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.caravagnalab.org/" class="external-link">Giulio Caravagna</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -912,6 +936,8 @@
 
   
 
+
+  
 
   </body>
 </html>
