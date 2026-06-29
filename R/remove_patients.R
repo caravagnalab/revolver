@@ -10,6 +10,7 @@
 #'
 #' @param x A REVOLVER cohort.
 #' @param patientID Id of the patient to remove. It can be a vector.
+#' @param check If \code{TRUE}, run \code{\link{revolver_check_cohort}} after removal.
 #'
 #' @return A modified cohort without the required patients.
 #' @export

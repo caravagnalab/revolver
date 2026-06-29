@@ -5,6 +5,7 @@
 ^.git/.*$
 ^old/.*$
 ^data_old/.*$
+^old_vignette$
 
 # Vignette
 inst/doc
@@ -17,3 +18,8 @@ inst/doc
 ..Rcheck
 
 ^\.github$
+^README\.Rmd$
+^_config\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

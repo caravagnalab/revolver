@@ -32,9 +32,9 @@ Stats_drivers(TRACERx_NEJM_2017_REVOLVER, drivers = c('TP53', 'KRAS'))
 \seealso{
 Other Summary statistics: 
 \code{\link{DET_index}()},
+\code{\link{Stats}()},
 \code{\link{Stats_cohort}()},
 \code{\link{Stats_fits}()},
-\code{\link{Stats_trees}()},
-\code{\link{Stats}()}
+\code{\link{Stats_trees}()}
 }
 \concept{Summary statistics}

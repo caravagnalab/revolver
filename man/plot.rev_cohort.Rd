@@ -26,15 +26,16 @@ clones with drivers, and coloured by the numnber of drivers.
 # Data released in the 'evoverse.datasets'
 data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 
-# Cancel the fits - just set the field to NULL
-TRACERx_NEJM_2017_REVOLVER$fit = NULL
+# Downcast to rev_cohort to use this method (the loaded object is rev_cohort_fit)
+x = TRACERx_NEJM_2017_REVOLVER
+class(x) = 'rev_cohort'
 
-plot(TRACERx_NEJM_2017_REVOLVER)
+plot(x)
 }
 \seealso{
 Other S3 functions: 
 \code{\link{plot.rev_cohort_fit}()},
-\code{\link{print.rev_cohort_fit}()},
-\code{\link{print.rev_cohort}()}
+\code{\link{print.rev_cohort}()},
+\code{\link{print.rev_cohort_fit}()}
 }
 \concept{S3 functions}

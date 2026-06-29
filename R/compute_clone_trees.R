@@ -3,23 +3,23 @@
 #' @description Create clone tree phylogenies from the package
 #' \code{ctree}, fitting the input data given to \code{REVOLVER}.
 #' A set of patient ids can be given as input, by default all are
-#' used. A parmeter controls if you want to overwrite the trees
+#' used. A parameter controls if you want to overwrite the trees
 #' of the patient, where they already computed. Please refer to the
-#' parameters of the \code{ctrees} constructor rom package \code{ctree}
+#' parameters of the \code{ctrees} constructor from package \code{ctree}
 #' for the input parameters that you can use to tune the construction.
 #'
 #' @param x A \code{REVOLVER} cohort.
 #' @param patients A set of patient ids in the cohort, for which the
 #' phylogenies are created.
+#' @param overwrite If \code{TRUE}, recompute trees even if already available.
+#' @param ... Additional parameters forwarded to the \code{ctree} constructor.
+#'
+#' @return A \code{REVOLVER} cohort with clone tree phylogenies for the
+#' requested \code{patients}.
 #'
 #' @family Cohort creation
 #'
-#' @param x A \code{REVOLVER} cohort with now available
-#' phylogeneis for the required \code{patients}.
-#'
 #' @export
-#'
-#' @import ctree
 #'
 #' @examples
 #' # Data released in the 'evoverse.datasets'

@@ -12,6 +12,7 @@
 #' Results are stored inside the field \code{cluster} of the returned object.
 #'
 #' @param x A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.
+#' @param patients A vector of patient IDs to include in the clustering (default: all patients).
 #' @param hc.method Method for hierarchial clustering, anything that can be
 #' passed to the \code{agnes} function of the \code{cluster} package.
 #' @param split.method Method to cut the dendrogram, anything of 
@@ -25,16 +26,13 @@
 #' @export
 #' @family Analysis functions
 #' 
-#' @import crayon
-#' @import cluster
-#' @import dendextend
-#' @import dynamicTreeCut
 #'
 #' @examples
-#' data(CRC.cohort)
-#' fit = revolver_fit(CRC.cohort)
-#' fit = revolver_evo_distance(fit)
-#' fit = revolver_cluster(fit) # dumped also to disk
+#' \dontrun{
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
+#' fit = revolver_cluster(fit)
+#' }
 revolver_cluster = function(
   x,
   patients = x$patients,
@@ -66,7 +64,7 @@ revolver_cluster = function(
   
   # External progress bar
   i = 0
-  pb = dplyr::progress_estimated(n = N * (N - 1) / 2, 3)
+  pb = cli::cli_progress_bar(total = N * (N - 1) / 2)
   pb.status = getOption('revolver.progressBar', default = TRUE)
   
   E = x$fit$penalty
@@ -80,7 +78,7 @@ revolver_cluster = function(
       if(p1 == p2) next;
       
       # update progress bar - N (N-1)/2 ticks
-      if (pb.status) pb$tick()$print()
+      if (pb.status) cli::cli_progress_update(id = pb)
       
       # Both patient have a transfer that we take and augment with E
       p1_IT = ITransfer(x, patients[p1], data = 'fits', type = 'drivers')
@@ -97,7 +95,9 @@ revolver_cluster = function(
         sum
     }
   }
-   
+
+  if (pb.status) cli::cli_progress_done(id = pb)
+
   # Store these objects inside a distances field - requires transpose
   cluster$distances = list(
     matrix = distances, 

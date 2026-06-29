@@ -20,10 +20,6 @@
 #'
 #' @export
 #'
-#' @import ggpubr
-#' @import ctree
-#' @import mtree
-#'
 #' @examples
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')

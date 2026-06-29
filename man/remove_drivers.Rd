@@ -10,6 +10,8 @@ remove_drivers(x, variantID, check = TRUE)
 \item{x}{A REVOLVER cohort.}
 
 \item{variantID}{Id of the driver event to remove.}
+
+\item{check}{If \code{TRUE}, run \code{\link{revolver_check_cohort}} after removal.}
 }
 \value{
 A modified cohort where the required events are no longer annotated as drivers.

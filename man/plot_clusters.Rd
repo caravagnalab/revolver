@@ -15,6 +15,9 @@ plot_clusters(
 \arguments{
 \item{x}{A \code{REVOLVER} object with fits and clusters.}
 
+\item{cluster_palette}{A palette function that should return the colour of
+an arbitrary number of clusters.}
+
 \item{cutoff_drivers}{Plot only drivers that occur in at least \code{cutoff_drivers} patients.}
 
 \item{cutoff_trajectories}{Plot only trajectories that occur in at least \code{cutoff_trajectories} patients.}
@@ -22,9 +25,6 @@ plot_clusters(
 \item{arrow.symbol}{UNICODE code to display arrows. Saving to PDF outputs with standard
 methods (ggsave, cairo, etc), often can lead to errors with UNICODE chars; therefore either print to PNG or change
 this variable to, e.g.,  \code{" --> "} to render arrows properly.}
-
-\item{clusters_palette}{A palette function that should return the colour of
-an arbitrary number of clusters.}
 }
 \value{
 A \code{ggplot} plot.

@@ -29,8 +29,8 @@ print(TRACERx_NEJM_2017_REVOLVER)
 }
 \seealso{
 Other S3 functions: 
-\code{\link{plot.rev_cohort_fit}()},
 \code{\link{plot.rev_cohort}()},
+\code{\link{plot.rev_cohort_fit}()},
 \code{\link{print.rev_cohort_fit}()}
 }
 \concept{S3 functions}

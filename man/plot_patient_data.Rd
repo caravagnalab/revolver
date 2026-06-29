@@ -19,9 +19,8 @@ A figure assembled with \code{ggpubr}.
 \description{
 This function creates a complex plot for the
 data of a patient, assembling plots returned from the following
-functions: 1) \code{\link{plot_data_clusters}},
-2) \code{\link{plot_data_clone_size}}, 3) \code{\link{plot_data_mutation_burden}}
-and 4) \code{plot_patient_oncoprint}.
+functions: 1) \code{\link{plot_patient_CCF_histogram}},
+2) \code{\link{plot_patient_mutation_burden}}, 3) \code{\link{plot_patient_oncoprint}}.
 }
 \examples{
 # Data released in the 'evoverse.datasets'

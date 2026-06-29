@@ -12,26 +12,33 @@ compute_mutation_trees(
 )
 }
 \arguments{
-\item{x}{A \code{REVOLVER} cohort with now available
-phylogeneis for the required \code{patients}.}
+\item{x}{A \code{REVOLVER} cohort.}
 
 \item{patients}{A set of patient ids in the cohort, for which the
 phylogenies are created.}
+
+\item{overwrite}{If \code{TRUE}, recompute trees even if already available.}
+
+\item{...}{Additional parameters forwarded to the \code{mtree} constructor.}
+}
+\value{
+A \code{REVOLVER} cohort with mutation tree phylogenies for the
+requested \code{patients}.
 }
 \description{
 Create mutation tree phylogenies from the package
-\code{btree}, fitting the input data given to \code{REVOLVER}.
+\code{mtree}, fitting the input data given to \code{REVOLVER}.
 A set of patient ids can be given as input, by default all are
-used. A parmeter controls if you want to overwrite the trees
+used. A parameter controls if you want to overwrite the trees
 of the patient, where they already computed. Please refer to the
-parameters of the \code{btree} constructor from package \code{btree}
+parameters of the \code{mtree} constructor from package \code{mtree}
 for the input parameters that you can use to tune the construction.
 }
-\note{
-This function is not yet implemented
-}
 \examples{
-print('TODO')
+\dontrun{
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+x = compute_mutation_trees(TRACERx_NEJM_2017_REVOLVER)
+}
 }
 \seealso{
 Other Cohort creation: 

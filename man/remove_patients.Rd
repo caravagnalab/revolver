@@ -10,6 +10,8 @@ remove_patients(x, patientID, check = TRUE)
 \item{x}{A REVOLVER cohort.}
 
 \item{patientID}{Id of the patient to remove. It can be a vector.}
+
+\item{check}{If \code{TRUE}, run \code{\link{revolver_check_cohort}} after removal.}
 }
 \value{
 A modified cohort without the required patients.

@@ -13,8 +13,9 @@ plot_jackknife_trajectories_stability(
 \arguments{
 \item{x}{A \code{REVOLVER} cohort with fits, clusters and jackknife results available.}
 
-\item{cluster_palette}{A palette of colours; must be a function that when applied to
-a number it returns that number of colours.}
+\item{annotate_probability}{Probability threshold above which trajectories are annotated.}
+
+\item{annotate_percentage}{Percentage threshold above which trajectories are annotated.}
 }
 \value{
 A \code{ggplot} figure.

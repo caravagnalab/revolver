@@ -8,6 +8,7 @@
 #' @param patient The id of a patient.
 #' @param transfer_palette A function that can be used to sample
 #' an arbitrary number of colours to identify the transfers.
+#' @param ... Extra parameters (currently unused).
 #'
 #' @family Plotting functions
 #'

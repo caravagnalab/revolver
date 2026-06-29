@@ -52,10 +52,10 @@ Function \code{\link{plot_penalty}} plots another
 measure derived from the same information used to compute the DET.
 
 Other Summary statistics: 
+\code{\link{Stats}()},
 \code{\link{Stats_cohort}()},
 \code{\link{Stats_drivers}()},
 \code{\link{Stats_fits}()},
-\code{\link{Stats_trees}()},
-\code{\link{Stats}()}
+\code{\link{Stats_trees}()}
 }
 \concept{Summary statistics}

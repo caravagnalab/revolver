@@ -12,19 +12,26 @@ compute_clone_trees(
 )
 }
 \arguments{
-\item{x}{A \code{REVOLVER} cohort with now available
-phylogeneis for the required \code{patients}.}
+\item{x}{A \code{REVOLVER} cohort.}
 
 \item{patients}{A set of patient ids in the cohort, for which the
 phylogenies are created.}
+
+\item{overwrite}{If \code{TRUE}, recompute trees even if already available.}
+
+\item{...}{Additional parameters forwarded to the \code{ctree} constructor.}
+}
+\value{
+A \code{REVOLVER} cohort with clone tree phylogenies for the
+requested \code{patients}.
 }
 \description{
 Create clone tree phylogenies from the package
 \code{ctree}, fitting the input data given to \code{REVOLVER}.
 A set of patient ids can be given as input, by default all are
-used. A parmeter controls if you want to overwrite the trees
+used. A parameter controls if you want to overwrite the trees
 of the patient, where they already computed. Please refer to the
-parameters of the \code{ctrees} constructor rom package \code{ctree}
+parameters of the \code{ctrees} constructor from package \code{ctree}
 for the input parameters that you can use to tune the construction.
 }
 \examples{

@@ -16,12 +16,12 @@
 #' package to run in parallel all the re-runs, therefore we suggest to run it on a
 #' multi-core machine to appreciate a speed up in the computations.
 #'
-#' @param cohort A cohort object where fit and clusters have been computed.
+#' @param x A cohort object where fit and clusters have been computed.
 #' @param resamples Number of jackknife samples.
-#' @param removal A number in \code{[0,1]} for the percentage of samples to leave out in each jackknife iteration.
-#' @param cores.ratio Ratio of cores for parallel execution
+#' @param leave.out A number in \code{(0,1)} for the proportion of patients to leave out in each jackknife iteration.
 #' @param options.fit List of parameters for fitting models. See  \code{\link{revolver_fit}}.
-#' @param options.clustering List of parameters for clustering with the germline node GL. See \code{\link{revolver_cluster}}.
+#' @param options.clustering List of parameters for clustering. See \code{\link{revolver_cluster}}.
+#' @param ... Additional parameters forwarded to \code{\link[easypar]{run}}.
 #'
 #' @return A cohort where a new jackknife field contains result from this analysis
 #' @export
@@ -31,7 +31,8 @@
 #'
 #' @examples
 #' \dontrun{
-#'  TODO
+#' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+#' x = revolver_jackknife(TRACERx_NEJM_2017_REVOLVER)
 #' }
 #'
 revolver_jackknife = function(x,
@@ -132,74 +133,4 @@ unpack = function(..., params, fun)
   
   values
 }
-
-# unpack(initial.solution = 3, n = 123412421, riop=',,', params = c('initial.solution', 'max.iterations', 'n'), fun = revolver_fit)
-
-
-
-# The loop with an error-handling function. That's good to iterate
-# untill the required number of resamples has been computed. This
-# function assumes that all the parallel stuff has been created beforehand
-# jackknife_aux_err_function = function(cohort, resamples, leave.out, options.fit, options.clustering) {
-# 
-#   r = foreach(num = 1:resamples, .packages = c("crayon", "igraph", 'matrixStats', 'matrixcalc'), .export = ls(globalenv())) %dopar%
-#   # for(num in 1:resamples)
-#   {
-#     # Error handling is explicit here
-#     tryCatch(
-#       {
-#         # Remove patients in "group"
-#         subsetted.cohort = revolver_deletePatients(
-#           cohort,
-#           sample( # randomized subsampling
-#             cohort$patients,
-#             round(length(cohort$patients) * leave.out))
-#         )
-# 
-#         # Get the list of recurrent drivers, and remove the others
-#         table = clonal.subclonal.table(subsetted.cohort)
-#         table = table[table$Counts > 1, ]
-#         subsetted.cohort = revolver_subsetDrivers(subsetted.cohort, rownames(table))
-# 
-#         # Fit the cohort, compute the distance, and the clusters
-#         fit = revolver_fit(subsetted.cohort, initial.solution = options.fit$initial.solution, transitive.orderings = options.fit$transitive.orderings, restarts = options.fit$restarts)
-#         fit = revolver_evo_distance(fit, use.GL = options.clustering$use.GL, transitive.closure = options.clustering$transitive.closure)
-#         fit = revolver_cluster(fit,
-#                                # plot.clusters = FALSE, plot.groups = FALSE,
-#                                hc.method = options.clustering$hc.method,
-#                                min.group.size = options.clustering$min.group.size,
-#                                # cutoff.features_annotation = options.clustering$cutoff.features_annotation,
-#                                split.method  = options.clustering$split.method)
-# 
-#         # Results from the features
-#         features = revolver.featureMatrix(fit)
-#         result = list(cluster = fit$cluster, features = features)
-# 
-#         # if(dump.partial) save(result, file = paste('Jackknife-', paste(sample(LETTERS, 10, TRUE), collapse = ''), '.RData', sep = ''))
-#         result
-#       },
-#       error = function(e) { # Errors intercepted output a NULL
-#         # sink("error.jacknife.log")
-#         # print(e)
-#         # sink()
-#         return(NULL)
-#       },
-#       finally = { }
-#     )
-# 
-# 
-#   }
-# 
-#   # print(r)
-# 
-#   # Filter entries that are NULL
-#   mask = sapply(r, function(w) !all(is.null(w)))
-# 
-#   # print(mask)
-#   # print(result)
-# 
-#   r[mask]
-# }
-
-
 
