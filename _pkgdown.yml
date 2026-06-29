@@ -2,8 +2,7 @@ template:
   params:
     part_of: evoverse
     footer: Test of my footer
-url:
-  caravagnalab.github.io/revolver
+url: https://caravagnalab.github.io/revolver
   
 # articles:
 # - title: R Markdown

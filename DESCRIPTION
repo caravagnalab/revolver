@@ -55,5 +55,5 @@ Suggests:
     rmarkdown,
     matrixStats,
 VignetteBuilder: knitr
-URL: https://github.com/caravagnalab/revolver
+URL: https://caravagnalab.github.io/revolver, https://github.com/caravagnalab/revolver
 BugReports: https://github.com/caravagnalab/revolver/issues
