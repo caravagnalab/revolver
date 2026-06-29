@@ -1,13 +1,12 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/caravagnalab/revolver/workflows/R-CMD-check/badge.svg)](https://github.com/caravagnalab/revolver/actions)
+[![R-CMD-check](https://github.com/caravagnalab/revolver/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/caravagnalab/revolver/actions/workflows/R-CMD-check.yaml)
 [![pkgdown](https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-# revolver <a href='caravagn.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# revolver <a href='https://caravagnalab.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 The `revolver` package implements the statistical model described in
 [Caravagna et al; PMID:
