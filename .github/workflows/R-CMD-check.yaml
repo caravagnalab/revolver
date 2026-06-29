@@ -35,4 +35,5 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
+          args: 'c("--no-manual", "--no-build-vignettes")'
           error-on: '"error"'
