@@ -15,17 +15,17 @@ revolver_jackknife(
 )
 }
 \arguments{
+\item{x}{A cohort object where fit and clusters have been computed.}
+
 \item{resamples}{Number of jackknife samples.}
+
+\item{leave.out}{A number in \code{(0,1)} for the proportion of patients to leave out in each jackknife iteration.}
 
 \item{options.fit}{List of parameters for fitting models. See  \code{\link{revolver_fit}}.}
 
-\item{options.clustering}{List of parameters for clustering with the germline node GL. See \code{\link{revolver_cluster}}.}
+\item{options.clustering}{List of parameters for clustering. See \code{\link{revolver_cluster}}.}
 
-\item{cohort}{A cohort object where fit and clusters have been computed.}
-
-\item{removal}{A number in \code{[0,1]} for the percentage of samples to leave out in each jackknife iteration.}
-
-\item{cores.ratio}{Ratio of cores for parallel execution}
+\item{...}{Additional parameters forwarded to \code{\link[easypar]{run}}.}
 }
 \value{
 A cohort where a new jackknife field contains result from this analysis
@@ -47,7 +47,8 @@ multi-core machine to appreciate a speed up in the computations.
 }
 \examples{
 \dontrun{
- TODO
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+x = revolver_jackknife(TRACERx_NEJM_2017_REVOLVER)
 }
 
 }

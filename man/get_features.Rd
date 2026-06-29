@@ -42,8 +42,8 @@ print(features)
 }
 \seealso{
 Other Getters: 
-\code{\link{CCF_clusters}()},
 \code{\link{CCF}()},
+\code{\link{CCF_clusters}()},
 \code{\link{Clonal_cluster}()},
 \code{\link{Data}()},
 \code{\link{Drivers}()},

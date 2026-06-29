@@ -30,7 +30,6 @@
 #' @export
 #' @family Analysis functions
 #' @import easypar
-#' @import crayon
 #'
 #' @examples
 #' # Data released in the 'evoverse.datasets'
@@ -341,7 +340,7 @@ tl_revolver_fit = function(x,
 
       # Then we take what are currently expanding, and the parent and children in there
       current_expansion_adjM = ctree:::DataFrameToMatrix(current_expansion)
-      parent_current_expansion = ctree:::pi(current_expansion_adjM, clone)
+      parent_current_expansion = ctree:::parent_of(current_expansion_adjM, clone)
       children_current_expansion = ctree:::children(current_expansion_adjM, clone)
 
       # We now make the modification, we can essentially
@@ -510,7 +509,7 @@ tl_revolver_fit = function(x,
   fit$clones_expansions = fit$clones_to_expand = NULL
 
   # We track this with a progress bar
-  pb = dplyr::progress_estimated(n = length(fit$phylogenies), 3)
+  pb = cli::cli_progress_bar(total = length(fit$phylogenies))
   pb.status = getOption('revolver.progressBar', default = TRUE)
 
   # For every patient we obtain the ML expansions for each patient, and then we
@@ -520,7 +519,7 @@ tl_revolver_fit = function(x,
   for (patient in seq_along(fitPatients))
   {
     # update progress bar
-    if (pb.status) pb$tick()$print()
+    if (pb.status) cli::cli_progress_update(id = pb)
 
     patient = fitPatients[patient]
 
@@ -548,6 +547,8 @@ tl_revolver_fit = function(x,
       )
   }
   names(fit$clones_expansions) = names(fit$clones_to_expand) = fitPatients
+
+  if (pb.status) cli::cli_progress_done(id = pb)
 
   # We can now get the penalty from the final fit output, re-using the E-step function
   # because we are still computing an expectation here

@@ -24,7 +24,7 @@
 #' plot_trajectories_per_cluster(TRACERx_NEJM_2017_REVOLVER, min_counts = .5)
 plot_trajectories_per_cluster = function(x, min_counts = 5)
 {
-  stopifnot(revolver:::has_clusters(x))
+  stopifnot(has_clusters(x))
   
   clusters_all = revolver::Cluster(x) %>% dplyr::pull(cluster) %>% unique() %>% sort()
   

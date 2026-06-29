@@ -17,10 +17,11 @@
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 #'
-#' # Cancel the fits - just set the field to NULL
-#' TRACERx_NEJM_2017_REVOLVER$fit = NULL
+#' # Downcast to rev_cohort to use this method (the loaded object is rev_cohort_fit)
+#' x = TRACERx_NEJM_2017_REVOLVER
+#' class(x) = 'rev_cohort'
 #'
-#' plot(TRACERx_NEJM_2017_REVOLVER)
+#' plot(x)
 plot.rev_cohort = function(x,  ...)
 {
   cex = 1
@@ -109,20 +110,4 @@ plot.rev_cohort_fit = function(x,  ...)
     scale_y_log10() +
     scale_x_continuous(limits = c(-0.1, 1.1)) +
     my_ggplot_theme()
-
-
-  # Alternative plot - maybe for the future
-  # icons = lapply(x$fit$phylogenies, plot_icon)
-  # k = ceiling(sqrt(length(icons)))
-  #
-  # icons_figure = ggpubr::ggarrange(
-  #   plotlist = icons,
-  #   nrow = k,
-  #   ncol = k
-  # )
-  #
-  # icons_figure = ggpubr::annotate_figure(
-  #   icons_figure,
-  #   top = paste0("Trees (icon format) ~ ", x$annotation)
-  # )
 }

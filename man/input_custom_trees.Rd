@@ -31,8 +31,11 @@ data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
 # To make it simple we use some trees that are already available
 trees = Phylo(TRACERx_NEJM_2017_REVOLVER, p = "CRUK0001")
 
-# Get matrices from these objects, and remove the GL columns/ rows
-matrices = lapply(trees, function(x) x$adj_mat[rownames(x$adj_mat) != 'GL', colnames(x$adj_mat) != 'GL'])
+# Get matrices from these objects, and remove the GL columns/rows
+matrices = lapply(trees, function(x) {
+  m = x$adj_mat
+  m[rownames(m) != 'GL', colnames(m) != 'GL']
+})
 
 print(matrices)
 

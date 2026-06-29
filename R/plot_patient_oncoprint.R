@@ -60,7 +60,7 @@ plot_patient_oncoprint = function(x,
   CCF_values = values %>%
     select(!!samples, id) %>%
     reshape2::melt(id = 'id')
-  CCF_values$id = factor(CCF_values$id, level = ordering_mutations)
+  CCF_values$id = factor(CCF_values$id, levels = ordering_mutations)
   
   # Drivers to annotate
   driver_CCF = Drivers(x, patient) %>%
@@ -92,7 +92,7 @@ plot_patient_oncoprint = function(x,
   Cluster_values = values %>%
     select(cluster, id) %>%
     reshape2::melt(id = 'id')
-  Cluster_values$id = factor(Cluster_values$id, level = ordering_mutations)
+  Cluster_values$id = factor(Cluster_values$id, levels = ordering_mutations)
   
   ncluster = length(unique(Cluster_values$value))
   
@@ -112,8 +112,6 @@ plot_patient_oncoprint = function(x,
     labs(y = '') 
   
   # Plot assembly
-  require(ggpubr)
-  
   figure = ggarrange(
     pl_Clusters,
     pl_CCF,

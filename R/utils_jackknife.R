@@ -42,14 +42,16 @@ analyse_jackknife = function(x)
   rownames(co.clustering) = colnames(co.clustering) = patients
   
   # Cumulative computation with prograss bar
-  pb = dplyr::progress_estimated(length(results), 3)
-  
+  pb = cli::cli_progress_bar(total = length(results))
+
   for(p in 1:length(results)) {
-    pb$tick()$print()
+    cli::cli_progress_update(id = pb)
     
     co.clustering = cumulative_co_occurrences(results[[p]], co.clustering)
   }
-  
+
+  cli::cli_progress_done(id = pb)
+
   co.clustering %>% pioDisp
   
   # Store normalized co-clustering probability

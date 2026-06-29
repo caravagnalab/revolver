@@ -10,37 +10,24 @@
 #'
 #' @return An object of the S3 class \code{"rev_cohort"} that represents a \code{REVOLVER} cohort.
 #'
-#' @import tidyverse
-#' @import tidygraph
 #' @import pio
 #' @import easypar
 #' @import RColorBrewer
-#' @import crayon
-#' @import cluster
-#' @import dendextend
-#' @import dynamicTreeCut
-#' @import igraph
-#' @import ggpubr
-#' @import ggrepel
-#' @import clisymbols
-#' @import evoverse.datasets
 #'
 #' @export
 #' @family Cohort creation
 #'
 #' @examples
 #' # Example cohort creation with the TRACERx data
-#' data(TRACERx_data)
+#' data('TRACERx_NEJM_2017', package = 'evoverse.datasets')
 #'
 #' # To speed up the process we use only 2 patients
-#' TRACERx_data = TRACERx_data %>%
-#'    filter(patientID %in% c('CRUK0001', 'CRUK0002'))
+#' TRACERx_NEJM_2017 = TRACERx_NEJM_2017[TRACERx_NEJM_2017$patientID %in% c('CRUK0001', 'CRUK0002'), ]
 #'
-#' cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
+#' cohort = revolver_cohort(TRACERx_NEJM_2017, annotation = 'A toy REVOLVER dataset')
 #'
-#' # The S3 print/ plot for this cohort
+#' # The S3 print method for this cohort
 #' print(cohort)
-#' plot(cohort)
 revolver_cohort = function(dataset,
                            CCF_parser = revolver::CCF_parser,
                            ONLY.DRIVER = FALSE,

@@ -9,11 +9,10 @@
 #'  input dataset, which can be obtained via \code{\link{Cluster}}.
 #'
 #' @param x A \code{REVOLVER} cohort with fits, clusters and jackknife results available.
-#' @param cluster_palette A palette of colours; must be a function that when applied to
-#' a number it returns that number of colours.
+#' @param annotate_probability Probability threshold above which trajectories are annotated.
+#' @param annotate_percentage Percentage threshold above which trajectories are annotated.
 #'
 #' @return A \code{ggplot} figure.
-#' @import ggrepel
 #' @family Plotting functions
 #' @export
 #'

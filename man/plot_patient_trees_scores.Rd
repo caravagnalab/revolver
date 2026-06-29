@@ -18,6 +18,8 @@ plot_patient_trees_scores(
 
 \item{transfer_palette}{A function that can be used to sample
 an arbitrary number of colours to identify the transfers.}
+
+\item{...}{Extra parameters (currently unused).}
 }
 \value{
 A \code{ggplot} plot.

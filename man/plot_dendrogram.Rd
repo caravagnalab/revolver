@@ -9,7 +9,7 @@ plot_dendrogram(x, cluster_palette = distinct_palette_few)
 \arguments{
 \item{x}{A \code{REVOLVER} object with fits and clusters.}
 
-\item{clusters_palette}{A palette function that should return the colour of
+\item{cluster_palette}{A palette function that should return the colour of
 an arbitrary number of clusters.}
 }
 \value{

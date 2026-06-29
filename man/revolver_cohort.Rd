@@ -33,17 +33,15 @@ Construct a REVOLVER cohort.
 }
 \examples{
 # Example cohort creation with the TRACERx data
-data(TRACERx_data)
+data('TRACERx_NEJM_2017', package = 'evoverse.datasets')
 
 # To speed up the process we use only 2 patients
-TRACERx_data = TRACERx_data \%>\%
-   filter(patientID \%in\% c('CRUK0001', 'CRUK0002'))
+TRACERx_NEJM_2017 = TRACERx_NEJM_2017[TRACERx_NEJM_2017$patientID \%in\% c('CRUK0001', 'CRUK0002'), ]
 
-cohort = revolver_cohort(TRACERx_data, annotation = 'A toy REVOLVER dataset')
+cohort = revolver_cohort(TRACERx_NEJM_2017, annotation = 'A toy REVOLVER dataset')
 
-# The S3 print/ plot for this cohort
+# The S3 print method for this cohort
 print(cohort)
-plot(cohort)
 }
 \seealso{
 Other Cohort creation: 

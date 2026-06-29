@@ -12,7 +12,7 @@
 #' Patients are sorted by cluster to match the dendrogram that one can obtain with \code{\link{plot_dendrogram}}.
 #'
 #' @param x A \code{REVOLVER} object with fits and clusters.
-#' @param clusters_palette A palette function that should return the colour of
+#' @param cluster_palette A palette function that should return the colour of
 #' an arbitrary number of clusters.
 #' @param cutoff_drivers Plot only drivers that occur in at least \code{cutoff_drivers} patients.
 #' @param cutoff_trajectories Plot only trajectories that occur in at least \code{cutoff_trajectories} patients.

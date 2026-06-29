@@ -17,8 +17,6 @@
 #' @export
 #' @family Cohort creation
 #'
-#' @import ctree
-#'
 #' @examples
 #' # Data released in the 'evoverse.datasets'
 #' data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
@@ -26,8 +24,11 @@
 #' # To make it simple we use some trees that are already available
 #' trees = Phylo(TRACERx_NEJM_2017_REVOLVER, p = "CRUK0001")
 #'
-#' # Get matrices from these objects, and remove the GL columns/ rows
-#' matrices = lapply(trees, function(x) x$adj_mat[rownames(x$adj_mat) != 'GL', colnames(x$adj_mat) != 'GL'])
+#' # Get matrices from these objects, and remove the GL columns/rows
+#' matrices = lapply(trees, function(x) {
+#'   m = x$adj_mat
+#'   m[rownames(m) != 'GL', colnames(m) != 'GL']
+#' })
 #'
 #' print(matrices)
 #'
@@ -104,7 +105,7 @@ are_suitable_precomputed_trees = function(
   cmt_size = sapply(precomputed.trees, ncol)
   rmt_size = sapply(precomputed.trees, nrow)
 
-  OK_size = (cmt_size == rmt_size) && (cmt_size == length(required_clusters))
+  OK_size = (cmt_size == rmt_size) & (cmt_size == length(required_clusters))
 
   if(!all(OK_size)) {
     message("Input trees must be NxN adjacency matrices because this patient has N = ",

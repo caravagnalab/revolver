@@ -15,6 +15,8 @@ revolver_cluster(
 \arguments{
 \item{x}{A \code{"rev_cohort_fit"} object for which the evolutionary distance has been computed.}
 
+\item{patients}{A vector of patient IDs to include in the clustering (default: all patients).}
+
 \item{hc.method}{Method for hierarchial clustering, anything that can be
 passed to the \code{agnes} function of the \code{cluster} package.}
 
@@ -40,10 +42,11 @@ parameters that are forwarded to the functions to carry out this task.
 Results are stored inside the field \code{cluster} of the returned object.
 }
 \examples{
-data(CRC.cohort)
-fit = revolver_fit(CRC.cohort)
-fit = revolver_evo_distance(fit)
-fit = revolver_cluster(fit) # dumped also to disk
+\dontrun{
+data('TRACERx_NEJM_2017_REVOLVER', package = 'evoverse.datasets')
+fit = revolver_fit(TRACERx_NEJM_2017_REVOLVER)
+fit = revolver_cluster(fit)
+}
 }
 \seealso{
 Other Analysis functions: 

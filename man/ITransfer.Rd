@@ -49,8 +49,8 @@ ITransfer(TRACERx_NEJM_2017_REVOLVER, 'CRUK0002', rank = 1, type = 'drivers', da
 }
 \seealso{
 Other Getters: 
-\code{\link{CCF_clusters}()},
 \code{\link{CCF}()},
+\code{\link{CCF_clusters}()},
 \code{\link{Clonal_cluster}()},
 \code{\link{Data}()},
 \code{\link{Drivers}()},

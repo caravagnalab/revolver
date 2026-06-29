@@ -45,7 +45,7 @@ You can install the released version of `revolver` from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("caravagnalab.github.io/revolver")
+devtools::install_github("caravagnalab/revolver")
 ```
 
 ------------------------------------------------------------------------

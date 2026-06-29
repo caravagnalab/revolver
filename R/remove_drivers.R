@@ -12,6 +12,7 @@
 #'
 #' @param x A REVOLVER cohort.
 #' @param variantID Id of the driver event to remove.
+#' @param check If \code{TRUE}, run \code{\link{revolver_check_cohort}} after removal.
 #'
 #' @return A modified cohort where the required events are no longer annotated as drivers.
 #' @export
@@ -40,14 +41,14 @@ remove_drivers = function(
 
   N = length(x$patients)
 
-  pb =  dplyr::progress_estimated(n = N, min_time = 2)
+  pb = cli::cli_progress_bar(total = N)
 
   # List of patients that stay after this editing
   new_patients = c()
 
   for(patient in x$patients)
   {
-    pb$tick()$print()
+    cli::cli_progress_update(id = pb)
 
     # Drivers for this patient
     drv = Drivers(x, patient) %>% pull(variantID)
@@ -148,7 +149,9 @@ remove_drivers = function(
     }
   }
 
-  # Retianed patients
+  cli::cli_progress_done(id = pb)
+
+  # Retained patients
   cli::cli_alert_info("Retained {.field {length(new_patients)}} patients after driver removal..\n")
 
   # if has fits, force to recompute
