@@ -46,9 +46,8 @@ remove_patients = function(x,
 
   if(length(drv_to_cancel) > 0) {
     message(paste(drv_to_cancel, collapse = ', '), ": driver events that now are found in only one patient, will be now removed ...")
+    x = remove_drivers(x, drv_to_cancel, check = FALSE)
   }
-
-   x = remove_drivers(x, drv_to_cancel, check = FALSE)
 
   # if has clusters, force to recompute
   if(has_clusters(x)) {

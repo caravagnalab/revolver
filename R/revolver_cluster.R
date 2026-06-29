@@ -83,11 +83,12 @@ revolver_cluster = function(
       if (pb.status) pb$tick()$print()
       
       # Both patient have a transfer that we take and augment with E
-      p1_IT = ITransfer(x, patients[p1], data = 'fits', type = 'drivers') %>%
-        left_join(E, by = c('from', 'to'))
+      p1_IT = ITransfer(x, patients[p1], data = 'fits', type = 'drivers')
+      if (!is.null(p1_IT)) p1_IT <- left_join(p1_IT, E, by = c('from', 'to'))
       
-      p2_IT = ITransfer(x, patients[p2], data = 'fits', type = 'drivers') %>%
-        left_join(E, by = c('from', 'to'))
+      p2_IT = ITransfer(x, patients[p2], data = 'fits', type = 'drivers') 
+      if (!is.null(p2_IT)) p2_IT <- left_join(p2_IT, E, by = c('from', 'to'))
+        
       
       # The distance is the absolute value of non-shared edges
       distances[patients[p1], patients[p2]] = bind_rows(p1_IT, p2_IT) %>%
