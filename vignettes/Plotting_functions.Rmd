@@ -121,7 +121,7 @@ The top tile is patients vs trajectories, and bottom is patients vs drivers. For
 The dendrogram of the clusters can be visualised - notice the colours and patients' ordering that are matched in these two functions.
 ```{r, echo = TRUE, warning=FALSE, fig.width=10, fig.height=4}
 # Plot the dendrogram of REVOLVER"s clusters
-plot_dendrogram(TRACERx_NEJM_2017_REVOLVER)
+revolver::plot_dendrogram(TRACERx_NEJM_2017_REVOLVER)
 ```
 
 You can also compute the number of trajectories per cluster, and their frequency.

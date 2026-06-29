@@ -107,7 +107,7 @@ plot_drivers_graph(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
 ```
 
 ```{r, message=FALSE, fig.height=3, fig.width=6}
-plot_dendrogram(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
+revolver::plot_dendrogram(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
 ```
 ```{r, message=FALSE, fig.height=3, fig.width=3}
 plot_DET_index(CROSS_CRC_ADENOCARCINOMA_REVOLVER)
