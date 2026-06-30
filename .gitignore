@@ -25,6 +25,12 @@ inst/doc
 # Configuration file
 cfg.R
 
+# R build artifacts
+*.tar.gz
+*.Rcheck/
+Rplots.pdf
+vignettes/*.html
+
 # Other file
 *.log
 *.out
