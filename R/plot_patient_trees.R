@@ -39,8 +39,8 @@ plot_patient_trees = function(x, patient, ...)
   top_tree = Phylo(x, patient, rank = 1)
 
   first = ggarrange(
-    top_tree %>% plot,
-    top_tree %>% plot_information_transfer,
+    ctree::plot.ctree(top_tree),
+    plot_information_transfer(top_tree),
     ncol = 2,
     nrow = 1
   )
