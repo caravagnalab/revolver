@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=F}
 library(revolver)
 library(evoverse.datasets)
-require(tidyverse)
+library(dplyr)
 ```
 ### Data
 

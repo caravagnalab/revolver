@@ -102,7 +102,7 @@ Once you have a dataframe/ tibble in the required format, you can use a [cohort 
 In this case, to make it faster we only use 3 patients from the released cohort.
 
 ```{r}
-require(tidyverse)
+library(dplyr)
 require(revolver)
 
 subset_data = TRACERx_NEJM_2017 %>%

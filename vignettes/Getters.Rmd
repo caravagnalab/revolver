@@ -14,6 +14,7 @@ vignette: >
 ```{r setup, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(revolver)
+library(dplyr)
 ```
 
 
