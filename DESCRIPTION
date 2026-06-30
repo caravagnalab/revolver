@@ -15,9 +15,11 @@ Description: Implements the statistical framework described in Caravagna et al.
     cohort of patients with phylogenetic trees, the package fits a probabilistic
     model of repeated evolution, clusters patients by shared trajectories, and
     provides tools for visualisation and jackknife-based stability assessment.
+
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+
 Depends:
     R (>= 4.1),
 Imports:
@@ -47,17 +49,18 @@ Imports:
     reshape2,
     broom,
     grid
-Remotes: 
+Remotes:
     caravagn/pio,
     caravagnalab/easypar,
     caravagnalab/ctree,
     caravagn/mtree,
     caravagn/evoverse.datasets
-RoxygenNote: 7.3.3
+
 Suggests:
     knitr,
     rmarkdown,
-    matrixStats,
+    matrixStats
 VignetteBuilder: knitr
+
 URL: https://caravagnalab.github.io/revolver, https://github.com/caravagnalab/revolver
 BugReports: https://github.com/caravagnalab/revolver/issues

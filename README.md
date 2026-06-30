@@ -4,6 +4,8 @@
 [![R-CMD-check](https://github.com/caravagnalab/revolver/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/caravagnalab/revolver/actions/workflows/R-CMD-check.yaml)
 [![pkgdown](https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/caravagnalab/revolver/actions/workflows/pkgdown.yaml)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Citations](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.semanticscholar.org%2Fgraph%2Fv1%2Fpaper%2FDOI%3A10.1038%2Fs41592-018-0108-x%3Ffields%3DcitationCount&query=%24.citationCount&label=citations&color=blue)](https://www.semanticscholar.org/paper/f58bb5b0e1b220575d44372c909f9ef195ffe067)
+[![GitHub stars](https://img.shields.io/github/stars/caravagnalab/revolver?style=flat&color=yellow)](https://github.com/caravagnalab/revolver/stargazers)
 <!-- badges: end -->
 
 # revolver <a href='https://caravagnalab.github.io/revolver'><img src='man/figures/logo.png' align="right" height="139" /></a>
@@ -12,7 +14,7 @@ The `revolver` package implements the statistical model described in
 [Caravagna et al; PMID:
 30171232](https://www.ncbi.nlm.nih.gov/pubmed/30171232) to determine
 trajectories of repeated evolution from multi-region sequencing data of
-human cancers.The package implements functions to process data from
+human cancers. The package implements functions to process data from
 large cohorts, and determine different types of phylogenetic trees from
 the input data of each input patients. The package provides also several
 functions to plot the data and determine clusters of patients that share
