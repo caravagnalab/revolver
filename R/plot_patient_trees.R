@@ -38,8 +38,11 @@ plot_patient_trees = function(x, patient, ...)
   # =-=-=-=-=-=-=-=-
   top_tree = Phylo(x, patient, rank = 1)
 
+  tree_plot = if (inherits(top_tree, "ctree")) ctree::plot.ctree(top_tree)
+              else mtree::plot.mtree(top_tree)
+
   first = ggarrange(
-    ctree::plot.ctree(top_tree),
+    tree_plot,
     plot_information_transfer(top_tree),
     ncol = 2,
     nrow = 1
